@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class UpStatue : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1034, 10, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1035, 11, 16, 16);
     Rectangle destination;
 
     public UpStatue(Vector2 screenLocation)

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class DungeonSand : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1000, 27, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1001, 28, 16, 16);
     Rectangle destination;
 
     public DungeonSand(Vector2 screenLocation)

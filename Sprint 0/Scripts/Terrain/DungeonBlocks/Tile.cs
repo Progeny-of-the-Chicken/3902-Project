@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Tile : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(983, 10, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(984, 11, 16, 16);
     Rectangle destination;
 
     public Tile(Vector2 screenLocation)
