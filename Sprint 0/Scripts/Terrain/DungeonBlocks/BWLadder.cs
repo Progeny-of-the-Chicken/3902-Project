@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class BWLadder : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1000, 44, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1001, 45, 16, 16);
     Rectangle destination;
 
     public BWLadder(Vector2 screenLocation)

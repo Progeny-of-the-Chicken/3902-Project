@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class BlackTile : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(983, 27, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(984, 28, 16, 16);
     Rectangle destination;
 
     public BlackTile(Vector2 screenLocation)

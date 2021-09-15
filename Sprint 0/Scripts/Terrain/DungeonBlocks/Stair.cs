@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Stair : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1034, 27, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
     Rectangle destination;
 
     public Stair(Vector2 screenLocation)
