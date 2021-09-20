@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0
 {
+    public enum Item { Sword, Arrow, Boomerang, Bomb, Fire, None };
+    public enum Direction { Up, Down, Left, Right };
     class Link : ILink
     {
         ISprite LinkSprite;
@@ -65,34 +67,79 @@ namespace Sprint_0
                 linkState.TakeDamage();
             }
         }
+        
+        public void UseSword()
+        {
+            if(linkState.WhichItemIsBeingUsed == Item.None)
+            {
+                linkState.UseSword();
+            }
+        }
+        
+        public void UseArrow()
+        {
+            if(linkState.WhichItemIsBeingUsed == Item.None)
+            {
+                linkState.UseArrow();
+            }
+        }
+        
+        public void UseBoomerang()
+        {
+            if(linkState.WhichItemIsBeingUsed == Item.None)
+            {
+                linkState.UseBoomerang();
+            }
+        }
+        
+        public void UseBomb()
+        {
+            if(linkState.WhichItemIsBeingUsed == Item.None)
+            {
+                linkState.UseBomb();
+            }
+        }
+        
+        public void UseFire()
+        {
+            if(linkState.WhichItemIsBeingUsed == Item.None)
+            {
+                linkState.UseFire();
+            }
+        }
+
+        
     }
 
     public class LinkStateMachine
     {
-        public enum Direction { Up, Down, Left, Right};
-        public enum Item {Sword, Arrow, Boomerang, Bomb, Fire};
         private Direction linksDirection;
         private bool isMoving;
-        private bool usingItem;
         private int damageCounter;
+        private int usingItemCounter;
+        private Item itemBeingUsed;
         private Vector2 linksPosition;
         private const int linkSpeed = 1;
 
         public LinkStateMachine()
         {
             linksDirection = Direction.Down;
-            isMoving = true;
+            isMoving = false;
             damageCounter = 0;
-            usingItem = false;
+            usingItemCounter = 0;
+            itemBeingUsed = Item.None;
             linksPosition = new Vector2(200, 200); //generic starting position
         }
 
         public void Update()
         {
+            if (usingItemCounter == 0)
+                itemBeingUsed = Item.None;
             if (damageCounter > 0)
                 damageCounter--;
+            if (usingItemCounter > 0)
+                usingItemCounter--;
         }
-
 
         //TODO: once we test and thing works, we could probably make one generic method to handle and change in direction
         public void GoLeft()
@@ -134,7 +181,52 @@ namespace Sprint_0
                 damageCounter = 30;
         }
 
-        public Vector2 LinksPosition
+        public void UseSword()
+        {
+            if (itemBeingUsed != Item.None)
+            {
+                itemBeingUsed = Item.Sword;
+                usingItemCounter = 30;
+            }
+        }
+
+        public void UseArrow()
+        {
+            if (itemBeingUsed != Item.None)
+            {
+                itemBeingUsed = Item.Arrow;
+                usingItemCounter = 30;
+            }
+        }
+
+        public void UseBoomerang()
+        {
+            if (itemBeingUsed != Item.None)
+            {
+                itemBeingUsed = Item.Boomerang;
+                usingItemCounter = 30;
+            }
+        }
+
+        public void UseBomb()
+        {
+            if (itemBeingUsed != Item.None)
+            {
+                itemBeingUsed = Item.Bomb;
+                usingItemCounter = 30;
+            }
+        }
+
+        public void UseFire()
+        {
+            if (itemBeingUsed != Item.None)
+            {
+                itemBeingUsed = Item.Fire;
+                usingItemCounter = 30;
+            }
+        }
+
+        public Vector2 Position
         {
             get
             {
@@ -142,7 +234,7 @@ namespace Sprint_0
             }
         }
 
-        public Direction LinksDirection
+        public Direction FacingDirection
         {
             get
             {
@@ -163,6 +255,14 @@ namespace Sprint_0
             get
             {
                 return damageCounter > 0;
+            }
+        }
+
+        public Item WhichItemIsBeingUsed
+        {
+            get
+            {
+                return itemBeingUsed;
             }
         }
     }
