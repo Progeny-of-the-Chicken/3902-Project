@@ -1,4 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/File.spritefont","/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0.218358
-"/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/LinkSpriteSheet.png","/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LinkSpriteSheet.xnb","TextureProcessor","Texture2DContent",13289,460125,0.133603
-"/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/smb_mario_sheet.png","/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb","TextureProcessor","Texture2DContent",6584,304645,0.015531

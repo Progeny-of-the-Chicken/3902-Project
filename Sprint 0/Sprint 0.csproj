@@ -13,6 +13,7 @@
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Scripts\SpriteFactories\" />
+    <None Remove="Scripts\Sprite\LinkSprites\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -30,5 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\SpriteFactories\" />
+    <Folder Include="Scripts\Sprite\LinkSprites\" />
   </ItemGroup>
 </Project>
