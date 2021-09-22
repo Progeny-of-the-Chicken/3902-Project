@@ -43,6 +43,11 @@ public class KeyboardController : IController
 
 		foreach (Keys key in pressedKeys)
         {
+			// Make sure key has mapping
+			if (!controllerMappings.ContainsKey(key))
+				return;
+
+
 			if (previousKeys.IsKeyUp(key))
 			{
 				controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
