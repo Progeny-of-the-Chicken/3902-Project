@@ -6,5 +6,6 @@ namespace Sprint_0.Scripts.Enemy
 {
     interface IEnemy
     { 
+        //hoi im temmie
     }
 }
