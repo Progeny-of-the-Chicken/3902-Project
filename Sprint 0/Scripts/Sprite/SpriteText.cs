@@ -23,9 +23,15 @@ public class SpriteText : ISprite
         content.RootDirectory = "Content";
         font = content.Load<SpriteFont>("File");
     }
+
     public void Draw(SpriteBatch _spriteBatch, GameTime timer)
     {
         _spriteBatch.DrawString(font, "Credits\nProgram Made By: Progeny of the Chicken\nSprites from: \"https://www.spriters-resource.com/nes/legendofzelda\"", destinationPos, Color.Black);
+    }
+
+    void ISprite.Update()
+    {
+        throw new NotImplementedException();
     }
 }
 

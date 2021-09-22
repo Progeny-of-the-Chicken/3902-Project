@@ -9,6 +9,9 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
     {
         public LinkMovingSprite()
         {
+        }
+        public void Update()
+        {
 
         }
 

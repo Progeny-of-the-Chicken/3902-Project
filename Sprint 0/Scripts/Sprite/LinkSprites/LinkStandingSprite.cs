@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             throw new NotImplementedException();
         }
 
-        public void LoadContent(ContentManager cm)
+        void ISprite.Update()
         {
             throw new NotImplementedException();
         }

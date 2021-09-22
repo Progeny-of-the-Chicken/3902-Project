@@ -7,7 +7,8 @@ namespace Sprint_0
 {
     public interface ISprite
     {
-        void LoadContent(ContentManager cm);
+        // void LoadContent(ContentManager cm);
+        void Update();
         void Draw(SpriteBatch sb, GameTime gt);
     }
 }
