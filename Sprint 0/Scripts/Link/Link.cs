@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Sprint_0.Scripts.SpriteFactories;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0
@@ -17,6 +17,7 @@ namespace Sprint_0
         {
             linkState = new LinkStateMachine();
             linkHealth = linkStartingHealth;
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void Draw(SpriteBatch sb, GameTime gt)
@@ -24,14 +25,10 @@ namespace Sprint_0
             LinkSprite.Draw(sb, gt);
         }
 
-        public void LoadContent(ContentManager cm)
-        {
-            LinkSprite.LoadContent(cm);
-        }
-
         public void Update()
         {
             linkState.Update();
+            LinkSprite.Update();
         }
 
         public void GoLeft()

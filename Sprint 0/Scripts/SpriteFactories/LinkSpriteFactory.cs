@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Sprint_0.Scripts.Sprite.LinkSprites;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -26,5 +26,15 @@ namespace Sprint_0.Scripts.SpriteFactories
 		{
 			spriteSheet = content.Load<Texture2D>("LinkSpriteSheet");
 		}
+
+		public Texture2D GetSpriteSheet()
+        {
+			return spriteSheet;
+        }
+
+		public ISprite GetSpriteForState(LinkStateMachine linkState)
+        {
+			return new LinkMovingSprite(linkState.FacingDirection);
+        }
 	}
 }

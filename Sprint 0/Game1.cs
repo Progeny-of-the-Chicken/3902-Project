@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Sprint_0.Scripts.SpriteFactories;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,6 +11,8 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         MouseController mc;
+        Link link;
+		ISprite sprite;
         SpriteText credits;
 
         //Just for sprint 2
@@ -32,23 +35,22 @@ namespace Sprint_0
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            this.LoadContent();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            LinkSpriteFactory.Instance.LoadAllTextures(this.Content);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
-            // TODO: use this.Content to load your game content here
             sprite = new Sprite1(this.GetCenterScreen());
             sprite.LoadContent(this.Content);
             credits = new SpriteText(this.GetCenterScreen());
             credits.LoadContent(this.Content);
-
-            //Just for sprint 2
             block = new Tile(blockLocation);
+            //Just for sprint 2
+            base.LoadContent();
+            link = new Link();
         }
 
         protected override void Update(GameTime gameTime)
@@ -56,18 +58,20 @@ namespace Sprint_0
             // TODO: Add your update logic here
             kc.Update();
             mc.Update();
+            link.Update();
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
+
             credits.Draw(this._spriteBatch, gameTime);
-            
+            link.Draw(_spriteBatch, gameTime);
             //Just for sprint 2
             block.Draw(_spriteBatch);
+
             _spriteBatch.End();
         }
 
