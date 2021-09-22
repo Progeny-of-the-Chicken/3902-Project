@@ -10,7 +10,6 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         MouseController mc;
-        ISprite sprite;
         SpriteText credits;
 
         //Just for sprint 2
@@ -65,7 +64,6 @@ namespace Sprint_0
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            sprite.Draw(this._spriteBatch, gameTime);
             credits.Draw(this._spriteBatch, gameTime);
             
             //Just for sprint 2
