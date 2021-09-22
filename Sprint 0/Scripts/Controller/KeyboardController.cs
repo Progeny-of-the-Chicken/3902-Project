@@ -5,46 +5,55 @@ using Sprint_0;
 
 public class KeyboardController : IController
 {
-	KeyboardState ks;
-	CommandQuit cq;
-	Command1 c1;
-	Command2 c2;
-	Command3 c3;
-	Command4 c4;
+	//Dictionary Linking keys to commands
+	private Dictionary<Keys, ICommand> controllerMappings;
 	private Game1 game;
 
-	public KeyboardController(Game1 game)
-	{
-		this.game = game;
-		cq = new CommandQuit(this.game);
-		c1 = new Command1(this.game);
-		c2 = new Command2(this.game);
-		c3 = new Command3(this.game);
-		c4 = new Command4(this.game);
-		ks = Keyboard.GetState();
-	}
+	//Previous Keys pressed to limit multiple presses
+	KeyboardState previousKeys;
 
+	//Constructor
+	public KeyboardController(Game1 game)
+    {
+		controllerMappings = new Dictionary<Keys, ICommand>();
+		this.game = game;
+		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+		setCommands();
+    }
+
+	//Method to add new keybinds for commands
+	public void RegisterCommand(Keys key, ICommand command)
+    {
+		controllerMappings.Add(key, command);
+    }
+
+	//Add keybinds here
+	private void setCommands()
+    {
+		//Just for sprint 2
+		this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
+		this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
+    }
+
+	//Update checks for keys pressed and calls the respective command
 	public void Update()
     {
-		ks = Keyboard.GetState();
-		if (ks.IsKeyDown(Keys.D0) || ks.IsKeyDown(Keys.NumPad0))
+		KeyboardState keyboardState = Keyboard.GetState();
+		Keys[] pressedKeys = keyboardState.GetPressedKeys();
+
+		foreach (Keys key in pressedKeys)
         {
-			cq.Execute();
-        } else if (ks.IsKeyDown(Keys.D1) || ks.IsKeyDown(Keys.NumPad1))
-		{
-			c1.Execute();
-		}
-		else if (ks.IsKeyDown(Keys.D2) || ks.IsKeyDown(Keys.NumPad2))
-		{
-			c2.Execute();
-		}
-		else if (ks.IsKeyDown(Keys.D3) || ks.IsKeyDown(Keys.NumPad3))
-		{
-			c3.Execute();
-		}
-		else if (ks.IsKeyDown(Keys.D4) || ks.IsKeyDown(Keys.NumPad4))
-		{
-			c4.Execute();
-		}
-	}
+			// Make sure key has mapping
+			if (!controllerMappings.ContainsKey(key))
+				return;
+
+
+			if (previousKeys.IsKeyUp(key))
+			{
+				controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+			}
+        }
+
+		previousKeys = keyboardState;
+    }
 }
