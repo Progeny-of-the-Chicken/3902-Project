@@ -43,8 +43,7 @@ namespace Sprint_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             LinkSpriteFactory.Instance.LoadAllTextures(this.Content);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
-            sprite = new Sprite1(this.GetCenterScreen());
-            sprite.LoadContent(this.Content);
+
             credits = new SpriteText(this.GetCenterScreen());
             credits.LoadContent(this.Content);
             block = new Tile(blockLocation);
@@ -84,11 +83,6 @@ namespace Sprint_0
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
         }
 
-        public void SetSprite(ISprite s)
-        {
-            this.sprite = s;
-            sprite.LoadContent(this.Content);
-        }
 
         //Just for sprint 2
         private void SetBlock()
