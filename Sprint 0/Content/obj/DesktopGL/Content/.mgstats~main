@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/DungeonTileset.png","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/DungeonTileset.xnb","TextureProcessor","Texture2DContent",74652,5826381,0.3012742
+"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/File.spritefont","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0.1990559
+"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/OverworldTileset.png","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/OverworldTileset.xnb","TextureProcessor","Texture2DContent",24755,566717,0.0137087

@@ -4,10 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/DungeonTileset.png</File>
-    <File>/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/File.spritefont</File>
-    <File>/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/OverworldTileset.png</File>
-    <File>/Users/nicholasbrinkel/Git Projects/3902-Project/Sprint 0/Content/LinkSpriteSheet.png</File>
+    <File>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/DungeonTileset.png</File>
+    <File>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/File.spritefont</File>
+    <File>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/OverworldTileset.png</File>
+    <File>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/smb_mario_sheet.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
