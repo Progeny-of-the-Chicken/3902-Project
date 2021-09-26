@@ -8,3 +8,7 @@ Sprint 0/obj
 Sprint 0/Content/obj/DesktopGL/Content/LinkSpriteSheet.mgcontent
 Sprint 0/Content/obj/DesktopGL/Content/.mgstats
 .DS_Store
+Sprint 0/Content/obj/DesktopGL/Content/OverworldTileset.mgcontent
+Sprint 0/Content/obj/DesktopGL/Content/DungeonTileset.mgcontent
+Sprint 0/obj/Debug/netcoreapp3.1
+Sprint 0/bin

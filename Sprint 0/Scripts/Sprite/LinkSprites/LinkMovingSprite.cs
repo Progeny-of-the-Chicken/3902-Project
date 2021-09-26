@@ -12,8 +12,8 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         private Rectangle forwardSpritesheetLocation_1 = new Rectangle(1, 11, 15, 16);
         private Rectangle forwardSpritesheetLocation_2 = new Rectangle(19, 11, 15, 16);
-        private Rectangle rightSpritesheetLocation_1 = new Rectangle(34, 11, 15, 16);
-        private Rectangle rightSpritesheetLocation_2 = new Rectangle(51, 12, 14, 16);
+        private Rectangle rightSpritesheetLocation_1 = new Rectangle(34, 11, 16, 16);
+        private Rectangle rightSpritesheetLocation_2 = new Rectangle(51, 12, 15, 16);
         private Rectangle backwardSpritesheetLocation_1 = new Rectangle(70, 11, 15, 16);
         private Rectangle backwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
 
@@ -55,12 +55,26 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         public void Draw(SpriteBatch sb, GameTime gt)
         {
+
             if (isFrame1)
             {
-                sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame1, Color.White);
+                if (direction == Direction.Left)
+                {
+                    sb.Draw(sheet, new Rectangle(97, 100, 53, 50), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                } else
+                {
+                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame1, Color.White);
+                }
             } else
             {
-                sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame2, Color.White);
+                if (direction == Direction.Left)
+                {
+                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                }
+                else
+                {
+                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame2, Color.White);
+                }
             }
         }
 
