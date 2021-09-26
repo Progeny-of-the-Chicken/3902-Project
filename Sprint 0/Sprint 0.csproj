@@ -10,6 +10,16 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Scripts\Commands\Command1.cs" />
+    <Compile Remove="Scripts\Commands\Command2.cs" />
+    <Compile Remove="Scripts\Commands\Command3.cs" />
+    <Compile Remove="Scripts\Commands\Command4.cs" />
+    <Compile Remove="Scripts\Sprite\Sprite1.cs" />
+    <Compile Remove="Scripts\Sprite\Sprite2.cs" />
+    <Compile Remove="Scripts\Sprite\Sprite3.cs" />
+    <Compile Remove="Scripts\Sprite\Sprite4.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

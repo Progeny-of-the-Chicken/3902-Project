@@ -10,8 +10,6 @@ namespace Sprint_0.Scripts.Enemy
 {
     class EnemyFactory
     {
-		private Texture2D spriteSheet;
-
 		private static EnemyFactory instance = new EnemyFactory();
 
 		public static EnemyFactory Instance
@@ -26,14 +24,9 @@ namespace Sprint_0.Scripts.Enemy
 		{
 		}
 
-		public void LoadAllTextures(ContentManager content)
+		public IEnemy CreateStalfos(Vector2 location)
 		{
-			spriteSheet = content.Load<Texture2D>("enemy");
-		}
-
-		public IEnemy CreateStalfos()
-		{
-			return new Stalfos();
+			return new Stalfos(location);
 		}
 	}
 }

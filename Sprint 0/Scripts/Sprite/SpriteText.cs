@@ -23,7 +23,12 @@ public class SpriteText : ISprite
         content.RootDirectory = "Content";
         font = content.Load<SpriteFont>("File");
     }
-    public void Draw(SpriteBatch _spriteBatch, GameTime timer)
+
+    public void Update(GameTime gt)
+    {
+        //not used
+    }
+    public void Draw(SpriteBatch _spriteBatch, Vector2 location)
     {
         _spriteBatch.DrawString(font, "Credits\nProgram Made By: Alex Dai\nSprites from: \"https://www.mariomayhem.com/downloads/sprites/super_mario_bros_sprites.php\"", destinationPos, Color.Black);
     }

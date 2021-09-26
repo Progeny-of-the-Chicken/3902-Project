@@ -9,8 +9,6 @@ namespace Sprint_0.Scripts.Enemy
 {
     public interface IEnemy
     {
-        //hoi im temmie
-        //test 2
         public void Update(GameTime t);
 
         void Move();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0
 {
@@ -10,8 +11,9 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         MouseController mc;
-        ISprite sprite;
-        SpriteText credits;
+
+        IEnemy enemy;
+        Vector2 enemyStart;
 
         public Game1()
         {
@@ -20,12 +22,14 @@ namespace Sprint_0
             IsMouseVisible = true;
             kc = new KeyboardController(this);
             mc = new MouseController(this);
+
+            enemyStart = GetCenterScreen();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.LoadContent();
+            //this.LoadContent();
             base.Initialize();
         }
 
@@ -33,17 +37,23 @@ namespace Sprint_0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+            /*
             sprite = new Sprite1(this.GetCenterScreen());
             sprite.LoadContent(this.Content);
             credits = new SpriteText(this.GetCenterScreen());
             credits.LoadContent(this.Content);
+            */
+            EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
+            enemy = EnemyFactory.Instance.CreateStalfos(enemyStart);
         }
 
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            kc.Update();
-            mc.Update();
+            kc.Update(gameTime);
+            mc.Update(gameTime);
+
+            enemy.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -52,8 +62,9 @@ namespace Sprint_0
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            sprite.Draw(this._spriteBatch, gameTime);
-            credits.Draw(this._spriteBatch, gameTime);
+            enemy.Draw(_spriteBatch);
+            //sprite.Draw(this._spriteBatch, gameTime);
+            //credits.Draw(this._spriteBatch, gameTime);
             _spriteBatch.End();
         }
 
@@ -66,10 +77,12 @@ namespace Sprint_0
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
         }
 
+        /*
         public void SetSprite(ISprite s)
         {
             this.sprite = s;
             sprite.LoadContent(this.Content);
         }
+        */
     }
 }

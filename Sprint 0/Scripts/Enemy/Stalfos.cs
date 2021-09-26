@@ -13,15 +13,17 @@ namespace Sprint_0.Scripts.Enemy
         enum Direction { Up, Down, Left, Right, Still };
 
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-
-        Stalfos(Rectangle sourceRectangle)
+        private StalfosSprite sprite;
+        private Vector2 location;
+        public Stalfos(Vector2 location)
         {
-
+            this.location = location;
+            sprite = (StalfosSprite) EnemySpriteFactory.Instance.CreateStalfos();
         }
 
-        public void Update(GameTime t)
+        public void Update(GameTime gt)
         {
-
+            sprite.Update(gt);
         }
 
         public void Move()
@@ -36,7 +38,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Draw(SpriteBatch sb)
         {
-
+            sprite.Draw(sb, location);
         }
     }
 }
