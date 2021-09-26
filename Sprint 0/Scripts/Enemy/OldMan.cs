@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Enemy
 {
-    public class Stalfos : IEnemy
+    public class OldMan : IEnemy
     {
-        enum Direction { Up, Down, Left, Right, Still };
-
-        private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        private StalfosSprite sprite;
+        private OldManSprite sprite;
         private Vector2 location;
-        public Stalfos(Vector2 location)
+        public OldMan(Vector2 location)
         {
             this.location = location;
-            sprite = (StalfosSprite) EnemySpriteFactory.Instance.CreateStalfosSprite();
+            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite();
+
         }
 
         public void Update(GameTime gt)
@@ -33,7 +30,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            //not needed
+            //not used
         }
 
         public void Draw(SpriteBatch sb)

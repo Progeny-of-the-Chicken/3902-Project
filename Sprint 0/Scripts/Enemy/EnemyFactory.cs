@@ -28,5 +28,9 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new Stalfos(location);
 		}
+		public IEnemy CreateOldMan(Vector2 location)
+        {
+			return new OldMan(location);
+        }
 	}
 }

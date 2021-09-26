@@ -3,5 +3,5 @@ using Microsoft.Xna.Framework;
 
 public interface IController
 {
-	void Update(GameTime gt);
+	void Update();
 }

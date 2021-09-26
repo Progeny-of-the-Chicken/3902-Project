@@ -14,6 +14,8 @@ namespace Sprint_0
 
         IEnemy enemy;
         Vector2 enemyStart;
+        int enemyCount = 2;
+        int enemyIndex = 0;
 
         public Game1()
         {
@@ -37,21 +39,15 @@ namespace Sprint_0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            /*
-            sprite = new Sprite1(this.GetCenterScreen());
-            sprite.LoadContent(this.Content);
-            credits = new SpriteText(this.GetCenterScreen());
-            credits.LoadContent(this.Content);
-            */
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
-            enemy = EnemyFactory.Instance.CreateStalfos(enemyStart);
+            SetEnemy(enemyIndex);
         }
 
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            kc.Update(gameTime);
-            mc.Update(gameTime);
+            kc.Update();
+            mc.Update();
 
             enemy.Update(gameTime);
         }
@@ -63,8 +59,6 @@ namespace Sprint_0
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             enemy.Draw(_spriteBatch);
-            //sprite.Draw(this._spriteBatch, gameTime);
-            //credits.Draw(this._spriteBatch, gameTime);
             _spriteBatch.End();
         }
 
@@ -77,12 +71,30 @@ namespace Sprint_0
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
         }
 
-        /*
-        public void SetSprite(ISprite s)
+        void SetEnemy(int i)
         {
-            this.sprite = s;
-            sprite.LoadContent(this.Content);
+            switch (i)
+            {
+                case 0:
+                    enemy = EnemyFactory.Instance.CreateStalfos(enemyStart);
+                    break;
+                case 1:
+                    enemy = EnemyFactory.Instance.CreateOldMan(enemyStart);
+                    break;
+            }
         }
-        */
+        public void NextEnemy()
+        {
+            enemyIndex++;
+            enemyIndex %= enemyCount;
+            SetEnemy(enemyIndex);
+        }
+        public void PrevEnemy()
+        {
+            //Add enemy count to ensure enemyIndex is not negative
+            enemyIndex += enemyCount - 1;
+            enemyIndex %= enemyCount;
+            SetEnemy(enemyIndex);
+        }
     }
 }

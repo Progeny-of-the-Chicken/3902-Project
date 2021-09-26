@@ -10,8 +10,9 @@ namespace Sprint_0.Scripts.Enemy
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
-        private SpriteEffects effect = SpriteEffects.None;
         private int scale;
+
+        private SpriteEffects effect = SpriteEffects.None;
         private float flipsPerSec = 4;
         private float timeSinceFlip = 0;
         public StalfosSprite(Rectangle rectangle, int scale, Texture2D spriteSheet)

@@ -14,7 +14,7 @@ public class MouseController : IController
 		this.game = game;
 	}
 
-	public void Update(GameTime gt)
+	public void Update()
 	{
 		ms = Mouse.GetState();
 	}
