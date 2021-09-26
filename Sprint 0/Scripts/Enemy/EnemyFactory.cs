@@ -32,5 +32,21 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new OldMan(location);
         }
+		public IEnemy CreateGel(Vector2 location)
+		{
+			return new Gel(location);
+		}
+		public IEnemy CreateZol(Vector2 location)
+        {
+			return new Zol(location);
+        }
+		public IEnemy CreateAquamentus(Vector2 location)
+        {
+			return new Aquamentus(location);
+        }
+		public IEnemy CreateMagicProjectile(Vector2 location)
+        {
+			return new MagicProjectile(location);
+        }
 	}
 }

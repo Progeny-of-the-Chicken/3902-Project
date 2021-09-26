@@ -14,7 +14,7 @@ namespace Sprint_0
 
         IEnemy enemy;
         Vector2 enemyStart;
-        int enemyCount = 2;
+        int enemyCount = 5;
         int enemyIndex = 0;
 
         public Game1()
@@ -31,7 +31,6 @@ namespace Sprint_0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //this.LoadContent();
             base.Initialize();
         }
 
@@ -80,6 +79,17 @@ namespace Sprint_0
                     break;
                 case 1:
                     enemy = EnemyFactory.Instance.CreateOldMan(enemyStart);
+                    break;
+                case 2:
+                    enemy = EnemyFactory.Instance.CreateGel(enemyStart);
+                    break;
+                case 3:
+                    enemy = EnemyFactory.Instance.CreateZol(enemyStart);
+                    break;
+                case 4:
+                    enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart);
+                    break;
+                default:
                     break;
             }
         }

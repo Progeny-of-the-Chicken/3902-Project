@@ -11,10 +11,6 @@ namespace Sprint_0.Scripts.Enemy
     {
         public void Update(GameTime t);
 
-        void Move();
-
-        void ShootProjectile();
-
         void Draw(SpriteBatch sb);
 
     }
