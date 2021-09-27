@@ -18,6 +18,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle backwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
 
         private Direction direction;
+        private LinkStateMachine state;
 
         private int stepSpeed = 10; // Lower is faster
         private int stepsPerSec = 3;
@@ -27,11 +28,13 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle frame2;
         private bool isFrame1 = true;
 
+        private int standardWidthHeight = 50;
 
 
-        public LinkMovingSprite(Direction direction)
+        public LinkMovingSprite(LinkStateMachine state)
         {
-            this.direction = direction;
+            this.state = state;
+            this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesForDirection();
         }
@@ -55,25 +58,32 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         public void Draw(SpriteBatch sb, GameTime gt)
         {
+            int x = (int)state.Position.X;
+            int y = (int)state.Position.Y;
+            int width = standardWidthHeight;
+            int height = standardWidthHeight;
 
             if (isFrame1)
             {
                 if (direction == Direction.Left)
                 {
-                    sb.Draw(sheet, new Rectangle(97, 100, 53, 50), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    x = (int)state.Position.X - 3;
+                    width = standardWidthHeight + 3;
+
+                    sb.Draw(sheet, new Rectangle(x, y, width, height), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                 } else
                 {
-                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame1, Color.White);
+                    sb.Draw(sheet, new Rectangle(x, y, width, height), frame1, Color.White);
                 }
             } else
             {
                 if (direction == Direction.Left)
                 {
-                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    sb.Draw(sheet, new Rectangle(x, y, width, height), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                 }
                 else
                 {
-                    sb.Draw(sheet, new Rectangle(100, 100, 50, 50), frame2, Color.White);
+                    sb.Draw(sheet, new Rectangle(x, y, width, height), frame2, Color.White);
                 }
             }
         }
