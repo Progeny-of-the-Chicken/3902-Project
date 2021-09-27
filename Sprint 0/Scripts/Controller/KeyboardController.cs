@@ -55,7 +55,7 @@ public class KeyboardController : IController
 
 			if (previousKeys.IsKeyUp(key))
 			{
-				controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+				controllerMappings[key].Execute();
 			}
         }
 
