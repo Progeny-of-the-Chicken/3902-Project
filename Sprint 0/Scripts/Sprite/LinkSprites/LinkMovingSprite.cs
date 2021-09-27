@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle forwardSpritesheetLocation_1 = new Rectangle(1, 11, 15, 16);
         private Rectangle forwardSpritesheetLocation_2 = new Rectangle(19, 11, 15, 16);
         private Rectangle rightSpritesheetLocation_1 = new Rectangle(34, 11, 16, 16);
-        private Rectangle rightSpritesheetLocation_2 = new Rectangle(51, 12, 15, 16);
+        private Rectangle rightSpritesheetLocation_2 = new Rectangle(51, 12, 16, 16);
         private Rectangle backwardSpritesheetLocation_1 = new Rectangle(70, 11, 15, 16);
         private Rectangle backwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
 
@@ -21,8 +21,6 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private LinkStateMachine state;
         int x;
         int y;
-        int width;
-        int height;
 
         private int stepSpeed = 10; // Lower is faster
         private int stepsPerSec = 3;
@@ -32,12 +30,13 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle frame2;
         private bool isFrame1 = true;
 
-        private int standardWidthHeight = 50;
-        private int pixel = 4;
+        private int pixel = 3;
+        private int standardWidthHeight; // Defined by pixel
 
 
         public LinkMovingSprite(LinkStateMachine state)
         {
+            standardWidthHeight = 16 * pixel;
             this.state = state;
             this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
@@ -61,8 +60,6 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
             x = (int)state.Position.X;
             y = (int)state.Position.Y;
-            width = standardWidthHeight;
-            height = standardWidthHeight;
         }
 
 
@@ -73,13 +70,12 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
                 switch (direction)
                 {
                     case Direction.Left:
-                        int offsetX = x - pixel;
-                        int offsetWidth = width + pixel;
+                        int offsetX = x;
 
-                        sb.Draw(sheet, new Rectangle(offsetX, y, offsetWidth, height), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                         break;
                     default:
-                        sb.Draw(sheet, new Rectangle(x, y, width, height), frame1, Color.White);
+                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame1, Color.White);
                         break;
                 }
             } else
@@ -87,22 +83,20 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
                 switch (direction)
                 {
                     case Direction.Left:
-                        sb.Draw(sheet, new Rectangle(x, y, width, height), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                         break;
                     case Direction.Right:
                         int offsetX = x;
-                        int offsetWidth = width - pixel;
 
-                        sb.Draw(sheet, new Rectangle(offsetX, y, offsetWidth, height), frame2, Color.White);
+                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
                         break;
                     case Direction.Down:
                         offsetX = x + pixel;
-                        offsetWidth = width;
 
-                        sb.Draw(sheet, new Rectangle(offsetX, y, offsetWidth, height), frame2, Color.White);
+                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
                         break;
                     default:
-                        sb.Draw(sheet, new Rectangle(x, y, width, height), frame2, Color.White);
+                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
                         break;
                 }
             }
