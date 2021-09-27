@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 
 		public ISprite GetSpriteForState(LinkStateMachine linkState)
         {
-			return new LinkMovingSprite(linkState);
+			return new LinkMovingSprite(linkState.FacingDirection);
         }
 	}
 }
