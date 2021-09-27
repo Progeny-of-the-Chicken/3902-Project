@@ -6,7 +6,8 @@ namespace Sprint_0
 {
     public enum Item { Sword, Arrow, Boomerang, Bomb, Fire, None };
     public enum Direction { Up, Down, Left, Right };
-    class Link : ILink
+
+    public class Link : ILink
     {
         ISprite LinkSprite;
         LinkStateMachine linkState;
@@ -34,21 +35,25 @@ namespace Sprint_0
         public void GoLeft()
         {
             linkState.GoLeft();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void GoRight()
         {
             linkState.GoRight();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void GoUp()
         {
             linkState.GoUp();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void GoDown()
         {
             linkState.GoDown();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void NotMoving()

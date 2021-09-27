@@ -33,7 +33,12 @@ public class KeyboardController : IController
 		//Just for sprint 2
 		this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
 		this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
-    }
+
+		this.RegisterCommand(Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
+		this.RegisterCommand(Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
+		this.RegisterCommand(Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
+		this.RegisterCommand(Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
+	}
 
 	//Update checks for keys pressed and calls the respective command
 	public void Update()

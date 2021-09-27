@@ -11,7 +11,7 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         MouseController mc;
-        Link link;
+        public Link link;
 		ISprite sprite;
         SpriteText credits;
 
@@ -25,8 +25,6 @@ namespace Sprint_0
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            kc = new KeyboardController(this);
-            mc = new MouseController(this);
             
             //Just for sprint 2
             blockNum = 0;
@@ -50,6 +48,9 @@ namespace Sprint_0
             //Just for sprint 2
             base.LoadContent();
             link = new Link();
+
+            kc = new KeyboardController(this);
+            mc = new MouseController(this);
         }
 
         protected override void Update(GameTime gameTime)
