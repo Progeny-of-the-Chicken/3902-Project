@@ -67,41 +67,45 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         { 
             if (isFrame1)
             {
-                switch (direction)
-                {
-                    case Direction.Left:
-                        int offsetX = x;
-
-                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
-                        break;
-                    default:
-                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame1, Color.White);
-                        break;
-                }
+                drawFrame1(sb, gt);
             } else
             {
-                switch (direction)
-                {
-                    case Direction.Left:
-                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
-                        break;
-                    case Direction.Right:
-                        int offsetX = x;
-
-                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
-                        break;
-                    case Direction.Down:
-                        offsetX = x + pixel;
-
-                        sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
-                        break;
-                    default:
-                        sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
-                        break;
-                }
+                drawFrame2(sb, gt);
             }
         }
 
+        private void drawFrame1(SpriteBatch sb, GameTime gt)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    int offsetX = x;
+
+                    sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    break;
+                default:
+                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame1, Color.White);
+                    break;
+            }
+        }
+
+        private void drawFrame2(SpriteBatch sb, GameTime gt)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    break;
+                case Direction.Down:
+                    int offsetX = x + pixel;
+
+                    sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
+                    break;
+                default:
+                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
+                    break;
+            }
+        }
 
         private void setFramesForDirection()
         {
