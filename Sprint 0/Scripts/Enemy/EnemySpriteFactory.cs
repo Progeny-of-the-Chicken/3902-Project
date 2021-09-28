@@ -31,6 +31,13 @@ namespace Sprint_0.Scripts.Enemy
 		private Rectangle[] AquamentusShootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
 		private Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
 													  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
+        private Rectangle[] KeeseFrames = {new Rectangle(183, 14, 18, 10), new Rectangle(200, 14, 16, 12)};
+		private Rectangle GoriyaFrontFrame = new Rectangle(222, 10, 15, 17);
+		private Rectangle GoriyaBackFrame = new Rectangle(240, 10, 14, 17);
+		private Rectangle[] GoriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16 ) };
+		private Rectangle BoomerangFrames = new Rectangle(290, 14, 7, 10);
+
+
 
 		private EnemySpriteFactory()
 		{
@@ -69,9 +76,30 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new AquamentusShootSprite(AquamentusShootFrames, 4, bossSprites);
 		}
+		public ISprite CreateKeeseSprite()
+        {
+			return new KeeseSprite(KeeseFrames, 4, enemySprites);
+        }
 		public ISprite CreateMagicProjectileSprite()
 		{
 			return new MagicProjectileSprite(MagicProjectileFrames, 4, bossSprites);
 		}
+		public ISprite CreateFrontGoriyaSprite()
+        {
+			return new GoriyaFrontSprite(GoriyaFrontFrame, 4, enemySprites);
+        }
+		public ISprite CreateBackGoriyaSprite()
+        {
+			return new GoriyaBackSprite(GoriyaBackFrame, 4, enemySprites);
+        }
+		public ISprite CreateRightGoriyaSprite()
+		{
+			return new GoriyaRightSprite(GoriyaRightFrames, 4, enemySprites);
+		}
+
+		public ISprite CreateBoomerangSprite()
+        {
+			return new BoomerangSprite(BoomerangFrames, 4, enemySprites);
+        }
 	}
 }

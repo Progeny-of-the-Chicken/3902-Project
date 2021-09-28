@@ -14,7 +14,7 @@ namespace Sprint_0
 
         IEnemy enemy;
         Vector2 enemyStart;
-        int enemyCount = 5;
+        int enemyCount = 7;
         int enemyIndex = 0;
 
         public Game1()
@@ -87,6 +87,12 @@ namespace Sprint_0
                     enemy = EnemyFactory.Instance.CreateZol(enemyStart);
                     break;
                 case 4:
+                    enemy = EnemyFactory.Instance.CreateKeese(enemyStart);
+                    break;
+                case 5:
+                    enemy = EnemyFactory.Instance.CreateGoriya(enemyStart);
+                    break;
+                case 6:
                     enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart);
                     break;
                 default:
