@@ -29,36 +29,13 @@ namespace Sprint_0
         public void Update()
         {
             linkState.Update();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             LinkSprite.Update();
         }
 
-        public void GoLeft()
+        public void GoInDirection(Direction direction)
         {
-            linkState.GoLeft();
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-        }
-
-        public void GoRight()
-        {
-            linkState.GoRight();
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-        }
-
-        public void GoUp()
-        {
-            linkState.GoUp();
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-        }
-
-        public void GoDown()
-        {
-            linkState.GoDown();
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-        }
-
-        public void NotMoving()
-        {
-            linkState.NotMoving();
+            linkState.GoInDirection(direction);
         }
 
         public void TakeDamage()
@@ -69,6 +46,11 @@ namespace Sprint_0
                 linkState.TakeDamage();
             }
         }
+
+        public bool IsMoving()
+        {
+            return linkState.IsMoving;
+        }
         
         public void UseSword()
         {
@@ -77,104 +59,75 @@ namespace Sprint_0
                 linkState.UseSword();
             }
         }
-        
-        public void UseArrow()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseArrow();
-            }
-        }
-        
-        public void UseBoomerang()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseBoomerang();
-            }
-        }
-        
-        public void UseBomb()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseBomb();
-            }
-        }
-        
-        public void UseFire()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseFire();
-            }
-        }
 
-        
     }
 
     public class LinkStateMachine
     {
         private Direction linksDirection;
-        private bool isMoving;
         private int damageCounter;
         private int usingItemCounter;
+        private int movingCounter;
         private Item itemBeingUsed;
         private Vector2 linksPosition;
-        private const int linkSpeed = 1;
+        private const int linkSpeed = 16;
 
         public LinkStateMachine()
         {
             linksDirection = Direction.Down;
-            isMoving = false;
             damageCounter = 0;
             usingItemCounter = 0;
+            movingCounter = 0;
             itemBeingUsed = Item.None;
             linksPosition = new Vector2(200, 200); //generic starting position
         }
 
         public void Update()
         {
-            if (usingItemCounter == 0)
-                itemBeingUsed = Item.None;
             if (damageCounter > 0)
                 damageCounter--;
             if (usingItemCounter > 0)
                 usingItemCounter--;
+            if (movingCounter > 0)
+                movingCounter--;
         }
 
-        //TODO: once we test and thing works, we could probably make one generic method to handle and change in direction
-        public void GoLeft()
+
+        public void GoInDirection(Direction direction)
         {
-            linksDirection = Direction.Left;
-            isMoving = true;
-            linksPosition.X -= linkSpeed;
+            if(direction == linksDirection)
+            {
+                MoveInCurrentDirection();
+            }
+            else
+            {
+                SwitchToFaceNewDirection(direction);
+            }
         }
 
-        public void GoRight()
+        private void MoveInCurrentDirection()
         {
-            linksDirection = Direction.Right;
-            isMoving = true;
-            linksPosition.X += linkSpeed;
+            switch(linksDirection)
+            {
+                case Direction.Left:
+                    linksPosition.X -= linkSpeed;
+                    break;
+                case Direction.Right:
+                    linksPosition.X += linkSpeed;
+                    break;
+                case Direction.Up:
+                    linksPosition.Y -= linkSpeed;
+                    break;
+                case Direction.Down:
+                    linksPosition.Y += linkSpeed;
+                    break;
+            }
+            movingCounter = 15;
         }
 
-        public void GoUp()
+        private void SwitchToFaceNewDirection(Direction direction)
         {
-            linksDirection = Direction.Up;
-            isMoving = true;
-            linksPosition.Y -= linkSpeed;
-        }
-
-        public void GoDown()
-        {
-            linksDirection = Direction.Down;
-            isMoving = true;
-            linksPosition.Y += linkSpeed;
-        }
-
-        public void NotMoving()
-        {
-            isMoving = false;
+            linksDirection = direction;
         }
 
         public void TakeDamage()
@@ -188,42 +141,6 @@ namespace Sprint_0
             if (itemBeingUsed != Item.None)
             {
                 itemBeingUsed = Item.Sword;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseArrow()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Arrow;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseBoomerang()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Boomerang;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseBomb()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Bomb;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseFire()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Fire;
                 usingItemCounter = 30;
             }
         }
@@ -248,7 +165,7 @@ namespace Sprint_0
         {
             get
             {
-                return isMoving;
+                return movingCounter > 0;
             }
         }
 

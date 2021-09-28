@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            link.GoLeft();
+            link.GoInDirection(Direction.Left);
         }
     }
 }

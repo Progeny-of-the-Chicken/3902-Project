@@ -7,6 +7,7 @@ public class KeyboardController : IController
 {
 	//Dictionary Linking keys to commands
 	private Dictionary<Keys, ICommand> controllerMappings;
+	private Dictionary<Keys, ICommand> linkControllerMappings;
 	private Game1 game;
 
 	//Previous Keys pressed to limit multiple presses
@@ -16,28 +17,29 @@ public class KeyboardController : IController
 	public KeyboardController(Game1 game)
     {
 		controllerMappings = new Dictionary<Keys, ICommand>();
+		linkControllerMappings = new Dictionary<Keys, ICommand>();
 		this.game = game;
 		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 		setCommands();
     }
 
 	//Method to add new keybinds for commands
-	public void RegisterCommand(Keys key, ICommand command)
+	public void RegisterCommand(Dictionary<Keys, ICommand> dictionary, Keys key, ICommand command)
     {
-		controllerMappings.Add(key, command);
+		dictionary.Add(key, command);
     }
 
 	//Add keybinds here
 	private void setCommands()
     {
 		//Just for sprint 2
-		this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
-		this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
+		this.RegisterCommand(controllerMappings, Keys.T, new BlockReverseCycle(game));
+		this.RegisterCommand(controllerMappings, Keys.Y, new BlockForwardCycle(game));
 
-		this.RegisterCommand(Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
-		this.RegisterCommand(Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
-		this.RegisterCommand(Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
-		this.RegisterCommand(Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
 	}
 
 	//Update checks for keys pressed and calls the respective command
@@ -48,15 +50,12 @@ public class KeyboardController : IController
 
 		foreach (Keys key in pressedKeys)
         {
-			// Make sure key has mapping
-			if (!controllerMappings.ContainsKey(key))
-				return;
-
-
-			if (previousKeys.IsKeyUp(key))
-			{
+			// Make sure key has mapping and previous key is up before executing it
+			if (controllerMappings.ContainsKey(key) && previousKeys.IsKeyUp(key))
 				controllerMappings[key].Execute();
-			}
+
+			if (linkControllerMappings.ContainsKey(key) && previousKeys.IsKeyUp(key) && !game.link.IsMoving())
+				linkControllerMappings[key].Execute();
         }
 
 		previousKeys = keyboardState;
