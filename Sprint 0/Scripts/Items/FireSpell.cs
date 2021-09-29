@@ -22,6 +22,8 @@ namespace Sprint_0.Scripts.Items
         private int fireMaxDistance;
         private bool linger;
 
+        private bool delete;
+
         public FireSpell(Texture2D spritesheet, Rectangle textureLocation, Vector2 spawnLoc, Direction dir)
         {
             projectileSpritesheet = spritesheet;
@@ -30,6 +32,7 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRec.Width / 2), (int)spawnLoc.Y - (sourceRec.Height / 2),
                 2 * sourceRec.Width, 2 * sourceRec.Height
             );
+            delete = false;
 
             pointing = dir;
             flip = SpriteEffects.None;
@@ -60,9 +63,10 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
+
         }
 
-        public bool Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             // Animation control
             if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
@@ -79,7 +83,6 @@ namespace Sprint_0.Scripts.Items
             }
 
             // Movement control
-            bool delete = false;
             if (!linger)
             {
                 activeAxis.currentPos += (int) fireSpeed;
@@ -96,13 +99,16 @@ namespace Sprint_0.Scripts.Items
                     delete = true;
                 }
             }
-
-            return delete;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRec, Color.White, 0, new Vector2(0, 0), flip, 0);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

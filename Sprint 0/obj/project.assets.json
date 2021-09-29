@@ -174,26 +174,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oshii\\.nuget\\packages\\": {}
+    "/Users/lucasbutler/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oshii\\source\\repos\\Sprint 0\\Sprint 0\\Sprint 0.csproj",
+      "projectUniqueName": "/Users/lucasbutler/Projects/3902-Project/Sprint 0/Sprint 0.csproj",
       "projectName": "Sprint 0",
-      "projectPath": "C:\\Users\\oshii\\source\\repos\\Sprint 0\\Sprint 0\\Sprint 0.csproj",
-      "packagesPath": "C:\\Users\\oshii\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oshii\\source\\repos\\Sprint 0\\Sprint 0\\obj\\",
+      "projectPath": "/Users/lucasbutler/Projects/3902-Project/Sprint 0/Sprint 0.csproj",
+      "packagesPath": "/Users/lucasbutler/.nuget/packages/",
+      "outputPath": "/Users/lucasbutler/Projects/3902-Project/Sprint 0/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\oshii\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/lucasbutler/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -236,7 +234,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

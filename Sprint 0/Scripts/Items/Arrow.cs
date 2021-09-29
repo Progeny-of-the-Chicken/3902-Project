@@ -17,6 +17,8 @@ namespace Sprint_0.Scripts.Items
         private int arrowMaxDistance;
         private SpriteEffects flip;
 
+        private bool delete;
+
         public Arrow(Texture2D spritesheet, Rectangle textureLocation, Vector2 spawnLoc, Direction dir, bool silver)
         {
             projectileSpritesheet = spritesheet;
@@ -25,6 +27,7 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRec.Width / 2), (int)spawnLoc.Y - (sourceRec.Height / 2),
                 2 * sourceRec.Width, 2 * sourceRec.Height
             );
+            delete = false;
             pointing = dir;
 
             // Arrow stats
@@ -59,9 +62,8 @@ namespace Sprint_0.Scripts.Items
             }
         }
 
-        public bool Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            bool delete = false;
             activeAxis.currentPos += (int) arrowSpeed;
             if (Math.Abs(activeAxis.currentPos - activeAxis.startPos) > arrowMaxDistance)
             {
@@ -69,12 +71,16 @@ namespace Sprint_0.Scripts.Items
                 ItemSpriteFactory.Instance.CreateArrowPuff(new Vector2(activeAxis.spriteRec.X, activeAxis.spriteRec.Y));
                 delete = true;
             }
-            return delete;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRec, Color.White, 0, new Vector2(0, 0), flip, 0);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

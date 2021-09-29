@@ -11,6 +11,7 @@ namespace Sprint_0.Scripts.Items
         private Rectangle destinationRec;
         private int frameIndex;
         private double lastFrameTime;
+        private bool delete;
 
         public ProjectilePuff(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc)
         {
@@ -21,14 +22,14 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
                 2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
             );
+            delete = false;
 
             frameIndex = 0;
             lastFrameTime = 0;
         }
 
-        public bool Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            bool delete = false;
             // Animation control
             if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
             {
@@ -43,13 +44,16 @@ namespace Sprint_0.Scripts.Items
                 }
                 lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
-
-            return delete;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(treasureSpritesheet, destinationRec, sourceRecs[frameIndex], Color.White);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

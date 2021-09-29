@@ -24,6 +24,8 @@ namespace Sprint_0.Scripts.Items
         private double boomerangAccel;
         private int boomerangMaxDistance;
 
+        private bool delete;
+
         public Boomerang(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc, Direction dir, bool magical)
         {
             projectileSpritesheet = spritesheet;
@@ -32,6 +34,7 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
                 2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
             );
+            delete = false;
             pointing = dir;
 
             frameIndex = 0;
@@ -70,9 +73,11 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
+
+            delete = false;
         }
 
-    public bool Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
         {
             // Animation control
             if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
@@ -97,20 +102,23 @@ namespace Sprint_0.Scripts.Items
             }
 
             // Movement control
-            bool delete = false;
             if (!startTimeInitialized)
             {
                 startT = gameTime.TotalGameTime.TotalMilliseconds;
             }
             t = (gameTime.TotalGameTime.TotalMilliseconds - startT);
             activeAxis.currentPos += (int) boomerangSpeed;
-            return delete;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRecs[frameIndex], Color.White,
                 rotation, new Vector2(activeAxis.spriteRec.Width / 4, activeAxis.spriteRec.Height / 4), SpriteEffects.None, 0);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

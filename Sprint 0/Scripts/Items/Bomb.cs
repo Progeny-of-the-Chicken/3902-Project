@@ -20,6 +20,8 @@ namespace Sprint_0.Scripts.Items
         private int frameIndex;
         private double lastFrameTime;
 
+        private bool delete;
+
         public Bomb(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc, Direction dir)
         {
             projectileSpritesheet = spritesheet;
@@ -28,6 +30,7 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
                 2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
             );
+            delete = false;
             displacement = ItemSettings.bombDisplacement;
 
             placement = dir;
@@ -57,12 +60,13 @@ namespace Sprint_0.Scripts.Items
                     break;
             }
             activeAxis.currentPos += displacement;
+
+            delete = false;
         }
 
-        public bool Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             // Animation control
-            bool delete = false;
             if (!startTimeInitialized)
             {
                 startTime = gameTime.TotalGameTime.TotalSeconds;
@@ -89,13 +93,16 @@ namespace Sprint_0.Scripts.Items
                     lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
                 }
             }
-
-            return delete;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRecs[frameIndex], Color.White);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

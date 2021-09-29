@@ -8,6 +8,7 @@ namespace Sprint_0.Scripts.Items
         private Texture2D treasureSpritesheet;
         private Rectangle sourceRec;
         private Rectangle destinationRec;
+        private bool delete;
 
         public NonAnimatedTreasure(Texture2D spritesheet, Rectangle textureLocation, Vector2 spawnLoc)
         {
@@ -17,17 +18,23 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRec.Width / 2), (int)spawnLoc.Y - (sourceRec.Height / 2),
                 2 * sourceRec.Width, 2 * sourceRec.Height
             );
+
+            delete = false;
         }
 
-        public bool Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             // No animation
-            return false;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(treasureSpritesheet, destinationRec, sourceRec, Color.White);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
         }
     }
 }

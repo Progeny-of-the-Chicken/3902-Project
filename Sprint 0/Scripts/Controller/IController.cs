@@ -1,6 +1,4 @@
-﻿using System;
-
-public interface IController
+﻿public interface IController
 {
 	void Update();
 }

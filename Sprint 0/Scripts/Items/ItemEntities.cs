@@ -25,10 +25,12 @@ namespace Sprint_0.Scripts.Items
             HashSet<IItem> itemsToRemove = new HashSet<IItem>();
             foreach (IItem item in items)
             {
-                if (item.Update(gameTime))
+                item.Update(gameTime);
+                if (item.CheckDelete())
                 {
                     itemsToRemove.Add(item);
                 }
+
             }
             foreach (IItem item in itemsToRemove)
             {

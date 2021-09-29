@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0
 {
@@ -8,10 +11,8 @@ namespace Sprint_0
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        KeyboardController kc;
-        MouseController mc;
-        ISprite sprite;
-        SpriteText credits;
+        private KeyboardController kc;
+        public ItemEntities ic;
 
         public Game1()
         {
@@ -19,42 +20,37 @@ namespace Sprint_0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             kc = new KeyboardController(this);
-            mc = new MouseController(this);
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             this.LoadContent();
             base.Initialize();
+            ic = new ItemEntities(this);
+            ic.sprint2Item = ItemSpriteFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
-            sprite = new Sprite1(this.GetCenterScreen());
-            sprite.LoadContent(this.Content);
-            credits = new SpriteText(this.GetCenterScreen());
-            credits.LoadContent(this.Content);
+            ItemSpriteFactory.Instance.LoadAllTextures(Content);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
             kc.Update();
-            mc.Update();
+            ic.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            sprite.Draw(this._spriteBatch, gameTime);
-            credits.Draw(this._spriteBatch, gameTime);
+            ic.Draw(_spriteBatch);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         public void Quit()
@@ -64,12 +60,6 @@ namespace Sprint_0
         public Vector2 GetCenterScreen()
         {
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-        }
-
-        public void SetSprite(ISprite s)
-        {
-            this.sprite = s;
-            sprite.LoadContent(this.Content);
         }
     }
 }
