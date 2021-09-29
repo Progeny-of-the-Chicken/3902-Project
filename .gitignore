@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Sprint 0/Content/bin/DesktopGL
+/Sprint 0/Content/obj/DesktopGL/npc.png.mgcontent
+/Sprint 0/Content/obj/DesktopGL/Font.mgcontent
+/Sprint 0/Content/obj/DesktopGL/enemies.png.mgcontent
+/Sprint 0/Content/obj/DesktopGL/bosses.png.mgcontent
+/Sprint 0/Content/obj/DesktopGL/.mgstats
+/Sprint 0/Content/obj/DesktopGL/.mgcontent
+/Sprint 0/obj/Debug/netcoreapp3.1/Sprint 0.AssemblyInfo.cs
+/Sprint 0/obj/Debug/netcoreapp3.1/Sprint 0.csproj.CopyComplete
+/Sprint 0/Content/obj/DesktopGL/Content/bosses.png.mgcontent
+*.mgcontent
+/Sprint 0/bin/Debug/netcoreapp3.1
+*.editorconfig

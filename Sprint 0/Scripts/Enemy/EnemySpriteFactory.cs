@@ -96,6 +96,10 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new GoriyaRightSprite(GoriyaRightFrames, 4, enemySprites);
 		}
+		public ISprite CreateLeftGoriyaSprite()
+		{
+			return new GoriyaLeftSprite(GoriyaRightFrames, 4, enemySprites);
+		}
 
 		public ISprite CreateBoomerangSprite()
         {
