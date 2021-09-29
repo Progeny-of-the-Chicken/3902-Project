@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Enemy
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private StalfosSprite sprite;
         private byte[] random;
-        private float moveTime = 2;
+        private float moveTime = 1;
         private float moveSpeed = 100;
         private float timeSinceMove = 0;
         private Vector2 location;
@@ -64,11 +64,6 @@ namespace Sprint_0.Scripts.Enemy
                 timeSinceMove = 0;
             }
             location += directionVector * (float)gt.ElapsedGameTime.TotalSeconds;
-        }
-
-        public void ShootProjectile()
-        {
-            //not needed
         }
 
         public void Draw(SpriteBatch sb)

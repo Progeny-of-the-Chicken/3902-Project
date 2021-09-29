@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Keese : IEnemy
     {
-        enum Direction { Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight, Still };
+        enum Direction { Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight};
 
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private KeeseSprite sprite;
