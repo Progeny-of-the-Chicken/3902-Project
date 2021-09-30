@@ -12,9 +12,11 @@ namespace Sprint_0.Scripts.Enemy
         MagicProjectileSprite sprite;
         private Vector2 location;
         private int speed = 200;
-        public MagicProjectile(Vector2 location)
+        private Vector2 direction;
+        public MagicProjectile(Vector2 location, Vector2 direction)
         {
             this.location = location;
+            this.direction = direction;
             sprite = (MagicProjectileSprite) EnemySpriteFactory.Instance.CreateMagicProjectileSprite();
         }
         public void Update(GameTime t)
@@ -25,7 +27,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Move(GameTime t)
         {
-            this.location.X -= speed * (float)t.ElapsedGameTime.TotalSeconds;
+            this.location += direction * speed * (float)t.ElapsedGameTime.TotalSeconds;
         }
 
         public void Draw(SpriteBatch sb)

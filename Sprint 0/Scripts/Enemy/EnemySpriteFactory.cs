@@ -82,7 +82,7 @@ namespace Sprint_0.Scripts.Enemy
         }
 		public ISprite CreateMagicProjectileSprite()
 		{
-			return new MagicProjectileSprite(MagicProjectileFrames, 4, bossSprites);
+			return new MagicProjectileSprite(MagicProjectileFrames, 3, bossSprites);
 		}
 		public ISprite CreateFrontGoriyaSprite()
         {

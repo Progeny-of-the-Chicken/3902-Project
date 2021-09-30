@@ -9,7 +9,7 @@ namespace Sprint_0.Scripts.Enemy
     public class Aquamentus : IEnemy
     {
         ISprite sprite;
-        private MagicProjectile projectile;
+        private AquamentusProjectile projectile;
         private Vector2 location;
         private float projectileLifespan = 2.5f;
         private float timeSinceFire = 0;
@@ -45,7 +45,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            projectile = (MagicProjectile)EnemyFactory.Instance.CreateMagicProjectile(location);
+            projectile = (AquamentusProjectile)EnemyFactory.Instance.CreateAquamentusProjectile(location);
         }
 
         public void Draw(SpriteBatch sb)
