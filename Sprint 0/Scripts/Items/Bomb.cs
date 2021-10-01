@@ -41,13 +41,13 @@ namespace Sprint_0.Scripts.Items
             sprite = ItemSpriteFactory.Instance.CreateBombSprite();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gt)
         {
             // Animation control
-            sprite.Update(gameTime);
+            sprite.Update(gt);
             if (!explode)
             {
-                startTime += gameTime.ElapsedGameTime.TotalSeconds;
+                startTime += gt.ElapsedGameTime.TotalSeconds;
                 if (startTime > fuseDurationSeconds)
                 {
                     explode = true;
@@ -57,7 +57,7 @@ namespace Sprint_0.Scripts.Items
             }
             else
             {
-                startTime += gameTime.ElapsedGameTime.TotalSeconds;
+                startTime += gt.ElapsedGameTime.TotalSeconds;
                 if (startTime > explodeDurationSeconds)
                 {
                     delete = true;
@@ -65,9 +65,9 @@ namespace Sprint_0.Scripts.Items
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(_spriteBatch, pos);
+            sprite.Draw(sb, pos);
         }
 
         public bool CheckDelete()

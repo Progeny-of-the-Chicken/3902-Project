@@ -44,12 +44,12 @@ namespace Sprint_0.Scripts.Items
             sprite = ItemSpriteFactory.Instance.CreateFireSpellSprite();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gt)
         {
-            sprite.Update(gameTime);
+            sprite.Update(gt);
             if (!linger)
             {
-                currentPos += directionVector * (float)(gameTime.ElapsedGameTime.TotalSeconds * speedPerSecond);
+                currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
                 // Distance based
                 if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
                 {
@@ -58,7 +58,7 @@ namespace Sprint_0.Scripts.Items
             }
             else
             {
-                startLingerTime += gameTime.ElapsedGameTime.TotalSeconds;
+                startLingerTime += gt.ElapsedGameTime.TotalSeconds;
                 if (startLingerTime > lingerDuration)
                 {
                     delete = true;
@@ -66,9 +66,9 @@ namespace Sprint_0.Scripts.Items
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(_spriteBatch, currentPos);
+            sprite.Draw(sb, currentPos);
         }
 
         public bool CheckDelete()

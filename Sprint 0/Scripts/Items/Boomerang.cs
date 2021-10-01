@@ -50,15 +50,15 @@ namespace Sprint_0.Scripts.Items
             sprite = ItemSpriteFactory.Instance.CreateBoomerangSprite(magical);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gt)
         {
             // Movement control
-            sprite.Update(gameTime);
+            sprite.Update(gt);
             if (startT == 0)
             {
-                startT = gameTime.TotalGameTime.TotalSeconds;
+                startT = gt.TotalGameTime.TotalSeconds;
             }
-            double t = gameTime.TotalGameTime.TotalSeconds - startT + tOffset;
+            double t = gt.TotalGameTime.TotalSeconds - startT + tOffset;
             currentPos += directionVector * (float)(t * speedPerSecond + t * t * decelPerSecond);
             // Delete on boomerang return
             if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
@@ -67,9 +67,9 @@ namespace Sprint_0.Scripts.Items
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(_spriteBatch, currentPos);
+            sprite.Draw(sb, currentPos);
         }
 
         public bool CheckDelete()

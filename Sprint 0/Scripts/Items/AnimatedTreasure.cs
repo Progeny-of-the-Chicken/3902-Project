@@ -3,28 +3,27 @@ using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Items
 {
-    public class NonAnimatedTreasure : IItem
+    public class AnimatedTreasure : IItem
     {
         private ISprite sprite;
-        private Vector2 pos;
+        private Vector2 location;
         private bool delete = false;
 
-        public NonAnimatedTreasure(ISprite treasureSprite, Vector2 spawnLoc)
+        public AnimatedTreasure(ISprite treasureType, Vector2 spawnLoc)
         {
-            sprite = treasureSprite;
-            pos = spawnLoc;
-            delete = false;
+            sprite = treasureType;
+            location = spawnLoc;
         }
 
         public void Update(GameTime gt)
         {
-            // No animation
             sprite.Update(gt);
+            // No deletion criteria
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, pos);
+            sprite.Draw(sb, location);
         }
 
         public bool CheckDelete()

@@ -5,9 +5,9 @@ namespace Sprint_0.Scripts.Items
 {
     public interface IItem
     {
-        void Update(GameTime gameTime);
+        void Update(GameTime gt);
 
-        void Draw(SpriteBatch _spriteBatch);
+        void Draw(SpriteBatch sb);
 
         bool CheckDelete();
     }

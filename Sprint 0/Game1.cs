@@ -27,7 +27,7 @@ namespace Sprint_0
             this.LoadContent();
             base.Initialize();
             itemSet = new ItemEntities(this);
-            itemSet.sprint2Item = ItemSpriteFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
+            itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
         }
 
         protected override void LoadContent()

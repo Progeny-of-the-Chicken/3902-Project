@@ -31,96 +31,96 @@ namespace Sprint_0.Scripts.Items
             treasureSpritesheet = content.Load<Texture2D>("LoZItems");
         }
 
-        public IItem CreateSmallHeartTreasure(Vector2 spawnLoc)
+        public ISprite CreateSmallHeartTreasureSprite()
         {
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(0, 0, 7, 8));
             frames.Add(new Rectangle(0, 8, 7, 8));
-            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames);
         }
 
-        public IItem CreateHeartContainer(Vector2 spawnLoc)
+        public ISprite CreateHeartContainerSprite()
         {
             Rectangle frame = new Rectangle(25, 1, 13, 13);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateFairy(Vector2 spawnLoc)
+        public ISprite CreateFairySprite()
         {
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(40, 0, 8, 16));
             frames.Add(new Rectangle(48, 0, 8, 16));
-            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames);
         }
 
-        public IItem CreateClock(Vector2 spawnLoc)
+        public ISprite CreateClockSprite()
         {
             Rectangle frame = new Rectangle(58, 0, 11, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateBlueRuby(Vector2 spawnLoc)
+        public ISprite CreateBlueRubySprite()
         {
             Rectangle frame = new Rectangle(72, 0, 8, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateYellowRuby(Vector2 spawnLoc)
+        public ISprite CreateYellowRubySprite()
         {
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(72, 0, 8, 16));
             frames.Add(new Rectangle(72, 16, 8, 16));
-            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames);
         }
 
-        public IItem CreateBasicMap(Vector2 spawnLoc)
+        public ISprite CreateBasicMapSprite()
         {
             Rectangle frame = new Rectangle(88, 0, 8, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateBoomerangTreasure(Vector2 spawnLoc)
+        public ISprite CreateBoomerangTreasureSprite()
         {
             Rectangle frame = new Rectangle(129, 3, 5, 8);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateBombTreasure(Vector2 spawnLoc)
+        public ISprite CreateBombTreasureSprite()
         {
             Rectangle frame = new Rectangle(136, 0, 8, 14);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateBowTreasure(Vector2 spawnLoc)
+        public ISprite CreateBowTreasureSprite()
         {
             Rectangle frame = new Rectangle(144, 0, 8, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateBasicKey(Vector2 spawnLoc)
+        public ISprite CreateBasicKeySprite()
         {
             Rectangle frame = new Rectangle(240, 0, 8, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateMagicKey(Vector2 spawnLoc)
+        public ISprite CreateMagicKeySprite()
         {
             Rectangle frame = new Rectangle(248, 0, 8, 16);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateCompass(Vector2 spawnLoc)
+        public ISprite CreateCompassSprite()
         {
             Rectangle frame = new Rectangle(258, 1, 11, 12);
-            return new NonAnimatedTreasure(treasureSpritesheet, frame, spawnLoc);
+            return new NonAnimatedTreasureSprite(treasureSpritesheet, frame);
         }
 
-        public IItem CreateTriforcePiece(Vector2 spawnLoc)
+        public ISprite CreateTriforcePieceSprite()
         {
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(275, 3, 10, 10));
             frames.Add(new Rectangle(275, 19, 10, 10));
-            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames);
         }
 
         public ISprite CreateArrowSprite(ArrowSprite.Orientation direction, bool silver)

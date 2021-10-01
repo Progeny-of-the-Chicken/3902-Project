@@ -11,20 +11,20 @@ namespace Sprint_0.Scripts.Items
         public TreasureCycle(Vector2 spawnLoc)
         {
             cycle = new List<IItem>();
-            cycle.Add(ItemSpriteFactory.Instance.CreateBlueRuby(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateYellowRuby(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateSmallHeartTreasure(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateHeartContainer(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateFairy(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateClock(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateBasicKey(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateBoomerangTreasure(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateBombTreasure(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateBowTreasure(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateBasicKey(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateMagicKey(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateCompass(spawnLoc));
-            cycle.Add(ItemSpriteFactory.Instance.CreateTriforcePiece(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBlueRuby(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateYellowRuby(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateSmallHeartTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateHeartContainer(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateFairy(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateClock(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBasicKey(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBoomerangTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBombTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBowTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBasicKey(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateMagicKey(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateCompass(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateTriforcePiece(spawnLoc));
 
             currentIndex = 0;
         }
