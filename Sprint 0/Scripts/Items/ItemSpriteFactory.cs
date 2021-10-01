@@ -124,75 +124,22 @@ namespace Sprint_0.Scripts.Items
 
         public IItem CreateArrow(Vector2 spawnLoc, Arrow.Direction dir, bool silver)
         {
-            Rectangle frame;
-            if (!silver)
-            {
-                if (dir == Arrow.Direction.RIGHT || dir == Arrow.Direction.LEFT)
-                {
-                    frame = new Rectangle(10, 190, 16, 5);
-                }
-                else
-                {
-                    frame = new Rectangle(3, 185, 5, 16);
-                }
-            }
-            else
-            {
-                if (dir == Arrow.Direction.RIGHT || dir == Arrow.Direction.LEFT)
-                {
-                    frame = new Rectangle(36, 190, 16, 5);
-                }
-                else
-                {
-                    frame = new Rectangle(29, 185, 5, 16);
-                }
-            }
-            
-            return new Arrow(projectileSpritesheet, frame, spawnLoc, dir, silver);
-        }
-
-        public IItem CreateArrowPuff(Vector2 spawnLoc)
-        {
-            List<Rectangle> frames = new List<Rectangle>();
-            frames.Add(new Rectangle(53, 189, 8, 8));
-            return new ProjectilePuff(projectileSpritesheet, frames, spawnLoc);
+            return new Arrow(projectileSpritesheet, spawnLoc, dir, silver);
         }
 
         public IItem CreateBoomerang(Vector2 spawnLoc, Boomerang.Direction dir, bool magical)
         {
-            List<Rectangle> frames = new List<Rectangle>();
-            if (!magical)
-            {
-                frames.Add(new Rectangle(64, 189, 8, 8));
-                frames.Add(new Rectangle(73, 189, 8, 8));
-                frames.Add(new Rectangle(82, 189, 8, 8));
-                frames.Add(new Rectangle(91, 189, 8, 8));
-            }
-            else
-            {
-                frames.Add(new Rectangle(100, 189, 8, 8));
-                frames.Add(new Rectangle(109, 189, 8, 8));
-                frames.Add(new Rectangle(118, 189, 8, 8));
-                frames.Add(new Rectangle(127, 189, 8, 8));
-            }
-
-            return new Boomerang(projectileSpritesheet, frames, spawnLoc, dir, magical);
+            return new Boomerang(projectileSpritesheet, spawnLoc, dir, magical);
         }
 
         public IItem CreateFireSpell(Vector2 spawnLoc, FireSpell.Direction dir)
         {
-            Rectangle frame = new Rectangle(215, 185, 16, 16);
-            return new FireSpell(projectileSpritesheet, frame, spawnLoc, dir);
+            return new FireSpell(projectileSpritesheet, spawnLoc, dir);
         }
 
         public IItem CreateBomb(Vector2 spawnLoc, Bomb.Direction dir)
         {
-            List<Rectangle> frames = new List<Rectangle>();
-            frames.Add(new Rectangle(145, 185, 16, 16));
-            frames.Add(new Rectangle(162, 185, 16, 16));
-            frames.Add(new Rectangle(179, 185, 16, 16));
-            frames.Add(new Rectangle(196, 185, 16, 16));
-            return new Bomb(projectileSpritesheet, frames, spawnLoc, dir);
+            return new Bomb(projectileSpritesheet, spawnLoc, dir);
         }
     }
 }

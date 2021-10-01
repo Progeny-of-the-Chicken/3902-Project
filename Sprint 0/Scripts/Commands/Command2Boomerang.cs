@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Commands
         public void Execute()
         {
             // TODO: Move item factory dependency to player sprite class
-            game.ic.items.Add(ItemSpriteFactory.Instance.CreateBoomerang(game.GetCenterScreen(), Boomerang.Direction.LEFT, false));
+            game.itemSet.items.Add(ItemSpriteFactory.Instance.CreateBoomerang(game.GetCenterScreen(), Boomerang.Direction.LEFT, false));
         }
     }
 }

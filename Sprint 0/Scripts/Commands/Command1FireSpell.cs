@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Commands
 		public void Execute()
 		{
 			// TODO: Move item factory dependency to player sprite class
-			game.ic.items.Add(ItemSpriteFactory.Instance.CreateFireSpell(game.GetCenterScreen(), FireSpell.Direction.RIGHT));
+			game.itemSet.items.Add(ItemSpriteFactory.Instance.CreateFireSpell(game.GetCenterScreen(), FireSpell.Direction.RIGHT));
 		}
 	}
 }

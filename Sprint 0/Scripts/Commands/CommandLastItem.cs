@@ -11,7 +11,7 @@
 
 		public void Execute()
 		{
-			this.game.ic.sprint2Item = game.ic.sprint2Cycle.getLastItem();
+			this.game.itemSet.sprint2Item = game.itemSet.sprint2Cycle.getLastItem();
 		}
 	}
 }

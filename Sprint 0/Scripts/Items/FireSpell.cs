@@ -1,100 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
     public class FireSpell : IItem
     {
-        public enum Direction { UP, DOWN, LEFT, RIGHT };
+        public enum Direction { RIGHT, UP, LEFT, DOWN }
 
-        private Texture2D projectileSpritesheet;
-        private Rectangle sourceRec;
+        private ISprite sprite;
+        private Vector2 directionVector;
+        private Vector2 currentPos;
+        private Vector2 startPos;
+        private bool delete = false;
 
-        private double lastFrameTime;
-        private double startLingerTime;
-        private Direction pointing;
-        private SpriteEffects flip;
+        private bool linger = false;
+        private double speedPerSecond = 150.0;
+        private int maxDistance = 200;
+        private double startLingerTime = 0;
+        private double lingerDuration = 2.0;
 
-        private SpriteAxis activeAxis;
-        private double fireSpeed;
-        private int fireMaxDistance;
-        private bool linger;
-
-        private bool delete;
-
-        public FireSpell(Texture2D spritesheet, Rectangle textureLocation, Vector2 spawnLoc, Direction dir)
+        public FireSpell(Texture2D spritesheet, Vector2 spawnLoc, Direction dir)
         {
-            projectileSpritesheet = spritesheet;
-            sourceRec = textureLocation;
-            Rectangle destinationRec = new Rectangle(
-                (int)spawnLoc.X - (sourceRec.Width / 2), (int)spawnLoc.Y - (sourceRec.Height / 2),
-                2 * sourceRec.Width, 2 * sourceRec.Height
-            );
-            delete = false;
-
-            pointing = dir;
-            flip = SpriteEffects.None;
-            lastFrameTime = 0;
-            linger = false;
-
-            // Fire stats
-            fireSpeed = ItemSettings.fireSpeed;
-            fireMaxDistance = ItemSettings.fireDistance;
-
-            // TODO: Clean up orientation logic
-            switch (pointing)
+            startPos = currentPos = spawnLoc;
+            switch (dir)
             {
+                case Direction.RIGHT:
+                    directionVector = new Vector2(1, 0);
+                    break;
                 case Direction.UP:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    fireSpeed *= -1;
+                    directionVector = new Vector2(0, 1);
                     break;
                 case Direction.LEFT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
-                    fireSpeed *= -1;
+                    directionVector = new Vector2(-1, 0);
                     break;
                 case Direction.DOWN:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    break;
-                case Direction.RIGHT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
+                    directionVector = new Vector2(0, -1);
                     break;
                 default:
                     break;
             }
-
+            sprite = new FireSpellSprite(spritesheet);
         }
 
         public void Update(GameTime gameTime)
         {
-            // Animation control
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
-            {
-                if (flip == SpriteEffects.None)
-                {
-                    flip = SpriteEffects.FlipHorizontally;
-                }
-                else
-                {
-                    flip = SpriteEffects.None;
-                }
-                lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
-            }
-
-            // Movement control
+            sprite.Update(gameTime);
             if (!linger)
             {
-                activeAxis.currentPos += (int) fireSpeed;
-                if (Math.Abs(activeAxis.currentPos - activeAxis.startPos) > fireMaxDistance)
+                currentPos += directionVector * (float)(gameTime.ElapsedGameTime.TotalSeconds * speedPerSecond);
+                // Distance based
+                if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
                 {
-                    startLingerTime = gameTime.TotalGameTime.TotalSeconds;
                     linger = true;
                 }
             }
             else
             {
-                if (gameTime.TotalGameTime.TotalSeconds - startLingerTime > ItemSettings.lingerDuration)
+                startLingerTime += gameTime.ElapsedGameTime.TotalSeconds;
+                if (startLingerTime > lingerDuration)
                 {
                     delete = true;
                 }
@@ -103,7 +68,7 @@ namespace Sprint_0.Scripts.Items
 
         public void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRec, Color.White, 0, new Vector2(0, 0), flip, 0);
+            sprite.Draw(_spriteBatch, currentPos);
         }
 
         public bool CheckDelete()

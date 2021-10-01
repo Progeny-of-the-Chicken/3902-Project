@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -8,96 +9,67 @@ namespace Sprint_0.Scripts.Items
     {
         public enum Direction { UP, DOWN, LEFT, RIGHT };
 
-        private Texture2D projectileSpritesheet;
-        private List<Rectangle> sourceRecs;
-        private Direction placement;
-        private int displacement;
-        private SpriteAxis activeAxis;
+        private Texture2D sourceSheet;
+        private ISprite sprite;
+        private Vector2 pos;
+        private int displacement = 50;
+        private bool delete = false;
+        private double startTime = 0;
+        private double fuseDurationSeconds = 2.0;
+        private bool explode = false;
+        private double explodeDurationSeconds = 0.3;
 
-        private bool startTimeInitialized;
-        private double startTime;
-        private bool linger;
-        private int frameIndex;
-        private double lastFrameTime;
-
-        private bool delete;
-
-        public Bomb(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc, Direction dir)
+        public Bomb(Texture2D spritesheet, Vector2 spawnLoc, Direction dir)
         {
-            projectileSpritesheet = spritesheet;
-            sourceRecs = textureLocation;
-            Rectangle destinationRec = new Rectangle(
-                (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
-                2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
-            );
-            delete = false;
-            displacement = ItemSettings.bombDisplacement;
-
-            placement = dir;
-            linger = true;
-            startTimeInitialized = false;
-            startTime = 0.0;
-            frameIndex = 0;
-
-            // TODO: Clean up orientation logic
-            switch (placement)
+            sourceSheet = spritesheet;
+            pos = spawnLoc;
+            switch (dir)
             {
+                case Direction.RIGHT:
+                    pos.X += displacement;
+                    break;
                 case Direction.UP:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
+                    pos.Y += displacement;
                     break;
                 case Direction.LEFT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
-                    displacement *= -1;
+                    pos.X -= displacement;
                     break;
                 case Direction.DOWN:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    displacement *= -1;
-                    break;
-                case Direction.RIGHT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
+                    pos.Y -= displacement;
                     break;
                 default:
                     break;
             }
-            activeAxis.currentPos += displacement;
-
-            delete = false;
+            sprite = new BombSprite(spritesheet, spawnLoc);
         }
 
         public void Update(GameTime gameTime)
         {
             // Animation control
-            if (!startTimeInitialized)
+            sprite.Update(gameTime);
+            if (!explode)
             {
-                startTime = gameTime.TotalGameTime.TotalSeconds;
-                startTimeInitialized = true;
-            }
-
-            if (linger)
-            {
-                if (gameTime.TotalGameTime.TotalSeconds - startTime > ItemSettings.fuseDuration)
+                startTime += gameTime.ElapsedGameTime.TotalSeconds;
+                if (startTime > fuseDurationSeconds)
                 {
-                    linger = false;
-                    lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
+                    explode = true;
+                    sprite = new BombExplodeSprite(sourceSheet);
+                    startTime = 0.0;
                 }
             }
             else
             {
-                if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
+                startTime += gameTime.ElapsedGameTime.TotalSeconds;
+                if (startTime > explodeDurationSeconds)
                 {
-                    frameIndex++;
-                    if (frameIndex == (sourceRecs.Capacity - 1))
-                    {
-                        delete = true;
-                    }
-                    lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
+                    delete = true;
                 }
             }
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRecs[frameIndex], Color.White);
+            sprite.Draw(_spriteBatch, pos);
         }
 
         public bool CheckDelete()

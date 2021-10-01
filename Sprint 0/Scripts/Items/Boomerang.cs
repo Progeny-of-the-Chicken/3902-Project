@@ -2,118 +2,74 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
     public class Boomerang : IItem
     {
-        public enum Direction { UP, DOWN, LEFT, RIGHT };
+        public enum Direction { RIGHT, UP, LEFT, DOWN }
 
-        private Texture2D projectileSpritesheet;
-        private List<Rectangle> sourceRecs;
-        private Direction pointing;
-        private int frameIndex;
-        private double lastFrameTime;
-        private float rotation;
+        private ISprite sprite;
+        private Vector2 directionVector;
+        private Vector2 currentPos;
+        private Vector2 startPos;
+        private bool delete = false;
 
-        private SpriteAxis activeAxis;
-        private bool startTimeInitialized;
-        private double startT;
-        private double t;
-        private double boomerangSpeed;
-        private double boomerangAccel;
-        private int boomerangMaxDistance;
+        private double speedPerSecond = 10.0;
+        private double decelPerSecond = -5.0;
+        private double magicalBoomerangSpeedCoef = 2.0;
+        private double startT = 0;
+        private double tOffset = 1;
 
-        private bool delete;
-
-        public Boomerang(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc, Direction dir, bool magical)
+        public Boomerang(Texture2D spritesheet, Vector2 spawnLoc, Direction dir, bool magical)
         {
-            projectileSpritesheet = spritesheet;
-            sourceRecs = new List<Rectangle>(textureLocation);
-            Rectangle destinationRec = new Rectangle(
-                (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
-                2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
-            );
-            delete = false;
-            pointing = dir;
-
-            frameIndex = 0;
-            lastFrameTime = 0;
-            rotation = 0;
-            startTimeInitialized = false;
-
-            // Boomerang stats
-            boomerangAccel = ItemSettings.boomerangAccel;
-            boomerangSpeed = ItemSettings.boomerangSpeed;
-            boomerangMaxDistance = ItemSettings.arrowDistance;
+            startPos = currentPos = spawnLoc;
             if (magical)
             {
-                boomerangMaxDistance = (int)(boomerangMaxDistance * ItemSettings.magicalBoomerangSpeedCoef);
+                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
             }
 
-            // TODO: Clean up orientation logic
-            switch (pointing)
+            switch (dir)
             {
+                case Direction.RIGHT:
+                    directionVector = new Vector2(1, 0);
+                    break;
                 case Direction.UP:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    boomerangSpeed *= -1;
-                    boomerangAccel *= -1;
+                    directionVector = new Vector2(0, 1);
                     break;
                 case Direction.LEFT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
-                    boomerangSpeed *= -1;
-                    boomerangAccel *= -1;
+                    directionVector = new Vector2(-1, 0);
                     break;
                 case Direction.DOWN:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    break;
-                case Direction.RIGHT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
+                    directionVector = new Vector2(0, -1);
                     break;
                 default:
                     break;
             }
-
-            delete = false;
+            sprite = new BoomerangSprite(spritesheet, magical);
         }
 
-    public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            // Animation control
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
-            {
-                if (frameIndex == (sourceRecs.Count - 1))
-                {
-                    frameIndex = 0;
-                    if (rotation == 0)
-                    {
-                        rotation = (float) Math.PI;
-                    }
-                    else
-                    {
-                        rotation = 0;
-                    }
-                }
-                else
-                {
-                    frameIndex++;
-                }
-                lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
-            }
-
             // Movement control
-            if (!startTimeInitialized)
+            sprite.Update(gameTime);
+            if (startT == 0)
             {
-                startT = gameTime.TotalGameTime.TotalMilliseconds;
+                startT = gameTime.TotalGameTime.TotalSeconds;
             }
-            t = (gameTime.TotalGameTime.TotalMilliseconds - startT);
-            activeAxis.currentPos += (int) boomerangSpeed;
+            double t = gameTime.TotalGameTime.TotalSeconds - startT + tOffset;
+            currentPos += directionVector * (float)(t * speedPerSecond + t * t * decelPerSecond);
+            // Delete on boomerang return
+            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
+            {
+                delete = true;
+            }
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRecs[frameIndex], Color.White,
-                rotation, new Vector2(activeAxis.spriteRec.Width / 4, activeAxis.spriteRec.Height / 4), SpriteEffects.None, 0);
+            sprite.Draw(_spriteBatch, currentPos);
         }
 
         public bool CheckDelete()

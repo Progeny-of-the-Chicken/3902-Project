@@ -12,7 +12,7 @@ namespace Sprint_0
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         private KeyboardController kc;
-        public ItemEntities ic;
+        public ItemEntities itemSet;
 
         public Game1()
         {
@@ -26,8 +26,8 @@ namespace Sprint_0
         {
             this.LoadContent();
             base.Initialize();
-            ic = new ItemEntities(this);
-            ic.sprint2Item = ItemSpriteFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
+            itemSet = new ItemEntities(this);
+            itemSet.sprint2Item = ItemSpriteFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
         }
 
         protected override void LoadContent()
@@ -39,7 +39,7 @@ namespace Sprint_0
         protected override void Update(GameTime gameTime)
         {
             kc.Update();
-            ic.Update(gameTime);
+            itemSet.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -47,7 +47,7 @@ namespace Sprint_0
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            ic.Draw(_spriteBatch);
+            itemSet.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

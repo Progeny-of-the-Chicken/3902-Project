@@ -1,61 +1,53 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
     public class Arrow : IItem
     {
-        public enum Direction { UP, DOWN, LEFT, RIGHT };
+        public enum Direction { RIGHT, UP, LEFT, DOWN }
 
-        private Texture2D projectileSpritesheet;
-        private Rectangle sourceRec;
-        private Direction pointing;
+        private Texture2D sourceSheet;
+        private ISprite sprite;
+        private Vector2 directionVector;
+        private Vector2 currentPos;
+        private Vector2 startPos;
+        private bool delete = false;
 
-        private SpriteAxis activeAxis;
-        private double arrowSpeed;
-        private int arrowMaxDistance;
-        private SpriteEffects flip;
+        private double speedPerSecond = 150.0;
+        private int maxDistance = 200;
+        private double silverArrowSpeedCoef = 2.0;
+        private bool pop = false;
+        private double popDurationSeconds = 0.2;
 
-        private bool delete;
-
-        public Arrow(Texture2D spritesheet, Rectangle textureLocation, Vector2 spawnLoc, Direction dir, bool silver)
+        public Arrow(Texture2D spritesheet, Vector2 spawnLoc, Direction dir, bool silver)
         {
-            projectileSpritesheet = spritesheet;
-            sourceRec = textureLocation;
-            Rectangle destinationRec = new Rectangle(
-                (int)spawnLoc.X - (sourceRec.Width / 2), (int)spawnLoc.Y - (sourceRec.Height / 2),
-                2 * sourceRec.Width, 2 * sourceRec.Height
-            );
-            delete = false;
-            pointing = dir;
-
-            // Arrow stats
-            arrowSpeed = ItemSettings.arrowSpeed;
-            arrowMaxDistance = ItemSettings.arrowDistance;
+            sourceSheet = spritesheet;
+            startPos = currentPos = spawnLoc;
             if (silver)
             {
-                arrowMaxDistance = (int) (arrowMaxDistance * ItemSettings.silverArrowSpeedCoef);
+                maxDistance = (int) (maxDistance * silverArrowSpeedCoef);
             }
 
-            // TODO: Clean up orientation logic
-            switch (pointing)
+            switch (dir)
             {
+                case Direction.RIGHT:
+                    directionVector = new Vector2(1, 0);
+                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.RIGHT, silver);
+                    break;
                 case Direction.UP:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    arrowSpeed *= -1;
+                    directionVector = new Vector2(0, 1);
+                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.UP, silver);
                     break;
                 case Direction.LEFT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
-                    flip = SpriteEffects.FlipHorizontally;
-                    arrowSpeed *= -1;
+                    directionVector = new Vector2(-1, 0);
+                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.LEFT, silver);
                     break;
                 case Direction.DOWN:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.VERTICAL);
-                    flip = SpriteEffects.FlipVertically;
-                    break;
-                case Direction.RIGHT:
-                    activeAxis = new SpriteAxis(destinationRec, SpriteAxis.Orientation.HORIZONTAL);
+                    directionVector = new Vector2(0, -1);
+                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.DOWN, silver);
                     break;
                 default:
                     break;
@@ -64,18 +56,31 @@ namespace Sprint_0.Scripts.Items
 
         public void Update(GameTime gameTime)
         {
-            activeAxis.currentPos += (int) arrowSpeed;
-            if (Math.Abs(activeAxis.currentPos - activeAxis.startPos) > arrowMaxDistance)
+            sprite.Update(gameTime);
+            if (!pop)
             {
-                // TODO: Find a way to spawn puff in Item controller
-                ItemSpriteFactory.Instance.CreateArrowPuff(new Vector2(activeAxis.spriteRec.X, activeAxis.spriteRec.Y));
-                delete = true;
+                currentPos += directionVector * (float)(gameTime.ElapsedGameTime.TotalSeconds * speedPerSecond);
+                // Delete based on distance
+                if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
+                {
+                    pop = true;
+                    sprite = new ArrowPopSprite(sourceSheet, currentPos);
+                }
             }
+            else
+            {
+                popDurationSeconds -= gameTime.ElapsedGameTime.TotalSeconds;
+                if (popDurationSeconds <= 0.0)
+                {
+                    delete = true;
+                }
+            }
+            
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(projectileSpritesheet, activeAxis.spriteRec, sourceRec, Color.White, 0, new Vector2(0, 0), flip, 0);
+            sprite.Draw(_spriteBatch, currentPos);
         }
 
         public bool CheckDelete()
