@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Stair : ITerrain
+public class TileSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(984, 11, 16, 16);
     Rectangle destination;
 
-    public Stair(Vector2 screenLocation)
+    public TileSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
     }

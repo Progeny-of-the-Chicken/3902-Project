@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class BWWall : ITerrain
+public class StairSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(984, 45, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
     Rectangle destination;
 
-    public BWWall(Vector2 screenLocation)
+    public StairSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
     }

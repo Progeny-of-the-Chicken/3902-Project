@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Tile : ITerrain
+public class DungeonWaterSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(984, 11, 16, 16);
+    private Rectangle spritesheetLocation = new Rectangle(1018, 28, 16, 16);
     Rectangle destination;
 
-    public Tile(Vector2 screenLocation)
+    public DungeonWaterSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
     }
