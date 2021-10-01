@@ -1,6 +1,7 @@
 ﻿using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Sprint_0
 {
@@ -29,13 +30,15 @@ namespace Sprint_0
         public void Update()
         {
             linkState.Update();
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            if(!linkState.DoingSomething())
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             LinkSprite.Update();
         }
 
         public void GoInDirection(Direction direction)
         {
             linkState.GoInDirection(direction);
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void TakeDamage()
@@ -54,10 +57,8 @@ namespace Sprint_0
         
         public void UseSword()
         {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseSword();
-            }
+            linkState.UseSword();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
     }
@@ -68,7 +69,7 @@ namespace Sprint_0
         private int damageCounter;
         private int usingItemCounter;
         private int movingCounter;
-        private Item itemBeingUsed;
+        private int swordCounter;
         private Vector2 linksPosition;
         private const int linkSpeed = 16;
 
@@ -78,7 +79,6 @@ namespace Sprint_0
             damageCounter = 0;
             usingItemCounter = 0;
             movingCounter = 0;
-            itemBeingUsed = Item.None;
             linksPosition = new Vector2(200, 200); //generic starting position
         }
 
@@ -90,6 +90,8 @@ namespace Sprint_0
                 usingItemCounter--;
             if (movingCounter > 0)
                 movingCounter--;
+            if (swordCounter > 0)
+                swordCounter--;
         }
 
 
@@ -122,7 +124,7 @@ namespace Sprint_0
                     linksPosition.Y += linkSpeed;
                     break;
             }
-            movingCounter = 15;
+            movingCounter = 30;
         }
 
         private void SwitchToFaceNewDirection(Direction direction)
@@ -132,17 +134,25 @@ namespace Sprint_0
 
         public void TakeDamage()
         {
-            if (damageCounter == 0)
+            if (!DoingSomething())
                 damageCounter = 30;
         }
 
         public void UseSword()
+        { 
+            if (!DoingSomething())
+                swordCounter = 30;
+        }
+
+        public void UseItem()
         {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Sword;
+            if (!DoingSomething())
                 usingItemCounter = 30;
-            }
+        }
+
+        public bool DoingSomething()
+        {
+            return usingItemCounter != 0 || damageCounter != 0 || movingCounter != 0 || swordCounter != 0;
         }
 
         public Vector2 Position
@@ -177,11 +187,19 @@ namespace Sprint_0
             }
         }
 
-        public Item WhichItemIsBeingUsed
+        public bool SwordIsBeingUsed
         {
             get
             {
-                return itemBeingUsed;
+                return swordCounter > 0;
+            }
+        }
+
+        public bool IsUsingItem
+        {
+            get
+            {
+                return usingItemCounter > 0;
             }
         }
     }

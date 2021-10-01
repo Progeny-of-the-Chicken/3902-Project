@@ -19,11 +19,11 @@ namespace Sprint_0.Scripts
         private Vector2 position;
         private int animateSwordCounter;
 
-        public LinkSwordSprite(Direction direction, Vector2 position)
+        public LinkSwordSprite(LinkStateMachine linkState)
         {
-            this.direction = direction;
+            this.direction = linkState.FacingDirection;
             animateSwordCounter = 30;
-            this.position = position;
+            this.position = linkState.Position;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesBasedOnDirection();
         }

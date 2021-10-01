@@ -40,6 +40,8 @@ public class KeyboardController : IController
 		this.RegisterCommand(linkControllerMappings, Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
 		this.RegisterCommand(linkControllerMappings, Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
 		this.RegisterCommand(linkControllerMappings, Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.N, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.Z, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
 	}
 
 	//Update checks for keys pressed and calls the respective command
@@ -55,7 +57,10 @@ public class KeyboardController : IController
 				controllerMappings[key].Execute();
 
 			if (linkControllerMappings.ContainsKey(key) && previousKeys.IsKeyUp(key) && !game.link.IsMoving())
+            {
 				linkControllerMappings[key].Execute();
+			}
+				
         }
 
 		previousKeys = keyboardState;
