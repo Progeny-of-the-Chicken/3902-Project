@@ -49,7 +49,7 @@ namespace Sprint_0
             credits.LoadContent(this.Content);
 
             //Just for sprint 2
-            block = new Tile(blockLocation);
+            block = new TileSprite(blockLocation);
         }
 
         protected override void Update(GameTime gameTime)
@@ -94,34 +94,34 @@ namespace Sprint_0
             switch(blockNum % 10)
             {
                 case 0:
-                    block = new Tile(blockLocation);
+                    block = new TileSprite(blockLocation);
                     break;
                 case 1:
-                    block = new Block(blockLocation);
+                    block = new BlockSprite(blockLocation);
                     break;
                 case 2:
-                    block = new DownStatue(blockLocation);
+                    block = new DownStatueSprite(blockLocation);
                     break;
                 case 3:
-                    block = new UpStatue(blockLocation);
+                    block = new UpStatueSprite(blockLocation);
                     break;
                 case 4:
-                    block = new BlackTile(blockLocation);
+                    block = new BlackTileSprite(blockLocation);
                     break;
                 case 5:
-                    block = new DungeonSand(blockLocation);
+                    block = new DungeonSandSprite(blockLocation);
                     break;
                 case 6:
-                    block = new DungeonWater(blockLocation);
+                    block = new DungeonWaterSprite(blockLocation);
                     break;
                 case 7:
-                    block = new Stair(blockLocation);
+                    block = new StairSprite(blockLocation);
                     break;
                 case 8:
-                    block = new BWWall(blockLocation);
+                    block = new BWWallSprite(blockLocation);
                     break;
                 case 9:
-                    block = new BWLadder(blockLocation);
+                    block = new BWLadderSprite(blockLocation);
                     break;
                 default:
                     //uh oh
