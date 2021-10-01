@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -35,7 +36,7 @@ namespace Sprint_0.Scripts.Items
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(0, 0, 7, 8));
             frames.Add(new Rectangle(0, 8, 7, 8));
-            return new AnimatedTreasure(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
         }
 
         public IItem CreateHeartContainer(Vector2 spawnLoc)
@@ -49,7 +50,7 @@ namespace Sprint_0.Scripts.Items
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(40, 0, 8, 16));
             frames.Add(new Rectangle(48, 0, 8, 16));
-            return new AnimatedTreasure(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
         }
 
         public IItem CreateClock(Vector2 spawnLoc)
@@ -69,7 +70,7 @@ namespace Sprint_0.Scripts.Items
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(72, 0, 8, 16));
             frames.Add(new Rectangle(72, 16, 8, 16));
-            return new AnimatedTreasure(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
         }
 
         public IItem CreateBasicMap(Vector2 spawnLoc)
@@ -119,27 +120,37 @@ namespace Sprint_0.Scripts.Items
             List<Rectangle> frames = new List<Rectangle>();
             frames.Add(new Rectangle(275, 3, 10, 10));
             frames.Add(new Rectangle(275, 19, 10, 10));
-            return new AnimatedTreasure(treasureSpritesheet, frames, spawnLoc);
+            return new AnimatedTreasureSprite(treasureSpritesheet, frames, spawnLoc);
         }
 
-        public IItem CreateArrow(Vector2 spawnLoc, Arrow.Direction dir, bool silver)
+        public ISprite CreateArrowSprite(ArrowSprite.Orientation direction, bool silver)
         {
-            return new Arrow(projectileSpritesheet, spawnLoc, dir, silver);
+            return new ArrowSprite(projectileSpritesheet, direction, silver);
         }
 
-        public IItem CreateBoomerang(Vector2 spawnLoc, Boomerang.Direction dir, bool magical)
+        public ISprite CreateArrowPopSprite()
         {
-            return new Boomerang(projectileSpritesheet, spawnLoc, dir, magical);
+            return new ArrowPopSprite(projectileSpritesheet);
         }
 
-        public IItem CreateFireSpell(Vector2 spawnLoc, FireSpell.Direction dir)
+        public ISprite CreateBoomerangSprite(bool magical)
         {
-            return new FireSpell(projectileSpritesheet, spawnLoc, dir);
+            return new BoomerangSprite(projectileSpritesheet, magical);
         }
 
-        public IItem CreateBomb(Vector2 spawnLoc, Bomb.Direction dir)
+        public ISprite CreateBombSprite()
         {
-            return new Bomb(projectileSpritesheet, spawnLoc, dir);
+            return new BombSprite(projectileSpritesheet);
+        }
+
+        public ISprite CreateBombExplodeSprite()
+        {
+            return new BombExplodeSprite(projectileSpritesheet);
+        }
+
+        public ISprite CreateFireSpellSprite()
+        {
+            return new FireSpellSprite(projectileSpritesheet);
         }
     }
 }

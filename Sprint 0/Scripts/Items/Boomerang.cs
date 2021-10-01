@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.Items
         private double startT = 0;
         private double tOffset = 1;
 
-        public Boomerang(Texture2D spritesheet, Vector2 spawnLoc, Direction dir, bool magical)
+        public Boomerang(Vector2 spawnLoc, Direction dir, bool magical)
         {
             startPos = currentPos = spawnLoc;
             if (magical)
@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = new BoomerangSprite(spritesheet, magical);
+            sprite = ItemSpriteFactory.Instance.CreateBoomerangSprite(magical);
         }
 
         public void Update(GameTime gameTime)

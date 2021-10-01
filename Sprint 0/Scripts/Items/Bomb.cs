@@ -9,7 +9,6 @@ namespace Sprint_0.Scripts.Items
     {
         public enum Direction { UP, DOWN, LEFT, RIGHT };
 
-        private Texture2D sourceSheet;
         private ISprite sprite;
         private Vector2 pos;
         private int displacement = 50;
@@ -19,9 +18,8 @@ namespace Sprint_0.Scripts.Items
         private bool explode = false;
         private double explodeDurationSeconds = 0.3;
 
-        public Bomb(Texture2D spritesheet, Vector2 spawnLoc, Direction dir)
+        public Bomb(Vector2 spawnLoc, Direction dir)
         {
-            sourceSheet = spritesheet;
             pos = spawnLoc;
             switch (dir)
             {
@@ -40,7 +38,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = new BombSprite(spritesheet, spawnLoc);
+            sprite = ItemSpriteFactory.Instance.CreateBombSprite();
         }
 
         public void Update(GameTime gameTime)
@@ -53,7 +51,7 @@ namespace Sprint_0.Scripts.Items
                 if (startTime > fuseDurationSeconds)
                 {
                     explode = true;
-                    sprite = new BombExplodeSprite(sourceSheet);
+                    sprite = ItemSpriteFactory.Instance.CreateBombExplodeSprite();
                     startTime = 0.0;
                 }
             }

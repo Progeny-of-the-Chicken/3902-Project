@@ -60,7 +60,7 @@ namespace Sprint_0.Scripts.Controller
 			ks = Keyboard.GetState();
 
 			// TODO: Remove test code before merging
-			testProjectile testValue = testProjectile.BOOMERANG;
+			testProjectile testValue = testProjectile.BOMB;
 
 			if (ks.IsKeyDown(Keys.D0) || ks.IsKeyDown(Keys.NumPad0))
 			{

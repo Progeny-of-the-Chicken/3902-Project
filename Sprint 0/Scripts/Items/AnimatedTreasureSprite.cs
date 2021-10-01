@@ -4,16 +4,17 @@ using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Items
 {
-    public class AnimatedTreasure : IItem
+    public class AnimatedTreasureSprite : IItem
     {
         private Texture2D treasureSpritesheet;
         private List<Rectangle> sourceRecs;
         private Rectangle destinationRec;
-        private int frameIndex;
-        private double lastFrameTime;
-        private bool delete;
+        private double animationDelaySeconds = 0.1;
+        private int frameIndex = 0;
+        private double lastFrameTime = 0;
+        private bool delete = false;
 
-        public AnimatedTreasure(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc)
+        public AnimatedTreasureSprite(Texture2D spritesheet, List<Rectangle> textureLocation, Vector2 spawnLoc)
         {
             treasureSpritesheet = spritesheet;
             sourceRecs = new List<Rectangle>(textureLocation);
@@ -22,26 +23,19 @@ namespace Sprint_0.Scripts.Items
                 (int)spawnLoc.X - (sourceRecs[0].Width / 2), (int)spawnLoc.Y - (sourceRecs[0].Height / 2),
                 2 * sourceRecs[0].Width, 2 * sourceRecs[0].Height
             );
-            delete = false;
-
-            frameIndex = 0;
-            lastFrameTime = 0;
         }
 
         public void Update(GameTime gameTime)
         {
             // Animation control
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastFrameTime > ItemSettings.animationDelay)
+            if (gameTime.TotalGameTime.TotalSeconds - lastFrameTime > animationDelaySeconds)
             {
-                if (frameIndex == (sourceRecs.Capacity - 1))
+                frameIndex++;
+                if (frameIndex == sourceRecs.Count)
                 {
                     frameIndex = 0;
                 }
-                else
-                {
-                    frameIndex++;
-                }
-                lastFrameTime = gameTime.TotalGameTime.TotalMilliseconds;
+                lastFrameTime = gameTime.TotalGameTime.TotalSeconds;
             }
         }
 

@@ -21,7 +21,7 @@ namespace Sprint_0.Scripts.Items
         private double startLingerTime = 0;
         private double lingerDuration = 2.0;
 
-        public FireSpell(Texture2D spritesheet, Vector2 spawnLoc, Direction dir)
+        public FireSpell(Vector2 spawnLoc, Direction dir)
         {
             startPos = currentPos = spawnLoc;
             switch (dir)
@@ -41,7 +41,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = new FireSpellSprite(spritesheet);
+            sprite = ItemSpriteFactory.Instance.CreateFireSpellSprite();
         }
 
         public void Update(GameTime gameTime)

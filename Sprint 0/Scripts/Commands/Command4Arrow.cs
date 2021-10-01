@@ -14,6 +14,6 @@ public class Command4Arrow : ICommand
 	public void Execute()
 	{
 		// TODO: Move item factory dependency to player sprite class
-		game.itemSet.items.Add(ItemSpriteFactory.Instance.CreateArrow(game.GetCenterScreen(), Arrow.Direction.DOWN, false));
+		game.itemSet.items.Add(ItemFactory.Instance.CreateArrow(game.GetCenterScreen(), Arrow.Direction.DOWN, false));
 	}
 }

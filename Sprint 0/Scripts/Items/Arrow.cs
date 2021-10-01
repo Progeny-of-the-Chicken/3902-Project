@@ -9,7 +9,6 @@ namespace Sprint_0.Scripts.Items
     {
         public enum Direction { RIGHT, UP, LEFT, DOWN }
 
-        private Texture2D sourceSheet;
         private ISprite sprite;
         private Vector2 directionVector;
         private Vector2 currentPos;
@@ -22,9 +21,8 @@ namespace Sprint_0.Scripts.Items
         private bool pop = false;
         private double popDurationSeconds = 0.2;
 
-        public Arrow(Texture2D spritesheet, Vector2 spawnLoc, Direction dir, bool silver)
+        public Arrow(Vector2 spawnLoc, Direction dir, bool silver)
         {
-            sourceSheet = spritesheet;
             startPos = currentPos = spawnLoc;
             if (silver)
             {
@@ -35,19 +33,19 @@ namespace Sprint_0.Scripts.Items
             {
                 case Direction.RIGHT:
                     directionVector = new Vector2(1, 0);
-                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.RIGHT, silver);
+                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.RIGHT, silver);
                     break;
                 case Direction.UP:
                     directionVector = new Vector2(0, 1);
-                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.UP, silver);
+                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.UP, silver);
                     break;
                 case Direction.LEFT:
                     directionVector = new Vector2(-1, 0);
-                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.LEFT, silver);
+                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.LEFT, silver);
                     break;
                 case Direction.DOWN:
                     directionVector = new Vector2(0, -1);
-                    sprite = new ArrowSprite(spritesheet, ArrowSprite.Orientation.DOWN, silver);
+                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.DOWN, silver);
                     break;
                 default:
                     break;
@@ -64,7 +62,7 @@ namespace Sprint_0.Scripts.Items
                 if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
                 {
                     pop = true;
-                    sprite = new ArrowPopSprite(sourceSheet, currentPos);
+                    sprite = ItemSpriteFactory.Instance.CreateArrowPopSprite();
                 }
             }
             else
