@@ -39,7 +39,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 			if (linkState.SwordIsBeingUsed)
 				return new LinkSwordSprite(linkState);
 			else
-				return new LinkMovingSprite(linkState);
+				return new LinkStandingSprite(linkState);
 		}
 	}
 }

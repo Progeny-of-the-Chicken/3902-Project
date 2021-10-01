@@ -54,14 +54,14 @@ namespace Sprint_0.Scripts
             {
                 case Direction.Left:
                     linkSwordFrame1 = new Rectangle(0, 77, 16, 16);
-                    linkSwordFrame2 = new Rectangle(17, 77, 29, 16);
-                    linkSwordFrame3 = new Rectangle(45, 77, 25, 16);
+                    linkSwordFrame2 = new Rectangle(18, 77, 27, 16);
+                    linkSwordFrame3 = new Rectangle(46, 77, 24, 16);
                     linkSwordFrame4 = new Rectangle(69, 77, 16, 16);
                     break;
                 case Direction.Right:
                     linkSwordFrame1 = new Rectangle(0, 77, 16, 16);
-                    linkSwordFrame2 = new Rectangle(17, 77, 29, 16);
-                    linkSwordFrame3 = new Rectangle(45, 77, 25, 16);
+                    linkSwordFrame2 = new Rectangle(18, 77, 27, 16);
+                    linkSwordFrame3 = new Rectangle(46, 77, 24, 16);
                     linkSwordFrame4 = new Rectangle(69, 77, 16, 16);
                     break;
                 case Direction.Up:
