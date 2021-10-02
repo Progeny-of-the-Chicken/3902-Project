@@ -47,6 +47,7 @@ namespace Sprint_0
             {
                 linkHealth--;
                 linkState.TakeDamage();
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             }
         }
 

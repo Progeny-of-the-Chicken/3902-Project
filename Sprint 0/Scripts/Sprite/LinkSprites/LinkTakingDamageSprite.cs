@@ -1,12 +1,12 @@
-﻿using System;
-using Sprint_0.Scripts.SpriteFactories;
+﻿using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkStandingSprite: ISprite
+    public class LinkTakingDamageSprite: ISprite
     {
         private Texture2D sheet;
 
@@ -16,30 +16,37 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle frame;
         private Vector2 position;
         private Direction direction;
+        private int colorCounter;
+        private Color randColor;
+        private Random rand = new Random();
         private const int standardWidthHeight = 48;
 
 
-        public LinkStandingSprite(LinkStateMachine state)
+        public LinkTakingDamageSprite(LinkStateMachine state)
         {
             position = state.Position;
             this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesForDirection();
+            colorCounter = 0;
         }
 
 
         public void Update()
         {
-            //just standing no need to update
+            colorCounter++;
+            if (colorCounter % 5 == 0)
+                randColor = new Color(128 + rand.Next(128), 128 + rand.Next(128), 128 + rand.Next(128));
+
         }
 
 
         public void Draw(SpriteBatch sb, GameTime gt)
         {
             if(direction == Direction.Left)
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, randColor, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
             else
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, Color.White);
+                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, randColor);
         }
 
         private void setFramesForDirection()

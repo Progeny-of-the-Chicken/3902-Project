@@ -42,6 +42,7 @@ public class KeyboardController : IController
 		this.RegisterCommand(linkControllerMappings, Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
 		this.RegisterCommand(linkControllerMappings, Keys.N, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
 		this.RegisterCommand(linkControllerMappings, Keys.Z, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
+		this.RegisterCommand(linkControllerMappings, Keys.E, new Sprint_0.Scripts.Commands.LinkTakeDamage(game.link));
 	}
 
 	//Update checks for keys pressed and calls the respective command
