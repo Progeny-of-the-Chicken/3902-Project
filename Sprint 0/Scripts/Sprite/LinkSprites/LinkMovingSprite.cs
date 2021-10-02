@@ -74,6 +74,11 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             }
         }
 
+
+
+
+        /*------------------------- Helper methods -------------------------*/
+
         private void drawFrame1(SpriteBatch sb, GameTime gt)
         {
             switch (direction)
