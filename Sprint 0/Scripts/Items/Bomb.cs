@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
@@ -27,13 +26,13 @@ namespace Sprint_0.Scripts.Items
                     pos.X += displacement;
                     break;
                 case Direction.UP:
-                    pos.Y += displacement;
+                    pos.Y -= displacement;
                     break;
                 case Direction.LEFT:
                     pos.X -= displacement;
                     break;
                 case Direction.DOWN:
-                    pos.Y -= displacement;
+                    pos.Y += displacement;
                     break;
                 default:
                     break;

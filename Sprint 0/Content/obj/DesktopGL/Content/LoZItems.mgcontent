@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/LoZItems.png</SourceFile>
-  <SourceTime>2021-09-27T02:44:07.1416359-04:00</SourceTime>
+  <SourceTime>2021-10-02T17:21:08.1060246-04:00</SourceTime>
   <DestFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LoZItems.xnb</DestFile>
-  <DestTime>2021-09-27T02:44:08.7073715-04:00</DestTime>
+  <DestTime>2021-10-02T17:21:09.3571637-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

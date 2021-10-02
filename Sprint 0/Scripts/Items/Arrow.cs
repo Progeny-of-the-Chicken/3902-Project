@@ -13,11 +13,12 @@ namespace Sprint_0.Scripts.Items
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
+        private Vector2 popOffset;
         private bool delete = false;
 
         private double speedPerSecond = 150.0;
         private int maxDistance = 200;
-        private double silverArrowSpeedCoef = 2.0;
+        private double silverArrowSpeedCoef = 1.5;
         private bool pop = false;
         private double popDurationSeconds = 0.2;
 
@@ -33,18 +34,22 @@ namespace Sprint_0.Scripts.Items
             {
                 case Direction.RIGHT:
                     directionVector = new Vector2(1, 0);
+                    popOffset = new Vector2(4, -8);
                     sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.RIGHT, silver);
                     break;
                 case Direction.UP:
-                    directionVector = new Vector2(0, 1);
+                    directionVector = new Vector2(0, -1);
+                    popOffset = new Vector2(-8, -20);
                     sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.UP, silver);
                     break;
                 case Direction.LEFT:
                     directionVector = new Vector2(-1, 0);
+                    popOffset = new Vector2(-20, -8);
                     sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.LEFT, silver);
                     break;
                 case Direction.DOWN:
-                    directionVector = new Vector2(0, -1);
+                    directionVector = new Vector2(0, 1);
+                    popOffset = new Vector2(-8, 4);
                     sprite = ItemSpriteFactory.Instance.CreateArrowSprite(ArrowSprite.Orientation.DOWN, silver);
                     break;
                 default:
@@ -62,6 +67,7 @@ namespace Sprint_0.Scripts.Items
                 if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
                 {
                     pop = true;
+                    currentPos += popOffset;
                     sprite = ItemSpriteFactory.Instance.CreateArrowPopSprite();
                 }
             }
@@ -73,7 +79,6 @@ namespace Sprint_0.Scripts.Items
                     delete = true;
                 }
             }
-            
         }
 
         public void Draw(SpriteBatch sb)
