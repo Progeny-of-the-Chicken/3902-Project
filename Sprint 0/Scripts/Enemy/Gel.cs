@@ -72,11 +72,6 @@ namespace Sprint_0.Scripts.Enemy
             }
         }
 
-        public void ShootProjectile()
-        {
-            //not used
-        }
-
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
