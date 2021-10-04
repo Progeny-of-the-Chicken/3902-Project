@@ -18,34 +18,37 @@ public class KeyboardController : IController
 
 	//Constructor
 	public KeyboardController(Game1 game)
-	{
+    {
 		controllerMappings = new Dictionary<Keys, ICommand>();
 		this.game = game;
 		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 		setCommands();
-	}
+    }
 
 	//Method to add new keybinds for commands
 	public void RegisterCommand(Keys key, ICommand command)
-	{
+    {
 		controllerMappings.Add(key, command);
-	}
+    }
 
 	//Add keybinds here
 	private void setCommands()
-	{
+    {
+		//Just for sprint 2
+		this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
+		this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
 		RegisterCommand(Keys.O, new PrevEnemy(game));
 		RegisterCommand(Keys.P, new NextEnemy(game));
-	}
+    }
 
 	//Update checks for keys pressed and calls the respective command
 	public void Update()
-	{
+    {
 		KeyboardState keyboardState = Keyboard.GetState();
 		Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
 		foreach (Keys key in pressedKeys)
-		{
+        {
 			// Make sure key has mapping
 			if (!controllerMappings.ContainsKey(key))
 				return;
@@ -55,8 +58,8 @@ public class KeyboardController : IController
 			{
 				controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
 			}
-		}
+        }
 
 		previousKeys = keyboardState;
-	}
+    }
 }

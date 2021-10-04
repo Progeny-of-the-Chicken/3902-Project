@@ -30,7 +30,7 @@ public class SpriteText : ISprite
     }
     public void Draw(SpriteBatch _spriteBatch, Vector2 location)
     {
-        _spriteBatch.DrawString(font, "Credits\nProgram Made By: Alex Dai\nSprites from: \"https://www.mariomayhem.com/downloads/sprites/super_mario_bros_sprites.php\"", destinationPos, Color.Black);
+        _spriteBatch.DrawString(font, "Credits\nProgram Made By: Progeny of the Chicken\nSprites from: \"https://www.spriters-resource.com/nes/legendofzelda\"", destinationPos, Color.Black);
     }
 }
 

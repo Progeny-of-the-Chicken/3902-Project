@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/smb_mario_sheet.png</SourceFile>
-  <SourceTime>2021-09-20T11:56:21.899034-04:00</SourceTime>
-  <DestFile>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb</DestFile>
-  <DestTime>2021-09-20T22:08:31.8601619-04:00</DestTime>
+  <SourceFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/smb_mario_sheet.png</SourceFile>
+  <SourceTime>2021-10-01T16:59:47.0627916-04:00</SourceTime>
+  <DestFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb</DestFile>
+  <DestTime>2021-10-01T16:59:48.4359053-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T12:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
