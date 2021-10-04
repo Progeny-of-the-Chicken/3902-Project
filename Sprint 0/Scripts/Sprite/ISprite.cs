@@ -1,14 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0
+namespace Sprint_0.Scripts.Sprite
 {
     public interface ISprite
     {
-        // void LoadContent(ContentManager cm);
-        void Update();
-        void Draw(SpriteBatch sb, GameTime gt);
+        void Update(GameTime gt);
+        void Draw(SpriteBatch sb, Vector2 location);
     }
 }

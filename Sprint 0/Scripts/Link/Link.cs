@@ -1,6 +1,7 @@
 ﻿using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 using System;
 
 namespace Sprint_0
@@ -22,12 +23,12 @@ namespace Sprint_0
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb, Vector2 pos)
         {
-            LinkSprite.Draw(sb, gt);
+            LinkSprite.Draw(sb, pos);
         }
 
-        public void Update()
+        public void Update(GameTime gt)
         {
             linkState.Update();
             if(!linkState.DoingSomething())
