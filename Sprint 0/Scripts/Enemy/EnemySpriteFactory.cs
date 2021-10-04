@@ -53,52 +53,52 @@ namespace Sprint_0.Scripts.Enemy
 
 		public ISprite CreateStalfosSprite()
 		{
-			return new StalfosSprite(StalfosRectangle, 4, enemySprites);
+			return new StalfosSprite(StalfosRectangle, 2, enemySprites);
 		}
 
 		public ISprite CreateOldManSprite()
         {
-			return new OldManSprite(OldManRectangle, 4, npcSprites);
+			return new OldManSprite(OldManRectangle, 2, npcSprites);
         }
 		public ISprite CreateGelSprite()
         {
-			return new GelSprite(GelFrames, 4, enemySprites);
+			return new GelSprite(GelFrames, 2, enemySprites);
         }
 		public ISprite CreateZolSprite()
         {
-			return new ZolSprite(ZolFrames, 4, enemySprites);
+			return new ZolSprite(ZolFrames, 2, enemySprites);
         }
 		public ISprite CreateAquamentusMoveSprite()
         {
-			return new AquamentusMoveSprite(AquamentusMoveFrames, 4, bossSprites);
+			return new AquamentusMoveSprite(AquamentusMoveFrames, 2, bossSprites);
         }
 		public ISprite CreateAquamentusShootSprite()
 		{
-			return new AquamentusShootSprite(AquamentusShootFrames, 4, bossSprites);
+			return new AquamentusShootSprite(AquamentusShootFrames, 2, bossSprites);
 		}
 		public ISprite CreateKeeseSprite()
         {
-			return new KeeseSprite(KeeseFrames, 4, enemySprites);
+			return new KeeseSprite(KeeseFrames, 2, enemySprites);
         }
 		public ISprite CreateMagicProjectileSprite()
 		{
-			return new MagicProjectileSprite(MagicProjectileFrames, 3, bossSprites);
+			return new MagicProjectileSprite(MagicProjectileFrames, 1.5f, bossSprites);
 		}
 		public ISprite CreateFrontGoriyaSprite()
         {
-			return new GoriyaFrontSprite(GoriyaFrontFrame, 4, enemySprites);
+			return new GoriyaFrontSprite(GoriyaFrontFrame, 2, enemySprites);
         }
 		public ISprite CreateBackGoriyaSprite()
         {
-			return new GoriyaBackSprite(GoriyaBackFrame, 4, enemySprites);
+			return new GoriyaBackSprite(GoriyaBackFrame, 2, enemySprites);
         }
 		public ISprite CreateRightGoriyaSprite()
 		{
-			return new GoriyaRightSprite(GoriyaRightFrames, 4, enemySprites);
+			return new GoriyaRightSprite(GoriyaRightFrames, 2, enemySprites);
 		}
 		public ISprite CreateLeftGoriyaSprite()
 		{
-			return new GoriyaLeftSprite(GoriyaRightFrames, 4, enemySprites);
+			return new GoriyaLeftSprite(GoriyaRightFrames, 2, enemySprites);
 		}
 	}
 }

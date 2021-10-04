@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -21,7 +22,7 @@ namespace Sprint_0.Scripts.Items
         {
             currentPos = spawnLoc;
             // Aquamentus facing direction
-            if (mainDirection == FacingDirection.Right)
+            if (mainDirection == FacingDirection.Left)
             {
                 directionVector.X *= -1;
             }
@@ -35,25 +36,26 @@ namespace Sprint_0.Scripts.Items
                     directionVector.Y *= spreadFactor;
                     break;
                 default:
+                    directionVector.Y = 0;
                     break;
             }
-            // TODO: sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite...
+            sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite();
         }
 
         public void Update(GameTime gt)
         {
-            // TODO: call sprite.update
             currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
             startTimeSeconds += gt.ElapsedGameTime.TotalSeconds;
             if (startTimeSeconds > projectileLifetimeSeconds)
             {
                 delete = true;
             }
+            sprite.Update(gt);
         }
 
         public void Draw(SpriteBatch sb)
         {
-            // TODO: call sprite.draw
+            sprite.Draw(sb, currentPos);
         }
 
         public bool CheckDelete()

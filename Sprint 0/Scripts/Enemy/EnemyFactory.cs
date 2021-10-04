@@ -44,14 +44,6 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Aquamentus(location);
         }
-		public IEnemy CreateMagicProjectile()
-        {
-			return new MagicProjectile();
-        }
-		public IEnemy CreateAquamentusProjectile()
-        {
-			return new AquamentusProjectile();
-        }
 		public IEnemy CreateKeese(Vector2 location)
         {
 			return new Keese(location);

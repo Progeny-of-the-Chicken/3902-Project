@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -13,14 +14,14 @@ namespace Sprint_0.Scripts.Enemy
         ISprite moveSprite;
         ISprite shootSprite;
         
-        AquamentusProjectile projectile;
+        List<IItem> projectiles;
         
         Vector2 location;
         Vector2 direction = new Vector2(-1, 0);
         Vector2 startLocation;
         
-        const float speed = 100;
-        const float moveDistance = 75;
+        const float speed = 50;
+        const float moveDistance = 40;
 
         float timeSinceFire = 0;
         const float reloadTime = 3.5f;
@@ -34,8 +35,7 @@ namespace Sprint_0.Scripts.Enemy
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
             sprite = moveSprite;
-
-            projectile = (AquamentusProjectile) EnemyFactory.Instance.CreateAquamentusProjectile();
+            projectiles = ItemFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
         }
         public void Update(GameTime t)
         {
@@ -43,7 +43,7 @@ namespace Sprint_0.Scripts.Enemy
             sprite.Update(t);
 
             timeSinceFire += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFire >= reloadTime)
+            if (projectiles.ToArray()[0].CheckDelete())
             {
                 ShootProjectile();
             }
@@ -51,8 +51,10 @@ namespace Sprint_0.Scripts.Enemy
             {
                 sprite = moveSprite;
             }
-
-            projectile.Update(t);
+            foreach (IItem projectile in projectiles)
+            {
+                projectile.Update(t);
+            }
         }
 
         public void Move(GameTime t)
@@ -67,13 +69,16 @@ namespace Sprint_0.Scripts.Enemy
         void ShootProjectile()
         {
             timeSinceFire = 0;
-            projectile.Fire(location);
+            projectiles = ItemFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
             sprite = shootSprite;
         }
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
-            projectile.Draw(sb);
+            foreach (IItem projectile in projectiles)
+            {
+                projectile.Draw(sb);
+            }
         }
     }
 }
