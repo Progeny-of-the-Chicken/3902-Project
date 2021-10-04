@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/smb_mario_sheet.png</SourceFile>
-  <SourceTime>2021-10-01T16:59:47.0627916-04:00</SourceTime>
-  <DestFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb</DestFile>
-  <DestTime>2021-10-01T16:59:48.4359053-04:00</DestTime>
+  <SourceFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/LoZSprites.png</SourceFile>
+  <SourceTime>2021-10-02T17:21:08.1063125-04:00</SourceTime>
+  <DestFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LoZSprites.xnb</DestFile>
+  <DestTime>2021-10-02T17:21:09.3977049-04:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T12:17:54-04:00</ImporterTime>
+  <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T12:17:54-04:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T16:17:54-04:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

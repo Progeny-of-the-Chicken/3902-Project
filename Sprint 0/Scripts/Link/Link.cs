@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0
 {
@@ -19,14 +20,9 @@ namespace Sprint_0
             linkHealth = linkStartingHealth;
         }
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb, Vector2 pos)
         {
-            LinkSprite.Draw(sb, gt);
-        }
-
-        public void LoadContent(ContentManager cm)
-        {
-            LinkSprite.LoadContent(cm);
+            LinkSprite.Draw(sb, pos);
         }
 
         public void Update()
@@ -108,7 +104,10 @@ namespace Sprint_0
             }
         }
 
-        
+        public void Update(GameTime gt)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public class LinkStateMachine

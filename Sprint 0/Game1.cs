@@ -1,17 +1,19 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0
 {
+    public enum FacingDirection {Right, Left, Up, Down};
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        KeyboardController kc;
-        MouseController mc;
-        ISprite sprite;
-        SpriteText credits;
+        private KeyboardController kc;
+        public ItemEntities itemSet;
 
         //Just for sprint 2
         ITerrain block;
@@ -24,7 +26,6 @@ namespace Sprint_0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             kc = new KeyboardController(this);
-            mc = new MouseController(this);
             
             //Just for sprint 2
             blockNum = 0;
@@ -33,8 +34,6 @@ namespace Sprint_0
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            this.LoadContent();
             base.Initialize();
         }
 
@@ -42,35 +41,33 @@ namespace Sprint_0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
+            ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             // TODO: use this.Content to load your game content here
-            sprite = new Sprite1(this.GetCenterScreen());
-            sprite.LoadContent(this.Content);
-            credits = new SpriteText(this.GetCenterScreen());
-            credits.LoadContent(this.Content);
 
             //Just for sprint 2
             block = new TileSprite(blockLocation);
+            itemSet = new ItemEntities(this);
+            itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
             kc.Update();
-            mc.Update();
+            itemSet.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            sprite.Draw(this._spriteBatch, gameTime);
-            credits.Draw(this._spriteBatch, gameTime);
-            
-            //Just for sprint 2
+            itemSet.Draw(_spriteBatch);
+
+			//Just for sprint 2
             block.Draw(_spriteBatch);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         public void Quit()
@@ -80,12 +77,6 @@ namespace Sprint_0
         public Vector2 GetCenterScreen()
         {
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-        }
-
-        public void SetSprite(ISprite s)
-        {
-            this.sprite = s;
-            sprite.LoadContent(this.Content);
         }
 
         //Just for sprint 2

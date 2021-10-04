@@ -1,59 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using Sprint_0;
+using Sprint_0.Scripts.Commands;
 
-public class KeyboardController : IController
+namespace Sprint_0.Scripts.Controller
 {
-	//Dictionary Linking keys to commands
-	private Dictionary<Keys, ICommand> controllerMappings;
-	private Game1 game;
-
-	//Previous Keys pressed to limit multiple presses
-	KeyboardState previousKeys;
-
-	//Constructor
-	public KeyboardController(Game1 game)
+	public class KeyboardController
     {
-		controllerMappings = new Dictionary<Keys, ICommand>();
-		this.game = game;
-		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-		setCommands();
-    }
+		//Dictionary Linking keys to commands
+		private Dictionary<Keys, ICommand> controllerMappings;
+		private Game1 game;
+		private CommandNextItem nextItem;
+		private CommandLastItem lastItem;
+		private CommandShootArrow useFirstItem;
+		private CommandThrowBoomerangLink useSecondItem;
+		private CommandCastFireSpell useThirdItem;
+		private CommandPlaceBomb useFourthItem;
 
-	//Method to add new keybinds for commands
-	public void RegisterCommand(Keys key, ICommand command)
-    {
-		controllerMappings.Add(key, command);
-    }
+		//Previous Keys pressed to limit multiple presses
+		KeyboardState previousKeys;
 
-	//Add keybinds here
-	private void setCommands()
-    {
-		//Just for sprint 2
-		this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
-		this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
-    }
+		//Constructor
+		public KeyboardController(Game1 game)
+		{
+			controllerMappings = new Dictionary<Keys, ICommand>();
+			this.game = game;
+			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+			setCommands();
+		}
 
-	//Update checks for keys pressed and calls the respective command
-	public void Update()
-    {
-		KeyboardState keyboardState = Keyboard.GetState();
-		Keys[] pressedKeys = keyboardState.GetPressedKeys();
+		//Method to add new keybinds for commands
+		public void RegisterCommand(Keys key, ICommand command)
+		{
+			controllerMappings.Add(key, command);
+		}
 
-		foreach (Keys key in pressedKeys)
-        {
-			// Make sure key has mapping
-			if (!controllerMappings.ContainsKey(key))
-				return;
+		//Add keybinds here
+		private void setCommands()
+		{
+			//Just for sprint 2
+			this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
+			this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
+			this.RegisterCommand(Keys.D1, new CommandShootArrow(game));
+			this.RegisterCommand(Keys.D2, new CommandThrowBoomerangLink(game));
+			this.RegisterCommand(Keys.D3, new CommandCastFireSpell(game));
+			this.RegisterCommand(Keys.D4, new CommandPlaceBomb(game));
+			this.RegisterCommand(Keys.U, new CommandNextItem(game));
+			this.RegisterCommand(Keys.I, new CommandLastItem(game));
+		}
 
+		//Update checks for keys pressed and calls the respective command
+		public void Update()
+		{
+			KeyboardState keyboardState = Keyboard.GetState();
+			Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
-			if (previousKeys.IsKeyUp(key))
+			foreach (Keys key in pressedKeys)
 			{
-				controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
-			}
-        }
+				// Make sure key has mapping
+				if (!controllerMappings.ContainsKey(key))
+					return;
 
-		previousKeys = keyboardState;
-    }
+
+				if (previousKeys.IsKeyUp(key))
+				{
+					controllerMappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+				}
+			}
+
+			previousKeys = keyboardState;
+		}
+	}
 }
