@@ -8,36 +8,37 @@ using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0
 {
-    public enum FacingDirection {Right, Left, Up, Down};
+    public enum FacingDirection { Right, Left, Up, Down };
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
-		public ItemEntities itemSet;
+        public ItemEntities itemSet;
+
+
+        //Just for sprint 2
+        ITerrain block;
+        Vector2 blockLocation;
+        int blockNum;
 
         IEnemy enemy;
         Vector2 enemyStart;
         int enemyCount = 7;
         int enemyIndex = 0;
 
-        //Just for sprint 2
-        ITerrain block;
-        Vector2 blockLocation;
-        int blockNum;
-        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             kc = new KeyboardController(this);
-            
-			enemyStart = GetCenterScreen();
+
 
             //Just for sprint 2
             blockNum = 0;
             blockLocation = new Vector2(GetCenterScreen().X - 64, GetCenterScreen().Y + 32);
+            enemyStart = GetCenterScreen() * 1.5f;
         }
 
         protected override void Initialize()
@@ -52,9 +53,9 @@ namespace Sprint_0
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             // TODO: use this.Content to load your game content here
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
-            SetEnemy(enemyIndex);
 
-			//Just for sprint 2
+            //Just for sprint 2
+            SetEnemy(enemyIndex);
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
@@ -63,8 +64,10 @@ namespace Sprint_0
         protected override void Update(GameTime gameTime)
         {
             kc.Update();
+
+            //Just for Sprint 2
             itemSet.Update(gameTime);
-			enemy.Update(gameTime);
+            enemy.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -72,11 +75,12 @@ namespace Sprint_0
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+
+            //Just for sprint 2
+            block.Draw(_spriteBatch);
+            enemy.Draw(_spriteBatch);
             itemSet.Draw(_spriteBatch);
 
-			//Just for sprint 2
-            block.Draw(_spriteBatch);
-			enemy.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -96,25 +100,25 @@ namespace Sprint_0
             switch (i)
             {
                 case 0:
-                    enemy = EnemyFactory.Instance.CreateStalfos(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateStalfos(enemyStart, 2);
                     break;
                 case 1:
-                    enemy = EnemyFactory.Instance.CreateOldMan(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateOldMan(enemyStart, 2);
                     break;
                 case 2:
-                    enemy = EnemyFactory.Instance.CreateGel(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateGel(enemyStart, 2);
                     break;
                 case 3:
-                    enemy = EnemyFactory.Instance.CreateZol(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateZol(enemyStart, 2);
                     break;
                 case 4:
-                    enemy = EnemyFactory.Instance.CreateKeese(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateKeese(enemyStart, 2);
                     break;
                 case 5:
-                    enemy = EnemyFactory.Instance.CreateGoriya(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateGoriya(enemyStart, 2);
                     break;
                 case 6:
-                    enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart);
+                    enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart, 2);
                     break;
                 default:
                     break;
@@ -137,7 +141,7 @@ namespace Sprint_0
         //Just for sprint 2
         private void SetBlock()
         {
-            switch(blockNum % 10)
+            switch (blockNum % 10)
             {
                 case 0:
                     block = new TileSprite(blockLocation);

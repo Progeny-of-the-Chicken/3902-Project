@@ -39,7 +39,7 @@ namespace Sprint_0.Scripts.Items
                     directionVector.Y = 0;
                     break;
             }
-            sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite();
+            sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
         }
 
         public void Update(GameTime gt)

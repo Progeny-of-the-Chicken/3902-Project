@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Enemy
         IItem boomerang;
         
         float moveTime = 1.5f;
-        float moveSpeed = 100;
+        float moveSpeed;
         float timeSinceMove = 0;
 
         FacingDirection direction;
@@ -26,18 +26,20 @@ namespace Sprint_0.Scripts.Enemy
         (Vector2 directionVector, ISprite sprite) dependency;
 
         Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)> directionDependencies;
-        public Goriya(Vector2 location)
+        public Goriya(Vector2 location, float scale)
         {
 
             this.location = location;
 
+            moveSpeed = 25 * scale;
+
             random = new byte[3];
             randomDir = new RNGCryptoServiceProvider();
             directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (new Vector2(1, 0), EnemySpriteFactory.Instance.CreateRightGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Left, (new Vector2(-1, 0), EnemySpriteFactory.Instance.CreateLeftGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Up, (new Vector2(0, -1), EnemySpriteFactory.Instance.CreateBackGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Down, (new Vector2(0, 1), EnemySpriteFactory.Instance.CreateFrontGoriyaSprite()));
+            directionDependencies.Add(FacingDirection.Right, (new Vector2(1, 0), EnemySpriteFactory.Instance.CreateRightGoriyaSprite(scale)));
+            directionDependencies.Add(FacingDirection.Left, (new Vector2(-1, 0), EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(scale)));
+            directionDependencies.Add(FacingDirection.Up, (new Vector2(0, -1), EnemySpriteFactory.Instance.CreateBackGoriyaSprite(scale)));
+            directionDependencies.Add(FacingDirection.Down, (new Vector2(0, 1), EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(scale)));
             direction = FacingDirection.Down;
             directionDependencies.TryGetValue(direction, out dependency);
 

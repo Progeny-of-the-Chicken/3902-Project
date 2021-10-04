@@ -19,21 +19,23 @@ namespace Sprint_0.Scripts.Enemy
         Vector2 location;
         Vector2 direction = new Vector2(-1, 0);
         Vector2 startLocation;
-        
-        const float speed = 50;
-        const float moveDistance = 40;
+
+        float speed;
+        float moveDistance;
 
         float timeSinceFire = 0;
-        const float reloadTime = 3.5f;
-        const float shootSpriteTime = 0.5f;
+        float shootSpriteTime = 0.5f;
 
-        public Aquamentus(Vector2 location)
+        public Aquamentus(Vector2 location, float scale)
         {
             this.location = location;
             startLocation = location;
 
-            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
-            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
+            speed = 25 * scale;
+            moveDistance = 20 * scale;
+
+            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(scale);
+            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(scale);
             sprite = moveSprite;
             projectiles = ItemFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
         }
