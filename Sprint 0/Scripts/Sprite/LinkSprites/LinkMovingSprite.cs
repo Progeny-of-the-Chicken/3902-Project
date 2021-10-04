@@ -23,7 +23,6 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         int y;
 
         private int stepSpeed = 5; // Lower is faster
-        private int stepsPerSec = 3;
         private int frameNum = 0;
         private int maxFrames = 30;
         private Rectangle frame1;
