@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/smb_mario_sheet.png</SourceFile>
+  <SourceTime>2021-10-01T16:59:47.0627916-04:00</SourceTime>
+  <DestFile>C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb</DestFile>
+  <DestTime>2021-10-01T16:59:48.4359053-04:00</DestTime>
   <SourceFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/LoZItems.png</SourceFile>
   <SourceTime>2021-10-02T17:21:08.1060246-04:00</SourceTime>
   <DestFile>/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LoZItems.xnb</DestFile>
