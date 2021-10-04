@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle backwardSpritesheetLocation = new Rectangle(70, 11, 15, 16);
         private Rectangle frame;
         private Vector2 position;
-        private Direction direction;
+        private FacingDirection direction;
         private int colorCounter;
         private Color randColor;
         private Random rand = new Random();
@@ -43,7 +43,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         public void Draw(SpriteBatch sb, Vector2 loc)
         {
-            if(direction == Direction.Left)
+            if(direction == FacingDirection.Left)
                 sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, randColor, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
             else
                 sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, randColor);
@@ -53,14 +53,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             switch (direction)
             {
-                case Direction.Up:
+                case FacingDirection.Up:
                     frame = backwardSpritesheetLocation;
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     frame = forwardSpritesheetLocation;
                     break;
-                case Direction.Left:
-                case Direction.Right:
+                case FacingDirection.Left:
+                case FacingDirection.Right:
                     frame = rightSpritesheetLocation;
                     break;
                 default:

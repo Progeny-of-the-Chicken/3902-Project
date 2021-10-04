@@ -6,8 +6,6 @@ using System;
 
 namespace Sprint_0
 {
-    public enum Item { Sword, Arrow, Boomerang, Bomb, Fire, None };
-    public enum Direction { Up, Down, Left, Right };
 
     public class Link : ILink
     {
@@ -36,7 +34,7 @@ namespace Sprint_0
             LinkSprite.Update(gt);
         }
 
-        public void GoInDirection(Direction direction)
+        public void GoInDirection(FacingDirection direction)
         {
             linkState.GoInDirection(direction);
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
@@ -63,21 +61,50 @@ namespace Sprint_0
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
+        public void UseItem()
+        {
+            linkState.UseItem();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
+        public FacingDirection FacingDirection
+        {
+            get
+            {
+                return linkState.FacingDirection;
+            }
+        }
+
+        public Vector2 Position
+        {
+            get
+            {
+                return linkState.Position;
+            }
+        }
+
+        public Vector2 ItemSpawnPosition
+        {
+            get
+            {
+                return linkState.ItemSpawnPosition;
+            }
+        }
     }
 
     public class LinkStateMachine
     {
-        private Direction linksDirection;
+        private FacingDirection linksDirection;
         private int damageCounter;
         private int usingItemCounter;
         private int movingCounter;
         private int swordCounter;
         private Vector2 linksPosition;
-        private const int linkSpeed = 16;
+        private const int linkSpeed = 1;
 
         public LinkStateMachine()
         {
-            linksDirection = Direction.Down;
+            linksDirection = FacingDirection.Down;
             damageCounter = 0;
             usingItemCounter = 0;
             movingCounter = 0;
@@ -94,14 +121,17 @@ namespace Sprint_0
                 movingCounter--;
             if (swordCounter > 0)
                 swordCounter--;
+            if (IsMoving)
+                MoveInCurrentDirection();
         }
 
 
-        public void GoInDirection(Direction direction)
+        public void GoInDirection(FacingDirection direction)
         {
             if(direction == linksDirection)
             {
                 MoveInCurrentDirection();
+                movingCounter = 30;
             }
             else
             {
@@ -113,23 +143,22 @@ namespace Sprint_0
         {
             switch(linksDirection)
             {
-                case Direction.Left:
+                case FacingDirection.Left:
                     linksPosition.X -= linkSpeed;
                     break;
-                case Direction.Right:
+                case FacingDirection.Right:
                     linksPosition.X += linkSpeed;
                     break;
-                case Direction.Up:
+                case FacingDirection.Up:
                     linksPosition.Y -= linkSpeed;
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     linksPosition.Y += linkSpeed;
                     break;
             }
-            movingCounter = 30;
         }
 
-        private void SwitchToFaceNewDirection(Direction direction)
+        private void SwitchToFaceNewDirection(FacingDirection direction)
         {
             linksDirection = direction;
         }
@@ -165,7 +194,33 @@ namespace Sprint_0
             }
         }
 
-        public Direction FacingDirection
+        public Vector2 ItemSpawnPosition
+        {
+            get
+            {
+                float xDisp = 0, yDisp = 0;
+                switch (linksDirection)
+                {
+                    case FacingDirection.Left:
+                        yDisp += 24;
+                        break;
+                    case FacingDirection.Right:
+                        xDisp += 48;
+                        yDisp += 24;
+                        break;
+                    case FacingDirection.Up:
+                        xDisp += 24;
+                        break;
+                    case FacingDirection.Down:
+                        xDisp += 24;
+                        yDisp += 48;
+                        break;
+                }
+                return new Vector2(linksPosition.X + xDisp, linksPosition.Y + yDisp);
+            }
+        }
+
+        public FacingDirection FacingDirection
         {
             get
             {

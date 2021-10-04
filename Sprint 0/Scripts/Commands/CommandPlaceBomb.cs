@@ -5,17 +5,17 @@ namespace Sprint_0.Scripts.Commands
     public class CommandPlaceBomb : ICommand
     {
         private Game1 game;
+        private Link link;
 
         public CommandPlaceBomb(Game1 game)
         {
-            // TODO: Add ILink as parameter
             this.game = game;
+            link = game.link;
         }
 
         public void Execute()
         {
-            // TODO: Replace position and direction with those of Link
-            game.itemSet.items.Add(ItemFactory.Instance.CreateBomb(game.GetCenterScreen(), FacingDirection.Right));
+            game.itemSet.items.Add(ItemFactory.Instance.CreateBomb(link.ItemSpawnPosition, link.FacingDirection));
         }
     }
 }
