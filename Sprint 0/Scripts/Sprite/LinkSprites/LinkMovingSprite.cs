@@ -3,6 +3,7 @@ using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
@@ -64,13 +65,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
 
         public void Draw(SpriteBatch sb, Vector2 loc)
-        { 
+        {
+            Debug.Write("Moving Link Draw Called\n");
             if (isFrame1)
             {
-                drawFrame1(sb);
+                drawFrame1(sb, loc);
             } else
             {
-                drawFrame2(sb);
+                drawFrame2(sb, loc);
             }
         }
 
@@ -79,7 +81,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         /*------------------------- Helper methods -------------------------*/
 
-        private void drawFrame1(SpriteBatch sb)
+        private void drawFrame1(SpriteBatch sb, Vector2 loc)
         {
             switch (direction)
             {
@@ -94,7 +96,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             }
         }
 
-        private void drawFrame2(SpriteBatch sb)
+        private void drawFrame2(SpriteBatch sb, Vector2 loc)
         {
             switch (direction)
             {

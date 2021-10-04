@@ -35,6 +35,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 
 		public ISprite GetSpriteForState(LinkStateMachine linkState)
         {
+
             if(linkState.IsMoving)
 				return new LinkMovingSprite(linkState);
 			if (linkState.SwordIsBeingUsed)

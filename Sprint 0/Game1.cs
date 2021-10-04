@@ -34,10 +34,6 @@ namespace Sprint_0
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            link = new Link();
-
-            kc = new KeyboardController(this);
             
 			enemyStart = GetCenterScreen();
 
@@ -60,7 +56,11 @@ namespace Sprint_0
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
             SetEnemy(enemyIndex);
 
-			//Just for sprint 2
+            link = new Link();
+
+            kc = new KeyboardController(this);
+
+            //Just for sprint 2
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());

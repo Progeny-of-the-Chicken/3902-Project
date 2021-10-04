@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Commands;
+using System.Diagnostics;
 
 namespace Sprint_0.Scripts.Controller
 {
@@ -14,6 +15,8 @@ namespace Sprint_0.Scripts.Controller
 
 		//Previous Keys pressed to limit multiple presses
 		KeyboardState previousKeys;
+
+		KeyboardState keyboardState;
 
 		//Constructor
 		public KeyboardController(Game1 game)
@@ -31,7 +34,7 @@ namespace Sprint_0.Scripts.Controller
 		//Method to add new keybinds for commands
 		public void RegisterCommand(Dictionary<Keys, ICommand> mappings, Keys key, ICommand command)
 		{
-			controllerMappings.Add(key, command);
+			mappings.Add(key, command);
 		}
 
 		//Add keybinds here
@@ -48,26 +51,27 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.D4, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.U, new CommandNextItem(game));
 			this.RegisterCommand(controllerMappings, Keys.I, new CommandLastItem(game));
+			this.RegisterCommand(controllerMappings, Keys.N, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
+			this.RegisterCommand(controllerMappings, Keys.Z, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
+			this.RegisterCommand(controllerMappings, Keys.E, new Sprint_0.Scripts.Commands.LinkTakeDamage(game.link));
 
+			// Link movement commands
 			this.RegisterCommand(linkControllerMappings, Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.N, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.Z, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.E, new Sprint_0.Scripts.Commands.LinkTakeDamage(game.link));
 		}
 
 		//Update checks for keys pressed and calls the respective command
 		public void Update()
 		{
-			KeyboardState keyboardState = Keyboard.GetState();
+			keyboardState = Keyboard.GetState();
 			Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
 			foreach (Keys key in pressedKeys)
 			{
 				executeCommandsForKey(key, controllerMappings);
-				executeCommandsForKey(key, linkControllerMappings);
+				executeMovementCommandsForKey(key, linkControllerMappings);
 			}
 
 			previousKeys = keyboardState;
@@ -85,8 +89,19 @@ namespace Sprint_0.Scripts.Controller
 
 			if (previousKeys.IsKeyUp(key))
 			{
-				mappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+				mappings[key].Execute();
 			}
+		}
+
+		private void executeMovementCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
+        {
+			// Make sure key has mapping
+			if (!mappings.ContainsKey(key))
+            {
+				return;
+			}
+
+			mappings[key].Execute();
 		}
 	}
 }
