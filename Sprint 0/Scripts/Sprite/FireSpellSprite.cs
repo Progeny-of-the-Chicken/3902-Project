@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Sprite
     {
         private Texture2D spritesheet;
         private Rectangle frame = new Rectangle(215, 185, 16, 16);
-        private double animationDelaySeconds = 0.1;
+        private double animationDelaySeconds = 0.033;
         private double startTimeSeconds = 0.0;
         private SpriteEffects flip = SpriteEffects.None;
         private int scale = 2;
