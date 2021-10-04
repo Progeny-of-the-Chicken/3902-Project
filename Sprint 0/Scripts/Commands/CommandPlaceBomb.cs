@@ -2,19 +2,20 @@
 
 namespace Sprint_0.Scripts.Commands
 {
-    public class CommandSecondItem : ICommand
+    public class CommandPlaceBomb : ICommand
     {
         private Game1 game;
 
-        public CommandSecondItem(Game1 game)
+        public CommandPlaceBomb(Game1 game)
         {
+            // TODO: Add ILink as parameter
             this.game = game;
         }
 
         public void Execute()
         {
             // TODO: Replace position and direction with those of Link
-            game.itemSet.items.Add(ItemFactory.Instance.CreateBoomerang(game.GetCenterScreen(), Boomerang.Direction.RIGHT, true));
+            game.itemSet.items.Add(ItemFactory.Instance.CreateBomb(game.GetCenterScreen(), FacingDirection.Right));
         }
     }
 }

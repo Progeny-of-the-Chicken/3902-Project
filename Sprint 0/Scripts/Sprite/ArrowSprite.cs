@@ -6,15 +6,13 @@ namespace Sprint_0.Scripts.Sprite
 {
     public class ArrowSprite : ISprite
     {
-        public enum Orientation { RIGHT, UP, LEFT, DOWN };
-
         private Texture2D spritesheet;
         private Rectangle frame;
         private double rotation;
         private Vector2 rotationOffset = new Vector2(8, 2.5f);
         private int scale = 2;
 
-        public ArrowSprite(Texture2D textures, Orientation direction, bool silver)
+        public ArrowSprite(Texture2D textures, FacingDirection direction, bool silver)
         {
             spritesheet = textures;
             if (!silver)
@@ -27,16 +25,16 @@ namespace Sprint_0.Scripts.Sprite
             }
             switch (direction)
             {
-                case Orientation.RIGHT:
+                case FacingDirection.Right:
                     rotation = 0;
                     break;
-                case Orientation.UP:
+                case FacingDirection.Up:
                     rotation = (3 * Math.PI) / 2;
                     break;
-                case Orientation.LEFT:
+                case FacingDirection.Left:
                     rotation = Math.PI;
                     break;
-                case Orientation.DOWN:
+                case FacingDirection.Down:
                     rotation = Math.PI / 2;
                     break;
                 default:

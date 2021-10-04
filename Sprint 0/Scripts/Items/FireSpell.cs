@@ -7,8 +7,6 @@ namespace Sprint_0.Scripts.Items
 {
     public class FireSpell : IItem
     {
-        public enum Direction { RIGHT, UP, LEFT, DOWN }
-
         private ISprite sprite;
         private Vector2 directionVector;
         private Vector2 currentPos;
@@ -21,21 +19,21 @@ namespace Sprint_0.Scripts.Items
         private double startLingerTime = 0;
         private double lingerDuration = 2.0;
 
-        public FireSpell(Vector2 spawnLoc, Direction dir)
+        public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {
             startPos = currentPos = spawnLoc;
-            switch (dir)
+            switch (direction)
             {
-                case Direction.RIGHT:
+                case FacingDirection.Right:
                     directionVector = new Vector2(1, 0);
                     break;
-                case Direction.UP:
+                case FacingDirection.Up:
                     directionVector = new Vector2(0, -1);
                     break;
-                case Direction.LEFT:
+                case FacingDirection.Left:
                     directionVector = new Vector2(-1, 0);
                     break;
-                case Direction.DOWN:
+                case FacingDirection.Down:
                     directionVector = new Vector2(0, 1);
                     break;
                 default:
@@ -49,20 +47,11 @@ namespace Sprint_0.Scripts.Items
             sprite.Update(gt);
             if (!linger)
             {
-                currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
-                // Distance based
-                if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
-                {
-                    linger = true;
-                }
+                UpdateFireSpellMotion(gt);
             }
             else
             {
-                startLingerTime += gt.ElapsedGameTime.TotalSeconds;
-                if (startLingerTime > lingerDuration)
-                {
-                    delete = true;
-                }
+                UpdateFireSpellLinger(gt);
             }
         }
 
@@ -74,6 +63,27 @@ namespace Sprint_0.Scripts.Items
         public bool CheckDelete()
         {
             return delete;
+        }
+
+        //----- Updates methods for individual sprites -----//
+
+        private void UpdateFireSpellMotion(GameTime gt)
+        {
+            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
+            // Distance based
+            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
+            {
+                linger = true;
+            }
+        }
+
+        private void UpdateFireSpellLinger(GameTime gt)
+        {
+            startLingerTime += gt.ElapsedGameTime.TotalSeconds;
+            if (startLingerTime > lingerDuration)
+            {
+                delete = true;
+            }
         }
     }
 }

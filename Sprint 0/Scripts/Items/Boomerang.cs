@@ -6,8 +6,6 @@ namespace Sprint_0.Scripts.Items
 {
     public class Boomerang : IItem
     {
-        public enum Direction { RIGHT, UP, LEFT, DOWN }
-
         private ISprite sprite;
         private Vector2 directionVector;
         private Vector2 currentPos;
@@ -20,7 +18,7 @@ namespace Sprint_0.Scripts.Items
         private double startT = 0;
         private double tOffset = 1;
 
-        public Boomerang(Vector2 spawnLoc, Direction dir, bool magical)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
             startPos = currentPos = spawnLoc;
             if (magical)
@@ -28,18 +26,18 @@ namespace Sprint_0.Scripts.Items
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
             }
 
-            switch (dir)
+            switch (direction)
             {
-                case Direction.RIGHT:
+                case FacingDirection.Right:
                     directionVector = new Vector2(1, 0);
                     break;
-                case Direction.UP:
+                case FacingDirection.Up:
                     directionVector = new Vector2(0, -1);
                     break;
-                case Direction.LEFT:
+                case FacingDirection.Left:
                     directionVector = new Vector2(-1, 0);
                     break;
-                case Direction.DOWN:
+                case FacingDirection.Down:
                     directionVector = new Vector2(0, 1);
                     break;
                 default:

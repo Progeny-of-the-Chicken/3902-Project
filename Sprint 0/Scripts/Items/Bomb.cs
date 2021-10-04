@@ -6,8 +6,6 @@ namespace Sprint_0.Scripts.Items
 {
     public class Bomb : IItem
     {
-        public enum Direction { UP, DOWN, LEFT, RIGHT };
-
         private ISprite sprite;
         private Vector2 pos;
         private int displacement = 50;
@@ -17,21 +15,21 @@ namespace Sprint_0.Scripts.Items
         private bool explode = false;
         private double explodeDurationSeconds = 0.3;
 
-        public Bomb(Vector2 spawnLoc, Direction dir)
+        public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {
             pos = spawnLoc;
-            switch (dir)
+            switch (direction)
             {
-                case Direction.RIGHT:
+                case FacingDirection.Right:
                     pos.X += displacement;
                     break;
-                case Direction.UP:
+                case FacingDirection.Up:
                     pos.Y -= displacement;
                     break;
-                case Direction.LEFT:
+                case FacingDirection.Left:
                     pos.X -= displacement;
                     break;
-                case Direction.DOWN:
+                case FacingDirection.Down:
                     pos.Y += displacement;
                     break;
                 default:
@@ -46,21 +44,11 @@ namespace Sprint_0.Scripts.Items
             sprite.Update(gt);
             if (!explode)
             {
-                startTime += gt.ElapsedGameTime.TotalSeconds;
-                if (startTime > fuseDurationSeconds)
-                {
-                    explode = true;
-                    sprite = ItemSpriteFactory.Instance.CreateBombExplodeSprite();
-                    startTime = 0.0;
-                }
+                UpdateBomb(gt);
             }
             else
             {
-                startTime += gt.ElapsedGameTime.TotalSeconds;
-                if (startTime > explodeDurationSeconds)
-                {
-                    delete = true;
-                }
+                UpdateExplode(gt);
             }
         }
 
@@ -72,6 +60,28 @@ namespace Sprint_0.Scripts.Items
         public bool CheckDelete()
         {
             return delete;
+        }
+
+        //----- Updates methods for individual sprites -----//
+
+        private void UpdateBomb(GameTime gt)
+        {
+            startTime += gt.ElapsedGameTime.TotalSeconds;
+            if (startTime > fuseDurationSeconds)
+            {
+                explode = true;
+                sprite = ItemSpriteFactory.Instance.CreateBombExplodeSprite();
+                startTime = 0.0;
+            }
+        }
+
+        private void UpdateExplode(GameTime gt)
+        {
+            startTime += gt.ElapsedGameTime.TotalSeconds;
+            if (startTime > explodeDurationSeconds)
+            {
+                delete = true;
+            }
         }
     }
 }

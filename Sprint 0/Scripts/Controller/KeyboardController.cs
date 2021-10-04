@@ -9,10 +9,10 @@ namespace Sprint_0.Scripts.Controller
 		CommandQuit cq;
 		CommandNextItem nextItem;
 		CommandLastItem lastItem;
-		CommandFirstItem useFirstItem;
-		CommandSecondItem useSecondItem;
-		CommandThirdItem useThirdItem;
-		CommandFourthItem useFourthItem;
+		CommandShootArrow useFirstItem;
+		CommandThrowBoomerangLink useSecondItem;
+		CommandCastFireSpell useThirdItem;
+		CommandPlaceBomb useFourthItem;
 
 		private Game1 game;
 
@@ -22,10 +22,10 @@ namespace Sprint_0.Scripts.Controller
 			cq = new CommandQuit(this.game);
 			nextItem = new CommandNextItem(this.game);
 			lastItem = new CommandLastItem(this.game);
-			useFirstItem = new CommandFirstItem(this.game);
-			useSecondItem = new CommandSecondItem(this.game);
-			useThirdItem = new CommandThirdItem(this.game);
-			useFourthItem = new CommandFourthItem(this.game);
+			useFirstItem = new CommandShootArrow(this.game);
+			useSecondItem = new CommandThrowBoomerangLink(this.game);
+			useThirdItem = new CommandCastFireSpell(this.game);
+			useFourthItem = new CommandPlaceBomb(this.game);
 			
 			ks = Keyboard.GetState();
 		}

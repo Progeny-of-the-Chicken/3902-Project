@@ -7,6 +7,7 @@ using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0
 {
+    public enum FacingDirection {Right, Left, Up, Down};
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;

@@ -123,7 +123,7 @@ namespace Sprint_0.Scripts.Items
             return new AnimatedTreasureSprite(treasureSpritesheet, frames);
         }
 
-        public ISprite CreateArrowSprite(ArrowSprite.Orientation direction, bool silver)
+        public ISprite CreateArrowSprite(FacingDirection direction, bool silver)
         {
             return new ArrowSprite(projectileSpritesheet, direction, silver);
         }

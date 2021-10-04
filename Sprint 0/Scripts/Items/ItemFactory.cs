@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -88,24 +89,33 @@ namespace Sprint_0.Scripts.Items
             return new AnimatedTreasure(ItemSpriteFactory.Instance.CreateTriforcePieceSprite(), location);
         }
 
-        public IItem CreateArrow(Vector2 location, Arrow.Direction direction, bool silver)
+        public IItem CreateArrow(Vector2 location, FacingDirection direction, bool silver)
         {
             return new Arrow(location, direction, silver);
         }
 
-        public IItem CreateBoomerang(Vector2 location, Boomerang.Direction direction, bool magical)
+        public IItem CreateBoomerang(Vector2 location, FacingDirection direction, bool magical)
         {
             return new Boomerang(location, direction, magical);
         }
 
-        public IItem CreateBomb(Vector2 location, Bomb.Direction direction)
+        public IItem CreateBomb(Vector2 location, FacingDirection direction)
         {
             return new Bomb(location, direction);
         }
 
-        public IItem CreateFireSpell(Vector2 location, FireSpell.Direction direction)
+        public IItem CreateFireSpell(Vector2 location, FacingDirection direction)
         {
             return new FireSpell(location, direction);
+        }
+
+        public List<IItem> CreateThreeMagicProjectiles(Vector2 location, FacingDirection mainDirection)
+        {
+            return new List<IItem>{
+                new MagicProjectile(location, mainDirection, FacingDirection.Up),
+                new MagicProjectile(location, mainDirection, mainDirection),
+                new MagicProjectile(location, mainDirection, FacingDirection.Down)
+            };
         }
     }
 }
