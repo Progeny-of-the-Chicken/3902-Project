@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Controller;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0
 {
@@ -12,8 +13,13 @@ namespace Sprint_0
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        private KeyboardController kc;
-        public ItemEntities itemSet;
+        KeyboardController kc;
+		public ItemEntities itemSet;
+
+        IEnemy enemy;
+        Vector2 enemyStart;
+        int enemyCount = 7;
+        int enemyIndex = 0;
 
         //Just for sprint 2
         ITerrain block;
@@ -27,6 +33,8 @@ namespace Sprint_0
             IsMouseVisible = true;
             kc = new KeyboardController(this);
             
+			enemyStart = GetCenterScreen();
+
             //Just for sprint 2
             blockNum = 0;
             blockLocation = new Vector2(GetCenterScreen().X - 64, GetCenterScreen().Y + 32);
@@ -43,8 +51,10 @@ namespace Sprint_0
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             // TODO: use this.Content to load your game content here
+            EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
+            SetEnemy(enemyIndex);
 
-            //Just for sprint 2
+			//Just for sprint 2
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
@@ -54,6 +64,7 @@ namespace Sprint_0
         {
             kc.Update();
             itemSet.Update(gameTime);
+			enemy.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -65,6 +76,7 @@ namespace Sprint_0
 
 			//Just for sprint 2
             block.Draw(_spriteBatch);
+			enemy.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -77,6 +89,49 @@ namespace Sprint_0
         public Vector2 GetCenterScreen()
         {
             return new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+        }
+
+        void SetEnemy(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    enemy = EnemyFactory.Instance.CreateStalfos(enemyStart);
+                    break;
+                case 1:
+                    enemy = EnemyFactory.Instance.CreateOldMan(enemyStart);
+                    break;
+                case 2:
+                    enemy = EnemyFactory.Instance.CreateGel(enemyStart);
+                    break;
+                case 3:
+                    enemy = EnemyFactory.Instance.CreateZol(enemyStart);
+                    break;
+                case 4:
+                    enemy = EnemyFactory.Instance.CreateKeese(enemyStart);
+                    break;
+                case 5:
+                    enemy = EnemyFactory.Instance.CreateGoriya(enemyStart);
+                    break;
+                case 6:
+                    enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart);
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void NextEnemy()
+        {
+            enemyIndex++;
+            enemyIndex %= enemyCount;
+            SetEnemy(enemyIndex);
+        }
+        public void PrevEnemy()
+        {
+            //Add enemy count to ensure enemyIndex is not negative
+            enemyIndex += enemyCount - 1;
+            enemyIndex %= enemyCount;
+            SetEnemy(enemyIndex);
         }
 
         //Just for sprint 2

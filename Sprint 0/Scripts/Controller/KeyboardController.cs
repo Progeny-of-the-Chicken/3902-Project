@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Sprint_0;
+using Sprint_0.Scripts.Enemy;
+using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Commands;
 
 namespace Sprint_0.Scripts.Controller
@@ -40,6 +44,8 @@ namespace Sprint_0.Scripts.Controller
 			//Just for sprint 2
 			this.RegisterCommand(Keys.T, new BlockReverseCycle(game));
 			this.RegisterCommand(Keys.Y, new BlockForwardCycle(game));
+			this.RegisterCommand(Keys.O, new PrevEnemy(game));
+			this.RegisterCommand(Keys.P, new NextEnemy(game));
 			this.RegisterCommand(Keys.D1, new CommandShootArrow(game));
 			this.RegisterCommand(Keys.D2, new CommandThrowBoomerangLink(game));
 			this.RegisterCommand(Keys.D3, new CommandCastFireSpell(game));
