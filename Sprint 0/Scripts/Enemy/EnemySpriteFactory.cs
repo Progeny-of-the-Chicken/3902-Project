@@ -46,9 +46,9 @@ namespace Sprint_0.Scripts.Enemy
 
 		public void LoadAllTextures(ContentManager content)
         {
-			enemySprites = content.Load<Texture2D>("enemies.png");
-			npcSprites = content.Load<Texture2D>("npc.png");
-			bossSprites = content.Load<Texture2D>("bosses.png");
+			enemySprites = content.Load<Texture2D>("enemies");
+			npcSprites = content.Load<Texture2D>("npc");
+			bossSprites = content.Load<Texture2D>("bosses");
 		}
 
 		public ISprite CreateStalfosSprite()
@@ -100,10 +100,5 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new GoriyaLeftSprite(GoriyaRightFrames, 4, enemySprites);
 		}
-
-		public ISprite CreateBoomerangSprite()
-        {
-			return new BoomerangSprite(BoomerangFrames, 4, enemySprites);
-        }
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Enemy
 {

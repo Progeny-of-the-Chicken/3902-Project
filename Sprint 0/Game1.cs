@@ -1,16 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0
 {
+    public enum FacingDirection {Right, Left, Up, Down};
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
-        MouseController mc;
+		public ItemEntities itemSet;
 
         IEnemy enemy;
         Vector2 enemyStart;
@@ -28,7 +32,6 @@ namespace Sprint_0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             kc = new KeyboardController(this);
-            mc = new MouseController(this);
             
 			enemyStart = GetCenterScreen();
 
@@ -39,7 +42,6 @@ namespace Sprint_0
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -47,34 +49,37 @@ namespace Sprint_0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
+            ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             // TODO: use this.Content to load your game content here
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
             SetEnemy(enemyIndex);
 
 			//Just for sprint 2
             block = new TileSprite(blockLocation);
+            itemSet = new ItemEntities(this);
+            itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
             kc.Update();
-            mc.Update();
-
-            enemy.Update(gameTime);
+            itemSet.Update(gameTime);
+			enemy.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            
-            //Just for sprint 2
+            itemSet.Draw(_spriteBatch);
+
+			//Just for sprint 2
             block.Draw(_spriteBatch);
 			enemy.Draw(_spriteBatch);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         public void Quit()

@@ -60,10 +60,5 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Goriya(location);
         }
-		
-		public IEnemy CreateBoomerang(Vector2 location)
-        {
-			return new Boomerang(location);
-        }
 	}
 }
