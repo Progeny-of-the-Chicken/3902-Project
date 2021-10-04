@@ -23,9 +23,9 @@ namespace Sprint_0
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void Draw(SpriteBatch sb, Vector2 pos)
+        public void Draw(SpriteBatch sb, GameTime gt)
         {
-            LinkSprite.Draw(sb, pos);
+            LinkSprite.Draw(sb, linkState.Position);
         }
 
         public void Update(GameTime gt)
@@ -33,7 +33,7 @@ namespace Sprint_0
             linkState.Update();
             if(!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            LinkSprite.Update();
+            LinkSprite.Update(gt);
         }
 
         public void GoInDirection(Direction direction)

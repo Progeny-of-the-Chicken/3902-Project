@@ -44,7 +44,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         }
 
 
-        public void Update()
+        public void Update(GameTime gt)
         {
             frameNum++;
             if (frameNum == maxFrames)
@@ -63,14 +63,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         }
 
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb, Vector2 loc)
         { 
             if (isFrame1)
             {
-                drawFrame1(sb, gt);
+                drawFrame1(sb);
             } else
             {
-                drawFrame2(sb, gt);
+                drawFrame2(sb);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         /*------------------------- Helper methods -------------------------*/
 
-        private void drawFrame1(SpriteBatch sb, GameTime gt)
+        private void drawFrame1(SpriteBatch sb)
         {
             switch (direction)
             {
@@ -94,7 +94,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             }
         }
 
-        private void drawFrame2(SpriteBatch sb, GameTime gt)
+        private void drawFrame2(SpriteBatch sb)
         {
             switch (direction)
             {

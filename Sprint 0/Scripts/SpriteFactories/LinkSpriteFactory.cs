@@ -1,4 +1,5 @@
 ﻿using Sprint_0.Scripts.Sprite.LinkSprites;
+using Sprint_0.Scripts.Sprite;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

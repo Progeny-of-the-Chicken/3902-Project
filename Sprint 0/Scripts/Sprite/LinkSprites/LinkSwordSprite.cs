@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts
 {
@@ -93,7 +92,7 @@ namespace Sprint_0.Scripts
             }
         }
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb, Vector2 loc)
         {
             if (direction == Direction.Left)
             
@@ -102,7 +101,7 @@ namespace Sprint_0.Scripts
                 sb.Draw(sheet, destinationPos, currentFrame, Color.White);
         }
 
-        public void Update()
+        public void Update(GameTime gt)
         {
             animateSwordCounter++;
             animateSwordCounter %= 30;

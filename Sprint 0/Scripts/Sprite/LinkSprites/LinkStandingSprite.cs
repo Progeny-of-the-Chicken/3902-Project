@@ -28,13 +28,13 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         }
 
 
-        public void Update()
+        public void Update(GameTime gt)
         {
             //just standing no need to update
         }
 
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb, Vector2 loc)
         {
             if(direction == Direction.Left)
                 sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);

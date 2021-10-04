@@ -34,6 +34,9 @@ namespace Sprint_0
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            link = new Link();
+
             kc = new KeyboardController(this);
             
 			enemyStart = GetCenterScreen();
@@ -61,7 +64,6 @@ namespace Sprint_0
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
-			link = new Link();
 
 			base.LoadContent();
         }
@@ -71,7 +73,7 @@ namespace Sprint_0
             kc.Update();
             itemSet.Update(gameTime);
 			enemy.Update(gameTime);
-			link.Update();
+			link.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
