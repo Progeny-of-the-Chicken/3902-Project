@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0
 {
@@ -14,7 +15,9 @@ namespace Sprint_0
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
+
 		public ItemEntities itemSet;
+		public Link link;
 
         IEnemy enemy;
         Vector2 enemyStart;
@@ -31,6 +34,9 @@ namespace Sprint_0
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            link = new Link();
+
             kc = new KeyboardController(this);
             
 			enemyStart = GetCenterScreen();
@@ -48,9 +54,9 @@ namespace Sprint_0
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            LinkSpriteFactory.Instance.LoadAllTextures(this.Content);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
-            // TODO: use this.Content to load your game content here
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
             SetEnemy(enemyIndex);
 
@@ -58,6 +64,8 @@ namespace Sprint_0
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
+
+			base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -65,6 +73,7 @@ namespace Sprint_0
             kc.Update();
             itemSet.Update(gameTime);
 			enemy.Update(gameTime);
+			link.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -72,11 +81,12 @@ namespace Sprint_0
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            itemSet.Draw(_spriteBatch);
+			link.Draw(_spriteBatch, gameTime);
 
 			//Just for sprint 2
             block.Draw(_spriteBatch);
 			enemy.Draw(_spriteBatch);
+			itemSet.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

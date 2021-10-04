@@ -10,20 +10,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Scripts\Commands\Command1.cs" />
-    <Compile Remove="Scripts\Commands\Command2.cs" />
-    <Compile Remove="Scripts\Commands\Command3.cs" />
-    <Compile Remove="Scripts\Commands\Command4.cs" />
-    <Compile Remove="Scripts\Sprite\Sprite1.cs" />
-    <Compile Remove="Scripts\Sprite\Sprite2.cs" />
-    <Compile Remove="Scripts\Sprite\Sprite3.cs" />
-    <Compile Remove="Scripts\Sprite\Sprite4.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
-    <None Remove="Scripts\Items\" />
-    <None Remove="Scripts\Sprite\" />
+    <None Remove="Scripts\SpriteFactories\" />
+    <None Remove="Scripts\Sprite\LinkSprites\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -40,7 +30,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\Items\" />
-    <Folder Include="Scripts\Sprite\" />
+    <Folder Include="Scripts\SpriteFactories\" />
+    <Folder Include="Scripts\Sprite\LinkSprites\" />
   </ItemGroup>
 </Project>
