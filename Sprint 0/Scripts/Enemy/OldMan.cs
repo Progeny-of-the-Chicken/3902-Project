@@ -15,22 +15,11 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite();
-
         }
 
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
-        }
-
-        public void Move()
-        {
-
-        }
-
-        public void ShootProjectile()
-        {
-            //not used
         }
 
         public void Draw(SpriteBatch sb)

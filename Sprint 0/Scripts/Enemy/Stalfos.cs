@@ -10,22 +10,23 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class Stalfos : IEnemy
     {
-        enum Direction { Up, Down, Left, Right};
+        StalfosSprite sprite;
+        
+        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
+        byte[] random;
+        
+        const float moveTime = 1;
+        const float moveSpeed = 100;
+        float timeSinceMove = 0;
+        
+        Vector2 location;
+        Vector2 direction;
 
-        private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        private StalfosSprite sprite;
-        private byte[] random;
-        private float moveTime = 1;
-        private float moveSpeed = 100;
-        private float timeSinceMove = 0;
-        private Vector2 location;
-        private Vector2 directionVector;
-        private Direction direction;
         public Stalfos(Vector2 location)
         {
             this.location = location;
-            directionVector = new Vector2(-1, 0) * moveSpeed;
-            random = new byte[1];
+            direction = new Vector2(-1, 0);
+            random = new byte[2];
             sprite = (StalfosSprite) EnemySpriteFactory.Instance.CreateStalfosSprite();
         }
 
@@ -35,35 +36,32 @@ namespace Sprint_0.Scripts.Enemy
             sprite.Update(gt);
         }
 
-        public void Move(GameTime gt)
+        void Move(GameTime gt)
         {
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
 
             if (timeSinceMove >= moveTime)
             {
-                //Get a random direction to move in
-                randomDir.GetBytes(random);
-                direction = (Direction)(random[0] % 4);
-
-                switch (direction)
-                {
-                    case Direction.Down:
-                        directionVector = new Vector2(0, 1);
-                        break;
-                    case Direction.Left:
-                        directionVector = new Vector2(-1, 0);
-                        break;
-                    case Direction.Right:
-                        directionVector = new Vector2(1, 0);
-                        break;
-                    case Direction.Up:
-                        directionVector = new Vector2(0, -1);
-                        break;
-                }
-                directionVector *= moveSpeed;
+                SetRandomDirection();
                 timeSinceMove = 0;
             }
-            location += directionVector * (float)gt.ElapsedGameTime.TotalSeconds;
+            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+        }
+
+        void SetRandomDirection()
+        {
+            //First byte is vertical/horizontal, second is +/-
+            randomDir.GetBytes(random);
+            if (random[0] % 2 == 0)
+            {
+                direction.X = (random[1] % 2) * 2 - 1;
+                direction.Y = 0;
+            }
+            else
+            {
+                direction.X = 0;
+                direction.Y = (random[1] % 2) * 2 - 1;
+            }
         }
 
         public void Draw(SpriteBatch sb)

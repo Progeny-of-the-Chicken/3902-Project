@@ -10,9 +10,9 @@ namespace Sprint_0.Scripts.Enemy
 {
     class EnemySpriteFactory
     {
-        private Texture2D enemySprites;
-		private Texture2D npcSprites;
-		private Texture2D bossSprites;
+        Texture2D enemySprites;
+		Texture2D npcSprites;
+		Texture2D bossSprites;
 
 		private static EnemySpriteFactory instance = new EnemySpriteFactory();
 		public static EnemySpriteFactory Instance
@@ -23,19 +23,19 @@ namespace Sprint_0.Scripts.Enemy
 			}
 		} 
 
-		private Rectangle StalfosRectangle = new Rectangle(1, 59, 16, 16);
-		private Rectangle OldManRectangle = new Rectangle(1, 11, 16, 16);
-		private Rectangle[] GelFrames = { new Rectangle(1, 15, 8, 9), new Rectangle(10, 15, 8, 9) };
-		private Rectangle[] ZolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
-		private Rectangle[] AquamentusMoveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
-		private Rectangle[] AquamentusShootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
-		private Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
-													  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
-        private Rectangle[] KeeseFrames = {new Rectangle(183, 14, 18, 10), new Rectangle(200, 14, 16, 12)};
-		private Rectangle GoriyaFrontFrame = new Rectangle(222, 10, 15, 17);
-		private Rectangle GoriyaBackFrame = new Rectangle(240, 10, 14, 17);
-		private Rectangle[] GoriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16 ) };
-		private Rectangle BoomerangFrames = new Rectangle(290, 14, 7, 10);
+		Rectangle StalfosRectangle = new Rectangle(1, 59, 16, 16);
+		Rectangle OldManRectangle = new Rectangle(1, 11, 16, 16);
+		Rectangle[] GelFrames = { new Rectangle(1, 15, 8, 9), new Rectangle(10, 15, 8, 9) };
+		Rectangle[] ZolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
+		Rectangle[] AquamentusMoveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
+		Rectangle[] AquamentusShootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
+		Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
+											  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
+        Rectangle[] KeeseFrames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
+		Rectangle GoriyaFrontFrame = new Rectangle(222, 10, 15, 17);
+		Rectangle GoriyaBackFrame = new Rectangle(240, 10, 14, 17);
+		Rectangle[] GoriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16 ) };
+		Rectangle BoomerangFrames = new Rectangle(290, 14, 7, 10);
 
 
 

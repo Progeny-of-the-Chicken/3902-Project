@@ -11,41 +11,46 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        enum Direction { Up, Down, Left, Right, Still };
+        enum Direction { Up, Down, Left, Right };
 
-        private static RNGCryptoServiceProvider randomDir; 
-        private GoriyaFrontSprite spriteF;
-        private GoriyaBackSprite spriteB;
-        private GoriyaRightSprite spriteR;
-        private GoriyaLeftSprite spriteL;
-        private ISprite sprite;
-        private Direction direction;
-        private byte[] random;
-        private float moveTime = 2;
-        private float moveSpeed = 100;
-        private float timeSinceMove = 0;
-        private Vector2 location;
-        private Vector2 directionVector;
+        static RNGCryptoServiceProvider randomDir;
+        byte[] random;
+        
+        ISprite[] sprites;
+        ISprite sprite;
+        
+        float moveTime = 1.5f;
+        float moveSpeed = 100;
+        float timeSinceMove = 0;
+        bool paused = false;
+
+        Direction direction;
+        Vector2 location;
+        Vector2 directionVector;
+
         public Goriya(Vector2 location)
         {
+
             this.location = location;
-            directionVector = new Vector2(0, 1) * moveSpeed;
+            directionVector = new Vector2(0, 1);
+
+            random = new byte[3];
             randomDir = new RNGCryptoServiceProvider();
-            random = new byte[1];
-            spriteF = (GoriyaFrontSprite)EnemySpriteFactory.Instance.CreateFrontGoriyaSprite();
-            spriteB = (GoriyaBackSprite)EnemySpriteFactory.Instance.CreateBackGoriyaSprite();
-            spriteR = (GoriyaRightSprite)EnemySpriteFactory.Instance.CreateRightGoriyaSprite();
-            spriteL = (GoriyaLeftSprite)EnemySpriteFactory.Instance.CreateLeftGoriyaSprite();
-            sprite = spriteF;
+
+            sprites = new ISprite[] { EnemySpriteFactory.Instance.CreateBackGoriyaSprite(),
+                                    EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(),
+                                    EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(),
+                                    EnemySpriteFactory.Instance.CreateRightGoriyaSprite() };
+            sprite = sprites[1];
         }
 
-        public void Update(GameTime gt)
+        public void Update(GameTime t)
         {
-            Move(gt);
-            if (direction != Direction.Still)
-            {
-                sprite.Update(gt);
-            }
+            Move(t);
+            //if (!paused)
+            //{
+                sprite.Update(t);
+            //}
         }
 
         public void Move(GameTime gt)
@@ -53,38 +58,47 @@ namespace Sprint_0.Scripts.Enemy
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
             if (timeSinceMove >= moveTime)
             {
-                //Get a random direction to move in
-                randomDir.GetBytes(random);
-                direction = (Direction)(random[0] % 4);
-
-                switch (direction)
-                {
-                    case Direction.Down:
-                        sprite = spriteF;
-                        directionVector = new Vector2(0, 1);
-                        break;
-                    case Direction.Left:
-                        sprite = spriteL;
-                        directionVector = new Vector2(-1, 0);
-                        break;
-                    case Direction.Right:
-                        sprite = spriteR;
-                        directionVector = new Vector2(1, 0);
-                        break;
-                    case Direction.Up:
-                        sprite = spriteB;
-                        directionVector = new Vector2(0, -1);
-                        break;
-                }
-                directionVector *= moveSpeed;
+                SetRandomDirection();
                 timeSinceMove = 0;
             }
-            location += directionVector * (float)gt.ElapsedGameTime.TotalSeconds;
+            location += directionVector * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+        }
+
+        void SetRandomDirection()
+        {
+            //First byte is vertical/horizontal, second is +/-, third is whether it will shoot instead
+            randomDir.GetBytes(random);
+            if (random[2] % 5 == 0)
+            {
+                directionVector = Vector2.Zero;
+                ShootProjectile();
+            }
+            else
+            {
+                int axis = random[0] % 2;
+                int magnitude = random[1] % 2;
+                if (axis == 0)
+                {
+                    directionVector.X = magnitude * 2 - 1;
+                    directionVector.Y = 0;
+
+                    direction = (Direction) magnitude + 2;
+                }
+                else
+                {
+                    directionVector.X = 0;
+                    directionVector.Y = magnitude * 2 - 1;
+
+                    direction = (Direction) magnitude;
+                }
+                sprite = sprites[(int) direction];
+            }
         }
 
         public void ShootProjectile()
         {
-            direction = Direction.Still;
+            paused = true;
+            //TODO: Boomerang logic
         }
 
         public void Draw(SpriteBatch sb)

@@ -12,20 +12,22 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Keese : IEnemy
     {
-        enum Direction { Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight};
+        KeeseSprite sprite;
 
-        private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        private KeeseSprite sprite;
-        private Vector2 location;
-        private byte[] random;
-        private float moveTime = 1;
-        private float moveSpeed = 100;
-        private float timeSinceMove = 0;
-        private Vector2 directionVector;
+        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
+        byte[] random;
+        
+        const float moveTime = 1;
+        const float moveSpeed = 100;
+        float timeSinceMove = 0;
+        
+        Vector2 location;
+        Vector2 directionVector;
+
         public Keese(Vector2 location)
         {
             this.location = location;
-            directionVector = new Vector2(-1, 0);
+            directionVector = Vector2.Zero;
             sprite = (KeeseSprite)EnemySpriteFactory.Instance.CreateKeeseSprite();
             random = new byte[2];
         }
@@ -44,15 +46,17 @@ namespace Sprint_0.Scripts.Enemy
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
             if (timeSinceMove >= moveTime)
             {
-                //Get a random direction to move in
-                randomDir.GetBytes(random);
-                directionVector.X = (random[0] % 3) - 1;
-                directionVector.Y = (random[1] % 3) - 1;
+                SetRandomDirection();
                 timeSinceMove = 0;
             }
             location += directionVector * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
         }
-
+        void SetRandomDirection()
+        {
+            randomDir.GetBytes(random);
+            directionVector.X = (random[0] % 3) - 1;
+            directionVector.Y = (random[1] % 3) - 1;
+        }
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);

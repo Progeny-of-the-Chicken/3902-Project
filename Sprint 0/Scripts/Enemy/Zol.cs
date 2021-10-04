@@ -11,68 +11,62 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class Zol : IEnemy
     {
-        private ZolSprite sprite;
-        enum Direction { Up, Down, Left, Right, Still };
-        private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        private byte[] random;
-        private float moveTime = 1;
-        private float moveSpeed = 100;
-        private float timeSinceMove = 0;
-        private float pauseTime = 1;
-        private float timePaused = 0;
-        private Vector2 location;
-        private Vector2 directionVector;
-        private Direction direction;
+        ISprite sprite;
+        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
+        byte[] random;
+        float moveTime = 1;
+        float moveSpeed = 100;
+        float timeSinceMove = 0;
+        float pauseTime = 1;
+        
+        Vector2 location;
+        Vector2 direction;
 
         public Zol(Vector2 location)
         {
             this.location = location;
-            directionVector = new Vector2(-1, 0);
-            random = new byte[1];
+            direction = new Vector2(-1, 0);
+            random = new byte[2];
             sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite();
         }
-        public void Update(GameTime gt)
+        public void Update(GameTime t)
         {
-            Move(gt);
-            sprite.Update(gt);
+            timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
+            if (timeSinceMove >= pauseTime)
+            {
+                Move(t);
+            }
+            sprite.Update(t);
+        }
+
+        public void Move(GameTime t)
+        {
+            if (timeSinceMove >= moveTime + pauseTime)
+            {
+                SetRandomDirection();
+                timeSinceMove = 0;
+            }
+
+            location += direction * moveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+        }
+        void SetRandomDirection()
+        {
+            //First byte is vertical/horizontal, second is +/-
+            randomDir.GetBytes(random);
+            if (random[0] % 2 == 0)
+            {
+                direction.X = (random[1] % 2) * 2 - 1;
+                direction.Y = 0;
+            }
+            else
+            {
+                direction.X = 0;
+                direction.Y = (random[1] % 2) * 2 - 1;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, location);
-        }
-        public void Move(GameTime gt)
-        {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            timePaused += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime + pauseTime)
-            {
-                //Get a random direction to move in
-                randomDir.GetBytes(random);
-                direction = (Direction)(random[0] % 4);
-
-                switch (direction)
-                {
-                    case Direction.Down:
-                        directionVector = new Vector2(0, 1);
-                        break;
-                    case Direction.Left:
-                        directionVector = new Vector2(-1, 0);
-                        break;
-                    case Direction.Right:
-                        directionVector = new Vector2(1, 0);
-                        break;
-                    case Direction.Up:
-                        directionVector = new Vector2(0, -1);
-                        break;
-                }
-                directionVector *= moveSpeed;
-                timeSinceMove = 0;
-                timePaused = 0;
-            }
-            if (timePaused >= pauseTime)
-            {
-                location += directionVector * (float)gt.ElapsedGameTime.TotalSeconds;
-            }
         }
     }
 }
