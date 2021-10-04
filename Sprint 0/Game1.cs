@@ -38,7 +38,8 @@ namespace Sprint_0
             //Just for sprint 2
             blockNum = 0;
             blockLocation = new Vector2(GetCenterScreen().X - 64, GetCenterScreen().Y + 32);
-            enemyStart = GetCenterScreen() * 1.5f;
+            enemyStart.X = GetCenterScreen().X * 1.5f;
+            enemyStart.Y = GetCenterScreen().Y * 0.5f;
         }
 
         protected override void Initialize()

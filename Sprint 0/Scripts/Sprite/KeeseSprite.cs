@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Sprite
         private Rectangle[] frames;
         private float scale;
 
-        private float framesPerSecond = 4;
+        private float framesPerSecond = 8;
         private float timeSinceFrame = 0;
         private int currentFrame = 0;
         public KeeseSprite(Rectangle[] frames, float scale, Texture2D spriteSheet)
