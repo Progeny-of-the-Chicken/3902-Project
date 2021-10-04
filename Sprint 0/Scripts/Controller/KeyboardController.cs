@@ -93,15 +93,13 @@ namespace Sprint_0.Scripts.Controller
 			}
 		}
 
+		// Movement commands need to be constantly executed if a key is held down
 		private void executeMovementCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
         {
-			// Make sure key has mapping
-			if (!mappings.ContainsKey(key))
+			if (mappings.ContainsKey(key))
             {
-				return;
+				mappings[key].Execute();
 			}
-
-			mappings[key].Execute();
 		}
 	}
 }
