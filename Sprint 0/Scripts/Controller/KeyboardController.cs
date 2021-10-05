@@ -42,10 +42,12 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.Y, new BlockForwardCycle(game));
 			this.RegisterCommand(controllerMappings, Keys.O, new PrevEnemy(game));
 			this.RegisterCommand(controllerMappings, Keys.P, new NextEnemy(game));
-			this.RegisterCommand(controllerMappings, Keys.D1, new CommandShootArrow(game));
-			this.RegisterCommand(controllerMappings, Keys.D2, new CommandThrowBoomerangLink(game));
-			this.RegisterCommand(controllerMappings, Keys.D3, new CommandCastFireSpell(game));
-			this.RegisterCommand(controllerMappings, Keys.D4, new CommandPlaceBomb(game));
+			this.RegisterCommand(controllerMappings, Keys.D1, new CommandShootBasicArrow(game));
+			this.RegisterCommand(controllerMappings, Keys.D2, new CommandShootArrow(game));
+			this.RegisterCommand(controllerMappings, Keys.D3, new CommandThrowBasicBoomerangLink(game));
+			this.RegisterCommand(controllerMappings, Keys.D4, new CommandThrowBoomerangLink(game));
+			this.RegisterCommand(controllerMappings, Keys.D5, new CommandCastFireSpell(game));
+			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.U, new CommandNextItem(game));
 			this.RegisterCommand(controllerMappings, Keys.I, new CommandLastItem(game));
 
