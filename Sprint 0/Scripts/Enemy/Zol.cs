@@ -15,19 +15,20 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         float moveTime = 1;
-        float moveSpeed = 100;
+        float moveSpeed;
         float timeSinceMove = 0;
         float pauseTime = 1;
         
         Vector2 location;
         Vector2 direction;
 
-        public Zol(Vector2 location)
+        public Zol(Vector2 location, float scale)
         {
             this.location = location;
+            moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite();
+            sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite(scale);
         }
         public void Update(GameTime t)
         {

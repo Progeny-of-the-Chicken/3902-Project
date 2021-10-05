@@ -51,54 +51,54 @@ namespace Sprint_0.Scripts.Enemy
 			bossSprites = content.Load<Texture2D>("bosses");
 		}
 
-		public ISprite CreateStalfosSprite()
+		public ISprite CreateStalfosSprite(float scale)
 		{
-			return new StalfosSprite(StalfosRectangle, 4, enemySprites);
+			return new StalfosSprite(StalfosRectangle, scale, enemySprites);
 		}
 
-		public ISprite CreateOldManSprite()
+		public ISprite CreateOldManSprite(float scale)
         {
-			return new OldManSprite(OldManRectangle, 4, npcSprites);
+			return new OldManSprite(OldManRectangle, scale, npcSprites);
         }
-		public ISprite CreateGelSprite()
+		public ISprite CreateGelSprite(float scale)
         {
-			return new GelSprite(GelFrames, 4, enemySprites);
+			return new GelSprite(GelFrames, scale, enemySprites);
         }
-		public ISprite CreateZolSprite()
+		public ISprite CreateZolSprite(float scale)
         {
-			return new ZolSprite(ZolFrames, 4, enemySprites);
+			return new ZolSprite(ZolFrames, scale, enemySprites);
         }
-		public ISprite CreateAquamentusMoveSprite()
+		public ISprite CreateAquamentusMoveSprite(float scale)
         {
-			return new AquamentusMoveSprite(AquamentusMoveFrames, 4, bossSprites);
+			return new AquamentusMoveSprite(AquamentusMoveFrames, scale, bossSprites);
         }
-		public ISprite CreateAquamentusShootSprite()
+		public ISprite CreateAquamentusShootSprite(float scale)
 		{
-			return new AquamentusShootSprite(AquamentusShootFrames, 4, bossSprites);
+			return new AquamentusShootSprite(AquamentusShootFrames, scale, bossSprites);
 		}
-		public ISprite CreateKeeseSprite()
+		public ISprite CreateKeeseSprite(float scale)
         {
-			return new KeeseSprite(KeeseFrames, 4, enemySprites);
+			return new KeeseSprite(KeeseFrames, scale, enemySprites);
         }
-		public ISprite CreateMagicProjectileSprite()
+		public ISprite CreateMagicProjectileSprite(float scale)
 		{
-			return new MagicProjectileSprite(MagicProjectileFrames, 3, bossSprites);
+			return new MagicProjectileSprite(MagicProjectileFrames, scale, bossSprites);
 		}
-		public ISprite CreateFrontGoriyaSprite()
+		public ISprite CreateFrontGoriyaSprite(float scale)
         {
-			return new GoriyaFrontSprite(GoriyaFrontFrame, 4, enemySprites);
+			return new GoriyaFrontSprite(GoriyaFrontFrame, scale, enemySprites);
         }
-		public ISprite CreateBackGoriyaSprite()
+		public ISprite CreateBackGoriyaSprite(float scale)
         {
-			return new GoriyaBackSprite(GoriyaBackFrame, 4, enemySprites);
+			return new GoriyaBackSprite(GoriyaBackFrame, scale, enemySprites);
         }
-		public ISprite CreateRightGoriyaSprite()
+		public ISprite CreateRightGoriyaSprite(float scale)
 		{
-			return new GoriyaRightSprite(GoriyaRightFrames, 4, enemySprites);
+			return new GoriyaRightSprite(GoriyaRightFrames, scale, enemySprites);
 		}
-		public ISprite CreateLeftGoriyaSprite()
+		public ISprite CreateLeftGoriyaSprite(float scale)
 		{
-			return new GoriyaLeftSprite(GoriyaRightFrames, 4, enemySprites);
+			return new GoriyaLeftSprite(GoriyaRightFrames, scale, enemySprites);
 		}
 	}
 }
