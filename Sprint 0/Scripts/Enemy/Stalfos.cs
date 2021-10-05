@@ -16,18 +16,19 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
         
         const float moveTime = 1;
-        const float moveSpeed = 100;
+        float moveSpeed;
         float timeSinceMove = 0;
         
         Vector2 location;
         Vector2 direction;
 
-        public Stalfos(Vector2 location)
+        public Stalfos(Vector2 location, float scale)
         {
             this.location = location;
+            moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = (StalfosSprite) EnemySpriteFactory.Instance.CreateStalfosSprite();
+            sprite = (StalfosSprite) EnemySpriteFactory.Instance.CreateStalfosSprite(scale);
         }
 
         public void Update(GameTime gt)

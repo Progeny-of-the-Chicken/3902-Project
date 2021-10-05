@@ -11,12 +11,12 @@ namespace Sprint_0.Scripts.Enemy
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
-        private int scale;
+        private float scale;
 
         private SpriteEffects effect = SpriteEffects.None;
         private float framesPerSecond = 4;
         private float timeSinceFrame = 0;
-        public StalfosSprite(Rectangle rectangle, int scale, Texture2D spriteSheet)
+        public StalfosSprite(Rectangle rectangle, float scale, Texture2D spriteSheet)
         {
             sourceRectangle = rectangle;
             this.scale = scale;
@@ -41,7 +41,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * scale, sourceRectangle.Height * scale);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale), (int)(sourceRectangle.Height * scale));
             spriteBatch.Draw(sprite, destinationRectangle, sourceRectangle, Color.White, 0, Vector2.Zero, effect, 0);
 
         }
