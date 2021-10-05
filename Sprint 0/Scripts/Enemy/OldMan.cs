@@ -11,10 +11,10 @@ namespace Sprint_0.Scripts.Enemy
     {
         private OldManSprite sprite;
         private Vector2 location;
-        public OldMan(Vector2 location)
+        public OldMan(Vector2 location, float scale)
         {
             this.location = location;
-            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite();
+            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite(scale);
         }
 
         public void Update(GameTime gt)

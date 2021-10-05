@@ -9,7 +9,7 @@ namespace Sprint_0.Scripts.Sprite
     {
         private Texture2D spritesheet;
         private List<Rectangle> frames;
-        private double animationDelaySeconds = 0.033;
+        private double animationDelaySeconds = 0.1;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;
         private double rotation = 0.0;

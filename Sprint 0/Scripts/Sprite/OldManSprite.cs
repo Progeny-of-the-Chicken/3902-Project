@@ -10,8 +10,8 @@ namespace Sprint_0.Scripts.Sprite
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
-        private int scale;
-        public OldManSprite(Rectangle sourceRectangle, int scale, Texture2D spriteSheet)
+        private float scale;
+        public OldManSprite(Rectangle sourceRectangle, float scale, Texture2D spriteSheet)
         {
             this.sourceRectangle = sourceRectangle;
             this.scale = scale;
@@ -23,7 +23,7 @@ namespace Sprint_0.Scripts.Sprite
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * scale, sourceRectangle.Height * scale);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale), (int)(sourceRectangle.Height * scale));
             spriteBatch.Draw(sprite, destinationRectangle, sourceRectangle, Color.White);
         }
     }

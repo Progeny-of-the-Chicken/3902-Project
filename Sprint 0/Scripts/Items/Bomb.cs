@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Items
         private double startTime = 0;
         private double fuseDurationSeconds = 2.0;
         private bool explode = false;
-        private double explodeDurationSeconds = 0.14;
+        private double explodeDurationSeconds = 0.3;
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {

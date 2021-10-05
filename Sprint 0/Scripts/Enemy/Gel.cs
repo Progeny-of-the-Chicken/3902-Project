@@ -18,18 +18,19 @@ namespace Sprint_0.Scripts.Enemy
 
         const float moveTime = 1;
         const float pauseTime = 1;
-        const float moveSpeed = 100;
+        float moveSpeed;
         float timeSinceMove = 0;
         
         Vector2 location;
         Vector2 direction;
 
-        public Gel(Vector2 location)
+        public Gel(Vector2 location, float scale)
         {
             this.location = location;
+            moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateGelSprite();
+            sprite = EnemySpriteFactory.Instance.CreateGelSprite(scale);
         }
 
         public void Update(GameTime t)

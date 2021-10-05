@@ -18,17 +18,18 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
         
         const float moveTime = 1;
-        const float moveSpeed = 100;
+        float moveSpeed;
         float timeSinceMove = 0;
         
         Vector2 location;
         Vector2 directionVector;
 
-        public Keese(Vector2 location)
+        public Keese(Vector2 location, float scale)
         {
             this.location = location;
+            moveSpeed = 25 * scale;
             directionVector = Vector2.Zero;
-            sprite = (KeeseSprite)EnemySpriteFactory.Instance.CreateKeeseSprite();
+            sprite = (KeeseSprite)EnemySpriteFactory.Instance.CreateKeeseSprite(scale);
             random = new byte[2];
         }
 
