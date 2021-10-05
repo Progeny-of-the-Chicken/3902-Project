@@ -1,13 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Sprint_0.Scripts.SpriteFactories;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using System;
 
 namespace Sprint_0
 {
     public enum Item { Sword, Arrow, Boomerang, Bomb, Fire, None };
     public enum Direction { Up, Down, Left, Right };
-    class Link : ILink
+
+    public class Link : ILink
     {
         ISprite LinkSprite;
         LinkStateMachine linkState;
@@ -18,41 +20,26 @@ namespace Sprint_0
         {
             linkState = new LinkStateMachine();
             linkHealth = linkStartingHealth;
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void Draw(SpriteBatch sb, Vector2 pos)
+        public void Draw(SpriteBatch sb, GameTime gt)
         {
-            LinkSprite.Draw(sb, pos);
+            LinkSprite.Draw(sb, linkState.Position);
         }
 
-        public void Update()
+        public void Update(GameTime gt)
         {
             linkState.Update();
+            if(!linkState.DoingSomething())
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            LinkSprite.Update(gt);
         }
 
-        public void GoLeft()
+        public void GoInDirection(Direction direction)
         {
-            linkState.GoLeft();
-        }
-
-        public void GoRight()
-        {
-            linkState.GoRight();
-        }
-
-        public void GoUp()
-        {
-            linkState.GoUp();
-        }
-
-        public void GoDown()
-        {
-            linkState.GoDown();
-        }
-
-        public void NotMoving()
-        {
-            linkState.NotMoving();
+            linkState.GoInDirection(direction);
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void TakeDamage()
@@ -61,168 +48,113 @@ namespace Sprint_0
             {
                 linkHealth--;
                 linkState.TakeDamage();
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             }
+        }
+
+        public bool IsMoving()
+        {
+            return linkState.IsMoving;
         }
         
         public void UseSword()
         {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseSword();
-            }
-        }
-        
-        public void UseArrow()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseArrow();
-            }
-        }
-        
-        public void UseBoomerang()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseBoomerang();
-            }
-        }
-        
-        public void UseBomb()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseBomb();
-            }
-        }
-        
-        public void UseFire()
-        {
-            if(linkState.WhichItemIsBeingUsed == Item.None)
-            {
-                linkState.UseFire();
-            }
+            linkState.UseSword();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void Update(GameTime gt)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
     public class LinkStateMachine
     {
         private Direction linksDirection;
-        private bool isMoving;
         private int damageCounter;
         private int usingItemCounter;
-        private Item itemBeingUsed;
+        private int movingCounter;
+        private int swordCounter;
         private Vector2 linksPosition;
-        private const int linkSpeed = 1;
+        private const int linkSpeed = 16;
 
         public LinkStateMachine()
         {
             linksDirection = Direction.Down;
-            isMoving = false;
             damageCounter = 0;
             usingItemCounter = 0;
-            itemBeingUsed = Item.None;
+            movingCounter = 0;
             linksPosition = new Vector2(200, 200); //generic starting position
         }
 
         public void Update()
         {
-            if (usingItemCounter == 0)
-                itemBeingUsed = Item.None;
             if (damageCounter > 0)
                 damageCounter--;
             if (usingItemCounter > 0)
                 usingItemCounter--;
+            if (movingCounter > 0)
+                movingCounter--;
+            if (swordCounter > 0)
+                swordCounter--;
         }
 
-        //TODO: once we test and thing works, we could probably make one generic method to handle and change in direction
-        public void GoLeft()
+
+        public void GoInDirection(Direction direction)
         {
-            linksDirection = Direction.Left;
-            isMoving = true;
-            linksPosition.X -= linkSpeed;
+            if(direction == linksDirection)
+            {
+                MoveInCurrentDirection();
+            }
+            else
+            {
+                SwitchToFaceNewDirection(direction);
+            }
         }
 
-        public void GoRight()
+        private void MoveInCurrentDirection()
         {
-            linksDirection = Direction.Right;
-            isMoving = true;
-            linksPosition.X += linkSpeed;
+            switch(linksDirection)
+            {
+                case Direction.Left:
+                    linksPosition.X -= linkSpeed;
+                    break;
+                case Direction.Right:
+                    linksPosition.X += linkSpeed;
+                    break;
+                case Direction.Up:
+                    linksPosition.Y -= linkSpeed;
+                    break;
+                case Direction.Down:
+                    linksPosition.Y += linkSpeed;
+                    break;
+            }
+            movingCounter = 30;
         }
 
-        public void GoUp()
+        private void SwitchToFaceNewDirection(Direction direction)
         {
-            linksDirection = Direction.Up;
-            isMoving = true;
-            linksPosition.Y -= linkSpeed;
-        }
-
-        public void GoDown()
-        {
-            linksDirection = Direction.Down;
-            isMoving = true;
-            linksPosition.Y += linkSpeed;
-        }
-
-        public void NotMoving()
-        {
-            isMoving = false;
+            linksDirection = direction;
         }
 
         public void TakeDamage()
         {
-            if (damageCounter == 0)
+            if (!DoingSomething())
                 damageCounter = 30;
         }
 
         public void UseSword()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Sword;
-                usingItemCounter = 30;
-            }
+        { 
+            if (!DoingSomething())
+                swordCounter = 30;
         }
 
-        public void UseArrow()
+        public void UseItem()
         {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Arrow;
+            if (!DoingSomething())
                 usingItemCounter = 30;
-            }
         }
 
-        public void UseBoomerang()
+        public bool DoingSomething()
         {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Boomerang;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseBomb()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Bomb;
-                usingItemCounter = 30;
-            }
-        }
-
-        public void UseFire()
-        {
-            if (itemBeingUsed != Item.None)
-            {
-                itemBeingUsed = Item.Fire;
-                usingItemCounter = 30;
-            }
+            return usingItemCounter != 0 || damageCounter != 0 || movingCounter != 0 || swordCounter != 0;
         }
 
         public Vector2 Position
@@ -245,7 +177,7 @@ namespace Sprint_0
         {
             get
             {
-                return isMoving;
+                return movingCounter > 0;
             }
         }
 
@@ -257,11 +189,19 @@ namespace Sprint_0
             }
         }
 
-        public Item WhichItemIsBeingUsed
+        public bool SwordIsBeingUsed
         {
             get
             {
-                return itemBeingUsed;
+                return swordCounter > 0;
+            }
+        }
+
+        public bool IsUsingItem
+        {
+            get
+            {
+                return usingItemCounter > 0;
             }
         }
     }

@@ -2,8 +2,7 @@
 
 namespace Sprint_0
 {
-    public interface ILink : ISprite
+    public interface ILink
     {
-        void Update();
     }
 }

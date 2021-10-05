@@ -1,8 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/DungeonTileset.png","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/DungeonTileset.xnb","TextureProcessor","Texture2DContent",74652,5826381,0.2999965
-"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/File.spritefont","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.0822604
-"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/OverworldTileset.png","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/OverworldTileset.xnb","TextureProcessor","Texture2DContent",24755,566717,0.0168151
-"C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/smb_mario_sheet.png","C:/Users/oshii/source/repos/Sprint 0/Sprint 0/Content/bin/DesktopGL/Content/smb_mario_sheet.xnb","TextureProcessor","Texture2DContent",6584,304645,0.0114751
-"/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/LoZItems.png","/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LoZItems.xnb","TextureProcessor","Texture2DContent",11059,36949,0.182857
-"/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/LoZSprites.png","/Users/lucasbutler/Projects/3902-Project/Sprint 0/Content/bin/DesktopGL/Content/LoZSprites.xnb","TextureProcessor","Texture2DContent",48224,485353,0.020505
-
