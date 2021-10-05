@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle UsingItemDownSource = new Rectangle(107, 11, 16, 16);
         private Rectangle UsingItemLeftSource = new Rectangle(124, 12, 16, 16);
         private Rectangle UsingItemUpSource = new Rectangle(141, 11, 16, 16);
-        private Direction direction;
+        private FacingDirection direction;
         private Rectangle frame;
         private Vector2 position;
         private const int standardWidthHeight = 48;
@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         public void Draw(SpriteBatch sb, Vector2 loc)
         {
-            if (direction == Direction.Left)
+            if (direction == FacingDirection.Left)
                 sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, 48, standardWidthHeight), frame, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
             else
                 sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, Color.White);
@@ -46,14 +46,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
     {
         switch (direction)
         {
-            case Direction.Up:
+            case FacingDirection.Up:
                 frame = UsingItemUpSource;
                 break;
-            case Direction.Down:
+            case FacingDirection.Down:
                 frame = UsingItemDownSource;
                 break;
-            case Direction.Left:
-            case Direction.Right:
+            case FacingDirection.Left:
+            case FacingDirection.Right:
                 frame = UsingItemLeftSource;
                 break;
             default:

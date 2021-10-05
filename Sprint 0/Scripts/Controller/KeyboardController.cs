@@ -78,16 +78,29 @@ namespace Sprint_0.Scripts.Controller
 
 		/*---------------- Helper Methods ---------------*/
 
+		private bool IsMovementKey(Keys key)
+        {
+			return key == Keys.W || key == Keys.A || key == Keys.S || key == Keys.D;
+
+		}
+
+		private bool MovementKeyIsBeingHeldDown(Keys key, KeyboardState previousKeys)
+        {
+			if (IsMovementKey(key))
+            {
+				if(previousKeys.IsKeyDown(key))
+                {
+					return true;
+                }
+            }
+			return false;
+        }
+
 		private void executeCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
         {
-			// Make sure key has mapping
-			if (!mappings.ContainsKey(key))
-				return;
-
-
-			if (previousKeys.IsKeyUp(key))
+			if (mappings.ContainsKey(key) && (previousKeys.IsKeyUp(key) || MovementKeyIsBeingHeldDown(key, previousKeys)))
 			{
-				mappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+				mappings[key].Execute();
 			}
 		}
 	}

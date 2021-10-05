@@ -17,13 +17,12 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle backwardSpritesheetLocation_1 = new Rectangle(70, 11, 15, 16);
         private Rectangle backwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
 
-        private Direction direction;
+        private FacingDirection direction;
         private LinkStateMachine state;
         int x;
         int y;
 
-        private int stepSpeed = 10; // Lower is faster
-        private int stepsPerSec = 3;
+        private int stepSpeed = 5; // Lower is faster
         private int frameNum = 0;
         private int maxFrames = 30;
         private Rectangle frame1;
@@ -83,7 +82,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             switch (direction)
             {
-                case Direction.Left:
+                case FacingDirection.Left:
                     int offsetX = x;
 
                     sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
@@ -98,10 +97,10 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             switch (direction)
             {
-                case Direction.Left:
+                case FacingDirection.Left:
                     sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     int offsetX = x + pixel;
 
                     sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
@@ -116,19 +115,19 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             switch (direction)
             {
-                case Direction.Up:
+                case FacingDirection.Up:
                     frame1 = backwardSpritesheetLocation_1;
                     frame2 = backwardSpritesheetLocation_2;
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     frame1 = forwardSpritesheetLocation_1;
                     frame2 = forwardSpritesheetLocation_2;
                     break;
-                case Direction.Left:
+                case FacingDirection.Left:
                     frame1 = rightSpritesheetLocation_1;
                     frame2 = rightSpritesheetLocation_2;
                     break;
-                case Direction.Right:
+                case FacingDirection.Right:
                     frame1 = rightSpritesheetLocation_1;
                     frame2 = rightSpritesheetLocation_2;
                     break;

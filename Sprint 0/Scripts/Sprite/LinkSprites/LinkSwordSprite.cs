@@ -14,7 +14,7 @@ namespace Sprint_0.Scripts
         private Rectangle linkSwordFrame3;
         private Rectangle linkSwordFrame4;
         private Rectangle currentFrame;
-        private Direction direction;
+        private FacingDirection direction;
         private Vector2 position;
         private int animateSwordCounter;
 
@@ -32,16 +32,16 @@ namespace Sprint_0.Scripts
         {
             switch (direction)
             {
-                case Direction.Left:
+                case FacingDirection.Left:
                     destinationPos = new Rectangle((int)position.X - currentFrame.Width * 3 + 48, (int)position.Y, currentFrame.Width * 3, 48);
                     break;
-                case Direction.Right:
+                case FacingDirection.Right:
                     destinationPos = new Rectangle((int)position.X, (int)position.Y, currentFrame.Width * 3, 48);
                     break;
-                case Direction.Up:
+                case FacingDirection.Up:
                     destinationPos = new Rectangle((int)position.X, (int)position.Y - currentFrame.Height * 3 + 48, 48, currentFrame.Height * 3);
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     destinationPos = new Rectangle((int)position.X, (int)position.Y, 48, currentFrame.Height * 3);
                     break;
             }
@@ -51,20 +51,20 @@ namespace Sprint_0.Scripts
         {
             switch (direction)
             {
-                case Direction.Left:
-                case Direction.Right:
+                case FacingDirection.Left:
+                case FacingDirection.Right:
                     linkSwordFrame1 = new Rectangle(0, 77, 16, 16);
                     linkSwordFrame2 = new Rectangle(18, 77, 27, 16);
                     linkSwordFrame3 = new Rectangle(46, 77, 24, 16);
                     linkSwordFrame4 = new Rectangle(69, 77, 16, 16);
                     break;
-                case Direction.Up:
+                case FacingDirection.Up:
                     linkSwordFrame1 = new Rectangle(1, 108, 16, 18);
                     linkSwordFrame2 = new Rectangle(18, 97, 16, 29);
                     linkSwordFrame3 = new Rectangle(37, 97, 16, 29);
                     linkSwordFrame4 = new Rectangle(54, 108, 16, 18);
                     break;
-                case Direction.Down:
+                case FacingDirection.Down:
                     linkSwordFrame1 = new Rectangle(1, 47, 16, 18);
                     linkSwordFrame2 = new Rectangle(18, 47, 16, 29);
                     linkSwordFrame3 = new Rectangle(35, 47, 16, 29);
@@ -94,7 +94,7 @@ namespace Sprint_0.Scripts
 
         public void Draw(SpriteBatch sb, Vector2 loc)
         {
-            if (direction == Direction.Left)
+            if (direction == FacingDirection.Left)
             
                 sb.Draw(sheet, destinationPos, currentFrame, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
             else
