@@ -143,7 +143,7 @@ namespace Sprint_0
             else
             {
                 SwitchToFaceNewDirection(direction);
-                turningCounter = 10;
+                turningCounter = 4;
             }
         }
 
