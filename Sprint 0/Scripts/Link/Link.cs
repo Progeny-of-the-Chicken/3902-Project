@@ -36,7 +36,7 @@ namespace Sprint_0
 
         public void GoInDirection(FacingDirection direction)
         {
-            if(!linkState.IsMoving)
+            if(!linkState.IsMoving && !linkState.IsTurning)
             {
                 linkState.GoInDirection(direction);
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
@@ -102,6 +102,7 @@ namespace Sprint_0
         private int usingItemCounter;
         private int movingCounter;
         private int swordCounter;
+        private int turningCounter;
         private Vector2 linksPosition;
         private const int linkSpeed = 1;
 
@@ -111,6 +112,7 @@ namespace Sprint_0
             damageCounter = 0;
             usingItemCounter = 0;
             movingCounter = 0;
+            turningCounter = 0;
             linksPosition = new Vector2(200, 200); //generic starting position
         }
 
@@ -124,6 +126,8 @@ namespace Sprint_0
                 movingCounter--;
             if (swordCounter > 0)
                 swordCounter--;
+            if (turningCounter > 0)
+                turningCounter--;
             if (IsMoving)
                 MoveInCurrentDirection();
         }
@@ -139,6 +143,7 @@ namespace Sprint_0
             else
             {
                 SwitchToFaceNewDirection(direction);
+                turningCounter = 10;
             }
         }
 
@@ -260,6 +265,14 @@ namespace Sprint_0
             get
             {
                 return usingItemCounter > 0;
+            }
+        }
+
+        public bool IsTurning
+        {
+            get
+            {
+                return turningCounter > 0;
             }
         }
     }

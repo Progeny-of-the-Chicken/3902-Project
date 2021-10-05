@@ -9,7 +9,6 @@ namespace Sprint_0.Scripts.Controller
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private Dictionary<Keys, ICommand> linkControllerMappings;
-		private int debounceCounter;
 
 		private Game1 game;
 
@@ -23,8 +22,6 @@ namespace Sprint_0.Scripts.Controller
 
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			linkControllerMappings = new Dictionary<Keys, ICommand>();
-
-			debounceCounter = 0;
 
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
@@ -76,8 +73,6 @@ namespace Sprint_0.Scripts.Controller
 			}
 
 			previousKeys = keyboardState;
-			debounceCounter--;
-			debounceCounter %= 29;
 		}
 
 
@@ -91,11 +86,10 @@ namespace Sprint_0.Scripts.Controller
 
 		private bool MovementKeyIsBeingHeldDown(Keys key, KeyboardState previousKeys)
         {
-			if (IsMovementKey(key) && debounceCounter == 0)
+			if (IsMovementKey(key))
             {
 				if(previousKeys.IsKeyDown(key))
                 {
-					debounceCounter = 29;
 					return true;
                 }
             }
