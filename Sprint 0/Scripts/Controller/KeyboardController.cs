@@ -9,6 +9,7 @@ namespace Sprint_0.Scripts.Controller
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private Dictionary<Keys, ICommand> linkControllerMappings;
+		private int debounceCounter;
 
 		private Game1 game;
 
@@ -22,6 +23,8 @@ namespace Sprint_0.Scripts.Controller
 
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			linkControllerMappings = new Dictionary<Keys, ICommand>();
+
+			debounceCounter = 0;
 
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
@@ -71,21 +74,37 @@ namespace Sprint_0.Scripts.Controller
 			}
 
 			previousKeys = keyboardState;
+			debounceCounter--;
+			debounceCounter %= 29;
 		}
 
 
 		/*---------------- Helper Methods ---------------*/
 
+		private bool IsMovementKey(Keys key)
+        {
+			return key == Keys.W || key == Keys.A || key == Keys.S || key == Keys.D;
+
+		}
+
+		private bool MovementKeyIsBeingHeldDown(Keys key, KeyboardState previousKeys)
+        {
+			if (IsMovementKey(key) && debounceCounter == 0)
+            {
+				if(previousKeys.IsKeyDown(key))
+                {
+					debounceCounter = 29;
+					return true;
+                }
+            }
+			return false;
+        }
+
 		private void executeCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
         {
-			// Make sure key has mapping
-			if (!mappings.ContainsKey(key))
-				return;
-
-
-			if (previousKeys.IsKeyUp(key))
+			if (mappings.ContainsKey(key) && (previousKeys.IsKeyUp(key) || MovementKeyIsBeingHeldDown(key, previousKeys)))
 			{
-				mappings[key].Execute(); //Currently throws errors if you press buttons not in the dictionary
+				mappings[key].Execute();
 			}
 		}
 	}

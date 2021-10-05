@@ -36,8 +36,11 @@ namespace Sprint_0
 
         public void GoInDirection(FacingDirection direction)
         {
-            linkState.GoInDirection(direction);
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            if(!linkState.IsMoving)
+            {
+                linkState.GoInDirection(direction);
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            }
         }
 
         public void TakeDamage()
@@ -128,7 +131,7 @@ namespace Sprint_0
 
         public void GoInDirection(FacingDirection direction)
         {
-            if(direction == linksDirection)
+            if (direction == linksDirection)
             {
                 MoveInCurrentDirection();
                 movingCounter = 30;
