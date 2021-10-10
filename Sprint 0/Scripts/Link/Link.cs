@@ -11,13 +11,10 @@ namespace Sprint_0
     {
         ISprite LinkSprite;
         LinkStateMachine linkState;
-        private int linkHealth;
-        private const int linkStartingHealth = 3;
 
         public Link()
         {
             linkState = new LinkStateMachine();
-            linkHealth = linkStartingHealth;
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
@@ -29,35 +26,33 @@ namespace Sprint_0
         public void Update(GameTime gt)
         {
             linkState.Update();
-            if(!linkState.DoingSomething())
+            if (!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             LinkSprite.Update(gt);
         }
 
         public void GoInDirection(FacingDirection direction)
         {
-            if(!linkState.IsMoving && !linkState.IsTurning)
-            {
-                linkState.GoInDirection(direction);
-                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            }
+            linkState.GoInDirection(direction);
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void TakeDamage()
         {
-            if (!linkState.IsTakingDamage)
-            {
-                linkHealth--;
-                linkState.TakeDamage();
-                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            }
+            linkState.TakeDamage();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
+        public void BounceBackInDirection(FacingDirection direction)
+        {
+            linkState.BounceBackInDirection(direction);
         }
 
         public bool IsMoving()
         {
             return linkState.IsMoving;
         }
-        
+
         public void UseSword()
         {
             linkState.UseSword();
@@ -93,6 +88,22 @@ namespace Sprint_0
                 return linkState.ItemSpawnPosition;
             }
         }
+
+        public bool IsAlive
+        {
+            get
+            {
+                return linkState.IsAlive;
+            }
+        }
+
+        public bool DeathAnimation
+        {
+            get
+            {
+                return linkState.DeathAnimation;
+            }
+        }
     }
 
     public class LinkStateMachine
@@ -105,15 +116,15 @@ namespace Sprint_0
         private int turningCounter;
         private Vector2 linksPosition;
         private const int linkSpeed = 1;
+        private int linkHealth;
+        private const int linkStartingHealth = 6;
 
         public LinkStateMachine()
         {
             linksDirection = FacingDirection.Down;
-            damageCounter = 0;
-            usingItemCounter = 0;
-            movingCounter = 0;
-            turningCounter = 0;
+            ResetCounters();
             linksPosition = new Vector2(200, 200); //generic starting position
+            linkHealth = linkStartingHealth;
         }
 
         public void Update()
@@ -132,24 +143,35 @@ namespace Sprint_0
                 MoveInCurrentDirection();
         }
 
+        public void ResetCounters()
+        {
+            damageCounter = 0;
+            usingItemCounter = 0;
+            movingCounter = 0;
+            turningCounter = 0;
+
+        }
 
         public void GoInDirection(FacingDirection direction)
         {
-            if (direction == linksDirection)
+            if (!IsMoving && !IsTurning)
             {
-                MoveInCurrentDirection();
-                movingCounter = 30;
-            }
-            else
-            {
-                SwitchToFaceNewDirection(direction);
-                turningCounter = 4;
+                if (direction == linksDirection)
+                {
+                    MoveInCurrentDirection();
+                    movingCounter = 30;
+                }
+                else
+                {
+                    SwitchToFaceNewDirection(direction);
+                    turningCounter = 10;
+                }
             }
         }
 
         private void MoveInCurrentDirection()
         {
-            switch(linksDirection)
+            switch (linksDirection)
             {
                 case FacingDirection.Left:
                     linksPosition.X -= linkSpeed;
@@ -173,12 +195,35 @@ namespace Sprint_0
 
         public void TakeDamage()
         {
-            if (!DoingSomething())
+            if (!IsTakingDamage)
+            {
+                ResetCounters();
                 damageCounter = 30;
+                linkHealth--;
+            }
+        }
+
+        public void BounceBackInDirection(FacingDirection direction)
+        {
+            switch (direction)
+            {
+                case FacingDirection.Left:
+                    linksPosition.X += linkSpeed * 30 * 3;
+                    break;
+                case FacingDirection.Right:
+                    linksPosition.X -= linkSpeed * 30 * 3;
+                    break;
+                case FacingDirection.Up:
+                    linksPosition.Y -= linkSpeed * 30 * 3;
+                    break;
+                case FacingDirection.Down:
+                    linksPosition.Y += linkSpeed * 30 * 3;
+                    break;
+            }
         }
 
         public void UseSword()
-        { 
+        {
             if (!DoingSomething())
                 swordCounter = 30;
         }
@@ -273,6 +318,22 @@ namespace Sprint_0
             get
             {
                 return turningCounter > 0;
+            }
+        }
+
+        public bool IsAlive
+        {
+            get
+            {
+                return linkHealth > 0;
+            }
+        }
+
+        public bool DeathAnimation
+        {
+            get
+            {
+                return linkHealth == 0 && damageCounter > 0;
             }
         }
     }
