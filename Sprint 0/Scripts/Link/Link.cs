@@ -29,10 +29,6 @@ namespace Sprint_0
             if (!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             LinkSprite.Update(gt);
-            if (linkState.Position.X > 400)
-                ResetPosition(new Vector2(20, 20));
-            if (linkState.Position.Y > 400)
-                BounceBackInDirection(FacingDirection.Up);
         }
 
         public void GoInDirection(FacingDirection direction)
