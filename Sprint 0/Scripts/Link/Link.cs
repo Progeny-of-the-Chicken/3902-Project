@@ -29,6 +29,10 @@ namespace Sprint_0
             if (!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             LinkSprite.Update(gt);
+            if (linkState.Position.X > 400)
+                ResetPosition(new Vector2(20, 20));
+            if (linkState.Position.Y > 400)
+                BounceBackInDirection(FacingDirection.Up);
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -66,6 +70,11 @@ namespace Sprint_0
         {
             linkState.UseItem();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
+        public void ResetPosition(Vector2 newPosition)
+        {
+            linkState.ResetPosition(newPosition);
         }
 
         public FacingDirection FacingDirection
@@ -152,7 +161,6 @@ namespace Sprint_0
             usingItemCounter = 0;
             movingCounter = 0;
             turningCounter = 0;
-
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -167,6 +175,11 @@ namespace Sprint_0
                 SwitchToFaceNewDirection(direction);
                 turningCounter = 10;
             }
+        }
+
+        public void ResetPosition(Vector2 newPosition)
+        {
+            linksPosition = newPosition;
         }
 
         private void MoveInCurrentDirection()
@@ -327,7 +340,7 @@ namespace Sprint_0
         {
             get
             {
-                return linkHealth > 0;
+                return linkHealth > 0 || damageCounter > 0;
             }
         }
 

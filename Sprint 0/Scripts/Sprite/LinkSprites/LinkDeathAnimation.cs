@@ -64,13 +64,16 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             switch (direction)
             {
                 case FacingDirection.Down:
-                    newDirection = FacingDirection.Left;
-                    break;
-                case FacingDirection.Left:
                     newDirection = FacingDirection.Right;
                     break;
-                case FacingDirection.Right:
+                case FacingDirection.Left:
                     newDirection = FacingDirection.Down;
+                    break;
+                case FacingDirection.Right:
+                    newDirection = FacingDirection.Up;
+                    break;
+                case FacingDirection.Up:
+                    newDirection = FacingDirection.Left;
                     break;
                 default:
                     break;

@@ -77,7 +77,8 @@ namespace Sprint_0
             itemSet.Update(gameTime);
             enemy.Update(gameTime);
             link.Update(gameTime);
-            if(!link.IsAlive)
+            if (!link.IsAlive)
+                this.Quit();
 
         }
 
