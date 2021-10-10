@@ -50,6 +50,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.U, new CommandNextItem(game));
 			this.RegisterCommand(controllerMappings, Keys.I, new CommandLastItem(game));
+			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));

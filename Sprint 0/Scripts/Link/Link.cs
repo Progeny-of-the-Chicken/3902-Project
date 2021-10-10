@@ -33,8 +33,11 @@ namespace Sprint_0
 
         public void GoInDirection(FacingDirection direction)
         {
-            linkState.GoInDirection(direction);
-            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            if (!linkState.IsMoving && !linkState.IsTurning)
+            {
+                linkState.GoInDirection(direction);
+                LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            }
         }
 
         public void TakeDamage()
@@ -154,18 +157,15 @@ namespace Sprint_0
 
         public void GoInDirection(FacingDirection direction)
         {
-            if (!IsMoving && !IsTurning)
+            if (direction == linksDirection)
             {
-                if (direction == linksDirection)
-                {
-                    MoveInCurrentDirection();
-                    movingCounter = 30;
-                }
-                else
-                {
-                    SwitchToFaceNewDirection(direction);
-                    turningCounter = 10;
-                }
+                MoveInCurrentDirection();
+                movingCounter = 30;
+            }
+            else
+            {
+                SwitchToFaceNewDirection(direction);
+                turningCounter = 10;
             }
         }
 
@@ -200,6 +200,8 @@ namespace Sprint_0
                 ResetCounters();
                 damageCounter = 30;
                 linkHealth--;
+                if (linkHealth == 0)
+                    damageCounter += 90;
             }
         }
 
