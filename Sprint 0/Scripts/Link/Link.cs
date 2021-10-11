@@ -56,6 +56,11 @@ namespace Sprint_0
             return linkState.IsMoving;
         }
 
+        public void StopMoving()
+        {
+            linkState.StopMoving();
+        }
+
         public void UseSword()
         {
             linkState.UseSword();
@@ -231,6 +236,11 @@ namespace Sprint_0
                     linksPosition.Y += linkSpeed * 30 * 3;
                     break;
             }
+        }
+
+        public void StopMoving()
+        {
+            movingCounter = 0;
         }
 
         public void UseSword()
