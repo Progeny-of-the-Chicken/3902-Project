@@ -77,6 +77,9 @@ namespace Sprint_0
             itemSet.Update(gameTime);
             enemy.Update(gameTime);
             link.Update(gameTime);
+            if (!link.IsAlive)
+                this.Quit();
+
         }
 
         protected override void Draw(GameTime gameTime)

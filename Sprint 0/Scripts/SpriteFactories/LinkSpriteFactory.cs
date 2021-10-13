@@ -2,6 +2,7 @@
 using Sprint_0.Scripts.Sprite;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Sprint_0.Scripts.SpriteFactories
 {
@@ -35,7 +36,11 @@ namespace Sprint_0.Scripts.SpriteFactories
 
 		public ISprite GetSpriteForState(LinkStateMachine linkState)
         {
-            if(linkState.IsMoving)
+            if (linkState.DeathAnimation)
+            {
+				Console.WriteLine("Link is dead lmao");
+				return new LinkDeathSprite(linkState);
+			}if(linkState.IsMoving)
 				return new LinkMovingSprite(linkState);
 			if (linkState.SwordIsBeingUsed)
 				return new LinkSwordSprite(linkState);
@@ -43,6 +48,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 				return new LinkTakingDamageSprite(linkState);
 			if (linkState.IsUsingItem)
 				return new LinkUsingItemSprite(linkState);
+			
 			else
 				return new LinkStandingSprite(linkState);
 		}
