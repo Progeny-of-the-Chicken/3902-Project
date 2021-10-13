@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite
 {
-    public class NonAnimatedTreasureSprite : ISprite
+    public class NonAnimatedItemSprite : ISprite
     {
         private Texture2D spritesheet;
         private Rectangle frame;
         private int scale = 2;
 
-        public NonAnimatedTreasureSprite(Texture2D textures, Rectangle sourceRec)
+        public NonAnimatedItemSprite(Texture2D textures, Rectangle sourceRec)
         {
             spritesheet = textures;
             frame = sourceRec;

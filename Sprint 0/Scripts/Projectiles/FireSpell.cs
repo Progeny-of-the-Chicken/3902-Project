@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles
 {
-    public class FireSpell : IItem
+    public class FireSpell : IProjectile
     {
         private ISprite sprite;
         private Vector2 directionVector;
@@ -39,7 +39,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = ItemSpriteFactory.Instance.CreateFireSpellSprite();
+            sprite = ProjectileSpriteFactory.Instance.CreateFireSpellSprite();
         }
 
         public void Update(GameTime gt)

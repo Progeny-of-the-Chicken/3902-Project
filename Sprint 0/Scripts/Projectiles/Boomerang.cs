@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles
 {
-    public class Boomerang : IItem
+    public class Boomerang : IProjectile
     {
         private ISprite sprite;
         private Vector2 directionVector;
@@ -43,7 +43,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = ItemSpriteFactory.Instance.CreateBoomerangSprite(magical);
+            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
         }
 
         public void Update(GameTime gt)

@@ -4,16 +4,16 @@ using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
-    public class AnimatedTreasure : IItem
+    public class AnimatedItem : IItem
     {
         private ISprite sprite;
-        private Vector2 location;
+        private Vector2 pos;
         private bool delete = false;
 
-        public AnimatedTreasure(ISprite treasureType, Vector2 spawnLoc)
+        public AnimatedItem(ISprite itemSprite, Vector2 spawnLoc)
         {
-            sprite = treasureType;
-            location = spawnLoc;
+            sprite = itemSprite;
+            pos = spawnLoc;
         }
 
         public void Update(GameTime gt)
@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Items
 
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, location);
+            sprite.Draw(sb, pos);
         }
 
         public bool CheckDelete()

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Sprite;
-using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -14,7 +14,7 @@ namespace Sprint_0.Scripts.Enemy
         ISprite moveSprite;
         ISprite shootSprite;
         
-        List<IItem> projectiles;
+        List<IProjectile> projectiles;
         
         Vector2 location;
         Vector2 direction = new Vector2(-1, 0);
@@ -37,7 +37,7 @@ namespace Sprint_0.Scripts.Enemy
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(scale);
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(scale);
             sprite = moveSprite;
-            projectiles = ItemFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
+            projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
         }
         public void Update(GameTime t)
         {
@@ -53,7 +53,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 sprite = moveSprite;
             }
-            foreach (IItem projectile in projectiles)
+            foreach (IProjectile projectile in projectiles)
             {
                 projectile.Update(t);
             }
@@ -71,13 +71,13 @@ namespace Sprint_0.Scripts.Enemy
         void ShootProjectile()
         {
             timeSinceFire = 0;
-            projectiles = ItemFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
+            projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
             sprite = shootSprite;
         }
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
-            foreach (IItem projectile in projectiles)
+            foreach (IProjectile projectile in projectiles)
             {
                 projectile.Draw(sb);
             }

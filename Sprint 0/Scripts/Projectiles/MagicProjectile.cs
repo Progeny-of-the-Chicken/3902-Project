@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Enemy;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles
 {
-    public class MagicProjectile : IItem
+    public class MagicProjectile : IProjectile
     {
         private ISprite sprite;
         private Vector2 directionVector = new Vector2(1, 1);

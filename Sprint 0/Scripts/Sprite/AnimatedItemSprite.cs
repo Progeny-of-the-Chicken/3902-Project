@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite
 {
-    public class AnimatedTreasureSprite : ISprite
+    public class AnimatedItemSprite : ISprite
     {
         private Texture2D spritesheet;
         private List<Rectangle> frames;
@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Sprite
         private int frameIndex = 0;
         private int scale = 2;
 
-        public AnimatedTreasureSprite(Texture2D textures, List<Rectangle> sourceRecs)
+        public AnimatedItemSprite(Texture2D textures, List<Rectangle> sourceRecs)
         {
             spritesheet = textures;
             frames = sourceRecs;

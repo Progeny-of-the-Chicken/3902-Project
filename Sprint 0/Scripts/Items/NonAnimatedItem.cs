@@ -4,17 +4,16 @@ using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Items
 {
-    public class NonAnimatedTreasure : IItem
+    public class NonAnimatedItem : IItem
     {
         private ISprite sprite;
         private Vector2 pos;
         private bool delete = false;
 
-        public NonAnimatedTreasure(ISprite treasureSprite, Vector2 spawnLoc)
+        public NonAnimatedItem(ISprite itemSprite, Vector2 spawnLoc)
         {
-            sprite = treasureSprite;
+            sprite = itemSprite;
             pos = spawnLoc;
-            delete = false;
         }
 
         public void Update(GameTime gt)
