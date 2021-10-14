@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class WestWall : ITerrain
+public class NorthBombedSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(814, 43, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(946, 10, 32, 32);
     Rectangle destination;
 
-    public WestWall(Vector2 screenLocation)
+    public NorthBombedSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
     }
