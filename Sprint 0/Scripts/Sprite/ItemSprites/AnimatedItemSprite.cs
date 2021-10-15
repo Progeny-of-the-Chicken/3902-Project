@@ -2,26 +2,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite
+namespace Sprint_0.Scripts.Sprite.ItemSprites
 {
-    public class BombExplodeSprite : ISprite
+    public class AnimatedItemSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = new List<Rectangle>
-        {
-            new Rectangle(162, 185, 16, 16),
-            new Rectangle(179, 185, 16, 16),
-            new Rectangle(196, 185, 16, 16),
-            new Rectangle(0, 0, 0, 0)
-        };
+        private List<Rectangle> frames;
         private double animationDelaySeconds = 0.1;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;
         private int scale = 2;
 
-        public BombExplodeSprite(Texture2D textures)
+        public AnimatedItemSprite(Texture2D textures, List<Rectangle> sourceRecs)
         {
             spritesheet = textures;
+            frames = sourceRecs;
         }
 
         public void Update(GameTime gt)

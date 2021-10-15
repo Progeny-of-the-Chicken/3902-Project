@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite
+namespace Sprint_0.Scripts.Sprite.ItemSprites
 {
-    public class BombSprite : ISprite
+    public class NonAnimatedItemSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = new Rectangle(145, 185, 16, 16);
+        private Rectangle frame;
         private int scale = 2;
 
-        public BombSprite(Texture2D textures)
+        public NonAnimatedItemSprite(Texture2D textures, Rectangle sourceRec)
         {
             spritesheet = textures;
+            frame = sourceRec;
         }
 
         public void Update(GameTime gt)

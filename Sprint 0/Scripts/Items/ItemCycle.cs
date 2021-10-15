@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Items
             cycle.Add(ItemFactory.Instance.CreateHeartContainer(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateFairy(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateClock(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateBasicKey(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBasicMapItem(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateBoomerangItem(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateBombItem(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateBowItem(spawnLoc));

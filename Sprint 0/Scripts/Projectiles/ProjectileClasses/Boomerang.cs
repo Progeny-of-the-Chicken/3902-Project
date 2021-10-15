@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Projectiles
+namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Boomerang : IProjectile
     {

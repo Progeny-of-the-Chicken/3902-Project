@@ -2,24 +2,24 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Items.ItemClasses
 {
-    public class NonAnimatedItem : IItem
+    public class BoomerangItem : IItem
     {
         private ISprite sprite;
         private Vector2 pos;
         private bool delete = false;
 
-        public NonAnimatedItem(ISprite itemSprite, Vector2 spawnLoc)
+        public BoomerangItem(Vector2 spawnLoc)
         {
-            sprite = itemSprite;
+            sprite = ItemSpriteFactory.Instance.CreateBoomerangItemSprite();
             pos = spawnLoc;
         }
 
         public void Update(GameTime gt)
         {
-            // No animation
             sprite.Update(gt);
+            // Deletion criteria implemented by collision logic
         }
 
         public void Draw(SpriteBatch sb)

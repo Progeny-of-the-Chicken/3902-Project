@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Items.ItemClasses;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -21,72 +21,72 @@ namespace Sprint_0.Scripts.Items
 
         public IItem CreateSmallHeartItem(Vector2 location)
         {
-            return new AnimatedItem(ItemSpriteFactory.Instance.CreateSmallHeartItemSprite(), location);
+            return new SmallHeartItem(location);
         }
 
         public IItem CreateHeartContainer(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateHeartContainerSprite(), location);
+            return new HeartContainer(location);
         }
 
         public IItem CreateFairy(Vector2 location)
         {
-            return new AnimatedItem(ItemSpriteFactory.Instance.CreateFairySprite(), location);
+            return new Fairy(location);
         }
 
         public IItem CreateClock(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateClockSprite(), location);
+            return new Clock(location);
         }
 
         public IItem CreateBlueRuby(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBlueRubySprite(), location);
+            return new BlueRuby(location);
         }
 
         public IItem CreateYellowRuby(Vector2 location)
         {
-            return new AnimatedItem(ItemSpriteFactory.Instance.CreateYellowRubySprite(), location);
+            return new YellowRuby(location);
         }
 
-        public IItem CreateBasicMap(Vector2 location)
+        public IItem CreateBasicMapItem(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBasicMapSprite(), location);
+            return new BasicMapItem(location);
         }
 
         public IItem CreateBoomerangItem(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBoomerangItemSprite(), location);
+            return new BoomerangItem(location);
         }
 
         public IItem CreateBombItem(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBombItemSprite(), location);
+            return new BombItem(location);
         }
 
         public IItem CreateBowItem(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBowItemSprite(), location);
+            return new BowItem(location);
         }
 
         public IItem CreateBasicKey(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateBasicKeySprite(), location);
+            return new BasicKey(location);
         }
 
         public IItem CreateMagicKey(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateMagicKeySprite(), location);
+            return new MagicKey(location);
         }
 
         public IItem CreateCompass(Vector2 location)
         {
-            return new NonAnimatedItem(ItemSpriteFactory.Instance.CreateCompassSprite(), location);
+            return new Compass(location);
         }
 
         public IItem CreateTriforcePiece(Vector2 location)
         {
-            return new AnimatedItem(ItemSpriteFactory.Instance.CreateTriforcePieceSprite(), location);
+            return new TriforcePiece(location);
         }
     }
 }

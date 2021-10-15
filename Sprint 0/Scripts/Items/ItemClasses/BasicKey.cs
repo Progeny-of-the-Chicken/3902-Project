@@ -2,24 +2,24 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Items.ItemClasses
 {
-    public class AnimatedItem : IItem
+    public class BasicKey : IItem
     {
         private ISprite sprite;
         private Vector2 pos;
         private bool delete = false;
 
-        public AnimatedItem(ISprite itemSprite, Vector2 spawnLoc)
+        public BasicKey(Vector2 spawnLoc)
         {
-            sprite = itemSprite;
+            sprite = ItemSpriteFactory.Instance.CreateBasicKeySprite();
             pos = spawnLoc;
         }
 
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
-            // No deletion criteria
+            // Deletion criteria implemented by collision logic
         }
 
         public void Draw(SpriteBatch sb)

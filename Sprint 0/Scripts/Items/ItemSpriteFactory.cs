@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Sprite.ItemSprites;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -71,7 +72,7 @@ namespace Sprint_0.Scripts.Items
             return new AnimatedItemSprite(spritesheet, frames);
         }
 
-        public ISprite CreateBasicMapSprite()
+        public ISprite CreateBasicMapItemSprite()
         {
             Rectangle frame = new Rectangle(88, 0, 8, 16);
             return new NonAnimatedItemSprite(spritesheet, frame);
