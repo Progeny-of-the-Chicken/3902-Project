@@ -48,5 +48,10 @@ namespace Sprint_0.Scripts.Projectiles
                 new MagicProjectile(location, mainDirection, FacingDirection.Down)
             };
         }
+
+        public IProjectile CreateSwordAttackHitbox(Vector2 location, FacingDirection direction)
+        {
+            return new SwordAttackHitbox(location, direction);
+        }
     }
 }

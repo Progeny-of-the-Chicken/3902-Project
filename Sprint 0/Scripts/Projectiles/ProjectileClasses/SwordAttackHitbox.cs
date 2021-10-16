@@ -12,9 +12,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private double swingDurationSeconds = 0.2;
 
-        public SwordAttackHitbox(Vector2 spawnLoc)
+        public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
-            sprite = ProjectileSpriteFactory.Instance.CreateSwordAttackHitboxSprite();
+            sprite = ProjectileSpriteFactory.Instance.CreateSwordAttackHitboxSprite(direction);
             pos = spawnLoc;
         }
 

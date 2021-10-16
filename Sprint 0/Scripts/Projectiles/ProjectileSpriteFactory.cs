@@ -58,9 +58,9 @@ namespace Sprint_0.Scripts.Projectiles
             return new FireSpellSprite(spritesheet);
         }
 
-        public ISprite CreateSwordAttackHitboxSprite()
+        public ISprite CreateSwordAttackHitboxSprite(FacingDirection direction)
         {
-            return new SwordAttackHitboxSprite(spritesheet);
+            return new SwordAttackHitboxSprite(spritesheet, direction);
         }
     }
 }
