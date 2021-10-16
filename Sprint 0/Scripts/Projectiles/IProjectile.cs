@@ -10,5 +10,7 @@ namespace Sprint_0.Scripts.Projectiles
         void Draw(SpriteBatch sb);
 
         bool CheckDelete();
+
+        void Despawn();
     }
 }

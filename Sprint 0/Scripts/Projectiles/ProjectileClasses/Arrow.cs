@@ -53,6 +53,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             return delete;
         }
 
+        public void Despawn()
+        {
+            delete = true;
+        }
+
         private void SetSpriteVectors(FacingDirection direction, bool silver)
         {
             switch (direction)

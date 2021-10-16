@@ -62,6 +62,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             return delete;
         }
 
+        public void Despawn()
+        {
+            delete = true;
+        }
+
         //----- Updates methods for individual sprites -----//
 
         private void UpdateBomb(GameTime gt)

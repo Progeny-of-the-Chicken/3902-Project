@@ -19,7 +19,6 @@ namespace Sprint_0.Scripts.Items.ItemClasses
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
-            // Deletion criteria implemented by collision logic
         }
 
         public void Draw(SpriteBatch sb)
@@ -30,6 +29,11 @@ namespace Sprint_0.Scripts.Items.ItemClasses
         public bool CheckDelete()
         {
             return delete;
+        }
+
+        public void Despawn()
+        {
+            delete = true;
         }
     }
 }

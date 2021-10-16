@@ -72,5 +72,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             return delete;
         }
+
+        public void Despawn()
+        {
+            // Should never need to be called
+            delete = true;
+        }
     }
 }

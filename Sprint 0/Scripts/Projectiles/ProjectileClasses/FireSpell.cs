@@ -85,5 +85,10 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 delete = true;
             }
         }
+
+        public void Despawn()
+        {
+            delete = true;
+        }
     }
 }
