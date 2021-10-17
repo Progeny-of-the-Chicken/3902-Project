@@ -11,6 +11,10 @@ namespace Sprint_0.Scripts.Enemy
     {
         private OldManSprite sprite;
         private Vector2 location;
+
+        public int damage { get => _damage; }
+        const int _damage = 0;
+
         public OldMan(Vector2 location, float scale)
         {
             this.location = location;
@@ -25,6 +29,11 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
+        }
+
+        public void TakeDamage(int damage, Vector2 knockback)
+        {
+            throw new NotImplementedException();
         }
     }
 }

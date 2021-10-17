@@ -12,7 +12,12 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Keese : IEnemy
     {
-        KeeseSprite sprite;
+        ISprite sprite;
+        IEnemyCollider collider;
+
+
+        Rectangle[] frames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
+
 
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
@@ -20,6 +25,11 @@ namespace Sprint_0.Scripts.Enemy
         const float moveTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
+
+        public int damage { get => _damage; }
+        int _damage;
+        int health = 1;
+        const int knockbackDistance = 50;
         
         Vector2 location;
         Vector2 directionVector;
@@ -29,8 +39,10 @@ namespace Sprint_0.Scripts.Enemy
             this.location = location;
             moveSpeed = 25 * scale;
             directionVector = Vector2.Zero;
-            sprite = (KeeseSprite)EnemySpriteFactory.Instance.CreateKeeseSprite(scale);
             random = new byte[2];
+            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(scale, frames);
+            Rectangle collision = new Rectangle(0, 0, (int)(frames[0].Width * scale), (int)(frames[0].Height * scale));
+            collider = new GenericEnemyCollider(this, collision);
         }
 
         public void Update(GameTime gt)
@@ -40,6 +52,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 sprite.Update(gt);
             }
+            collider.Update(location);
         }
 
         public void Move(GameTime gt)
@@ -58,6 +71,12 @@ namespace Sprint_0.Scripts.Enemy
             directionVector.X = (random[0] % 3) - 1;
             directionVector.Y = (random[1] % 3) - 1;
         }
+        public void TakeDamage(int damage, Vector2 knockback)
+        {
+            health -= damage;
+            location += knockback * knockbackDistance;
+        }
+
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);

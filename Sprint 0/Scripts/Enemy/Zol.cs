@@ -12,13 +12,23 @@ namespace Sprint_0.Scripts.Enemy
     public class Zol : IEnemy
     {
         ISprite sprite;
+        IEnemyCollider collider;
+
+        Rectangle[] frames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
+
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
+
         float moveTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
         float pauseTime = 1;
-        
+
+        public int damage { get => _damage; }
+        int _damage;
+        int health = 1;
+        const int knockbackDistance = 50;
+
         Vector2 location;
         Vector2 direction;
 
@@ -28,7 +38,8 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite(scale);
+            sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite(scale, frames);
+            collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(frames[0].Width * scale), (int)(frames[0].Height * scale)));
         }
         public void Update(GameTime t)
         {
@@ -38,6 +49,7 @@ namespace Sprint_0.Scripts.Enemy
                 Move(t);
             }
             sprite.Update(t);
+            collider.Update(location);
         }
 
         public void Move(GameTime t)
@@ -64,6 +76,11 @@ namespace Sprint_0.Scripts.Enemy
                 direction.X = 0;
                 direction.Y = (random[1] % 2) * 2 - 1;
             }
+        }
+        public void TakeDamage(int damage, Vector2 knockback)
+        {
+            health -= damage;
+            location += knockback * knockbackDistance;
         }
         public void Draw(SpriteBatch spriteBatch)
         {

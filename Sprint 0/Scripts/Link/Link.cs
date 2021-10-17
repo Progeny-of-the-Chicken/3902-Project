@@ -40,9 +40,9 @@ namespace Sprint_0
             }
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
-            linkState.TakeDamage();
+            linkState.TakeDamage(damage);
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
@@ -207,13 +207,13 @@ namespace Sprint_0
             linksDirection = direction;
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
             if (!IsTakingDamage)
             {
                 ResetCounters();
                 damageCounter = 30;
-                linkHealth--;
+                linkHealth-= damage;
                 if (linkHealth == 0)
                     damageCounter += 90;
             }
