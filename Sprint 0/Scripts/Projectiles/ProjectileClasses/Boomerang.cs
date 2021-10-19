@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
-    public class FireSpell : IItem
+    public class Boomerang : IProjectile
     {
         private ISprite sprite;
         private Vector2 directionVector;
@@ -13,15 +12,20 @@ namespace Sprint_0.Scripts.Items
         private Vector2 startPos;
         private bool delete = false;
 
-        private bool linger = false;
-        private double speedPerSecond = 150.0;
-        private int maxDistance = 200;
-        private double startLingerTime = 0;
-        private double lingerDuration = 2.0;
+        private double speedPerSecond = 10.0;
+        private double decelPerSecond = -5.0;
+        private double magicalBoomerangSpeedCoef = 1.2;
+        private double startT = 0;
+        private double tOffset = 1;
 
-        public FireSpell(Vector2 spawnLoc, FacingDirection direction)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
             startPos = currentPos = spawnLoc;
+            if (magical)
+            {
+                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
+            }
+
             switch (direction)
             {
                 case FacingDirection.Right:
@@ -39,19 +43,23 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = ItemSpriteFactory.Instance.CreateFireSpellSprite();
+            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
         }
 
         public void Update(GameTime gt)
         {
+            // Movement control
             sprite.Update(gt);
-            if (!linger)
+            if (startT == 0)
             {
-                UpdateFireSpellMotion(gt);
+                startT = gt.TotalGameTime.TotalSeconds;
             }
-            else
+            double t = gt.TotalGameTime.TotalSeconds - startT + tOffset;
+            currentPos += directionVector * (float)(t * speedPerSecond + t * t * decelPerSecond);
+            // Delete on boomerang return
+            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
             {
-                UpdateFireSpellLinger(gt);
+                delete = true;
             }
         }
 
@@ -65,25 +73,10 @@ namespace Sprint_0.Scripts.Items
             return delete;
         }
 
-        //----- Updates methods for individual sprites -----//
-
-        private void UpdateFireSpellMotion(GameTime gt)
+        public void Despawn()
         {
-            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
-            // Distance based
-            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
-            {
-                linger = true;
-            }
-        }
-
-        private void UpdateFireSpellLinger(GameTime gt)
-        {
-            startLingerTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startLingerTime > lingerDuration)
-            {
-                delete = true;
-            }
+            // Should never need to be called
+            delete = true;
         }
     }
 }

@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
-    public class Bomb : IItem
+    public class Bomb : IProjectile
     {
         private ISprite sprite;
         private Vector2 pos;
@@ -35,7 +35,7 @@ namespace Sprint_0.Scripts.Items
                 default:
                     break;
             }
-            sprite = ItemSpriteFactory.Instance.CreateBombSprite();
+            sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
         }
 
         public void Update(GameTime gt)
@@ -62,6 +62,11 @@ namespace Sprint_0.Scripts.Items
             return delete;
         }
 
+        public void Despawn()
+        {
+            delete = true;
+        }
+
         //----- Updates methods for individual sprites -----//
 
         private void UpdateBomb(GameTime gt)
@@ -70,7 +75,7 @@ namespace Sprint_0.Scripts.Items
             if (startTime > fuseDurationSeconds)
             {
                 explode = true;
-                sprite = ItemSpriteFactory.Instance.CreateBombExplodeSprite();
+                sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
                 startTime = 0.0;
             }
         }

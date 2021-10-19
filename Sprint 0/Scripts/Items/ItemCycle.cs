@@ -3,24 +3,24 @@ using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Items
 {
-    public class TreasureCycle
+    public class ItemCycle
     {
         private List<IItem> cycle;
         private int currentIndex;
 
-        public TreasureCycle(Vector2 spawnLoc)
+        public ItemCycle(Vector2 spawnLoc)
         {
             cycle = new List<IItem>();
             cycle.Add(ItemFactory.Instance.CreateBlueRuby(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateYellowRuby(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateSmallHeartTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateSmallHeartItem(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateHeartContainer(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateFairy(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateClock(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateBasicKey(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateBoomerangTreasure(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateBombTreasure(spawnLoc));
-            cycle.Add(ItemFactory.Instance.CreateBowTreasure(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBasicMapItem(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBoomerangItem(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBombItem(spawnLoc));
+            cycle.Add(ItemFactory.Instance.CreateBowItem(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateBasicKey(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateMagicKey(spawnLoc));
             cycle.Add(ItemFactory.Instance.CreateCompass(spawnLoc));

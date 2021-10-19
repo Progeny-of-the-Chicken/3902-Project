@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -19,103 +18,74 @@ namespace Sprint_0.Scripts.Items
         {
         }
 
-        public IItem CreateSmallHeartTreasure(Vector2 location)
+        public IItem CreateSmallHeartItem(Vector2 location)
         {
-            return new AnimatedTreasure(ItemSpriteFactory.Instance.CreateSmallHeartTreasureSprite(), location);
+            return new Item(location, ItemType.SmallHeartItem);
         }
 
         public IItem CreateHeartContainer(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateHeartContainerSprite(), location);
+            return new Item(location, ItemType.HeartContainer);
         }
 
         public IItem CreateFairy(Vector2 location)
         {
-            return new AnimatedTreasure(ItemSpriteFactory.Instance.CreateFairySprite(), location);
+            return new Item(location, ItemType.Fairy);
         }
 
         public IItem CreateClock(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateClockSprite(), location);
+            return new Item(location, ItemType.Clock);
         }
 
         public IItem CreateBlueRuby(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBlueRubySprite(), location);
+            return new Item(location, ItemType.BlueRuby);
         }
 
         public IItem CreateYellowRuby(Vector2 location)
         {
-            return new AnimatedTreasure(ItemSpriteFactory.Instance.CreateYellowRubySprite(), location);
+            return new Item(location, ItemType.YellowRuby);
         }
 
-        public IItem CreateBasicMap(Vector2 location)
+        public IItem CreateBasicMapItem(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBasicMapSprite(), location);
+            return new Item(location, ItemType.BasicMapItem);
         }
 
-        public IItem CreateBoomerangTreasure(Vector2 location)
+        public IItem CreateBoomerangItem(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBoomerangTreasureSprite(), location);
+            return new Item(location, ItemType.BoomerangItem);
         }
 
-        public IItem CreateBombTreasure(Vector2 location)
+        public IItem CreateBombItem(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBombTreasureSprite(), location);
+            return new Item(location, ItemType.BombItem);
         }
 
-        public IItem CreateBowTreasure(Vector2 location)
+        public IItem CreateBowItem(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBowTreasureSprite(), location);
+            return new Item(location, ItemType.BowItem);
         }
 
         public IItem CreateBasicKey(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateBasicKeySprite(), location);
+            return new Item(location, ItemType.BasicKey);
         }
 
         public IItem CreateMagicKey(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateMagicKeySprite(), location);
+            return new Item(location, ItemType.MagicKey);
         }
 
         public IItem CreateCompass(Vector2 location)
         {
-            return new NonAnimatedTreasure(ItemSpriteFactory.Instance.CreateCompassSprite(), location);
+            return new Item(location, ItemType.Compass);
         }
 
         public IItem CreateTriforcePiece(Vector2 location)
         {
-            return new AnimatedTreasure(ItemSpriteFactory.Instance.CreateTriforcePieceSprite(), location);
-        }
-
-        public IItem CreateArrow(Vector2 location, FacingDirection direction, bool silver)
-        {
-            return new Arrow(location, direction, silver);
-        }
-
-        public IItem CreateBoomerang(Vector2 location, FacingDirection direction, bool magical)
-        {
-            return new Boomerang(location, direction, magical);
-        }
-
-        public IItem CreateBomb(Vector2 location, FacingDirection direction)
-        {
-            return new Bomb(location, direction);
-        }
-
-        public IItem CreateFireSpell(Vector2 location, FacingDirection direction)
-        {
-            return new FireSpell(location, direction);
-        }
-
-        public List<IItem> CreateThreeMagicProjectiles(Vector2 location, FacingDirection mainDirection)
-        {
-            return new List<IItem>{
-                new MagicProjectile(location, mainDirection, FacingDirection.Up),
-                new MagicProjectile(location, mainDirection, mainDirection),
-                new MagicProjectile(location, mainDirection, FacingDirection.Down)
-            };
+            return new Item(location, ItemType.TriforcePiece);
         }
     }
 }

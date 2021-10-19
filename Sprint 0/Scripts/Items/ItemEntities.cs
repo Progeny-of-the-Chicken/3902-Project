@@ -9,7 +9,7 @@ namespace Sprint_0.Scripts.Items
         private Game1 game;
         public HashSet<IItem> items;
 
-        public TreasureCycle sprint2Cycle;
+        public ItemCycle sprint2Cycle;
         public IItem sprint2Item;
 
         public ItemEntities(Game1 game)
@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Items
             this.game = game;
             items = new HashSet<IItem>();
 
-            sprint2Cycle = new TreasureCycle(game.GetCenterScreen());
+            sprint2Cycle = new ItemCycle(game.GetCenterScreen());
         }
 
         public void Update(GameTime gameTime)

@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Items
+namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
-    public class Arrow : IItem
+    public class Arrow : IProjectile
     {
         private ISprite sprite;
         private Vector2 directionVector;
@@ -53,6 +53,11 @@ namespace Sprint_0.Scripts.Items
             return delete;
         }
 
+        public void Despawn()
+        {
+            delete = true;
+        }
+
         private void SetSpriteVectors(FacingDirection direction, bool silver)
         {
             switch (direction)
@@ -60,22 +65,22 @@ namespace Sprint_0.Scripts.Items
                 case FacingDirection.Right:
                     directionVector = new Vector2(1, 0);
                     popOffset = new Vector2(4, -8);
-                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Right, silver);
+                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Right, silver);
                     break;
                 case FacingDirection.Up:
                     directionVector = new Vector2(0, -1);
                     popOffset = new Vector2(-8, -20);
-                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Up, silver);
+                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Up, silver);
                     break;
                 case FacingDirection.Left:
                     directionVector = new Vector2(-1, 0);
                     popOffset = new Vector2(-20, -8);
-                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Left, silver);
+                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Left, silver);
                     break;
                 case FacingDirection.Down:
                     directionVector = new Vector2(0, 1);
                     popOffset = new Vector2(-8, 4);
-                    sprite = ItemSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Down, silver);
+                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Down, silver);
                     break;
                 default:
                     break;
@@ -92,7 +97,7 @@ namespace Sprint_0.Scripts.Items
             {
                 pop = true;
                 currentPos += popOffset;
-                sprite = ItemSpriteFactory.Instance.CreateArrowPopSprite();
+                sprite = ProjectileSpriteFactory.Instance.CreateArrowPopSprite();
             }
         }
 

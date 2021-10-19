@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite
+namespace Sprint_0.Scripts.Sprite.ProjectileSprites
 {
     class MagicProjectileSprite : ISprite
     {
