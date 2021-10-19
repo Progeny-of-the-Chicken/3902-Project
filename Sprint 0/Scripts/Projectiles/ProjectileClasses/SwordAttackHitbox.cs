@@ -9,17 +9,17 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Rectangle frame;
         private bool delete = false;
 
-        private int swordCounter = 17;
+        private int swordCounter = ObjectConstants.swordHitboxCounter;
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
             if ((direction == FacingDirection.Left) || (direction == FacingDirection.Right))
             {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, 11, 3);
+                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxLength * ObjectConstants.scale, ObjectConstants.swordHitboxWidth * ObjectConstants.scale);
             }
             else
             {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, 3, 11);
+                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxWidth * ObjectConstants.scale, ObjectConstants.swordHitboxLength * ObjectConstants.scale);
             }
         }
 

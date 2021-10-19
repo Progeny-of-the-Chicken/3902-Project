@@ -12,11 +12,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 startPos;
         private bool delete = false;
 
-        private double speedPerSecond = 10.0;
-        private double decelPerSecond = -5.0;
-        private double magicalBoomerangSpeedCoef = 1.2;
+        private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
+        private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
+        private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
         private double startT = 0;
-        private double tOffset = 1;
+        private double tOffset = ObjectConstants.boomerangTOffset;
 
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {

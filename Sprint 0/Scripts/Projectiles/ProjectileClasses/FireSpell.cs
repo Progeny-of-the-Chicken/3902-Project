@@ -14,10 +14,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
 
         private bool linger = false;
-        private double speedPerSecond = 150.0;
-        private int maxDistance = 200;
-        private double startLingerTime = 0;
-        private double lingerDuration = 2.0;
+        private double speedPerSecond = ObjectConstants.fireSpellSpeedPerSecond;
+        private int maxDistance = ObjectConstants.fireSpellMaxDistance;
+        private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
 
         public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {
@@ -79,8 +78,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void UpdateFireSpellLinger(GameTime gt)
         {
-            startLingerTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startLingerTime > lingerDuration)
+            lingerDuration -= gt.ElapsedGameTime.TotalSeconds;
+            if (lingerDuration <= 0)
             {
                 delete = true;
             }
