@@ -16,7 +16,6 @@
     <None Remove="Scripts\Sprite\LinkSprites\" />
     <None Remove="Scripts\New Folder\" />
     <None Remove="Scripts\Sprite\ItemSprites\" />
-    <None Remove="Scripts\Items\ItemClasses\" />
     <None Remove="Scripts\Projectiles\ProjectileClasses\" />
     <None Remove="Scripts\Sprite\ProjectileSprites\" />
   </ItemGroup>
@@ -39,7 +38,6 @@
     <Folder Include="Scripts\Sprite\LinkSprites\" />
     <Folder Include="Scripts\Projectiles\" />
     <Folder Include="Scripts\Sprite\ItemSprites\" />
-    <Folder Include="Scripts\Items\ItemClasses\" />
     <Folder Include="Scripts\Projectiles\ProjectileClasses\" />
     <Folder Include="Scripts\Sprite\ProjectileSprites\" />
   </ItemGroup>

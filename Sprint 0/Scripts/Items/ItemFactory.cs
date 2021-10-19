@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint_0.Scripts.Items.ItemClasses;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -21,72 +20,72 @@ namespace Sprint_0.Scripts.Items
 
         public IItem CreateSmallHeartItem(Vector2 location)
         {
-            return new SmallHeartItem(location);
+            return new Item(location, ItemType.SmallHeartItem);
         }
 
         public IItem CreateHeartContainer(Vector2 location)
         {
-            return new HeartContainer(location);
+            return new Item(location, ItemType.HeartContainer);
         }
 
         public IItem CreateFairy(Vector2 location)
         {
-            return new Fairy(location);
+            return new Item(location, ItemType.Fairy);
         }
 
         public IItem CreateClock(Vector2 location)
         {
-            return new Clock(location);
+            return new Item(location, ItemType.Clock);
         }
 
         public IItem CreateBlueRuby(Vector2 location)
         {
-            return new BlueRuby(location);
+            return new Item(location, ItemType.BlueRuby);
         }
 
         public IItem CreateYellowRuby(Vector2 location)
         {
-            return new YellowRuby(location);
+            return new Item(location, ItemType.YellowRuby);
         }
 
         public IItem CreateBasicMapItem(Vector2 location)
         {
-            return new BasicMapItem(location);
+            return new Item(location, ItemType.BasicMapItem);
         }
 
         public IItem CreateBoomerangItem(Vector2 location)
         {
-            return new BoomerangItem(location);
+            return new Item(location, ItemType.BoomerangItem);
         }
 
         public IItem CreateBombItem(Vector2 location)
         {
-            return new BombItem(location);
+            return new Item(location, ItemType.BombItem);
         }
 
         public IItem CreateBowItem(Vector2 location)
         {
-            return new BowItem(location);
+            return new Item(location, ItemType.BowItem);
         }
 
         public IItem CreateBasicKey(Vector2 location)
         {
-            return new BasicKey(location);
+            return new Item(location, ItemType.BasicKey);
         }
 
         public IItem CreateMagicKey(Vector2 location)
         {
-            return new MagicKey(location);
+            return new Item(location, ItemType.MagicKey);
         }
 
         public IItem CreateCompass(Vector2 location)
         {
-            return new Compass(location);
+            return new Item(location, ItemType.Compass);
         }
 
         public IItem CreateTriforcePiece(Vector2 location)
         {
-            return new TriforcePiece(location);
+            return new Item(location, ItemType.TriforcePiece);
         }
     }
 }

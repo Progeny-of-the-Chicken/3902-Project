@@ -6,23 +6,27 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class SwordAttackHitbox : IProjectile
     {
-        private ISprite sprite;
-        private Vector2 pos;
+        private Rectangle frame;
         private bool delete = false;
 
-        private double swingDurationSeconds = 0.2;
+        private int swordCounter = 17;
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
-            sprite = ProjectileSpriteFactory.Instance.CreateSwordAttackHitboxSprite(direction);
-            pos = spawnLoc;
+            if ((direction == FacingDirection.Left) || (direction == FacingDirection.Right))
+            {
+                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, 11, 3);
+            }
+            else
+            {
+                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, 3, 11);
+            }
         }
 
         public void Update(GameTime gt)
         {
-            sprite.Update(gt);
-            swingDurationSeconds -= gt.ElapsedGameTime.TotalSeconds;
-            if (swingDurationSeconds <= 0)
+            swordCounter--;
+            if (swordCounter <= 0)
             {
                 delete = true;
             }
@@ -30,7 +34,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, pos);
+            // Transparent, no drawing needed
         }
 
         public bool CheckDelete()
