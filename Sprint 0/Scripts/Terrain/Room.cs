@@ -34,7 +34,7 @@ public class Room : IRoom
     {
 		//This needs to be updated once we have more than dungeon 1
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-		spriteBatch.Draw(texture, new Rectangle(0, 16 * scale, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
+		spriteBatch.Draw(texture, new Rectangle(0, 64 * scale, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 	}
 
 	void LoadRoom()

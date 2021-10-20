@@ -57,7 +57,7 @@ namespace Sprint_0
         protected override void Initialize()
         {
             _graphics.PreferredBackBufferWidth = 256 * scale;
-            _graphics.PreferredBackBufferHeight = 192 * scale;
+            _graphics.PreferredBackBufferHeight = 240 * scale;
             _graphics.ApplyChanges();
             base.Initialize();
         }
