@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sprint_0.Scripts.Projectiles
 {
-    interface IProjectile
+    public interface IProjectile
     {
         public int damage { get; }
     }

@@ -4,6 +4,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider;
+
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -12,7 +14,8 @@ namespace Sprint_0.Scripts.Enemy
         private OldManSprite sprite;
         private Vector2 location;
 
-        public int damage { get => _damage; }
+        public int Damage { get => _damage; }
+        public IEnemyCollider Collider { get => new NPCCollider(this, Rectangle.Empty); }
         const int _damage = 0;
 
         public OldMan(Vector2 location, float scale)
