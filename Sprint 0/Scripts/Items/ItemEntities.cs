@@ -6,18 +6,11 @@ namespace Sprint_0.Scripts.Items
 {
     public class ItemEntities
     {
-        private Game1 game;
         public HashSet<IItem> items;
 
-        public ItemCycle sprint2Cycle;
-        public IItem sprint2Item;
-
-        public ItemEntities(Game1 game)
+        public ItemEntities()
         {
-            this.game = game;
             items = new HashSet<IItem>();
-
-            sprint2Cycle = new ItemCycle(game.GetCenterScreen());
         }
 
         public void Update(GameTime gameTime)
@@ -36,8 +29,6 @@ namespace Sprint_0.Scripts.Items
             {
                 items.Remove(item);
             }
-
-            sprint2Item.Update(gameTime);
         }
 
         public void Draw(SpriteBatch _spriteBatch)
@@ -46,8 +37,6 @@ namespace Sprint_0.Scripts.Items
             {
                 item.Draw(_spriteBatch);
             }
-
-            sprint2Item.Draw(_spriteBatch);
         }
     }
 }

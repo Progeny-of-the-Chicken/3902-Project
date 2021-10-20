@@ -7,6 +7,7 @@ using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.SpriteFactories;
+using System;
 
 namespace Sprint_0
 {
@@ -42,7 +43,7 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             link = new Link();
-            room = new Room(scale);
+            room = new Room("Room02", this);
 
             kc = new KeyboardController(this);
 
@@ -52,6 +53,7 @@ namespace Sprint_0
             blockLocation = new Vector2(GetCenterScreen().X - 64, GetCenterScreen().Y + 32);
             enemyStart.X = GetCenterScreen().X * 1.5f;
             enemyStart.Y = GetCenterScreen().Y * 0.5f;
+
         }
 
         protected override void Initialize()
@@ -71,12 +73,7 @@ namespace Sprint_0
             ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
 
-            //Just for sprint 2
-            SetEnemy(enemyIndex);
-            block = new TileSprite(blockLocation);
-            itemSet = new ItemEntities(this);
-            itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
-            projectileSet = new ProjectileEntities(this);
+            ////Just for sprint 2
 
 			base.LoadContent();
         }
@@ -86,10 +83,7 @@ namespace Sprint_0
             kc.Update();
 
             //Just for Sprint 2
-            itemSet.Update(gameTime);
-            projectileSet.Update(gameTime);
-            enemy.Update(gameTime);
-            link.Update(gameTime);
+            room.Update(gameTime);
             if (!link.IsAlive)
                 this.Quit();
 
@@ -102,12 +96,6 @@ namespace Sprint_0
             _spriteBatch.Begin();
 
             room.Draw(_spriteBatch);
-            link.Draw(_spriteBatch, gameTime);
-            //Just for sprint 2
-            block.Draw(_spriteBatch);
-            enemy.Draw(_spriteBatch);
-            itemSet.Draw(_spriteBatch);
-            projectileSet.Draw(_spriteBatch);
             
             _spriteBatch.End();
 

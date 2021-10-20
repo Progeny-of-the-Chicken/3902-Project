@@ -18,7 +18,7 @@ namespace Sprint_0
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb)
         {
             LinkSprite.Draw(sb, linkState.Position);
         }
