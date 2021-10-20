@@ -38,5 +38,10 @@ namespace Sprint_0.Scripts.Projectiles
                 projectile.Draw(_spriteBatch);
             }
         }
+
+        public void Add(IProjectile item)
+        {
+            projectiles.Add(item);
+        }
     }
 }

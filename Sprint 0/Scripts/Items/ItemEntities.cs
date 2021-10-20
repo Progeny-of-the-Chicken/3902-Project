@@ -38,5 +38,10 @@ namespace Sprint_0.Scripts.Items
                 item.Draw(_spriteBatch);
             }
         }
+
+        public void Add(IItem item)
+        {
+            items.Add(item);
+        }
     }
 }
