@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Collider;
+
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -14,11 +16,12 @@ namespace Sprint_0.Scripts.Enemy
         ISprite moveSprite;
         ISprite shootSprite;
         IEnemyCollider collider;
+        public IEnemyCollider Collider{ get => collider; }
 
         Rectangle[] moveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
         Rectangle[] shootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
 
-        public int damage { get => _damage; }
+        public int Damage { get => _damage; }
         int _damage;
         int health = 1;
         const int knockbackDistance = 50;

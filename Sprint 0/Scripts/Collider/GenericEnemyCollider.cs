@@ -3,8 +3,9 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Sprint_0.Scripts.Enemy;
 
-namespace Sprint_0.Scripts.Enemy
+namespace Sprint_0.Scripts.Collider
 {
     class GenericEnemyCollider : IEnemyCollider
     {
@@ -25,7 +26,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void OnPlayerCollision(ILink player)
         {
-            player.TakeDamage(owner.damage);
+            player.TakeDamage(owner.Damage);
         }
 
         public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)

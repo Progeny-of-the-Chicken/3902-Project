@@ -3,10 +3,11 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Sprint_0.Scripts.Enemy;
 
-namespace Sprint_0.Scripts.Enemy
+namespace Sprint_0.Scripts.Collider
 {
-    interface IEnemyCollider
+    public interface IEnemyCollider
     {
         public IEnemy owner { get; }
         public Rectangle collisionRectangle { get; }

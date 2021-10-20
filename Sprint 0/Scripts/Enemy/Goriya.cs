@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Collider;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -14,6 +15,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         IItem boomerang;
         IEnemyCollider collider;
+        public IEnemyCollider Collider { get => collider; }
 
         static RNGCryptoServiceProvider randomDir;
         byte[] random;
@@ -22,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         Rectangle backFrame = new Rectangle(240, 10, 14, 17);
         Rectangle[] rightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
 
-        public int damage { get => _damage; }
+        public int Damage { get => _damage; }
         int _damage;
         int health = 1;
         const int knockbackDistance = 50;
