@@ -11,6 +11,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private int swordCounter = ObjectConstants.swordHitboxCounter;
 
+        public int damage { get => ObjectConstants.basicSwordDamage; }
+
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
             if ((direction == FacingDirection.Left) || (direction == FacingDirection.Right))

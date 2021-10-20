@@ -46,23 +46,28 @@ namespace Sprint_0
         public const int arrowMaxDistance = 200;
         public const double silverArrowSpeedCoef = 1.5;
         public const double arrowPopDurationSeconds = 0.2;
+        public const int arrowDamage = 1;
         // Bomb
         public const int bombDisplacement = 50;
         public const double bombFuseDurationSeconds = 2.0;
         public const double bombExplodeDurationSeconds = 0.3;
+        public const int bombDamage = 1;
         // Boomerang
         public const double boomerangSpeedPerSecond = 10.0;
         public const double boomerangDecelPerSecond = -5.0;
         public const double magicalBoomerangSpeedCoef = 1.2;
         public const double boomerangTOffset = 1;
+        public const int boomerangDamage = 1;
         // FireSpell
         public const double fireSpellSpeedPerSecond = 150.0;
         public const int fireSpellMaxDistance = 200;
         public const double fireSpellLingerDuration = 2.0;
+        public const int fireSpellDamage = 1;
         // SwordAttackHitbox
         public const int swordHitboxCounter = 17;
         public const int swordHitboxLength = 11;
         public const int swordHitboxWidth = 3;
+        public const int basicSwordDamage = 1;
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
