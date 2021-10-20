@@ -45,13 +45,13 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
 
-			this.RegisterCommand(linkControllerMappings, Keys.W, new Sprint_0.Scripts.Commands.LinkChangeDirectionUp(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.A, new Sprint_0.Scripts.Commands.LinkChangeDirectionLeft(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.S, new Sprint_0.Scripts.Commands.LinkChangeDirectionDown(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.D, new Sprint_0.Scripts.Commands.LinkChangeDirectionRight(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.N, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.Z, new Sprint_0.Scripts.Commands.LinkUseSword(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.E, new Sprint_0.Scripts.Commands.LinkTakeDamage(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.S, new LinkChangeDirectionDown(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.Z, new LinkUseSword(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.E, new LinkTakeDamage(game.link));
 		}
 
 		//Update checks for keys pressed and calls the respective command

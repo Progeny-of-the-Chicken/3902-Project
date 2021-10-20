@@ -17,7 +17,7 @@ public class Room : IRoom
 	private string roomId;
 	private string filePath;
 	private int scale;
-	private Link link;
+	private ILink link;
 	private List<IEnemy> enemies;
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
@@ -30,7 +30,7 @@ public class Room : IRoom
 	private string[] southDoor;
 	private string[] special;
 
-	public Room(string roomId, Game1 game)
+	public Room(string roomId, ILink link)
 	{
 		this.scale = Constants.scale;
 		this.roomId = roomId;
@@ -38,7 +38,7 @@ public class Room : IRoom
 		roomRow = Int32.Parse(roomId.Substring(4, 1));
 		roomCol = Int32.Parse(roomId.Substring(5, 1));
 		roomLocation = new Vector2(roomCol, roomRow);
-		link = game.link;
+		this.link = link;
 		enemies = new List<IEnemy>();
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
@@ -132,4 +132,9 @@ public class Room : IRoom
 	{
 		//Todo
 	}
+
+	public void AddProjectile(IProjectile item)
+    {
+		projectileSet.Add(item);
+    }
 }
