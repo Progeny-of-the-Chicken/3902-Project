@@ -6,11 +6,11 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     public class FireSpellSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = new Rectangle(215, 185, 16, 16);
-        private double animationDelaySeconds = 0.1;
+        private Rectangle frame = ObjectConstants.fireSpellFrame;
+        private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = 0.0;
         private SpriteEffects flip = SpriteEffects.None;
-        private int scale = 2;
+        private int scale = ObjectConstants.scale;
 
         public FireSpellSprite(Texture2D textures)
         {
