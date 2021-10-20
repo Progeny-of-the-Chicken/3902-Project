@@ -19,17 +19,21 @@ namespace Sprint_0
         public ItemEntities itemSet;
         public ProjectileEntities projectileSet;
         public Link link;
-
+        public Room room;
+        
 
         //Just for sprint 2
+        //Blocks are remaining until Room gets good
         ITerrain block;
         Vector2 blockLocation;
         int blockNum;
-
+        
         IEnemy enemy;
         Vector2 enemyStart;
         int enemyCount = 7;
         int enemyIndex = 0;
+
+        int scale = 3;
 
         public Game1()
         {
@@ -38,6 +42,7 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             link = new Link();
+            room = new Room(scale);
 
             kc = new KeyboardController(this);
 
@@ -51,6 +56,9 @@ namespace Sprint_0
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = 256 * scale;
+            _graphics.PreferredBackBufferHeight = 192 * scale;
+            _graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -92,9 +100,9 @@ namespace Sprint_0
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            
-			      link.Draw(_spriteBatch, gameTime);
 
+            room.Draw(_spriteBatch);
+            link.Draw(_spriteBatch, gameTime);
             //Just for sprint 2
             block.Draw(_spriteBatch);
             enemy.Draw(_spriteBatch);
