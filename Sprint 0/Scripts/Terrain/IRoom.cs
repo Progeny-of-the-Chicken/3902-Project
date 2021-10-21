@@ -6,7 +6,6 @@ public interface IRoom
 {
 	void Update(GameTime gt);
 	void Draw(SpriteBatch spriteBatch);
-	void LoadRoom();
 	string RoomId();
 	void AddProjectile(IProjectile item);
 }
