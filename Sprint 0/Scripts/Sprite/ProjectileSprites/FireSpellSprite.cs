@@ -6,7 +6,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     public class FireSpellSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = ObjectConstants.fireSpellFrame;
+        private Rectangle frame = SpriteRectangles.fireSpellFrame;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = 0.0;
         private SpriteEffects flip = SpriteEffects.None;

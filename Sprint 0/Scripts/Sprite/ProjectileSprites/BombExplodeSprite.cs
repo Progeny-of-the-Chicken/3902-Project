@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     public class BombExplodeSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = ObjectConstants.bombExplodeFrames;
+        private List<Rectangle> frames = SpriteRectangles.bombExplodeFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;

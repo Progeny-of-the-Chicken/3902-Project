@@ -6,7 +6,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     public class BombSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = ObjectConstants.bombFrame;
+        private Rectangle frame = SpriteRectangles.bombFrame;
         private int scale = ObjectConstants.scale;
 
         public BombSprite(Texture2D textures)

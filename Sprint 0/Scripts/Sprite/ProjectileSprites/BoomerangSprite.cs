@@ -22,11 +22,11 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
             frames = new List<Rectangle>();
             if (!magical)
             {
-                frames = ObjectConstants.basicBoomerangFrames;
+                frames = SpriteRectangles.basicBoomerangFrames;
             }
             else
             {
-                frames = ObjectConstants.magicalBoomerangFrames;
+                frames = SpriteRectangles.magicalBoomerangFrames;
             }
         }
 

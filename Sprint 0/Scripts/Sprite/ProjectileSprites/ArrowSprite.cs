@@ -17,11 +17,11 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
             spritesheet = textures;
             if (!silver)
             {
-                frame = ObjectConstants.basicArrowFrame;
+                frame = SpriteRectangles.basicArrowFrame;
             }
             else
             {
-                frame = ObjectConstants.silverArrowFrame;
+                frame = SpriteRectangles.silverArrowFrame;
             }
             switch (direction)
             {

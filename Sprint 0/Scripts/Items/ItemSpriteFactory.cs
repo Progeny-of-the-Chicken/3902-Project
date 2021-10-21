@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.ItemSprites;
@@ -32,72 +30,72 @@ namespace Sprint_0.Scripts.Items
 
         public ISprite CreateSmallHeartItemSprite()
         {
-            return new AnimatedItemSprite(spritesheet, ObjectConstants.smallHeartFrames);
+            return new AnimatedItemSprite(spritesheet, SpriteRectangles.smallHeartFrames);
         }
 
         public ISprite CreateHeartContainerSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.heartContainerFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.heartContainerFrame);
         }
 
         public ISprite CreateFairySprite()
         {
-            return new AnimatedItemSprite(spritesheet, ObjectConstants.fairyFrames);
+            return new AnimatedItemSprite(spritesheet, SpriteRectangles.fairyFrames);
         }
 
         public ISprite CreateClockSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.clockFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.clockFrame);
         }
 
         public ISprite CreateBlueRubySprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.blueRubyFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.blueRubyFrame);
         }
 
         public ISprite CreateYellowRubySprite()
         {
-            return new AnimatedItemSprite(spritesheet, ObjectConstants.yellowRubyFrames);
+            return new AnimatedItemSprite(spritesheet, SpriteRectangles.yellowRubyFrames);
         }
 
         public ISprite CreateBasicMapItemSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.basicMapFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.basicMapFrame);
         }
 
         public ISprite CreateBoomerangItemSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.boomerangItemFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.boomerangItemFrame);
         }
 
         public ISprite CreateBombItemSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.bombItemFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.bombItemFrame);
         }
 
         public ISprite CreateBowItemSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.bowItemFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.bowItemFrame);
         }
 
         public ISprite CreateBasicKeySprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.basicKeyFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.basicKeyFrame);
         }
 
         public ISprite CreateMagicKeySprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.magicKeyFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.magicKeyFrame);
         }
 
         public ISprite CreateCompassSprite()
         {
-            return new NonAnimatedItemSprite(spritesheet, ObjectConstants.compassFrame);
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.compassFrame);
         }
 
         public ISprite CreateTriforcePieceSprite()
         {
-            return new AnimatedItemSprite(spritesheet, ObjectConstants.triforcePieceFrames);
+            return new AnimatedItemSprite(spritesheet, SpriteRectangles.triforcePieceFrames);
         }
     }
 }
