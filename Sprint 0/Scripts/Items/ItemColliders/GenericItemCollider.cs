@@ -62,6 +62,7 @@ namespace Sprint_0.Scripts.Items.ItemColliders
                     _hitbox = SpriteRectangles.smallHeartFrames[0];
                     break;
             }
+            _hitbox.Size *= new Point(ObjectConstants.scale);
         }
 
         public void Update(Vector2 location)
