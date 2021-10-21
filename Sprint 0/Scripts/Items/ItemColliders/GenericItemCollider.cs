@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Items.ItemColliders
 
         public IItem Owner { get; }
 
-        public Rectangle Hitbox { get; }
+        public Rectangle Hitbox { get => _hitbox; }
 
         public GenericItemCollider(IItem owner)
         {

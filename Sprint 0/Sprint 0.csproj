@@ -19,6 +19,7 @@
     <None Remove="Scripts\Projectiles\ProjectileClasses\" />
     <None Remove="Scripts\Sprite\ProjectileSprites\" />
     <None Remove="Scripts\Items\ItemColliders\" />
+    <None Remove="Scripts\CollisionHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -42,5 +43,6 @@
     <Folder Include="Scripts\Projectiles\ProjectileClasses\" />
     <Folder Include="Scripts\Sprite\ProjectileSprites\" />
     <Folder Include="Scripts\Items\ItemColliders\" />
+    <Folder Include="Scripts\CollisionHandlers\" />
   </ItemGroup>
 </Project>
