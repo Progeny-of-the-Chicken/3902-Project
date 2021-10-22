@@ -30,7 +30,7 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             link = new Link();
-
+            roomManager = new RoomManager(link);
             kc = new KeyboardController(this);
 
         }
@@ -51,7 +51,6 @@ namespace Sprint_0
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
-            roomManager = new RoomManager(link);
 
             base.LoadContent();
         }
