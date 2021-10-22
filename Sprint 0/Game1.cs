@@ -30,7 +30,6 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             link = new Link();
-            roomManager = new RoomManager(link);
             kc = new KeyboardController(this);
 
         }
@@ -53,6 +52,7 @@ namespace Sprint_0
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
+            roomManager = new RoomManager(link);
         }
 
         protected override void Update(GameTime gameTime)
