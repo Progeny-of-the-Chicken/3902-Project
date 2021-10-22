@@ -1,8 +1,4 @@
-﻿5 2,6 2,5 3,6 3,5 4,6 4
-4 2,Stalfos,7 2,Stalfos,8 0,Stalfos
-,,,,,
-,,,,,
-NorthDoorSprite,Room23,,,,
-,,,,,
-SouthDoorSprite,Room25,,,,
-,16,,16,,
+﻿5 2,6 2,5 3,6 3,5 4,6 4,,
+4 2,Stalfos,7 2,Stalfos,8 0,Stalfos,,
+,,,,,,,
+,,NorthDoorSprite,Room23,,,SouthDoorSprite,Room25

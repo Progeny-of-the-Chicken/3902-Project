@@ -1,8 +1,4 @@
 ﻿1 1,2 1,9 1,10 1,5 3,6 3,1 5,2 5,9 5,10 5
 3 1,Gel,6 2,Gel,11 3,Gel,6 4,Gel,3 6,Gel
 10 3,Map,,,,,,,,
-EastLockedSprite,Room32,,,,,,,,
-NorthDoorSprite,Room21,,,,,,,,
-WestDoorSprite,Room12,,,,,,,,
-SouthBombableSprite,Room23,,,,,,,,
-16,16,16,16,,,,,,
+EastLockedSprite,Room32,NorthDoorSprite,Room21,WestDoorSprite,Room12,SouthBombableSprite,Room23,,
