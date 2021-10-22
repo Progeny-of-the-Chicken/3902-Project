@@ -17,6 +17,10 @@ namespace Sprint_0.Scripts.Enemy
 
         void Draw(SpriteBatch sb);
 
-        public void TakeDamage(int damage, Vector2 knockback);
+        public void TakeDamage(int damage);
+
+        public void KnockBack(Vector2 knockback);
+
+        public bool CheckDelete();
     }
 }

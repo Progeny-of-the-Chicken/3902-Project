@@ -50,7 +50,8 @@ namespace Sprint_0.Scripts.Collider
                 default:
                     break;
             }
-            _owner.TakeDamage(projectile.damage, direction);
+            _owner.TakeDamage(projectile.damage);
+            _owner.KnockBack(direction);
         }
     }
 }

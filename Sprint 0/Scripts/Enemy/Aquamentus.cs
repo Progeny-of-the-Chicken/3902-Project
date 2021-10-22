@@ -25,6 +25,7 @@ namespace Sprint_0.Scripts.Enemy
         int _damage;
         int health = 1;
         const int knockbackDistance = 50;
+        bool delete = false;
 
         List<IItem> projectiles;
         
@@ -90,12 +91,19 @@ namespace Sprint_0.Scripts.Enemy
             sprite = shootSprite;
         }
 
-        public void TakeDamage(int damage, Vector2 knockback)
+        public void TakeDamage(int damage)
         {
             health -= damage;
+            delete = (health <= 0);
+        }
+        public void KnockBack(Vector2 knockback)
+        {
             location += knockback * knockbackDistance;
         }
-
+        public bool CheckDelete()
+        {
+            return delete;
+        }
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);

@@ -28,6 +28,7 @@ namespace Sprint_0.Scripts.Enemy
         int _damage;
         int health = 1;
         const int knockbackDistance = 50;
+        bool delete = false;
 
         float moveTime = 1.5f;
         float moveSpeed;
@@ -108,10 +109,18 @@ namespace Sprint_0.Scripts.Enemy
         {
             boomerang = ItemFactory.Instance.CreateBoomerang(location, direction, false);
         }
-        public void TakeDamage(int damage, Vector2 knockback)
+        public void TakeDamage(int damage)
         {
             health -= damage;
+            delete = (health <= 0);
+        }
+        public void KnockBack(Vector2 knockback)
+        {
             location += knockback * knockbackDistance;
+        }
+        public bool CheckDelete()
+        {
+            return delete;
         }
 
         public void Draw(SpriteBatch sb)

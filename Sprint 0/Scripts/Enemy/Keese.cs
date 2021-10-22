@@ -31,7 +31,8 @@ namespace Sprint_0.Scripts.Enemy
         int _damage;
         int health = 1;
         const int knockbackDistance = 50;
-        
+        bool delete = false;
+
         Vector2 location;
         Vector2 directionVector;
 
@@ -72,10 +73,18 @@ namespace Sprint_0.Scripts.Enemy
             directionVector.X = (random[0] % 3) - 1;
             directionVector.Y = (random[1] % 3) - 1;
         }
-        public void TakeDamage(int damage, Vector2 knockback)
+        public void TakeDamage(int damage)
         {
             health -= damage;
+            delete = (health <= 0);
+        }
+        public void KnockBack(Vector2 knockback)
+        {
             location += knockback * knockbackDistance;
+        }
+        public bool CheckDelete()
+        {
+            return delete;
         }
 
         public void Draw(SpriteBatch sb)

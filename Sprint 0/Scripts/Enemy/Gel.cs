@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Enemy
         const float pauseTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
+        bool delete = false;
 
         public int Damage { get => _damage; }
         int _damage;
@@ -85,12 +86,19 @@ namespace Sprint_0.Scripts.Enemy
             }
         }
 
-        public void TakeDamage(int damage, Vector2 knockback)
+        public void TakeDamage(int damage)
         {
             health -= damage;
+            delete = (health <= 0);
+        }
+        public void KnockBack(Vector2 knockback)
+        {
             location += knockback * knockbackDistance;
         }
-
+        public bool CheckDelete()
+        {
+            return delete;
+        }
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
