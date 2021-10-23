@@ -6,8 +6,8 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     public class ArrowPopSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = new Rectangle(53, 189, 8, 8);
-        private int scale = 2;
+        private Rectangle frame = SpriteRectangles.arrowPopFrame;
+        private int scale = ObjectConstants.scale;
 
         public ArrowPopSprite(Texture2D textures)
         {

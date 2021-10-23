@@ -9,12 +9,12 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     {
         private Texture2D spritesheet;
         private List<Rectangle> frames;
-        private double animationDelaySeconds = 0.1;
+        private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;
         private double rotation = 0.0;
         private Vector2 rotationOffset = new Vector2(4, 4);
-        private int scale = 2;
+        private int scale = ObjectConstants.scale;
 
         public BoomerangSprite(Texture2D textures, bool magical)
         {
@@ -22,17 +22,11 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
             frames = new List<Rectangle>();
             if (!magical)
             {
-                frames.Add(new Rectangle(64, 189, 8, 8));
-                frames.Add(new Rectangle(73, 189, 8, 8));
-                frames.Add(new Rectangle(82, 189, 8, 8));
-                frames.Add(new Rectangle(91, 189, 8, 8));
+                frames = SpriteRectangles.basicBoomerangFrames;
             }
             else
             {
-                frames.Add(new Rectangle(100, 189, 8, 8));
-                frames.Add(new Rectangle(109, 189, 8, 8));
-                frames.Add(new Rectangle(118, 189, 8, 8));
-                frames.Add(new Rectangle(127, 189, 8, 8));
+                frames = SpriteRectangles.magicalBoomerangFrames;
             }
         }
 
