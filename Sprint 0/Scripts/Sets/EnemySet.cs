@@ -11,6 +11,7 @@ namespace Sprint_0.Scripts.Sets
     {
         public HashSet<IEnemy> Enemies { get => enemies; }
         HashSet<IEnemy> enemies;
+        HashSet<IEnemy> toBeRemoved;
         Game1 game;
 
         public EnemySet(Game1 game)
@@ -20,6 +21,11 @@ namespace Sprint_0.Scripts.Sets
 
         }
 
+        public void Add(IEnemy enemy)
+        {
+            enemies.Add(enemy);
+        }
+
         public void Update(GameTime gameTime)
         {
             foreach(IEnemy enemy in enemies)
@@ -27,9 +33,14 @@ namespace Sprint_0.Scripts.Sets
                 enemy.Update(gameTime);
                 if (enemy.CheckDelete())
                 {
-                    enemies.Remove(enemy);
+                    toBeRemoved.Add(enemy);
                 }
             }
+            foreach(IEnemy enemy in toBeRemoved)
+            {
+                enemies.Remove(enemy);
+            }
+            toBeRemoved.Clear();
         }
         public void Draw(SpriteBatch sb)
         {
