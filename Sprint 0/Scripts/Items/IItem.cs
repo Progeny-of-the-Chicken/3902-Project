@@ -10,5 +10,7 @@ namespace Sprint_0.Scripts.Items
         void Draw(SpriteBatch sb);
 
         bool CheckDelete();
+
+        void Despawn();
     }
 }

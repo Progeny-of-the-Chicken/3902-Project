@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.SpriteFactories;
@@ -16,6 +17,7 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         public ItemEntities itemSet;
+        public ProjectileEntities projectileSet;
         public Link link;
 
 
@@ -58,6 +60,7 @@ namespace Sprint_0
             LinkSpriteFactory.Instance.LoadAllTextures(this.Content);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
+            ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
 
             //Just for sprint 2
@@ -65,6 +68,7 @@ namespace Sprint_0
             block = new TileSprite(blockLocation);
             itemSet = new ItemEntities(this);
             itemSet.sprint2Item = ItemFactory.Instance.CreateBlueRuby(this.GetCenterScreen());
+            projectileSet = new ProjectileEntities(this);
 
 			base.LoadContent();
         }
@@ -75,6 +79,7 @@ namespace Sprint_0
 
             //Just for Sprint 2
             itemSet.Update(gameTime);
+            projectileSet.Update(gameTime);
             enemy.Update(gameTime);
             link.Update(gameTime);
             if (!link.IsAlive)
@@ -94,6 +99,7 @@ namespace Sprint_0
             block.Draw(_spriteBatch);
             enemy.Draw(_spriteBatch);
             itemSet.Draw(_spriteBatch);
+            projectileSet.Draw(_spriteBatch);
             
             _spriteBatch.End();
 

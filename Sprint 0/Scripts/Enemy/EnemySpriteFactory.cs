@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Sprite.ProjectileSprites;
 
 namespace Sprint_0.Scripts.Enemy
 {

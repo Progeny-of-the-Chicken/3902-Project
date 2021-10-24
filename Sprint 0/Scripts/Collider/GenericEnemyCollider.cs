@@ -31,27 +31,7 @@ namespace Sprint_0.Scripts.Collider
 
         public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
         {
-            Vector2 direction = Vector2.Zero;
-            //Move away from the collision
-            switch (collisionDirection)
-            {
-                case FacingDirection.Right:
-                    direction.X = -1;
-                    break;
-                case FacingDirection.Left:
-                    direction.X = 1;
-                    break;
-                case FacingDirection.Down:
-                    direction.Y = -1;
-                    break;
-                case FacingDirection.Up:
-                    direction.Y += 1;
-                    break;
-                default:
-                    break;
-            }
-            _owner.TakeDamage(projectile.damage);
-            _owner.KnockBack(direction);
+            //despawn projectile
         }
     }
 }

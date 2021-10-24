@@ -8,12 +8,13 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider;
+using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        IItem boomerang;
+        IProjectile boomerang;
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
@@ -107,7 +108,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ItemFactory.Instance.CreateBoomerang(location, direction, false);
+            boomerang = ProjectileFactory.Instance.CreateBoomerang(location, direction, false);
         }
         public void TakeDamage(int damage)
         {

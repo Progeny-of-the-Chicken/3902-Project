@@ -1,4 +1,4 @@
-﻿using Sprint_0.Scripts.Items;
+﻿using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.Commands
 {
@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            game.itemSet.items.Add(ItemFactory.Instance.CreateArrow(link.ItemSpawnPosition, link.FacingDirection, true));
+            game.projectileSet.projectiles.Add(ProjectileFactory.Instance.CreateArrow(link.ItemSpawnPosition, link.FacingDirection, true));
             link.UseItem();
         }
     }
