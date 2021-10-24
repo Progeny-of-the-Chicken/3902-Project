@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool explode = false;
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
 
-        public int damage { get => ObjectConstants.bombDamage; }
+        public int Damage { get => ObjectConstants.bombDamage; }
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {

@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double startT = 0;
         private double tOffset = ObjectConstants.boomerangTOffset;
 
-        public int damage { get => ObjectConstants.boomerangDamage; }
+        public int Damage { get => ObjectConstants.boomerangDamage; }
 
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {

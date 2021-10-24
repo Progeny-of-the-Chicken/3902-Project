@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Rectangle frame;
         private bool delete = false;
 
-        public int damage { get => ObjectConstants.basicSwordDamage; }
+        public int Damage { get => ObjectConstants.basicSwordDamage; }
 
         public BlastZone(Vector2 location, FacingDirection direction)
         {

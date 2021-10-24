@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private int maxDistance = ObjectConstants.fireSpellMaxDistance;
         private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
 
-        public int damage { get => ObjectConstants.fireSpellDamage; }
+        public int Damage { get => ObjectConstants.fireSpellDamage; }
 
         public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {

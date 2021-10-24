@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool pop = false;
         private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
 
-        public int damage { get => ObjectConstants.arrowDamage; }
+        public int Damage { get => ObjectConstants.arrowDamage; }
 
         public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
         {

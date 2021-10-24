@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider
 
         public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
         {
-            //despawn projectile
+            projectile.Despawn();
         }
     }
 }
