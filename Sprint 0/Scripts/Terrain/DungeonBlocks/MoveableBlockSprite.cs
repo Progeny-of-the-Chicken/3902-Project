@@ -8,9 +8,9 @@ public class MoveableBlockSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(1001, 11, 16, 16);
     Rectangle destination;
 
-    public MoveableBlockSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+    public MoveableBlockSprite(Vector2 screenLocation, int scake)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

@@ -8,9 +8,9 @@ public class WestLockedSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(880, 43, 32, 32);
     Rectangle destination;
 
-    public WestLockedSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+    public WestLockedSprite(Vector2 screenLocation, int scale)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

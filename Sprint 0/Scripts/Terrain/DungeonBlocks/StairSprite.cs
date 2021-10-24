@@ -8,9 +8,9 @@ public class StairSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
     Rectangle destination;
 
-    public StairSprite(Vector2 screenLocation)
+    public StairSprite(Vector2 screenLocation, int scale)
     { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

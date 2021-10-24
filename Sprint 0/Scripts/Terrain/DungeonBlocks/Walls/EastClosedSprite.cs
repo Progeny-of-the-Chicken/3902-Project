@@ -8,9 +8,9 @@ public class EastClosedSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(913, 76, 32, 32);
     Rectangle destination;
 
-    public EastClosedSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+    public EastClosedSprite(Vector2 screenLocation, int scale)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

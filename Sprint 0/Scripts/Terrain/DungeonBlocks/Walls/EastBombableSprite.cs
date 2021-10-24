@@ -8,9 +8,9 @@ public class EastBombableSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(814, 76, 32, 32);
     Rectangle destination;
 
-    public EastBombableSprite(Vector2 screenLocation)
+    public EastBombableSprite(Vector2 screenLocation, int scale)
     { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

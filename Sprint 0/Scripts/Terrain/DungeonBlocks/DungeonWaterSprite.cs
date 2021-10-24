@@ -8,9 +8,9 @@ public class DungeonWaterSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(1018, 28, 16, 16);
     Rectangle destination;
 
-    public DungeonWaterSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+    public DungeonWaterSprite(Vector2 screenLocation, int scale)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()

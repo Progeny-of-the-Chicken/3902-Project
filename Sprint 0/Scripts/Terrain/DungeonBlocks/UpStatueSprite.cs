@@ -8,9 +8,9 @@ public class UpStatueSprite : ITerrain
     private Rectangle spritesheetLocation = new Rectangle(1035, 11, 16, 16);
     Rectangle destination;
 
-    public UpStatueSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+    public UpStatueSprite(Vector2 screenLocation, int scale)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, spritesheetLocation.Width * scale, spritesheetLocation.Height * scale);
     }
 
     public void Update()
