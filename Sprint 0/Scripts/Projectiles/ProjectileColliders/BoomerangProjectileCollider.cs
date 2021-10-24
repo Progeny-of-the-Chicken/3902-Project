@@ -30,7 +30,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
             if (Owner.Friendly)
             {
                 // Add to inventory in Sprint 4
-                Owner.Despawn();
             }
             else
             {
