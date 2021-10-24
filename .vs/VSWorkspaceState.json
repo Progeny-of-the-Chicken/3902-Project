@@ -4,9 +4,7 @@
     "\\Sprint 0",
     "\\Sprint 0\\Content",
     "\\Sprint 0\\Scripts",
-    "\\Sprint 0\\Scripts\\Link",
-    "\\Sprint 0\\Scripts\\Terrain",
-    "\\Sprint 0\\Scripts\\Terrain\\DungeonBlocks\\Walls"
+    "\\Sprint 0\\Scripts\\Terrain"
   ],
   "SelectedNode": "\\Sprint 0\\Game1.cs",
   "PreviewInSolutionExplorer": false
