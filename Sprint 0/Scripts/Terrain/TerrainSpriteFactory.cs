@@ -9,6 +9,7 @@ class TerrainSpriteFactory
 {
     private Texture2D overworldSpritesheet;
     private Texture2D dungeonSpritesheet;
+    private Texture2D dungeon1RoomSpritesheet;
 
     private static TerrainSpriteFactory instance = new TerrainSpriteFactory();
 
@@ -28,6 +29,7 @@ class TerrainSpriteFactory
     {
         overworldSpritesheet = content.Load<Texture2D>("OverworldTileset");
         dungeonSpritesheet = content.Load<Texture2D>("dungeonTileset");
+        dungeon1RoomSpritesheet = content.Load<Texture2D>("Dungeon1Eagle");
     }
 
     public Texture2D GetOverworldSpritesheet()
@@ -38,5 +40,10 @@ class TerrainSpriteFactory
     public Texture2D GetDungeonSpritesheet()
     {
         return dungeonSpritesheet;
+    }
+
+    public Texture2D GetDungeon1RoomSpritesheet()
+    {
+        return dungeon1RoomSpritesheet;
     }
 }
