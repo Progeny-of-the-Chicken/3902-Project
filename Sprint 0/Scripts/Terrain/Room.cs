@@ -29,8 +29,8 @@ public class Room : IRoom
 	public Room(string roomId, ILink link)
 	{
 		this.scale = Constants.scale;
-		this.WALLOFFSET = 32 * this.scale;
-		this.YOFFSET = 64 * this.scale;
+		this.WALLOFFSET = 33 * this.scale;
+		this.YOFFSET = 63 * this.scale;
 
 		this.roomId = roomId;
 		int roomRow, roomCol;
@@ -99,16 +99,16 @@ public class Room : IRoom
 	void LoadBlockColliders(TextFieldParser csvReader)
 	{
 		string[] blockColliderString = csvReader.ReadFields();
-		for (int i = 0; i < blockColliderString.Length; i += 2)
+		for (int i = 0; i < blockColliderString.Length; i++)
 		{
 			if (!blockColliderString[i].Equals(""))
 			{
 				//first string in each pair notates location
 				float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
 				float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-				Vector2 enemyLocation = new Vector2(blockLocationX, blockLocationY);
+				Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
-				blocks.Add(new DungeonWaterSprite(enemyLocation));
+				blocks.Add(new DungeonWaterSprite(blockLocation));
 			}
 		}
 	}
