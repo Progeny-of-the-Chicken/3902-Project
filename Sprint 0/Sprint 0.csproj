@@ -47,6 +47,6 @@
     <Folder Include="Scripts\Items\ItemColliders\" />
     <Folder Include="Scripts\CollisionHandlers\" />
     <Folder Include="Scripts\Projectiles\ProjectileColliders\" />
-    <Folder Include="Scripts\Terrain\Colliders\" />
+    <Folder Include="Scripts\Collider\Terrain\" />
   </ItemGroup>
 </Project>

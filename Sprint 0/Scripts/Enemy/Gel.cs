@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
-using Sprint_0.Scripts.Collider;
+using Sprint_0.Scripts.Collider.Enemy;
 
 
 namespace Sprint_0.Scripts.Enemy
