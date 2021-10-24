@@ -131,6 +131,8 @@ namespace Sprint_0
         private const int linkSpeed = 1;
         private int linkHealth;
         private const int linkStartingHealth = 6;
+        private const int defaultCounterLength = 30;
+        private const int bouncebackDistance = 90;
 
         public LinkStateMachine()
         {
@@ -169,7 +171,7 @@ namespace Sprint_0
             if (direction == linksDirection)
             {
                 MoveInCurrentDirection();
-                movingCounter = 30;
+                movingCounter = defaultCounterLength;
             }
             else
             {
@@ -212,8 +214,10 @@ namespace Sprint_0
             if (!IsTakingDamage)
             {
                 ResetCounters();
-                damageCounter = 30;
+                
+                damageCounter = defaultCounterLength;
                 linkHealth-= damage;
+              
                 if (linkHealth == 0)
                     damageCounter += 90;
             }
@@ -224,16 +228,16 @@ namespace Sprint_0
             switch (direction)
             {
                 case FacingDirection.Left:
-                    linksPosition.X += linkSpeed * 30 * 3;
+                    linksPosition.X += bouncebackDistance;
                     break;
                 case FacingDirection.Right:
-                    linksPosition.X -= linkSpeed * 30 * 3;
+                    linksPosition.X -= bouncebackDistance;
                     break;
                 case FacingDirection.Up:
-                    linksPosition.Y -= linkSpeed * 30 * 3;
+                    linksPosition.Y -= bouncebackDistance;
                     break;
                 case FacingDirection.Down:
-                    linksPosition.Y += linkSpeed * 30 * 3;
+                    linksPosition.Y += bouncebackDistance;
                     break;
             }
         }

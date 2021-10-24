@@ -1,20 +1,24 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items.ItemColliders;
 
 namespace Sprint_0.Scripts.Items
 {
     public class Item : IItem
     {
-        private ItemType type;
         private ISprite sprite;
         private Vector2 pos;
         private bool delete = false;
 
+        public ItemType Type { get; }
+
+        public IItemCollider Collider { get; set; }
+
         public Item(Vector2 spawnLoc, ItemType type)
         {
-            this.type = type;
-            sprite = GetSprite(type);
+            Type = type;
+            InitializeDependencies(Type);
             pos = spawnLoc;
         }
 
@@ -38,61 +42,74 @@ namespace Sprint_0.Scripts.Items
             delete = true;
         }
 
-        //----- Helper method for handling sprite type -----//
+        //----- Helper method for initializing dependencies by type -----//
 
-        private ISprite GetSprite(ItemType type)
+        private void InitializeDependencies(ItemType type)
         {
-            ISprite returnSprite;
             switch (type)
             {
                 case ItemType.SmallHeartItem:
-                    returnSprite = ItemSpriteFactory.Instance.CreateSmallHeartItemSprite();
+                    Collider = ItemColliderFactory.Instance.CreateSmallHeartItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateSmallHeartItemSprite();
                     break;
                 case ItemType.HeartContainer:
-                    returnSprite = ItemSpriteFactory.Instance.CreateHeartContainerSprite();
+                    Collider = ItemColliderFactory.Instance.CreateHeartContainerCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateHeartContainerSprite();
                     break;
                 case ItemType.Fairy:
-                    returnSprite = ItemSpriteFactory.Instance.CreateFairySprite();
+                    Collider = ItemColliderFactory.Instance.CreateFairyCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateFairySprite();
                     break;
                 case ItemType.Clock:
-                    returnSprite = ItemSpriteFactory.Instance.CreateClockSprite();
+                    Collider = ItemColliderFactory.Instance.CreateClockCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateClockSprite();
                     break;
                 case ItemType.BlueRuby:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBlueRubySprite();
+                    Collider = ItemColliderFactory.Instance.CreateBlueRubyCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBlueRubySprite();
                     break;
                 case ItemType.YellowRuby:
-                    returnSprite = ItemSpriteFactory.Instance.CreateYellowRubySprite();
+                    Collider = ItemColliderFactory.Instance.CreateYellowRubyCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateYellowRubySprite();
                     break;
                 case ItemType.BasicMapItem:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBasicMapItemSprite();
+                    Collider = ItemColliderFactory.Instance.CreateBasicMapItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBasicMapItemSprite();
                     break;
                 case ItemType.BoomerangItem:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBoomerangItemSprite();
+                    Collider = ItemColliderFactory.Instance.CreateBoomerangItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBoomerangItemSprite();
                     break;
                 case ItemType.BombItem:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBombItemSprite();
+                    Collider = ItemColliderFactory.Instance.CreateBombItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBombItemSprite();
                     break;
                 case ItemType.BowItem:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBowItemSprite();
+                    Collider = ItemColliderFactory.Instance.CreateBowItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBowItemSprite();
                     break;
                 case ItemType.BasicKey:
-                    returnSprite = ItemSpriteFactory.Instance.CreateBasicKeySprite();
+                    Collider = ItemColliderFactory.Instance.CreateBasicKeyCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBasicKeySprite();
                     break;
                 case ItemType.MagicKey:
-                    returnSprite = ItemSpriteFactory.Instance.CreateMagicKeySprite();
+                    Collider = ItemColliderFactory.Instance.CreateMagicKeyCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateMagicKeySprite();
                     break;
                 case ItemType.Compass:
-                    returnSprite = ItemSpriteFactory.Instance.CreateCompassSprite();
+                    Collider = ItemColliderFactory.Instance.CreateCompassCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateCompassSprite();
                     break;
                 case ItemType.TriforcePiece:
-                    returnSprite = ItemSpriteFactory.Instance.CreateTriforcePieceSprite();
+                    Collider = ItemColliderFactory.Instance.CreateTriforcePieceCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateTriforcePieceSprite();
                     break;
                 default:
                     // Should never fire
-                    returnSprite = ItemSpriteFactory.Instance.CreateYellowRubySprite();
+                    Collider = ItemColliderFactory.Instance.CreateSmallHeartItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateSmallHeartItemSprite();
                     break;
             }
-            return returnSprite;
         }
     }
 }

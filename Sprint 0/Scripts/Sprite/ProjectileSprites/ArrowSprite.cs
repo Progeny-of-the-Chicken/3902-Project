@@ -10,18 +10,18 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         private Rectangle frame;
         private double rotation;
         private Vector2 rotationOffset = new Vector2(8, 2.5f);
-        private int scale = 2;
+        private int scale = ObjectConstants.scale;
 
         public ArrowSprite(Texture2D textures, FacingDirection direction, bool silver)
         {
             spritesheet = textures;
             if (!silver)
             {
-                frame = new Rectangle(10, 190, 16, 5);
+                frame = SpriteRectangles.basicArrowFrame;
             }
             else
             {
-                frame = new Rectangle(36, 190, 16, 5);
+                frame = SpriteRectangles.silverArrowFrame;
             }
             switch (direction)
             {

@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Sprite.ItemSprites
         private double animationDelaySeconds = 0.1;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;
-        private int scale = 2;
+        private int scale = ObjectConstants.scale;
 
         public AnimatedItemSprite(Texture2D textures, List<Rectangle> sourceRecs)
         {

@@ -18,6 +18,8 @@ namespace Sprint_0.Scripts.Projectiles
         private double startTimeSeconds = 0.0;
         private double projectileLifetimeSeconds = 3.0;
 
+        public int damage { get => 1; }
+
         public MagicProjectile(Vector2 spawnLoc, FacingDirection mainDirection, FacingDirection secondaryDirection)
         {
             currentPos = spawnLoc;

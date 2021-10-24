@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Sprite.ItemSprites
     {
         private Texture2D spritesheet;
         private Rectangle frame;
-        private int scale = 2;
+        private int scale = ObjectConstants.scale;
 
         public NonAnimatedItemSprite(Texture2D textures, Rectangle sourceRec)
         {
