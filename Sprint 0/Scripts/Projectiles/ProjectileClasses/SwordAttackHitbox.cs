@@ -1,16 +1,20 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class SwordAttackHitbox : IProjectile
     {
         private Rectangle frame;
+        private IProjectileCollider collider;
         private bool delete = false;
 
         private int swordCounter = ObjectConstants.swordHitboxCounter;
 
         public int Damage { get => ObjectConstants.basicSwordDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {

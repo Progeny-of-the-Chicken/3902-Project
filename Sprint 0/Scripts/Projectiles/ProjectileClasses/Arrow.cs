@@ -2,12 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Arrow : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
@@ -22,6 +24,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public int Damage { get => ObjectConstants.arrowDamage; }
 
+        public IProjectileCollider Collider { get => collider; }
+
         public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
         {
             startPos = currentPos = spawnLoc;
@@ -30,6 +34,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 maxDistance = (int) (maxDistance * silverArrowSpeedCoef);
             }
             SetSpriteVectors(direction, silver);
+
+            collider = new RotatedProjectileCollider(this, direction);
         }
 
         public void Update(GameTime gt)

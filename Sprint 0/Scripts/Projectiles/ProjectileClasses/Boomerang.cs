@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Boomerang : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
@@ -19,6 +21,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double tOffset = ObjectConstants.boomerangTOffset;
 
         public int Damage { get => ObjectConstants.boomerangDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {

@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Bomb : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 pos;
         private int displacement = ObjectConstants.bombDisplacement;
         private bool delete = false;
@@ -16,6 +18,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
 
         public int Damage { get => ObjectConstants.bombDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {

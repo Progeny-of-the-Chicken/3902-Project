@@ -1,14 +1,17 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class BlastZone : IProjectile
     {
-        private Rectangle frame;
+        private IProjectileCollider collider;
         private bool delete = false;
 
         public int Damage { get => ObjectConstants.basicSwordDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public BlastZone(Vector2 location, FacingDirection direction)
         {

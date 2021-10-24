@@ -2,12 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles.ProjectileColliders;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class FireSpell : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
@@ -19,6 +21,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
 
         public int Damage { get => ObjectConstants.fireSpellDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {
