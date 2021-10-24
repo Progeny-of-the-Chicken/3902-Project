@@ -35,7 +35,8 @@ namespace Sprint_0.Scripts.Terrain.Colliders
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            projectile.despawn();
+            if()
+            projectile.Despawn();
         }
 
         public void Update(Vector2 location)
