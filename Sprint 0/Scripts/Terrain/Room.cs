@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using System;
+using Sprint_0.Scripts.Sets;
 
 public class Room : IRoom
 {
@@ -20,7 +21,7 @@ public class Room : IRoom
 	private int YOFFSET;
 	private int WALLOFFSET;
 	private ILink link;
-	private List<IEnemy> enemies;
+	private EnemySet enemySet;
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
@@ -38,7 +39,7 @@ public class Room : IRoom
 		roomLocation = new Vector2(roomCol, roomRow);
 
 		this.link = link;
-		enemies = new List<IEnemy>();
+		enemySet = new EnemySet();
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
@@ -49,10 +50,7 @@ public class Room : IRoom
 	public void Update(GameTime gt)
 	{
 		link.Update(gt);
-        foreach (IEnemy enemy in enemies)
-        {
-			enemy.Update(gt);
-        }
+		enemySet.Update(gt);
 		itemSet.Update(gt);
 		projectileSet.Update(gt);
 		foreach(ITerrain block in blocks)
@@ -69,10 +67,7 @@ public class Room : IRoom
 		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
 		link.Draw(spriteBatch);
-		foreach (IEnemy enemy in enemies)
-		{
-			enemy.Draw(spriteBatch);
-		}
+		enemySet.Draw(spriteBatch);
 		itemSet.Draw(spriteBatch);
 		projectileSet.Draw(spriteBatch);
 		foreach (ITerrain block in blocks)
@@ -122,25 +117,25 @@ public class Room : IRoom
 				switch (enemyString[i+1])
                 {
 					case "Aquamentus":
-						enemies.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation, scale));
 						break;
 					case "Gel":
-						enemies.Add(EnemyFactory.Instance.CreateGel(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation, scale));
 						break;
 					case "Goriya":
-						enemies.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation, scale));
 						break;
 					case "Keese":
-						enemies.Add(EnemyFactory.Instance.CreateKeese(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation, scale));
 						break;
 					case "OldMan":
-						enemies.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation, scale));
 						break;
 					case "Stalfos":
-						enemies.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation, scale));
 						break;
 					case "Zol":
-						enemies.Add(EnemyFactory.Instance.CreateZol(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation, scale));
 						break;
 					default:
 						Console.WriteLine("Typo in Room " + roomId);

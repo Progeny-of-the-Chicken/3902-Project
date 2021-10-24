@@ -12,11 +12,9 @@ namespace Sprint_0.Scripts.Sets
         public HashSet<IEnemy> Enemies { get => enemies; }
         HashSet<IEnemy> enemies;
         HashSet<IEnemy> toBeRemoved;
-        Game1 game;
 
-        public EnemySet(Game1 game)
+        public EnemySet()
         {
-            this.game = game;
             enemies = new HashSet<IEnemy>();
 
         }
