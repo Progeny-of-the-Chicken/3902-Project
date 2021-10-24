@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Collider;
+
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -13,6 +16,10 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         
         ISprite sprite;
+        IEnemyCollider collider;
+        public IEnemyCollider Collider { get => collider; }
+
+        Rectangle[] frames = { new Rectangle(1, 15, 8, 9), new Rectangle(10, 15, 8, 9) };
 
         byte[] random;
 
@@ -20,6 +27,12 @@ namespace Sprint_0.Scripts.Enemy
         const float pauseTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
+        bool delete = false;
+
+        public int Damage { get => _damage; }
+        int _damage;
+        int health = 1;
+        const int knockbackDistance = 50;
         
         Vector2 location;
         Vector2 direction;
@@ -30,7 +43,10 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateGelSprite(scale);
+            sprite = EnemySpriteFactory.Instance.CreateGelSprite(scale, frames);
+
+            Rectangle collision = new Rectangle(0, 0, (int) (frames[0].Width * scale), (int) (frames[0].Height * scale));
+            collider = new GenericEnemyCollider(this, collision);
         }
 
         public void Update(GameTime t)
@@ -40,7 +56,8 @@ namespace Sprint_0.Scripts.Enemy
             {
                 Move(t);
             }
-            sprite.Update(t);   
+            sprite.Update(t);
+            collider.Update(location);
         }
 
         public void Move(GameTime t)
@@ -67,6 +84,20 @@ namespace Sprint_0.Scripts.Enemy
                 direction.X = 0;
                 direction.Y = (random[1] % 2) * 2 - 1;
             }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            delete = (health <= 0);
+        }
+        public void KnockBack(Vector2 knockback)
+        {
+            location += knockback * knockbackDistance;
+        }
+        public bool CheckDelete()
+        {
+            return delete;
         }
         public void Draw(SpriteBatch sb)
         {

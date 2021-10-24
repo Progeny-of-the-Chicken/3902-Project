@@ -4,5 +4,6 @@ namespace Sprint_0
 {
     public interface ILink
     {
+        public void TakeDamage(int damage);
     }
 }
