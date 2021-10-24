@@ -10,5 +10,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
         Rectangle Hitbox { get; }
 
         void Update(Vector2 location);
+
+        void OnPlayerCollision(ILink link);
+
+        void OnEnemyCollision(IEnemy enemy);
+
+        void OnBlockCollision(ITerrain block);
     }
 }

@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
             }
+            // TODO: Check if spawned by Link or Goriya, send to collider
 
             switch (direction)
             {
