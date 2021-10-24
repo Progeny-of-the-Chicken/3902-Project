@@ -41,6 +41,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
+            collider.Update(currentPos);
             if (!pop)
             {
                 UpdateArrow(gt);

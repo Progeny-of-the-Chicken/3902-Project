@@ -8,6 +8,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
     {
         private Rectangle _hitbox;
         private Vector2 positionOffset;
+        private FacingDirection direction;
 
         public IProjectile Owner { get; }
 
@@ -16,6 +17,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
         public RotatedProjectileCollider(IProjectile owner, FacingDirection direction)
         {
             Owner = owner;
+            this.direction = direction;
             if (owner is Arrow)
             {
                 _hitbox = SpriteRectangles.basicArrowFrame;
@@ -36,14 +38,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
 
         public void OnPlayerCollision(ILink player)
         {
-            // TODO: call Link knockback, reduce health by owner damage
-            Owner.Despawn();
+            // TODO: call Link knockback
+            player.TakeDamage(Owner.Damage);
         }
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            // TODO: call Enemy knockback, reduce health by owner damage
-            Owner.Despawn();
+            // TODO: call enemy knockback with facing direction
+            enemy.TakeDamage(Owner.Damage);
         }
 
         //----- Helper method for initializing the hitbox -----//

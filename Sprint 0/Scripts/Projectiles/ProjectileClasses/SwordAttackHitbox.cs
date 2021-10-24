@@ -6,7 +6,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class SwordAttackHitbox : IProjectile
     {
-        private Rectangle frame;
+        private Vector2 pos;
         private IProjectileCollider collider;
         private bool delete = false;
 
@@ -18,18 +18,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
-            if ((direction == FacingDirection.Left) || (direction == FacingDirection.Right))
-            {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxLength * ObjectConstants.scale, ObjectConstants.swordHitboxWidth * ObjectConstants.scale);
-            }
-            else
-            {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxWidth * ObjectConstants.scale, ObjectConstants.swordHitboxLength * ObjectConstants.scale);
-            }
+            pos = spawnLoc;
+            collider = new RotatedProjectileCollider(this, direction);
         }
 
         public void Update(GameTime gt)
         {
+            collider.Update(pos);
             swordCounter--;
             if (swordCounter <= 0)
             {

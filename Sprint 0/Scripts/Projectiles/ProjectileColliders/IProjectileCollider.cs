@@ -14,7 +14,5 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileColliders
         void OnPlayerCollision(ILink link);
 
         void OnEnemyCollision(IEnemy enemy);
-
-        void OnBlockCollision(ITerrain block);
     }
 }
