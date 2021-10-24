@@ -36,6 +36,9 @@ namespace Sprint_0.Scripts.Enemy
 		Rectangle GoriyaBackFrame = new Rectangle(240, 10, 14, 17);
 		Rectangle[] GoriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16 ) };
 		Rectangle BoomerangFrames = new Rectangle(290, 14, 7, 10);
+		Rectangle WallmasterOpenFrame = new Rectangle(392, 10, 18 ,16);
+		Rectangle WallmasterCloseFrame = new Rectangle(410, 11, 14, 16);
+		Rectangle SpikeTrapFrame = new Rectangle(161, 58, 24, 18);
 
 
 
@@ -99,6 +102,19 @@ namespace Sprint_0.Scripts.Enemy
 		public ISprite CreateLeftGoriyaSprite(float scale)
 		{
 			return new GoriyaLeftSprite(GoriyaRightFrames, scale, enemySprites);
+		}
+		public ISprite CreateWallmasterOpenSprite(float scale)
+        {
+			return new WallmasterOpenSprite(WallmasterOpenFrame, scale, enemySprites);
+        }
+
+		public ISprite CreateWallmasterCloseSprite(float scale)
+		{
+			return new WallmasterCloseSprite(WallmasterCloseFrame, scale, enemySprites);
+		}
+		public ISprite CreateSpikeTrapSprite(float scale)
+		{
+			return new SpikeTrapSprite(SpikeTrapFrame, scale, enemySprites);
 		}
 	}
 }

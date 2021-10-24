@@ -26,7 +26,7 @@ namespace Sprint_0
 
         IEnemy enemy;
         Vector2 enemyStart;
-        int enemyCount = 7;
+        int enemyCount = 9;
         int enemyIndex = 0;
 
         public Game1()
@@ -132,6 +132,12 @@ namespace Sprint_0
                     enemy = EnemyFactory.Instance.CreateGoriya(enemyStart, 2);
                     break;
                 case 6:
+                    enemy = EnemyFactory.Instance.CreateWallmaster(enemyStart, 2);
+                    break;
+                case 7:
+                    enemy = EnemyFactory.Instance.CreateSpikeTrap(enemyStart, 2);
+                    break;
+                case 8:
                     enemy = EnemyFactory.Instance.CreateAquamentus(enemyStart, 2);
                     break;
                 default:
