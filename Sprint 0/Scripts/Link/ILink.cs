@@ -8,5 +8,6 @@ namespace Sprint_0
     {
         void Draw(SpriteBatch sb);
         void Update(GameTime gt);
+        public void TakeDamage(int damage);
     }
 }
