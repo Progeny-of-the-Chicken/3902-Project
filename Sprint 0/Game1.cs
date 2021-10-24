@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts;
 
 namespace Sprint_0
 {

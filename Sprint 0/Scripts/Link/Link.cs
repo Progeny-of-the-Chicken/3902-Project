@@ -2,20 +2,24 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
-using System;
 
-namespace Sprint_0
+namespace Sprint_0.Scripts
 {
 
     public class Link : ILink
     {
         ISprite LinkSprite;
         LinkStateMachine linkState;
+        private LinkCollider _collider;
+        public IPlayerCollider collider { get => _collider; }
 
         public Link()
         {
             linkState = new LinkStateMachine();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+
+            Rectangle spawnHitbox = new Rectangle(linkState.Position.ToPoint(), new Point(LinkConstants.WidthHeight * LinkConstants.Scale));
+            _collider = new LinkCollider(this, spawnHitbox);
         }
 
         public void Draw(SpriteBatch sb, GameTime gt)
@@ -28,7 +32,9 @@ namespace Sprint_0
             linkState.Update();
             if (!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+
             LinkSprite.Update(gt);
+            _collider.Update(linkState.Position);
         }
 
         public void GoInDirection(FacingDirection direction)
