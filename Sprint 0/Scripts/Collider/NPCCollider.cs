@@ -20,14 +20,43 @@ namespace Sprint_0.Scripts.Collider
             this._owner = owner;
             this.rectangle = collisionRectangle;
         }
-        public void OnPlayerCollision(ILink player)
+        public void OnPlayerCollision(Link player, Rectangle overlap)
         {
-            //unused
+            Vector2 pushBack = Vector2.Zero;
+
+            //Collided on left or right
+            if(overlap.Width > overlap.Height)
+            {
+                //Collided on the left, so push right
+                if(overlap.X == rectangle.X)
+                {
+                    pushBack.X = overlap.Width;
+                }
+                //Collided on the right, so push left
+                else
+                {
+                    pushBack.X = -overlap.Width;
+                }
+            }
+            else
+            {
+                //Collided on the top, so push down
+                if(overlap.Y == rectangle.Y)
+                {
+                    pushBack.Y = overlap.Height;
+                }
+                //Collided on the bottom, so push up
+                else
+                {
+                    pushBack.Y = -overlap.Height;
+                }
+            }
+            player.BounceBackInDirection(pushBack);
         }
 
-        public void OnProjectileCollision(FacingDirection direction, IProjectile projectile)
+        public void OnProjectileCollision(IProjectile projectile)
         {
-            //unused
+            //can implement ability to counterattack, however that's low on our priorities for now
         }
 
         public void Update(Vector2 location)

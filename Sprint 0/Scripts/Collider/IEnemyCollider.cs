@@ -14,8 +14,8 @@ namespace Sprint_0.Scripts.Collider
 
         public void Update(Vector2 location);
 
-        public void OnPlayerCollision(ILink player);
+        public void OnPlayerCollision(Link player, Rectangle overlap);
 
-        public void OnProjectileCollision(FacingDirection direction, IProjectile projectile);
+        public void OnProjectileCollision(IProjectile projectile);
     }
 }
