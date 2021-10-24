@@ -99,6 +99,18 @@ public class Room : IRoom
 	void LoadBlockColliders(TextFieldParser csvReader)
 	{
 		string[] blockColliderString = csvReader.ReadFields();
+		for (int i = 0; i < blockColliderString.Length; i += 2)
+		{
+			if (!blockColliderString[i].Equals(""))
+			{
+				//first string in each pair notates location
+				float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
+				float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+				Vector2 enemyLocation = new Vector2(blockLocationX, blockLocationY);
+
+				blocks.Add(new DungeonWaterSprite(enemyLocation));
+			}
+		}
 	}
 
 	void LoadEnemies(TextFieldParser csvReader)
