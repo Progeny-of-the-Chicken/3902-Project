@@ -14,11 +14,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 popOffset;
         private bool delete = false;
 
-        private double speedPerSecond = 150.0;
-        private int maxDistance = 200;
-        private double silverArrowSpeedCoef = 1.5;
+        private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
+        private int maxDistance = ObjectConstants.arrowMaxDistance;
+        private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
         private bool pop = false;
-        private double popDurationSeconds = 0.2;
+        private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
+
+        public int damage { get => ObjectConstants.arrowDamage; }
 
         public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
         {

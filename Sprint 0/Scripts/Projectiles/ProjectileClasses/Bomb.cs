@@ -8,12 +8,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
     {
         private ISprite sprite;
         private Vector2 pos;
-        private int displacement = 50;
+        private int displacement = ObjectConstants.bombDisplacement;
         private bool delete = false;
         private double startTime = 0;
-        private double fuseDurationSeconds = 2.0;
+        private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
-        private double explodeDurationSeconds = 0.3;
+        private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
+
+        public int damage { get => ObjectConstants.bombDamage; }
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {
