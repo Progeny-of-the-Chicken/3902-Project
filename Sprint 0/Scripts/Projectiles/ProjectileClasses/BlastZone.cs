@@ -8,6 +8,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
     {
         private IProjectileCollider collider;
         private bool delete = false;
+        private bool friendly = false;
+
+        public bool Friendly { get => friendly; }
 
         public int Damage { get => ObjectConstants.basicSwordDamage; }
 
@@ -16,6 +19,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public BlastZone(Vector2 location, FacingDirection direction)
         {
             // TODO: Add collider
+            friendly = true;
         }
 
         public void Update(GameTime gameTime)

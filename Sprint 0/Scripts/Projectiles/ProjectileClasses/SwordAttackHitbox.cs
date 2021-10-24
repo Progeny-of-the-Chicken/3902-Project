@@ -9,8 +9,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 pos;
         private IProjectileCollider collider;
         private bool delete = false;
+        private bool friendly = false;
 
         private int swordCounter = ObjectConstants.swordHitboxCounter;
+
+        public bool Friendly { get => friendly; }
 
         public int Damage { get => ObjectConstants.basicSwordDamage; }
 

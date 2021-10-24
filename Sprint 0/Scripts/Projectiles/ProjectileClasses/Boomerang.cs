@@ -13,6 +13,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 currentPos;
         private Vector2 startPos;
         private bool delete = false;
+        private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
@@ -20,18 +21,19 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double startT = 0;
         private double tOffset = ObjectConstants.boomerangTOffset;
 
+        public bool Friendly { get => friendly; }
+
         public int Damage { get => ObjectConstants.boomerangDamage; }
 
         public IProjectileCollider Collider { get => collider; }
 
-        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, bool friendly)
         {
             startPos = currentPos = spawnLoc;
             if (magical)
             {
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
             }
-            // TODO: Check if spawned by Link or Goriya, send to collider
 
             switch (direction)
             {
@@ -51,6 +53,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
+
+            // TODO: Add collider
+            this.friendly = friendly;
         }
 
         public void Update(GameTime gt)

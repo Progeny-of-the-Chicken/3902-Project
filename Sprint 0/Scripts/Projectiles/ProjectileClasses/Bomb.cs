@@ -12,10 +12,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 pos;
         private int displacement = ObjectConstants.bombDisplacement;
         private bool delete = false;
+        private bool friendly = false;
+
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
+
+        public bool Friendly { get => friendly; }
 
         public int Damage { get => ObjectConstants.bombDamage; }
 
@@ -42,6 +46,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
+
+            // TODO: Add collider
+            friendly = true;
         }
 
         public void Update(GameTime gt)

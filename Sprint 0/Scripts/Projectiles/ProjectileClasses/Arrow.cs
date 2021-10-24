@@ -15,12 +15,15 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 startPos;
         private Vector2 popOffset;
         private bool delete = false;
+        private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
         private int maxDistance = ObjectConstants.arrowMaxDistance;
         private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
         private bool pop = false;
         private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
+
+        public bool Friendly { get => friendly; }
 
         public int Damage { get => ObjectConstants.arrowDamage; }
 
@@ -36,6 +39,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             SetSpriteVectors(direction, silver);
 
             collider = new RotatedProjectileCollider(this, direction);
+            friendly = true;
         }
 
         public void Update(GameTime gt)

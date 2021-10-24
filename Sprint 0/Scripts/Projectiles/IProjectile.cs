@@ -6,6 +6,8 @@ namespace Sprint_0.Scripts.Projectiles
 {
     public interface IProjectile
     {
+        bool Friendly { get; }
+
         int Damage { get; }
 
         IProjectileCollider Collider { get; }

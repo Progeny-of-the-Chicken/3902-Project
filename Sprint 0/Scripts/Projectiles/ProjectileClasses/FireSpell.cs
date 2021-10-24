@@ -14,11 +14,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 currentPos;
         private Vector2 startPos;
         private bool delete = false;
+        private bool friendly = false;
 
         private bool linger = false;
         private double speedPerSecond = ObjectConstants.fireSpellSpeedPerSecond;
         private int maxDistance = ObjectConstants.fireSpellMaxDistance;
         private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
+
+        public bool Friendly { get => friendly; }
 
         public int Damage { get => ObjectConstants.fireSpellDamage; }
 
@@ -45,6 +48,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateFireSpellSprite();
+
+            // TODO: Add collider
+            friendly = true;
         }
 
         public void Update(GameTime gt)
