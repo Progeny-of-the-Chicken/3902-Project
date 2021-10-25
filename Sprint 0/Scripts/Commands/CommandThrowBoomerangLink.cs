@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            game.projectileSet.projectiles.Add(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.ItemSpawnPosition, link.FacingDirection));
+            game.roomManager.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.ItemSpawnPosition, link.FacingDirection));
             link.UseItem();
         }
     }

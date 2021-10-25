@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0;
 
 public class NorthDoorSprite : ITerrain
 {
@@ -10,7 +11,7 @@ public class NorthDoorSprite : ITerrain
 
     public NorthDoorSprite(Vector2 screenLocation)
     { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, 2*spritesheetLocation.Width, 2*spritesheetLocation.Height);
+        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
     }
 
     public void Update()
