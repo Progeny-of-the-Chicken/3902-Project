@@ -30,7 +30,7 @@ public class Room : IRoom
 
 	public Room(string roomId, ILink link)
 	{
-		this.scale = Constants.scale;
+		this.scale = ObjectConstants.scale;
 		this.WALLOFFSET = 33 * this.scale;
 		this.YOFFSET = 63 * this.scale;
 

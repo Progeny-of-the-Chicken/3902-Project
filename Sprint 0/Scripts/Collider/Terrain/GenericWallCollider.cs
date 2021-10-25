@@ -25,7 +25,6 @@ namespace Sprint_0.Scripts.Collider.Terrain
         {
             Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.collisionRectangle);
             enemy.KnockBack(adjustmentForEnemy);
-            
         }
 
         public void OnLinkCollision(Link link)
