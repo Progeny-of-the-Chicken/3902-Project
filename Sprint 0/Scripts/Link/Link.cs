@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts
             linkState = new LinkStateMachine();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
 
-            Rectangle spawnHitbox = new Rectangle(linkState.Position.ToPoint(), new Point(LinkConstants.WidthHeight * LinkConstants.Scale));
+            Rectangle spawnHitbox = new Rectangle(linkState.Position.ToPoint(), new Point(ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             _collider = new LinkCollider(this, spawnHitbox);
         }
 

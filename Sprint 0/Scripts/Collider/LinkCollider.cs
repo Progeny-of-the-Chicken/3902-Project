@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts
 {
@@ -20,15 +21,20 @@ namespace Sprint_0.Scripts
         }
 
 
-        public void onBlockCollision(ITerrain block)
+        public void OnBlockCollision(ITerrain block)
         {
             FacingDirection currDirection = _owner.FacingDirection;
             _owner.BounceBackInDirection(oppositeDirection(currDirection));
         }
 
-        public void onItemCollision(IItem item)
+        public void OnItemCollision(IItem item)
         {
             item.Despawn();
+        }
+
+        public void OnProjectileCollision(IProjectile proj)
+        {
+            proj.Despawn();
         }
 
         public void Update(Vector2 location)

@@ -8,6 +8,7 @@ namespace Sprint_0
         //----- Sprite constant values -----//
         public const int scale = 2;
         public const double itemAnimationDelaySeconds = 0.1;
+        public const int standardWidthHeight = 16;
 
         //----- Item constant values -----//
         public const double clockFreezeSeconds = 10.0;

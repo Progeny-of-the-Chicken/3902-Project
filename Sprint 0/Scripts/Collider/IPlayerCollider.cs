@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts
 {
@@ -11,8 +12,10 @@ namespace Sprint_0.Scripts
 
         public void Update(Vector2 location);
 
-        public void onBlockCollision(ITerrain block);
+        public void OnBlockCollision(ITerrain block);
 
-        public void onItemCollision(IItem item);
+        public void OnItemCollision(IItem item);
+
+        public void OnProjectileCollision(IProjectile proj);
     }
 }
