@@ -7,13 +7,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Collider.Enemy;
+
 
 
 namespace Sprint_0.Scripts.Enemy
 {
     class Wallmaster : IEnemy
     {
-        WallmasterOpenSprite sprite;
+
+        ISprite sprite;
+        IEnemyCollider collider;
+        public IEnemyCollider Collider { get => collider; }
 
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
