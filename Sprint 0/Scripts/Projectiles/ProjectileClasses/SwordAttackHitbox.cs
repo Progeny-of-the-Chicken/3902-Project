@@ -23,6 +23,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             pos = spawnLoc;
             collider = new RotatedProjectileCollider(this, direction);
+            friendly = true;
         }
 
         public void Update(GameTime gt)

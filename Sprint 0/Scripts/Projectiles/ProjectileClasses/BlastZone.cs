@@ -16,9 +16,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public BlastZone(Vector2 location, FacingDirection direction)
+        public BlastZone(Vector2 location)
         {
-            // TODO: Add collider
+            collider = new BlastZoneProjectileCollider(this);
             friendly = true;
         }
 

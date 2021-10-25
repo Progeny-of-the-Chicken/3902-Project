@@ -50,7 +50,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
 
-            // TODO: Add collider
+            collider = new GenericEnemyProjectileCollider(this);
             friendly = false;
         }
 

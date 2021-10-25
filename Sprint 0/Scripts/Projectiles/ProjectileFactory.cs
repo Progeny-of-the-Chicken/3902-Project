@@ -45,9 +45,9 @@ namespace Sprint_0.Scripts.Projectiles
             return new Bomb(location, direction);
         }
 
-        public IProjectile CreateBlastZone(Vector2 location, FacingDirection direction)
+        public IProjectile CreateBlastZone(Vector2 location)
         {
-            return new BlastZone(location, direction);
+            return new BlastZone(location);
         }
 
         public IProjectile CreateFireSpell(Vector2 location, FacingDirection direction)
