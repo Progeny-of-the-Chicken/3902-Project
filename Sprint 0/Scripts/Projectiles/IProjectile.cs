@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles
 {
     public interface IProjectile
     {
-        int damage { get; }
+        bool Friendly { get; }
+
+        int Damage { get; }
+
+        IProjectileCollider Collider { get; }
 
         void Update(GameTime gt);
 

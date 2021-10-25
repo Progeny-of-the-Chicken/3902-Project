@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public IEnemy owner { get => _owner; }
         private IEnemy _owner;
-        public Rectangle collisionRectangle { get => collisionRectangle; }
+        public Rectangle collisionRectangle { get => rectangle; }
         private Rectangle rectangle;
 
         private const int knockBack = 50;
@@ -63,7 +64,10 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            projectile.Despawn();
+            if (projectile is Arrow)
+            {
+                projectile.Despawn();
+            }
         }
     }
 }

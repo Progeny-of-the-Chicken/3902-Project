@@ -2,23 +2,31 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class FireSpell : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
         private bool delete = false;
+        private bool friendly = false;
 
-        private bool linger = false;
         private double speedPerSecond = ObjectConstants.fireSpellSpeedPerSecond;
         private int maxDistance = ObjectConstants.fireSpellMaxDistance;
         private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
 
-        public int damage { get => ObjectConstants.fireSpellDamage; }
+        public bool linger = false;
+
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => ObjectConstants.fireSpellDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {
@@ -41,6 +49,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateFireSpellSprite();
+
+            collider = ProjectileColliderFactory.Instance.CreateFireSpellCollider(this);
+            friendly = true;
         }
 
         public void Update(GameTime gt)
@@ -54,6 +65,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 UpdateFireSpellLinger(gt);
             }
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)

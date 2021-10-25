@@ -108,7 +108,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ProjectileFactory.Instance.CreateBoomerang(location, direction, false);
+            boomerang = ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction);
         }
         public void TakeDamage(int damage)
         {

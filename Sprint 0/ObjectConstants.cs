@@ -27,8 +27,12 @@ namespace Sprint_0
         public const double silverArrowSpeedCoef = 1.5;
         public const double arrowPopDurationSeconds = 0.2;
         public const int arrowDamage = 1;
+        // BlastZone
+        public const int blastZonePositionOffset = 16;
+        public const int blastZoneWidthHeight = 48 * scale;
+        public const int blastZoneDamage = 1;
         // Bomb
-        public const int bombDisplacement = 50;
+        public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
         public const double bombExplodeDurationSeconds = 0.3;
         public const int bombDamage = 1;
