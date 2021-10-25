@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Collider;
+using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 
@@ -23,7 +25,14 @@ namespace Sprint_0.Scripts
 
         public void OnBlockCollision(ITerrain block)
         {
-            _owner.BounceBackInDirection(oppositeDirection(currDirection));
+            //Vector2 tryToPushBlockBack = Overlap.DirectionToMoveObjectOff(this.hitbox, block.Collider.collisionRectangle);
+            //block.KnockBack(tryToPushBlockBack);
+            //TODO: ITerrain needs to have a public collider and a push back method
+        }
+
+        public void OnEnemyCollision(IEnemy enemy)
+        {
+            //Link can't do anything here
         }
 
         public void OnItemCollision(IItem item)
@@ -39,23 +48,6 @@ namespace Sprint_0.Scripts
         public void Update(Vector2 location)
         {
             hitbox.Location = location.ToPoint();
-        }
-
-        private FacingDirection oppositeDirection(FacingDirection dir)
-        {
-            switch (dir)
-            {
-                case FacingDirection.Right:
-                    return FacingDirection.Left;
-                case FacingDirection.Left:
-                    return FacingDirection.Right;
-                case FacingDirection.Up:
-                    return FacingDirection.Down;
-                case FacingDirection.Down:
-                    return FacingDirection.Up;
-                default:
-                    return FacingDirection.Up;
-            }
         }
     }
 }
