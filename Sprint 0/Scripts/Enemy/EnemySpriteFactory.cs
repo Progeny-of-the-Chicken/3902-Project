@@ -93,5 +93,19 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new GoriyaLeftSprite(frames, scale, enemySprites);
 		}
+
+		public ISprite CreateWallmasterOpenSprite(float scale, Rectangle frame)
+        {
+			return new WallmasterOpenSprite(frame, scale, enemySprites);
+        }
+		public ISprite CreateWallmasterCloseSprite(float scale, Rectangle frame)
+        {
+			return new WallmasterCloseSprite(frame, scale, enemySprites);
+        }
+
+		public ISprite CreateSpikeTrapSprite(float scale, Rectangle frame)
+        {
+			return new SpikeTrapSprite(frame, scale, enemySprites);
+        }
 	}
 }
