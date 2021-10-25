@@ -17,6 +17,7 @@ namespace Sprint_0.Scripts.Sets
             collisionHandlers.Add(new ProjectileEnemyCollisionHandler(projectiles, enemies));
             collisionHandlers.Add(new ProjectileBlockCollisionHandler(projectiles, blocks));
             collisionHandlers.Add(new PlayerItemCollisionHandler(link, items));
+            collisionHandlers.Add(new PlayerEnemyCollisionHandler((Link) link, enemies));
         }
 
         public void Update()

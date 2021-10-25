@@ -9,49 +9,22 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class NPCCollider : IEnemyCollider
     {
-        IEnemy _owner;
-        Rectangle rectangle;
-        public IEnemy owner => throw new NotImplementedException();
+        IEnemy owner;
+        Rectangle hitbox;
+        public IEnemy Owner { get => owner; }
 
-        public Rectangle collisionRectangle => throw new NotImplementedException();
+        public Rectangle Hitbox { get => hitbox; }
 
         public NPCCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
-            this.rectangle = collisionRectangle;
+            this.owner = owner;
+            this.hitbox = collisionRectangle;
         }
-        public void OnPlayerCollision(Link player, Rectangle overlap)
+        public void OnPlayerCollision(Link player)
         {
             Vector2 pushBack = Vector2.Zero;
-
-            //Collided on left or right
-            if(overlap.Width > overlap.Height)
-            {
-                //Collided on the left, so push right
-                if(overlap.X == rectangle.X)
-                {
-                    pushBack.X = overlap.Width;
-                }
-                //Collided on the right, so push left
-                else
-                {
-                    pushBack.X = -overlap.Width;
-                }
-            }
-            else
-            {
-                //Collided on the top, so push down
-                if(overlap.Y == rectangle.Y)
-                {
-                    pushBack.Y = overlap.Height;
-                }
-                //Collided on the bottom, so push up
-                else
-                {
-                    pushBack.Y = -overlap.Height;
-                }
-            }
-            player.BounceBackInDirection(pushBack);
+            pushBack = Overlap.DirectionToMoveObjectOff(hitbox, player.collider.CollisionRectangle);
+            player.PushBackBy(pushBack);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

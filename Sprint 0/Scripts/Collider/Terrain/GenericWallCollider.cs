@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.collisionRectangle);
+            Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
             enemy.KnockBack(adjustmentForEnemy);
         }
 

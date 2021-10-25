@@ -11,55 +11,28 @@ namespace Sprint_0.Scripts.Collider.Enemy
     class GenericEnemyCollider : IEnemyCollider
     {
 
-        public IEnemy owner { get => _owner; }
-        private IEnemy _owner;
-        public Rectangle collisionRectangle { get => rectangle; }
-        private Rectangle rectangle;
+        public IEnemy Owner { get => owner; }
+        private IEnemy owner;
+        public Rectangle Hitbox { get => hitbox; }
+        private Rectangle hitbox;
 
         private const int knockBack = 50;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
-            this.rectangle = collisionRectangle;
+            this.owner = owner;
+            this.hitbox = collisionRectangle;
         }
         public void Update(Vector2 location)
         {
-            rectangle.Location = location.ToPoint();
+            hitbox.Location = location.ToPoint();
         }
 
-        public void OnPlayerCollision(Link player, Rectangle overlap)
+        public void OnPlayerCollision(Link player)
         {
-            player.TakeDamage(owner.Damage);
-            Vector2 pushBack = Vector2.Zero;
+            player.TakeDamage(Owner.Damage);
 
-            //Collided on left or right
-            if (overlap.Width > overlap.Height)
-            {
-                //Collided on the left, so push right
-                if (overlap.X == rectangle.X)
-                {
-                    pushBack.X = knockBack;
-                }
-                //Collided on the right, so push left
-                else
-                {
-                    pushBack.X = -knockBack;
-                }
-            }
-            else
-            {
-                //Collided on the top, so push down
-                if (overlap.Y == rectangle.Y)
-                {
-                    pushBack.Y = knockBack;
-                }
-                //Collided on the bottom, so push up
-                else
-                {
-                    pushBack.Y = -knockBack;
-                }
-            }
-            player.BounceBackInDirection(pushBack);
+            Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
+            player.PushBackBy(pushBack);
         }
 
         public void OnProjectileCollision(IProjectile projectile)
