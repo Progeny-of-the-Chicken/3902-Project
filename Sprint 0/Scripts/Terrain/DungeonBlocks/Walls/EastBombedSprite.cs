@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
 
-public class EastBombedSprite : ITerrain
+public class EastBombedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(946, 76, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(947, 77, 32, 32);
     Rectangle destination;
 
     public EastBombedSprite(Vector2 screenLocation)

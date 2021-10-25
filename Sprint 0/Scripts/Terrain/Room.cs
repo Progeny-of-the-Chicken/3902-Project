@@ -25,6 +25,7 @@ public class Room : IRoom
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
+	private List<IWall> doors;
 
 	public Room(string roomId, ILink link)
 	{
@@ -43,6 +44,7 @@ public class Room : IRoom
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
+		doors = new List<IWall>();
 
 		LoadRoom();
 	}
@@ -66,14 +68,14 @@ public class Room : IRoom
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
 		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
-		link.Draw(spriteBatch);
-		enemySet.Draw(spriteBatch);
+		foreach (IWall door in doors)
+		{
+			door.Draw(spriteBatch);
+		}
 		itemSet.Draw(spriteBatch);
 		projectileSet.Draw(spriteBatch);
-		foreach (ITerrain block in blocks)
-		{
-			block.Draw(spriteBatch);
-		}
+		enemySet.Draw(spriteBatch);
+		link.Draw(spriteBatch);
 	}
 
 	public string RoomId()
@@ -204,37 +206,31 @@ public class Room : IRoom
 	void LoadDoors(TextFieldParser csvReader)
 	{
 		string[] doorString = csvReader.ReadFields();
-		for (int i = 0; i < doorString.Length; i += 2)
+		
+		Vector2 doorLocation = new Vector2();
+		if (doorString[0] != "")
         {
-			if (doorString[i] != "")
-            {
-				float doorLocationX;
-				float doorLocationY;
-				if (i % 4 == 0)
-                {
-					doorLocationY = YOFFSET + 88 * scale; 
-					if (i == 0)
-                    {
-						doorLocationX = 144 * scale;
-                    } else
-                    {
-						doorLocationX = 0;
-                    }
-                } else
-                {
-					doorLocationX = 112 * scale;
-					if (i == 2)
-                    {
-						doorLocationY = YOFFSET;
-                    } else
-                    {
-						doorLocationY = YOFFSET + 144 * scale;
-					}
-					Vector2 doorLocation = new Vector2(doorLocationX, doorLocationY);
-				}
-			}
-			//Do one of the many doors
+			doorLocation.X = 224 * scale;
+			doorLocation.Y = YOFFSET + 72 * scale;
+			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation));
         }
+		if (doorString.Length >  2 && doorString[2] != "")
+		{
+			doorLocation.X = 112 * scale;
+			doorLocation.Y = YOFFSET;
+			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation));
+		}
+		if (doorString.Length > 4 && doorString[4] != "") {
+			doorLocation.X = 0;
+			doorLocation.Y = YOFFSET + 72 * scale;
+			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation));
+		}  
+		if (doorString.Length > 6 && doorString[6] != "")
+		{
+			doorLocation.X = 112 * scale;
+			doorLocation.Y = YOFFSET + 144 * scale;
+			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation));
+		}
 	}
 
 	void LoadSpecial(TextFieldParser csvReader)

@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
 
-public class WestClosedSprite : ITerrain
+public class WestClosedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(913, 43, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(914, 44, 32, 32);
     Rectangle destination;
 
     public WestClosedSprite(Vector2 screenLocation)
