@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public IEnemy owner { get => _owner; }
         private IEnemy _owner;
-        public Rectangle collisionRectangle { get => collisionRectangle; }
+        public Rectangle collisionRectangle { get => rectangle; }
         private Rectangle rectangle;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
@@ -29,9 +30,12 @@ namespace Sprint_0.Scripts.Collider.Enemy
             player.TakeDamage(owner.Damage);
         }
 
-        public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
+        public void OnProjectileCollision(IProjectile projectile)
         {
-            //despawn projectile
+            if (projectile is Arrow)
+            {
+                projectile.Despawn();
+            }
         }
     }
 }

@@ -49,8 +49,8 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.S, new LinkChangeDirectionDown(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.Z, new LinkUseSword(game.link));
+			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link, game));
+			this.RegisterCommand(linkControllerMappings, Keys.Z, new LinkUseSword(game.link, game));
 			this.RegisterCommand(linkControllerMappings, Keys.E, new LinkTakeDamage(game.link));
 		}
 
