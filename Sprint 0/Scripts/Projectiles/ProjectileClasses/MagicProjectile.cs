@@ -1,24 +1,30 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Collider.Projectile;
 
-namespace Sprint_0.Scripts.Projectiles
+namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class MagicProjectile : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector = new Vector2(1, 1);
         private Vector2 currentPos;
         private float spreadFactor = 0.3f;
         private bool delete = false;
+        private bool friendly;
 
         private double speedPerSecond = 150.0;
         private double startTimeSeconds = 0.0;
         private double projectileLifetimeSeconds = 3.0;
 
-        public int damage { get => 1; }
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => 1; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public MagicProjectile(Vector2 spawnLoc, FacingDirection mainDirection, FacingDirection secondaryDirection)
         {
@@ -42,6 +48,9 @@ namespace Sprint_0.Scripts.Projectiles
                     break;
             }
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
+
+            collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
+            friendly = false;
         }
 
         public void Update(GameTime gt)
@@ -53,6 +62,7 @@ namespace Sprint_0.Scripts.Projectiles
                 delete = true;
             }
             sprite.Update(gt);
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -23,7 +24,6 @@ namespace Sprint_0.Scripts.Collider.Terrain
         {
             Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.collisionRectangle);
             enemy.KnockBack(adjustmentForEnemy);
-            
         }
 
         public void OnLinkCollision(Link link)
@@ -35,8 +35,22 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            //if()
-            projectile.Despawn();
+            if (projectile is Boomerang)
+            {
+                ((Boomerang)projectile).BounceOffWall();
+            }
+            else if (projectile is FireSpell)
+            {
+                ((FireSpell)projectile).linger = true;
+            }
+            else if (projectile is Bomb)
+            {
+                ((Bomb)projectile).MoveOutOfWall(Overlap.DirectionToMoveObjectOff(hitbox, projectile.Collider.Hitbox));
+            }
+            else
+            {
+                projectile.Despawn();
+            }
         }
 
         public void Update(Vector2 location)

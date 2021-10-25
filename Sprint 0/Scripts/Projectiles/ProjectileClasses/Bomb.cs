@@ -1,21 +1,29 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Bomb : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 pos;
         private int displacement = ObjectConstants.bombDisplacement;
         private bool delete = false;
+        private bool friendly = false;
+
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
 
-        public int damage { get => ObjectConstants.bombDamage; }
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => ObjectConstants.bombDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {
@@ -38,12 +46,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
+
+            collider = ProjectileColliderFactory.Instance.CreateBombCollider(this);
+            friendly = true;
         }
 
         public void Update(GameTime gt)
         {
             // Animation control
             sprite.Update(gt);
+            collider.Update(pos);
             if (!explode)
             {
                 UpdateBomb(gt);
@@ -69,6 +81,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             delete = true;
         }
 
+        public void MoveOutOfWall(Vector2 adjustment)
+        {
+            pos += adjustment;
+        }
+
         //----- Updates methods for individual sprites -----//
 
         private void UpdateBomb(GameTime gt)
@@ -78,6 +95,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 explode = true;
                 sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
+                // TODO: Add BlastZone object to room instance
                 startTime = 0.0;
             }
         }
