@@ -25,6 +25,7 @@ public class Room : IRoom
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
+	private CollisionHandlerSet collisionHandlerSet;
 
 	public Room(string roomId, ILink link)
 	{
@@ -45,6 +46,8 @@ public class Room : IRoom
 		blocks = new List<ITerrain>();
 
 		LoadRoom();
+
+		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks));
 	}
 
 	public void Update(GameTime gt)
@@ -57,6 +60,7 @@ public class Room : IRoom
         {
 			block.Update();
         }
+		collisionHandlerSet.Update();
 	}
 
 

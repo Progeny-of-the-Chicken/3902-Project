@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public IEnemy owner { get => _owner; }
         private IEnemy _owner;
-        public Rectangle collisionRectangle { get => collisionRectangle; }
+        public Rectangle collisionRectangle { get => rectangle; }
         private Rectangle rectangle;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
@@ -29,7 +29,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
             player.TakeDamage(owner.Damage);
         }
 
-        public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
+        public void OnProjectileCollision(IProjectile projectile)
         {
             projectile.Despawn();
         }
