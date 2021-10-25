@@ -6,12 +6,10 @@ namespace Sprint_0.Scripts.Projectiles
 {
     public class ProjectileEntities
     {
-        private Game1 game;
         public HashSet<IProjectile> projectiles;
 
-        public ProjectileEntities(Game1 game)
+        public ProjectileEntities()
         {
-            this.game = game;
             projectiles = new HashSet<IProjectile>();
         }
 
@@ -39,6 +37,11 @@ namespace Sprint_0.Scripts.Projectiles
             {
                 projectile.Draw(_spriteBatch);
             }
+        }
+
+        public void Add(IProjectile item)
+        {
+            projectiles.Add(item);
         }
     }
 }

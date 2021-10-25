@@ -1,0 +1,5 @@
+﻿6 1,5 2,7 2,8 3,5 4,7 4,6 5,
+0 0,BladeTrap,11 0,BladeTrap,0 6,BladeTrap,11 6,BladeTrap
+,,,,,,,
+EastDoorSprite,Room20,,,,,,
+4 1,MoveableBlockSprite,4 3,StairSprite,,,,
