@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
             rectangle.Location = location.ToPoint();
         }
 
-        public void OnPlayerCollision(ILink player)
+        public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(owner.Damage);
         }

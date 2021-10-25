@@ -5,13 +5,14 @@ using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Terrain;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
     class WallmasterEnemyCollider : IEnemyCollider
     {
         public IEnemy owner { get => _owner; }
-        private string firstRoom = "Room25";
         private Wallmaster _owner;
         public Rectangle collisionRectangle { get => collisionRectangle; }
         private Rectangle rectangle;
@@ -25,15 +26,18 @@ namespace Sprint_0.Scripts.Collider.Enemy
             rectangle.Location = location.ToPoint();
         }
 
-        public void OnPlayerCollision(ILink player)
+        public void OnPlayerCollision(Link player)
         {
-
-            _owner.GrabLink();
+            player.Suspend();
+            _owner.GrabLink(player);
         }
 
-        public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
+        public void OnProjectileCollision(IProjectile projectile)
         {
-            //despawn projectile
+            if (projectile is Arrow)
+            {
+                projectile.Despawn();
+            }
         }
     }
 
