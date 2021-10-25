@@ -6,17 +6,17 @@ using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
-    public class GenericWallCollider : IBlockCollider
+    public class GenericWallCollider : IWallCollider
     {
-        private ITerrain owner;
+        private IWall owner;
         private Rectangle hitbox;
 
-        public GenericWallCollider(ITerrain owner)
+        public GenericWallCollider(IWall owner)
         {
             this.owner = owner;
         }
 
-        public ITerrain Owner { get => owner; }
+        public IWall Owner { get => owner; }
 
         public Rectangle Hitbox { get => hitbox; }
 

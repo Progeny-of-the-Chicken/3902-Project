@@ -10,7 +10,7 @@ namespace Sprint_0.Scripts.Sets
     {
         private HashSet<ICollisionHandler> collisionHandlers;
 
-        public CollisionHandlerSet(ILink link, HashSet<IEnemy> enemies, HashSet<IItem> items, HashSet<IProjectile> projectiles, HashSet<ITerrain> blocks)
+        public CollisionHandlerSet(ILink link, HashSet<IEnemy> enemies, HashSet<IItem> items, HashSet<IProjectile> projectiles, HashSet<ITerrain> blocks, HashSet<IWall> walls)
         {
             collisionHandlers = new HashSet<ICollisionHandler>();
             collisionHandlers.Add(new ProjectilePlayerCollisionHandler(projectiles, link));

@@ -25,6 +25,7 @@ public class Room : IRoom
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
+	private List<IWall> walls;
 	private List<IWall> doors;
 	private CollisionHandlerSet collisionHandlerSet;
 
@@ -45,11 +46,12 @@ public class Room : IRoom
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
+		walls = new List<IWall>();
 		doors = new List<IWall>();
 
 		LoadRoom();
 
-		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks));
+		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
 	}
 
 	public void Update(GameTime gt)
@@ -209,9 +211,33 @@ public class Room : IRoom
 
 	void LoadDoors(TextFieldParser csvReader)
 	{
+		Vector2 doorLocation = new Vector2(0, YOFFSET);
+		//Add 8 Wall segments
+		//North wall left side
+		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		//West wall top side
+		walls.Add(new InvisibleVerticleWall(doorLocation));
+		//North wall right side
+		doorLocation.X = scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		//East wall top side
+		doorLocation.X = scale * 224;
+		walls.Add(new InvisibleVerticleWall(doorLocation));
+		//East wall bottom side
+		doorLocation.Y += scale * 104;
+		walls.Add(new InvisibleVerticleWall(doorLocation));
+		//West wall bottom side
+		doorLocation.X = 0;
+		walls.Add(new InvisibleVerticleWall(doorLocation));
+		//South wall left side
+		doorLocation.Y = YOFFSET + scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		//South wall right side
+		doorLocation.X = scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation));
+
 		string[] doorString = csvReader.ReadFields();
 		
-		Vector2 doorLocation = new Vector2();
 		if (doorString[0] != "")
         {
 			doorLocation.X = 224 * scale;
