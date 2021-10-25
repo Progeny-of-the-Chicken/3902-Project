@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Sprint_0.Scripts.Collider.ItemColliders;
+using Sprint_0.Scripts.Collider.Item;
 
 namespace Sprint_0.Scripts.Items
 {
