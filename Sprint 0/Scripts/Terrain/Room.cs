@@ -81,6 +81,7 @@ public class Room : IRoom
 		return roomId;
     }
 
+	//Start csv parsing
 	public void LoadRoom()
 	{
         spritesheetLocation = new Rectangle(257 * (int)roomLocation.X, 177 * (int)roomLocation.Y, 256, 176);
@@ -99,16 +100,19 @@ public class Room : IRoom
 	void LoadBlockColliders(TextFieldParser csvReader)
 	{
 		string[] blockColliderString = csvReader.ReadFields();
-		for (int i = 0; i < blockColliderString.Length; i++)
+		if (blockColliderString[0] != "None")
 		{
-			if (!blockColliderString[i].Equals(""))
+			for (int i = 0; i < blockColliderString.Length; i++)
 			{
-				//first string in each pair notates location
-				float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-				Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
+				if (!blockColliderString[i].Equals(""))
+				{
+					//first string in each pair notates location
+					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
+					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
-				blocks.Add(new DungeonWaterSprite(blockLocation));
+					blocks.Add(new InvisibleSprite(blockLocation));
+				}
 			}
 		}
 	}
