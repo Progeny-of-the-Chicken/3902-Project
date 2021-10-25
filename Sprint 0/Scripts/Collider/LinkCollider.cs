@@ -10,8 +10,8 @@ namespace Sprint_0.Scripts
         private Link _owner;
         private Rectangle hitbox;
 
-        public Link owner { get => _owner; }
-        public Rectangle collisionRectangle { get => hitbox; }
+        public Link Owner { get => _owner; }
+        public Rectangle CollisionRectangle { get => hitbox; }
 
 
         public LinkCollider(Link owner, Rectangle initialPosition)
@@ -23,7 +23,6 @@ namespace Sprint_0.Scripts
 
         public void OnBlockCollision(ITerrain block)
         {
-            FacingDirection currDirection = _owner.FacingDirection;
             _owner.BounceBackInDirection(oppositeDirection(currDirection));
         }
 

@@ -6,9 +6,15 @@ namespace Sprint_0
     public static class ObjectConstants
     {
         //----- Sprite constant values -----//
-        public const int scale = 2;
+        public const int scale = 3;
         public const double itemAnimationDelaySeconds = 0.1;
         public const int standardWidthHeight = 16;
+
+        //----- Link constant values -----//
+        public const int linkSpeed = 1;
+        public const int linkStartingHealth = 6;
+        public const int defaultCounterLength = 30;
+        public const int bouncebackDistance = 90;
 
         //----- Item constant values -----//
         public const double clockFreezeSeconds = 10.0;

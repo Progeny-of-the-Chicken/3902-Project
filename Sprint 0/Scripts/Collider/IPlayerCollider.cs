@@ -7,8 +7,8 @@ namespace Sprint_0.Scripts
 {
     public interface IPlayerCollider
     {
-        public Link owner { get; }
-        public Rectangle collisionRectangle { get; }
+        public Link Owner { get; }
+        public Rectangle CollisionRectangle { get; }
 
         public void Update(Vector2 location);
 
