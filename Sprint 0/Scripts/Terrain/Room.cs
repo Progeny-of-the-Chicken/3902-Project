@@ -84,7 +84,7 @@ public class Room : IRoom
 	//Start csv parsing
 	public void LoadRoom()
 	{
-        spritesheetLocation = new Rectangle(257 * (int)roomLocation.X, 177 * (int)roomLocation.Y, 256, 176);
+        spritesheetLocation = new Rectangle(257 * (int)roomLocation.X + 1, 177 * (int)roomLocation.Y + 1, 256, 176);
 
 		filePath = Environment.CurrentDirectory.ToString() + @"/../../../Scripts/Terrain/LevelData/Dungeon1/" + roomId + ".csv";
 		TextFieldParser csvReader = new TextFieldParser(filePath);
@@ -93,7 +93,7 @@ public class Room : IRoom
 		LoadBlockColliders(csvReader);
         LoadEnemies(csvReader);
         LoadItems(csvReader);
-        LoadDoors(csvReader);
+		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
     }
 
@@ -175,6 +175,9 @@ public class Room : IRoom
 
 				switch(itemString[i+1])
                 {
+					case "BowItem":
+						itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+						break;
 					case "Compass":
 						itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
 						break;

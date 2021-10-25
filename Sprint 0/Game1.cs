@@ -135,7 +135,7 @@ namespace Sprint_0
                     roomManager.SwitchToRoom("Room10");
                     break;
                 case 13:
-                    //roomManager.SwitchToRoom("Room00");
+                    roomManager.SwitchToRoom("Room00");
                     break;
                 case 14:
                     roomManager.SwitchToRoom("Room32");
@@ -162,7 +162,6 @@ namespace Sprint_0
                 roomNum = 0;
             }
             ChangeRoom();
-            System.Diagnostics.Debug.WriteLine("Next Room " + roomNum);
         }
 
         public void PrevRoom()
