@@ -84,45 +84,27 @@ namespace Sprint_0.Scripts
             linkState.ResetPosition(newPosition);
         }
 
-        public FacingDirection FacingDirection
+        public void Suspend()
         {
-            get
-            {
-                return linkState.FacingDirection;
-            }
+            linkState.Suspend();
         }
 
-        public Vector2 Position
+        public void UnSuspend()
         {
-            get
-            {
-                return linkState.Position;
-            }
+            linkState.UnSuspend();
         }
 
-        public Vector2 ItemSpawnPosition
-        {
-            get
-            {
-                return linkState.ItemSpawnPosition;
-            }
-        }
+        public FacingDirection FacingDirection { get => linkState.FacingDirection; }
 
-        public bool IsAlive
-        {
-            get
-            {
-                return linkState.IsAlive;
-            }
-        }
+        public Vector2 Position { get => linkState.Position; }
 
-        public bool DeathAnimation
-        {
-            get
-            {
-                return linkState.DeathAnimation;
-            }
-        }
+        public Vector2 ItemSpawnPosition { get => linkState.ItemSpawnPosition; }
+
+        public bool IsAlive { get => linkState.IsAlive; }
+
+        public bool DeathAnimation { get => linkState.DeathAnimation; }
+
+        public bool IsSuspended { get => linkState.IsSuspended; }
     }
 
 }
