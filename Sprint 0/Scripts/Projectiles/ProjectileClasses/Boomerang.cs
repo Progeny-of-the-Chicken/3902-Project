@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Boomerang : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
         private bool delete = false;
+        private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
@@ -18,9 +21,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double startT = 0;
         private double tOffset = ObjectConstants.boomerangTOffset;
 
-        public int damage { get => ObjectConstants.boomerangDamage; }
+        public bool Friendly { get => friendly; }
 
-        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical)
+        public int Damage { get => ObjectConstants.boomerangDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
+
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, bool friendly)
         {
             startPos = currentPos = spawnLoc;
             if (magical)
@@ -46,6 +53,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
+
+            collider = new BoomerangProjectileCollider(this, direction);
+            this.friendly = friendly;
         }
 
         public void Update(GameTime gt)

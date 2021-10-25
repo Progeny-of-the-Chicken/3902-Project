@@ -4,14 +4,11 @@ using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
-    public class SwordAttackHitbox : IProjectile
+    public class BlastZone : IProjectile
     {
-        private Vector2 pos;
         private IProjectileCollider collider;
         private bool delete = false;
         private bool friendly = false;
-
-        private int swordCounter = ObjectConstants.swordHitboxCounter;
 
         public bool Friendly { get => friendly; }
 
@@ -19,20 +16,15 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
+        public BlastZone(Vector2 location, FacingDirection direction)
         {
-            pos = spawnLoc;
-            collider = new RotatedProjectileCollider(this, direction);
+            // TODO: Add collider
+            friendly = true;
         }
 
-        public void Update(GameTime gt)
+        public void Update(GameTime gameTime)
         {
-            collider.Update(pos);
-            swordCounter--;
-            if (swordCounter <= 0)
-            {
-                delete = true;
-            }
+            delete = true;
         }
 
         public void Draw(SpriteBatch sb)

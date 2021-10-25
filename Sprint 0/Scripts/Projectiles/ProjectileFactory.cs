@@ -25,14 +25,29 @@ namespace Sprint_0.Scripts.Projectiles
             return new Arrow(location, direction, silver);
         }
 
-        public IProjectile CreateBoomerang(Vector2 location, FacingDirection direction, bool magical)
+        public IProjectile CreateLinkBasicBoomerang(Vector2 location, FacingDirection direction)
         {
-            return new Boomerang(location, direction, magical);
+            return new Boomerang(location, direction, false, true);
+        }
+
+        public IProjectile CreateLinkMagicalBoomerang(Vector2 location, FacingDirection direction)
+        {
+            return new Boomerang(location, direction, true, true);
+        }
+
+        public IProjectile CreateEnemyBoomerang(Vector2 location, FacingDirection direction)
+        {
+            return new Boomerang(location, direction, false, false);
         }
 
         public IProjectile CreateBomb(Vector2 location, FacingDirection direction)
         {
             return new Bomb(location, direction);
+        }
+
+        public IProjectile CreateBlastZone(Vector2 location, FacingDirection direction)
+        {
+            return new BlastZone(location, direction);
         }
 
         public IProjectile CreateFireSpell(Vector2 location, FacingDirection direction)

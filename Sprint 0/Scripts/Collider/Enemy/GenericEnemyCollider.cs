@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sprint_0.Scripts.Enemy;
 
-namespace Sprint_0.Scripts.Collider
+namespace Sprint_0.Scripts.Collider.Enemy
 {
     class GenericEnemyCollider : IEnemyCollider
     {
@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider
 
         public void OnProjectileCollision(FacingDirection collisionDirection, IProjectile projectile)
         {
-            //despawn projectile
+            projectile.Despawn();
         }
     }
 }

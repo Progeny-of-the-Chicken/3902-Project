@@ -1,21 +1,29 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Bomb : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 pos;
         private int displacement = ObjectConstants.bombDisplacement;
         private bool delete = false;
+        private bool friendly = false;
+
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
 
-        public int damage { get => ObjectConstants.bombDamage; }
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => ObjectConstants.bombDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public Bomb(Vector2 spawnLoc, FacingDirection direction)
         {
@@ -38,6 +46,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
+
+            // TODO: Add collider
+            friendly = true;
         }
 
         public void Update(GameTime gt)

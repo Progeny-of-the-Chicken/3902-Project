@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
 
-namespace Sprint_0.Scripts.Terrain.Colliders
+namespace Sprint_0.Scripts.Collider.Terrain
 {
     public interface IBlockCollider
     {

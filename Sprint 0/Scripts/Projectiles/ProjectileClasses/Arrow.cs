@@ -2,17 +2,20 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class Arrow : IProjectile
     {
         private ISprite sprite;
+        private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
         private Vector2 popOffset;
         private bool delete = false;
+        private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
         private int maxDistance = ObjectConstants.arrowMaxDistance;
@@ -20,7 +23,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool pop = false;
         private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
 
-        public int damage { get => ObjectConstants.arrowDamage; }
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => ObjectConstants.arrowDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
         {
@@ -30,11 +37,15 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 maxDistance = (int) (maxDistance * silverArrowSpeedCoef);
             }
             SetSpriteVectors(direction, silver);
+
+            collider = new RotatedProjectileCollider(this, direction);
+            friendly = true;
         }
 
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
+            collider.Update(currentPos);
             if (!pop)
             {
                 UpdateArrow(gt);

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint_0.Scripts.Collider
+namespace Sprint_0.Scripts.Collider.Enemy
 {
     class NPCCollider : IEnemyCollider
     {
