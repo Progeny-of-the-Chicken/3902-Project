@@ -26,7 +26,6 @@ public class Room : IRoom
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
-	private List<IWall> doors;
 	private CollisionHandlerSet collisionHandlerSet;
 
 	public Room(string roomId, ILink link)
@@ -47,7 +46,6 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
-		doors = new List<IWall>();
 
 		LoadRoom();
 
@@ -74,7 +72,7 @@ public class Room : IRoom
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
 		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
-		foreach (IWall door in doors)
+		foreach (IWall door in walls)
 		{
 			door.Draw(spriteBatch);
 		}
@@ -214,27 +212,27 @@ public class Room : IRoom
 		Vector2 doorLocation = new Vector2(0, YOFFSET);
 		//Add 8 Wall segments
 		//North wall left side
-		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 		//West wall top side
-		walls.Add(new InvisibleVerticleWall(doorLocation));
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
 		//North wall right side
 		doorLocation.X = scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 		//East wall top side
 		doorLocation.X = scale * 224;
-		walls.Add(new InvisibleVerticleWall(doorLocation));
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
 		//East wall bottom side
 		doorLocation.Y += scale * 104;
-		walls.Add(new InvisibleVerticleWall(doorLocation));
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
 		//West wall bottom side
 		doorLocation.X = 0;
-		walls.Add(new InvisibleVerticleWall(doorLocation));
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
 		//South wall left side
 		doorLocation.Y = YOFFSET + scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 		//South wall right side
 		doorLocation.X = scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation));
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 
 		string[] doorString = csvReader.ReadFields();
 		
@@ -242,25 +240,26 @@ public class Room : IRoom
         {
 			doorLocation.X = 224 * scale;
 			doorLocation.Y = YOFFSET + 72 * scale;
-			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation));
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
         }
 		if (doorString.Length >  2 && doorString[2] != "")
 		{
 			doorLocation.X = 112 * scale;
 			doorLocation.Y = YOFFSET;
-			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation));
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
 		}
 		if (doorString.Length > 4 && doorString[4] != "") {
 			doorLocation.X = 0;
 			doorLocation.Y = YOFFSET + 72 * scale;
-			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation));
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
 		}  
 		if (doorString.Length > 6 && doorString[6] != "")
 		{
 			doorLocation.X = 112 * scale;
 			doorLocation.Y = YOFFSET + 144 * scale;
-			doors.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation));
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
 		}
+
 	}
 
 	void LoadSpecial(TextFieldParser csvReader)
@@ -271,5 +270,12 @@ public class Room : IRoom
 	public void AddProjectile(IProjectile item)
     {
 		projectileSet.Add(item);
+    }
+
+	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
+    {
+		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
+		walls.Remove(doorToRemove);
+		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
     }
 }

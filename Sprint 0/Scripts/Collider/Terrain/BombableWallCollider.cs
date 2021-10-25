@@ -6,12 +6,12 @@ using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
-    public class GenericWallCollider : IWallCollider
+    public class BombableWallCollider : IWallCollider
     {
         private IWall owner;
         private Rectangle hitbox;
 
-        public GenericWallCollider(IWall owner, Rectangle hitbox)
+        public BombableWallCollider(IWall owner, Rectangle hitbox)
         {
             this.owner = owner;
             this.hitbox = hitbox;
@@ -48,6 +48,9 @@ namespace Sprint_0.Scripts.Collider.Terrain
             else if (projectile is Bomb)
             {
                 ((Bomb)projectile).MoveOutOfWall(Overlap.DirectionToMoveObjectOff(hitbox, projectile.Collider.Hitbox));
+            } else if (projectile is BlastZone)
+            {
+                //Add command for room to switch room
             }
             else
             {

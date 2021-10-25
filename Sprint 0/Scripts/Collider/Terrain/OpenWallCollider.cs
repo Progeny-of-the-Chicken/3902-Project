@@ -6,12 +6,12 @@ using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
-    public class GenericWallCollider : IWallCollider
+    public class OpenWallCollider : IWallCollider
     {
         private IWall owner;
         private Rectangle hitbox;
 
-        public GenericWallCollider(IWall owner, Rectangle hitbox)
+        public OpenWallCollider(IWall owner, Rectangle hitbox)
         {
             this.owner = owner;
             this.hitbox = hitbox;
