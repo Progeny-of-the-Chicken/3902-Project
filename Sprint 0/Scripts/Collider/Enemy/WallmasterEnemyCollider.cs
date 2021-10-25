@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(ILink player)
         {
+
             _owner.GrabLink();
         }
 
