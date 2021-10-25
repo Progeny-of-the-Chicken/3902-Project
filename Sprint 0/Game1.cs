@@ -59,7 +59,6 @@ namespace Sprint_0
             roomManager.Update(gameTime);
             if (!link.IsAlive)
                 this.Quit();
-
         }
 
         protected override void Draw(GameTime gameTime)

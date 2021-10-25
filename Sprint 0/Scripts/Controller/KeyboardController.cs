@@ -63,7 +63,10 @@ namespace Sprint_0.Scripts.Controller
 			foreach (Keys key in pressedKeys)
 			{
 				executeCommandsForKey(key, controllerMappings);
-				executeCommandsForKey(key, linkControllerMappings);
+				if(!game.link.IsSuspended)
+				{
+					executeCommandsForKey(key, linkControllerMappings);
+				}
 			}
 
 			previousKeys = keyboardState;

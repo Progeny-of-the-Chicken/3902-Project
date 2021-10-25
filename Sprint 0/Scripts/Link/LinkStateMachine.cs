@@ -12,6 +12,7 @@ namespace Sprint_0.Scripts
         private int turningCounter;
         private Vector2 linksPosition;
         private int linkHealth;
+        private bool isSuspended;
 
         public LinkStateMachine()
         {
@@ -19,10 +20,15 @@ namespace Sprint_0.Scripts
             ResetCounters();
             linksPosition = new Vector2(200, 200); //generic starting position
             linkHealth = ObjectConstants.linkStartingHealth;
+            isSuspended = false;
         }
 
         public void Update()
         {
+            if(isSuspended)
+            {
+                ResetCounters();
+            }
             if (damageCounter > 0)
                 damageCounter--;
             if (usingItemCounter > 0)
@@ -43,6 +49,7 @@ namespace Sprint_0.Scripts
             usingItemCounter = 0;
             movingCounter = 0;
             turningCounter = 0;
+            swordCounter = 0;
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -124,17 +131,19 @@ namespace Sprint_0.Scripts
                 usingItemCounter = 30;
         }
 
+        public void Suspend()
+        {
+            isSuspended = true;
+        }
+
+        public void UnSuspend()
+        {
+            isSuspended = false;
+        }
+
         public bool DoingSomething()
         {
             return usingItemCounter != 0 || damageCounter != 0 || movingCounter != 0 || swordCounter != 0;
-        }
-
-        public Vector2 Position
-        {
-            get
-            {
-                return linksPosition;
-            }
         }
 
         public Vector2 ItemSpawnPosition
@@ -163,68 +172,24 @@ namespace Sprint_0.Scripts
             }
         }
 
-        public FacingDirection FacingDirection
-        {
-            get
-            {
-                return linksDirection;
-            }
-        }
+        public Vector2 Position { get => linksPosition; }
 
-        public bool IsMoving
-        {
-            get
-            {
-                return movingCounter > 0;
-            }
-        }
+        public FacingDirection FacingDirection { get => linksDirection; }
 
-        public bool IsTakingDamage
-        {
-            get
-            {
-                return damageCounter > 0;
-            }
-        }
+        public bool IsMoving { get => movingCounter > 0; }
 
-        public bool SwordIsBeingUsed
-        {
-            get
-            {
-                return swordCounter > 0;
-            }
-        }
+        public bool IsTakingDamage { get => damageCounter > 0; }
 
-        public bool IsUsingItem
-        {
-            get
-            {
-                return usingItemCounter > 0;
-            }
-        }
+        public bool SwordIsBeingUsed { get => swordCounter > 0; }
 
-        public bool IsTurning
-        {
-            get
-            {
-                return turningCounter > 0;
-            }
-        }
+        public bool IsUsingItem { get => usingItemCounter > 0; }
 
-        public bool IsAlive
-        {
-            get
-            {
-                return linkHealth > 0 || damageCounter > 0;
-            }
-        }
+        public bool IsTurning { get => turningCounter > 0; }
 
-        public bool DeathAnimation
-        {
-            get
-            {
-                return linkHealth == 0 && damageCounter > 0;
-            }
-        }
+        public bool IsAlive { get => linkHealth > 0 || damageCounter > 0; }
+
+        public bool DeathAnimation { get => linkHealth == 0 && damageCounter > 0; }
+
+        public bool IsSuspended { get => isSuspended; }
     }
 }
