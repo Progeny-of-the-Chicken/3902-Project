@@ -37,6 +37,12 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnProjectileCollision(IProjectile projectile)
         {
+            System.Diagnostics.Debug.WriteLine(projectile);
+            if (projectile is BlastZone)
+            {
+                owner.SwapDoor();
+            }
+
             if (projectile is Boomerang)
             {
                 ((Boomerang)projectile).BounceOffWall();
@@ -47,10 +53,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             }
             else if (projectile is Bomb)
             {
-                ((Bomb)projectile).MoveOutOfWall(Overlap.DirectionToMoveObjectOff(hitbox, projectile.Collider.Hitbox));
-            } else if (projectile is BlastZone)
-            {
-                //Add command for room to switch room
+               //((Bomb)projectile).MoveOutOfWall(Overlap.DirectionToMoveObjectOff(hitbox, projectile.Collider.Hitbox));
             }
             else
             {

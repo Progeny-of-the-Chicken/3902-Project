@@ -21,7 +21,8 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 foreach (IWall wall in walls)
                 {
-                    if (wall.Collider.Hitbox.Intersects(projectile.Collider.Hitbox)) {
+                    if (wall.Collider.Hitbox.Intersects(projectile.Collider.Hitbox))
+                    {
                         wall.Collider.OnProjectileCollision(projectile);
                     }
                 }
