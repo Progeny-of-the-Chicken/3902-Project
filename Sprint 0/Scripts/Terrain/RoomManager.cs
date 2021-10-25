@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Terrain
         public RoomManager(ILink link)
         {
             this.link = link;
-            activeRoom = new Room("Room20", this.link);
+            activeRoom = new Room("Room25", this.link);
             dormentRooms = new Dictionary<string, IRoom>();
         }
 

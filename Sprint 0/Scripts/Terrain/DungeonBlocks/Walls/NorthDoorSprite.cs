@@ -10,7 +10,7 @@ public class NorthDoorSprite : IWall
     private Rectangle spritesheetLocation = new Rectangle(848, 11, 32, 32);
     Rectangle destination;
     OpenWallCollider collider;
-    public IWallCollider Collider { get => Collider; }
+    public IWallCollider Collider { get => collider; }
     Room room;
 
     public NorthDoorSprite(Vector2 screenLocation, Room room)

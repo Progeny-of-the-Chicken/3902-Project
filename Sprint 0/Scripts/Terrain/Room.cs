@@ -72,6 +72,10 @@ public class Room : IRoom
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
 		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
+		foreach (ITerrain block in blocks)
+		{
+			block.Draw(spriteBatch);
+		}
 		foreach (IWall door in walls)
 		{
 			door.Draw(spriteBatch);
@@ -113,8 +117,8 @@ public class Room : IRoom
 				if (!blockColliderString[i].Equals(""))
 				{
 					//first string in each pair notates location
-					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET - this.scale;
+					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET - this.scale;
 					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
 					blocks.Add(new InvisibleSprite(blockLocation));
@@ -236,29 +240,37 @@ public class Room : IRoom
 
 		string[] doorString = csvReader.ReadFields();
 		
+		//East
+		doorLocation.X = 224 * scale;
+		doorLocation.Y = YOFFSET + 72 * scale;
 		if (doorString[0] != "")
-        {
-			doorLocation.X = 224 * scale;
-			doorLocation.Y = YOFFSET + 72 * scale;
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
-        }
-		if (doorString.Length >  2 && doorString[2] != "")
-		{
-			doorLocation.X = 112 * scale;
-			doorLocation.Y = YOFFSET;
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
+		
+		//North
+		doorLocation.X = 112 * scale;
+		doorLocation.Y = YOFFSET;
+		if (doorString.Length > 2 && doorString[2] != "")
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
-		}
-		if (doorString.Length > 4 && doorString[4] != "") {
-			doorLocation.X = 0;
-			doorLocation.Y = YOFFSET + 72 * scale;
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
+		
+		//West
+		doorLocation.X = 0;
+		doorLocation.Y = YOFFSET + 72 * scale;
+		if (doorString.Length > 4 && doorString[4] != "")
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
-		}  
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
+
+		//South
+		doorLocation.X = 112 * scale;
+		doorLocation.Y = YOFFSET + 144 * scale;
 		if (doorString.Length > 6 && doorString[6] != "")
-		{
-			doorLocation.X = 112 * scale;
-			doorLocation.Y = YOFFSET + 144 * scale;
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
-		}
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateSouthWallSprite(doorLocation, this));
 
 	}
 
