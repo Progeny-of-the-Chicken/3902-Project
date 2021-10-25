@@ -7,6 +7,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
     public class BlastZone : IProjectile
     {
         private IProjectileCollider collider;
+        private Vector2 pos;
         private bool delete = false;
         private bool friendly = false;
 
@@ -16,14 +17,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public BlastZone(Vector2 location, FacingDirection direction)
+        public BlastZone(Vector2 location)
         {
-            // TODO: Add collider
+            pos = location;
+            collider = ProjectileColliderFactory.Instance.CreateBlastZoneCollider(this);
             friendly = true;
         }
 
         public void Update(GameTime gameTime)
         {
+            collider.Update(pos);
             delete = true;
         }
 

@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
 
-            // TODO: Add collider
+            collider = ProjectileColliderFactory.Instance.CreateBombCollider(this);
             friendly = true;
         }
 
@@ -55,6 +55,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             // Animation control
             sprite.Update(gt);
+            collider.Update(pos);
             if (!explode)
             {
                 UpdateBomb(gt);
@@ -80,6 +81,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             delete = true;
         }
 
+        public void MoveOutOfWall(Vector2 adjustment)
+        {
+            pos += adjustment;
+        }
+
         //----- Updates methods for individual sprites -----//
 
         private void UpdateBomb(GameTime gt)
@@ -89,6 +95,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 explode = true;
                 sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
+                // TODO: Add BlastZone object to room instance
                 startTime = 0.0;
             }
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
@@ -18,8 +19,12 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
+        private double t = 0;
         private double startT = 0;
-        private double tOffset = ObjectConstants.boomerangTOffset;
+        private double tInitialOffset = ObjectConstants.boomerangTOffset;
+        private double tBounceOffset = 0;
+
+        public bool ReturnState { get; set; }
 
         public bool Friendly { get => friendly; }
 
@@ -54,8 +59,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
 
-            collider = new BoomerangProjectileCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
             this.friendly = friendly;
+            ReturnState = false;
         }
 
         public void Update(GameTime gt)
@@ -66,8 +72,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 startT = gt.TotalGameTime.TotalSeconds;
             }
-            double t = gt.TotalGameTime.TotalSeconds - startT + tOffset;
-            currentPos += directionVector * (float)(t * speedPerSecond + t * t * decelPerSecond);
+            t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset + tBounceOffset;
+            double posChange = (t * speedPerSecond + t * t * decelPerSecond);
+            currentPos += directionVector * (float)posChange;
+            if (!ReturnState && (posChange < 0))
+            {
+                ReturnState = true;
+            }
+            collider.Update(currentPos);
             // Delete on boomerang return
             if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
             {
@@ -87,8 +99,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
-            // Should never need to be called
             delete = true;
+        }
+
+        public void BounceOffWall()
+        {
+            ReturnState = true;
+            tBounceOffset = 2 * Math.Abs(t - (speedPerSecond / (-1 * decelPerSecond)));
         }
     }
 }

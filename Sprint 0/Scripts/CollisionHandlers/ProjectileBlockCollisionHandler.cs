@@ -18,7 +18,10 @@ namespace Sprint_0.Scripts.CollisionHandlers
         {
             foreach (IProjectile projectile in projectiles)
             {
-                // TODO: Compare projectile collider against block collider
+                foreach (ITerrain block in blocks)
+                {
+                    // Compare projectile hitbox to block hitbox
+                }
             }
         }
     }

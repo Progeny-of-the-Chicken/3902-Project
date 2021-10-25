@@ -25,7 +25,7 @@ namespace Sprint_0
         public const int blastZoneWidthHeight = 48 * scale;
         public const int blastZoneDamage = 1;
         // Bomb
-        public const int bombDisplacement = 50;
+        public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
         public const double bombExplodeDurationSeconds = 0.3;
         public const int bombDamage = 1;

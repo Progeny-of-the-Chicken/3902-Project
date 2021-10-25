@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Enemy;
@@ -50,7 +49,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
 
-            // TODO: Add collider
+            collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
             friendly = false;
         }
 
@@ -63,6 +62,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 delete = true;
             }
             sprite.Update(gt);
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)

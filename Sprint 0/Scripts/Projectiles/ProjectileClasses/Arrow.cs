@@ -38,7 +38,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             SetSpriteVectors(direction, silver);
 
-            collider = new RotatedProjectileCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateArrowCollider(this, direction);
             friendly = true;
         }
 

@@ -16,10 +16,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
         private bool friendly = false;
 
-        private bool linger = false;
         private double speedPerSecond = ObjectConstants.fireSpellSpeedPerSecond;
         private int maxDistance = ObjectConstants.fireSpellMaxDistance;
         private double lingerDuration = ObjectConstants.fireSpellLingerDuration;
+
+        public bool linger = false;
 
         public bool Friendly { get => friendly; }
 
@@ -49,7 +50,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateFireSpellSprite();
 
-            // TODO: Add collider
+            collider = ProjectileColliderFactory.Instance.CreateFireSpellCollider(this);
             friendly = true;
         }
 
@@ -64,6 +65,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 UpdateFireSpellLinger(gt);
             }
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)

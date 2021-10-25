@@ -20,5 +20,10 @@ namespace Sprint_0.Scripts.Collider
                 overlapVec.Y *= -1;            
             return overlapVec;
         }
+
+        public static bool CheckIntersection(Rectangle staticObject, Rectangle moveableObject)
+        {
+            return staticObject.Intersects(moveableObject);
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace Sprint_0.Scripts.Items
     {
         public HashSet<IItem> items;
 
+        public HashSet<IItem> itemSet { get => items; }
+
         public ItemEntities()
         {
             items = new HashSet<IItem>();
