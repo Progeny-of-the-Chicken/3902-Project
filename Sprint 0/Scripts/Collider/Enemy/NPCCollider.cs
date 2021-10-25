@@ -36,5 +36,10 @@ namespace Sprint_0.Scripts.Collider.Enemy
         {
             //unused
         }
+
+        public void OnEnemyCollision(IEnemy enemy)
+        {
+            //Only used for spike trap
+        }
     }
 }

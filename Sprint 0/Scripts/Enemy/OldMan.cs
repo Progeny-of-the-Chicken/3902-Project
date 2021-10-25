@@ -14,18 +14,21 @@ namespace Sprint_0.Scripts.Enemy
         private OldManSprite sprite;
         private Vector2 location;
 
-        public int Damage { get => _damage; }
-        public IEnemyCollider Collider { get => new NPCCollider(this, Rectangle.Empty); }
-        const int _damage = 0;
+        Rectangle frame = new Rectangle(1, 11, 16, 16);
 
-        const int knockbackDistance = 50;
+        public int Damage { get => damage; }
+        public IEnemyCollider Collider { get => collider; }
+        IEnemyCollider collider;
+        const int damage = 0;
+
         int health = 1;
         bool delete = false;
 
         public OldMan(Vector2 location, float scale)
         {
             this.location = location;
-            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite(scale);
+            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite(scale, frame);
+            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (frame.Size.ToVector2() * scale).ToPoint()));
         }
 
         public void Update(GameTime gt)
@@ -46,7 +49,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {

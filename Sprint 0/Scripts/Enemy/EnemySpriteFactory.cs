@@ -24,12 +24,8 @@ namespace Sprint_0.Scripts.Enemy
 			}
 		} 
 
-		Rectangle OldManRectangle = new Rectangle(1, 11, 16, 16);
 		Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
 											  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
-
-		//Rectangle BoomerangFrames = new Rectangle(290, 14, 7, 10);
-
 
 
 		private EnemySpriteFactory()
@@ -49,9 +45,9 @@ namespace Sprint_0.Scripts.Enemy
 			return new StalfosSprite(frame, scale, enemySprites);
 		}
 
-		public ISprite CreateOldManSprite(float scale)
+		public ISprite CreateOldManSprite(float scale, Rectangle frame)
         {
-			return new OldManSprite(OldManRectangle, scale, npcSprites);
+			return new OldManSprite(frame, scale, npcSprites);
         }
 		public ISprite CreateGelSprite(float scale, Rectangle[] frames)
         {

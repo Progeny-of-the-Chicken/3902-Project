@@ -17,5 +17,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player);
 
         public void OnProjectileCollision(IProjectile projectile);
+
+        public void OnEnemyCollision(IEnemy enemy);
     }
 }

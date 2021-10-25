@@ -30,9 +30,8 @@ namespace Sprint_0.Scripts.Enemy
         bool delete = false;
 
         public int Damage { get => _damage; }
-        int _damage;
+        int _damage = 1;
         int health = 1;
-        const int knockbackDistance = 50;
         
         Vector2 location;
         Vector2 direction;
@@ -93,7 +92,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {

@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public Rectangle Hitbox { get => hitbox; }
         private Rectangle hitbox;
 
-        private const int knockBack = 50;
+        private const int knockBack = ObjectConstants.scale * ObjectConstants.standardWidthHeight * 3;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
             this.owner = owner;
@@ -38,6 +38,8 @@ namespace Sprint_0.Scripts.Collider.Enemy
                     pushBack.Normalize();
                     pushBack *= knockBack;
                 }
+                //not sure if we need this line or not
+                //player.StopMoving();
                 player.PushBackBy(pushBack);
 
                 player.TakeDamage(Owner.Damage);
@@ -50,6 +52,11 @@ namespace Sprint_0.Scripts.Collider.Enemy
             {
                 projectile.Despawn();
             }
+        }
+
+        public void OnEnemyCollision(IEnemy enemy)
+        {
+            //Only used for spike trap
         }
     }
 }
