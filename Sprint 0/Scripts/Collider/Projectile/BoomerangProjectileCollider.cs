@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Projectile
@@ -31,6 +32,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             {
                 link.TakeDamage(Owner.Damage);
                 // TODO: knockback link
+                ((Boomerang)Owner).BounceOffWall();
             }
         }
 
@@ -40,6 +42,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             {
                 enemy.TakeDamage(Owner.Damage);
                 enemy.KnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.collisionRectangle));
+                ((Boomerang)Owner).BounceOffWall();
             }
         }
     }

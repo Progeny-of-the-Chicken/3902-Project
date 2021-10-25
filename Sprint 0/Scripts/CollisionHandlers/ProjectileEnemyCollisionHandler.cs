@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Collider;
 
 namespace Sprint_0.Scripts.CollisionHandlers
 {

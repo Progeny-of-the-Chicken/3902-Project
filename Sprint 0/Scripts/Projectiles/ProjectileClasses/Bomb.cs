@@ -95,6 +95,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 explode = true;
                 sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
+                // TODO: Add BlastZone object to room instance
                 startTime = 0.0;
             }
         }
