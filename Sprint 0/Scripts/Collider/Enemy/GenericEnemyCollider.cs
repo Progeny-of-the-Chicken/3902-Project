@@ -29,10 +29,13 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            player.TakeDamage(Owner.Damage);
+            if(player.CanBeAffectedByEnemy)
+            {
+                Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
+                player.PushBackBy(pushBack);
 
-            Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
-            player.PushBackBy(pushBack);
+                player.TakeDamage(Owner.Damage);
+            }
         }
 
         public void OnProjectileCollision(IProjectile projectile)

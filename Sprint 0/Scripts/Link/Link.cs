@@ -123,6 +123,8 @@ namespace Sprint_0.Scripts
                 return linkState.DeathAnimation;
             }
         }
+
+        public bool CanBeAffectedByEnemy { get => !linkState.IsTakingDamage; }
     }
 
 }
