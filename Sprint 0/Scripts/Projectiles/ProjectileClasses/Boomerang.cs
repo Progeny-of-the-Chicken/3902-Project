@@ -79,6 +79,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 ReturnState = true;
             }
+            collider.Update(currentPos);
             // Delete on boomerang return
             if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
             {
@@ -101,7 +102,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             delete = true;
         }
 
-        public void SetReturnState()
+        public void BounceOffWall()
         {
             ReturnState = true;
             tBounceOffset = 2 * Math.Abs(t - (speedPerSecond / (-1 * decelPerSecond)));

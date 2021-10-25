@@ -55,6 +55,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             // Animation control
             sprite.Update(gt);
+            collider.Update(pos);
             if (!explode)
             {
                 UpdateBomb(gt);
@@ -78,6 +79,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void Despawn()
         {
             delete = true;
+        }
+
+        public void MoveOutOfWall(Vector2 adjustment)
+        {
+            pos += adjustment;
         }
 
         //----- Updates methods for individual sprites -----//

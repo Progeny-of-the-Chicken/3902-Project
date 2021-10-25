@@ -62,6 +62,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 delete = true;
             }
             sprite.Update(gt);
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)

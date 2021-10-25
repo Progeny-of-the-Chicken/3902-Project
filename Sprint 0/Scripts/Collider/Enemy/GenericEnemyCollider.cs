@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,10 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            projectile.Despawn();
+            if (projectile is Arrow)
+            {
+                projectile.Despawn();
+            }
         }
     }
 }

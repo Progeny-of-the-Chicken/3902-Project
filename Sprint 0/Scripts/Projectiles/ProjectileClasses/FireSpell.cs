@@ -65,6 +65,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 UpdateFireSpellLinger(gt);
             }
+            collider.Update(currentPos);
         }
 
         public void Draw(SpriteBatch sb)
