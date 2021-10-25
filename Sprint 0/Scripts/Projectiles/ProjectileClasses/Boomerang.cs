@@ -54,7 +54,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
 
-            collider = new BoomerangProjectileCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
             this.friendly = friendly;
         }
 

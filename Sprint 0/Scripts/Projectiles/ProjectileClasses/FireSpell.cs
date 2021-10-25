@@ -50,7 +50,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateFireSpellSprite();
 
-            collider = new FireSpellProjectileCollider(this);
+            collider = ProjectileColliderFactory.Instance.CreateFireSpellCollider(this);
             friendly = true;
         }
 

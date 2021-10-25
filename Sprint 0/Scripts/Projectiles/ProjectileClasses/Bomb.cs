@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = ProjectileSpriteFactory.Instance.CreateBombSprite();
 
-            collider = new BombProjectileCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateBombCollider(this);
             friendly = true;
         }
 

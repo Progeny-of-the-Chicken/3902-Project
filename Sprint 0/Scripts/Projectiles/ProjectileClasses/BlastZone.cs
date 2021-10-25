@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public BlastZone(Vector2 location)
         {
-            collider = new BlastZoneProjectileCollider(this);
+            collider = ProjectileColliderFactory.Instance.CreateBlastZoneCollider(this);
             friendly = true;
         }
 

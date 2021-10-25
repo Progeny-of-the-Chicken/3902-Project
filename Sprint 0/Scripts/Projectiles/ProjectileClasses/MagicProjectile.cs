@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Enemy;
@@ -50,7 +49,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
 
-            collider = new GenericEnemyProjectileCollider(this);
+            collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
             friendly = false;
         }
 

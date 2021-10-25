@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
             pos = spawnLoc;
-            collider = new RotatedProjectileCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateSwordAttackHitboxCollider(this, direction);
             friendly = true;
         }
 
