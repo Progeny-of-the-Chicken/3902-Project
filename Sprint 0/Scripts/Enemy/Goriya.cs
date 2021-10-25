@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
-using Sprint_0.Scripts.Collider;
+using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.Enemy

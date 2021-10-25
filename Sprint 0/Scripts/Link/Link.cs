@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts
             _collider = new LinkCollider(this, spawnHitbox);
         }
 
-        public void Draw(SpriteBatch sb, GameTime gt)
+        public void Draw(SpriteBatch sb)
         {
             LinkSprite.Draw(sb, linkState.Position);
         }
