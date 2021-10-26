@@ -25,6 +25,12 @@ namespace Sprint_0.Scripts.CollisionHandlers
                     //if we implement logic for enemy collision in link collider we'll put uncomment the next line
                     //link.collider.OnEnemyCollision(enemy);
                     enemy.Collider.OnPlayerCollision(link);
+                    SpikeTrap cast = (SpikeTrap)enemy;
+                    if(cast != null)
+                    {
+                        enemy.XDetectionCollider.OnPlayerCollision(link);
+                        enemy.YDetectionCollider.OnPlayerCollision(link);
+                    }
                 }
             }
         }
