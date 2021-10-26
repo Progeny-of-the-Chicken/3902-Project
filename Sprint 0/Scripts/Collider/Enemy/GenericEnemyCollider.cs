@@ -51,10 +51,5 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 projectile.Despawn();
             }
         }
-
-        public void OnEnemyCollision(IEnemy enemy)
-        {
-            //Only used for spike trap
-        }
     }
 }
