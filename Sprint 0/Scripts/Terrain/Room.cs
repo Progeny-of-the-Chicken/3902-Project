@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.VisualBasic.FileIO;
-using System.IO;
 using Sprint_0;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
