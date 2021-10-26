@@ -21,7 +21,6 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 if (((Link)link).collider.CollisionRectangle.Intersects(item.Collider.Hitbox))
                 {
-                    System.Diagnostics.Debug.WriteLine(item);
                     ((Link)link).collider.OnItemCollision(item);
                     // No current item changes
                 }
