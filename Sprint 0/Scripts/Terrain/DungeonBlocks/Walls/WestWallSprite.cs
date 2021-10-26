@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts.Collider.Terrain;
 
-public class WestWallSprite : ITerrain
+public class WestWallSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(814, 43, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(815, 44, 32, 32);
     Rectangle destination;
+    GenericWallCollider collider;
+    public IWallCollider Collider { get => collider; }
+    Room room;
 
-    public WestWallSprite(Vector2 screenLocation)
+    public WestWallSprite(Vector2 screenLocation, Room room)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+        collider = new GenericWallCollider(this, destination);
+        this.room = room;
     }
 
     public void Update()
@@ -25,4 +31,8 @@ public class WestWallSprite : ITerrain
         spriteBatch.Draw(texture, destination, spritesheetLocation, Color.White);
     }
 
+    public void SwapDoor()
+    {
+
+    }
 }

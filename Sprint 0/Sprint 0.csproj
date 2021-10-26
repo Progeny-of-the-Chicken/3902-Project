@@ -44,8 +44,6 @@
     <Folder Include="Scripts\Sprite\ItemSprites\" />
     <Folder Include="Scripts\Projectiles\ProjectileClasses\" />
     <Folder Include="Scripts\Sprite\ProjectileSprites\" />
-    <Folder Include="Scripts\CollisionHandlers\" />
-    <Folder Include="Scripts\Collider\Terrain\" />
     <Folder Include="Scripts\Collider\Item\" />
     <Folder Include="Scripts\Collider\Projectile\" />
   </ItemGroup>
