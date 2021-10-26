@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts
 {
@@ -71,6 +73,7 @@ namespace Sprint_0.Scripts
         {
             linkState.UseSword();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            ObjectsFromObjectsFactory.Instance.CreateSwordAttackHitboxFromLink(Position, FacingDirection);
         }
 
         public void UseItem()
