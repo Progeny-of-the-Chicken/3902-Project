@@ -27,6 +27,7 @@ public class Room : IRoom
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
 	private CollisionHandlerSet collisionHandlerSet;
+	private List<IProjectile> projectileQueue;
 
 	public Room(string roomId, ILink link)
 	{
@@ -45,6 +46,8 @@ public class Room : IRoom
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
+
+		projectileQueue = new List<IProjectile>();
 
 		LoadRoom();
 
@@ -79,6 +82,7 @@ public class Room : IRoom
 		{
 			block.Draw(spriteBatch);
 		}
+		AddQueuedProjectiles();
 	}
 
 	public string RoomId()
@@ -244,6 +248,14 @@ public class Room : IRoom
 
 	public void AddProjectile(IProjectile item)
     {
-		projectileSet.Add(item);
+		projectileQueue.Add(item);
+    }
+
+	private void AddQueuedProjectiles()
+    {
+		foreach (IProjectile projectile in projectileQueue)
+        {
+			projectileSet.Add(projectile);
+        }
     }
 }
