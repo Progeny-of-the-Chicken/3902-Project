@@ -163,6 +163,9 @@ public class Room : IRoom
 					case "Aquamentus":
 						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
 						break;
+					case "BladeTrap":
+						enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
+						break;
 					case "Gel":
 						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
 						break;
@@ -177,6 +180,9 @@ public class Room : IRoom
 						break;
 					case "Stalfos":
 						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
+						break;
+					case "WallMaster":
+						enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
 						break;
 					case "Zol":
 						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));

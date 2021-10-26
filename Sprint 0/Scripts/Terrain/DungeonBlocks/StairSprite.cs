@@ -7,13 +7,13 @@ public class StairSprite : ITerrain
 {
     private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
     Rectangle destination;
-    GenericBlockCollider collider;
+    StairCollider collider;
     public IBlockCollider Collider { get => collider; }
 
     public StairSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
-        this.collider = new GenericBlockCollider(this, destination);
+        this.collider = new StairCollider(this, destination);
     }
 
     public void Update()

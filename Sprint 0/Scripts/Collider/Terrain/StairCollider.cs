@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -24,7 +25,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             //Keese can go over blocks
             if (!(enemy is Keese))
             {
-                Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.collisionRectangle);
+                Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
                 enemy.KnockBack(adjustmentForEnemy);
             }
         }
@@ -32,7 +33,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            //Do stuff when RoomManager.Instance gets merged in
+            RoomManager.Instance.SwitchToRoom("room00");
 
         }
 

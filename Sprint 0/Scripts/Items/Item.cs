@@ -25,6 +25,7 @@ namespace Sprint_0.Scripts.Items
         public void Update(GameTime gt)
         {
             sprite.Update(gt);
+            Collider.Update(pos);
         }
 
         public void Draw(SpriteBatch sb)
