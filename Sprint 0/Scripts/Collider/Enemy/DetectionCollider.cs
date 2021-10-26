@@ -15,13 +15,13 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class DetectionCollider : IEnemyCollider
     {
-        public IEnemy owner { get => _owner; }
-        private IEnemy _owner;
-        public Rectangle collisionRectangle { get => rectangle; }
+        public IEnemy Owner { get => owner; }
+        private IEnemy owner;
+        public Rectangle Hitbox { get => rectangle; }
         private Rectangle rectangle;
         public DetectionCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
+            this.owner = owner;
             this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
