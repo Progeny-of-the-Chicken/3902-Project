@@ -108,6 +108,8 @@ namespace Sprint_0.Scripts
         public bool DeathAnimation { get => linkState.DeathAnimation; }
 
         public bool IsSuspended { get => linkState.IsSuspended; }
+
+        public bool CanBeAffectedByEnemy { get => !linkState.IsTakingDamage; }
     }
 
 }

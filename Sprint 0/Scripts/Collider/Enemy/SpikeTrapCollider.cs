@@ -11,13 +11,13 @@ namespace Sprint_0.Scripts.Collider.Enemy
     class SpikeTrapCollider : IEnemyCollider
     {
 
-        public IEnemy owner { get => _owner; }
-        private SpikeTrap _owner;
-        public Rectangle collisionRectangle { get => rectangle; }
+        public IEnemy Owner { get => owner; }
+        private SpikeTrap owner;
+        public Rectangle Hitbox { get => rectangle; }
         private Rectangle rectangle;
         public SpikeTrapCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = (SpikeTrap)owner;
+            this.owner = (SpikeTrap)owner;
             this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
@@ -28,12 +28,12 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(owner.Damage);
-            Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.collisionRectangle);
+            Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.Hitbox);
             Vector2 direction = Vector2.Zero;
             if (intersect.Width > intersect.Height)
             {
                 direction = Vector2.UnitX;
-                if (intersect.Location.X < _owner.Location.X)
+                if (intersect.Location.X < owner.Location.X)
                 {
                     direction *= -1;
                 }
@@ -41,12 +41,12 @@ namespace Sprint_0.Scripts.Collider.Enemy
             {
                 
                 direction = Vector2.UnitY;
-                if (intersect.Location.X < _owner.Location.Y)
+                if (intersect.Location.X < owner.Location.Y)
                 {
                     direction *= -1;
                 }
             }
-            _owner.SetHasHit(direction);
+            owner.SetHasHit(direction);
         }
 
         public void OnProjectileCollision(IProjectile projectile)
