@@ -11,21 +11,18 @@ namespace Sprint_0.Scripts.Sprite
     {
         private Texture2D sprite;
         private Rectangle[] frames;
-        private float scale;
 
-        private float framesPerSecond = 4;
         private float timeSinceFrame = 0;
         private int currentFrame = 0;
-        public GoriyaRightSprite(Rectangle[] frames, float scale, Texture2D spriteSheet)
+        public GoriyaRightSprite(Rectangle[] frames, Texture2D spriteSheet)
         {
             this.frames = frames;
-            this.scale = scale;
             sprite = spriteSheet;
         }
         public void Update(GameTime gt)
         {
             timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / framesPerSecond)
+            if (timeSinceFrame >= 1 / ObjectConstants.DefaultEnemyFramesPerSecond)
             {
                 currentFrame = (currentFrame + 1) % frames.Length;
                 timeSinceFrame = 0;
@@ -33,7 +30,7 @@ namespace Sprint_0.Scripts.Sprite
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(frames[currentFrame].Width * scale), (int)(frames[currentFrame].Height * scale));
+            Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (frames[currentFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White);
         }
 

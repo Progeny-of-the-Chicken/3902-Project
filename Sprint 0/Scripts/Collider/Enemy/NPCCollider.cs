@@ -9,25 +9,27 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class NPCCollider : IEnemyCollider
     {
-        IEnemy _owner;
-        Rectangle rectangle;
-        public IEnemy owner => throw new NotImplementedException();
+        IEnemy owner;
+        Rectangle hitbox;
+        public IEnemy Owner { get => owner; }
 
-        public Rectangle collisionRectangle => throw new NotImplementedException();
+        public Rectangle Hitbox { get => hitbox; }
 
         public NPCCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
-            this.rectangle = collisionRectangle;
+            this.owner = owner;
+            this.hitbox = collisionRectangle;
         }
         public void OnPlayerCollision(Link player)
         {
-            //unused
+            Vector2 pushBack = Vector2.Zero;
+            pushBack = Overlap.DirectionToMoveObjectOff(hitbox, player.collider.CollisionRectangle);
+            player.PushBackBy(pushBack);
         }
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            //unused
+            //can implement ability to counterattack, however that's low on our priorities for now
         }
 
         public void Update(Vector2 location)

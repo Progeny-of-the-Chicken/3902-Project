@@ -9,8 +9,8 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     public interface IEnemyCollider
     {
-        public IEnemy owner { get; }
-        public Rectangle collisionRectangle { get; }
+        public IEnemy Owner { get; }
+        public Rectangle Hitbox { get; }
 
         public void Update(Vector2 location);
 
