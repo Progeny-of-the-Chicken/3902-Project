@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(Owner.Damage);
-            // TODO: call Link knockback
+            player.PushBackBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
         }
 
         public void OnEnemyCollision(IEnemy enemy)
