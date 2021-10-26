@@ -133,25 +133,25 @@ public class Room : IRoom
 				switch (enemyString[i+1])
                 {
 					case "Aquamentus":
-						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
 						break;
 					case "Gel":
-						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
 						break;
 					case "Goriya":
-						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
 						break;
 					case "Keese":
-						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
 						break;
 					case "OldMan":
-						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
 						break;
 					case "Stalfos":
-						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
 						break;
 					case "Zol":
-						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
 						break;
 					default:
 						Console.WriteLine("Typo in Room " + roomId);
