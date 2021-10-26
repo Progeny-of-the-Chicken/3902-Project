@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
             //unused
         }
 
-        public void OnProjectileCollision(FacingDirection direction, IProjectile projectile)
+        public void OnProjectileCollision(IProjectile projectile)
         {
             //unused
         }

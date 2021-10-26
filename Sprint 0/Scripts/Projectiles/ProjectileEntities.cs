@@ -8,6 +8,8 @@ namespace Sprint_0.Scripts.Projectiles
     {
         public HashSet<IProjectile> projectiles;
 
+        public HashSet<IProjectile> ProjectileSet { get => projectiles; }
+
         public ProjectileEntities()
         {
             projectiles = new HashSet<IProjectile>();

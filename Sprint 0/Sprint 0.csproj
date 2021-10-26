@@ -18,10 +18,10 @@
     <None Remove="Scripts\Sprite\ItemSprites\" />
     <None Remove="Scripts\Projectiles\ProjectileClasses\" />
     <None Remove="Scripts\Sprite\ProjectileSprites\" />
-    <None Remove="Scripts\Items\ItemColliders\" />
     <None Remove="Scripts\CollisionHandlers\" />
-    <None Remove="Scripts\Projectiles\ProjectileColliders\" />
     <None Remove="Scripts\Terrain\Colliders\" />
+    <None Remove="Scripts\Collider\ItemColliders\" />
+    <None Remove="Scripts\Collider\ProjectileColliders\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -43,9 +43,7 @@
     <Folder Include="Scripts\Projectiles\" />
     <Folder Include="Scripts\Projectiles\ProjectileClasses\" />
     <Folder Include="Scripts\Sprite\ProjectileSprites\" />
-    <Folder Include="Scripts\Items\ItemColliders\" />
-    <Folder Include="Scripts\CollisionHandlers\" />
-    <Folder Include="Scripts\Projectiles\ProjectileColliders\" />
-    <Folder Include="Scripts\Collider\Terrain\" />
+    <Folder Include="Scripts\Collider\Item\" />
+    <Folder Include="Scripts\Collider\Projectile\" />
   </ItemGroup>
 </Project>

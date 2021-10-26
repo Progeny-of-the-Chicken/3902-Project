@@ -1,32 +1,34 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Collider.Projectile;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
     public class SwordAttackHitbox : IProjectile
     {
-        private Rectangle frame;
+        private Vector2 pos;
+        private IProjectileCollider collider;
         private bool delete = false;
+        private bool friendly = false;
 
         private int swordCounter = ObjectConstants.swordHitboxCounter;
 
-        public int damage { get => ObjectConstants.basicSwordDamage; }
+        public bool Friendly { get => friendly; }
+
+        public int Damage { get => ObjectConstants.basicSwordDamage; }
+
+        public IProjectileCollider Collider { get => collider; }
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
-            if ((direction == FacingDirection.Left) || (direction == FacingDirection.Right))
-            {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxLength * ObjectConstants.scale, ObjectConstants.swordHitboxWidth * ObjectConstants.scale);
-            }
-            else
-            {
-                frame = new Rectangle((int)spawnLoc.X, (int)spawnLoc.Y, ObjectConstants.swordHitboxWidth * ObjectConstants.scale, ObjectConstants.swordHitboxLength * ObjectConstants.scale);
-            }
+            pos = spawnLoc;
+            collider = ProjectileColliderFactory.Instance.CreateSwordAttackHitboxCollider(this, direction);
+            friendly = true;
         }
 
         public void Update(GameTime gt)
         {
+            collider.Update(pos);
             swordCounter--;
             if (swordCounter <= 0)
             {

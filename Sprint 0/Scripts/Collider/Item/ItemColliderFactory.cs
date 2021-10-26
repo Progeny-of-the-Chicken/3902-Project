@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Sprint_0.Scripts.Items;
 
-namespace Sprint_0.Scripts.Items.ItemColliders
+namespace Sprint_0.Scripts.Collider.Item
 {
     public class ItemColliderFactory
     {
