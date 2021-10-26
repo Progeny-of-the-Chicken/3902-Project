@@ -7,6 +7,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
     public class BlastZoneProjectileCollider : IProjectileCollider
     {
         private Rectangle _hitbox;
+        private Vector2 locationOffset = new Vector2((float)ObjectConstants.blastZonePositionOffset);
 
         public IProjectile Owner { get; }
 
@@ -21,7 +22,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void Update(Vector2 location)
         {
-            _hitbox.Location = location.ToPoint();
+            _hitbox.Location = location.ToPoint() + locationOffset.ToPoint();
         }
 
         public void OnPlayerCollision(Link player)
