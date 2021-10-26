@@ -53,6 +53,5 @@ namespace Sprint_0
         public const int swordHitboxWidth = 3 * scale;
         public const int basicSwordDamage = 1;
         //spiketrap rectangles
-
     }
 }

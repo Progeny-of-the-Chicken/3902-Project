@@ -14,21 +14,24 @@ namespace Sprint_0.Scripts.Enemy
     class SpikeTrap : IEnemy
     {
         ISprite sprite;
-        IEnemyCollider collider;
-        public IEnemyCollider Collider { get => collider; }
+        IEnemyCollider DamageCollider;
+        IEnemyCollider XDetectionCollider;
+        IEnemyCollider YDetectionCollider;
+        public IEnemyCollider Collider {get => DamageCollider;}
+        public IEnemyCollider XCollider { get => XDetectionCollider; }
 
-        Rectangle frame = new Rectangle(161, 58, 24, 18);
+        public IEnemyCollider YCollider { get => YDetectionCollider; }
 
-        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        byte[] random;
-
-        const float moveTime = 1;
+        Rectangle damageFrame = new Rectangle(161, 58, 24, 18);
+        Rectangle RectangleX;
+        Rectangle RectangleY;
+        Vector2 OriginalLocation;
         float moveSpeed;
-        float timeSinceMove = 0;
+        bool hasHit = false;
+        int damage;
+        public Vector2 Location { get => location; }
 
-        public int Damage { get => _damage; }
-        int _damage;
-        int health = 3;
+        public int Damage { get => damage; }
         const int knockbackDistance = 50;
         bool delete = false;
 
@@ -38,30 +41,55 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             moveSpeed = 25 * scale;
-            direction = new Vector2(-1, 0);
-            random = new byte[2];
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(scale, frame);
+            OriginalLocation = location;
+            direction = Vector2.Zero;
+            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
+            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (int)(damageFrame.Width * scale), (int)(damageFrame.Height * scale)));
+            XDetectionCollider = new DetectionCollider(this, RectangleX);
+            YDetectionCollider = new DetectionCollider(this, RectangleY);
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(scale, damageFrame);
         }
 
         public void Update(GameTime gt)
         {
-            Move(gt);
-            sprite.Update(gt);
+            if (hasHit == false)
+            {
+                Move(gt);
+                sprite.Update(gt);
+            } else
+            {
+                SetOriginalPosition(gt);
+            }
+            
+            
         }
 
         void Move(GameTime gt)
         {
             //move according to link's position
-            //if link is under, move down
-            //if link is above, move up
-            //if link is left, move left
-            //if link is down, move down,
-           // SetOriginalPosition(sprite, linkPosition);
+            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            
+            DamageCollider.Update(location);
         }
 
-        void SetOriginalPosition(ISprite sprite, Vector2 linkPosition )
+        public void SetHasHit(Vector2 direction)
         {
-            //set original position
+            this.direction = direction;
+            hasHit = true;
+        }
+
+        public void SetOriginalPosition(GameTime gt)
+        {
+            if (location != OriginalLocation)
+            {
+                location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            } else
+            {
+                hasHit = false;
+                direction = Vector2.Zero;
+            }
+            
         }
 
         public void TakeDamage(int damage)
