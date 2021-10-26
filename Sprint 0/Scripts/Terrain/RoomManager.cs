@@ -10,11 +10,24 @@ namespace Sprint_0.Scripts.Terrain
         private IRoom activeRoom;
         private Dictionary<string, IRoom> dormentRooms;
         private ILink link;
-        public RoomManager(ILink link)
+
+        private static RoomManager instance = new RoomManager();
+
+        public static RoomManager Instance
         {
-            this.link = link;
-            activeRoom = new Room("Room25", this.link);
+            get
+            {
+                return instance;
+            }
+        }
+        private RoomManager()
+        { 
             dormentRooms = new Dictionary<string, IRoom>();
+        }
+        public void Init(ILink player)
+        {
+            this.link = player;
+            activeRoom = new Room("Room20", this.link);
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
             this._owner = owner;
             this.rectangle = collisionRectangle;
         }
-        public void OnPlayerCollision(ILink player)
+        public void OnPlayerCollision(Link player)
         {
             //unused
         }

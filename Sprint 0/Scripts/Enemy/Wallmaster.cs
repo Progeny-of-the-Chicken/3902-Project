@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
-
-
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -32,6 +31,7 @@ namespace Sprint_0.Scripts.Enemy
         int health = 3;
         const int knockbackDistance = 50;
         bool delete = false;
+        bool grab = false;
 
         const float moveTime = 1;
         float moveSpeed;
@@ -39,6 +39,8 @@ namespace Sprint_0.Scripts.Enemy
 
         Vector2 location;
         Vector2 direction;
+
+        Link grabbedLink; 
         public Wallmaster(Vector2 location, float scale)
         {
             this.location = location;
@@ -53,21 +55,41 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gt)
         {
-            Move(gt);
-            sprite.Update(gt);
-            collider.Update(location);
+            if (grab == false)
+            {
+                SearchMove(gt);
+                sprite.Update(gt);
+                collider.Update(location);
+            } else
+            {
+                yeetLink();
+                sprite.Update(gt);
+            }
         }
 
-        void Move(GameTime gt)
+        void SearchMove(GameTime gt)
         {
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-
             if (timeSinceMove >= moveTime)
             {
                 SetRandomDirection();
                 timeSinceMove = 0;
             }
             location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+        }
+
+        void yeetLink()
+        {
+            if (location.X > 0)
+            {
+                --location.X;
+                grabbedLink.ResetPosition(location);
+            } else
+            {
+
+                RoomManager.Instance.SwitchToRoom("Room25");
+                grabbedLink.UnSuspend();
+            }
         }
 
         void SetRandomDirection()
@@ -86,12 +108,13 @@ namespace Sprint_0.Scripts.Enemy
             }
         }
 
-        public void GrabLink()
+        public void GrabLink(Link player)
         {
             //todo 
             //change to closed hand, move link
             sprite = closeSprite;
-
+            grab = true;
+            grabbedLink = player;
             //change to first dungeon room
         }
 
