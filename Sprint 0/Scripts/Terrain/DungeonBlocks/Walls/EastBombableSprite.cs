@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts.Collider.Terrain;
 
-public class EastBombableSprite : ITerrain
+public class EastBombableSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(814, 76, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(814, 77, 32, 32);
     Rectangle destination;
+    BombableWallCollider collider;
+    public IWallCollider Collider { get => collider; }
+    Room room;
 
-    public EastBombableSprite(Vector2 screenLocation)
+    public EastBombableSprite(Vector2 screenLocation, Room room)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+        collider = new BombableWallCollider(this, destination);
+        this.room = room;
     }
 
     public void Update()
@@ -25,4 +31,9 @@ public class EastBombableSprite : ITerrain
         spriteBatch.Draw(texture, destination, spritesheetLocation, Color.White);
     }
 
+    public void SwapDoor()
+    {
+        CommandSwapDoor command = new CommandSwapDoor(room, this, "EastBombedDoor");
+        command.Execute();
+    }
 }
