@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0;
 
 public interface IRoomManager
 {
@@ -7,5 +8,6 @@ public interface IRoomManager
     void Draw(SpriteBatch spriteBatch);
     void SwitchToRoom(string roomID);
     IRoom CurrentRoom { get; }
+    void Init(ILink player);
 }
 
