@@ -18,7 +18,10 @@ namespace Sprint_0.Scripts.CollisionHandlers
         {
             foreach (IProjectile projectile in projectiles)
             {
-                // TODO: Compare link collider against projectile collider
+                if (((Link)link).collider.CollisionRectangle.Intersects(projectile.Collider.Hitbox)) {
+                    projectile.Collider.OnPlayerCollision((Link)link);
+                    ((Link)link).collider.OnProjectileCollision(projectile);
+                }
             }
         }
     }

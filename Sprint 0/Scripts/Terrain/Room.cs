@@ -10,6 +10,7 @@ using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
+using Sprint_0.Scripts.Terrain;
 
 public class Room : IRoom
 {
@@ -27,6 +28,7 @@ public class Room : IRoom
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
 	private CollisionHandlerSet collisionHandlerSet;
+	private List<IProjectile> projectileQueue;
 
 	public Room(string roomId, ILink link)
 	{
@@ -46,6 +48,8 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
+
+		projectileQueue = new List<IProjectile>();
 
 		LoadRoom();
 
@@ -76,6 +80,9 @@ public class Room : IRoom
 		{
 			block.Draw(spriteBatch);
 		}
+
+		AddQueuedProjectiles();
+
 		foreach (IWall door in walls)
 		{
 			door.Draw(spriteBatch);
@@ -105,6 +112,8 @@ public class Room : IRoom
         LoadItems(csvReader);
 		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
+
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)
@@ -281,7 +290,15 @@ public class Room : IRoom
 
 	public void AddProjectile(IProjectile item)
     {
-		projectileSet.Add(item);
+		projectileQueue.Add(item);
+    }
+
+	private void AddQueuedProjectiles()
+    {
+		foreach (IProjectile projectile in projectileQueue)
+        {
+			projectileSet.Add(projectile);
+        }
     }
 
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)

@@ -8,6 +8,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
     {
         private IProjectileCollider collider;
         private Vector2 pos;
+        private int blastZoneCounter = ObjectConstants.blastZoneCounter;
         private bool delete = false;
         private bool friendly = false;
 
@@ -27,7 +28,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void Update(GameTime gameTime)
         {
             collider.Update(pos);
-            delete = true;
+            if (blastZoneCounter <= 0)
+            {
+                delete = true;
+            }
+            blastZoneCounter--;
         }
 
         public void Draw(SpriteBatch sb)

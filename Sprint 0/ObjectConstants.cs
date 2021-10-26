@@ -28,8 +28,9 @@ namespace Sprint_0
         public const double arrowPopDurationSeconds = 0.2;
         public const int arrowDamage = 1;
         // BlastZone
-        public const int blastZonePositionOffset = 16;
-        public const int blastZoneWidthHeight = 48 * scale;
+        public const int blastZonePositionOffset = -8;
+        public const int blastZoneWidthHeight = 32;
+        public const int blastZoneCounter = 1;
         public const int blastZoneDamage = 1;
         // Bomb
         public const int bombDisplacement = 16 * scale;
@@ -49,8 +50,8 @@ namespace Sprint_0
         public const int fireSpellDamage = 1;
         // SwordAttackHitbox
         public const int swordHitboxCounter = 17;
-        public const int swordHitboxLength = 11 * scale;
-        public const int swordHitboxWidth = 3 * scale;
+        public const int swordHitboxLength = 11;
+        public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
     }
 }
