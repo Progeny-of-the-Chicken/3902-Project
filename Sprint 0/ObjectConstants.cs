@@ -30,6 +30,7 @@ namespace Sprint_0
         // BlastZone
         public const int blastZonePositionOffset = 16;
         public const int blastZoneWidthHeight = 48 * scale;
+        public const int blastZoneCounter = 1;
         public const int blastZoneDamage = 1;
         // Bomb
         public const int bombDisplacement = 16 * scale;
