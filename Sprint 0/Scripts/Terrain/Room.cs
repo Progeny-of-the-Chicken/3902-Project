@@ -20,6 +20,7 @@ public class Room : IRoom
 	private int scale;
 	private int YOFFSET;
 	private int WALLOFFSET;
+
 	private ILink link;
 	private EnemySet enemySet;
 	private ItemEntities itemSet;
@@ -28,11 +29,14 @@ public class Room : IRoom
 	private List<IWall> walls;
 	private CollisionHandlerSet collisionHandlerSet;
 
+	private bool enemiesFlag;
+	private List<String> RoomClear;
+
 	public Room(string roomId, ILink link)
 	{
 		this.scale = ObjectConstants.scale;
-		this.WALLOFFSET = 33 * this.scale;
-		this.YOFFSET = 63 * this.scale;
+		this.WALLOFFSET = 32 * this.scale;
+		this.YOFFSET = 64 * this.scale;
 
 		this.roomId = roomId;
 		int roomRow, roomCol;
@@ -46,6 +50,9 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
+
+		enemiesFlag = false;
+		RoomClear = new List<string>();
 
 		LoadRoom();
 
@@ -63,6 +70,10 @@ public class Room : IRoom
 			block.Update();
         }
 		collisionHandlerSet.Update();
+		if (enemiesFlag && isAllEnemiesDead())
+		{
+			RoomCleared();
+		}
 	}
 
 
@@ -117,8 +128,8 @@ public class Room : IRoom
 				if (!blockColliderString[i].Equals(""))
 				{
 					//first string in each pair notates location
-					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET - this.scale;
-					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET - this.scale;
+					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
+					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
 					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
 					blocks.Add(new InvisibleSprite(blockLocation));
@@ -239,36 +250,60 @@ public class Room : IRoom
 		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 
 		string[] doorString = csvReader.ReadFields();
-		
+
 		//East
 		doorLocation.X = 224 * scale;
 		doorLocation.Y = YOFFSET + 72 * scale;
-		if (doorString[0] != "")
+		if (doorString[0] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
+			if (doorString[0].Equals("EastClosedSprite"))
+            {
+				enemiesFlag = true;
+				RoomClear.Add(doorString[0]);
+            }	
+		}
 		else
 			walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
 		
 		//North
 		doorLocation.X = 112 * scale;
 		doorLocation.Y = YOFFSET;
-		if (doorString.Length > 2 && doorString[2] != "")
+		if (doorString.Length > 2 && doorString[2] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
+			if (doorString[2].Equals("NorthClosedSprite"))
+			{
+				enemiesFlag = true;
+				RoomClear.Add(doorString[2]);
+			}
+		}
 		else
 			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
 		
 		//West
 		doorLocation.X = 0;
 		doorLocation.Y = YOFFSET + 72 * scale;
-		if (doorString.Length > 4 && doorString[4] != "")
+		if (doorString.Length > 4 && doorString[4] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
+			if (doorString[4].Equals("WestClosedSprite"))
+			{
+				enemiesFlag = true;
+				RoomClear.Add(doorString[4]);
+			}
+		}
 		else
 			walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
 
 		//South
 		doorLocation.X = 112 * scale;
 		doorLocation.Y = YOFFSET + 144 * scale;
-		if (doorString.Length > 6 && doorString[6] != "")
+		if (doorString.Length > 6 && doorString[6] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
+			if (doorString[6].Equals("SouthClosedSprite"))
+			{
+				enemiesFlag = true;
+				RoomClear.Add(doorString[6]);
+			}
+		}
 		else
 			walls.Add(WallSpriteFactory.Instance.CreateSouthWallSprite(doorLocation, this));
 
@@ -277,6 +312,34 @@ public class Room : IRoom
 	void LoadSpecial(TextFieldParser csvReader)
 	{
 		string[] specialString = csvReader.ReadFields();
+		for (int i = 0; i < specialString.Length; i += 2)
+        {
+			if (specialString[i] == "")
+            {
+				break;
+            }
+			float specialLocationX = float.Parse(specialString[i].Substring(0, specialString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
+			float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+			Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
+			switch (specialString[i+1])
+            {
+				case "MoveableBlockSprite":
+					blocks.Add(new MoveableBlockSprite(specialLocation));
+					break;
+				case "StairSprite":
+					blocks.Add(new StairSprite(specialLocation));
+					break;
+				case "HeartContainer":
+				case "Key":
+					enemiesFlag = true;
+					RoomClear.Add(specialString[i]);
+					RoomClear.Add(specialString[i + 1]);
+					break;
+				default:
+					//You shouldn't end up here
+					break;
+            }
+        }
 	}
 
 	public void AddProjectile(IProjectile item)
@@ -289,5 +352,50 @@ public class Room : IRoom
 		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
 		walls.Remove(doorToRemove);
 		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
+    }
+
+	public bool isAllEnemiesDead()
+    {
+		return enemySet.Enemies.Count == 0;
+    }
+
+	private void RoomCleared()
+    {
+		String[] strArray = RoomClear.ToArray();
+		for (int i = 0; i < strArray.Length; i++)
+        {
+			enemiesFlag = false;
+			switch (strArray[i])
+            {
+				case "EastClosedSprite":
+					ChangeDoor(walls.ToArray()[8], "EastDoorSprite");
+					break;
+				case "NorthClosedSprite":
+					ChangeDoor(walls.ToArray()[9], "NorthDoorSprite");
+					break;
+				case "WestClosedSprite":
+					ChangeDoor(walls.ToArray()[10], "WestDoorSprite");
+					break;
+				case "SouthClosedSprite":
+					ChangeDoor(walls.ToArray()[11], "SouthDoorSprite");
+					break;
+				default:
+					//Not a door
+					float specialLocationX = float.Parse(strArray[i].Substring(0, strArray[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
+					float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+					Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
+					i++;
+					switch (strArray[i])
+                    {
+						case "Key":
+							itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
+							break;
+						case "HeartContainer":
+							itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
+							break;
+                    }
+					break;
+			}
+        }
     }
 }
