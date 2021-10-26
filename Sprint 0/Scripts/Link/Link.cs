@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts
 {
@@ -71,6 +73,7 @@ namespace Sprint_0.Scripts
         {
             linkState.UseSword();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+            ObjectsFromObjectsFactory.Instance.CreateSwordAttackHitboxFromLink(Position, FacingDirection);
         }
 
         public void UseItem()
@@ -84,47 +87,27 @@ namespace Sprint_0.Scripts
             linkState.ResetPosition(newPosition);
         }
 
-        public FacingDirection FacingDirection
+        public void Suspend()
         {
-            get
-            {
-                return linkState.FacingDirection;
-            }
+            linkState.Suspend();
         }
 
-        public Vector2 Position
+        public void UnSuspend()
         {
-            get
-            {
-                return linkState.Position;
-            }
+            linkState.UnSuspend();
         }
 
-        public Vector2 ItemSpawnPosition
-        {
-            get
-            {
-                return linkState.ItemSpawnPosition;
-            }
-        }
+        public FacingDirection FacingDirection { get => linkState.FacingDirection; }
 
-        public bool IsAlive
-        {
-            get
-            {
-                return linkState.IsAlive;
-            }
-        }
+        public Vector2 Position { get => linkState.Position; }
 
-        public bool DeathAnimation
-        {
-            get
-            {
-                return linkState.DeathAnimation;
-            }
-        }
+        public Vector2 ItemSpawnPosition { get => linkState.ItemSpawnPosition; }
 
-        public bool CanBeAffectedByEnemy { get => !linkState.IsTakingDamage; }
+        public bool IsAlive { get => linkState.IsAlive; }
+
+        public bool DeathAnimation { get => linkState.DeathAnimation; }
+
+        public bool IsSuspended { get => linkState.IsSuspended; }
     }
 
 }

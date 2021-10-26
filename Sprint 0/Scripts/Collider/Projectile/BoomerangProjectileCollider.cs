@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             if (!Owner.Friendly)
             {
                 link.TakeDamage(Owner.Damage);
-                // TODO: knockback link
+                link.PushBackBy(Overlap.DirectionToMoveObjectOff(link.collider.CollisionRectangle, _hitbox));
                 ((Boomerang)Owner).BounceOffWall();
             }
         }

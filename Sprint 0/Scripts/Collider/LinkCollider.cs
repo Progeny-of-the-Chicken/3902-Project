@@ -4,6 +4,7 @@ using Sprint_0.Scripts.Collider;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 
 namespace Sprint_0.Scripts
 {
@@ -42,7 +43,10 @@ namespace Sprint_0.Scripts
 
         public void OnProjectileCollision(IProjectile proj)
         {
-            proj.Despawn();
+            if (proj is Boomerang && proj.Friendly && ((Boomerang)proj).ReturnState)
+            {
+                proj.Despawn();
+            }
         }
 
         public void Update(Vector2 location)

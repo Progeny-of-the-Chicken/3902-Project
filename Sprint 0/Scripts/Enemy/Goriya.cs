@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -102,7 +103,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction);
+            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction);
         }
         public void TakeDamage(int damage)
         {

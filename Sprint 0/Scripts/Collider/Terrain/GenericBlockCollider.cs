@@ -10,9 +10,10 @@ namespace Sprint_0.Scripts.Collider.Terrain
         private ITerrain owner;
         private Rectangle hitbox;
 
-        public GenericBlockCollider(ITerrain owner)
+        public GenericBlockCollider(ITerrain owner, Rectangle hitbox)
         {
             this.owner = owner;
+            this.hitbox = hitbox;
         }
 
         public ITerrain Owner { get => owner; }
@@ -34,6 +35,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             //Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, link.Collider.collisionRectangle); TODO: get links collider to find his position
             //link.(adjustmentForEnemy); TODO: update links position
             link.StopMoving();
+            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
         }
 
         public void OnProjectileCollision(IProjectile projectile)

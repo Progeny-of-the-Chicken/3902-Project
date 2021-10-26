@@ -7,6 +7,7 @@ using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 
 namespace Sprint_0.Scripts.Enemy
@@ -80,7 +81,7 @@ namespace Sprint_0.Scripts.Enemy
         void ShootProjectile()
         {
             timeSinceFire = 0;
-            projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
+            projectiles = ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location, FacingDirection.Left);
             sprite = shootSprite;
         }
 

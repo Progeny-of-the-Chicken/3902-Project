@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts.Collider.Terrain;
 
-public class WestBombedSprite : ITerrain
+public class WestBombedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(946, 43, 32, 32);
+    private Rectangle spritesheetLocation = new Rectangle(947, 44, 32, 32);
     Rectangle destination;
+    OpenWallCollider collider;
+    public IWallCollider Collider { get => collider; }
+    Room room;
 
-    public WestBombedSprite(Vector2 screenLocation)
+    public WestBombedSprite(Vector2 screenLocation, Room room)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+        Rectangle hitbox = destination;
+        hitbox.Width -= 8 * ObjectConstants.scale;
+        collider = new OpenWallCollider(this, hitbox);
+        this.room = room;
     }
 
     public void Update()
@@ -23,6 +31,11 @@ public class WestBombedSprite : ITerrain
     {
         Texture2D texture = TerrainSpriteFactory.Instance.GetDungeonSpritesheet();
         spriteBatch.Draw(texture, destination, spritesheetLocation, Color.White);
+    }
+
+    public void SwapDoor()
+    {
+
     }
 
 }

@@ -10,6 +10,7 @@ using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
+using Sprint_0.Scripts.Terrain;
 
 public class Room : IRoom
 {
@@ -25,7 +26,9 @@ public class Room : IRoom
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
+	private List<IWall> walls;
 	private CollisionHandlerSet collisionHandlerSet;
+	private List<IProjectile> projectileQueue;
 
 	public Room(string roomId, ILink link)
 	{
@@ -44,10 +47,13 @@ public class Room : IRoom
 		itemSet = new ItemEntities();
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
+		walls = new List<IWall>();
+
+		projectileQueue = new List<IProjectile>();
 
 		LoadRoom();
 
-		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks));
+		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
 	}
 
 	public void Update(GameTime gt)
@@ -70,14 +76,21 @@ public class Room : IRoom
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
 		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
-		link.Draw(spriteBatch);
-		enemySet.Draw(spriteBatch);
-		itemSet.Draw(spriteBatch);
-		projectileSet.Draw(spriteBatch);
 		foreach (ITerrain block in blocks)
 		{
 			block.Draw(spriteBatch);
 		}
+
+		AddQueuedProjectiles();
+
+		foreach (IWall door in walls)
+		{
+			door.Draw(spriteBatch);
+		}
+		itemSet.Draw(spriteBatch);
+		projectileSet.Draw(spriteBatch);
+		enemySet.Draw(spriteBatch);
+		link.Draw(spriteBatch);
 	}
 
 	public string RoomId()
@@ -85,9 +98,10 @@ public class Room : IRoom
 		return roomId;
     }
 
+	//Start csv parsing
 	public void LoadRoom()
 	{
-        spritesheetLocation = new Rectangle(257 * (int)roomLocation.X, 177 * (int)roomLocation.Y, 256, 176);
+        spritesheetLocation = new Rectangle(257 * (int)roomLocation.X + 1, 177 * (int)roomLocation.Y + 1, 256, 176);
 
 		filePath = Environment.CurrentDirectory.ToString() + @"/../../../Scripts/Terrain/LevelData/Dungeon1/" + roomId + ".csv";
 		TextFieldParser csvReader = new TextFieldParser(filePath);
@@ -96,23 +110,28 @@ public class Room : IRoom
 		LoadBlockColliders(csvReader);
         LoadEnemies(csvReader);
         LoadItems(csvReader);
-        LoadDoors(csvReader);
+		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
+
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)
 	{
 		string[] blockColliderString = csvReader.ReadFields();
-		for (int i = 0; i < blockColliderString.Length; i++)
+		if (blockColliderString[0] != "None")
 		{
-			if (!blockColliderString[i].Equals(""))
+			for (int i = 0; i < blockColliderString.Length; i++)
 			{
-				//first string in each pair notates location
-				float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-				Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
+				if (!blockColliderString[i].Equals(""))
+				{
+					//first string in each pair notates location
+					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET - this.scale;
+					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET - this.scale;
+					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
-				blocks.Add(new DungeonWaterSprite(blockLocation));
+					blocks.Add(new InvisibleSprite(blockLocation));
+				}
 			}
 		}
 	}
@@ -175,6 +194,9 @@ public class Room : IRoom
 
 				switch(itemString[i+1])
                 {
+					case "BowItem":
+						itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+						break;
 					case "Compass":
 						itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
 						break;
@@ -200,38 +222,65 @@ public class Room : IRoom
 
 	void LoadDoors(TextFieldParser csvReader)
 	{
+		Vector2 doorLocation = new Vector2(0, YOFFSET);
+		//Add 8 Wall segments
+		//North wall left side
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+		//West wall top side
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
+		//North wall right side
+		doorLocation.X = scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+		//East wall top side
+		doorLocation.X = scale * 224;
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
+		//East wall bottom side
+		doorLocation.Y += scale * 104;
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
+		//West wall bottom side
+		doorLocation.X = 0;
+		walls.Add(new InvisibleVerticleWall(doorLocation, this));
+		//South wall left side
+		doorLocation.Y = YOFFSET + scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+		//South wall right side
+		doorLocation.X = scale * 144;
+		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+
 		string[] doorString = csvReader.ReadFields();
-		for (int i = 0; i < doorString.Length; i += 2)
-        {
-			if (doorString[i] != "")
-            {
-				float doorLocationX;
-				float doorLocationY;
-				if (i % 4 == 0)
-                {
-					doorLocationY = YOFFSET + 88 * scale; 
-					if (i == 0)
-                    {
-						doorLocationX = 144 * scale;
-                    } else
-                    {
-						doorLocationX = 0;
-                    }
-                } else
-                {
-					doorLocationX = 112 * scale;
-					if (i == 2)
-                    {
-						doorLocationY = YOFFSET;
-                    } else
-                    {
-						doorLocationY = YOFFSET + 144 * scale;
-					}
-					Vector2 doorLocation = new Vector2(doorLocationX, doorLocationY);
-				}
-			}
-			//Do one of the many doors
-        }
+		
+		//East
+		doorLocation.X = 224 * scale;
+		doorLocation.Y = YOFFSET + 72 * scale;
+		if (doorString[0] != "")
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
+		
+		//North
+		doorLocation.X = 112 * scale;
+		doorLocation.Y = YOFFSET;
+		if (doorString.Length > 2 && doorString[2] != "")
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
+		
+		//West
+		doorLocation.X = 0;
+		doorLocation.Y = YOFFSET + 72 * scale;
+		if (doorString.Length > 4 && doorString[4] != "")
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
+
+		//South
+		doorLocation.X = 112 * scale;
+		doorLocation.Y = YOFFSET + 144 * scale;
+		if (doorString.Length > 6 && doorString[6] != "")
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
+		else
+			walls.Add(WallSpriteFactory.Instance.CreateSouthWallSprite(doorLocation, this));
+
 	}
 
 	void LoadSpecial(TextFieldParser csvReader)
@@ -241,6 +290,21 @@ public class Room : IRoom
 
 	public void AddProjectile(IProjectile item)
     {
-		projectileSet.Add(item);
+		projectileQueue.Add(item);
+    }
+
+	private void AddQueuedProjectiles()
+    {
+		foreach (IProjectile projectile in projectileQueue)
+        {
+			projectileSet.Add(projectile);
+        }
+    }
+
+	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
+    {
+		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
+		walls.Remove(doorToRemove);
+		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
     }
 }
