@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Sprite
 {
-    class GoriyaBackSprite : ISprite
+    class WallmasterCloseSprite : ISprite
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
@@ -15,7 +16,7 @@ namespace Sprint_0.Scripts.Sprite
         private SpriteEffects effect = SpriteEffects.None;
         private float framesPerSecond = 4;
         private float timeSinceFrame = 0;
-        public GoriyaBackSprite(Rectangle rectangle, float scale, Texture2D spriteSheet)
+        public WallmasterCloseSprite(Rectangle rectangle, float scale, Texture2D spriteSheet)
         {
             sourceRectangle = rectangle;
             this.scale = scale;
@@ -23,20 +24,7 @@ namespace Sprint_0.Scripts.Sprite
         }
         public void Update(GameTime gt)
         {
-            timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / framesPerSecond)
-            {
-                //Will alternate between normal and flipped sprite
-                if (effect == SpriteEffects.None)
-                {
-                    effect = SpriteEffects.FlipHorizontally;
-                }
-                else
-                {
-                    effect = SpriteEffects.None;
-                }
-                timeSinceFrame = 0;
-            }
+            //not needed
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
@@ -46,4 +34,5 @@ namespace Sprint_0.Scripts.Sprite
         }
     }
 }
+
 

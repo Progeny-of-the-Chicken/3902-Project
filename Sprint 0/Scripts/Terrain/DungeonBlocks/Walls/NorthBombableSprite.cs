@@ -33,7 +33,7 @@ public class NorthBombableSprite : IWall
     public void SwapDoor()
     {
         System.Diagnostics.Debug.WriteLine("Blowing up door");
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "NorthBombedDoor");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, "NorthBombedSprite");
         command.Execute();
     }
 

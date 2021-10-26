@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             //Keese can go over blocks
             if(!(enemy is Keese))
             {
-                Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.collisionRectangle);
+                Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
                 enemy.KnockBack(adjustmentForEnemy);
             }
         }

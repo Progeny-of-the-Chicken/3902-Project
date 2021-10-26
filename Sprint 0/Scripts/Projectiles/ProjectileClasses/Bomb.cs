@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -95,7 +96,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 explode = true;
                 sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
-                // TODO: Add BlastZone object to room instance
+                ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
                 startTime = 0.0;
             }
         }

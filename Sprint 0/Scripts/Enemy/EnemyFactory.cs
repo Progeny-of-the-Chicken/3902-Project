@@ -24,33 +24,33 @@ namespace Sprint_0.Scripts.Enemy
 		{
 		}
 
-		public IEnemy CreateStalfos(Vector2 location, float scale)
+		public IEnemy CreateStalfos(Vector2 location)
 		{
-			return new Stalfos(location, scale);
+			return new Stalfos(location);
 		}
-		public IEnemy CreateOldMan(Vector2 location, float scale)
+		public IEnemy CreateOldMan(Vector2 location)
         {
-			return new OldMan(location, scale);
+			return new OldMan(location);
         }
-		public IEnemy CreateGel(Vector2 location, float scale)
+		public IEnemy CreateGel(Vector2 location)
 		{
-			return new Gel(location, scale);
+			return new Gel(location);
 		}
-		public IEnemy CreateZol(Vector2 location, float scale)
+		public IEnemy CreateZol(Vector2 location)
         {
-			return new Zol(location, scale);
+			return new Zol(location);
         }
-		public IEnemy CreateAquamentus(Vector2 location, float scale)
+		public IEnemy CreateAquamentus(Vector2 location)
         {
-			return new Aquamentus(location, scale);
+			return new Aquamentus(location);
         }
-		public IEnemy CreateKeese(Vector2 location, float scale)
+		public IEnemy CreateKeese(Vector2 location)
         {
-			return new Keese(location, scale);
+			return new Keese(location);
         }
-		public IEnemy CreateGoriya(Vector2 location, float scale)
+		public IEnemy CreateGoriya(Vector2 location)
         {
-			return new Goriya(location, scale);
+			return new Goriya(location);
         }
 	}
 }

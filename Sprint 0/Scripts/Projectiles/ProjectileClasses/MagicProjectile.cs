@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     directionVector.Y = 0;
                     break;
             }
-            sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite(1.5f);
+            sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite();
 
             collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
             friendly = false;

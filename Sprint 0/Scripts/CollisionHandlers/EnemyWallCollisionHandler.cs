@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 foreach (ITerrain block in blocks)
                 {
-                    if (block.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle))
+                    if (block.Collider.Hitbox.Intersects(enemy.Collider.Hitbox))
                     {
                         block.Collider.OnEnemyCollision(enemy);
                     }

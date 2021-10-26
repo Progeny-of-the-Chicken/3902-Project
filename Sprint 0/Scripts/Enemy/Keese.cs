@@ -23,27 +23,22 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         
-        const float moveTime = 1;
-        float moveSpeed;
         float timeSinceMove = 0;
 
-        public int Damage { get => _damage; }
-        int _damage;
-        int health = 1;
-        const int knockbackDistance = 50;
+        public int Damage { get => ObjectConstants.KeeseDamage; }
+        int health = ObjectConstants.KeeseStartingHealth;
         bool delete = false;
 
         Vector2 location;
         Vector2 directionVector;
 
-        public Keese(Vector2 location, float scale)
+        public Keese(Vector2 location)
         {
             this.location = location;
-            moveSpeed = 25 * scale;
             directionVector = Vector2.Zero;
             random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(scale, frames);
-            Rectangle collision = new Rectangle(0, 0, (int)(frames[0].Width * scale), (int)(frames[0].Height * scale));
+            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(frames);
+            Rectangle collision = new Rectangle(location.ToPoint(), (frames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
         }
 
@@ -54,18 +49,18 @@ namespace Sprint_0.Scripts.Enemy
             {
                 sprite.Update(gt);
             }
-            collider.Update(location);
         }
 
         public void Move(GameTime gt)
         {
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (timeSinceMove >= ObjectConstants.KeeseMoveTime)
             {
                 SetRandomDirection();
                 timeSinceMove = 0;
             }
-            location += directionVector * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            location += directionVector * ObjectConstants.KeeseMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            collider.Update(location);
         }
         void SetRandomDirection()
         {
@@ -80,7 +75,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {

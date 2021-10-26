@@ -8,6 +8,7 @@ using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
+using Sprint_0.Scripts.Terrain;
 
 public class Room : IRoom
 {
@@ -26,6 +27,7 @@ public class Room : IRoom
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
 	private CollisionHandlerSet collisionHandlerSet;
+	private List<IProjectile> projectileQueue;
 
 	private bool enemiesFlag;
 	private List<String> RoomClear;
@@ -51,6 +53,8 @@ public class Room : IRoom
 
 		enemiesFlag = false;
 		RoomClear = new List<string>();
+
+		projectileQueue = new List<IProjectile>();
 
 		LoadRoom();
 
@@ -85,6 +89,9 @@ public class Room : IRoom
 		{
 			block.Draw(spriteBatch);
 		}
+
+		AddQueuedProjectiles();
+
 		foreach (IWall door in walls)
 		{
 			door.Draw(spriteBatch);
@@ -114,6 +121,8 @@ public class Room : IRoom
         LoadItems(csvReader);
 		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
+
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)
@@ -152,25 +161,25 @@ public class Room : IRoom
 				switch (enemyString[i+1])
                 {
 					case "Aquamentus":
-						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
 						break;
 					case "Gel":
-						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
 						break;
 					case "Goriya":
-						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
 						break;
 					case "Keese":
-						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
 						break;
 					case "OldMan":
-						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
 						break;
 					case "Stalfos":
-						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
 						break;
 					case "Zol":
-						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation, scale));
+						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
 						break;
 					default:
 						Console.WriteLine("Typo in Room " + roomId);
@@ -342,7 +351,15 @@ public class Room : IRoom
 
 	public void AddProjectile(IProjectile item)
     {
-		projectileSet.Add(item);
+		projectileQueue.Add(item);
+    }
+
+	private void AddQueuedProjectiles()
+    {
+		foreach (IProjectile projectile in projectileQueue)
+        {
+			projectileSet.Add(projectile);
+        }
     }
 
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)

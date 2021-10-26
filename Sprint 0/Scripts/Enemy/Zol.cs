@@ -21,49 +21,43 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
 
-        float moveTime = 1;
-        float moveSpeed;
         float timeSinceMove = 0;
-        float pauseTime = 1;
         bool delete = false;
 
-        public int Damage { get => _damage; }
-        int _damage;
-        int health = 1;
-        const int knockbackDistance = 50;
+        public int Damage { get => ObjectConstants.ZolDamage; }
+        int health = ObjectConstants.ZolStartingHealth;
 
         Vector2 location;
         Vector2 direction;
 
-        public Zol(Vector2 location, float scale)
+        public Zol(Vector2 location)
         {
             this.location = location;
-            moveSpeed = 25 * scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            sprite = (ZolSprite)EnemySpriteFactory.Instance.CreateZolSprite(scale, frames);
-            collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(frames[0].Width * scale), (int)(frames[0].Height * scale)));
+            sprite = EnemySpriteFactory.Instance.CreateZolSprite(frames);
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (frames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
         }
         public void Update(GameTime t)
         {
             timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= pauseTime)
+            if (timeSinceMove >= ObjectConstants.ZolPauseTime)
             {
                 Move(t);
             }
             sprite.Update(t);
-            collider.Update(location);
         }
 
         public void Move(GameTime t)
         {
-            if (timeSinceMove >= moveTime + pauseTime)
+            if (timeSinceMove >= ObjectConstants.ZolMoveTime + ObjectConstants.ZolPauseTime)
             {
                 SetRandomDirection();
                 timeSinceMove = 0;
             }
 
-            location += direction * moveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+            location += direction * ObjectConstants.ZolMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+            collider.Update(location);
         }
         void SetRandomDirection()
         {
@@ -87,7 +81,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {

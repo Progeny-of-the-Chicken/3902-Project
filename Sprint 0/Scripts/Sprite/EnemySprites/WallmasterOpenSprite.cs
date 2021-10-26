@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Sprite
 {
-    class OldManSprite : ISprite
+    class WallmasterOpenSprite : ISprite
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
         private float scale;
-        public OldManSprite(Rectangle sourceRectangle, float scale, Texture2D spriteSheet)
+
+        private SpriteEffects effect = SpriteEffects.None;
+        private float framesPerSecond = 4;
+        private float timeSinceFrame = 0;
+        public WallmasterOpenSprite(Rectangle rectangle, float scale, Texture2D spriteSheet)
         {
-            this.sourceRectangle = sourceRectangle;
+            sourceRectangle = rectangle;
             this.scale = scale;
             sprite = spriteSheet;
         }
         public void Update(GameTime gt)
         {
-            //not used
+            //not needed
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale), (int)(sourceRectangle.Height * scale));
-            spriteBatch.Draw(sprite, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(sprite, destinationRectangle, sourceRectangle, Color.White, 0, Vector2.Zero, effect, 0);
+
         }
     }
 }
