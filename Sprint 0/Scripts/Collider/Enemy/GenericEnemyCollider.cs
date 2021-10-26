@@ -15,8 +15,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
         private IEnemy owner;
         public Rectangle Hitbox { get => hitbox; }
         private Rectangle hitbox;
-
-        private const int knockBack = ObjectConstants.scale * ObjectConstants.standardWidthHeight * 3;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
             this.owner = owner;
@@ -36,7 +34,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 if (!pushBack.Equals(Vector2.Zero))
                 {
                     pushBack.Normalize();
-                    pushBack *= knockBack;
+                    pushBack *= ObjectConstants.DefaultEnemyKnockback;
                 }
                 //not sure if we need this line or not
                 //player.StopMoving();

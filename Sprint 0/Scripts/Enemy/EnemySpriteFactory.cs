@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.ProjectileSprites;
+using Sprint_0.Scripts.Sprite.EnemySprites;
+using Sprint_0.Scripts.Sprites.EnemySprites;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -40,54 +42,54 @@ namespace Sprint_0.Scripts.Enemy
 			bossSprites = content.Load<Texture2D>("bosses");
 		}
 
-		public ISprite CreateStalfosSprite(float scale, Rectangle frame)
+		public ISprite CreateStalfosSprite(Rectangle frame)
 		{
-			return new StalfosSprite(frame, scale, enemySprites);
+			return new UnanimatedFlipSprite(frame, enemySprites);
 		}
 
-		public ISprite CreateOldManSprite(float scale, Rectangle frame)
+		public ISprite CreateOldManSprite(Rectangle frame)
         {
-			return new OldManSprite(frame, scale, npcSprites);
+			return new GenericUnanimatedEnemySprite(frame, npcSprites);
         }
-		public ISprite CreateGelSprite(float scale, Rectangle[] frames)
+		public ISprite CreateGelSprite(Rectangle[] frames)
         {
-			return new GelSprite(frames, scale, enemySprites);
+			return new GenericEnemySprite(frames, enemySprites);
         }
-		public ISprite CreateZolSprite(float scale, Rectangle[] frames)
+		public ISprite CreateZolSprite(Rectangle[] frames)
         {
-			return new ZolSprite(frames, scale, enemySprites);
+			return new GenericEnemySprite(frames, enemySprites);
         }
-		public ISprite CreateAquamentusMoveSprite(float scale, Rectangle[] frames)
+		public ISprite CreateAquamentusMoveSprite(Rectangle[] frames)
         {
-			return new AquamentusMoveSprite(frames, scale, bossSprites);
+			return new GenericEnemySprite(frames, bossSprites);
         }
-		public ISprite CreateAquamentusShootSprite(float scale, Rectangle[] frames)
+		public ISprite CreateAquamentusShootSprite(Rectangle[] frames)
 		{
-			return new AquamentusShootSprite(frames, scale, bossSprites);
+			return new GenericEnemySprite(frames, bossSprites);
 		}
-		public ISprite CreateKeeseSprite(float scale, Rectangle[] frames)
+		public ISprite CreateKeeseSprite(Rectangle[] frames)
         {
-			return new KeeseSprite(frames, scale, enemySprites);
+			return new GenericEnemySprite(frames, enemySprites);
         }
-		public ISprite CreateMagicProjectileSprite(float scale)
+		public ISprite CreateMagicProjectileSprite()
 		{
-			return new MagicProjectileSprite(MagicProjectileFrames, scale, bossSprites);
+			return new MagicProjectileSprite(MagicProjectileFrames, ObjectConstants.scale, bossSprites);
 		}
-		public ISprite CreateFrontGoriyaSprite(float scale, Rectangle frame)
+		public ISprite CreateFrontGoriyaSprite(Rectangle frame)
         {
-			return new GoriyaFrontSprite(frame, scale, enemySprites);
+			return new AnimatedFlipSprite(frame, enemySprites);
         }
-		public ISprite CreateBackGoriyaSprite(float scale, Rectangle frame)
+		public ISprite CreateBackGoriyaSprite(Rectangle frame)
         {
-			return new GoriyaBackSprite(frame, scale, enemySprites);
+			return new AnimatedFlipSprite(frame, enemySprites);
         }
-		public ISprite CreateRightGoriyaSprite(float scale, Rectangle[] frames)
+		public ISprite CreateRightGoriyaSprite(Rectangle[] frames)
 		{
-			return new GoriyaRightSprite(frames, scale, enemySprites);
+			return new GoriyaRightSprite(frames, enemySprites);
 		}
-		public ISprite CreateLeftGoriyaSprite(float scale, Rectangle[] frames)
+		public ISprite CreateLeftGoriyaSprite(Rectangle[] frames)
 		{
-			return new GoriyaLeftSprite(frames, scale, enemySprites);
+			return new GoriyaLeftSprite(frames, enemySprites);
 		}
 	}
 }

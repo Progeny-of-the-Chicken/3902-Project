@@ -22,38 +22,29 @@ namespace Sprint_0.Scripts.Enemy
         Rectangle[] moveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
         Rectangle[] shootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
 
-        public int Damage { get => _damage; }
-        int _damage;
-        int health = 1;
-        const int knockbackDistance = 50;
+        public int Damage { get => ObjectConstants.AquamentusDamage; }
+        private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
         List<IProjectile> projectiles;
         
         Vector2 location;
-        Vector2 direction = new Vector2(-1, 0);
+        Vector2 direction = -Vector2.UnitX;
         Vector2 startLocation;
 
-        float speed;
-        float moveDistance;
-
         float timeSinceFire = 0;
-        float shootSpriteTime = 0.5f;
 
-        public Aquamentus(Vector2 location, float scale)
+        public Aquamentus(Vector2 location)
         {
             this.location = location;
             startLocation = location;
 
-            speed = 25 * scale;
-            moveDistance = 20 * scale;
-
-            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(scale, moveFrames);
-            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(scale, shootFrames);
+            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(moveFrames);
+            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(shootFrames);
             sprite = moveSprite;
             projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
 
-            Rectangle collision = new Rectangle(0, 0, (int)(moveFrames[0].Width * scale), (int)(moveFrames[0].Height * scale));
+            Rectangle collision = new Rectangle(location.ToPoint(), (moveFrames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
         }
         public void Update(GameTime t)
@@ -66,7 +57,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 ShootProjectile();
             }
-            if (timeSinceFire >= shootSpriteTime)
+            if (timeSinceFire >= ObjectConstants.AquamentusShootSpriteTime)
             {
                 sprite = moveSprite;
             }
@@ -78,11 +69,12 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Move(GameTime t)
         {
-            if (location.X < startLocation.X - moveDistance || location.X > startLocation.X)
+            if (location.X < startLocation.X - ObjectConstants.AquamentusMoveDistance || location.X > startLocation.X)
             {
                 direction *= -1;
             }
-            location += speed * direction * (float)t.ElapsedGameTime.TotalSeconds;
+            location += ObjectConstants.AquamentusMoveSpeed * direction * (float)t.ElapsedGameTime.TotalSeconds;
+            collider.Update(location);
         }
 
         void ShootProjectile()
@@ -99,7 +91,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {

@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class OldMan : IEnemy
     {
-        private OldManSprite sprite;
+        private ISprite sprite;
         private Vector2 location;
 
         Rectangle frame = new Rectangle(1, 11, 16, 16);
@@ -21,14 +21,14 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider collider;
         const int damage = 0;
 
-        int health = 1;
+        int health = ObjectConstants.OldManStartingHealth;
         bool delete = false;
 
-        public OldMan(Vector2 location, float scale)
+        public OldMan(Vector2 location)
         {
             this.location = location;
-            sprite = (OldManSprite)EnemySpriteFactory.Instance.CreateOldManSprite(scale, frame);
-            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (frame.Size.ToVector2() * scale).ToPoint()));
+            sprite = EnemySpriteFactory.Instance.CreateOldManSprite(frame);
+            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (frame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
         }
 
         public void Update(GameTime gt)
@@ -44,12 +44,12 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             //May add way to have old man counter-attack if you hit him but for now this isn't planned to be called
-            health -= damage;
-            delete = (health <= 0);
+            //health -= damage;
+            //delete = (health <= 0);
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback;
+            //location += knockback;
         }
         public bool CheckDelete()
         {

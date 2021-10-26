@@ -25,14 +25,10 @@ namespace Sprint_0.Scripts.Enemy
         Rectangle backFrame = new Rectangle(240, 10, 14, 17);
         Rectangle[] rightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
 
-        public int Damage { get => _damage; }
-        int _damage;
-        int health = 1;
-        const int knockbackDistance = 50;
+        public int Damage { get => ObjectConstants.GoriyaDamage; }
+        int health = ObjectConstants.GoriyaStartingHealth;
         bool delete = false;
 
-        float moveTime = 1.5f;
-        float moveSpeed;
         float timeSinceMove = 0;
 
         FacingDirection direction;
@@ -40,24 +36,22 @@ namespace Sprint_0.Scripts.Enemy
         (Vector2 directionVector, ISprite sprite) dependency;
 
         Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)> directionDependencies;
-        public Goriya(Vector2 location, float scale)
+        public Goriya(Vector2 location)
         {
 
             this.location = location;
 
-            moveSpeed = 25 * scale;
-
             random = new byte[3];
             randomDir = new RNGCryptoServiceProvider();
             directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (new Vector2(1, 0), EnemySpriteFactory.Instance.CreateRightGoriyaSprite(scale, rightFrames)));
-            directionDependencies.Add(FacingDirection.Left, (new Vector2(-1, 0), EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(scale, rightFrames)));
-            directionDependencies.Add(FacingDirection.Up, (new Vector2(0, -1), EnemySpriteFactory.Instance.CreateBackGoriyaSprite(scale, backFrame)));
-            directionDependencies.Add(FacingDirection.Down, (new Vector2(0, 1), EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(scale, frontFrame)));
+            directionDependencies.Add(FacingDirection.Right, (Vector2.UnitX, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(rightFrames)));
+            directionDependencies.Add(FacingDirection.Left, (-Vector2.UnitX, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(rightFrames)));
+            directionDependencies.Add(FacingDirection.Up, (-Vector2.UnitY, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(backFrame)));
+            directionDependencies.Add(FacingDirection.Down, (Vector2.UnitY, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(frontFrame)));
             direction = FacingDirection.Down;
             directionDependencies.TryGetValue(direction, out dependency);
 
-            collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(frontFrame.Width * scale), (int)(frontFrame.Height * scale)));
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (frontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             boomerang = null;
         }
@@ -77,18 +71,18 @@ namespace Sprint_0.Scripts.Enemy
                     boomerang = null;
                 }
             }
-            collider.Update(location);
         }
 
         public void Move(GameTime gt)
         {
             timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (timeSinceMove >= ObjectConstants.GoriyaMoveTime)
             {
                 SetRandomDirection();
                 timeSinceMove = 0;
             }
-            location += dependency.directionVector * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            location += dependency.directionVector * ObjectConstants.GoriyaMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            collider.Update(location);
         }
 
         void SetRandomDirection()
@@ -117,7 +111,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void KnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public bool CheckDelete()
         {
