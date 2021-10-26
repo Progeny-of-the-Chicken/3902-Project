@@ -8,16 +8,16 @@ using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
-    class GenericEnemyCollider : IEnemyCollider
+    class SpikeTrapCollider : IEnemyCollider
     {
 
         public IEnemy owner { get => _owner; }
-        private IEnemy _owner;
+        private SpikeTrap _owner;
         public Rectangle collisionRectangle { get => rectangle; }
         private Rectangle rectangle;
-        public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
+        public SpikeTrapCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
+            this._owner = (SpikeTrap)owner;
             this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
@@ -28,6 +28,25 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(owner.Damage);
+            Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.collisionRectangle);
+            Vector2 direction = Vector2.Zero;
+            if (intersect.Width > intersect.Height)
+            {
+                direction = Vector2.UnitX;
+                if (intersect.Location.X < _owner.Location.X)
+                {
+                    direction *= -1;
+                }
+            } else
+            {
+                
+                direction = Vector2.UnitY;
+                if (intersect.Location.X < _owner.Location.Y)
+                {
+                    direction *= -1;
+                }
+            }
+            _owner.SetHasHit(direction);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

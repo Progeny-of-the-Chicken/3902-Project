@@ -1,23 +1,24 @@
-﻿using Microsoft.Xna.Framework;
-using Sprint_0.Scripts.Projectiles;
-using Sprint_0.Scripts.Projectiles.ProjectileClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Terrain;
+using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
-    class GenericEnemyCollider : IEnemyCollider
+    class WallmasterEnemyCollider : IEnemyCollider
     {
-
         public IEnemy owner { get => _owner; }
-        private IEnemy _owner;
-        public Rectangle collisionRectangle { get => rectangle; }
+        private Wallmaster _owner;
+        public Rectangle collisionRectangle { get => collisionRectangle; }
         private Rectangle rectangle;
-        public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
+        public WallmasterEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this._owner = owner;
+            this._owner = (Wallmaster)owner;
             this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
@@ -27,7 +28,8 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            player.TakeDamage(owner.Damage);
+            player.Suspend();
+            _owner.GrabLink(player);
         }
 
         public void OnProjectileCollision(IProjectile projectile)
@@ -38,4 +40,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
             }
         }
     }
+
 }
+

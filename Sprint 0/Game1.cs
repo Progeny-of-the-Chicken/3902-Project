@@ -56,7 +56,8 @@ namespace Sprint_0
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
-            roomManager = new RoomManager(link);
+            roomManager = RoomManager.Instance;
+            roomManager.Init(link);
         }
 
         protected override void Update(GameTime gameTime)
