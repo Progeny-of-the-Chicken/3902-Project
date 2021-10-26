@@ -10,6 +10,7 @@ using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
+using Sprint_0.Scripts.Terrain;
 
 public class Room : IRoom
 {
@@ -98,6 +99,8 @@ public class Room : IRoom
         LoadItems(csvReader);
         LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
+
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)
