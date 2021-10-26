@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Terrain
             return projectile;
         }
 
-        public List<IProjectile> CreateMagicProjectileFromEnemy(Vector2 location, FacingDirection direction)
+        public List<IProjectile> CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)
         {
             List<IProjectile> projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, direction);
             foreach (IProjectile projectile in projectiles)
