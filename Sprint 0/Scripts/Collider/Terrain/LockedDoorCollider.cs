@@ -30,8 +30,6 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnLinkCollision(Link link)
         {
-            //Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, link.Collider.collisionRectangle); TODO: get links collider to find his position
-            //link.(adjustmentForEnemy); TODO: update links position
             link.StopMoving();
             link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
             owner.SwapDoor();

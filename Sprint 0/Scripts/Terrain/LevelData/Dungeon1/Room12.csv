@@ -2,4 +2,4 @@
 1 1,Gel,3 0,Gel,10 1,Gel,,
 ,,,,,,,
 EastClosedSprite,Room02,,,WestDoorSprite,Room22,SouthLockedSprite,Room13
-5 3,MovableBlockSprite,,,,,,
+5 3,MoveableBlockSprite,,,,,,

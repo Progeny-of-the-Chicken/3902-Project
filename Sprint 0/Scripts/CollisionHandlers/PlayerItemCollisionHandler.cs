@@ -19,7 +19,8 @@ namespace Sprint_0.Scripts.CollisionHandlers
         {
             foreach (IItem item in items)
             {
-                if (((Link)link).collider.CollisionRectangle.Intersects(item.Collider.Hitbox)){
+                if (((Link)link).collider.CollisionRectangle.Intersects(item.Collider.Hitbox))
+                {
                     ((Link)link).collider.OnItemCollision(item);
                     // No current item changes
                 }

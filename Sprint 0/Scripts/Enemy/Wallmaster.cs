@@ -41,16 +41,16 @@ namespace Sprint_0.Scripts.Enemy
         Vector2 direction;
 
         Link grabbedLink; 
-        public Wallmaster(Vector2 location, float scale)
+        public Wallmaster(Vector2 location)
         {
             this.location = location;
-            moveSpeed = 25 * scale;
+            moveSpeed = 25 * ObjectConstants.scale;
             direction = new Vector2(-1, 0);
             random = new byte[2];
-            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(scale, openFrame);
-            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(scale, openFrame);
+            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(ObjectConstants.scale, openFrame);
+            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(ObjectConstants.scale, openFrame);
             sprite = openSprite;
-            collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(openFrame.Width * scale), (int)(openFrame.Height * scale)));
+            collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(openFrame.Width * ObjectConstants.scale), (int)(openFrame.Height * ObjectConstants.scale)));
         }
 
         public void Update(GameTime gt)

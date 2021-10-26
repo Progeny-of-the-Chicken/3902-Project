@@ -1,4 +1,4 @@
-﻿2 2,9 2,2 4,9 4,,,,
-3 0,Goriya,11 3,Goriya,10 5,Goriya,,
-,,,,,,,
-EastDoorSprite,Room42,,,WestLockedSprite,Room22,SouthBombableSprite,Room33
+﻿1 1,3 1,5 1,6 1,8 1,10 1,1 3,3 3,5 3,6 3,8 3,10 3,1 5,3 5,5 5,6 5,8 5,10 5
+2 0,WallMaster,9 0,WallMaster,0 1,WallMaster,11 1,WallMaster,0 5,WallMaster,11 5,WallMaster,2 6,WallMaster,9 6,WallMaster,,
+,,,,,,,,,,,,,,,,,
+,,NorthDoorSprite,Room41,WestLockedSprite,Room32,,,,,,,,,,,,

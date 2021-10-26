@@ -1,16 +1,15 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
-    public class GenericBlockCollider : IBlockCollider
+    public class MoveableBlockCollider : IBlockCollider
     {
         private ITerrain owner;
         private Rectangle hitbox;
 
-        public GenericBlockCollider(ITerrain owner, Rectangle hitbox)
+        public MoveableBlockCollider(ITerrain owner, Rectangle hitbox)
         {
             this.owner = owner;
             this.hitbox = hitbox;
@@ -23,7 +22,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnEnemyCollision(IEnemy enemy)
         {
             //Keese can go over blocks
-            if(!(enemy is Keese))
+            if (!(enemy is Keese))
             {
                 Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
                 enemy.KnockBack(adjustmentForEnemy);
@@ -33,7 +32,8 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
+            ((MoveableBlockSprite)owner).MoveBlock(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
+
         }
 
         public void OnProjectileCollision(IProjectile projectile)
@@ -43,7 +43,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void Update(Vector2 location)
         {
-            //most blocks do not move so nothing should happen here
+            //Stairs do not move
         }
     }
 }

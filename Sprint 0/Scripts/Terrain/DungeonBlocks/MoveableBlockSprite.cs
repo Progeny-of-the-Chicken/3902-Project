@@ -7,13 +7,13 @@ public class MoveableBlockSprite : ITerrain
 {
     private Rectangle spritesheetLocation = new Rectangle(1001, 11, 16, 16);
     Rectangle destination;
-    GenericBlockCollider collider;
+    IBlockCollider collider;
     public IBlockCollider Collider { get => collider; }
 
     public MoveableBlockSprite(Vector2 screenLocation)
     { 
         destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
-        this.collider = new GenericBlockCollider(this, destination);
+        this.collider = new MoveableBlockCollider(this, destination);
     }
 
     public void Update()
@@ -27,4 +27,27 @@ public class MoveableBlockSprite : ITerrain
         spriteBatch.Draw(texture, destination, spritesheetLocation, Color.White);
     }
 
+    public void MoveBlock(Vector2 direction) {
+        if (direction.X == 0)
+        {
+            if (direction.Y > 0)
+            {
+                destination.Y -= ObjectConstants.scale * spritesheetLocation.Width;
+            } else
+            {
+                destination.Y += ObjectConstants.scale * spritesheetLocation.Width;
+            }
+        } else
+        {
+            if (direction.X > 0)
+            {
+                destination.X -= ObjectConstants.scale * spritesheetLocation.Width;
+            } else
+            {
+                destination.X += ObjectConstants.scale * spritesheetLocation.Width;
+            }
+        }
+        collider = new GenericBlockCollider(this, destination);
+
+    }
 }

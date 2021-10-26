@@ -52,5 +52,13 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Goriya(location);
         }
+		public IEnemy CreateSpikeTrap(Vector2 location)
+        {
+			return new SpikeTrap(location);
+        }
+		public IEnemy CreateWallMaster(Vector2 location)
+        {
+			return new Wallmaster(location);
+        }
 	}
 }
