@@ -72,6 +72,7 @@ namespace Sprint_0.Scripts.Enemy
                     boomerang = null;
                 }
             }
+            collider.Update(location);
         }
 
         public void Move(GameTime gt)
@@ -83,7 +84,6 @@ namespace Sprint_0.Scripts.Enemy
                 timeSinceMove = 0;
             }
             location += dependency.directionVector * ObjectConstants.GoriyaMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            collider.Update(location);
         }
 
         void SetRandomDirection()
