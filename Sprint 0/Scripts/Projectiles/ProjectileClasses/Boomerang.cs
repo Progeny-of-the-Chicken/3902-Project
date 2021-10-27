@@ -19,7 +19,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
-        private double t = 0;
         private double startT = 0;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
         private double tBounceOffset = 0;
@@ -72,15 +71,17 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 startT = gt.TotalGameTime.TotalSeconds;
             }
-            t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset + tBounceOffset;
-            double posChange = (t * speedPerSecond + t * t * decelPerSecond);
-            currentPos += directionVector * (float)posChange;
-            if (!ReturnState && (posChange < 0))
+            if (!ReturnState)
             {
-                ReturnState = true;
+                ThrowUpdate(gt);
+            }
+            else
+            {
+                ReturnUpdate(gt);
             }
             collider.Update(currentPos);
             // Delete on boomerang return
+            // TODO: Delete this after properly despawned by thrower
             if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
             {
                 delete = true;
@@ -105,7 +106,24 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void BounceOffWall()
         {
             ReturnState = true;
-            tBounceOffset = 2 * Math.Abs(t - (speedPerSecond / (-1 * decelPerSecond)));
+        }
+
+        //----- Helper methods for boomerang state -----//
+
+        private void ThrowUpdate(GameTime gt)
+        {
+            double t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset;
+            double posChange = (t * speedPerSecond + t * t * decelPerSecond);
+            currentPos += directionVector * (float)posChange;
+            if (!ReturnState && (posChange < 0))
+            {
+                ReturnState = true;
+            }
+        }
+
+        private void ReturnUpdate(GameTime gt)
+        {
+            currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
         }
     }
 }
