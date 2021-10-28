@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -21,7 +22,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
         private double startT = 0;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-        private double tBounceOffset = 0;
+
+        private Link linkOwner;
+        private IEnemy enemyOwner;
 
         public bool ReturnState { get; set; }
 
@@ -31,36 +34,18 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, bool friendly)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, Link link)
         {
-            startPos = currentPos = spawnLoc;
-            if (magical)
-            {
-                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
-            }
+            linkOwner = link;
+            friendly = true;
+            InitializeObject(spawnLoc, direction, magical);
+        }
 
-            switch (direction)
-            {
-                case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
-                    break;
-                case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
-                    break;
-                case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
-                    break;
-                case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
-                    break;
-                default:
-                    break;
-            }
-            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
-
-            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
-            this.friendly = friendly;
-            ReturnState = false;
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
+        {
+            enemyOwner = enemy;
+            friendly = false;
+            InitializeObject(spawnLoc, direction, magical);
         }
 
         public void Update(GameTime gt)
@@ -110,6 +95,37 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         //----- Helper methods for boomerang state -----//
 
+        private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
+        {
+            startPos = currentPos = spawnLoc;
+            if (magical)
+            {
+                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
+            }
+
+            switch (direction)
+            {
+                case FacingDirection.Right:
+                    directionVector = new Vector2(1, 0);
+                    break;
+                case FacingDirection.Up:
+                    directionVector = new Vector2(0, -1);
+                    break;
+                case FacingDirection.Left:
+                    directionVector = new Vector2(-1, 0);
+                    break;
+                case FacingDirection.Down:
+                    directionVector = new Vector2(0, 1);
+                    break;
+                default:
+                    break;
+            }
+            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
+
+            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
+            ReturnState = false;
+        }
+
         private void ThrowUpdate(GameTime gt)
         {
             double t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset;
@@ -123,7 +139,19 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void ReturnUpdate(GameTime gt)
         {
-            currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
+            Vector2 distanceVector;
+            if (friendly)
+            {
+                distanceVector = linkOwner.Position - currentPos;
+            }
+            else
+            {
+                distanceVector = enemyOwner.Collider.Hitbox.Location.ToVector2() - currentPos;
+            }
+            Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
+            Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
+            currentPos += new Vector2((float)speedPerSecond) * xyScale;
+            // currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
         }
     }
 }
