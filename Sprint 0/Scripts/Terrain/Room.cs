@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Effect;
 
 public class Room : IRoom
 {
@@ -26,8 +27,10 @@ public class Room : IRoom
 	private ProjectileEntities projectileSet;
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
+	private List<IEffect> effects;
 	private CollisionHandlerSet collisionHandlerSet;
 	private List<IProjectile> projectileQueue;
+	private List<IEffect> effectQueue;
 
 	private bool enemiesFlag;
 	private List<String> RoomClear;
@@ -50,11 +53,13 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
+		effects = new List<IEffect>();
 
 		enemiesFlag = false;
 		RoomClear = new List<string>();
 
 		projectileQueue = new List<IProjectile>();
+		effectQueue = new List<IEffect>();
 
 		LoadRoom();
 
@@ -71,11 +76,17 @@ public class Room : IRoom
         {
 			block.Update();
         }
+		foreach (IEffect effect in effects)
+        {
+			effect.Update(gt);
+        }
 		collisionHandlerSet.Update();
 		if (enemiesFlag && isAllEnemiesDead())
 		{
 			RoomCleared();
 		}
+
+		TransferQueuedEffects();
 	}
 
 
@@ -100,6 +111,10 @@ public class Room : IRoom
 		projectileSet.Draw(spriteBatch);
 		enemySet.Draw(spriteBatch);
 		link.Draw(spriteBatch);
+		foreach (IEffect effect in effects)
+        {
+			effect.Draw(spriteBatch);
+        }
 	}
 
 	public string RoomId()
@@ -365,6 +380,19 @@ public class Room : IRoom
 		foreach (IProjectile projectile in projectileQueue)
         {
 			projectileSet.Add(projectile);
+        }
+    }
+
+	public void AddEffect(IEffect effect)
+    {
+		effectQueue.Add(effect);
+    }
+
+	private void TransferQueuedEffects()
+    {
+		foreach (IEffect effect in effectQueue)
+        {
+			effects.Add(effect);
         }
     }
 
