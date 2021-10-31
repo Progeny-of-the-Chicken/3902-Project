@@ -22,6 +22,8 @@
     <None Remove="Scripts\Terrain\Colliders\" />
     <None Remove="Scripts\Collider\ItemColliders\" />
     <None Remove="Scripts\Collider\ProjectileColliders\" />
+    <None Remove="Scripts\Effect\" />
+    <None Remove="Scripts\Effect\EffectClass\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -46,5 +48,7 @@
     <Folder Include="Scripts\Collider\Terrain\" />
     <Folder Include="Scripts\Collider\Item\" />
     <Folder Include="Scripts\Collider\Projectile\" />
+    <Folder Include="Scripts\Effect\" />
+    <Folder Include="Scripts\Effect\EffectClass\" />
   </ItemGroup>
 </Project>
