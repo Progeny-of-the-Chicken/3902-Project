@@ -22,3 +22,8 @@ Sprint 0/obj
 .vs/VSWorkspaceState.json
 .vs/slnx.sqlite
 /.vs/Sprint 0/DesignTimeBuild/.dtbcache.v2
+*.xnb
+/Sprint 0/Content/obj/DesktopGL/.mgcontent
+/Sprint 0/Content/obj/DesktopGL/.mgstats
+/Sprint 0/Content/obj/DesktopGL/bosses.mgcontent
+*.mgcontent
