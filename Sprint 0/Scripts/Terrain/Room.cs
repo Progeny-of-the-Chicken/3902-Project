@@ -25,9 +25,10 @@ public class Room : IRoom
 	private EnemySet enemySet;
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
+	private EffectSet effectSet;
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
-	private List<IEffect> effects;
+	// private List<IEffect> effects;
 	private CollisionHandlerSet collisionHandlerSet;
 	private List<IProjectile> projectileQueue;
 	private List<IEffect> effectQueue;
@@ -53,7 +54,8 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
-		effects = new List<IEffect>();
+		effectSet = new EffectSet();
+		// effects = new List<IEffect>();
 
 		enemiesFlag = false;
 		RoomClear = new List<string>();
@@ -76,10 +78,7 @@ public class Room : IRoom
         {
 			block.Update();
         }
-		foreach (IEffect effect in effects)
-        {
-			effect.Update(gt);
-        }
+		effectSet.Update(gt);
 		collisionHandlerSet.Update();
 		if (enemiesFlag && isAllEnemiesDead())
 		{
@@ -111,10 +110,7 @@ public class Room : IRoom
 		projectileSet.Draw(spriteBatch);
 		enemySet.Draw(spriteBatch);
 		link.Draw(spriteBatch);
-		foreach (IEffect effect in effects)
-        {
-			effect.Draw(spriteBatch);
-        }
+		effectSet.Draw(spriteBatch);
 	}
 
 	public string RoomId()
@@ -392,7 +388,7 @@ public class Room : IRoom
     {
 		foreach (IEffect effect in effectQueue)
         {
-			effects.Add(effect);
+			effectSet.Add(effect);
         }
     }
 
