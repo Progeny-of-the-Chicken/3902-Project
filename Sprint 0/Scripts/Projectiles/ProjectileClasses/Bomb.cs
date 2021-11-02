@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
         private bool friendly = false;
 
-        private double startTime = 0;
+        private double startTime = ObjectConstants.counterInitialVal_float;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
         private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
@@ -97,7 +97,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 explode = true;
                 sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
                 ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
-                startTime = 0.0;
+                startTime = ObjectConstants.counterInitialVal_float;//TODO: I feel like this line can be removed if we just set delete to true
             }
         }
 

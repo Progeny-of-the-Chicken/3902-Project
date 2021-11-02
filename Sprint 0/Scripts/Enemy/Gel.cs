@@ -63,11 +63,11 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is vertical/horizontal, second is +/-
             randomDir.GetBytes(random);
-            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero)
+            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
                 direction = Vector2.UnitX;
             else
                 direction = Vector2.UnitY;
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero)
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
                 direction *= ObjectConstants.vectorFlip;
         }
 

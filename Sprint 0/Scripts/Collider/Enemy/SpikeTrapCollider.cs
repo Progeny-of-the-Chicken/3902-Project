@@ -36,7 +36,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 }
             } else
             {
-                
                 direction = Vector2.UnitY;
                 if (intersect.Location.X < owner.Location.Y)
                 {

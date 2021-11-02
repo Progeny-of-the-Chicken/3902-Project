@@ -34,13 +34,13 @@ namespace Sprint_0.Scripts.Enemy
 
             this.location = location;
 
-            random = new byte[ObjectConstants.GoriyaRandomBytes];
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             randomDir = new RNGCryptoServiceProvider();
             directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (Vector2.UnitX, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
-            directionDependencies.Add(FacingDirection.Left, (-Vector2.UnitX, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
-            directionDependencies.Add(FacingDirection.Up, (-Vector2.UnitY, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(SpriteRectangles.goriyaBackFrame)));
-            directionDependencies.Add(FacingDirection.Down, (Vector2.UnitY, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(SpriteRectangles.goriyaFrontFrame)));
+            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
+            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
+            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(SpriteRectangles.goriyaBackFrame)));
+            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(SpriteRectangles.goriyaFrontFrame)));
             direction = FacingDirection.Down;
             directionDependencies.TryGetValue(direction, out dependency);
 
@@ -82,7 +82,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is direction, second is whether it will shoot instead
             randomDir.GetBytes(random);
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInFive == ObjectConstants.zero)
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInFive == ObjectConstants.zero_int)
             {
                 ShootProjectile();
             }

@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void Update(GameTime gameTime)
         {
             collider.Update(pos);
-            if (blastZoneCounter <= 0)
+            if (blastZoneCounter <= ObjectConstants.zero_float)
             {
                 delete = true;
             }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Sprint_0
 {
@@ -15,8 +14,14 @@ namespace Sprint_0
         public const float counterInitialVal_float = 0;
         public const int zeroHealth = 0;
 
+        //----- Vector constant values -----//
+        public static Vector2 UpUnitVector = new Vector2(0, -1);
+        public static Vector2 DownUnitVector = new Vector2(0, 1);
+        public static Vector2 LeftUnitVector = new Vector2(-1, 0);
+        public static Vector2 RightUnitVector = new Vector2(1, 0);
+
         //----- Probability and random selection constant values -----//
-        public const int zero = 0;
+        public const int zero_int = 0;
         public const int oneInTwo = 2;
         public const int numberOfBytesForRandomDirection = 2;
         public const int oneInThree = 3;
@@ -27,9 +32,13 @@ namespace Sprint_0
         //----- Link constant values -----//
         public const int linkSpeed = 1;
         public const int linkStartingHealth = 6;
+        public const int linkTurningCounterDebounce = 10;
+        public const int linkDeathCounter = 90;
         public const int defaultCounterLength = 30;
         public const int bouncebackDistance = 90;
         public const int squareTileWidthHeight = 16;
+        public const float zero_float = 0;
+        public static Vector2 linkStartingPosition = new Vector2(200, 400); //generic starting position
 
         //----- Item constant values -----//
         public const double clockFreezeSeconds = 10.0;
@@ -43,6 +52,10 @@ namespace Sprint_0
         public const double silverArrowSpeedCoef = 1.5;
         public const double arrowPopDurationSeconds = 0.2;
         public const int arrowDamage = 1;
+        public static Vector2 rightArrowPopOffset = new Vector2(4, -8);
+        public static Vector2 upArrowPopOffset = new Vector2(-8, -20);
+        public static Vector2 leftArrowPopOffset = new Vector2(-20, -8);
+        public static Vector2 downArrowPopOffset = new Vector2(-8, 4);
         // BlastZone
         public const int blastZonePositionOffset = -8;
         public const int blastZoneWidthHeight = 32;
@@ -118,6 +131,10 @@ namespace Sprint_0
         //SpikeTrap
         public const int vectorFlip = -1;
         public const int spikeTrapSpeed = 25;
+        //WallMaster
+        public const int WallMasterHealth = 3;
+        public const float WallMasterTimeToMoveAgain = 1;
+        public const float WallMasterMoveSpeed = DefaultEnemyMoveSpeed;
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
         public const int firstFrame = 0;
@@ -129,6 +146,7 @@ namespace Sprint_0
         public static Vector2 degreesCW180 = new Vector2(-1, -1);
         public static Vector2 degreesCW270 = new Vector2(-1, 0);
         public const int goToZero = 0;
+        public const int xOnScreenBorder = 0;
 
         //----- string constant values -----//
         public const string secretRoom = "Room00";
@@ -136,5 +154,6 @@ namespace Sprint_0
         public const string enemiesFile = "enemies";
         public const string npcFile = "npc";
         public const string bossesFile = "bosses";
+        public const string itemFile = "LoZItems";
     }
 }

@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         List<IProjectile> projectiles;
         
         Vector2 location;
-        Vector2 direction = -Vector2.UnitX;
+        Vector2 direction = ObjectConstants.LeftUnitVector;
         Vector2 startLocation;
 
         float timeSinceFire = ObjectConstants.counterInitialVal_float;

@@ -85,5 +85,10 @@ namespace Sprint_0
         public static Rectangle spikeTrapFrame = new Rectangle(164, 59, 16, 16);
         //Stalfos
         public static Rectangle stalfosFrame = new Rectangle(1, 59, 16, 16);
+        //Wallmaster
+        public static Rectangle wallMasterOpenFrame = new Rectangle(392, 10, 18, 16);
+        public static Rectangle wallMasterCloseFrame = new Rectangle(410, 11, 14, 16);
+        //Zol
+        public static Rectangle[] zolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
     }
 }
