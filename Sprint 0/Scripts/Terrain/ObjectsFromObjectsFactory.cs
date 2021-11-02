@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Effect;
 
 namespace Sprint_0.Scripts.Terrain
 {
@@ -56,6 +57,11 @@ namespace Sprint_0.Scripts.Terrain
             IProjectile projectile = ProjectileFactory.Instance.CreateSwordAttackHitbox(location, direction);
             room.AddProjectile(projectile);
             return projectile;
+        }
+
+        public void CreatePopEffect(Vector2 location, EffectType type)
+        {
+            room.AddEffect(new Effect.Effect(location, type));
         }
     }
 }

@@ -23,7 +23,6 @@
     <None Remove="Scripts\Collider\ItemColliders\" />
     <None Remove="Scripts\Collider\ProjectileColliders\" />
     <None Remove="Scripts\Effect\" />
-    <None Remove="Scripts\Effect\EffectClass\" />
     <None Remove="Scripts\Sprite\EffectSprites\" />
   </ItemGroup>
   <ItemGroup>
@@ -50,7 +49,6 @@
     <Folder Include="Scripts\Collider\Item\" />
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
-    <Folder Include="Scripts\Effect\EffectClass\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
   </ItemGroup>
 </Project>

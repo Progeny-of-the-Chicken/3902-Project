@@ -132,7 +132,6 @@ public class Room : IRoom
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
 
 		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
-		EffectFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)

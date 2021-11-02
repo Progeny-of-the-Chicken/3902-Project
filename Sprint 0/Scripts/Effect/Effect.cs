@@ -2,16 +2,16 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.Effect.EffectClass
+namespace Sprint_0.Scripts.Effect
 {
-    public class PopEffect : IEffect
+    public class Effect : IEffect
     {
         private ISprite sprite;
         private Vector2 location;
         private double durationSeconds;
         private bool delete = false;
 
-        public PopEffect(Vector2 location, EffectType type)
+        public Effect(Vector2 location, EffectType type)
         {
             sprite = EffectSpriteFactory.Instance.CreatePopEffectSprite();
             this.location = location;

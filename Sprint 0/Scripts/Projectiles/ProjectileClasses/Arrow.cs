@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
 using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -50,7 +51,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Delete based on distance
             if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
             {
-                EffectFactory.Instance.CreatePopEffect(currentPos + popOffset, EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreatePopEffect(currentPos + popOffset, EffectType.Pop);
                 delete = true;
             }
         }
