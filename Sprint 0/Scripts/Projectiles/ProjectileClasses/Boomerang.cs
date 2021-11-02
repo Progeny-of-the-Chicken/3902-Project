@@ -19,10 +19,10 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
-        private double t = 0;
-        private double startT = 0;
+        private double t = ObjectConstants.counterInitialVal_double;//TODO: more desciptive name here
+        private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-        private double tBounceOffset = 0;
+        private double tBounceOffset = ObjectConstants.counterInitialVal_double;
 
         public bool ReturnState { get; set; }
 
@@ -43,16 +43,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             switch (direction)
             {
                 case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
+                    directionVector = ObjectConstants.RightUnitVector;
                     break;
                 case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
+                    directionVector = ObjectConstants.UpUnitVector;
                     break;
                 case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
+                    directionVector = ObjectConstants.LeftUnitVector;
                     break;
                 case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
+                    directionVector = ObjectConstants.DownUnitVector;
                     break;
                 default:
                     break;
@@ -68,20 +68,20 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             // Movement control
             sprite.Update(gt);
-            if (startT == 0)
+            if (startT == ObjectConstants.counterInitialVal_double)
             {
                 startT = gt.TotalGameTime.TotalSeconds;
             }
             t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset + tBounceOffset;
             double posChange = (t * speedPerSecond + t * t * decelPerSecond);
             currentPos += directionVector * (float)posChange;
-            if (!ReturnState && (posChange < 0))
+            if (!ReturnState && (posChange < ObjectConstants.zero_double))
             {
                 ReturnState = true;
             }
             collider.Update(currentPos);
             // Delete on boomerang return
-            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
+            if (directionVector.X * (currentPos.X - startPos.X) < ObjectConstants.zero_float || directionVector.Y * (currentPos.Y - startPos.Y) < ObjectConstants.zero_float)
             {
                 delete = true;
             }
@@ -105,7 +105,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void BounceOffWall()
         {
             ReturnState = true;
-            tBounceOffset = 2 * Math.Abs(t - (speedPerSecond / (-1 * decelPerSecond)));
+            tBounceOffset = ObjectConstants.doubleTheValue * Math.Abs(t - (speedPerSecond / (ObjectConstants.adjustByNegativeOne * decelPerSecond)));
         }
     }
 }

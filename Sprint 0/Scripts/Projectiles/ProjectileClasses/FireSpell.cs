@@ -34,16 +34,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             switch (direction)
             {
                 case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
+                    directionVector = ObjectConstants.RightUnitVector;
                     break;
                 case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
+                    directionVector = ObjectConstants.UpUnitVector;
                     break;
                 case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
+                    directionVector = ObjectConstants.LeftUnitVector;
                     break;
                 case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
+                    directionVector = ObjectConstants.DownUnitVector;
                     break;
                 default:
                     break;
@@ -93,7 +93,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private void UpdateFireSpellLinger(GameTime gt)
         {
             lingerDuration -= gt.ElapsedGameTime.TotalSeconds;
-            if (lingerDuration <= 0)
+            if (lingerDuration <= ObjectConstants.zero_double)
             {
                 delete = true;
             }

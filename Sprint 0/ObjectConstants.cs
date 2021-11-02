@@ -12,7 +12,12 @@ namespace Sprint_0
         //----- General constant values -----//
         public const int counterInitialVal_int = 0;
         public const float counterInitialVal_float = 0;
+        public const double counterInitialVal_double = 0;
+        public const float zero_float = 0;
+        public const int zero_int = 0;
+        public const double zero_double = 0;
         public const int zeroHealth = 0;
+        public const int doubleTheValue = 2; 
 
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
@@ -21,7 +26,6 @@ namespace Sprint_0
         public static Vector2 RightUnitVector = new Vector2(1, 0);
 
         //----- Probability and random selection constant values -----//
-        public const int zero_int = 0;
         public const int oneInTwo = 2;
         public const int numberOfBytesForRandomDirection = 2;
         public const int oneInThree = 3;
@@ -37,7 +41,6 @@ namespace Sprint_0
         public const int defaultCounterLength = 30;
         public const int bouncebackDistance = 90;
         public const int squareTileWidthHeight = 16;
-        public const float zero_float = 0;
         public static Vector2 linkStartingPosition = new Vector2(200, 400); //generic starting position
 
         //----- Item constant values -----//
@@ -83,6 +86,11 @@ namespace Sprint_0
         public const int swordHitboxLength = 11;
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
+        //Magic projectile
+        public const float magicProjectileSpread = 0.3f;
+        public const double magicProjectileSpeed = 150;
+        public const double magicProjectileLifetime = 3.0;
+        public const int magicProjectileDamage = DefaultEnemyDamage;
 
         //----- Enemy constant values -----//
         //Default
@@ -155,5 +163,6 @@ namespace Sprint_0
         public const string npcFile = "npc";
         public const string bossesFile = "bosses";
         public const string itemFile = "LoZItems";
+        public const string projectileFile = "LoZSprites";
     }
 }
