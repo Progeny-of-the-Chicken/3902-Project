@@ -43,11 +43,6 @@ namespace Sprint_0.Scripts.Projectiles
             return new BombSprite(spritesheet);
         }
 
-        public ISprite CreateBombExplodeSprite()
-        {
-            return new BombExplodeSprite(spritesheet);
-        }
-
         public ISprite CreateFireSpellSprite()
         {
             return new FireSpellSprite(spritesheet);

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
@@ -17,12 +18,10 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
-        private bool explode = false;
-        private double explodeDurationSeconds = ObjectConstants.explosionDurationSeconds;
 
         public bool Friendly { get => friendly; }
 
-        public int Damage { get => ObjectConstants.bombDamage; }
+        public int Damage { get => 0; }
 
         public IProjectileCollider Collider { get => collider; }
 
@@ -57,13 +56,12 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Animation control
             sprite.Update(gt);
             collider.Update(pos);
-            if (!explode)
+
+            startTime += gt.ElapsedGameTime.TotalSeconds;
+            if (startTime > fuseDurationSeconds)
             {
-                UpdateBomb(gt);
-            }
-            else
-            {
-                UpdateExplode(gt);
+                ObjectsFromObjectsFactory.Instance.CreateEffect(pos, EffectType.Explosion);
+                ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
             }
         }
 
@@ -85,29 +83,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void MoveOutOfWall(Vector2 adjustment)
         {
             pos += adjustment;
-        }
-
-        //----- Updates methods for individual sprites -----//
-
-        private void UpdateBomb(GameTime gt)
-        {
-            startTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startTime > fuseDurationSeconds)
-            {
-                explode = true;
-                sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
-                ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
-                startTime = 0.0;
-            }
-        }
-
-        private void UpdateExplode(GameTime gt)
-        {
-            startTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startTime > explodeDurationSeconds)
-            {
-                delete = true;
-            }
         }
     }
 }

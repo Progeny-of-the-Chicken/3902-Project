@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite.ProjectileSprites
+namespace Sprint_0.Scripts.Sprite.EffectSprites
 {
-    public class BombExplodeSprite : ISprite
+    public class ExplosionSprite : ISprite
     {
         private Texture2D spritesheet;
         private List<Rectangle> frames = SpriteRectangles.bombExplodeFrames;
@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         private int frameIndex = 0;
         private int scale = ObjectConstants.scale;
 
-        public BombExplodeSprite(Texture2D textures)
+        public ExplosionSprite(Texture2D textures)
         {
             spritesheet = textures;
         }

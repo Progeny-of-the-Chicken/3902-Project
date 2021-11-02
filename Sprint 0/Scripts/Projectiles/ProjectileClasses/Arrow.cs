@@ -51,7 +51,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Delete based on distance
             if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
             {
-                ObjectsFromObjectsFactory.Instance.CreatePopEffect(currentPos + popOffset, EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateEffect(currentPos + popOffset, EffectType.Pop);
                 delete = true;
             }
         }

@@ -34,7 +34,6 @@ namespace Sprint_0
         // Bomb
         public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
-        public const int bombDamage = 1;
         // Boomerang
         public const double boomerangSpeedPerSecond = 10.0;
         public const double boomerangDecelPerSecond = -5.0;

@@ -13,9 +13,8 @@ namespace Sprint_0.Scripts.Effect
 
         public Effect(Vector2 location, EffectType type)
         {
-            sprite = EffectSpriteFactory.Instance.CreatePopEffectSprite();
             this.location = location;
-            durationSeconds = GetDuration(type);
+            InitializeByType(type);
         }
 
         public void Update(GameTime gameTime)
@@ -40,25 +39,25 @@ namespace Sprint_0.Scripts.Effect
 
         //----- Helper to get effect duration -----//
 
-        private double GetDuration(EffectType type)
+        private void InitializeByType(EffectType type)
         {
-            double duration;
             switch (type)
             {
                 case EffectType.Pop:
-                    duration = ObjectConstants.popDurationSeconds;
+                    sprite = EffectSpriteFactory.Instance.CreatePopEffectSprite();
+                    durationSeconds = ObjectConstants.popDurationSeconds;
                     break;
                 case EffectType.Explosion:
-                    duration = ObjectConstants.explosionDurationSeconds;
+                    sprite = EffectSpriteFactory.Instance.CreateExplosionEffectSprite();
+                    durationSeconds = ObjectConstants.explosionDurationSeconds;
                     break;
                 case EffectType.EnemySpawn:
-                    duration = ObjectConstants.enemySpawnDurationSeconds;
+                    sprite = EffectSpriteFactory.Instance.CreateEnemySpawnEffectSprite();
+                    durationSeconds = ObjectConstants.enemySpawnDurationSeconds;
                     break;
                 default:
-                    duration = ObjectConstants.popDurationSeconds;
                     break;
             }
-            return duration;
         }
     }
 }

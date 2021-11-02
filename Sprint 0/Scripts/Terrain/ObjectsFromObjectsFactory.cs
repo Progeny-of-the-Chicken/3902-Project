@@ -59,7 +59,7 @@ namespace Sprint_0.Scripts.Terrain
             return projectile;
         }
 
-        public void CreatePopEffect(Vector2 location, EffectType type)
+        public void CreateEffect(Vector2 location, EffectType type)
         {
             room.AddEffect(new Effect.Effect(location, type));
         }

@@ -32,5 +32,15 @@ namespace Sprint_0.Scripts.Effect
         {
             return new PopEffectSprite(spritesheet);
         }
+
+        public ISprite CreateExplosionEffectSprite()
+        {
+            return new ExplosionSprite(spritesheet);
+        }
+
+        public ISprite CreateEnemySpawnEffectSprite()
+        {
+            return new PopEffectSprite(spritesheet);
+        }
     }
 }
