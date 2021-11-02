@@ -388,6 +388,7 @@ public class Room : IRoom
         {
 			effectSet.Add(effect);
         }
+		effectQueue.Clear();
     }
 
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
