@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Sprite.EffectSprites
     public class ExplosionSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = SpriteRectangles.bombExplodeFrames;
+        private List<Rectangle> frames = SpriteRectangles.explosionFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = 0.0;
         private int frameIndex = 0;

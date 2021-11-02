@@ -4,6 +4,6 @@
     {
         Pop,
         Explosion,
-        EnemySpawn
+        Twinkle
     }
 }

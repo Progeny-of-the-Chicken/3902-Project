@@ -28,19 +28,19 @@ namespace Sprint_0.Scripts.Effect
             spritesheet = content.Load<Texture2D>("LoZSprites");
         }
 
-        public ISprite CreatePopEffectSprite()
+        public ISprite CreatePopSprite()
         {
-            return new PopEffectSprite(spritesheet);
+            return new PopSprite(spritesheet);
         }
 
-        public ISprite CreateExplosionEffectSprite()
+        public ISprite CreateExplosionSprite()
         {
             return new ExplosionSprite(spritesheet);
         }
 
-        public ISprite CreateEnemySpawnEffectSprite()
+        public ISprite CreateTwinkleSprite()
         {
-            return new PopEffectSprite(spritesheet);
+            return new PopSprite(spritesheet);
         }
     }
 }

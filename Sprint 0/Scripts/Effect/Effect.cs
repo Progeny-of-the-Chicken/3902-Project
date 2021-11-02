@@ -44,16 +44,16 @@ namespace Sprint_0.Scripts.Effect
             switch (type)
             {
                 case EffectType.Pop:
-                    sprite = EffectSpriteFactory.Instance.CreatePopEffectSprite();
+                    sprite = EffectSpriteFactory.Instance.CreatePopSprite();
                     durationSeconds = ObjectConstants.popDurationSeconds;
                     break;
                 case EffectType.Explosion:
-                    sprite = EffectSpriteFactory.Instance.CreateExplosionEffectSprite();
+                    sprite = EffectSpriteFactory.Instance.CreateExplosionSprite();
                     durationSeconds = ObjectConstants.explosionDurationSeconds;
                     break;
-                case EffectType.EnemySpawn:
-                    sprite = EffectSpriteFactory.Instance.CreateEnemySpawnEffectSprite();
-                    durationSeconds = ObjectConstants.enemySpawnDurationSeconds;
+                case EffectType.Twinkle:
+                    sprite = EffectSpriteFactory.Instance.CreateTwinkleSprite();
+                    durationSeconds = ObjectConstants.twinkleDurationSeconds;
                     break;
                 default:
                     break;
