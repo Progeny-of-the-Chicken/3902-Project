@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
@@ -29,13 +26,13 @@ namespace Sprint_0.Scripts.Collider.Enemy
         {
             player.TakeDamage(owner.Damage);
             Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.Hitbox);
-            Vector2 direction = Vector2.Zero;
+            Vector2 direction;
             if (intersect.Width > intersect.Height)
             {
                 direction = Vector2.UnitX;
                 if (intersect.Location.X < owner.Location.X)
                 {
-                    direction *= -1;
+                    direction *= ObjectConstants.vectorFlip;
                 }
             } else
             {
@@ -43,7 +40,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 direction = Vector2.UnitY;
                 if (intersect.Location.X < owner.Location.Y)
                 {
-                    direction *= -1;
+                    direction *= ObjectConstants.vectorFlip;
                 }
             }
             owner.SetHasHit(direction);

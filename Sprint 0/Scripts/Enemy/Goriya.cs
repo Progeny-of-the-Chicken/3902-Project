@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
-using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
@@ -22,15 +18,11 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir;
         byte[] random;
 
-        Rectangle frontFrame = new Rectangle(222, 10, 15, 17);
-        Rectangle backFrame = new Rectangle(240, 10, 14, 17);
-        Rectangle[] rightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
-
         public int Damage { get => ObjectConstants.GoriyaDamage; }
         int health = ObjectConstants.GoriyaStartingHealth;
         bool delete = false;
 
-        float timeSinceMove = 0;
+        float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         FacingDirection direction;
         Vector2 location;
@@ -42,17 +34,17 @@ namespace Sprint_0.Scripts.Enemy
 
             this.location = location;
 
-            random = new byte[3];
+            random = new byte[ObjectConstants.GoriyaRandomBytes];
             randomDir = new RNGCryptoServiceProvider();
             directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (Vector2.UnitX, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(rightFrames)));
-            directionDependencies.Add(FacingDirection.Left, (-Vector2.UnitX, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(rightFrames)));
-            directionDependencies.Add(FacingDirection.Up, (-Vector2.UnitY, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(backFrame)));
-            directionDependencies.Add(FacingDirection.Down, (Vector2.UnitY, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(frontFrame)));
+            directionDependencies.Add(FacingDirection.Right, (Vector2.UnitX, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
+            directionDependencies.Add(FacingDirection.Left, (-Vector2.UnitX, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
+            directionDependencies.Add(FacingDirection.Up, (-Vector2.UnitY, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(SpriteRectangles.goriyaBackFrame)));
+            directionDependencies.Add(FacingDirection.Down, (Vector2.UnitY, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(SpriteRectangles.goriyaFrontFrame)));
             direction = FacingDirection.Down;
             directionDependencies.TryGetValue(direction, out dependency);
 
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (frontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             boomerang = null;
         }
@@ -81,7 +73,7 @@ namespace Sprint_0.Scripts.Enemy
             if (timeSinceMove >= ObjectConstants.GoriyaMoveTime)
             {
                 SetRandomDirection();
-                timeSinceMove = 0;
+                timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
             location += dependency.directionVector * ObjectConstants.GoriyaMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
         }
@@ -90,13 +82,13 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is direction, second is whether it will shoot instead
             randomDir.GetBytes(random);
-            if (random[1] % 5 == 0)
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInFive == ObjectConstants.zero)
             {
                 ShootProjectile();
             }
             else
             {
-                direction = (FacingDirection)(random[0] % 4);
+                direction = (FacingDirection)(random[ObjectConstants.firstInArray] % ObjectConstants.oneInFour);
                 directionDependencies.TryGetValue(direction, out dependency);
             }
         }
@@ -108,7 +100,7 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            delete = (health <= ObjectConstants.zeroHealth);
         }
         public void KnockBack(Vector2 knockback)
         {

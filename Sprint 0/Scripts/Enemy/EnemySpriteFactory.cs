@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Sprint_0.Scripts.Sprite;
@@ -24,22 +21,16 @@ namespace Sprint_0.Scripts.Enemy
 			{
 				return instance;
 			}
-		} 
-
-		Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
-											  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
-
+		}
 
 		private EnemySpriteFactory()
-		{
-
-		}
+		{}
 
 		public void LoadAllTextures(ContentManager content)
         {
-			enemySprites = content.Load<Texture2D>("enemies");
-			npcSprites = content.Load<Texture2D>("npc");
-			bossSprites = content.Load<Texture2D>("bosses");
+			enemySprites = content.Load<Texture2D>(ObjectConstants.enemiesFile);
+			npcSprites = content.Load<Texture2D>(ObjectConstants.npcFile);
+			bossSprites = content.Load<Texture2D>(ObjectConstants.bossesFile);
 		}
 
 		public ISprite CreateStalfosSprite(Rectangle frame)
@@ -71,10 +62,12 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new GenericEnemySprite(frames, enemySprites);
         }
+		//TODO: fix the magic projectile sprite to not take rectangles
 		public ISprite CreateMagicProjectileSprite()
 		{
-			return new MagicProjectileSprite(MagicProjectileFrames, ObjectConstants.scale, bossSprites);
+			return new MagicProjectileSprite(SpriteRectangles.magicProjectileFrames, ObjectConstants.scale, bossSprites);
 		}
+		//TODO:Maybe not have so many sprites? just animate them right?
 		public ISprite CreateFrontGoriyaSprite(Rectangle frame)
         {
 			return new AnimatedFlipSprite(frame, enemySprites);
@@ -91,7 +84,7 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new GoriyaLeftSprite(frames, enemySprites);
 		}
-
+		//TODO:remove scale here
 		public ISprite CreateWallmasterOpenSprite(float scale, Rectangle frame)
         {
 			return new WallmasterOpenSprite(frame, scale, enemySprites);

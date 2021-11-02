@@ -78,6 +78,7 @@ namespace Sprint_0.Scripts.Enemy
             location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
         }
 
+        //TODO: more appropriate name, this one is funny tho
         void yeetLink()
         {
             if (location.X > 0)
@@ -86,8 +87,7 @@ namespace Sprint_0.Scripts.Enemy
                 grabbedLink.ResetPosition(location);
             } else
             {
-
-                RoomManager.Instance.SwitchToRoom("Room25");
+                RoomManager.Instance.SwitchToRoom(ObjectConstants.wallMasterToRoom);
                 grabbedLink.UnSuspend();
             }
         }
@@ -96,16 +96,12 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is vertical/horizontal, second is +/-
             randomDir.GetBytes(random);
-            if (random[0] % 2 == 0)
-            {
-                direction.X = (random[1] % 2) * 2 - 1;
-                direction.Y = 0;
-            }
+            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero)
+                direction = Vector2.UnitX;
             else
-            {
-                direction.X = 0;
-                direction.Y = (random[1] % 2) * 2 - 1;
-            }
+                direction = Vector2.UnitY;
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero)
+                direction *= ObjectConstants.vectorFlip;
         }
 
         public void GrabLink(Link player)
@@ -121,7 +117,7 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            delete = (health <= ObjectConstants.counterInitialVal_float);
         }
         public void KnockBack(Vector2 knockback)
         {

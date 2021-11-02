@@ -10,6 +10,20 @@ namespace Sprint_0
         public const double itemAnimationDelaySeconds = 0.1;
         public const int standardWidthHeight = 16;
 
+        //----- General constant values -----//
+        public const int counterInitialVal_int = 0;
+        public const float counterInitialVal_float = 0;
+        public const int zeroHealth = 0;
+
+        //----- Probability and random selection constant values -----//
+        public const int zero = 0;
+        public const int oneInTwo = 2;
+        public const int numberOfBytesForRandomDirection = 2;
+        public const int oneInThree = 3;
+        public const int oneInFour = 4;
+        public const int oneInFive = 5;
+        public const int adjustByNegativeOne = -1;
+
         //----- Link constant values -----//
         public const int linkSpeed = 1;
         public const int linkStartingHealth = 6;
@@ -21,6 +35,8 @@ namespace Sprint_0
         public const double clockFreezeSeconds = 10.0;
         
         //----- Projectile constant values -----//
+        public static Rectangle standardProjectileSize = new Rectangle(0, 0, 8, 8);
+        public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
         // Arrow
         public const double arrowSpeedPerSecond = 150.0;
         public const int arrowMaxDistance = 200;
@@ -32,6 +48,7 @@ namespace Sprint_0
         public const int blastZoneWidthHeight = 32;
         public const int blastZoneCounter = 1;
         public const int blastZoneDamage = 1;
+        public static Rectangle blastZoneSize = new Rectangle(0, 0, blastZoneWidthHeight, blastZoneWidthHeight);
         // Bomb
         public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
@@ -98,7 +115,26 @@ namespace Sprint_0
         public const float ZolMoveSpeed = DefaultEnemyMoveSpeed;
         public const double ZolPauseTime = DefaultEnemyPauseTime;
         public const int ZolStartingHealth = DefaultEnemyHealth;
+        //SpikeTrap
+        public const int vectorFlip = -1;
+        public const int spikeTrapSpeed = 25;
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+        public const int firstFrame = 0;
+        public const int firstInArray = 0;
+        public const int secondInArray = 1;
+
+        //----- Collision constant values -----//
+        public static Vector2 degreesCW90 = new Vector2(0, -1);
+        public static Vector2 degreesCW180 = new Vector2(-1, -1);
+        public static Vector2 degreesCW270 = new Vector2(-1, 0);
+        public const int goToZero = 0;
+
+        //----- string constant values -----//
+        public const string secretRoom = "Room00";
+        public const string wallMasterToRoom = "Room25";
+        public const string enemiesFile = "enemies";
+        public const string npcFile = "npc";
+        public const string bossesFile = "bosses";
     }
 }

@@ -63,5 +63,27 @@ namespace Sprint_0
             new Rectangle(127, 189, 8, 8)
         };
         public static Rectangle fireSpellFrame = new Rectangle(215, 185, 16, 16);
+
+        //----- Enemy source rectangles -----//
+        //Aquamentus
+        public static Rectangle[] aquamentusMoveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
+        public static Rectangle[] aquamentusShootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
+        //Magic Projectile
+        public static Rectangle[] magicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
+                                              new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
+        //Gel
+        public static Rectangle[] gelFrames = { new Rectangle(1, 15, 8, 9), new Rectangle(10, 15, 8, 9) };
+        //Goriya
+        public static Rectangle goriyaFrontFrame = new Rectangle(222, 10, 15, 17);
+        public static Rectangle goriyaBackFrame = new Rectangle(240, 10, 14, 17);
+        public static Rectangle[] goriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
+        //Keese
+        public static Rectangle[] keeseFrames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
+        //Old Man
+        public static Rectangle oldManFrame = new Rectangle(1, 11, 16, 16);
+        //SpikeTrap
+        public static Rectangle spikeTrapFrame = new Rectangle(164, 59, 16, 16);
+        //Stalfos
+        public static Rectangle stalfosFrame = new Rectangle(1, 59, 16, 16);
     }
 }

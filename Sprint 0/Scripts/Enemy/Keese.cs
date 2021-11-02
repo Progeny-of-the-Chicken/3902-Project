@@ -17,13 +17,10 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
-        Rectangle[] frames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
-
-
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         
-        float timeSinceMove = 0;
+        float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         public int Damage { get => ObjectConstants.KeeseDamage; }
         int health = ObjectConstants.KeeseStartingHealth;
@@ -36,9 +33,9 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             directionVector = Vector2.Zero;
-            random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(frames);
-            Rectangle collision = new Rectangle(location.ToPoint(), (frames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint());
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
+            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(SpriteRectangles.keeseFrames);
+            Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
         }
 
@@ -57,7 +54,7 @@ namespace Sprint_0.Scripts.Enemy
             if (timeSinceMove >= ObjectConstants.KeeseMoveTime)
             {
                 SetRandomDirection();
-                timeSinceMove = 0;
+                timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
             location += directionVector * ObjectConstants.KeeseMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
             collider.Update(location);
@@ -65,13 +62,13 @@ namespace Sprint_0.Scripts.Enemy
         void SetRandomDirection()
         {
             randomDir.GetBytes(random);
-            directionVector.X = (random[0] % 3) - 1;
-            directionVector.Y = (random[1] % 3) - 1;
+            directionVector.X = (random[ObjectConstants.firstInArray] % ObjectConstants.oneInThree) + ObjectConstants.adjustByNegativeOne;
+            directionVector.Y = (random[ObjectConstants.secondInArray] % ObjectConstants.oneInThree) + ObjectConstants.adjustByNegativeOne;
         }
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            delete = (health <= ObjectConstants.zeroHealth);
         }
         public void KnockBack(Vector2 knockback)
         {

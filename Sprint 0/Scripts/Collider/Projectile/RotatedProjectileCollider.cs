@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             }
             else if (owner is SwordAttackHitbox)
             {
-                _hitbox = new Rectangle(0, 0, ObjectConstants.swordHitboxLength, ObjectConstants.swordHitboxWidth);
+                _hitbox = ObjectConstants.swordAttackHitBoxSize;
             }
             _hitbox.Size *= new Point(ObjectConstants.scale);
 
@@ -59,14 +59,14 @@ namespace Sprint_0.Scripts.Collider.Projectile
                     break;
                 case FacingDirection.Up:
                     _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = new Vector2(0, -1 * _hitbox.Height);
+                    positionOffset = ObjectConstants.degreesCW90 * _hitbox.Height;
                     break;
                 case FacingDirection.Left:
-                    positionOffset = new Vector2(-1 * _hitbox.Width, -1 * _hitbox.Height);
+                    positionOffset = ObjectConstants.degreesCW180 * _hitbox.Height;
                     break;
                 case FacingDirection.Down:
                     _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = new Vector2(-1 * _hitbox.Width, 0);
+                    positionOffset = ObjectConstants.degreesCW270 * _hitbox.Height;
                     break;
                 default:
                     break;
