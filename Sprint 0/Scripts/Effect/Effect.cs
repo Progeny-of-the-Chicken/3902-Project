@@ -51,10 +51,6 @@ namespace Sprint_0.Scripts.Effect
                     sprite = EffectSpriteFactory.Instance.CreateExplosionSprite();
                     durationSeconds = ObjectConstants.explosionDurationSeconds;
                     break;
-                case EffectType.Twinkle:
-                    sprite = EffectSpriteFactory.Instance.CreateTwinkleSprite();
-                    durationSeconds = ObjectConstants.twinkleDurationSeconds;
-                    break;
                 default:
                     break;
             }

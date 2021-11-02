@@ -3,7 +3,6 @@
     public enum EffectType
     {
         Pop,
-        Explosion,
-        Twinkle
+        Explosion
     }
 }

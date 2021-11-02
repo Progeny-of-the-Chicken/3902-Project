@@ -37,10 +37,5 @@ namespace Sprint_0.Scripts.Effect
         {
             return new ExplosionSprite(spritesheet);
         }
-
-        public ISprite CreateTwinkleSprite()
-        {
-            return new PopSprite(spritesheet);
-        }
     }
 }
