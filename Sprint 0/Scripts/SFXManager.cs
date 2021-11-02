@@ -47,6 +47,12 @@ namespace Sprint_0.Scripts
         SoundEffect textScroll;             //probably needs to be loopable
         SoundEffect textScrollSlow;         //probably needs to be loopable
 
+        SoundEffectInstance lowHealthInstance;
+        SoundEffectInstance refillLoopInstance;
+        SoundEffectInstance shoreInstance;
+        SoundEffectInstance textScrollInstance;
+        SoundEffectInstance textScrollSlowInstance;
+
         public void LoadAllSounds(ContentManager content)
         {
             bombExplosion = content.Load<SoundEffect>("Sounds/LOZ_Bomb_Blow");
@@ -80,6 +86,18 @@ namespace Sprint_0.Scripts
             swordSlash = content.Load<SoundEffect>("Sounds/LOZ_Sword_Slash");
             textScroll = content.Load<SoundEffect>("Sounds/LOZ_Text");
             textScrollSlow = content.Load<SoundEffect>("Sounds/LOZ_Text_Slow");
+
+            lowHealthInstance = lowHealth.CreateInstance();
+            refillLoopInstance = refillLoop.CreateInstance();
+            shoreInstance = shore.CreateInstance();
+            textScrollInstance = textScroll.CreateInstance();
+            textScrollSlowInstance = textScrollSlow.CreateInstance();
+
+            lowHealthInstance.IsLooped = true;
+            refillLoopInstance.IsLooped = true;
+            shoreInstance.IsLooped = true;
+            textScrollInstance.IsLooped = true;
+            textScrollSlowInstance.IsLooped = true;
         }
 
         public void BombExplosion()
@@ -146,10 +164,6 @@ namespace Sprint_0.Scripts
         {
             linkHit.Play();
         }
-        public void LowHealth()
-        {
-            lowHealth.Play();
-        }
         public void PickUpHeart()
         {
             pickUpHeart.Play();
@@ -166,10 +180,6 @@ namespace Sprint_0.Scripts
         {
             recorder.Play();
         }
-        public void RefillLoop()
-        {
-            refillLoop.Play();
-        }
         public void SecretFound()
         {
             secretFound.Play();
@@ -177,10 +187,6 @@ namespace Sprint_0.Scripts
         public void ShieldDeflect()
         {
             shieldDeflect.Play();
-        }
-        public void Shore()
-        {
-            shore.Play();
         }
         public void Stairs()
         {
@@ -198,13 +204,47 @@ namespace Sprint_0.Scripts
         {
             swordSlash.Play();
         }
-        public void TextScroll()
+
+        //Looping sounds
+        public void PlayLowHealth()
         {
-            textScroll.Play();
+            lowHealthInstance.Play();
         }
-        public void TextScrollSlow()
+        public void StopLowHealth()
         {
-            textScrollSlow.Play();
+            lowHealthInstance.Stop();
+        }
+        public void PlayRefillLoop()
+        {
+            refillLoopInstance.Play();
+        }
+        public void StopRefillLoop()
+        {
+            refillLoopInstance.Stop();
+        }
+        public void PlayTextScroll()
+        {
+            textScrollInstance.Play();
+        }
+        public void PlayShore()
+        {
+            shoreInstance.Play();
+        }
+        public void StopShore()
+        {
+            shoreInstance.Stop();
+        }
+        public void StopTextScroll()
+        {
+            textScrollInstance.Stop();
+        }
+        public void PlayTextScrollSlow()
+        {
+            textScrollSlowInstance.Play();
+        }
+        public void StopTextScrollSlow()
+        {
+            textScrollSlowInstance.Stop();
         }
     }
 }
