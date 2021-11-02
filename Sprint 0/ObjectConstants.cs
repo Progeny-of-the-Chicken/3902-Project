@@ -101,6 +101,7 @@ namespace Sprint_0
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
         public const double explosionDurationSeconds = 0.3;
-        public const double twinkleDurationSeconds = 0.3;
+        public const double bombExtraExplosionOffset = 16 * scale;
+        public const double bombExtraExplosionNumber = 6;
     }
 }

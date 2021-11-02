@@ -125,13 +125,13 @@ public class Room : IRoom
 		TextFieldParser csvReader = new TextFieldParser(filePath);
 		csvReader.Delimiters = new string[] { "," };
 
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
+
 		LoadBlockColliders(csvReader);
         LoadEnemies(csvReader);
         LoadItems(csvReader);
 		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
-
-		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)

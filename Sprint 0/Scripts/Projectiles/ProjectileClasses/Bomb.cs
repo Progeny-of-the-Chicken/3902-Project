@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
@@ -18,6 +19,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
+        private double extraExplosionOffset = ObjectConstants.bombExtraExplosionOffset;
+        private double extraExplosionNumber = ObjectConstants.bombExtraExplosionNumber;
 
         public bool Friendly { get => friendly; }
 
@@ -60,7 +63,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             startTime += gt.ElapsedGameTime.TotalSeconds;
             if (startTime > fuseDurationSeconds)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(pos, EffectType.Explosion);
+                SpawnExplosions();
                 ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
             }
         }
@@ -83,6 +86,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void MoveOutOfWall(Vector2 adjustment)
         {
             pos += adjustment;
+        }
+
+        private void SpawnExplosions()
+        {
+            ObjectsFromObjectsFactory.Instance.CreateEffect(pos, EffectType.Explosion);
+            for (double i = 0; i <= (2 * Math.PI); i += (2 * Math.PI / extraExplosionNumber))
+            {
+                Vector2 explosionSpawnOffset = new Vector2((float)(Math.Cos(i) * extraExplosionOffset), (float)(Math.Sin(i) * extraExplosionOffset));
+                ObjectsFromObjectsFactory.Instance.CreateEffect(pos + explosionSpawnOffset, EffectType.Explosion);
+            }
         }
     }
 }
