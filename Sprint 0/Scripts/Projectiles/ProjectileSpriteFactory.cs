@@ -33,11 +33,6 @@ namespace Sprint_0.Scripts.Projectiles
             return new ArrowSprite(spritesheet, direction, silver);
         }
 
-        public ISprite CreateArrowPopSprite()
-        {
-            return new ArrowPopSprite(spritesheet);
-        }
-
         public ISprite CreateBoomerangSprite(bool magical)
         {
             return new BoomerangSprite(spritesheet, magical);

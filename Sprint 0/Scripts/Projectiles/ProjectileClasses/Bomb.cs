@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double startTime = 0;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private bool explode = false;
-        private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
+        private double explodeDurationSeconds = ObjectConstants.explosionDurationSeconds;
 
         public bool Friendly { get => friendly; }
 

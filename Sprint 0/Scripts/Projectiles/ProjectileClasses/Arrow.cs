@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Effect;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -20,8 +21,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
         private int maxDistance = ObjectConstants.arrowMaxDistance;
         private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
-        private bool pop = false;
-        private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
 
         public bool Friendly { get => friendly; }
 
@@ -46,13 +45,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             sprite.Update(gt);
             collider.Update(currentPos);
-            if (!pop)
+
+            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
+            // Delete based on distance
+            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
             {
-                UpdateArrow(gt);
-            }
-            else
-            {
-                UpdatePop(gt);
+                EffectFactory.Instance.CreatePopEffect(currentPos + popOffset, EffectType.Pop);
+                delete = true;
             }
         }
 
@@ -97,29 +96,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     break;
                 default:
                     break;
-            }
-        }
-
-        //----- Updates methods for individual sprites -----//
-
-        private void UpdateArrow(GameTime gt)
-        {
-            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
-            // Delete based on distance
-            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
-            {
-                pop = true;
-                currentPos += popOffset;
-                sprite = ProjectileSpriteFactory.Instance.CreateArrowPopSprite();
-            }
-        }
-
-        private void UpdatePop(GameTime gt)
-        {
-            popDurationSeconds -= gt.ElapsedGameTime.TotalSeconds;
-            if (popDurationSeconds <= 0.0)
-            {
-                delete = true;
             }
         }
     }

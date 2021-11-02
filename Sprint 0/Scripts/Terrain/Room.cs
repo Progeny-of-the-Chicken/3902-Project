@@ -28,7 +28,6 @@ public class Room : IRoom
 	private EffectSet effectSet;
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
-	// private List<IEffect> effects;
 	private CollisionHandlerSet collisionHandlerSet;
 	private List<IProjectile> projectileQueue;
 	private List<IEffect> effectQueue;
@@ -55,7 +54,6 @@ public class Room : IRoom
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
 		effectSet = new EffectSet();
-		// effects = new List<IEffect>();
 
 		enemiesFlag = false;
 		RoomClear = new List<string>();
@@ -134,6 +132,7 @@ public class Room : IRoom
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
 
 		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
+		EffectFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)

@@ -1,4 +1,5 @@
-﻿using Sprint_0.Scripts.Terrain;
+﻿using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Effect.EffectClass;
 
 namespace Sprint_0.Scripts.Effect
 {
@@ -25,5 +26,9 @@ namespace Sprint_0.Scripts.Effect
             this.room = room;
         }
 
+        public void CreatePopEffect(Vector2 location, EffectType type)
+        {
+            room.AddEffect(new PopEffect(location, type));
+        }
     }
 }
