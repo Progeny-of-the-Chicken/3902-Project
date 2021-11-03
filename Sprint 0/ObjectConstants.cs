@@ -13,6 +13,7 @@ namespace Sprint_0
         public const int counterInitialVal_int = 0;
         public const float counterInitialVal_float = 0;
         public const double counterInitialVal_double = 0;
+        public const double oneSecond_double = 1;
         public const float zero_float = 0;
         public const int zero_int = 0;
         public const double zero_double = 0;
@@ -148,6 +149,9 @@ namespace Sprint_0
         public const int firstFrame = 0;
         public const int firstInArray = 0;
         public const int secondInArray = 1;
+        public const float zeroRotation = 0;
+        public const float noLayerDepth = 0;
+        public const int nextInArray = 1;
 
         //----- Collision constant values -----//
         public static Vector2 degreesCW90 = new Vector2(0, -1);
