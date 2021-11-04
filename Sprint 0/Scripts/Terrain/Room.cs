@@ -90,7 +90,7 @@ public class Room : IRoom
 			block.Draw(spriteBatch);
 		}
 
-		AddQueuedProjectiles();
+		TransferQueuedProjectiles();
 
 		foreach (IWall door in walls)
 		{
@@ -360,12 +360,13 @@ public class Room : IRoom
 		projectileQueue.Add(item);
     }
 
-	private void AddQueuedProjectiles()
+	private void TransferQueuedProjectiles()
     {
 		foreach (IProjectile projectile in projectileQueue)
         {
 			projectileSet.Add(projectile);
         }
+		projectileQueue.Clear();
     }
 
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
