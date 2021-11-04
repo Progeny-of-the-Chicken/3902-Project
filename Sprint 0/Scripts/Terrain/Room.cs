@@ -371,9 +371,11 @@ public class Room : IRoom
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
     {
 		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
-		walls.Remove(doorToRemove);
-		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
-    }
+		if (walls.Remove(doorToRemove))
+		{
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
+		}
+	}
 
 	public bool isAllEnemiesDead()
     {

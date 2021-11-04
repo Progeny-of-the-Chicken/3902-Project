@@ -12,6 +12,8 @@ public class NorthBombableSprite : IWall
     BombableWallCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public NorthBombableSprite(Vector2 screenLocation, Room room)
     { 

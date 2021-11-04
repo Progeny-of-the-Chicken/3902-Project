@@ -12,6 +12,8 @@ public class EastLockedSprite : IWall
     LockedDoorCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public EastLockedSprite(Vector2 screenLocation, Room room)
     { 
