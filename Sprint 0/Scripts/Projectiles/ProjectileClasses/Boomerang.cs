@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -19,10 +20,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
-        private double t = 0;
         private double startT = 0;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-        private double tBounceOffset = 0;
+
+        private Link linkOwner;
+        private IEnemy enemyOwner;
 
         public bool ReturnState { get; set; }
 
@@ -32,7 +34,68 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, bool friendly)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, Link link)
+        {
+            linkOwner = link;
+            friendly = true;
+            InitializeObject(spawnLoc, direction, magical);
+        }
+
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
+        {
+            enemyOwner = enemy;
+            friendly = false;
+            InitializeObject(spawnLoc, direction, magical);
+        }
+
+        public void Update(GameTime gt)
+        {
+            // Movement control
+            sprite.Update(gt);
+            if (startT == 0)
+            {
+                startT = gt.TotalGameTime.TotalSeconds;
+            }
+            if (!ReturnState)
+            {
+                ThrowUpdate(gt);
+            }
+            else
+            {
+                ReturnUpdate(gt);
+            }
+            collider.Update(currentPos);
+            // Delete on boomerang return
+            // TODO: Delete this after properly despawned by thrower
+            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
+            {
+                delete = true;
+            }
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            sprite.Draw(sb, currentPos);
+        }
+
+        public bool CheckDelete()
+        {
+            return delete;
+        }
+
+        public void Despawn()
+        {
+            delete = true;
+        }
+
+        public void BounceOffWall()
+        {
+            ReturnState = true;
+        }
+
+        //----- Helper methods for boomerang state -----//
+
+        private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
             startPos = currentPos = spawnLoc;
             if (magical)
@@ -60,52 +123,35 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
 
             collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
-            this.friendly = friendly;
             ReturnState = false;
         }
 
-        public void Update(GameTime gt)
+        private void ThrowUpdate(GameTime gt)
         {
-            // Movement control
-            sprite.Update(gt);
-            if (startT == 0)
-            {
-                startT = gt.TotalGameTime.TotalSeconds;
-            }
-            t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset + tBounceOffset;
+            double t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset;
             double posChange = (t * speedPerSecond + t * t * decelPerSecond);
             currentPos += directionVector * (float)posChange;
             if (!ReturnState && (posChange < 0))
             {
                 ReturnState = true;
             }
-            collider.Update(currentPos);
-            // Delete on boomerang return
-            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
+        }
+
+        private void ReturnUpdate(GameTime gt)
+        {
+            Vector2 distanceVector;
+            if (friendly)
             {
-                delete = true;
+                distanceVector = linkOwner.Position - currentPos;
             }
-        }
-
-        public void Draw(SpriteBatch sb)
-        {
-            sprite.Draw(sb, currentPos);
-        }
-
-        public bool CheckDelete()
-        {
-            return delete;
-        }
-
-        public void Despawn()
-        {
-            delete = true;
-        }
-
-        public void BounceOffWall()
-        {
-            ReturnState = true;
-            tBounceOffset = 2 * Math.Abs(t - (speedPerSecond / (-1 * decelPerSecond)));
+            else
+            {
+                distanceVector = enemyOwner.Collider.Hitbox.Location.ToVector2() - currentPos;
+            }
+            Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
+            Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
+            currentPos += new Vector2((float)speedPerSecond) * xyScale;
+            // currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Terrain
 {
@@ -28,9 +29,9 @@ namespace Sprint_0.Scripts.Terrain
             this.room = room;
         }
 
-        public IProjectile CreateBoomerangFromEnemy(Vector2 location, FacingDirection direction)
+        public IProjectile CreateBoomerangFromEnemy(Vector2 location, FacingDirection direction, IEnemy enemy)
         {
-            IProjectile projectile = ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction);
+            IProjectile projectile = ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy);
             room.AddProjectile(projectile);
             return projectile;
         }

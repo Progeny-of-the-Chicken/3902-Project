@@ -40,7 +40,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.D1, new CommandShootBasicArrow(game));
 			this.RegisterCommand(controllerMappings, Keys.D2, new CommandShootArrow(game));
 			this.RegisterCommand(controllerMappings, Keys.D3, new CommandThrowBasicBoomerangLink(game));
-			this.RegisterCommand(controllerMappings, Keys.D4, new CommandThrowBoomerangLink(game));
+			this.RegisterCommand(controllerMappings, Keys.D4, new CommandThrowMagicalBoomerangLink(game));
 			this.RegisterCommand(controllerMappings, Keys.D5, new CommandCastFireSpell(game));
 			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));

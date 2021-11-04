@@ -2,12 +2,12 @@
 
 namespace Sprint_0.Scripts.Commands
 {
-    public class CommandThrowBoomerangLink : ICommand
+    public class CommandThrowMagicalBoomerangLink : ICommand
     {
         private Game1 game;
         private Link link;
 
-        public CommandThrowBoomerangLink(Game1 game)
+        public CommandThrowMagicalBoomerangLink(Game1 game)
         {
             this.game = game;
             link = game.link;
@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            game.roomManager.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.ItemSpawnPosition, link.FacingDirection));
+            game.roomManager.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.ItemSpawnPosition, link.FacingDirection, link));
             link.UseItem();
         }
     }
