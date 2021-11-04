@@ -25,7 +25,6 @@ namespace Sprint_0
         public const double arrowSpeedPerSecond = 150.0;
         public const int arrowMaxDistance = 200;
         public const double silverArrowSpeedCoef = 1.5;
-        public const double arrowPopDurationSeconds = 0.2;
         public const int arrowDamage = 1;
         // BlastZone
         public const int blastZonePositionOffset = -8;
@@ -35,8 +34,6 @@ namespace Sprint_0
         // Bomb
         public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
-        public const double bombExplodeDurationSeconds = 0.3;
-        public const int bombDamage = 1;
         // Boomerang
         public const double boomerangSpeedPerSecond = 10.0;
         public const double boomerangDecelPerSecond = -5.0;
@@ -100,5 +97,11 @@ namespace Sprint_0
         public const int ZolStartingHealth = DefaultEnemyHealth;
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+
+        //----- Effect constant values -----//
+        public const double popDurationSeconds = 0.2;
+        public const double explosionDurationSeconds = 0.3;
+        public const double bombExtraExplosionOffset = 16 * scale;
+        public const double bombExtraExplosionNumber = 6;
     }
 }

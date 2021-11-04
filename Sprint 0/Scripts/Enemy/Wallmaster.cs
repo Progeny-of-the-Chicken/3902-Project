@@ -121,7 +121,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            if (health <= 0)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {
