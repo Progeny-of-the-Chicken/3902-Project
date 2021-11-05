@@ -1,21 +1,15 @@
-﻿using System;
-using Sprint_0.Scripts.SpriteFactories;
+﻿using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkUsingItemSprite: ISprite
+    public class LinkUsingItemSprite : ISprite
     {
         private Texture2D sheet;
-        private Rectangle UsingItemDownSource = new Rectangle(107, 11, 16, 16);
-        private Rectangle UsingItemLeftSource = new Rectangle(124, 12, 16, 16);
-        private Rectangle UsingItemUpSource = new Rectangle(141, 11, 16, 16);
         private FacingDirection direction;
         private Rectangle frame;
         private Vector2 position;
-        private const int standardWidthHeight = 48;
 
         public LinkUsingItemSprite(LinkStateMachine state)
         {
@@ -25,40 +19,36 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             setFramesForDirection();
         }
 
-
         public void Update(GameTime gt)
         {
             //No Update
         }
 
-
         public void Draw(SpriteBatch sb, Vector2 loc)
         {
             if (direction == FacingDirection.Left)
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, 48, standardWidthHeight), frame, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White, ObjectConstants.zeroRotation, new Vector2(), SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
             else
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, standardWidthHeight, standardWidthHeight), frame, Color.White);
+                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White);
         }
 
-        
-
-    private void setFramesForDirection()
-    {
-        switch (direction)
+        private void setFramesForDirection()
         {
-            case FacingDirection.Up:
-                frame = UsingItemUpSource;
-                break;
-            case FacingDirection.Down:
-                frame = UsingItemDownSource;
-                break;
-            case FacingDirection.Left:
-            case FacingDirection.Right:
-                frame = UsingItemLeftSource;
-                break;
-            default:
-                break;
+            switch (direction)
+            {
+                case FacingDirection.Up:
+                    frame = SpriteRectangles.linkUsingItemUpFrame;
+                    break;
+                case FacingDirection.Down:
+                    frame = SpriteRectangles.linkUsingItemDownFrame;
+                    break;
+                case FacingDirection.Left:
+                case FacingDirection.Right:
+                    frame = SpriteRectangles.linkUsingItemRightFrame;
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
 }

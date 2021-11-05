@@ -5,6 +5,33 @@ namespace Sprint_0
 {
     public static class SpriteRectangles
     {
+
+        //----- Link source rectangles -----//
+        public static Rectangle linkForwardSpritesheetLocation_1 = new Rectangle(1, 11, 15, 16);
+        public static Rectangle linkForwardSpritesheetLocation_2 = new Rectangle(19, 11, 15, 16);
+        public static Rectangle linkRightSpritesheetLocation_1 = new Rectangle(34, 11, 16, 16);
+        public static Rectangle linkRightSpritesheetLocation_2 = new Rectangle(51, 12, 16, 16);
+        public static Rectangle linkBackwardSpritesheetLocation_1 = new Rectangle(70, 11, 15, 16);
+        public static Rectangle linkBackwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
+
+        public static Rectangle[] linkSwordFramesRight = { new Rectangle(0, 77, 16, 16),
+            new Rectangle(18, 77, 27, 16),
+            new Rectangle(46, 77, 23, 16),
+            new Rectangle(69, 77, 16, 16) };
+
+        public static Rectangle[] linkSwordFramesUp = { new Rectangle(1, 108, 16, 18),
+            new Rectangle(18, 97, 16, 29),
+            new Rectangle(37, 97, 16, 29),
+            new Rectangle(54, 108, 16, 18) };
+
+        public static Rectangle[] linkSwordFramesDown = { new Rectangle(1, 47, 16, 18),
+            new Rectangle(18, 47, 16, 29),
+            new Rectangle(35, 47, 16, 29),
+            new Rectangle(53, 47, 16, 18) };
+
+        public static Rectangle linkUsingItemDownFrame = new Rectangle(107, 11, 16, 16);
+        public static Rectangle linkUsingItemRightFrame = new Rectangle(124, 12, 16, 16);
+        public static Rectangle linkUsingItemUpFrame = new Rectangle(141, 11, 16, 16);
         //----- Item source rectangles -----//
         public static List<Rectangle> smallHeartFrames = new List<Rectangle> {
             new Rectangle(0, 0, 7, 8),

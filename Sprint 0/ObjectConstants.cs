@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace Sprint_0
 {
@@ -8,23 +9,26 @@ namespace Sprint_0
         public const int scale = 3;
         public const double itemAnimationDelaySeconds = 0.1;
         public const int standardWidthHeight = 16;
+        public const int scaledStdWidthHeight = scale * standardWidthHeight;
 
         //----- General constant values -----//
         public const int counterInitialVal_int = 0;
         public const float counterInitialVal_float = 0;
         public const double counterInitialVal_double = 0;
         public const double oneSecond_double = 1;
+        public const float oneSecond_float = 1;
         public const float zero_float = 0;
         public const int zero_int = 0;
         public const double zero_double = 0;
         public const int zeroHealth = 0;
-        public const int doubleTheValue = 2; 
+        public const int doubleTheValue = 2;
 
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
         public static Vector2 DownUnitVector = new Vector2(0, 1);
         public static Vector2 LeftUnitVector = new Vector2(-1, 0);
         public static Vector2 RightUnitVector = new Vector2(1, 0);
+        public static Vector2 zeroVector = new Vector2(0, 0);
 
         //----- Probability and random selection constant values -----//
         public const int oneInTwo = 2;
@@ -33,6 +37,7 @@ namespace Sprint_0
         public const int oneInFour = 4;
         public const int oneInFive = 5;
         public const int adjustByNegativeOne = -1;
+        public const int rgbHalfOfMax = 128;
 
         //----- Link constant values -----//
         public const int linkSpeed = 1;
@@ -46,7 +51,7 @@ namespace Sprint_0
 
         //----- Item constant values -----//
         public const double clockFreezeSeconds = 10.0;
-        
+
         //----- Projectile constant values -----//
         public static Rectangle standardProjectileSize = new Rectangle(0, 0, 8, 8);
         public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
@@ -60,6 +65,7 @@ namespace Sprint_0
         public static Vector2 upArrowPopOffset = new Vector2(-8, -20);
         public static Vector2 leftArrowPopOffset = new Vector2(-20, -8);
         public static Vector2 downArrowPopOffset = new Vector2(-8, 4);
+        public static Vector2 arrowRotationOffset = new Vector2(8, 2.5f);
         // BlastZone
         public const int blastZonePositionOffset = -8;
         public const int blastZoneWidthHeight = 32;
@@ -77,6 +83,7 @@ namespace Sprint_0
         public const double magicalBoomerangSpeedCoef = 1.2;
         public const double boomerangTOffset = 1;
         public const int boomerangDamage = 1;
+        public static Vector2 boomerangRotationOffset = new Vector2(4, 4);
         // FireSpell
         public const double fireSpellSpeedPerSecond = 150.0;
         public const int fireSpellMaxDistance = 200;
@@ -150,13 +157,16 @@ namespace Sprint_0
         public const int firstInArray = 0;
         public const int secondInArray = 1;
         public const float zeroRotation = 0;
+        public const double degreeRotationCW90_s = Math.PI / 2;
+        public const double degreeRotationCW180_s = Math.PI;
+        public const double degreeRotationCW270_s = (3 * Math.PI) / 2;
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
         //----- Collision constant values -----//
-        public static Vector2 degreesCW90 = new Vector2(0, -1);
-        public static Vector2 degreesCW180 = new Vector2(-1, -1);
-        public static Vector2 degreesCW270 = new Vector2(-1, 0);
+        public static Vector2 degreesCW90_v = new Vector2(0, -1);
+        public static Vector2 degreesCW180_v = new Vector2(-1, -1);
+        public static Vector2 degreesCW270_v = new Vector2(-1, 0);
         public const int goToZero = 0;
         public const int xOnScreenBorder = 0;
 

@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider DamageCollider;
         IEnemyCollider XDetectionCollider;
         IEnemyCollider YDetectionCollider;
-        public IEnemyCollider Collider {get => DamageCollider;}
+        public IEnemyCollider Collider { get => DamageCollider; }
         public IEnemyCollider XCollider { get => XDetectionCollider; }
 
         public IEnemyCollider YCollider { get => YDetectionCollider; }
@@ -37,9 +37,9 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = ObjectConstants.spikeTrapSpeed * ObjectConstants.scale;
             OriginalLocation = location;
             direction = Vector2.Zero;
-            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
-            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
+            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (25 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.standardWidthHeight);
+            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.scaledStdWidthHeight)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.scaledStdWidthHeight));
+            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
             XDetectionCollider = new DetectionCollider(this, RectangleX);
             YDetectionCollider = new DetectionCollider(this, RectangleY);
             sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(ObjectConstants.scale, SpriteRectangles.spikeTrapFrame);
@@ -51,19 +51,20 @@ namespace Sprint_0.Scripts.Enemy
             {
                 Move(gt);
                 sprite.Update(gt);
-            } else
+            }
+            else
             {
                 SetOriginalPosition(gt);
             }
-            
-            
+
+
         }
 
         void Move(GameTime gt)
         {
             //move according to link's position
             location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            
+
             DamageCollider.Update(location);
         }
 
@@ -78,12 +79,13 @@ namespace Sprint_0.Scripts.Enemy
             if (location != OriginalLocation)
             {
                 location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            } else
+            }
+            else
             {
                 hasHit = false;
                 direction = Vector2.Zero;
             }
-            
+
         }
 
         public void TakeDamage(int damage)

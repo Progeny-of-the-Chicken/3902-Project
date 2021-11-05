@@ -4,6 +4,7 @@ namespace Sprint_0.Scripts
 {
     public class LinkStateMachine
     {
+        //TODO:switch link to run off of gametime instead of frame counters
         private FacingDirection linksDirection;
         private int damageCounter;
         private int usingItemCounter;

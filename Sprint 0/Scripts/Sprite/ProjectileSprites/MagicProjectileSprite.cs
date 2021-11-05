@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.ProjectileSprites
@@ -11,10 +8,8 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         private Texture2D sprite;
         private Rectangle[] frames;
         private float scale;
-
-        private float framesPerSecond = 15;
-        private float timeSinceFrame = 0;
-        private int currentFrame = 0;
+        private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
+        private int currentFrame = ObjectConstants.firstFrame;
         public MagicProjectileSprite(Rectangle[] frames, float scale, Texture2D sprite)
         {
             this.frames = frames;
@@ -25,16 +20,16 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         public void Update(GameTime gameTime)
         {
             timeSinceFrame += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / framesPerSecond)
+            if (timeSinceFrame >= ObjectConstants.oneSecond_float / ObjectConstants.defaultCounterLength)
             {
-                currentFrame = (currentFrame + 1) % frames.Length;
-                timeSinceFrame = 0;
+                currentFrame = (currentFrame + ObjectConstants.nextInArray) % frames.Length;
+                timeSinceFrame = ObjectConstants.counterInitialVal_float;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int) (frames[currentFrame].Width * scale), (int)(frames[currentFrame].Height * scale));
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(frames[currentFrame].Width * scale), (int)(frames[currentFrame].Height * scale));
             spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White);
         }
     }
