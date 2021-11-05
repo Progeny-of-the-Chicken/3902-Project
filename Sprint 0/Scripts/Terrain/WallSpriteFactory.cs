@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint_0;
 
 class WallSpriteFactory
 {
@@ -95,7 +92,7 @@ class WallSpriteFactory
 
     public IWall CreateEastBombedSprite(Vector2 location, Room room)
     {
-        return new EastBombedSprite(location, room) ;
+        return new EastBombedSprite(location, room);
     }
 
     public IWall CreateEastClosedSprite(Vector2 location, Room room)

@@ -178,5 +178,27 @@ namespace Sprint_0
         public const string bossesFile = "bosses";
         public const string itemFile = "LoZItems";
         public const string projectileFile = "LoZSprites";
+        public const string linkFile = "LinkSpriteSheet";
+        public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
+        public const string cvsExtension = ".csv";
+        public const string separator = ",";
+        public const string lineIsEmpty = "None";
+        public const string emptyStr = "";
+        public const string spaceStr = " ";
+
+
+        //----- wall/block constant values -----//
+        public const int wallOffset = scale * standardWidthHeight * 2;
+        public const int yOffsetForRoom = scale * standardWidthHeight * 4;
+        public const int rowParsePosition = 5;
+        public const int colParsePosition = 4;
+        public const int rowAndColPraseLen = 1;
+        public const int xOffsetForRoom = 0;
+        public const int roomWidth = 256;
+        public const int roomHeight = 176;
+        public const int roomWidthForScanIn = 257;
+        public const int roomHeightForScanIn = 177;
+        public const int roomReadInAdjustment = 1;
+        public const int xPosForParse = 0;
     }
 }
