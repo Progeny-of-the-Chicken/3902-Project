@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
-
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -19,7 +19,7 @@ namespace Sprint_0.Scripts.Enemy
 
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
-        
+
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         public int Damage { get => ObjectConstants.KeeseDamage; }
@@ -37,12 +37,14 @@ namespace Sprint_0.Scripts.Enemy
             sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(SpriteRectangles.keeseFrames);
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
         {
             Move(gt);
-            if(directionVector != Vector2.Zero)
+            if (directionVector != Vector2.Zero)
             {
                 sprite.Update(gt);
             }
@@ -68,7 +70,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.zeroHealth);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

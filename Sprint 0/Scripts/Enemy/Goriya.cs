@@ -47,6 +47,8 @@ namespace Sprint_0.Scripts.Enemy
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             boomerang = null;
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
@@ -95,12 +97,16 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction);
+            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
         }
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.zeroHealth);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {
@@ -114,7 +120,7 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             dependency.sprite.Draw(sb, location);
-            if(boomerang != null)
+            if (boomerang != null)
             {
                 boomerang.Draw(sb);
             }

@@ -14,7 +14,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public bool Friendly { get => friendly; }
 
-        public int Damage { get => ObjectConstants.basicSwordDamage; }
+        public int Damage { get => ObjectConstants.blastZoneDamage; }
 
         public IProjectileCollider Collider { get => collider; }
 

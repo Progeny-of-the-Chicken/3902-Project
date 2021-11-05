@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using System.Security.Cryptography;
 using Sprint_0.Scripts.Collider.Enemy;
-
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -35,6 +35,7 @@ namespace Sprint_0.Scripts.Enemy
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             sprite = EnemySpriteFactory.Instance.CreateZolSprite(SpriteRectangles.zolFrames);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
         public void Update(GameTime t)
         {
@@ -71,7 +72,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.zeroHealth);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

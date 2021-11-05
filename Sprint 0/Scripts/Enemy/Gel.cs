@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Security.Cryptography;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
+using Sprint_0.Scripts.Terrain;
 
 
 namespace Sprint_0.Scripts.Enemy
@@ -10,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
     class Gel : IEnemy
     {
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        
+
         ISprite sprite;
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
@@ -22,7 +23,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => ObjectConstants.GelDamage; }
         int health = ObjectConstants.GelStartingHealth;
-        
+
         Vector2 location;
         Vector2 direction;
 
@@ -34,14 +35,16 @@ namespace Sprint_0.Scripts.Enemy
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
-            
+
             SetRandomDirection();
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
         {
             timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
-            if(timeSinceMove >= ObjectConstants.GelPauseTime)
+            if (timeSinceMove >= ObjectConstants.GelPauseTime)
             {
                 Move(t);
             }
@@ -55,7 +58,7 @@ namespace Sprint_0.Scripts.Enemy
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            
+
             location += direction * ObjectConstants.GelMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
             collider.Update(location);
         }
@@ -74,7 +77,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.zeroHealth);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

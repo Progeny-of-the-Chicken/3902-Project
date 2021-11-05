@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -23,6 +24,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
         private double tBounceOffset = ObjectConstants.counterInitialVal_double;
+        private Link linkOwner;
+        private IEnemy enemyOwner;
 
         public bool ReturnState { get; set; }
 
@@ -32,36 +35,17 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, bool friendly)
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, Link link)
         {
-            startPos = currentPos = spawnLoc;
-            if (magical)
-            {
-                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
-            }
-
-            switch (direction)
-            {
-                case FacingDirection.Right:
-                    directionVector = ObjectConstants.RightUnitVector;
-                    break;
-                case FacingDirection.Up:
-                    directionVector = ObjectConstants.UpUnitVector;
-                    break;
-                case FacingDirection.Left:
-                    directionVector = ObjectConstants.LeftUnitVector;
-                    break;
-                case FacingDirection.Down:
-                    directionVector = ObjectConstants.DownUnitVector;
-                    break;
-                default:
-                    break;
-            }
-            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
-
-            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
-            this.friendly = friendly;
-            ReturnState = false;
+            linkOwner = link;
+            friendly = true;
+            InitializeObject(spawnLoc, direction, magical);
+        }
+        public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
+        {
+            enemyOwner = enemy;
+            friendly = false;
+            InitializeObject(spawnLoc, direction, magical);
         }
 
         public void Update(GameTime gt)
@@ -72,12 +56,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 startT = gt.TotalGameTime.TotalSeconds;
             }
-            t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset + tBounceOffset;
-            double posChange = (t * speedPerSecond + t * t * decelPerSecond);
-            currentPos += directionVector * (float)posChange;
-            if (!ReturnState && (posChange < ObjectConstants.zero_double))
+            if (!ReturnState)
             {
-                ReturnState = true;
+                ThrowUpdate(gt);
+            }
+            else
+            {
+                ReturnUpdate(gt);
             }
             collider.Update(currentPos);
             // Delete on boomerang return
@@ -105,7 +90,67 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public void BounceOffWall()
         {
             ReturnState = true;
-            tBounceOffset = ObjectConstants.doubleTheValue * Math.Abs(t - (speedPerSecond / (ObjectConstants.adjustByNegativeOne * decelPerSecond)));
+        }
+
+        //----- Helper methods for boomerang state -----//
+
+        private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
+        {
+            startPos = currentPos = spawnLoc;
+            if (magical)
+            {
+                speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
+            }
+
+            switch (direction)
+            {
+                case FacingDirection.Right:
+                    directionVector = ObjectConstants.RightUnitVector;
+                    break;
+                case FacingDirection.Up:
+                    directionVector = ObjectConstants.UpUnitVector;
+                    break;
+                case FacingDirection.Left:
+                    directionVector = ObjectConstants.LeftUnitVector;
+                    break;
+                case FacingDirection.Down:
+                    directionVector = ObjectConstants.DownUnitVector;
+                    break;
+                default:
+                    break;
+            }
+            sprite = ProjectileSpriteFactory.Instance.CreateBoomerangSprite(magical);
+
+            collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
+            ReturnState = false;
+        }
+
+        private void ThrowUpdate(GameTime gt)
+        {
+            double t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset;
+            double posChange = (t * speedPerSecond + t * t * decelPerSecond);
+            currentPos += directionVector * (float)posChange;
+            if (!ReturnState && (posChange < ObjectConstants.zero_double))
+            {
+                ReturnState = true;
+            }
+        }
+
+        private void ReturnUpdate(GameTime gt)
+        {
+            Vector2 distanceVector;
+            if (friendly)
+            {
+                distanceVector = linkOwner.Position - currentPos;
+            }
+            else
+            {
+                distanceVector = enemyOwner.Collider.Hitbox.Location.ToVector2() - currentPos;
+            }
+            Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
+            Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
+            currentPos += new Vector2((float)speedPerSecond) * xyScale;
+            // currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
         }
     }
 }

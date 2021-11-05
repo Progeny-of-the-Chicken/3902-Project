@@ -6,7 +6,6 @@ using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
 
-
 namespace Sprint_0.Scripts.Enemy
 {
     public class Aquamentus : IEnemy
@@ -15,14 +14,14 @@ namespace Sprint_0.Scripts.Enemy
         ISprite moveSprite;
         ISprite shootSprite;
         IEnemyCollider collider;
-        public IEnemyCollider Collider{ get => collider; }
+        public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
         private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
         List<IProjectile> projectiles;
-        
+
         Vector2 location;
         Vector2 direction = ObjectConstants.LeftUnitVector;
         Vector2 startLocation;
@@ -41,6 +40,8 @@ namespace Sprint_0.Scripts.Enemy
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
         public void Update(GameTime t)
         {
@@ -82,7 +83,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.zeroHealth);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

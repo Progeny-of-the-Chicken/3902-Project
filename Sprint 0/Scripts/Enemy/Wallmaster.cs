@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Enemy
         Vector2 location;
         Vector2 direction;
 
-        Link grabbedLink; 
+        Link grabbedLink;
         public Wallmaster(Vector2 location)
         {
             this.location = location;
@@ -51,7 +51,8 @@ namespace Sprint_0.Scripts.Enemy
                 SearchMove(gt);
                 sprite.Update(gt);
                 collider.Update(location);
-            } else
+            }
+            else
             {
                 yeetLink();
                 sprite.Update(gt);
@@ -76,7 +77,8 @@ namespace Sprint_0.Scripts.Enemy
             {
                 --location.X;
                 grabbedLink.ResetPosition(location);
-            } else
+            }
+            else
             {
                 //TODO:reset link to his starting position
                 RoomManager.Instance.SwitchToRoom(ObjectConstants.wallMasterToRoom);
@@ -109,7 +111,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= ObjectConstants.counterInitialVal_float);
+            if (health <= ObjectConstants.zeroHealth)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {
