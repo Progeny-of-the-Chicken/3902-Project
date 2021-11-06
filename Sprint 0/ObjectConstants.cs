@@ -182,7 +182,22 @@ namespace Sprint_0
         public const string lineIsEmpty = "None";
         public const string emptyStr = "";
         public const string spaceStr = " ";
-
+        public const string AquamentusStr = "Aquamentus";
+        public const string BladeTrapStr = "BladeTrap";
+        public const string GelStr = "Gel";
+        public const string GoriyaStr = "Goriya";
+        public const string KeeseStr = "Keese";
+        public const string OldManStr = "OldMan";
+        public const string StalfosStr = "Stalfos";
+        public const string WallMasterStr = "WallMaster";
+        public const string ZolStr = "Zol";
+        public const string BowItemStr = "BowItem";
+        public const string CompassStr = "Compass";
+        public const string HeartContainerStr = "HeartContainer";
+        public const string KeyStr = "Key";
+        public const string MapStr = "Map";
+        public const string TriforcePieceStr = "TriforcePiece";
+        public const string typoInRoomMessage = "Typo in Room ";
 
         //----- wall/block constant values -----//
         public const int wallOffset = scale * standardWidthHeight * 2;
@@ -196,7 +211,10 @@ namespace Sprint_0
         public const int roomWidthForScanIn = 257;
         public const int roomHeightForScanIn = 177;
         public const int roomReadInAdjustment = 1;
+        public const int coordinateReadInAdjustment = 2;
+        public const int nextCharInString = 1;
         public const int xPosForParse = 0;
+        public const int xPosForDoorOrigin = 0;
 
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;

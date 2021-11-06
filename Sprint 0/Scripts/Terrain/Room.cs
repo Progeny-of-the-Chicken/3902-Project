@@ -143,8 +143,8 @@ public class Room : IRoom
                 if (!blockColliderString[i].Equals(ObjectConstants.emptyStr))
                 {
                     //first string in each pair notates location
-                    float blockLocationX = float.Parse(blockColliderString[i].Substring(ObjectConstants.xPosForParse, blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + WALLOFFSET;
-                    float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+                    float blockLocationX = float.Parse(blockColliderString[i].Substring(ObjectConstants.xPosForParse, blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
                     Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
                     blocks.Add(new InvisibleSprite(blockLocation));
@@ -156,47 +156,47 @@ public class Room : IRoom
     void LoadEnemies(TextFieldParser csvReader)
     {
         string[] enemyString = csvReader.ReadFields();
-        for (int i = 0; i < enemyString.Length; i += 2)
+        for (int i = ObjectConstants.counterInitialVal_int; i < enemyString.Length; i += ObjectConstants.coordinateReadInAdjustment)
         {
-            if (!enemyString[i].Equals(""))
+            if (!enemyString[i].Equals(ObjectConstants.emptyStr))
             {
                 //first string in each pair notates location
-                float enemyLocationX = float.Parse(enemyString[i].Substring(ObjectConstants.xPosForParse, enemyString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + WALLOFFSET;
-                float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+                float enemyLocationX = float.Parse(enemyString[i].Substring(ObjectConstants.xPosForParse, enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
                 Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
 
                 //second string in each pair notates enemy type
-                switch (enemyString[i + 1])
+                switch (enemyString[i + ObjectConstants.nextCharInString])
                 {
-                    case "Aquamentus":
+                    case ObjectConstants.AquamentusStr:
                         enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
                         break;
-                    case "BladeTrap":
+                    case ObjectConstants.BladeTrapStr:
                         enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
                         break;
-                    case "Gel":
+                    case ObjectConstants.GelStr:
                         enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
                         break;
-                    case "Goriya":
+                    case ObjectConstants.GoriyaStr:
                         enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
                         break;
-                    case "Keese":
+                    case ObjectConstants.KeeseStr:
                         enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
                         break;
-                    case "OldMan":
+                    case ObjectConstants.OldManStr:
                         enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
                         break;
-                    case "Stalfos":
+                    case ObjectConstants.StalfosStr:
                         enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
                         break;
-                    case "WallMaster":
+                    case ObjectConstants.WallMasterStr:
                         enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
                         break;
-                    case "Zol":
+                    case ObjectConstants.ZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
                         break;
                     default:
-                        Console.WriteLine("Typo in Room " + roomId);
+                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
                 }
             }
@@ -206,37 +206,37 @@ public class Room : IRoom
     void LoadItems(TextFieldParser csvReader)
     {
         string[] itemString = csvReader.ReadFields();
-        for (int i = 0; i < itemString.Length; i += 2)
+        for (int i = ObjectConstants.counterInitialVal_int; i < itemString.Length; i += ObjectConstants.coordinateReadInAdjustment)
         {
-            if (!itemString[i].Equals(""))
+            if (!itemString[i].Equals(ObjectConstants.emptyStr))
             {
                 //first string in each pair notates location
-                float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + WALLOFFSET;
-                float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+                float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
                 Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
 
-                switch (itemString[i + 1])
+                switch (itemString[i + ObjectConstants.nextCharInString])
                 {
-                    case "BowItem":
+                    case ObjectConstants.BowItemStr:
                         itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
                         break;
-                    case "Compass":
+                    case ObjectConstants.CompassStr:
                         itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
                         break;
-                    case "HeartContainer":
+                    case ObjectConstants.HeartContainerStr:
                         itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
                         break;
-                    case "Key":
+                    case ObjectConstants.KeyStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
                         break;
-                    case "Map":
+                    case ObjectConstants.MapStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
                         break;
-                    case "TriforcePiece":
+                    case ObjectConstants.TriforcePieceStr:
                         itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
                         break;
                     default:
-                        Console.WriteLine("Type in Room " + roomId);
+                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
                 }
             }
@@ -245,7 +245,7 @@ public class Room : IRoom
 
     void LoadDoors(TextFieldParser csvReader)
     {
-        Vector2 doorLocation = new Vector2(0, YOFFSET);
+        Vector2 doorLocation = new Vector2(ObjectConstants.xPosForDoorOrigin, YOFFSET);
         //Add 8 Wall segments
         //North wall left side
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
@@ -275,7 +275,7 @@ public class Room : IRoom
         //East
         doorLocation.X = 224 * scale;
         doorLocation.Y = YOFFSET + 72 * scale;
-        if (doorString[0] != "")
+        if (doorString[0] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
             if (doorString[0].Equals("EastClosedSprite"))
@@ -290,7 +290,7 @@ public class Room : IRoom
         //North
         doorLocation.X = 112 * scale;
         doorLocation.Y = YOFFSET;
-        if (doorString.Length > 2 && doorString[2] != "")
+        if (doorString.Length > 2 && doorString[2] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
             if (doorString[2].Equals("NorthClosedSprite"))
@@ -305,7 +305,7 @@ public class Room : IRoom
         //West
         doorLocation.X = 0;
         doorLocation.Y = YOFFSET + 72 * scale;
-        if (doorString.Length > 4 && doorString[4] != "")
+        if (doorString.Length > 4 && doorString[4] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
             if (doorString[4].Equals("WestClosedSprite"))
@@ -320,7 +320,7 @@ public class Room : IRoom
         //South
         doorLocation.X = 112 * scale;
         doorLocation.Y = YOFFSET + 144 * scale;
-        if (doorString.Length > 6 && doorString[6] != "")
+        if (doorString.Length > 6 && doorString[6] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
             if (doorString[6].Equals("SouthClosedSprite"))
@@ -337,16 +337,16 @@ public class Room : IRoom
     void LoadSpecial(TextFieldParser csvReader)
     {
         string[] specialString = csvReader.ReadFields();
-        for (int i = 0; i < specialString.Length; i += 2)
+        for (int i = ObjectConstants.counterInitialVal_int; i < specialString.Length; i += ObjectConstants.coordinateReadInAdjustment)
         {
-            if (specialString[i] == "")
+            if (specialString[i] == ObjectConstants.emptyStr)
             {
                 break;
             }
-            float specialLocationX = float.Parse(specialString[i].Substring(ObjectConstants.xPosForParse, specialString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + WALLOFFSET;
-            float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+            float specialLocationX = float.Parse(specialString[i].Substring(ObjectConstants.xPosForParse, specialString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+            float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
             Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
-            switch (specialString[i + 1])
+            switch (specialString[i + ObjectConstants.nextCharInString])
             {
                 case "MoveableBlockSprite":
                     blocks.Add(new MoveableBlockSprite(specialLocation));
@@ -358,7 +358,7 @@ public class Room : IRoom
                 case "Key":
                     enemiesFlag = true;
                     RoomClear.Add(specialString[i]);
-                    RoomClear.Add(specialString[i + 1]);
+                    RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
                     break;
                 default:
                     //You shouldn't end up here
@@ -410,7 +410,7 @@ public class Room : IRoom
     private void RoomCleared()
     {
         String[] strArray = RoomClear.ToArray();
-        for (int i = 0; i < strArray.Length; i++)
+        for (int i = ObjectConstants.counterInitialVal_int; i < strArray.Length; i++)
         {
             enemiesFlag = false;
             switch (strArray[i])
@@ -429,8 +429,8 @@ public class Room : IRoom
                     break;
                 default:
                     //Not a door
-                    float specialLocationX = float.Parse(strArray[i].Substring(ObjectConstants.xPosForParse, strArray[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + WALLOFFSET;
-                    float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(ObjectConstants.spaceStr))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+                    float specialLocationX = float.Parse(strArray[i].Substring(ObjectConstants.xPosForParse, strArray[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
                     Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
                     i++;
                     switch (strArray[i])
