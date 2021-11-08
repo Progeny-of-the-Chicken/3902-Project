@@ -12,6 +12,8 @@ public class WestWallSprite : IWall
     GenericWallCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public WestWallSprite(Vector2 screenLocation, Room room)
     { 

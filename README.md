@@ -4,6 +4,8 @@ Our recreation of the beginning of the first Legend of Zelda game for CSE 3902. 
 
 We did code reviews using pull requests, and used Visual Studio's built in code metrics.
 
+Switch Rooms by Left/Right clicking
+
 # Authors
 - Nicholas Brinkel
 - Lucas Butler

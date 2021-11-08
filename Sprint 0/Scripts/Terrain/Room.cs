@@ -34,7 +34,6 @@ public class Room : IRoom
 
 	private bool enemiesFlag;
 	private List<String> RoomClear;
-
 	public Room(string roomId, ILink link)
 	{
 		this.scale = ObjectConstants.scale;
@@ -395,9 +394,12 @@ public class Room : IRoom
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
     {
 		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
-		walls.Remove(doorToRemove);
-		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
-    }
+		if (walls.Remove(doorToRemove))
+		{
+			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
+			collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
+		}
+	}
 
 	public bool isAllEnemiesDead()
     {
