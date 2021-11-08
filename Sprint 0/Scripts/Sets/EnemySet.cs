@@ -37,6 +37,7 @@ namespace Sprint_0.Scripts.Sets
             foreach(IEnemy enemy in toBeRemoved)
             {
                 enemies.Remove(enemy);
+                SFXManager.Instance.PlayEnemyDeath();
             }
             toBeRemoved.Clear();
         }

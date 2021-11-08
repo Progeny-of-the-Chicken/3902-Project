@@ -107,7 +107,8 @@ namespace Sprint_0.Scripts
                 if (linkHealth <= 0)
                 {
                     damageCounter += 90;
-                    SFXManager.Instance.PlayLinkDeath(); //not sure where else to put this
+                    SFXManager.Instance.StopMusic();    //not sure where else to put this
+                    SFXManager.Instance.PlayLinkDeath(); 
                 }
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 
 public class NorthBombableSprite : IWall
@@ -35,6 +36,7 @@ public class NorthBombableSprite : IWall
         System.Diagnostics.Debug.WriteLine("Blowing up door");
         CommandSwapDoor command = new CommandSwapDoor(room, this, "NorthBombedSprite");
         command.Execute();
+        SFXManager.Instance.PlaySecretFound();
     }
 
 }
