@@ -39,15 +39,7 @@ namespace Sprint_0
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
         public static Rectangle silverArrowFrame = new Rectangle(36, 190, 16, 5);
-        public static Rectangle arrowPopFrame = new Rectangle(53, 189, 8, 8);
         public static Rectangle bombFrame = new Rectangle(145, 185, 16, 16);
-        public static List<Rectangle> bombExplodeFrames = new List<Rectangle>
-        {
-            new Rectangle(162, 185, 16, 16),
-            new Rectangle(179, 185, 16, 16),
-            new Rectangle(196, 185, 16, 16),
-            new Rectangle(0, 0, 0, 0)
-        };
         public static List<Rectangle> basicBoomerangFrames = new List<Rectangle>
         {
             new Rectangle(64, 189, 8, 8),
@@ -63,5 +55,15 @@ namespace Sprint_0
             new Rectangle(127, 189, 8, 8)
         };
         public static Rectangle fireSpellFrame = new Rectangle(215, 185, 16, 16);
+
+        //----- Effect source rectangles -----//
+        public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);
+        public static List<Rectangle> explosionFrames = new List<Rectangle>
+        {
+            new Rectangle(162, 185, 16, 16),
+            new Rectangle(179, 185, 16, 16),
+            new Rectangle(196, 185, 16, 16),
+            new Rectangle(0, 0, 0, 0)
+        };
     }
 }

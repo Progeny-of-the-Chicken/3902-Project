@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
-
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -40,6 +40,8 @@ namespace Sprint_0.Scripts.Enemy
             sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(frames);
             Rectangle collision = new Rectangle(location.ToPoint(), (frames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
@@ -71,7 +73,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            if (health <= 0)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

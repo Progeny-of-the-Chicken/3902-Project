@@ -7,6 +7,7 @@ using System.Text;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
+using Sprint_0.Scripts.Terrain;
 
 
 namespace Sprint_0.Scripts.Enemy
@@ -42,6 +43,8 @@ namespace Sprint_0.Scripts.Enemy
             collider = new GenericEnemyCollider(this, collision);
             
             SetRandomDirection();
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
@@ -84,7 +87,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+            if (health <= 0)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+            }
         }
         public void KnockBack(Vector2 knockback)
         {

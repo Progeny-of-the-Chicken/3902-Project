@@ -6,6 +6,7 @@ using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
 
 namespace Sprint_0
@@ -54,6 +55,7 @@ namespace Sprint_0
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
+            EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
             roomManager = RoomManager.Instance;

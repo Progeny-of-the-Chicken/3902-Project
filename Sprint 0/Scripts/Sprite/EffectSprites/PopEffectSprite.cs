@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite.ProjectileSprites
+namespace Sprint_0.Scripts.Sprite.EffectSprites
 {
-    public class ArrowPopSprite : ISprite
+    public class PopSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = SpriteRectangles.arrowPopFrame;
+        private Rectangle frame = SpriteRectangles.popFrame;
         private int scale = ObjectConstants.scale;
 
-        public ArrowPopSprite(Texture2D textures)
+        public PopSprite(Texture2D textures)
         {
             spritesheet = textures;
         }

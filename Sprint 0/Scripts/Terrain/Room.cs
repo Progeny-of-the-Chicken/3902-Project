@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Effect;
 
 public class Room : IRoom
 {
@@ -24,10 +25,12 @@ public class Room : IRoom
 	private EnemySet enemySet;
 	private ItemEntities itemSet;
 	private ProjectileEntities projectileSet;
+	private EffectSet effectSet;
 	private List<ITerrain> blocks;
 	private List<IWall> walls;
 	private CollisionHandlerSet collisionHandlerSet;
 	private List<IProjectile> projectileQueue;
+	private List<IEffect> effectQueue;
 
 	private bool enemiesFlag;
 	private List<String> RoomClear;
@@ -50,11 +53,13 @@ public class Room : IRoom
 		projectileSet = new ProjectileEntities();
 		blocks = new List<ITerrain>();
 		walls = new List<IWall>();
+		effectSet = new EffectSet();
 
 		enemiesFlag = false;
 		RoomClear = new List<string>();
 
 		projectileQueue = new List<IProjectile>();
+		effectQueue = new List<IEffect>();
 
 		LoadRoom();
 
@@ -71,11 +76,14 @@ public class Room : IRoom
         {
 			block.Update();
         }
+		effectSet.Update(gt);
 		collisionHandlerSet.Update();
 		if (enemiesFlag && isAllEnemiesDead())
 		{
 			RoomCleared();
 		}
+
+		TransferQueuedEffects();
 	}
 
 
@@ -90,7 +98,7 @@ public class Room : IRoom
 			block.Draw(spriteBatch);
 		}
 
-		AddQueuedProjectiles();
+		TransferQueuedProjectiles();
 
 		foreach (IWall door in walls)
 		{
@@ -100,6 +108,7 @@ public class Room : IRoom
 		projectileSet.Draw(spriteBatch);
 		enemySet.Draw(spriteBatch);
 		link.Draw(spriteBatch);
+		effectSet.Draw(spriteBatch);
 	}
 
 	public string RoomId()
@@ -116,13 +125,13 @@ public class Room : IRoom
 		TextFieldParser csvReader = new TextFieldParser(filePath);
 		csvReader.Delimiters = new string[] { "," };
 
+		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
+
 		LoadBlockColliders(csvReader);
         LoadEnemies(csvReader);
         LoadItems(csvReader);
 		if (!csvReader.EndOfData) LoadDoors(csvReader);
 		if (!csvReader.EndOfData) LoadSpecial(csvReader);
-
-		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
     }
 
 	void LoadBlockColliders(TextFieldParser csvReader)
@@ -360,12 +369,27 @@ public class Room : IRoom
 		projectileQueue.Add(item);
     }
 
-	private void AddQueuedProjectiles()
+	private void TransferQueuedProjectiles()
     {
 		foreach (IProjectile projectile in projectileQueue)
         {
 			projectileSet.Add(projectile);
         }
+		projectileQueue.Clear();
+    }
+
+	public void AddEffect(IEffect effect)
+    {
+		effectQueue.Add(effect);
+    }
+
+	private void TransferQueuedEffects()
+    {
+		foreach (IEffect effect in effectQueue)
+        {
+			effectSet.Add(effect);
+        }
+		effectQueue.Clear();
     }
 
 	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
