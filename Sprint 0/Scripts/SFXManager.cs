@@ -14,7 +14,6 @@ namespace Sprint_0.Scripts
         private SFXManager()
         {
         }
-
         SoundEffect bombExplosion;
         SoundEffect bombPlacement;
         SoundEffect bossHit;
@@ -32,6 +31,7 @@ namespace Sprint_0.Scripts
         SoundEffect linkDeath;
         SoundEffect linkHit;
         SoundEffect lowHealth;              //probably needs to be loopable
+        SoundEffect music;                  //definitely needs to be loopable
         SoundEffect pickUpHeart;
         SoundEffect pickUpItem;
         SoundEffect pickupRupee;
@@ -48,6 +48,7 @@ namespace Sprint_0.Scripts
         SoundEffect textScrollSlow;         //probably needs to be loopable
 
         SoundEffectInstance lowHealthInstance;
+        SoundEffectInstance musicInstance;
         SoundEffectInstance refillLoopInstance;
         SoundEffectInstance shoreInstance;
         SoundEffectInstance textScrollInstance;
@@ -72,6 +73,7 @@ namespace Sprint_0.Scripts
             linkDeath = content.Load<SoundEffect>("Sounds/LOZ_Link_Die");
             linkHit = content.Load<SoundEffect>("Sounds/LOZ_Link_Hurt");
             lowHealth = content.Load<SoundEffect>("Sounds/LOZ_LowHealth");
+            music = content.Load<SoundEffect>("Sounds/Dungeon Theme");
             pickUpHeart = content.Load<SoundEffect>("Sounds/LOZ_Get_Heart");
             pickUpItem = content.Load<SoundEffect>("Sounds/LOZ_Get_Item");
             pickupRupee = content.Load<SoundEffect>("Sounds/LOZ_Get_Rupee");
@@ -88,119 +90,121 @@ namespace Sprint_0.Scripts
             textScrollSlow = content.Load<SoundEffect>("Sounds/LOZ_Text_Slow");
 
             lowHealthInstance = lowHealth.CreateInstance();
+            musicInstance = music.CreateInstance();
             refillLoopInstance = refillLoop.CreateInstance();
             shoreInstance = shore.CreateInstance();
             textScrollInstance = textScroll.CreateInstance();
             textScrollSlowInstance = textScrollSlow.CreateInstance();
 
             lowHealthInstance.IsLooped = true;
+            musicInstance.IsLooped = true;
             refillLoopInstance.IsLooped = true;
             shoreInstance.IsLooped = true;
             textScrollInstance.IsLooped = true;
             textScrollSlowInstance.IsLooped = true;
         }
 
-        public void BombExplosion()
+        public void PlayBombExplosion()
         {
             bombExplosion.Play();
         }
-        public void BombPlacement()
+        public void PlayBombPlacement()
         {
             bombPlacement.Play();
         }
-        public void BossHit()
+        public void PlayBossHit()
         {
             bossHit.Play();
         }
-        public void BossScream1()
+        public void PlayBossScream1()
         {
             bossScream1.Play();
         }
-        public void BossScream2()
+        public void PlayBossScream2()
         {
             bossScream2.Play();
         }
-        public void BossScream3()
+        public void PlayBossScream3()
         {
             bossScream3.Play();
         }
-        public void DoorUnlocking()
+        public void PlayDoorUnlocking()
         {
             doorUnlocking.Play();
         }
-        public void EnemyDeath()
+        public void PlayEnemyDeath()
         {
             enemyDeath.Play();
         }
-        public void EnemyHit()
+        public void PlayEnemyHit()
         {
             enemyHit.Play();
         }
-        public void Fanfare()
+        public void PlayFanfare()
         {
             fanfare.Play();
         }
-        public void FireArrowBoomerang()
+        public void PlayFireArrowBoomerang()
         {
             fireArrowBoomerang.Play();
         }
-        public void FireCandle()
+        public void PlayFireCandle()
         {
             fireCandle.Play();
         }
-        public void FireMagicRod()
+        public void PlayFireMagicRod()
         {
             fireMagicRod.Play();
         }
-        public void KeySpawn()
+        public void PlayKeySpawn()
         {
             keySpawn.Play();
         }
-        public void LinkDeath()
+        public void PlayLinkDeath()
         {
             linkDeath.Play();
         }
-        public void LinkHit()
+        public void PlayLinkHit()
         {
             linkHit.Play();
         }
-        public void PickUpHeart()
+        public void PlayPickUpHeart()
         {
             pickUpHeart.Play();
         }
-        public void PickUpItem()
+        public void PlayPickUpItem()
         {
             pickUpItem.Play();
         }
-        public void PickUpRupee()
+        public void PlayPickUpRupee()
         {
             pickupRupee.Play();
         }
-        public void Recorder()
+        public void PlayRecorder()
         {
             recorder.Play();
         }
-        public void SecretFound()
+        public void PlaySecretFound()
         {
             secretFound.Play();
         }
-        public void ShieldDeflect()
+        public void PlayShieldDeflect()
         {
             shieldDeflect.Play();
         }
-        public void Stairs()
+        public void PlayStairs()
         {
             stairs.Play();
         }
-        public void SwordCombined()
+        public void PlaySwordCombined()
         {
             swordCombined.Play();
         }
-        public void SwordShoot() 
+        public void PlaySwordShoot() 
         { 
             swordShoot.Play(); 
         }
-        public void SwordSlash()
+        public void PlaySwordSlash()
         {
             swordSlash.Play();
         }
@@ -213,6 +217,14 @@ namespace Sprint_0.Scripts
         public void StopLowHealth()
         {
             lowHealthInstance.Stop();
+        }
+        public void PlayMusic()
+        {
+            musicInstance.Play();
+        }
+        public void StopMusic()
+        {
+            musicInstance.Stop();
         }
         public void PlayRefillLoop()
         {

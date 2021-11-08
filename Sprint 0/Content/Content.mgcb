@@ -121,6 +121,12 @@
 /processorParam:TextureFormat=Color
 /build:OverworldTileset.png
 
+#begin Sounds/Dungeon Theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Dungeon Theme.wav
+
 #begin Sounds/LOZ_Arrow_Boomerang.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

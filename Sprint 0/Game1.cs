@@ -59,6 +59,7 @@ namespace Sprint_0
             base.LoadContent();
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
+            SFXManager.Instance.PlayMusic();
         }
 
         protected override void Update(GameTime gameTime)

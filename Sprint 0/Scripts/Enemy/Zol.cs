@@ -78,6 +78,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             health -= damage;
             delete = (health <= 0);
+            SFXManager.Instance.PlayEnemyHit();
         }
         public void KnockBack(Vector2 knockback)
         {

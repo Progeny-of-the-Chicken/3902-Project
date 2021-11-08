@@ -52,7 +52,6 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link, game));
 			this.RegisterCommand(linkControllerMappings, Keys.Z, new LinkUseSword(game.link, game));
 			this.RegisterCommand(linkControllerMappings, Keys.E, new LinkTakeDamage(game.link));
-
 			this.RegisterCommand(controllerMappings, Keys.M, new ToggleMute());
 		}
 

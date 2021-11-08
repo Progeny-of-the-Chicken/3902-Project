@@ -104,8 +104,11 @@ namespace Sprint_0.Scripts
                 damageCounter = ObjectConstants.defaultCounterLength;
                 linkHealth -= damage;
 
-                if (linkHealth == 0)
+                if (linkHealth <= 0)
+                {
                     damageCounter += 90;
+                    SFXManager.Instance.PlayLinkDeath(); //not sure where else to put this
+                }
             }
         }
 
