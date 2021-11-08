@@ -65,6 +65,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             {
                 SpawnExplosions();
                 ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
+                delete = true;
             }
         }
 
