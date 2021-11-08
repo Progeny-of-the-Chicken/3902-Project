@@ -12,6 +12,8 @@ public class NorthDoorSprite : IWall
     OpenWallCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public NorthDoorSprite(Vector2 screenLocation, Room room)
     { 
@@ -20,6 +22,9 @@ public class NorthDoorSprite : IWall
         hitbox.Height -= 8 * ObjectConstants.scale;
         collider = new OpenWallCollider(this, hitbox);
         this.room = room;
+        nextRoom = this.room.RoomId();
+        int roomY = (int)nextRoom[5] - '0' - 1;
+        nextRoom = nextRoom.Substring(0, 5) + roomY;
     }
 
     public void Update()

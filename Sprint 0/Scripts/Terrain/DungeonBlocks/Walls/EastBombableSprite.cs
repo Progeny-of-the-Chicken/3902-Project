@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
 using Sprint_0.Scripts.Collider.Terrain;
+using System;
 
 public class EastBombableSprite : IWall
 {
@@ -10,6 +11,8 @@ public class EastBombableSprite : IWall
     BombableWallCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public EastBombableSprite(Vector2 screenLocation, Room room)
     {

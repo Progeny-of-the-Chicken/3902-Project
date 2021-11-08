@@ -119,7 +119,8 @@ namespace Sprint_0
             new Rectangle(0, 0, 0, 0)
         };
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
-
         public static Rectangle StairFrame = new Rectangle(1035, 28, 16, 16);
+
+        public static Rectangle EastDoorSpriteFrame = new Rectangle(814, 77, 32, 32);
     }
 }
