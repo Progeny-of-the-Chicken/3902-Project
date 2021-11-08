@@ -24,6 +24,7 @@
     <None Remove="Scripts\Collider\ProjectileColliders\" />
     <None Remove="Scripts\Effect\" />
     <None Remove="Scripts\Sprite\EffectSprites\" />
+    <None Remove="Game State Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -50,5 +51,6 @@
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
+    <Folder Include="Game State Handlers\" />
   </ItemGroup>
 </Project>
