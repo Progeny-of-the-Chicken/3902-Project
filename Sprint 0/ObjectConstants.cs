@@ -152,6 +152,9 @@ namespace Sprint_0
         public const float DefaultEnemyFramesPerSecond = 4;
         public const int firstFrame = 0;
         public const int firstInArray = 0;
+        public const int secondDoorInArray = 2;
+        public const int thirdDoorInArray = 4;
+        public const int fourthDoorInArray = 6;
         public const int secondInArray = 1;
         public const float zeroRotation = 0;
         public const double degreeRotationCW90_s = Math.PI / 2;
@@ -198,6 +201,37 @@ namespace Sprint_0
         public const string MapStr = "Map";
         public const string TriforcePieceStr = "TriforcePiece";
         public const string typoInRoomMessage = "Typo in Room ";
+        public const string EastClosedSpriteStr = "EastClosedSprite";
+        public const string NorthClosedSpriteStr = "NorthClosedSprite";
+        public const string WestClosedSpriteStr = "WestClosedSprite";
+        public const string SouthClosedSpriteStr = "SouthClosedSprite";
+        public const string MoveableBlockSpriteStr = "MoveableBlockSprite";
+        public const string StairSpriteStr = "StairSprite";
+        public const string EastDoorSpriteStr = "EastDoorSprite";
+        public const string NorthDoorSpriteStr = "NorthDoorSprite";
+        public const string WestDoorSpriteStr = "WestDoorSprite";
+        public const string SouthDoorSpriteStr = "SouthDoorSprite";
+        //TODO: start in start room
+        public const string startRoom = "Room20";
+        public const string OverworldTilesetStr = "OverworldTileset";
+        public const string dungeonTilesetStr = "dungeonTileset";
+        public const string Dungeon1EagleStr = "Dungeon1Eagle";
+        public const string EastBombableSpriteStr = "EastBombableSprite";
+        public const string EastBombedSpriteStr = "EastBombedSprite";
+        public const string EastLockedSpriteStr = "EastLockedSprite";
+        public const string EastWallSpriteStr = "EastWallSprite";
+        public const string NorthBombableSpriteStr = "NorthBombableSprite";
+        public const string NorthBombedSpriteStr = "NorthBombedSprite";
+        public const string NorthLockedSpriteStr = "NorthLockedSprite";
+        public const string NorthWallSpriteStr = "NorthWallSprite";
+        public const string WestBombableSpriteStr = "WestBombableSprite";
+        public const string WestBombedSpriteStr = "WestBombedSprite";
+        public const string WestLockedSpriteStr = "WestLockedSprite";
+        public const string WestWallSpriteStr = "WestWallSprite";
+        public const string SouthBombableSpriteStr = "SouthBombableSprite";
+        public const string SouthBombedSpriteStr = "SouthBombedSprite";
+        public const string SouthLockedSpriteStr = "SouthLockedSprite";
+        public const string SouthWallSpriteStr = "SouthWallSprite";
 
         //----- wall/block constant values -----//
         public const int wallOffset = scale * standardWidthHeight * 2;
@@ -215,7 +249,16 @@ namespace Sprint_0
         public const int nextCharInString = 1;
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
-
+        public const int xPosForDoorRight = 144;
+        public const int xPosForDoorTop = 224;
+        public const int yPosForDoorBottom = 104;
+        public const int yPosForDoorLeft = 144;
+        public const int yPosForDoorEast = 72;
+        public const int xPosForDoorNorth = 112;
+        public const int EastDoorSpritePos = 8;
+        public const int NorthDoorSpritePos = 9;
+        public const int WestDoorSpritePos = 10;
+        public const int SouthDoorSpritePos = 11;
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
         public const double explosionDurationSeconds = 0.3;

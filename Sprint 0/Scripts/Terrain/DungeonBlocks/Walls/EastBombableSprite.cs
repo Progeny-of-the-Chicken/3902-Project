@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
 using Sprint_0.Scripts.Collider.Terrain;
@@ -14,8 +12,8 @@ public class EastBombableSprite : IWall
     Room room;
 
     public EastBombableSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new BombableWallCollider(this, destination);
         this.room = room;
     }

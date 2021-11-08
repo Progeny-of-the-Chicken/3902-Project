@@ -252,81 +252,81 @@ public class Room : IRoom
         //West wall top side
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //North wall right side
-        doorLocation.X = scale * 144;
+        doorLocation.X = scale * ObjectConstants.xPosForDoorRight;
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
         //East wall top side
-        doorLocation.X = scale * 224;
+        doorLocation.X = scale * ObjectConstants.xPosForDoorTop;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //East wall bottom side
-        doorLocation.Y += scale * 104;
+        doorLocation.Y += scale * ObjectConstants.yPosForDoorBottom;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //West wall bottom side
-        doorLocation.X = 0;
+        doorLocation.X = ObjectConstants.goToZero;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //South wall left side
-        doorLocation.Y = YOFFSET + scale * 144;
+        doorLocation.Y = YOFFSET + scale * ObjectConstants.yPosForDoorLeft;
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
         //South wall right side
-        doorLocation.X = scale * 144;
+        doorLocation.X = scale * ObjectConstants.xPosForDoorRight;
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 
         string[] doorString = csvReader.ReadFields();
 
         //East
-        doorLocation.X = 224 * scale;
-        doorLocation.Y = YOFFSET + 72 * scale;
-        if (doorString[0] != ObjectConstants.emptyStr)
+        doorLocation.X = ObjectConstants.xPosForDoorTop * scale;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        if (doorString[ObjectConstants.firstInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
-            if (doorString[0].Equals("EastClosedSprite"))
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.firstInArray], doorLocation, this));
+            if (doorString[ObjectConstants.firstInArray].Equals(ObjectConstants.EastClosedSpriteStr))
             {
                 enemiesFlag = true;
-                RoomClear.Add(doorString[0]);
+                RoomClear.Add(doorString[ObjectConstants.firstInArray]);
             }
         }
         else
             walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
 
         //North
-        doorLocation.X = 112 * scale;
+        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
         doorLocation.Y = YOFFSET;
-        if (doorString.Length > 2 && doorString[2] != ObjectConstants.emptyStr)
+        if (doorString.Length > ObjectConstants.secondDoorInArray && doorString[ObjectConstants.secondDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
-            if (doorString[2].Equals("NorthClosedSprite"))
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.secondDoorInArray], doorLocation, this));
+            if (doorString[ObjectConstants.secondDoorInArray].Equals(ObjectConstants.NorthClosedSpriteStr))
             {
                 enemiesFlag = true;
-                RoomClear.Add(doorString[2]);
+                RoomClear.Add(doorString[ObjectConstants.secondDoorInArray]);
             }
         }
         else
             walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
 
         //West
-        doorLocation.X = 0;
-        doorLocation.Y = YOFFSET + 72 * scale;
-        if (doorString.Length > 4 && doorString[4] != ObjectConstants.emptyStr)
+        doorLocation.X = ObjectConstants.xPosForDoorOrigin;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        if (doorString.Length > ObjectConstants.thirdDoorInArray && doorString[ObjectConstants.thirdDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
-            if (doorString[4].Equals("WestClosedSprite"))
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.thirdDoorInArray], doorLocation, this));
+            if (doorString[ObjectConstants.thirdDoorInArray].Equals(ObjectConstants.WestClosedSpriteStr))
             {
                 enemiesFlag = true;
-                RoomClear.Add(doorString[4]);
+                RoomClear.Add(doorString[ObjectConstants.thirdDoorInArray]);
             }
         }
         else
             walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
 
         //South
-        doorLocation.X = 112 * scale;
-        doorLocation.Y = YOFFSET + 144 * scale;
-        if (doorString.Length > 6 && doorString[6] != ObjectConstants.emptyStr)
+        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorLeft * scale;
+        if (doorString.Length > ObjectConstants.fourthDoorInArray && doorString[ObjectConstants.fourthDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
-            if (doorString[6].Equals("SouthClosedSprite"))
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.fourthDoorInArray], doorLocation, this));
+            if (doorString[ObjectConstants.fourthDoorInArray].Equals(ObjectConstants.SouthClosedSpriteStr))
             {
                 enemiesFlag = true;
-                RoomClear.Add(doorString[6]);
+                RoomClear.Add(doorString[ObjectConstants.fourthDoorInArray]);
             }
         }
         else
@@ -348,14 +348,14 @@ public class Room : IRoom
             Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
             switch (specialString[i + ObjectConstants.nextCharInString])
             {
-                case "MoveableBlockSprite":
+                case ObjectConstants.MoveableBlockSpriteStr:
                     blocks.Add(new MoveableBlockSprite(specialLocation));
                     break;
-                case "StairSprite":
+                case ObjectConstants.StairSpriteStr:
                     blocks.Add(new StairSprite(specialLocation));
                     break;
-                case "HeartContainer":
-                case "Key":
+                case ObjectConstants.HeartContainerStr:
+                case ObjectConstants.KeyStr:
                     enemiesFlag = true;
                     RoomClear.Add(specialString[i]);
                     RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
@@ -415,17 +415,17 @@ public class Room : IRoom
             enemiesFlag = false;
             switch (strArray[i])
             {
-                case "EastClosedSprite":
-                    ChangeDoor(walls.ToArray()[8], "EastDoorSprite");
+                case ObjectConstants.EastClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.EastDoorSpritePos], ObjectConstants.EastDoorSpriteStr);
                     break;
-                case "NorthClosedSprite":
-                    ChangeDoor(walls.ToArray()[9], "NorthDoorSprite");
+                case ObjectConstants.NorthClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.NorthDoorSpritePos], ObjectConstants.NorthDoorSpriteStr);
                     break;
-                case "WestClosedSprite":
-                    ChangeDoor(walls.ToArray()[10], "WestDoorSprite");
+                case ObjectConstants.WestClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.WestDoorSpritePos], ObjectConstants.WestDoorSpriteStr);
                     break;
-                case "SouthClosedSprite":
-                    ChangeDoor(walls.ToArray()[11], "SouthDoorSprite");
+                case ObjectConstants.SouthClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.SouthDoorSpritePos], ObjectConstants.SouthDoorSpriteStr);
                     break;
                 default:
                     //Not a door
@@ -435,10 +435,10 @@ public class Room : IRoom
                     i++;
                     switch (strArray[i])
                     {
-                        case "Key":
+                        case ObjectConstants.KeyStr:
                             itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
                             break;
-                        case "HeartContainer":
+                        case ObjectConstants.HeartContainerStr:
                             itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
                             break;
                     }

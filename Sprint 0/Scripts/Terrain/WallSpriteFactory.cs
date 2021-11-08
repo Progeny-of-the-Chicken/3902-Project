@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0;
 
 class WallSpriteFactory
 {
@@ -32,53 +33,53 @@ class WallSpriteFactory
     {
         switch (str)
         {
-            case "EastBombableSprite":
+            case ObjectConstants.EastBombableSpriteStr:
                 return CreateEastBombableSprite(location, room);
-            case "EastBombedSprite":
+            case ObjectConstants.EastBombedSpriteStr:
                 return CreateEastClosedSprite(location, room);
-            case "EastClosedSprite":
+            case ObjectConstants.EastClosedSpriteStr:
                 return CreateEastClosedSprite(location, room);
-            case "EastDoorSprite":
+            case ObjectConstants.EastDoorSpriteStr:
                 return CreateEastDoorSprite(location, room);
-            case "EastLockedSprite":
+            case ObjectConstants.EastLockedSpriteStr:
                 return CreateEastLockedSprite(location, room);
-            case "EastWallSprite":
+            case ObjectConstants.EastWallSpriteStr:
                 return CreateEastWallSprite(location, room);
-            case "NorthBombableSprite":
+            case ObjectConstants.NorthBombableSpriteStr:
                 return CreateNorthBombableSprite(location, room);
-            case "NorthBombedSprite":
+            case ObjectConstants.NorthBombedSpriteStr:
                 return CreateNorthClosedSprite(location, room);
-            case "NorthClosedSprite":
+            case ObjectConstants.NorthClosedSpriteStr:
                 return CreateNorthClosedSprite(location, room);
-            case "NorthDoorSprite":
+            case ObjectConstants.NorthDoorSpriteStr:
                 return CreateNorthDoorSprite(location, room);
-            case "NorthLockedSprite":
+            case ObjectConstants.NorthLockedSpriteStr:
                 return CreateNorthLockedSprite(location, room);
-            case "NorthWallSprite":
+            case ObjectConstants.NorthWallSpriteStr:
                 return CreateNorthWallSprite(location, room);
-            case "WestBombableSprite":
+            case ObjectConstants.WestBombableSpriteStr:
                 return CreateWestBombableSprite(location, room);
-            case "WestBombedSprite":
+            case ObjectConstants.WestBombedSpriteStr:
                 return CreateWestClosedSprite(location, room);
-            case "WestClosedSprite":
+            case ObjectConstants.WestClosedSpriteStr:
                 return CreateWestClosedSprite(location, room);
-            case "WestDoorSprite":
+            case ObjectConstants.WestDoorSpriteStr:
                 return CreateWestDoorSprite(location, room);
-            case "WestLockedSprite":
+            case ObjectConstants.WestLockedSpriteStr:
                 return CreateWestLockedSprite(location, room);
-            case "WestWallSprite":
+            case ObjectConstants.WestWallSpriteStr:
                 return CreateWestWallSprite(location, room);
-            case "SouthBombableSprite":
+            case ObjectConstants.SouthBombableSpriteStr:
                 return CreateSouthBombableSprite(location, room);
-            case "SouthBombedSprite":
+            case ObjectConstants.SouthBombedSpriteStr:
                 return CreateSouthClosedSprite(location, room);
-            case "SouthClosedSprite":
+            case ObjectConstants.SouthClosedSpriteStr:
                 return CreateSouthClosedSprite(location, room);
-            case "SouthDoorSprite":
+            case ObjectConstants.SouthDoorSpriteStr:
                 return CreateSouthDoorSprite(location, room);
-            case "SouthLockedSprite":
+            case ObjectConstants.SouthLockedSpriteStr:
                 return CreateSouthLockedSprite(location, room);
-            case "SouthWallSprite":
+            case ObjectConstants.SouthWallSpriteStr:
                 return CreateSouthWallSprite(location, room);
             default:
                 return new EastBombedSprite(location, room);

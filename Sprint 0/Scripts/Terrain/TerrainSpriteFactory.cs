@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
 
@@ -27,9 +24,9 @@ class TerrainSpriteFactory
 
     public void LoadAllTextures(ContentManager content)
     {
-        overworldSpritesheet = content.Load<Texture2D>("OverworldTileset");
-        dungeonSpritesheet = content.Load<Texture2D>("dungeonTileset");
-        dungeon1RoomSpritesheet = content.Load<Texture2D>("Dungeon1Eagle");
+        overworldSpritesheet = content.Load<Texture2D>(ObjectConstants.OverworldTilesetStr);
+        dungeonSpritesheet = content.Load<Texture2D>(ObjectConstants.dungeonTilesetStr);
+        dungeon1RoomSpritesheet = content.Load<Texture2D>(ObjectConstants.Dungeon1EagleStr);
     }
 
     public Texture2D GetOverworldSpritesheet()

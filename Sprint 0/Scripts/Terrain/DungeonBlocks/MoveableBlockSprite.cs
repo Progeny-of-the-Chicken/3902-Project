@@ -5,14 +5,14 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class MoveableBlockSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1001, 11, 16, 16);
+    private Rectangle spritesheetLocation = SpriteRectangles.MovableBlockFrame;
     Rectangle destination;
     IBlockCollider collider;
     public IBlockCollider Collider { get => collider; }
 
     public MoveableBlockSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         this.collider = new MoveableBlockCollider(this, destination);
     }
 
@@ -27,22 +27,26 @@ public class MoveableBlockSprite : ITerrain
         spriteBatch.Draw(texture, destination, spritesheetLocation, Color.White);
     }
 
-    public void MoveBlock(Vector2 direction) {
-        if (direction.X == 0)
+    public void MoveBlock(Vector2 direction)
+    {
+        if (direction.X == ObjectConstants.zero_float)
         {
-            if (direction.Y > 0)
+            if (direction.Y > ObjectConstants.zero_float)
             {
                 destination.Y -= ObjectConstants.scale * spritesheetLocation.Width;
-            } else
+            }
+            else
             {
                 destination.Y += ObjectConstants.scale * spritesheetLocation.Width;
             }
-        } else
+        }
+        else
         {
-            if (direction.X > 0)
+            if (direction.X > ObjectConstants.zero_float)
             {
                 destination.X -= ObjectConstants.scale * spritesheetLocation.Width;
-            } else
+            }
+            else
             {
                 destination.X += ObjectConstants.scale * spritesheetLocation.Width;
             }
