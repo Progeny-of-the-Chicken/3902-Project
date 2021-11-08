@@ -11,11 +11,15 @@ namespace Sprint_0.Scripts.Controller
 
 		MouseState newState = Mouse.GetState();
 		MouseState oldState;
+		CommandNextRoom cnr;
+		CommandPrevRoom cpr;
 
 		//Constructor
 		public MouseController(Game1 game)
 		{
 			this.game = game;
+			cnr = new CommandNextRoom(game);
+			cpr = new CommandPrevRoom(game);
 
 			oldState = Mouse.GetState();
 		}
@@ -27,10 +31,10 @@ namespace Sprint_0.Scripts.Controller
 
 			if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
 			{
-				// Execute on left click
+				cnr.Execute();
             } else if (newState.RightButton == ButtonState.Pressed && oldState.RightButton == ButtonState.Released)
             {
-				// Execute on right click
+				cpr.Execute();
             }
 
 			oldState = newState;

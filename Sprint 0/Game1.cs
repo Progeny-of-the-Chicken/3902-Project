@@ -19,6 +19,7 @@ namespace Sprint_0
         public SpriteBatch _spriteBatch;
         KeyboardController kc;
         public Link link;
+        public IRoomManager roomManager;
         public GameStateMachine gameStateMachine;
 
         int scale = 3;
@@ -92,6 +93,91 @@ namespace Sprint_0
         {
             Exit();
         }
+
+        //Just for sprint 3
+        void ChangeRoom()
+        {
+            switch (roomNum)
+            {
+                case 0:
+                    roomManager.SwitchToRoom("Room25");
+                    break;
+                case 1:
+                    roomManager.SwitchToRoom("Room15");
+                    break;
+                case 2:
+                    roomManager.SwitchToRoom("Room35");
+                    break;
+                case 3:
+                    roomManager.SwitchToRoom("Room24");
+                    break;
+                case 4:
+                    roomManager.SwitchToRoom("Room23");
+                    break;
+                case 5:
+                    roomManager.SwitchToRoom("Room33");
+                    break;
+                case 6:
+                    roomManager.SwitchToRoom("Room13");
+                    break;
+                case 7:
+                    roomManager.SwitchToRoom("Room12");
+                    break;
+                case 8:
+                    roomManager.SwitchToRoom("Room02");
+                    break;
+                case 9:
+                    roomManager.SwitchToRoom("Room22");
+                    break;
+                case 10:
+                    roomManager.SwitchToRoom("Room21");
+                    break;
+                case 11:
+                    roomManager.SwitchToRoom("Room20");
+                    break;
+                case 12:
+                    roomManager.SwitchToRoom("Room10");
+                    break;
+                case 13:
+                    roomManager.SwitchToRoom("Room00");
+                    break;
+                case 14:
+                    roomManager.SwitchToRoom("Room32");
+                    break;
+                case 15:
+                    roomManager.SwitchToRoom("Room42");
+                    break;
+                case 16:
+                    roomManager.SwitchToRoom("Room41");
+                    break;
+                case 17:
+                    roomManager.SwitchToRoom("Room51");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void NextRoom()
+        {
+            roomNum++;
+            if (roomNum > 17)
+            {
+                roomNum = 0;
+            }
+            ChangeRoom();
+        }
+
+        public void PrevRoom()
+        {
+            roomNum--;
+            if (roomNum < 0)
+            {
+                roomNum = 17;
+            }
+            ChangeRoom();
+        }
+
     }
 
 }
