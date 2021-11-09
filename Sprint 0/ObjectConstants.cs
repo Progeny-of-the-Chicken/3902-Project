@@ -22,6 +22,8 @@ namespace Sprint_0
         public const double zero_double = 0;
         public const int zeroHealth = 0;
         public const int doubleTheValue = 2;
+        public const int PreferredBackBufferWidth = 256;
+        public const int PreferredBackBufferHeight = 240;
 
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
@@ -213,6 +215,9 @@ namespace Sprint_0
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
         public const string startRoom = "Room20";
+        public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
+"Room51"};
+        public const string contentLocation = "Content";
         public const string OverworldTilesetStr = "OverworldTileset";
         public const string dungeonTilesetStr = "dungeonTileset";
         public const string Dungeon1EagleStr = "Dungeon1Eagle";
