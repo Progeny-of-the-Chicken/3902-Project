@@ -259,6 +259,8 @@ namespace Sprint_0
         public const int NorthDoorSpritePos = 9;
         public const int WestDoorSpritePos = 10;
         public const int SouthDoorSpritePos = 11;
+        public const int wallHitBoxHalfSize = standardWidthHeight / 2;
+        public const int wallHitBoxSize = standardWidthHeight;
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
         public const double explosionDurationSeconds = 0.3;

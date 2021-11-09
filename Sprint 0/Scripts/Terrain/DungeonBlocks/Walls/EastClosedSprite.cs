@@ -7,7 +7,7 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class EastClosedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(914, 77, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.EastClosedSpriteFrame;
     Rectangle destination;
     GenericWallCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -16,8 +16,8 @@ public class EastClosedSprite : IWall
     public String NextRoom { get => nextRoom; }
 
     public EastClosedSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new GenericWallCollider(this, destination);
         this.room = room;
     }
@@ -34,7 +34,7 @@ public class EastClosedSprite : IWall
     }
     public void SwapDoor()
     {
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "EastDoorSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.EastDoorSpriteStr);
         command.Execute();
     }
 }

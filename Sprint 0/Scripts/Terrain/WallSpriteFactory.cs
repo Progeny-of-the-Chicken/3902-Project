@@ -36,7 +36,7 @@ class WallSpriteFactory
             case ObjectConstants.EastBombableSpriteStr:
                 return CreateEastBombableSprite(location, room);
             case ObjectConstants.EastBombedSpriteStr:
-                return CreateEastClosedSprite(location, room);
+                return CreateEastBombedSprite(location, room);
             case ObjectConstants.EastClosedSpriteStr:
                 return CreateEastClosedSprite(location, room);
             case ObjectConstants.EastDoorSpriteStr:
@@ -48,7 +48,7 @@ class WallSpriteFactory
             case ObjectConstants.NorthBombableSpriteStr:
                 return CreateNorthBombableSprite(location, room);
             case ObjectConstants.NorthBombedSpriteStr:
-                return CreateNorthClosedSprite(location, room);
+                return CreateNorthBombedSprite(location, room);
             case ObjectConstants.NorthClosedSpriteStr:
                 return CreateNorthClosedSprite(location, room);
             case ObjectConstants.NorthDoorSpriteStr:
@@ -60,7 +60,7 @@ class WallSpriteFactory
             case ObjectConstants.WestBombableSpriteStr:
                 return CreateWestBombableSprite(location, room);
             case ObjectConstants.WestBombedSpriteStr:
-                return CreateWestClosedSprite(location, room);
+                return CreateWestBombedSprite(location, room);
             case ObjectConstants.WestClosedSpriteStr:
                 return CreateWestClosedSprite(location, room);
             case ObjectConstants.WestDoorSpriteStr:
@@ -72,7 +72,7 @@ class WallSpriteFactory
             case ObjectConstants.SouthBombableSpriteStr:
                 return CreateSouthBombableSprite(location, room);
             case ObjectConstants.SouthBombedSpriteStr:
-                return CreateSouthClosedSprite(location, room);
+                return CreateSouthBombedSprite(location, room);
             case ObjectConstants.SouthClosedSpriteStr:
                 return CreateSouthClosedSprite(location, room);
             case ObjectConstants.SouthDoorSpriteStr:

@@ -6,7 +6,7 @@ using System;
 
 public class EastBombableSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(814, 77, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.EastBombableSpriteFrame;
     Rectangle destination;
     BombableWallCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -34,7 +34,7 @@ public class EastBombableSprite : IWall
 
     public void SwapDoor()
     {
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "EastBombedSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.EastBombedSpriteStr);
         command.Execute();
     }
 }

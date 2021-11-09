@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
@@ -7,7 +6,7 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class EastBombedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(947, 77, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.EastBombedSpriteFrame;
     Rectangle destination;
     OpenWallCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -16,16 +15,16 @@ public class EastBombedSprite : IWall
     public String NextRoom { get => nextRoom; }
 
     public EastBombedSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         Rectangle hitbox = destination;
-        hitbox.X += 16 * ObjectConstants.scale;
+        hitbox.X += ObjectConstants.wallHitBoxSize * ObjectConstants.scale;
         hitbox.Width /= 2;
         collider = new OpenWallCollider(this, hitbox);
         this.room = room;
         nextRoom = this.room.RoomId();
         int roomX = (int)nextRoom[4] - '0' + 1;
-        nextRoom = nextRoom.Substring(0, nextRoom.Length-2) + roomX + nextRoom.Substring(nextRoom.Length-1);
+        nextRoom = nextRoom.Substring(0, nextRoom.Length - 2) + roomX + nextRoom.Substring(nextRoom.Length - 1);
     }
 
     public void Update()

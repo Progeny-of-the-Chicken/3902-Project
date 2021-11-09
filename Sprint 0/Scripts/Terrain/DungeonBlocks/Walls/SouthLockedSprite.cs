@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
@@ -7,7 +6,7 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class SouthLockedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(881, 110, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.SouthLockedSpriteFrame;
     Rectangle destination;
     LockedDoorCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -35,7 +34,7 @@ public class SouthLockedSprite : IWall
 
     public void SwapDoor()
     {
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "SouthDoorSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.SouthDoorSpriteStr);
         command.Execute();
     }
 }

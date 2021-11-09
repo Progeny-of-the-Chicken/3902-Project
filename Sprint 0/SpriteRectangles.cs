@@ -120,7 +120,31 @@ namespace Sprint_0
         };
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
         public static Rectangle StairFrame = new Rectangle(1035, 28, 16, 16);
-
-        public static Rectangle EastDoorSpriteFrame = new Rectangle(814, 77, 32, 32);
+        public static Rectangle EastDoorSpriteFrame = new Rectangle(848, 77, 32, 32);
+        public static Rectangle EastBombableSpriteFrame = new Rectangle(814, 77, 32, 32);
+        public static Rectangle EastBombedSpriteFrame = new Rectangle(947, 77, 32, 32);
+        public static Rectangle WestLockedSpriteFrame = new Rectangle(881, 44, 32, 32);
+        public static Rectangle WestDoorSpriteFrame = new Rectangle(848, 44, 32, 32);
+        public static Rectangle WestWallSpriteFrame = new Rectangle(815, 44, 32, 32);
+        public static Rectangle WestClosedSpriteFrame = new Rectangle(914, 44, 32, 32);
+        public static Rectangle WestBombedSpriteFrame = new Rectangle(947, 44, 32, 32);
+        public static Rectangle WestBombableSpriteFrame = new Rectangle(815, 44, 32, 32);
+        public static Rectangle SouthWallSpriteFrame = new Rectangle(815, 110, 32, 32);
+        public static Rectangle SouthLockedSpriteFrame = new Rectangle(881, 110, 32, 32);
+        public static Rectangle SouthDoorSpriteFrame = new Rectangle(848, 110, 32, 32);
+        public static Rectangle SouthClosedSpriteFrame = new Rectangle(914, 110, 32, 32);
+        public static Rectangle SouthBombedSpriteFrame = new Rectangle(947, 110, 32, 32);
+        public static Rectangle SouthBombableSpriteFrame = new Rectangle(815, 110, 32, 32);
+        public static Rectangle NorthWallSpriteFrame = new Rectangle(815, 11, 32, 32);
+        public static Rectangle NorthLockedSpriteFrame = new Rectangle(881, 11, 32, 32);
+        public static Rectangle NorthDoorSpriteFrame = new Rectangle(848, 11, 32, 32);
+        public static Rectangle NorthClosedSpriteFrame = new Rectangle(914, 11, 32, 32);
+        public static Rectangle NorthBombedSpriteFrame = new Rectangle(947, 11, 32, 32);
+        public static Rectangle NorthBombableSpriteFrame = new Rectangle(815, 11, 32, 32);
+        public static Rectangle InvisibleVerticleWallFrame = new Rectangle(814, 143, 32, 72);
+        public static Rectangle InvisibleHorizontalWallFrame = new Rectangle(814, 143, 112, 32);
+        public static Rectangle EastWallSpriteFrame = new Rectangle(815, 77, 32, 32);
+        public static Rectangle EastLockedSpriteFrame = new Rectangle(881, 77, 32, 32);
+        public static Rectangle EastClosedSpriteFrame = new Rectangle(914, 77, 32, 32);
     }
 }

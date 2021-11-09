@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
@@ -20,8 +19,8 @@ public class EastDoorSprite : IWall
     {
         destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         Rectangle hitbox = destination;
-        hitbox.X += 8 * ObjectConstants.scale;
-        hitbox.Width -= 8 * ObjectConstants.scale;
+        hitbox.X += ObjectConstants.wallHitBoxHalfSize * ObjectConstants.scale;
+        hitbox.Width -= ObjectConstants.wallHitBoxHalfSize * ObjectConstants.scale;
         collider = new OpenWallCollider(this, hitbox);
         this.room = room;
         nextRoom = this.room.RoomId();
