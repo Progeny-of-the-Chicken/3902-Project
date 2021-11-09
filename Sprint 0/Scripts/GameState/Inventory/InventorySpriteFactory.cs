@@ -32,5 +32,15 @@ namespace Sprint_0.Scripts.GameState.Inventory
         {
             return new BackdropSprite(texture);
         }
+
+        public ISprite CreateWeaponSprite(WeaponType weaponType, Rectangle sourceRec)
+        {
+            return new WeaponSprite(texture, sourceRec);
+        }
+
+        public ISprite CreateSelectionSprite()
+        {
+            return new SelectionSprite(texture);
+        }
     }
 }

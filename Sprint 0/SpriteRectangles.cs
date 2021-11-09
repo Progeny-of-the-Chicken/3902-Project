@@ -68,5 +68,10 @@ namespace Sprint_0
 
         //----- Inventory GUI source rectangles -----//
         public static Rectangle backdropFrame = new Rectangle(1, 11, 256, 88);
+        public static List<Rectangle> selectionFrames = new List<Rectangle>
+        {
+            new Rectangle(519, 137, 16, 16),
+            new Rectangle(536, 137, 16, 16)
+        };
     }
 }

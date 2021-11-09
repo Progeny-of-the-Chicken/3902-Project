@@ -1,6 +1,6 @@
 ﻿namespace Sprint_0.Scripts.GameState
 {
-    public enum Weapon
+    public enum WeaponType
     {
         WoodenSword,
         BasicBoomerang,
