@@ -276,7 +276,7 @@ public class Room : IRoom
         doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
         if (doorString[ObjectConstants.firstInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.firstInArray], doorLocation, this));
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.firstInArray], doorLocation, this, doorString[ObjectConstants.firstInArray + ObjectConstants.nextInArray]));
             if (doorString[ObjectConstants.firstInArray].Equals(ObjectConstants.EastClosedSpriteStr))
             {
                 enemiesFlag = true;
@@ -291,7 +291,7 @@ public class Room : IRoom
         doorLocation.Y = YOFFSET;
         if (doorString.Length > ObjectConstants.secondDoorInArray && doorString[ObjectConstants.secondDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.secondDoorInArray], doorLocation, this));
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.secondDoorInArray], doorLocation, this, doorString[ObjectConstants.secondDoorInArray + ObjectConstants.nextInArray]));
             if (doorString[ObjectConstants.secondDoorInArray].Equals(ObjectConstants.NorthClosedSpriteStr))
             {
                 enemiesFlag = true;
@@ -306,7 +306,7 @@ public class Room : IRoom
         doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
         if (doorString.Length > ObjectConstants.thirdDoorInArray && doorString[ObjectConstants.thirdDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.thirdDoorInArray], doorLocation, this));
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.thirdDoorInArray], doorLocation, this, doorString[ObjectConstants.thirdDoorInArray + ObjectConstants.nextInArray]));
             if (doorString[ObjectConstants.thirdDoorInArray].Equals(ObjectConstants.WestClosedSpriteStr))
             {
                 enemiesFlag = true;
@@ -321,7 +321,7 @@ public class Room : IRoom
         doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorLeft * scale;
         if (doorString.Length > ObjectConstants.fourthDoorInArray && doorString[ObjectConstants.fourthDoorInArray] != ObjectConstants.emptyStr)
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.fourthDoorInArray], doorLocation, this));
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.fourthDoorInArray], doorLocation, this, doorString[ObjectConstants.fourthDoorInArray + ObjectConstants.nextInArray]));
             if (doorString[ObjectConstants.fourthDoorInArray].Equals(ObjectConstants.SouthClosedSpriteStr))
             {
                 enemiesFlag = true;
@@ -397,9 +397,10 @@ public class Room : IRoom
     public void ChangeDoor(IWall doorToRemove, String doorToAdd)
     {
         Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
+        string nextRoom = doorToRemove.NextRoom;
         if (walls.Remove(doorToRemove))
         {
-            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this, nextRoom));
             collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
         }
     }

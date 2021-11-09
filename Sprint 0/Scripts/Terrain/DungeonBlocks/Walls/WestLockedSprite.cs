@@ -14,11 +14,12 @@ public class WestLockedSprite : IWall
     string nextRoom;
     public String NextRoom { get => nextRoom; }
 
-    public WestLockedSprite(Vector2 screenLocation, Room room)
+    public WestLockedSprite(Vector2 screenLocation, Room room, String nextRoom)
     {
         destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new LockedDoorCollider(this, destination);
         this.room = room;
+        this.nextRoom = nextRoom;
     }
 
     public void Update()

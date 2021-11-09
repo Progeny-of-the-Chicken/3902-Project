@@ -14,16 +14,14 @@ public class NorthDoorSprite : IWall
     string nextRoom;
     public String NextRoom { get => nextRoom; }
 
-    public NorthDoorSprite(Vector2 screenLocation, Room room)
+    public NorthDoorSprite(Vector2 screenLocation, Room room, String nextRoom)
     {
         destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         Rectangle hitbox = destination;
         hitbox.Height -= ObjectConstants.wallHitBoxHalfSize * ObjectConstants.scale;
         collider = new OpenWallCollider(this, hitbox);
         this.room = room;
-        nextRoom = this.room.RoomId();
-        int roomY = (int)nextRoom[5] - '0' - 1;
-        nextRoom = nextRoom.Substring(0, 5) + roomY;
+        this.nextRoom = nextRoom;
     }
 
     public void Update()
