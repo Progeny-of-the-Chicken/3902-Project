@@ -8,6 +8,7 @@ namespace Sprint_0.Scripts.GameState.Inventory
     public class InventoryManager : IInventoryManager
     {
         private List<IDisplay> displays;
+        private int inventoryDisplayIndex = ObjectConstants.inventoryDisplayListIndex;
 
         private static InventoryManager instance = new InventoryManager();
 
@@ -26,6 +27,7 @@ namespace Sprint_0.Scripts.GameState.Inventory
         public void Init()
         {
             displays.Add(new BackdropDisplay());
+            displays.Add(new InventoryDisplay());
         }
 
         public void Update(GameTime gt)
@@ -54,12 +56,12 @@ namespace Sprint_0.Scripts.GameState.Inventory
 
         public void SelectWeapon()
         {
-
+            ((InventoryDisplay)displays[inventoryDisplayIndex]).SelectWeapon();
         }
 
-        public void MoveSelection(FacingDirection diration)
+        public void MoveSelection(FacingDirection direction)
         {
-
+            ((InventoryDisplay)displays[inventoryDisplayIndex]).MoveSelection(direction);
         }
     }
 }

@@ -106,7 +106,16 @@ namespace Sprint_0
 
         //----- Inventory GUI constant values -----//
         public const string inventorySpritesheetFileName = "InventorySpritesheet";
+        public const int inventoryDisplayListIndex = 1;
         // Backdrop
         public static Vector2 backdropSpawnLocation = Vector2.Zero;
+        // Inventory
+        public static int inventorySpaceBetweenWeapon = 16 * scale;
+        public static int inventorySpaceBetweenSelection = 8 * scale;
+        public static int inventoryWeaponListStartIndex = 0;
+        public static int inventoryMoveSelectionIndexRight = 1;
+        public static int inventoryMoveSelectionIndexUp = -4;
+        public static int inventoryMoveSelectionIndexLeft = -1;
+        public static int inventoryMoveSelectionIndexDown = 4;
     }
 }

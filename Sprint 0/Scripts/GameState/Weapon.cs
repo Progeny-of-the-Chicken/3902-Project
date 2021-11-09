@@ -8,6 +8,7 @@
         Bomb,
         BasicArrow,
         SilverArrow,
+        Bow,
         BlueCandle,
         Map,
         Compass
