@@ -96,7 +96,7 @@ namespace Sprint_0
         public void NextRoom()
         {
             roomNum++;
-            if (roomNum > ObjectConstants.rooms.Length)
+            if (roomNum + ObjectConstants.nextInArray > ObjectConstants.rooms.Length)
             {
                 roomNum = ObjectConstants.counterInitialVal_int;
             }
@@ -106,7 +106,7 @@ namespace Sprint_0
         public void PrevRoom()
         {
             roomNum--;
-            if (roomNum < ObjectConstants.counterInitialVal_int)
+            if (roomNum < ObjectConstants.counterInitialVal_int + ObjectConstants.nextInArray)
             {
                 roomNum = ObjectConstants.rooms.Length;
             }
