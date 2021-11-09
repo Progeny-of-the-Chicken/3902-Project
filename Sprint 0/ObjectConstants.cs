@@ -103,5 +103,8 @@ namespace Sprint_0
         public const double explosionDurationSeconds = 0.3;
         public const double bombExtraExplosionOffset = 16 * scale;
         public const double bombExtraExplosionNumber = 6;
+
+        //----- Inventory GUI constant values -----//
+        public const string inventorySpritesheetFileName = "InventorySpritesheet";
     }
 }
