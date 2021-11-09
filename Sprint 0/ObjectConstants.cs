@@ -106,5 +106,7 @@ namespace Sprint_0
 
         //----- Inventory GUI constant values -----//
         public const string inventorySpritesheetFileName = "InventorySpritesheet";
+        // Backdrop
+        public static Vector2 backdropSpawnLocation = Vector2.Zero;
     }
 }
