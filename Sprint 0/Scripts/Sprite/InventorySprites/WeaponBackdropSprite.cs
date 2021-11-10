@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.InventorySprites
 {
-    public class BackdropSprite : ISprite
+    public class WeaponBackdropSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = SpriteRectangles.backdropFrame;
+        private Rectangle frame = SpriteRectangles.weaponBackdropFrame;
         private int scale = ObjectConstants.scale;
 
-        public BackdropSprite(Texture2D textures)
+        public WeaponBackdropSprite(Texture2D textures)
         {
             spritesheet = textures;
         }

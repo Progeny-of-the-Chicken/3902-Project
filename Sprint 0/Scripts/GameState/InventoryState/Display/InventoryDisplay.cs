@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 {
     public class InventoryDisplay : IDisplay
     {
-        private Dictionary<ISprite, Vector2> itemSprites;
+        private Dictionary<ISprite, Vector2> itemSprites = new Dictionary<ISprite, Vector2>();
         private ISprite selectionSprite;
         private Vector2 selectionLocation;
         private int selectionIndex;
@@ -80,7 +80,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         private bool ValidSelectionMovement(int indexToTest)
         {
-            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex || indexToTest <= itemSprites.Count);
+            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex && indexToTest < itemSprites.Count);
         }
 
         //----- Helper methods to set up weapon sprites from inventory -----//
@@ -98,9 +98,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             {
                 Rectangle sourceRec = getFrameForWeapon(Inventory.Instance.Weapons[i]);
                 // Center weapon on inventory slot
-                Vector2 weaponSlot = backdropLocation + ObjectConstants.weaponFromBackdropLocation + ObjectConstants.inventorySlotLocations[i]
-                    + new Vector2((ObjectConstants.inventorySlotWidthHeight - sourceRec.X) / ObjectConstants.halveOpDenom,
-                    (ObjectConstants.inventorySlotWidthHeight - sourceRec.Y) / ObjectConstants.halveOpDenom);
+                Vector2 weaponSlot = backdropLocation + ObjectConstants.inventorySlotLocations[i] + ObjectConstants.inventoryWeaponFromSlotOffset;
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateWeaponSprite(sourceRec), weaponSlot);
             }
             // Map and compass

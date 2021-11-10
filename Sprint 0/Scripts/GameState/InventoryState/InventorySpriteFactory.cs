@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.InventorySprites;
 
@@ -23,14 +24,24 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
         }
 
-        public void LoadTextures(Texture2D texture)
+        public void LoadAllTextures(ContentManager content)
         {
-            this.texture = texture;
+            texture = content.Load<Texture2D>(ObjectConstants.inventorySpritesheetFileName);
         }
 
-        public ISprite CreateBackdropSprite()
+        public ISprite CreateWeaponBackdropSprite()
         {
-            return new BackdropSprite(texture);
+            return new WeaponBackdropSprite(texture);
+        }
+
+        public ISprite CreateMapBackdropSprite()
+        {
+            return new MapBackdropSprite(texture);
+        }
+
+        public ISprite CreateCoverSprite(Rectangle destRec)
+        {
+            return new CoverSprite(texture, destRec);
         }
 
         public ISprite CreateSelectionSprite()

@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState
 {
     public class InventoryManager : IInventoryManager
     {
-        private List<IDisplay> displays;
+        private List<IDisplay> displays = new List<IDisplay>();
         private int inventoryDisplayIndex = ObjectConstants.inventoryDisplayListIndex;
 
         private static InventoryManager instance = new InventoryManager();

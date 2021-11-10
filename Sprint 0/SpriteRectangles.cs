@@ -67,7 +67,8 @@ namespace Sprint_0
         };
 
         //----- Inventory GUI source rectangles -----//
-        public static Rectangle backdropFrame = new Rectangle(1, 11, 256, 88);
+        public static Rectangle weaponBackdropFrame = new Rectangle(1, 11, 256, 88);
+        public static Rectangle mapBackdropFrame = new Rectangle(258, 112, 256, 88);
         public static List<Rectangle> selectionFrames = new List<Rectangle>
         {
             new Rectangle(519, 137, 16, 16),
@@ -82,7 +83,14 @@ namespace Sprint_0
         public static Rectangle weaponBowFrame = new Rectangle(633, 137, 8, 16);
         public static Rectangle weaponBlueCandleFrame = new Rectangle(644, 137, 8, 16);
         public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
-        public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 16, 16);
-
+        public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
+        public static List<Rectangle> backdropCoverFrames = new List<Rectangle>
+        {
+            new Rectangle(44, 152, 15, 16),
+            new Rectangle(48, 112, 8, 16),
+            new Rectangle(68, 48, 8, 16),
+            new Rectangle(132, 48, 80, 32),
+            new Rectangle(128, 24, 88, 16)
+        };
     }
 }

@@ -105,10 +105,11 @@ namespace Sprint_0
         public const double bombExtraExplosionNumber = 6;
 
         //----- Inventory GUI constant values -----//
-        public const string inventorySpritesheetFileName = "InventorySpritesheet";
+        public const string inventorySpritesheetFileName = "InventorySpritesheetAdjusted";
         public const int inventoryDisplayListIndex = 1;
         // Backdrop
         public static Vector2 backdropSpawnLocation = Vector2.Zero;
+        public static Vector2 mapBackdropFromBackdrop = new Vector2(0, 88) * scale;
         // Weapon
         public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
         public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
@@ -118,21 +119,20 @@ namespace Sprint_0
         {
             new Vector2()
         };
-        public const int halveOpDenom = 2;
         public const int inventoryWeaponListStartIndex = 0;
         // Selection
         public static List<Vector2> inventorySlotLocations = new List<Vector2>
         {
-            new Vector2(129, 59) * scale,
-            new Vector2(153, 59) * scale,
-            new Vector2(177, 59) * scale,
-            new Vector2(201, 59) * scale,
-            new Vector2(129, 75) * scale,
-            new Vector2(153, 75) * scale,
-            new Vector2(177, 75) * scale,
-            new Vector2(201, 75) * scale
+            new Vector2(128, 48) * scale,
+            new Vector2(152, 48) * scale,
+            new Vector2(176, 48) * scale,
+            new Vector2(200, 48) * scale,
+            new Vector2(128, 64) * scale,
+            new Vector2(152, 64) * scale,
+            new Vector2(176, 64) * scale,
+            new Vector2(200, 64) * scale
         };
-        public const int inventorySlotWidthHeight = 16 * scale;
+        public static Vector2 inventoryWeaponFromSlotOffset = new Vector2(4, 0) * scale;
         public const int inventoryMoveSelectionRightIndex = 1;
         public const int inventoryMoveSelectionUpIndex = -4;
         public const int inventoryMoveSelectionLeftIndex = -1;
