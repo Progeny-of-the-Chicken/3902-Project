@@ -49,6 +49,9 @@ namespace Sprint_0.Scripts.Items
                 case ItemType.YellowRuby:
                     SFXManager.Instance.PlayPickUpRupee();
                     break;
+                case ItemType.HeartContainer:
+                    SFXManager.Instance.PlayFanfare();
+                    break;
                 case ItemType.TriforcePiece:
                     SFXManager.Instance.StopMusic();
                     SFXManager.Instance.PlayTriforcePiece();

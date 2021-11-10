@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts;
 
 public class Room : IRoom
 {
@@ -410,6 +411,7 @@ public class Room : IRoom
                     {
 						case "Key":
 							itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
+							SFXManager.Instance.PlayKeySpawn();
 							break;
 						case "HeartContainer":
 							itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
