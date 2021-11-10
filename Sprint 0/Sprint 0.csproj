@@ -28,6 +28,7 @@
     <None Remove="Scripts\GameState\Inventory\" />
     <None Remove="Scripts\Sprite\InventoryGUISprites\" />
     <None Remove="Scripts\GameState\Inventory\Display\" />
+    <None Remove="Scripts\Commands\InventoryState\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -55,8 +56,9 @@
     <Folder Include="Scripts\Effect\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
     <Folder Include="Scripts\GameState\" />
-    <Folder Include="Scripts\GameState\InventoryClass\" />
+    <Folder Include="Scripts\GameState\InventoryState\" />
     <Folder Include="Scripts\Sprite\InventorySprites\" />
-    <Folder Include="Scripts\GameState\InventoryClass\Display\" />
+    <Folder Include="Scripts\GameState\InventoryState\Display\" />
+    <Folder Include="Scripts\Commands\InventoryState\" />
   </ItemGroup>
 </Project>
