@@ -8,6 +8,7 @@ using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
+using Sprint_0.GameStateHandlers;
 
 namespace Sprint_0
 {
@@ -19,6 +20,7 @@ namespace Sprint_0
         KeyboardController kc;
         public Link link;
         public IRoomManager roomManager;
+        public GameStateMachine gameStateMachine;
         MouseController mc;
         int roomNum = ObjectConstants.counterInitialVal_int;
 
@@ -54,19 +56,20 @@ namespace Sprint_0
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
-            roomManager = RoomManager.Instance;
-            roomManager.Init(link);
+
+            gameStateMachine = new GameStateMachine(link);
         }
 
         protected override void Update(GameTime gameTime)
         {
             kc.Update();
-            roomManager.Update(gameTime);
             if (!link.IsAlive)
                 this.Quit();
 
             //Just for Sprint 3
             mc.Update();
+
+            gameStateMachine.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -75,7 +78,7 @@ namespace Sprint_0
 
             _spriteBatch.Begin();
 
-            roomManager.Draw(_spriteBatch);
+            gameStateMachine.Draw(_spriteBatch, gameTime);
 
             _spriteBatch.End();
 
