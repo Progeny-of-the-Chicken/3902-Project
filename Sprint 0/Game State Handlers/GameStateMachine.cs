@@ -9,7 +9,7 @@ namespace Sprint_0.GameStateHandlers
     {
         Menu,
         Gameplay,
-        Iventory
+        Inventory
     }
 
     public class GameStateMachine
@@ -44,7 +44,7 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.Menu:
                     break;
-                case GameState.Iventory:
+                case GameState.Inventory:
                     break;
                 default:
                     break;
@@ -60,7 +60,7 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.Menu:
                     break;
-                case GameState.Iventory:
+                case GameState.Inventory:
                     break;
                 default:
                     break;

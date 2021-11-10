@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0
 {
-    public interface GameStateHandler
+    public interface IGameStateHandler
     {
         void Update(GameTime gameTime);
         void Draw(SpriteBatch sb, GameTime gameTime);

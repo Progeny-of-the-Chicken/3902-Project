@@ -5,7 +5,7 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
-    public class GameplayStateHandler: GameStateHandler
+    public class GameplayStateHandler: IGameStateHandler
     {
         private IRoomManager roomManager;
 
