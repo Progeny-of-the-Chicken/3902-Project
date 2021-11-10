@@ -401,6 +401,7 @@ public class Room : IRoom
         if (walls.Remove(doorToRemove))
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this, nextRoom));
+            System.Diagnostics.Debug.WriteLine(doorToAdd);
             collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
         }
     }

@@ -56,7 +56,8 @@ namespace Sprint_0
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
-
+            roomManager = RoomManager.Instance;
+            roomManager.Init(link);
             gameStateMachine = new GameStateMachine(link);
         }
 
