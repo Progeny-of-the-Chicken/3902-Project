@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 
-namespace Sprint_0.Scripts.GameState.Inventory.Display
+namespace Sprint_0.Scripts.GameState.InventoryState.Display
 {
     public class BackdropDisplay : IDisplay
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint_0.Scripts.GameState.Inventory.Display;
+using Sprint_0.Scripts.GameState.InventoryState.Display;
 
-namespace Sprint_0.Scripts.GameState.Inventory
+namespace Sprint_0.Scripts.GameState.InventoryState
 {
     public class InventoryManager : IInventoryManager
     {

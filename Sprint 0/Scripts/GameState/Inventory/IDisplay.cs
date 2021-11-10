@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.GameState.Inventory
+namespace Sprint_0.Scripts.GameState.InventoryState
 {
     public interface IDisplay
     {

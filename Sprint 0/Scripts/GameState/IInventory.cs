@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Sprint_0.Scripts.GameState;
 
-namespace Sprint_0.Scripts.Link
+namespace Sprint_0.Scripts.GameState
 {
     public interface IInventory
     {

@@ -2,13 +2,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
-using Sprint_0.Scripts.Sprite.InventorySprites;
 
-namespace Sprint_0.Scripts.GameState.Inventory.Display
+namespace Sprint_0.Scripts.GameState.InventoryState.Display
 {
     public class InventoryDisplay : IDisplay
     {
-        // TODO: Check whether this is needed based on inventory implementation
         private Dictionary<ISprite, Vector2> itemSprites;
         private ISprite selectionSprite;
         private Vector2 selectionLocation;
@@ -37,6 +35,7 @@ namespace Sprint_0.Scripts.GameState.Inventory.Display
                 item.Key.Draw(spriteBatch, item.Value);
             }
             selectionSprite.Draw(spriteBatch, selectionLocation);
+            selectedWeaponSprite.Draw(spriteBatch, selectedWeaponLocation);
         }
 
         public void Scroll(Vector2 displacement)
@@ -50,7 +49,8 @@ namespace Sprint_0.Scripts.GameState.Inventory.Display
 
         public void SelectWeapon()
         {
-            // TODO: Update selected item, update inventory's selected item
+            Inventory.Instance.SelectedWeaponIndex = selectionIndex;
+            selectedWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[selectionIndex]));
         }
 
         public void MoveSelection(FacingDirection direction)
@@ -87,32 +87,16 @@ namespace Sprint_0.Scripts.GameState.Inventory.Display
 
         private void InitializeSelection()
         {
-            // TODO: Place selection at selected item
-            // Temporary dummy selection
-            int selectedWeaponIndex = 1;
-
             selectionSprite = InventorySpriteFactory.Instance.CreateSelectionSprite();
-            selectionLocation = backdropLocation + ObjectConstants.inventorySlotLocations[selectedWeaponIndex];
+            selectionLocation = backdropLocation + ObjectConstants.inventorySlotLocations[Inventory.Instance.SelectedWeaponIndex];
         }
 
         private void InitializeInventory()
         {
-            // TODO: Replace with inventory search function
-            // Temporary dummy inventory for testing purposes
-            List<WeaponType> inventory = new List<WeaponType>
-            {
-                WeaponType.BlueCandle,
-                WeaponType.Bomb,
-                WeaponType.BasicBoomerang
-            };
-            int selectedWeaponIndex = 1;
-            bool map = true;
-            bool compass = true;
-
             // Weapons
-            for (int i = ObjectConstants.inventoryWeaponListStartIndex; i < inventory.Count; i++)
+            for (int i = ObjectConstants.inventoryWeaponListStartIndex; i < Inventory.Instance.Weapons.Count; i++)
             {
-                Rectangle sourceRec = getFrameForWeapon(inventory[i]);
+                Rectangle sourceRec = getFrameForWeapon(Inventory.Instance.Weapons[i]);
                 // Center weapon on inventory slot
                 Vector2 weaponSlot = backdropLocation + ObjectConstants.weaponFromBackdropLocation + ObjectConstants.inventorySlotLocations[i]
                     + new Vector2((ObjectConstants.inventorySlotWidthHeight - sourceRec.X) / ObjectConstants.halveOpDenom,
@@ -120,16 +104,16 @@ namespace Sprint_0.Scripts.GameState.Inventory.Display
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateWeaponSprite(sourceRec), weaponSlot);
             }
             // Map and compass
-            if (map)
+            if (Inventory.Instance.Map)
             {
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateMapSprite(), backdropLocation + ObjectConstants.mapFromBackdropLocation);
             }
-            if (compass)
+            if (Inventory.Instance.Compass)
             {
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateCompassSprite(), backdropLocation + ObjectConstants.compassFromBackdropLocation);
             }
             // Selected weapon
-            selectedWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(inventory[selectedWeaponIndex]));
+            selectedWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             selectedWeaponLocation = backdropLocation + ObjectConstants.selectionWeaponFromBackdropLocation;
         }
 

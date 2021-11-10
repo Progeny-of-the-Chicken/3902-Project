@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.InventorySprites;
 
-namespace Sprint_0.Scripts.GameState.Inventory
+namespace Sprint_0.Scripts.GameState.InventoryState
 {
     public class InventorySpriteFactory
     {
