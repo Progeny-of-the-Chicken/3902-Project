@@ -145,7 +145,7 @@ namespace Sprint_0
         public const int ZolStartingHealth = DefaultEnemyHealth;
         //SpikeTrap
         public const int vectorFlip = -1;
-        public const int spikeTrapSpeed = 25;
+        public const int spikeTrapSpeed = 25 * scale;
         //WallMaster
         public const int WallMasterHealth = 3;
         public const float WallMasterTimeToMoveAgain = 1;
@@ -166,9 +166,9 @@ namespace Sprint_0
         public const int nextInArray = 1;
 
         //----- Collision constant values -----//
-        public static Vector2 degreesCW90_v = new Vector2(0, -1);
-        public static Vector2 degreesCW180_v = new Vector2(-1, -1);
-        public static Vector2 degreesCW270_v = new Vector2(-1, 0);
+        public static Vector2 degreeRotationCW90_v = new Vector2(0, -1);
+        public static Vector2 degreesRotationCW180_v = new Vector2(-1, -1);
+        public static Vector2 degreesRotationCW270_v = new Vector2(-1, 0);
         public const int goToZero = 0;
         public const int xOnScreenBorder = 0;
 

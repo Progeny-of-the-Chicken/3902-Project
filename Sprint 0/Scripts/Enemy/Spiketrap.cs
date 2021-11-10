@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Enemy
         public SpikeTrap(Vector2 location)
         {
             this.location = location;
-            moveSpeed = ObjectConstants.spikeTrapSpeed * ObjectConstants.scale;
+            moveSpeed = ObjectConstants.spikeTrapSpeed;
             OriginalLocation = location;
             direction = Vector2.Zero;
             RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (25 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.standardWidthHeight);
@@ -42,7 +42,7 @@ namespace Sprint_0.Scripts.Enemy
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
             XDetectionCollider = new DetectionCollider(this, RectangleX);
             YDetectionCollider = new DetectionCollider(this, RectangleY);
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(ObjectConstants.scale, SpriteRectangles.spikeTrapFrame);
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
         }
 
         public void Update(GameTime gt)

@@ -7,13 +7,11 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
     {
         private Texture2D sprite;
         private Rectangle[] frames;
-        private float scale;
         private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
         private int currentFrame = ObjectConstants.firstFrame;
-        public MagicProjectileSprite(Rectangle[] frames, float scale, Texture2D sprite)
+        public MagicProjectileSprite(Rectangle[] frames, Texture2D sprite)
         {
             this.frames = frames;
-            this.scale = scale;
             this.sprite = sprite;
         }
 
@@ -29,7 +27,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(frames[currentFrame].Width * scale), (int)(frames[currentFrame].Height * scale));
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(frames[currentFrame].Width * ObjectConstants.scale), (int)(frames[currentFrame].Height * ObjectConstants.scale));
             spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White);
         }
     }

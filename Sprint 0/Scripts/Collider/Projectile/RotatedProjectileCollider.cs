@@ -59,14 +59,14 @@ namespace Sprint_0.Scripts.Collider.Projectile
                     break;
                 case FacingDirection.Up:
                     _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = ObjectConstants.degreesCW90_v * _hitbox.Height;
+                    positionOffset = ObjectConstants.degreeRotationCW90_v * _hitbox.Height;
                     break;
                 case FacingDirection.Left:
-                    positionOffset = ObjectConstants.degreesCW180_v * _hitbox.Height;
+                    positionOffset = ObjectConstants.degreesRotationCW180_v * _hitbox.Height;
                     break;
                 case FacingDirection.Down:
                     _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = ObjectConstants.degreesCW270_v * _hitbox.Height;
+                    positionOffset = ObjectConstants.degreesRotationCW270_v * _hitbox.Height;
                     break;
                 default:
                     break;
