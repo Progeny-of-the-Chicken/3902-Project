@@ -109,13 +109,36 @@ namespace Sprint_0
         public const int inventoryDisplayListIndex = 1;
         // Backdrop
         public static Vector2 backdropSpawnLocation = Vector2.Zero;
-        // Inventory
-        public static int inventorySpaceBetweenWeapon = 16 * scale;
-        public static int inventorySpaceBetweenSelection = 8 * scale;
-        public static int inventoryWeaponListStartIndex = 0;
-        public static int inventoryMoveSelectionIndexRight = 1;
-        public static int inventoryMoveSelectionIndexUp = -4;
-        public static int inventoryMoveSelectionIndexLeft = -1;
-        public static int inventoryMoveSelectionIndexDown = 4;
+        // Weapon
+        public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
+        public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
+        public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
+        public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;
+        public static List<Vector2> inventoryWeaponLocations = new List<Vector2>
+        {
+            new Vector2()
+        };
+        public const int halveOpDenom = 2;
+        public const int inventoryWeaponListStartIndex = 0;
+        // Selection
+        public static List<Vector2> inventorySlotLocations = new List<Vector2>
+        {
+            new Vector2(129, 59) * scale,
+            new Vector2(153, 59) * scale,
+            new Vector2(177, 59) * scale,
+            new Vector2(201, 59) * scale,
+            new Vector2(129, 75) * scale,
+            new Vector2(153, 75) * scale,
+            new Vector2(177, 75) * scale,
+            new Vector2(201, 75) * scale
+        };
+        public const int inventorySlotWidthHeight = 16 * scale;
+        public const int inventoryMoveSelectionRightIndex = 1;
+        public const int inventoryMoveSelectionUpIndex = -4;
+        public const int inventoryMoveSelectionLeftIndex = -1;
+        public const int inventoryMoveSelectionDownIndex = 4;
+
+        //----- Inventory constant value -----//
+        public const int selectedItemStartingIndex = 0;
     }
 }

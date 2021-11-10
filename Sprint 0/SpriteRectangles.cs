@@ -73,5 +73,16 @@ namespace Sprint_0
             new Rectangle(519, 137, 16, 16),
             new Rectangle(536, 137, 16, 16)
         };
+        public static Rectangle weaponBasicSwordFrame = new Rectangle(555, 137, 8, 16);
+        public static Rectangle weaponBasicBoomerangFrame = new Rectangle(584, 137, 8, 16);
+        public static Rectangle weaponMagicalBoomerangFrame = new Rectangle(593, 137, 8, 16);
+        public static Rectangle weaponBombFrame = new Rectangle(604, 137, 8, 16);
+        public static Rectangle weaponBasicArrowFrame = new Rectangle(615, 137, 8, 16);
+        public static Rectangle weaponSilverArrowFrame = new Rectangle(624, 137, 8, 16);
+        public static Rectangle weaponBowFrame = new Rectangle(633, 137, 8, 16);
+        public static Rectangle weaponBlueCandleFrame = new Rectangle(644, 137, 8, 16);
+        public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
+        public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 16, 16);
+
     }
 }
