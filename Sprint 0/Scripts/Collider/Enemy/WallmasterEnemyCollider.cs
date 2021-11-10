@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Sprint_0.Scripts.Projectiles;
+﻿using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Enemy;
-using Sprint_0.Scripts.Terrain;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 

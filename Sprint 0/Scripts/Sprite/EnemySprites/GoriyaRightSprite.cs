@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Sprint_0.Scripts.Sprite
 {
@@ -12,8 +8,8 @@ namespace Sprint_0.Scripts.Sprite
         private Texture2D sprite;
         private Rectangle[] frames;
 
-        private float timeSinceFrame = 0;
-        private int currentFrame = 0;
+        private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
+        private int currentFrame = ObjectConstants.firstFrame;
         public GoriyaRightSprite(Rectangle[] frames, Texture2D spriteSheet)
         {
             this.frames = frames;
@@ -22,10 +18,10 @@ namespace Sprint_0.Scripts.Sprite
         public void Update(GameTime gt)
         {
             timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / ObjectConstants.DefaultEnemyFramesPerSecond)
+            if (timeSinceFrame >= ObjectConstants.oneSecond_double / ObjectConstants.DefaultEnemyFramesPerSecond)
             {
-                currentFrame = (currentFrame + 1) % frames.Length;
-                timeSinceFrame = 0;
+                currentFrame = (currentFrame + ObjectConstants.nextInArray) % frames.Length;
+                timeSinceFrame = ObjectConstants.counterInitialVal_float;
             }
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
