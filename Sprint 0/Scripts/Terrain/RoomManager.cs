@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Terrain
         private Dictionary<string, IRoom> dormentRooms;
         private ILink link;
 
-        private static RoomManager instance = new RoomManager();
+        public static RoomManager instance = new RoomManager();
 
         public static RoomManager Instance
         {
@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Terrain
                 return instance;
             }
         }
-        private RoomManager()
+        public RoomManager()
         { 
             dormentRooms = new Dictionary<string, IRoom>();
         }

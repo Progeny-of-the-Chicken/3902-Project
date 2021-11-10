@@ -11,37 +11,23 @@ namespace Sprint_0.Scripts.Collider.Enemy
     class GenericEnemyCollider : IEnemyCollider
     {
 
-        public IEnemy Owner { get => owner; }
-        private IEnemy owner;
-        public Rectangle Hitbox { get => hitbox; }
-        private Rectangle hitbox;
+        public IEnemy owner { get => _owner; }
+        private IEnemy _owner;
+        public Rectangle collisionRectangle { get => rectangle; }
+        private Rectangle rectangle;
         public GenericEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this.owner = owner;
-            this.hitbox = collisionRectangle;
+            this._owner = owner;
+            this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
         {
-            hitbox.Location = location.ToPoint();
+            rectangle.Location = location.ToPoint();
         }
 
         public void OnPlayerCollision(Link player)
         {
-            if(player.CanBeAffectedByEnemy)
-            {
-                Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
-                //playing it safe to avoid dividebyzero
-                if (!pushBack.Equals(Vector2.Zero))
-                {
-                    pushBack.Normalize();
-                    pushBack *= ObjectConstants.DefaultEnemyKnockback;
-                }
-                //not sure if we need this line or not
-                //player.StopMoving();
-                player.PushBackBy(pushBack);
-
-                player.TakeDamage(Owner.Damage);
-            }
+            player.TakeDamage(owner.Damage);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

@@ -12,13 +12,13 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class WallmasterEnemyCollider : IEnemyCollider
     {
-        public IEnemy Owner { get => owner; }
-        private Wallmaster owner;
-        public Rectangle Hitbox { get => rectangle; }
+        public IEnemy owner { get => owner; }
+        private Wallmaster _owner;
+        public Rectangle collisionRectangle { get => rectangle; }
         private Rectangle rectangle;
         public WallmasterEnemyCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this.owner = (Wallmaster)owner;
+            this._owner = (Wallmaster)owner;
             this.rectangle = collisionRectangle;
         }
         public void Update(Vector2 location)
@@ -29,7 +29,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
             player.Suspend();
-            owner.GrabLink(player);
+            _owner.GrabLink(player);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

@@ -9,15 +9,15 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class NPCCollider : IEnemyCollider
     {
-        IEnemy owner;
         Rectangle hitbox;
-        public IEnemy Owner { get => owner; }
+        public IEnemy owner { get => owner; }
+        public IEnemy _owner;
 
-        public Rectangle Hitbox { get => hitbox; }
+        public Rectangle collisionRectangle { get => hitbox; }
 
         public NPCCollider(IEnemy owner, Rectangle collisionRectangle)
         {
-            this.owner = owner;
+            this._owner = owner;
             this.hitbox = collisionRectangle;
         }
         public void OnPlayerCollision(Link player)

@@ -20,17 +20,11 @@ namespace Sprint_0.Scripts.CollisionHandlers
         {
             foreach (IEnemy enemy in enemies)
             {
-                if (link.collider.CollisionRectangle.Intersects(enemy.Collider.Hitbox))
+                if (link.collider.CollisionRectangle.Intersects(enemy.Collider.collisionRectangle))
                 {
                     //if we implement logic for enemy collision in link collider we'll put uncomment the next line
                     //link.collider.OnEnemyCollision(enemy);
                     enemy.Collider.OnPlayerCollision(link);
-                    SpikeTrap cast = enemy as SpikeTrap;
-                    if(cast != null)
-                    {
-                        cast.XCollider.OnPlayerCollision(link);
-                        cast.YCollider.OnPlayerCollision(link);
-                    }
                 }
             }
         }

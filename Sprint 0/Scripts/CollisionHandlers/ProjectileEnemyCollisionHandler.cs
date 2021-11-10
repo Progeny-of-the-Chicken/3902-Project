@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 foreach (IEnemy enemy in enemies)
                 {
-                    if (projectile.Collider.Hitbox.Intersects(enemy.Collider.Hitbox))
+                    if (projectile.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle))
                     {
                         projectile.Collider.OnEnemyCollision(enemy);
                         enemy.Collider.OnProjectileCollision(projectile);

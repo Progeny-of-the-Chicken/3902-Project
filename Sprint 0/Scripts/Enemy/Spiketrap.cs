@@ -15,16 +15,24 @@ namespace Sprint_0.Scripts.Enemy
     {
         ISprite sprite;
         IEnemyCollider DamageCollider;
-        IEnemyCollider XDetectionCollider;
-        IEnemyCollider YDetectionCollider;
+        IEnemyCollider DetectionColliderRight;
+        IEnemyCollider DetectionColliderLeft;
+        IEnemyCollider DetectionColliderUp;
+        IEnemyCollider DetectionColliderDown;
         public IEnemyCollider Collider {get => DamageCollider;}
-        public IEnemyCollider XCollider { get => XDetectionCollider; }
+        public IEnemyCollider ColliderRight { get => DetectionColliderRight; }
 
-        public IEnemyCollider YCollider { get => YDetectionCollider; }
+        public IEnemyCollider ColliderLeft { get => DetectionColliderLeft; }
+
+        public IEnemyCollider ColliderUp { get => DetectionColliderUp; }
+
+        public IEnemyCollider ColliderDown { get => DetectionColliderDown; }
 
         Rectangle damageFrame = new Rectangle(164, 59, 16, 16);
-        Rectangle RectangleX;
-        Rectangle RectangleY;
+        Rectangle RectangleXLeft;
+        Rectangle RectangleXRight;
+        Rectangle RectangleYDown;
+        Rectangle RectangleYUp;
         Vector2 OriginalLocation;
         float moveSpeed;
         bool hasHit = false;
@@ -43,11 +51,19 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = 25 * ObjectConstants.scale;
             OriginalLocation = location;
             direction = Vector2.Zero;
-            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            RectangleXLeft = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (13 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
+            RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
+            RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (8 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            RectangleYDown = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.standardWidthHeight, (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            //RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
+            //RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (int)(damageFrame.Width * ObjectConstants.scale), (int)(damageFrame.Height * ObjectConstants.scale)));
-            XDetectionCollider = new DetectionCollider(this, RectangleX);
-            YDetectionCollider = new DetectionCollider(this, RectangleY);
+            //XDetectionCollider = new DetectionCollider(this, RectangleX);
+            DetectionColliderRight = new DetectionColliderRight(this, RectangleXRight);
+            DetectionColliderLeft = new DetectionColliderLeft(this, RectangleXLeft);
+            //YDetectionCollider = new DetectionCollider(this, RectangleY);
+            DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
+            DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
             sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(ObjectConstants.scale, damageFrame);
         }
 
@@ -62,20 +78,42 @@ namespace Sprint_0.Scripts.Enemy
                 SetOriginalPosition(gt);
             }
             
-            
         }
 
-        void Move(GameTime gt)
+        public void Move(GameTime gt)
         {
             //move according to link's position
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            
+            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds; //fix
             DamageCollider.Update(location);
         }
 
-        public void SetHasHit(Vector2 direction)
+        public void SetDirection(Vector2 direction)
         {
             this.direction = direction;
+        }
+
+        public void MoveRight()
+        {
+            direction = Vector2.UnitX;
+        }
+
+        public void MoveLeft()
+        {
+            direction = -Vector2.UnitX;
+        }
+
+        public void MoveUp()
+        {
+            direction = Vector2.UnitY;
+        }
+
+        public void MoveDown()
+        {
+            direction = -Vector2.UnitY;
+        }
+
+        public void SetHasHit()
+        {
             hasHit = true;
         }
 

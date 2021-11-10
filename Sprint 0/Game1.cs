@@ -54,7 +54,6 @@ namespace Sprint_0
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
             ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
-
             base.LoadContent();
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
@@ -69,7 +68,7 @@ namespace Sprint_0
 
             //Just for Sprint 3
             mc.Update();
-            }
+        }
 
         protected override void Draw(GameTime gameTime)
         {
@@ -78,7 +77,7 @@ namespace Sprint_0
             _spriteBatch.Begin();
 
             roomManager.Draw(_spriteBatch);
-            
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
