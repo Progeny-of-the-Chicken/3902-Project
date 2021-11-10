@@ -50,6 +50,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
             collider = ProjectileColliderFactory.Instance.CreateBombCollider(this);
             friendly = true;
+            SFXManager.Instance.PlayBombPlacement();
         }
 
         public void Update(GameTime gt)

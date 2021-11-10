@@ -52,6 +52,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
             collider = ProjectileColliderFactory.Instance.CreateFireSpellCollider(this);
             friendly = true;
+            SFXManager.Instance.PlayFireCandle();
         }
 
         public void Update(GameTime gt)

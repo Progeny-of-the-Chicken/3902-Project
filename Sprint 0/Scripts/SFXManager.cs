@@ -46,6 +46,7 @@ namespace Sprint_0.Scripts
         SoundEffect swordSlash;
         SoundEffect textScroll;             //probably needs to be loopable
         SoundEffect textScrollSlow;         //probably needs to be loopable
+        SoundEffect triforcePiece;
 
         SoundEffectInstance lowHealthInstance;
         SoundEffectInstance musicInstance;
@@ -88,6 +89,7 @@ namespace Sprint_0.Scripts
             swordSlash = content.Load<SoundEffect>("Sounds/LOZ_Sword_Slash");
             textScroll = content.Load<SoundEffect>("Sounds/LOZ_Text");
             textScrollSlow = content.Load<SoundEffect>("Sounds/LOZ_Text_Slow");
+            triforcePiece = content.Load<SoundEffect>("Sounds/Triforce Piece");
 
             lowHealthInstance = lowHealth.CreateInstance();
             musicInstance = music.CreateInstance();
@@ -207,6 +209,10 @@ namespace Sprint_0.Scripts
         public void PlaySwordSlash()
         {
             swordSlash.Play();
+        }
+        public void PlayTriforcePiece()
+        {
+            triforcePiece.Play();
         }
 
         //Looping sounds

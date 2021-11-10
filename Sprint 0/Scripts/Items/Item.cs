@@ -40,6 +40,23 @@ namespace Sprint_0.Scripts.Items
 
         public void Despawn()
         {
+            switch (Type)
+            {
+                case ItemType.SmallHeartItem:
+                    SFXManager.Instance.PlayPickUpHeart();
+                    break;
+                case ItemType.BlueRuby:
+                case ItemType.YellowRuby:
+                    SFXManager.Instance.PlayPickUpRupee();
+                    break;
+                case ItemType.TriforcePiece:
+                    SFXManager.Instance.StopMusic();
+                    SFXManager.Instance.PlayTriforcePiece();
+                    break;
+                default:
+                    SFXManager.Instance.PlayPickUpItem();
+                    break;
+            }
             delete = true;
         }
 

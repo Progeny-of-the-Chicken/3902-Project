@@ -313,3 +313,9 @@
 /processorParam:Quality=Best
 /build:Sounds/LOZ_Text_Slow.wav
 
+#begin Sounds/Triforce Piece.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Triforce Piece.wav
+

@@ -62,6 +62,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
             this.friendly = friendly;
             ReturnState = false;
+
+            SFXManager.Instance.PlayFireArrowBoomerang();
         }
 
         public void Update(GameTime gt)
