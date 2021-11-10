@@ -69,7 +69,7 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            if (health <= ObjectConstants.zeroHealth)
+            if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;

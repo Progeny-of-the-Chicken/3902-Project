@@ -44,7 +44,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                     directionVector.Y *= spreadFactor;
                     break;
                 default:
-                    directionVector.Y = ObjectConstants.goToZero;
+                    directionVector.Y = ObjectConstants.zero;
                     break;
             }
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite();

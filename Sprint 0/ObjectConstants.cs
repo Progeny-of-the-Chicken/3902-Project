@@ -20,8 +20,6 @@ namespace Sprint_0
         public const float zero_float = 0;
         public const int zero_int = 0;
         public const double zero_double = 0;
-        public const int zeroHealth = 0;
-        public const int doubleTheValue = 2;
         public const int PreferredBackBufferWidth = 256;
         public const int PreferredBackBufferHeight = 240;
 
@@ -169,7 +167,7 @@ namespace Sprint_0
         public static Vector2 degreeRotationCW90_v = new Vector2(0, -1);
         public static Vector2 degreesRotationCW180_v = new Vector2(-1, -1);
         public static Vector2 degreesRotationCW270_v = new Vector2(-1, 0);
-        public const int goToZero = 0;
+        public const int zero = 0;
         public const int xOnScreenBorder = 0;
 
         //----- string constant values -----//

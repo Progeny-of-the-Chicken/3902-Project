@@ -260,7 +260,7 @@ public class Room : IRoom
         doorLocation.Y += scale * ObjectConstants.yPosForDoorBottom;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //West wall bottom side
-        doorLocation.X = ObjectConstants.goToZero;
+        doorLocation.X = ObjectConstants.zero;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //South wall left side
         doorLocation.Y = YOFFSET + scale * ObjectConstants.yPosForDoorLeft;

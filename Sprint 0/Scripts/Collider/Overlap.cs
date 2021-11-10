@@ -9,10 +9,10 @@ namespace Sprint_0.Scripts.Collider
         {
             Rectangle overlapRec = Rectangle.Intersect(staticObject, movableObject);
             Vector2 overlapVec = new Vector2(overlapRec.Width, overlapRec.Height);
-            if(overlapVec.X < overlapVec.Y)
-                overlapVec.Y = ObjectConstants.goToZero;
+            if (overlapVec.X < overlapVec.Y)
+                overlapVec.Y = ObjectConstants.zero;
             else
-                overlapVec.X = ObjectConstants.goToZero;
+                overlapVec.X = ObjectConstants.zero;
             //This less us take the magnatiude of the overlap and give it a direction for adjustment
             if (staticObject.X > movableObject.X)
                 overlapVec.X *= ObjectConstants.vectorFlip;

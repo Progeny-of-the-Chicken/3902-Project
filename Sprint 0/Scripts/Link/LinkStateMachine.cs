@@ -26,7 +26,7 @@ namespace Sprint_0.Scripts
 
         public void Update()
         {
-            if(isSuspended)
+            if (isSuspended)
             {
                 ResetCounters();
             }
@@ -46,11 +46,11 @@ namespace Sprint_0.Scripts
 
         public void ResetCounters()
         {
-            damageCounter = ObjectConstants.goToZero;
-            usingItemCounter = ObjectConstants.goToZero;
-            movingCounter = ObjectConstants.goToZero;
-            turningCounter = ObjectConstants.goToZero;
-            swordCounter = ObjectConstants.goToZero;
+            damageCounter = ObjectConstants.zero;
+            usingItemCounter = ObjectConstants.zero;
+            movingCounter = ObjectConstants.zero;
+            turningCounter = ObjectConstants.zero;
+            swordCounter = ObjectConstants.zero;
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -105,7 +105,7 @@ namespace Sprint_0.Scripts
                 damageCounter = ObjectConstants.defaultCounterLength;
                 linkHealth -= damage;
 
-                if (linkHealth == ObjectConstants.zeroHealth)
+                if (linkHealth == ObjectConstants.zero)
                     damageCounter += ObjectConstants.linkDeathCounter;
             }
         }
@@ -117,7 +117,7 @@ namespace Sprint_0.Scripts
 
         public void StopMoving()
         {
-            movingCounter = ObjectConstants.goToZero;
+            movingCounter = ObjectConstants.zero;
         }
 
         public void UseSword()
