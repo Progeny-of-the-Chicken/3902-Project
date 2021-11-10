@@ -38,7 +38,7 @@ class WallSpriteFactory
             case "EastBombableSprite":
                 return CreateEastBombableSprite(location, room);
             case "EastBombedSprite":
-                return CreateEastClosedSprite(location, room);
+                return CreateEastBombedSprite(location, room);
             case "EastClosedSprite":
                 return CreateEastClosedSprite(location, room);
             case "EastDoorSprite":
@@ -50,7 +50,7 @@ class WallSpriteFactory
             case "NorthBombableSprite":
                 return CreateNorthBombableSprite(location, room);
             case "NorthBombedSprite":
-                return CreateNorthClosedSprite(location, room);
+                return CreateNorthBombedSprite(location, room);
             case "NorthClosedSprite":
                 return CreateNorthClosedSprite(location, room);
             case "NorthDoorSprite":
@@ -62,7 +62,7 @@ class WallSpriteFactory
             case "WestBombableSprite":
                 return CreateWestBombableSprite(location, room);
             case "WestBombedSprite":
-                return CreateWestClosedSprite(location, room);
+                return CreateWestBombedSprite(location, room);
             case "WestClosedSprite":
                 return CreateWestClosedSprite(location, room);
             case "WestDoorSprite":
@@ -74,7 +74,7 @@ class WallSpriteFactory
             case "SouthBombableSprite":
                 return CreateSouthBombableSprite(location, room);
             case "SouthBombedSprite":
-                return CreateSouthClosedSprite(location, room);
+                return CreateSouthBombedSprite(location, room);
             case "SouthClosedSprite":
                 return CreateSouthClosedSprite(location, room);
             case "SouthDoorSprite":
