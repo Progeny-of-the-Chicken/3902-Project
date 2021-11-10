@@ -32,13 +32,16 @@ namespace Sprint_0.Scripts.Enemy
         const int knockbackDistance = 50;
         bool delete = false;
         bool grab = false;
+        bool inKnockBack = false;
 
         const float moveTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
+        float timeSinceKnockback = 0;
 
         Vector2 location;
         Vector2 direction;
+        Vector2 knockbackDirection;
 
         Link grabbedLink; 
         public Wallmaster(Vector2 location)
@@ -127,9 +130,13 @@ namespace Sprint_0.Scripts.Enemy
                 delete = true;
             }
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback * knockbackDistance;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //TODO: add gradual knockback to wallmaster
         }
         public bool CheckDelete()
         {

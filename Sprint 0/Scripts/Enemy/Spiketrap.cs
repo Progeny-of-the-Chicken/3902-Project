@@ -96,9 +96,14 @@ namespace Sprint_0.Scripts.Enemy
         {
             //these do not take damage
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback * knockbackDistance;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //Though your blade crashes against the spike trap's steel, it does not yield 
+            //(not implemented)
         }
         public bool CheckDelete()
         {

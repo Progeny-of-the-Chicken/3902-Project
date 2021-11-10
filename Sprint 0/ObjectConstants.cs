@@ -54,8 +54,10 @@ namespace Sprint_0
         //----- Enemy constant values -----//
         //Default
         public const int DefaultEnemyDamage = 1;
-        public const int DefaultEnemyHealth = 1;
-        public const int DefaultEnemyKnockback = 2 * scale * standardWidthHeight;
+        public const int DefaultEnemyHealth = 100;
+        public const double DefaultEnemyKnockbackTime = 0.5f;
+        public const float DefaultEnemyKnockbackSpeed = 4 * scale * standardWidthHeight;
+        public const float DefaultEnemyKnockbackToLink = 2 * scale * standardWidthHeight;
         public const float DefaultEnemyMoveSpeed = 2 * scale * standardWidthHeight;
         public const double DefaultEnemyMoveTime = 1.0;
         public const double DefaultEnemyPauseTime = 1.0;

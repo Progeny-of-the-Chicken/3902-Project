@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 if (!pushBack.Equals(Vector2.Zero))
                 {
                     pushBack.Normalize();
-                    pushBack *= ObjectConstants.DefaultEnemyKnockback;
+                    pushBack *= ObjectConstants.DefaultEnemyKnockbackToLink;
                 }
                 //not sure if we need this line or not
                 //player.StopMoving();
