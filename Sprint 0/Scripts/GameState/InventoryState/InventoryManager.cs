@@ -28,6 +28,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             displays.Add(new BackdropDisplay());
             displays.Add(new InventoryDisplay());
+            displays.Add(new DiscoveredRoomsDisplay());
         }
 
         public void Update(GameTime gt)
