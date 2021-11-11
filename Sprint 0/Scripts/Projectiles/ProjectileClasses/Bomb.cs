@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
         private bool friendly = false;
 
-        private double startTime = 0;
+        private double startTime = ObjectConstants.counterInitialVal_float;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
         private double extraExplosionOffset = ObjectConstants.bombExtraExplosionOffset;
         private double extraExplosionNumber = ObjectConstants.bombExtraExplosionNumber;

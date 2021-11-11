@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Sprint_0.Scripts.Sprite
 {
@@ -12,8 +8,8 @@ namespace Sprint_0.Scripts.Sprite
         private Texture2D sprite;
         private Rectangle[] frames;
 
-        private float timeSinceFrame = 0;
-        private int currentFrame = 0;
+        private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
+        private int currentFrame = ObjectConstants.firstFrame;
         public GoriyaLeftSprite(Rectangle[] frames, Texture2D spriteSheet)
         {
             this.frames = frames;
@@ -22,16 +18,16 @@ namespace Sprint_0.Scripts.Sprite
         public void Update(GameTime gt)
         {
             timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / ObjectConstants.DefaultEnemyFramesPerSecond)
+            if (timeSinceFrame >= ObjectConstants.oneSecond_double / ObjectConstants.DefaultEnemyFramesPerSecond)
             {
-                currentFrame = (currentFrame + 1) % frames.Length;
-                timeSinceFrame = 0;
+                currentFrame = (currentFrame + ObjectConstants.nextInArray) % frames.Length;
+                timeSinceFrame = ObjectConstants.counterInitialVal_float;
             }
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (frames[currentFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
-            spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+            spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White, ObjectConstants.zeroRotation, Vector2.Zero, SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
         }
 
     }

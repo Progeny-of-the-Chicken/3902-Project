@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -21,13 +20,13 @@ namespace Sprint_0.Scripts.Terrain
             }
         }
         private RoomManager()
-        { 
+        {
             dormentRooms = new Dictionary<string, IRoom>();
         }
         public void Init(ILink player)
         {
             this.link = player;
-            activeRoom = new Room("Room20", this.link);
+            activeRoom = new Room(ObjectConstants.startRoom, this.link);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -38,7 +37,7 @@ namespace Sprint_0.Scripts.Terrain
         public void SwitchToRoom(string roomID)
         {
             dormentRooms.Add(activeRoom.RoomId(), activeRoom);
-            if(dormentRooms.ContainsKey(roomID))
+            if (dormentRooms.ContainsKey(roomID))
             {
                 dormentRooms.Remove(roomID, out activeRoom);
             }

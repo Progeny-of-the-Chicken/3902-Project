@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         private Texture2D spritesheet;
         private Rectangle frame = SpriteRectangles.fireSpellFrame;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
-        private double startTimeSeconds = 0.0;
+        private double startTimeSeconds = ObjectConstants.counterInitialVal_double;
         private SpriteEffects flip = SpriteEffects.None;
         private int scale = ObjectConstants.scale;
 
@@ -30,14 +30,14 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
                 {
                     flip = SpriteEffects.None;
                 }
-                startTimeSeconds = 0.0;
+                startTimeSeconds = ObjectConstants.counterInitialVal_double;
             }
         }
 
         public void Draw(SpriteBatch sb, Vector2 location)
         {
             Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frame.Width * scale, frame.Height * scale);
-            sb.Draw(spritesheet, dest, frame, Color.White, 0, new Vector2(0, 0), flip, 0);
+            sb.Draw(spritesheet, dest, frame, Color.White, ObjectConstants.zeroRotation, ObjectConstants.zeroVector, flip, ObjectConstants.noLayerDepth);
         }
     }
 }

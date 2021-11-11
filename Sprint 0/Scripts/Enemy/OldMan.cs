@@ -14,21 +14,17 @@ namespace Sprint_0.Scripts.Enemy
         private ISprite sprite;
         private Vector2 location;
 
-        Rectangle frame = new Rectangle(1, 11, 16, 16);
-
         public int Damage { get => damage; }
         public IEnemyCollider Collider { get => collider; }
         IEnemyCollider collider;
-        const int damage = 0;
-
-        int health = ObjectConstants.OldManStartingHealth;
+        const int damage = ObjectConstants.OldManDamage;
         bool delete = false;
 
         public OldMan(Vector2 location)
         {
             this.location = location;
-            sprite = EnemySpriteFactory.Instance.CreateOldManSprite(frame);
-            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (frame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            sprite = EnemySpriteFactory.Instance.CreateOldManSprite(SpriteRectangles.oldManFrame);
+            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.oldManFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
         }
 
         public void Update(GameTime gt)

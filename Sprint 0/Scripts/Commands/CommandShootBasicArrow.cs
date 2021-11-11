@@ -1,4 +1,5 @@
 ﻿using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Commands
 {
@@ -15,7 +16,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            game.roomManager.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.ItemSpawnPosition, link.FacingDirection, false));
+            RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.ItemSpawnPosition, link.FacingDirection, false));
         }
     }
 }

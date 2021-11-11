@@ -17,13 +17,13 @@ namespace Sprint_0.Scripts.Collider.Item
             switch (Owner.Type)
             {
                 case ItemType.SmallHeartItem:
-                    _hitbox = SpriteRectangles.smallHeartFrames[0];
+                    _hitbox = SpriteRectangles.smallHeartFrames[ObjectConstants.firstFrame];
                     break;
                 case ItemType.HeartContainer:
                     _hitbox = SpriteRectangles.heartContainerFrame;
                     break;
                 case ItemType.Fairy:
-                    _hitbox = SpriteRectangles.fairyFrames[0];
+                    _hitbox = SpriteRectangles.fairyFrames[ObjectConstants.firstFrame];
                     break;
                 case ItemType.Clock:
                     _hitbox = SpriteRectangles.clockFrame;
@@ -32,7 +32,7 @@ namespace Sprint_0.Scripts.Collider.Item
                     _hitbox = SpriteRectangles.blueRubyFrame;
                     break;
                 case ItemType.YellowRuby:
-                    _hitbox = SpriteRectangles.yellowRubyFrames[0];
+                    _hitbox = SpriteRectangles.yellowRubyFrames[ObjectConstants.firstFrame];
                     break;
                 case ItemType.BasicMapItem:
                     _hitbox = SpriteRectangles.basicMapFrame;
@@ -56,11 +56,11 @@ namespace Sprint_0.Scripts.Collider.Item
                     _hitbox = SpriteRectangles.compassFrame;
                     break;
                 case ItemType.TriforcePiece:
-                    _hitbox = SpriteRectangles.triforcePieceFrames[0];
+                    _hitbox = SpriteRectangles.triforcePieceFrames[ObjectConstants.firstFrame];
                     break;
                 default:
                     // Should never happen
-                    _hitbox = SpriteRectangles.smallHeartFrames[0];
+                    _hitbox = SpriteRectangles.smallHeartFrames[ObjectConstants.firstFrame];
                     break;
             }
             _hitbox.Size *= new Point(ObjectConstants.scale);

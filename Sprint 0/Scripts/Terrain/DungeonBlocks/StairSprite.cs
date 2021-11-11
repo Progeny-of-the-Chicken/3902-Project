@@ -5,14 +5,14 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class StairSprite : ITerrain
 {
-    private Rectangle spritesheetLocation = new Rectangle(1035, 28, 16, 16);
+    private Rectangle spritesheetLocation = SpriteRectangles.StairFrame;
     Rectangle destination;
     StairCollider collider;
     public IBlockCollider Collider { get => collider; }
 
     public StairSprite(Vector2 screenLocation)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         this.collider = new StairCollider(this, destination);
     }
 

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Collider.Terrain;
+using System;
 
 public interface IWall
 {
@@ -11,5 +9,5 @@ public interface IWall
     void Update();
     void Draw(SpriteBatch spriteBatch);
     void SwapDoor();
-    
+
 }

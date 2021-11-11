@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             startPos = currentPos = spawnLoc;
             if (silver)
             {
-                maxDistance = (int) (maxDistance * silverArrowSpeedCoef);
+                maxDistance = (int)(maxDistance * silverArrowSpeedCoef);
             }
             SetSpriteVectors(direction, silver);
 
@@ -76,23 +76,23 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             switch (direction)
             {
                 case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
-                    popOffset = new Vector2(4, -8);
+                    directionVector = ObjectConstants.RightUnitVector;
+                    popOffset = ObjectConstants.rightArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Right, silver);
                     break;
                 case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
-                    popOffset = new Vector2(-8, -20);
+                    directionVector = ObjectConstants.UpUnitVector;
+                    popOffset = ObjectConstants.upArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Up, silver);
                     break;
                 case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
-                    popOffset = new Vector2(-20, -8);
+                    directionVector = ObjectConstants.LeftUnitVector;
+                    popOffset = ObjectConstants.leftArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Left, silver);
                     break;
                 case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
-                    popOffset = new Vector2(-8, 4);
+                    directionVector = ObjectConstants.DownUnitVector;
+                    popOffset = ObjectConstants.downArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Down, silver);
                     break;
                 default:

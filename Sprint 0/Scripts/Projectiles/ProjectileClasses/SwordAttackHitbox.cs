@@ -30,7 +30,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             collider.Update(pos);
             swordCounter--;
-            if (swordCounter <= 0)
+            if (swordCounter <= ObjectConstants.counterInitialVal_int)
             {
                 delete = true;
             }
