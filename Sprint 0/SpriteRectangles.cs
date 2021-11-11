@@ -118,6 +118,34 @@ namespace Sprint_0
             new Rectangle(196, 185, 16, 16),
             new Rectangle(0, 0, 0, 0)
         };
+
+        //----- Inventory GUI source rectangles -----//
+        public static Rectangle weaponBackdropFrame = new Rectangle(1, 11, 256, 88);
+        public static Rectangle mapBackdropFrame = new Rectangle(258, 112, 256, 88);
+        public static List<Rectangle> selectionFrames = new List<Rectangle>
+        {
+            new Rectangle(519, 137, 16, 16),
+            new Rectangle(536, 137, 16, 16)
+        };
+        public static Rectangle weaponBasicSwordFrame = new Rectangle(555, 137, 8, 16);
+        public static Rectangle weaponBasicBoomerangFrame = new Rectangle(584, 137, 8, 16);
+        public static Rectangle weaponMagicalBoomerangFrame = new Rectangle(593, 137, 8, 16);
+        public static Rectangle weaponBombFrame = new Rectangle(604, 137, 8, 16);
+        public static Rectangle weaponBasicArrowFrame = new Rectangle(615, 137, 8, 16);
+        public static Rectangle weaponSilverArrowFrame = new Rectangle(624, 137, 8, 16);
+        public static Rectangle weaponBowFrame = new Rectangle(633, 137, 8, 16);
+        public static Rectangle weaponBlueCandleFrame = new Rectangle(644, 137, 8, 16);
+        public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
+        public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
+        public static List<Rectangle> backdropCoverFrames = new List<Rectangle>
+        {
+            new Rectangle(44, 152, 15, 16),
+            new Rectangle(48, 112, 8, 16),
+            new Rectangle(68, 48, 8, 16),
+            new Rectangle(132, 48, 80, 32),
+            new Rectangle(128, 24, 88, 16)
+        };
+
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
         public static Rectangle StairFrame = new Rectangle(1035, 28, 16, 16);
         public static Rectangle EastDoorSpriteFrame = new Rectangle(848, 77, 32, 32);

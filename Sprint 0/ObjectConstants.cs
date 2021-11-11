@@ -1,5 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Sprint_0
 {
@@ -269,5 +270,42 @@ namespace Sprint_0
         public const double explosionDurationSeconds = 0.3;
         public const double bombExtraExplosionOffset = 16 * scale;
         public const double bombExtraExplosionNumber = 6;
+
+        //----- Inventory GUI constant values -----//
+        public const string inventorySpritesheetFileName = "InventorySpritesheetAdjusted";
+        public const int inventoryDisplayListIndex = 1;
+        // Backdrop
+        public static Vector2 backdropSpawnLocation = Vector2.Zero;
+        public static Vector2 mapBackdropFromBackdrop = new Vector2(0, 88) * scale;
+        // Weapon
+        public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
+        public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
+        public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
+        public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;
+        public static List<Vector2> inventoryWeaponLocations = new List<Vector2>
+        {
+            new Vector2()
+        };
+        public const int inventoryWeaponListStartIndex = 0;
+        // Selection
+        public static List<Vector2> inventorySlotLocations = new List<Vector2>
+        {
+            new Vector2(128, 48) * scale,
+            new Vector2(152, 48) * scale,
+            new Vector2(176, 48) * scale,
+            new Vector2(200, 48) * scale,
+            new Vector2(128, 64) * scale,
+            new Vector2(152, 64) * scale,
+            new Vector2(176, 64) * scale,
+            new Vector2(200, 64) * scale
+        };
+        public static Vector2 inventoryWeaponFromSlotOffset = new Vector2(4, 0) * scale;
+        public const int inventoryMoveSelectionRightIndex = 1;
+        public const int inventoryMoveSelectionUpIndex = -4;
+        public const int inventoryMoveSelectionLeftIndex = -1;
+        public const int inventoryMoveSelectionDownIndex = 4;
+
+        //----- Inventory constant value -----//
+        public const int selectedItemStartingIndex = 0;
     }
 }
