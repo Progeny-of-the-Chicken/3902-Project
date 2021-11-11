@@ -39,6 +39,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState
             return new MapBackdropSprite(texture);
         }
 
+        public ISprite CreateHUDBackdropSprite()
+        {
+            return new HUDBackdropSprite(texture);
+        }
+
         public ISprite CreateCoverSprite(Rectangle destRec)
         {
             return new CoverSprite(texture, destRec);

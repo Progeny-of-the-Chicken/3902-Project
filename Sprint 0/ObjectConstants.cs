@@ -22,7 +22,7 @@ namespace Sprint_0
         public const int zero_int = 0;
         public const double zero_double = 0;
         public const int PreferredBackBufferWidth = 256;
-        public const int PreferredBackBufferHeight = 240;
+        public const int PreferredBackBufferHeight = 232;
 
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
@@ -213,7 +213,7 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string startRoom = "Room20";
+        public const string startRoom = "Room25";
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
         public const string contentLocation = "Content";
@@ -239,7 +239,7 @@ namespace Sprint_0
 
         //----- wall/block constant values -----//
         public const int wallOffset = scale * standardWidthHeight * 2;
-        public const int yOffsetForRoom = scale * standardWidthHeight * 4;
+        public const int yOffsetForRoom = scale * standardWidthHeight * 7 / 2;
         public const int rowParsePosition = 5;
         public const int colParsePosition = 4;
         public const int rowAndColPraseLen = 1;
@@ -307,5 +307,10 @@ namespace Sprint_0
 
         //----- Inventory constant value -----//
         public const int selectedItemStartingIndex = 0;
+
+        //----- Font constant values -----//
+        public const string fontSpritesheetFileName = "Font";
+        public const int maxDisplayableNumbers = 3;
+
     }
 }

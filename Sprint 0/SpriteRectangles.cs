@@ -122,6 +122,7 @@ namespace Sprint_0
         //----- Inventory GUI source rectangles -----//
         public static Rectangle weaponBackdropFrame = new Rectangle(1, 11, 256, 88);
         public static Rectangle mapBackdropFrame = new Rectangle(258, 112, 256, 88);
+        public static Rectangle HUDBackdropFrame = new Rectangle(258, 11, 256, 56);
         public static List<Rectangle> selectionFrames = new List<Rectangle>
         {
             new Rectangle(519, 137, 16, 16),
@@ -174,5 +175,18 @@ namespace Sprint_0
         public static Rectangle EastWallSpriteFrame = new Rectangle(815, 77, 32, 32);
         public static Rectangle EastLockedSpriteFrame = new Rectangle(881, 77, 32, 32);
         public static Rectangle EastClosedSpriteFrame = new Rectangle(914, 77, 32, 32);
+
+
+        //----- Font source rectangles -----//
+        public static Rectangle fontZeroFrame = new Rectangle(335, 24, 8, 8);
+        public static Rectangle fontOneFrame = new Rectangle(351, 24, 8, 8);
+        public static Rectangle fontTwoFrame = new Rectangle(367, 24, 8, 8);
+        public static Rectangle fontThreeFrame = new Rectangle(383, 24, 8, 8);
+        public static Rectangle fontFourFrame = new Rectangle(399, 23, 8, 8);
+        public static Rectangle fontFiveFrame = new Rectangle(415, 23, 8, 8);
+        public static Rectangle fontSixFrame = new Rectangle(431, 23, 8, 8);
+        public static Rectangle fontSevenFrame = new Rectangle(447, 23, 8, 8);
+        public static Rectangle fontEightFrame = new Rectangle(463, 23, 8, 8);
+        public static Rectangle fontNineFrame = new Rectangle(479, 23, 8, 8);
     }
 }
