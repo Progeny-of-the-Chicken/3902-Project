@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Sprite.InventorySprites
     public class SelectionSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = SpriteRectangles.playerDotFrames;
+        private List<Rectangle> frames = SpriteRectangles.selectionFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = ObjectConstants.zero_double;
         private int frameIndex = ObjectConstants.zero_int;

@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         }
 
         public void SelectWeapon()
-        {
+         {
             Inventory.Instance.SelectedWeaponIndex = selectionIndex;
             selectedWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[selectionIndex]));
         }
@@ -79,7 +79,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         private bool ValidSelectionMovement(int indexToTest)
         {
-            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex && indexToTest < itemSprites.Count);
+            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex && indexToTest < Inventory.Instance.Weapons.Count);
         }
 
         //----- Helper methods to set up weapon sprites from inventory -----//

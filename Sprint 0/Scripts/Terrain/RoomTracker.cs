@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Terrain
@@ -72,14 +73,15 @@ namespace Sprint_0.Scripts.Terrain
                 Vector2(0, -1) => FacingDirection.Up,
                 Vector2(-1, 0) => FacingDirection.Left,
                 Vector2(0, 1) => FacingDirection.Down,
-                // Should never happen
+                // TODO: Find a way to separate this value from the rest in cases of wall master or stairs
                 _ => FacingDirection.Right
             };
         }
 
         private Vector2 ParseRoomString(string room)
         {
-            return new Vector2(room[ObjectConstants.roomStringXIndex], room[ObjectConstants.roomStringYIndex]);
+            return new Vector2((float)Char.GetNumericValue(room[ObjectConstants.roomStringXIndex]),
+                (float)Char.GetNumericValue(room[ObjectConstants.roomStringYIndex]));
         }
     }
 }

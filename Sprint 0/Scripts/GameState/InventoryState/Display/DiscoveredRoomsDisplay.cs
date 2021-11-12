@@ -93,11 +93,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 FacingDirection.Up, FacingDirection.Down, FacingDirection.Left, FacingDirection.Right
             };
             int index = ObjectConstants.discoveredRoomsMaxIndex;
-            for (int i = 0; i < orderedDoorsToCompare.Count; i++)
+            for (int i = orderedDoorsToCompare.Count - 1; i >= ObjectConstants.zero; i--)
             {
-                if (!doors.Contains(orderedDoorsToCompare[i]))
+                if (doors.Contains(orderedDoorsToCompare[i]))
                 {
-                    index =- (int)Math.Pow(ObjectConstants.discoveredRoomsTotalDoorStates, i - ObjectConstants.discoveredRoomsAlgorithmPowerOffset);
+                    index -= (int)Math.Pow(ObjectConstants.discoveredRoomsTotalDoorStates, i);
                 }
             }
             return index;

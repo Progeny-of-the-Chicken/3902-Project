@@ -310,12 +310,11 @@ namespace Sprint_0
         // Discovered rooms
         public const int discoveredRoomsMaxIndex = 15;
         public const int discoveredRoomsTotalDoorStates = 2;
-        public const int discoveredRoomsAlgorithmPowerOffset = 1;
         public const int discoveredRoomsSourcePixelDistance = 9;
         public static Vector2 discoveredRoomsInitialLocationFromBackdrop = new Vector2(128, 96) * scale;
         public static Vector2 discoveredRoomsD1LocationOffset = new Vector2(16, 8) * scale;
         public const int discoveredRoomsWidthHeight = 8 * scale;
-        public static Vector2 playerDotOffsetFromRoom = new Vector2(2);
+        public static Vector2 playerDotOffsetFromRoom = new Vector2(2) * scale;
 
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;

@@ -4,7 +4,7 @@ using Sprint_0.Scripts.Commands;
 
 namespace Sprint_0.Scripts.Controller
 {
-	public class KeyboardController
+	public class KeyboardController : IController
     {
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
@@ -44,6 +44,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.D5, new CommandCastFireSpell(game));
 			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
+			this.RegisterCommand(controllerMappings, Keys.I, new CommandEnterInventory(game));
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));

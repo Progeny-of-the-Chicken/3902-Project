@@ -151,7 +151,7 @@ namespace Sprint_0
             new Rectangle(528, 126, 3, 3),
             new Rectangle(582, 126, 3, 3)
         };
-        public static Rectangle mapColorCoverSpriteFrame = new Rectangle(587, 91, 16, 16);
+        public static Rectangle mapColorCoverSpriteFrame = new Rectangle(458, 120, 16, 16);
 
         //----- Wall source rectangles -----//
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
