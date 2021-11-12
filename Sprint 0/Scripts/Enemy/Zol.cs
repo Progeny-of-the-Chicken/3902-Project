@@ -16,12 +16,10 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
-        Rectangle[] frames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
-
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
 
-        float timeSinceMove = 0;
+        float timeSinceMove = ObjectConstants.counterInitialVal_float;
         bool delete = false;
 
         public int Damage { get => ObjectConstants.ZolDamage; }
@@ -33,11 +31,10 @@ namespace Sprint_0.Scripts.Enemy
         public Zol(Vector2 location)
         {
             this.location = location;
-            direction = new Vector2(-1, 0);
-            random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateZolSprite(frames);
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (frames[0].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-
+            direction = ObjectConstants.LeftUnitVector;
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
+            sprite = EnemySpriteFactory.Instance.CreateZolSprite(SpriteRectangles.zolFrames);
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
         public void Update(GameTime t)
@@ -55,7 +52,7 @@ namespace Sprint_0.Scripts.Enemy
             if (timeSinceMove >= ObjectConstants.ZolMoveTime + ObjectConstants.ZolPauseTime)
             {
                 SetRandomDirection();
-                timeSinceMove = 0;
+                timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
 
             location += direction * ObjectConstants.ZolMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
@@ -65,21 +62,17 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is vertical/horizontal, second is +/-
             randomDir.GetBytes(random);
-            if (random[0] % 2 == 0)
-            {
-                direction.X = (random[1] % 2) * 2 - 1;
-                direction.Y = 0;
-            }
+            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
+                direction = Vector2.UnitX;
             else
-            {
-                direction.X = 0;
-                direction.Y = (random[1] % 2) * 2 - 1;
-            }
+                direction = Vector2.UnitY;
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
+                direction *= ObjectConstants.vectorFlip;
         }
         public void TakeDamage(int damage)
         {
             health -= damage;
-            if (health <= 0)
+            if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;

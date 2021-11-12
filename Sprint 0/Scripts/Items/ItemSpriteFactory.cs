@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Items
 
         public void LoadAllTextures(ContentManager content)
         {
-            spritesheet = content.Load<Texture2D>("LoZItems");
+            spritesheet = content.Load<Texture2D>(ObjectConstants.itemFile);
         }
 
         public ISprite CreateSmallHeartItemSprite()

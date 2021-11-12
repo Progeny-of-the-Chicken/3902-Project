@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public BlastZoneProjectileCollider(IProjectile owner)
         {
             this.Owner = owner;
-            _hitbox = new Rectangle(0, 0, ObjectConstants.blastZoneWidthHeight, ObjectConstants.blastZoneWidthHeight);
+            _hitbox = ObjectConstants.blastZoneSize;
             _hitbox.Size *= new Point(ObjectConstants.scale);
         }
 

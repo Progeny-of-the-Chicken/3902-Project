@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         {
             this.Owner = owner;
             // No size variation between basic and magical boomerangs
-            _hitbox = SpriteRectangles.basicBoomerangFrames[0];
+            _hitbox = SpriteRectangles.basicBoomerangFrames[ObjectConstants.firstFrame];
             _hitbox.Size *= new Point(ObjectConstants.scale);
         }
 

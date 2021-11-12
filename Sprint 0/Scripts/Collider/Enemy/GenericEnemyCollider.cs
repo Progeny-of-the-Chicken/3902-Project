@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
@@ -36,10 +33,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                     pushBack.Normalize();
                     pushBack *= ObjectConstants.DefaultEnemyKnockback;
                 }
-                //not sure if we need this line or not
-                //player.StopMoving();
                 player.PushBackBy(pushBack);
-
                 player.TakeDamage(Owner.Damage);
             }
         }

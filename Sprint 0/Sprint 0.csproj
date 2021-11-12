@@ -24,6 +24,11 @@
     <None Remove="Scripts\Collider\ProjectileColliders\" />
     <None Remove="Scripts\Effect\" />
     <None Remove="Scripts\Sprite\EffectSprites\" />
+    <None Remove="Scripts\GameState\" />
+    <None Remove="Scripts\GameState\Inventory\" />
+    <None Remove="Scripts\Sprite\InventoryGUISprites\" />
+    <None Remove="Scripts\GameState\Inventory\Display\" />
+    <None Remove="Scripts\Commands\InventoryState\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -50,5 +55,10 @@
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
+    <Folder Include="Scripts\GameState\" />
+    <Folder Include="Scripts\GameState\InventoryState\" />
+    <Folder Include="Scripts\Sprite\InventorySprites\" />
+    <Folder Include="Scripts\GameState\InventoryState\Display\" />
+    <Folder Include="Scripts\Commands\InventoryState\" />
   </ItemGroup>
 </Project>

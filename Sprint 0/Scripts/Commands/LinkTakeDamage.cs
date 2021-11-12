@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            link.TakeDamage(1);
+            link.TakeDamage(ObjectConstants.DefaultEnemyDamage);
         }
     }
 }

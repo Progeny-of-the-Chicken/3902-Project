@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
@@ -7,7 +6,7 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class NorthBombableSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(815, 11, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.NorthBombableSpriteFrame;
     Rectangle destination;
     BombableWallCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -15,11 +14,12 @@ public class NorthBombableSprite : IWall
     string nextRoom;
     public String NextRoom { get => nextRoom; }
 
-    public NorthBombableSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    public NorthBombableSprite(Vector2 screenLocation, Room room, String nextRoom)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new BombableWallCollider(this, destination);
         this.room = room;
+        this.nextRoom = nextRoom;
     }
 
     public void Update()
@@ -34,8 +34,7 @@ public class NorthBombableSprite : IWall
     }
     public void SwapDoor()
     {
-        System.Diagnostics.Debug.WriteLine("Blowing up door");
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "NorthBombedSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.NorthBombedSpriteStr);
         command.Execute();
     }
 

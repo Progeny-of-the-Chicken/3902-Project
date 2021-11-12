@@ -8,9 +8,8 @@ namespace Sprint_0.Scripts.Sprite.ItemSprites
     {
         private Texture2D spritesheet;
         private List<Rectangle> frames;
-        private double animationDelaySeconds = 0.1;
-        private double startTimeSeconds = 0.0;
-        private int frameIndex = 0;
+        private double startTimeSeconds = ObjectConstants.counterInitialVal_double;
+        private int frameIndex = ObjectConstants.firstFrame;
         private int scale = ObjectConstants.scale;
 
         public AnimatedItemSprite(Texture2D textures, List<Rectangle> sourceRecs)
@@ -22,14 +21,14 @@ namespace Sprint_0.Scripts.Sprite.ItemSprites
         public void Update(GameTime gt)
         {
             startTimeSeconds += gt.ElapsedGameTime.TotalSeconds;
-            if (startTimeSeconds > animationDelaySeconds)
+            if (startTimeSeconds > ObjectConstants.itemAnimationDelaySeconds)
             {
                 frameIndex++;
                 if (frameIndex == frames.Count)
                 {
-                    frameIndex = 0;
+                    frameIndex = ObjectConstants.firstFrame;
                 }
-                startTimeSeconds = 0.0;
+                startTimeSeconds = ObjectConstants.counterInitialVal_double;
             }
         }
 
