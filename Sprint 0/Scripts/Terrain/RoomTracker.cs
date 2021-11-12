@@ -21,8 +21,12 @@ namespace Sprint_0.Scripts.Terrain
 
         private RoomTracker()
         {
+        }
+
+        public void Init(string startRoom)
+        {
             trackedRooms = new Dictionary<Vector2, HashSet<FacingDirection>>();
-            trackedRooms.Add(ParseRoomString(ObjectConstants.startRoom), new HashSet<FacingDirection>());
+            trackedRooms.Add(ParseRoomString(startRoom), new HashSet<FacingDirection>());
         }
 
         public void RegisterRoom(string currentRoom, string nextRoom)
