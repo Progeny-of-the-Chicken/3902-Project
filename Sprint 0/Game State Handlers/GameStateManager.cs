@@ -9,30 +9,54 @@ namespace Sprint_0.GameStateHandlers
     {
         Menu,
         Gameplay,
-        Inventory
+        Inventory,
+        RoomSwap
     }
 
-    public class GameStateMachine
+    public class GameStateManager
     {
+        private static GameStateManager instance = new GameStateManager();
+
+        public static GameStateManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
         private GameState _state;
         private Link link;
         public GameState state { get => _state; }
 
         // Game State Handlers
         GameplayStateHandler gameplay;
+        RoomSwapStateHandler swapper;
 
-        public GameStateMachine(Link link)
+        public GameStateManager()
         {
             // Set initial game state
             this._state = GameState.Gameplay;
-            this.link = link;
+        }
 
+        public void Init(Link link)
+        {
+            this.link = link;
             loadHandlers();
         }
 
-        public void SetState(GameState newState)
+        public void StartGameplay()
         {
-            this._state = newState;
+            this._state = GameState.Gameplay;
+            System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
+        }
+
+        public void SwapRooms(string fromRoomID, string toRoomID, FacingDirection scrollingDirection)
+        {
+            this._state = GameState.RoomSwap;
+            this.swapper = new RoomSwapStateHandler(fromRoomID, toRoomID, scrollingDirection);
+
+            System.Diagnostics.Debug.WriteLine("Swapped to state: Room Swap");
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
@@ -45,6 +69,9 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    break;
+                case GameState.RoomSwap:
+                    swapper.Draw(sb, gameTime);
                     break;
                 default:
                     break;
@@ -61,6 +88,9 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    break;
+                case GameState.RoomSwap:
+                    swapper.Update(gameTime);
                     break;
                 default:
                     break;

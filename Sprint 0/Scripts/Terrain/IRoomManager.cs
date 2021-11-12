@@ -9,5 +9,6 @@ public interface IRoomManager
     void SwitchToRoom(string roomID);
     IRoom CurrentRoom { get; }
     void Init(ILink player);
+    IRoom LoadRoom(string roomID);
 }
 

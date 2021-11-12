@@ -12,7 +12,28 @@ using Sprint_0.GameStateHandlers;
 
 namespace Sprint_0
 {
+    public static class Extensions
+    {
+        public static FacingDirection Opposite(this FacingDirection dir)
+        {
+            switch (dir)
+            {
+                case FacingDirection.Left:
+                    return FacingDirection.Right;
+                case FacingDirection.Right:
+                    return FacingDirection.Left;
+                case FacingDirection.Up:
+                    return FacingDirection.Down;
+                case FacingDirection.Down:
+                    return FacingDirection.Up;
+                default:
+                    // Should never happen
+                    return FacingDirection.Up;
+            }
+        }
+    }
     public enum FacingDirection { Right, Left, Up, Down };
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -20,7 +41,6 @@ namespace Sprint_0
         KeyboardController kc;
         public Link link;
         public IRoomManager roomManager;
-        public GameStateMachine gameStateMachine;
 
         int scale = 3;
 
@@ -39,6 +59,9 @@ namespace Sprint_0
 
             //Just for Sprint 3
             mc = new MouseController(this);
+
+            roomManager = RoomManager.Instance;
+            roomManager.Init(link);
         }
 
         protected override void Initialize()
@@ -61,7 +84,7 @@ namespace Sprint_0
 
             base.LoadContent();
 
-            gameStateMachine = new GameStateMachine(link);
+            GameStateManager.Instance.Init(link);
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,7 +96,7 @@ namespace Sprint_0
             //Just for Sprint 3
             mc.Update();
 
-            gameStateMachine.Update(gameTime);
+            GameStateManager.Instance.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -82,7 +105,7 @@ namespace Sprint_0
 
             _spriteBatch.Begin();
 
-            gameStateMachine.Draw(_spriteBatch, gameTime);
+            GameStateManager.Instance.Draw(_spriteBatch, gameTime);
             
             _spriteBatch.End();
 
@@ -100,57 +123,75 @@ namespace Sprint_0
             switch (roomNum)
             {
                 case 0:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room25", FacingDirection.Left);
                     roomManager.SwitchToRoom("Room25");
                     break;
                 case 1:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room15", FacingDirection.Right);
                     roomManager.SwitchToRoom("Room15");
                     break;
                 case 2:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room35", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room35");
                     break;
                 case 3:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room24", FacingDirection.Down);
                     roomManager.SwitchToRoom("Room24");
                     break;
                 case 4:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room23", FacingDirection.Left);
                     roomManager.SwitchToRoom("Room23");
                     break;
                 case 5:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room33", FacingDirection.Right);
                     roomManager.SwitchToRoom("Room33");
                     break;
                 case 6:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room13", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room13");
                     break;
                 case 7:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room12", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room12");
                     break;
                 case 8:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room02", FacingDirection.Left);
                     roomManager.SwitchToRoom("Room02");
                     break;
                 case 9:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room22", FacingDirection.Right);
                     roomManager.SwitchToRoom("Room22");
                     break;
                 case 10:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room21", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room21");
                     break;
                 case 11:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room20", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room20");
                     break;
                 case 12:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room10", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room10");
                     break;
                 case 13:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room00", FacingDirection.Right);
                     roomManager.SwitchToRoom("Room00");
                     break;
                 case 14:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room32", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room32");
                     break;
                 case 15:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room42", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room42");
                     break;
                 case 16:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room25", FacingDirection.Up);
                     roomManager.SwitchToRoom("Room41");
                     break;
                 case 17:
+                    GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), "Room25", FacingDirection.Right);
                     roomManager.SwitchToRoom("Room51");
                     break;
                 default:

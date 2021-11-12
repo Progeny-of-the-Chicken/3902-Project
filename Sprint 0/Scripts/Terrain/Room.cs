@@ -20,6 +20,8 @@ public class Room : IRoom
 	private int scale;
 	private int YOFFSET;
 	private int WALLOFFSET;
+	private Vector2 _roomDrawPoint;
+	public Vector2 roomDrawPoint { get => _roomDrawPoint; }
 
 	private ILink link;
 	private EnemySet enemySet;
@@ -34,11 +36,16 @@ public class Room : IRoom
 
 	private bool enemiesFlag;
 	private List<String> RoomClear;
+	private bool inTransition = false;
+
 	public Room(string roomId, ILink link)
 	{
 		this.scale = ObjectConstants.scale;
 		this.WALLOFFSET = 32 * this.scale;
 		this.YOFFSET = 64 * this.scale;
+
+		// Point of reference that is used for the Draw() method. Used to easily translate the room during transitions.
+		this._roomDrawPoint = new Vector2(0, YOFFSET);
 
 		this.roomId = roomId;
 		int roomRow, roomCol;
@@ -71,12 +78,15 @@ public class Room : IRoom
 		enemySet.Update(gt);
 		itemSet.Update(gt);
 		projectileSet.Update(gt);
+
 		foreach(ITerrain block in blocks)
         {
 			block.Update();
         }
+
 		effectSet.Update(gt);
 		collisionHandlerSet.Update();
+
 		if (enemiesFlag && isAllEnemiesDead())
 		{
 			RoomCleared();
@@ -90,24 +100,29 @@ public class Room : IRoom
 	{
 		//This needs to be updated once we have more than dungeon 1
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
+		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
-		foreach (ITerrain block in blocks)
-		{
-			block.Draw(spriteBatch);
+		// If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
+		if (!inTransition)
+        {
+			foreach (ITerrain block in blocks)
+			{
+				block.Draw(spriteBatch);
+			}
+
+			TransferQueuedProjectiles();
+
+			foreach (IWall door in walls)
+			{
+				door.Draw(spriteBatch);
+			}
+
+			itemSet.Draw(spriteBatch);
+			projectileSet.Draw(spriteBatch);
+			enemySet.Draw(spriteBatch);
+			link.Draw(spriteBatch);
+			effectSet.Draw(spriteBatch);
 		}
-
-		TransferQueuedProjectiles();
-
-		foreach (IWall door in walls)
-		{
-			door.Draw(spriteBatch);
-		}
-		itemSet.Draw(spriteBatch);
-		projectileSet.Draw(spriteBatch);
-		enemySet.Draw(spriteBatch);
-		link.Draw(spriteBatch);
-		effectSet.Draw(spriteBatch);
 	}
 
 	public string RoomId()
@@ -406,6 +421,7 @@ public class Room : IRoom
 		return enemySet.Enemies.Count == 0;
     }
 
+	// Checks to see if all enemies are dead. If they are, the room is considered "cleared"
 	private void RoomCleared()
     {
 		String[] strArray = RoomClear.ToArray();
@@ -445,4 +461,20 @@ public class Room : IRoom
 			}
         }
     }
+
+    public void PrepareForTransition()
+    {
+		inTransition = true;
+    }
+
+    public void TransitionEnded()
+    {
+		inTransition = false;
+		this._roomDrawPoint = new Vector2(0, YOFFSET);
+	}
+
+	public void UpdateDrawPoint(Vector2 dp)
+    {
+		this._roomDrawPoint = dp;
+	}
 }

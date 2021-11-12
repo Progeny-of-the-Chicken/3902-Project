@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
@@ -34,7 +35,9 @@ namespace Sprint_0.Scripts.Collider.Terrain
         {
             link.StopMoving();
             link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle) * ObjectConstants.scale) ;
-            roomManager.SwitchToRoom(owner.NextRoom);
+
+            GameStateManager.Instance.SwapRooms(roomManager.CurrentRoom.RoomId(), owner.NextRoom, link.FacingDirection.Opposite());
+
             System.Diagnostics.Debug.WriteLine("Next room:" + owner.NextRoom);
         }
 
