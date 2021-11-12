@@ -304,8 +304,10 @@ namespace Sprint_0
         public const int inventoryMoveSelectionUpIndex = -4;
         public const int inventoryMoveSelectionLeftIndex = -1;
         public const int inventoryMoveSelectionDownIndex = 4;
-
-        //----- Inventory constant value -----//
         public const int selectedItemStartingIndex = 0;
+
+        //----- RoomTracker constant values -----//
+        public const int roomStringXIndex = 4;
+        public const int roomStringYIndex = 5;
     }
 }
