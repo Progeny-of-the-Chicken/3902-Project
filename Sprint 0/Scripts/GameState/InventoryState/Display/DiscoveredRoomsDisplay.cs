@@ -70,7 +70,8 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         private Vector2 GetLocationForRoomSprite(Vector2 roomCoords)
         {
-            return ObjectConstants.discoveredRoomsInitialLocationFromBackdrop + ObjectConstants.discoveredRoomsD1LocationOffset + (roomCoords * ObjectConstants.discoveredRoomsWidthHeight);
+            return ObjectConstants.backdropSpawnLocation + ObjectConstants.discoveredRoomsInitialLocationFromBackdrop
+                + ObjectConstants.discoveredRoomsD1LocationOffset + (roomCoords * ObjectConstants.discoveredRoomsWidthHeight);
         }
 
         private int GetIndexForRoomSprite(HashSet<FacingDirection> doors)

@@ -25,7 +25,6 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         {
             selectionSprite.Update(gt);
             // No animation for weapons
-            // TODO: Check whether placeholder colors need to be covered by black boxes
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
