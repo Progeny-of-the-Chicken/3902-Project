@@ -313,6 +313,7 @@ namespace Sprint_0
         public static Vector2 discoveredRoomsInitialLocation = new Vector2(128, 96) * scale;
         public static Vector2 discoveredRoomsD1LocationOffset = new Vector2(16, 8) * scale;
         public const int discoveredRoomsWidthHeight = 8 * scale;
+        public static Vector2 playerDotOffsetFromRoom = new Vector2(2);
 
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;

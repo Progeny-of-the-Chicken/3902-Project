@@ -11,15 +11,18 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
     {
         // Sprite, sprite location and known used doors
         private Dictionary<ISprite, (Vector2, HashSet<FacingDirection>)> discoveredRooms;
+        private ISprite playerDotSprite;
+        private Vector2 playerDotLocation;
 
         public DiscoveredRoomsDisplay()
         {
-            AssembleSprites();
+            InitializePlayerDotSprite();
+            AssembleRoomSprites();
         }
 
         public void Update(GameTime gt)
         {
-            // TODO: Implement player dot animation
+            playerDotSprite.Update(gt);
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
@@ -28,6 +31,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             {
                 discoveredRoom.Key.Draw(spriteBatch, discoveredRoom.Value.Item1);
             }
+            playerDotSprite.Draw(spriteBatch, playerDotLocation);
         }
 
         public void Scroll(Vector2 displacement)
@@ -40,7 +44,13 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         //----- Initialization helper methods -----//
 
-        private void AssembleSprites()
+        private void InitializePlayerDotSprite()
+        {
+            playerDotSprite = InventorySpriteFactory.Instance.CreatePlayerDotSprite();
+            playerDotLocation = GetLocationForRoomSprite(RoomTracker.Instance.ActiveRoomCoords) + ObjectConstants.playerDotOffsetFromRoom;
+        }
+
+        private void AssembleRoomSprites()
         {
             foreach (KeyValuePair<Vector2, HashSet<FacingDirection>> trackedRoom in RoomTracker.Instance.TrackedRooms)
             {

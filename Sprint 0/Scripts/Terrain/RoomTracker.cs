@@ -12,6 +12,14 @@ namespace Sprint_0.Scripts.Terrain
 
         public Dictionary<Vector2, HashSet<FacingDirection>> TrackedRooms { get => trackedRooms; }
 
+        public Vector2 ActiveRoomCoords
+        {
+            get
+            {
+                return ParseRoomString(RoomManager.Instance.CurrentRoom.RoomId());
+            }
+        }
+
         public static RoomTracker Instance
         {
             get
@@ -57,6 +65,7 @@ namespace Sprint_0.Scripts.Terrain
 
         private FacingDirection GetDirectionForVector(Vector2 doorDirection)
         {
+
             return doorDirection switch
             {
                 Vector2(1, 0) => FacingDirection.Right,
