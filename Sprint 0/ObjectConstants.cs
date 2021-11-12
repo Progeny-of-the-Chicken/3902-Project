@@ -311,10 +311,16 @@ namespace Sprint_0
         //----- Font or HUD constant values -----//
         public const string fontSpritesheetFileName = "Font";
         public const int maxDisplayableNumbers = 3;
-        public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 mapDrawLocation = new Vector2(16 * scale, 16 * scale);
         public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
         public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
+        public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 primaryWeaponLocation = new Vector2(152 * scale, 24 * scale);
+        public static Vector2 secondaryWeaponLocation = new Vector2(128 * scale, 24 * scale);
+        public static Vector2 DungeonLevelDisplayLocation = new Vector2(16 * scale, 8 * scale);
+        public static Vector2 DungeonLevelNumberDisplayLocation = new Vector2(64 * scale, 8 * scale);
         public const int maxMaxHealth = 32;
+        public const int maxDungeonWidthHeight = 8;
 
     }
 }

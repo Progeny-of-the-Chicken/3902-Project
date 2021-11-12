@@ -13,7 +13,7 @@ using Sprint_0.Scripts.Effect;
 
 public class Room : IRoom
 {
-    private Vector2 roomLocation;
+    public Vector2 roomLocation { get; }
     private Rectangle spritesheetLocation;
     private string roomId;
     private string filePath;

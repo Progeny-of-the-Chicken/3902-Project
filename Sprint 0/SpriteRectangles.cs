@@ -153,6 +153,9 @@ namespace Sprint_0
         public static Rectangle emptyHeartFrame = new Rectangle(627, 117, 8, 8);
         public static Rectangle blackHUDCoverFrame = new Rectangle(2, 12, 8, 8);
         public static Rectangle whiteSwordFrame = new Rectangle(564, 137, 8, 16);
+        public static Rectangle noRoomFrame = new Rectangle(663, 112, 8, 4);
+        public static Rectangle hasRoomFrame = new Rectangle(663, 108, 8, 4);
+        public static Rectangle levelNumberFrame = new Rectangle(584, 1, 64, 8);
 
         //----- Terrain source rectangles -----//
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);

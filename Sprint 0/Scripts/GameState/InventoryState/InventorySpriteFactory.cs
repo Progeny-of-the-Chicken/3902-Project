@@ -90,5 +90,20 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new WhiteSwordSprite(texture);
         }
+
+        public ISprite CreateEmptyMapSprite()
+        {
+            return new EmptyMapSprite(texture);
+        }
+
+        public ISprite CreateRoomMapSprite()
+        {
+            return new RoomMapSprite(texture);
+        }
+
+        public ISprite CreateLevelNumberSprite()
+        {
+            return new LevelNumberSprite(texture);
+        }
     }
 }

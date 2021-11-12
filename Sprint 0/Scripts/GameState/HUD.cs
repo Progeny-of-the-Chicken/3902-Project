@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.VisualBasic.FileIO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.GameState.InventoryState;
@@ -7,6 +9,9 @@ using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.GameState
 {
+    //TODO: Update Map thingy when player can pick up map
+    //TODO: Update health to when moved to Link/Inventory
+    //TODO: Update counters when moved to Link/Inventory
     public class HUD : IHUD
     {
         ISprite backgroundSprite;
@@ -16,6 +21,8 @@ namespace Sprint_0.Scripts.GameState
         ISprite[] heartArray;
         ISprite secondaryWeaponSprite;
         ISprite primaryWeaponSprite;
+        ISprite levelDisplay;
+        ISprite levelNumber;
         int health;
         int maxHealth;
 
@@ -37,6 +44,9 @@ namespace Sprint_0.Scripts.GameState
             makeHeartArray();
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             primaryWeaponSprite = InventorySpriteFactory.Instance.CreateWhiteSwordSprite();
+
+            levelDisplay = InventorySpriteFactory.Instance.CreateLevelNumberSprite();
+            levelNumber = FontSpriteFactory.Instance.CreateOneSprite();
         }
 
         public void Update()
@@ -54,9 +64,41 @@ namespace Sprint_0.Scripts.GameState
             backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
             drawNumbers(spriteBatch);
             drawHealth(spriteBatch);
-            secondaryWeaponSprite.Draw(spriteBatch, new Vector2(384, 72));
-            primaryWeaponSprite.Draw(spriteBatch, new Vector2(456, 72));
+            secondaryWeaponSprite.Draw(spriteBatch, ObjectConstants.secondaryWeaponLocation);
+            primaryWeaponSprite.Draw(spriteBatch, ObjectConstants.primaryWeaponLocation);
+            drawMap(spriteBatch);
         }
+
+        //-----  Map Related -----//
+        private void drawMap(SpriteBatch spriteBatch)
+        {
+            //Display above map
+            levelDisplay.Draw(spriteBatch, ObjectConstants.DungeonLevelDisplayLocation);
+            levelNumber.Draw(spriteBatch, ObjectConstants.DungeonLevelNumberDisplayLocation);
+
+            string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
+            TextFieldParser csvReader = new TextFieldParser(filePath);
+            csvReader.Delimiters = new string[] { ObjectConstants.separator };
+            for (int i = 0; i < ObjectConstants.maxDungeonWidthHeight; i++)
+            {
+                string[] roomRow = csvReader.ReadFields();
+                for (int j = 0; j < ObjectConstants.maxDungeonWidthHeight; j++)
+                {
+                    ISprite roomSprite;
+                    if (/*Inventory.Instance.Map && */roomRow[j].Equals("1"))
+                    {
+                        roomSprite = InventorySpriteFactory.Instance.CreateRoomMapSprite();
+                    } else
+                    {
+                        roomSprite = InventorySpriteFactory.Instance.CreateEmptyMapSprite();
+                    }
+                    Vector2 drawLocation = ObjectConstants.mapDrawLocation + new Vector2(j * ObjectConstants.standardWidthHeight / 2 * ObjectConstants.scale, i * ObjectConstants.standardWidthHeight / 4 * ObjectConstants.scale);
+                    roomSprite.Draw(spriteBatch, drawLocation);
+                }
+            }
+        }
+
+
 
         //-----  Weapon Related  -----//
         private Rectangle getFrameForWeapon(WeaponType weapon)
@@ -107,7 +149,6 @@ namespace Sprint_0.Scripts.GameState
                     //full heart
                 }
                 heartArray[i / 2] = heart;
-                System.Diagnostics.Debug.WriteLine("Index " + (i / 2) + " is a " + heart);
             }
         }
 
