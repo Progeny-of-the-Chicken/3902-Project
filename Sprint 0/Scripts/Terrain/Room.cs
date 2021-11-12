@@ -18,7 +18,6 @@ public class Room : IRoom
 	private string roomId;
 	private string filePath;
 	private int scale;
-	private int YOFFSET;
 	private int WALLOFFSET;
 	private Vector2 _roomDrawPoint;
 	public Vector2 roomDrawPoint { get => _roomDrawPoint; }
@@ -42,10 +41,9 @@ public class Room : IRoom
 	{
 		this.scale = ObjectConstants.scale;
 		this.WALLOFFSET = 32 * this.scale;
-		this.YOFFSET = 64 * this.scale;
 
 		// Point of reference that is used for the Draw() method. Used to easily translate the room during transitions.
-		this._roomDrawPoint = new Vector2(0, YOFFSET);
+		this._roomDrawPoint = new Vector2(ObjectConstants.minRoomX * scale, ObjectConstants.minRoomY * scale + ObjectConstants.YOFFSET);
 
 		this.roomId = roomId;
 		int roomRow, roomCol;
@@ -159,7 +157,7 @@ public class Room : IRoom
 				{
 					//first string in each pair notates location
 					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + ObjectConstants.YOFFSET + WALLOFFSET;
 					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
 					blocks.Add(new InvisibleSprite(blockLocation));
@@ -177,7 +175,7 @@ public class Room : IRoom
             {
 				//first string in each pair notates location
 				float enemyLocationX = float.Parse(enemyString[i].Substring(0, enemyString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+				float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(" "))) * 16 * this.scale + ObjectConstants.YOFFSET + WALLOFFSET;
 				Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
 
 				//second string in each pair notates enemy type
@@ -227,7 +225,7 @@ public class Room : IRoom
 			{
 				//first string in each pair notates location
 				float itemLocationX = float.Parse(itemString[i].Substring(0, itemString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+				float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(" "))) * 16 * this.scale + ObjectConstants.YOFFSET + WALLOFFSET;
 				Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
 
 				switch(itemString[i+1])
@@ -260,7 +258,7 @@ public class Room : IRoom
 
 	void LoadDoors(TextFieldParser csvReader)
 	{
-		Vector2 doorLocation = new Vector2(0, YOFFSET);
+		Vector2 doorLocation = new Vector2(0, ObjectConstants.YOFFSET);
 		//Add 8 Wall segments
 		//North wall left side
 		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
@@ -279,7 +277,7 @@ public class Room : IRoom
 		doorLocation.X = 0;
 		walls.Add(new InvisibleVerticleWall(doorLocation, this));
 		//South wall left side
-		doorLocation.Y = YOFFSET + scale * 144;
+		doorLocation.Y = ObjectConstants.YOFFSET + scale * 144;
 		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 		//South wall right side
 		doorLocation.X = scale * 144;
@@ -289,7 +287,7 @@ public class Room : IRoom
 
 		//East
 		doorLocation.X = ObjectConstants.maxRoomX * scale;
-		doorLocation.Y = ObjectConstants.midRoomY * scale + YOFFSET;
+		doorLocation.Y = ObjectConstants.midRoomY * scale + ObjectConstants.YOFFSET;
 		if (doorString[0] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
 			if (doorString[0].Equals("EastClosedSprite"))
@@ -303,7 +301,7 @@ public class Room : IRoom
 		
 		//North
 		doorLocation.X = ObjectConstants.midRoomX * scale;
-		doorLocation.Y = ObjectConstants.minRoomY + YOFFSET;
+		doorLocation.Y = ObjectConstants.minRoomY * scale + ObjectConstants.YOFFSET;
 		if (doorString.Length > 2 && doorString[2] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
 			if (doorString[2].Equals("NorthClosedSprite"))
@@ -316,8 +314,8 @@ public class Room : IRoom
 			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
 		
 		//West
-		doorLocation.X = ObjectConstants.minRoomX;
-		doorLocation.Y = ObjectConstants.midRoomY * scale + YOFFSET;
+		doorLocation.X = ObjectConstants.minRoomX * scale;
+		doorLocation.Y = ObjectConstants.midRoomY * scale + ObjectConstants.YOFFSET;
 		if (doorString.Length > 4 && doorString[4] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
 			if (doorString[4].Equals("WestClosedSprite"))
@@ -331,7 +329,7 @@ public class Room : IRoom
 
 		//South
 		doorLocation.X = ObjectConstants.midRoomX * scale;
-		doorLocation.Y = ObjectConstants.maxRoomY * scale + YOFFSET;
+		doorLocation.Y = ObjectConstants.maxRoomY * scale + ObjectConstants.YOFFSET;
 		if (doorString.Length > 6 && doorString[6] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
 			if (doorString[6].Equals("SouthClosedSprite"))
@@ -355,7 +353,7 @@ public class Room : IRoom
 				break;
             }
 			float specialLocationX = float.Parse(specialString[i].Substring(0, specialString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-			float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+			float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(" "))) * 16 * this.scale + ObjectConstants.YOFFSET + WALLOFFSET;
 			Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
 			switch (specialString[i+1])
             {
@@ -445,7 +443,7 @@ public class Room : IRoom
 				default:
 					//Not a door
 					float specialLocationX = float.Parse(strArray[i].Substring(0, strArray[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-					float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
+					float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(" "))) * 16 * this.scale + ObjectConstants.YOFFSET + WALLOFFSET;
 					Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
 					i++;
 					switch (strArray[i])
@@ -470,7 +468,7 @@ public class Room : IRoom
     public void TransitionEnded()
     {
 		inTransition = false;
-		this._roomDrawPoint = new Vector2(0, YOFFSET);
+		this._roomDrawPoint = new Vector2(ObjectConstants.minRoomX * scale, ObjectConstants.minRoomY * scale + ObjectConstants.YOFFSET);
 	}
 
 	public void UpdateDrawPoint(Vector2 dp)

@@ -6,17 +6,23 @@ namespace Sprint_0
     public static class ObjectConstants
     {
         //----- Room Constant Values -----//
+        // 64 is the ammount of space needed for the HUD above the map
+        public static int YOFFSET { get { return 64 * scale; } }
+
         public const int minRoomX = 0;
         public const int maxRoomX = 224;
         public const int minRoomY = 0;
         public const int maxRoomY = 144;
-        public static int midRoomX { get { return (maxRoomX + minRoomX) / 2; } }
+
         public static int midRoomY { get { return (maxRoomY + minRoomY) / 2; } }
+        public static int midRoomX { get { return (maxRoomX + minRoomX) / 2; } }
+
 
         //----- Sprite constant values -----//
         public const int scale = 3;
         public const double itemAnimationDelaySeconds = 0.1;
         public const int standardWidthHeight = 16;
+
 
         //----- Link constant values -----//
         public const int linkSpeed = 1;
@@ -25,9 +31,11 @@ namespace Sprint_0
         public const int bouncebackDistance = 90;
         public const int squareTileWidthHeight = 16;
 
+
         //----- Item constant values -----//
         public const double clockFreezeSeconds = 10.0;
-        
+
+
         //----- Projectile constant values -----//
         // Arrow
         public const double arrowSpeedPerSecond = 150.0;
@@ -105,6 +113,7 @@ namespace Sprint_0
         public const int ZolStartingHealth = DefaultEnemyHealth;
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+
 
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
