@@ -90,12 +90,12 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             // Algorithm taking advantage of source rectangle order in order to reflect known doors
             List<FacingDirection> orderedDoorsToCompare = new List<FacingDirection>
             {
-                FacingDirection.Up, FacingDirection.Down, FacingDirection.Left, FacingDirection.Right
+                FacingDirection.Right, FacingDirection.Left, FacingDirection.Down, FacingDirection.Up
             };
             int index = ObjectConstants.discoveredRoomsMaxIndex;
-            for (int i = orderedDoorsToCompare.Count - 1; i >= ObjectConstants.zero; i--)
+            for (int i = 0; i < orderedDoorsToCompare.Count; i++)
             {
-                if (doors.Contains(orderedDoorsToCompare[i]))
+                if (!doors.Contains(orderedDoorsToCompare[i]))
                 {
                     index -= (int)Math.Pow(ObjectConstants.discoveredRoomsTotalDoorStates, i);
                 }

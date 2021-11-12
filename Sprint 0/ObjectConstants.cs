@@ -272,7 +272,7 @@ namespace Sprint_0
         public const double bombExtraExplosionNumber = 6;
 
         //----- Inventory GUI constant values -----//
-        public const string inventorySpritesheetFileName = "InventorySpritesheetAdjusted";
+        public const string inventorySpritesheetFileName = "InventorySpritesheetAdjusted2";
         public const int inventoryDisplayListIndex = 1;
         // Backdrop
         public static Vector2 backdropSpawnLocation = Vector2.Zero;

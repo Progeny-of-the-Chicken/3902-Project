@@ -23,7 +23,7 @@ namespace Sprint_0.Scripts.GameState
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             Map = false;
-            Compass = true;
+            Compass = false;
         }
 
         public List<WeaponType> Weapons { get; set; }
