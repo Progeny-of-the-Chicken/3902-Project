@@ -145,7 +145,9 @@ namespace Sprint_0
             new Rectangle(132, 48, 80, 32),
             new Rectangle(128, 24, 88, 16)
         };
+        public static Rectangle discoveredRoomIndex0Frame = new Rectangle(519, 108, 8, 8);
 
+        //----- Wall source rectangles -----//
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
         public static Rectangle StairFrame = new Rectangle(1035, 28, 16, 16);
         public static Rectangle EastDoorSpriteFrame = new Rectangle(848, 77, 32, 32);

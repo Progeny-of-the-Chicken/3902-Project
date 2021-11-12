@@ -305,6 +305,13 @@ namespace Sprint_0
         public const int inventoryMoveSelectionLeftIndex = -1;
         public const int inventoryMoveSelectionDownIndex = 4;
         public const int selectedItemStartingIndex = 0;
+        // Discovered rooms
+        public const int discoveredRoomsMaxIndex = 15;
+        public const int discoveredRoomsTotalDoorStates = 2;
+        public const int discoveredRoomsAlgorithmPowerOffset = 1;
+        public const int discoveredRoomsSourcePixelDistance = 9;
+        public static Vector2 discoveredRoomsD1InitialLocation = new Vector2(144, 104) * scale;
+        public const int discoveredRoomsWidthHeight = 8 * scale;
 
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;

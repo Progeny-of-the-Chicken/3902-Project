@@ -63,5 +63,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new CompassSprite(texture);
         }
+
+        public ISprite CreateDiscoveredRoomSprite(Rectangle sourceRec)
+        {
+            return new DiscoveredRoomSprite(texture, sourceRec);
+        }
     }
 }

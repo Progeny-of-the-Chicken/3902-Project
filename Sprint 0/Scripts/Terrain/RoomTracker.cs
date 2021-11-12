@@ -5,6 +5,7 @@ namespace Sprint_0.Scripts.Terrain
 {
     public class RoomTracker
     {
+        // Room coords, known used doors
         private Dictionary<Vector2, HashSet<FacingDirection>> trackedRooms;
 
         private static RoomTracker instance = new RoomTracker();
@@ -51,6 +52,8 @@ namespace Sprint_0.Scripts.Terrain
                 trackedRooms[nextRoomCoords].Add(nextRoomDoorDirection);
             }
         }
+
+        //----- Helper methods to communicate with room manager -----//
 
         private FacingDirection GetDirectionForVector(Vector2 doorDirection)
         {
