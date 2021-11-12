@@ -288,8 +288,8 @@ public class Room : IRoom
 		string[] doorString = csvReader.ReadFields();
 
 		//East
-		doorLocation.X = 224 * scale;
-		doorLocation.Y = YOFFSET + 72 * scale;
+		doorLocation.X = ObjectConstants.maxRoomX * scale;
+		doorLocation.Y = ObjectConstants.midRoomY * scale + YOFFSET;
 		if (doorString[0] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
 			if (doorString[0].Equals("EastClosedSprite"))
@@ -302,8 +302,8 @@ public class Room : IRoom
 			walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
 		
 		//North
-		doorLocation.X = 112 * scale;
-		doorLocation.Y = YOFFSET;
+		doorLocation.X = ObjectConstants.midRoomX * scale;
+		doorLocation.Y = ObjectConstants.minRoomY + YOFFSET;
 		if (doorString.Length > 2 && doorString[2] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
 			if (doorString[2].Equals("NorthClosedSprite"))
@@ -316,8 +316,8 @@ public class Room : IRoom
 			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
 		
 		//West
-		doorLocation.X = 0;
-		doorLocation.Y = YOFFSET + 72 * scale;
+		doorLocation.X = ObjectConstants.minRoomX;
+		doorLocation.Y = ObjectConstants.midRoomY * scale + YOFFSET;
 		if (doorString.Length > 4 && doorString[4] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
 			if (doorString[4].Equals("WestClosedSprite"))
@@ -330,8 +330,8 @@ public class Room : IRoom
 			walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
 
 		//South
-		doorLocation.X = 112 * scale;
-		doorLocation.Y = YOFFSET + 144 * scale;
+		doorLocation.X = ObjectConstants.midRoomX * scale;
+		doorLocation.Y = ObjectConstants.maxRoomY * scale + YOFFSET;
 		if (doorString.Length > 6 && doorString[6] != "") { 
 			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
 			if (doorString[6].Equals("SouthClosedSprite"))
