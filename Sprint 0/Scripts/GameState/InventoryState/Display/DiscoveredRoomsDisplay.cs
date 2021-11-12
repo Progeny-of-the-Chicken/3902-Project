@@ -17,6 +17,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         public DiscoveredRoomsDisplay()
         {
+            discoveredRooms = new Dictionary<ISprite, (Vector2, HashSet<FacingDirection>)>();
             if (compass)
             {
                 InitializePlayerDotSprite();
