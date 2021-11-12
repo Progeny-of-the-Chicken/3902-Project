@@ -105,5 +105,15 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new LevelNumberSprite(texture);
         }
+
+        public ISprite CreateCurrentRoomMapMarkerSprite()
+        {
+            return new CurrentRoomMapMarkerSprite(texture);
+        }
+
+        public ISprite CreateTreasureRoomMapMarkerSprite()
+        {
+            return new TreasureRoomMapMarkerSprite(texture);
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.GameState.InventoryState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.GameState
 {
@@ -23,6 +24,11 @@ namespace Sprint_0.Scripts.GameState
         ISprite primaryWeaponSprite;
         ISprite levelDisplay;
         ISprite levelNumber;
+        ISprite currentRoomMapMarker;
+        ISprite treasureRoomMapMarker;
+
+        Vector2 currentRoom;
+
         int health;
         int maxHealth;
 
@@ -38,15 +44,21 @@ namespace Sprint_0.Scripts.GameState
             keyCounter = numToSprites(456);
             bombCounter = numToSprites(789);
 
+            //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
             health = 7;
             maxHealth = 12;
             makeHeartArray();
+
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             primaryWeaponSprite = InventorySpriteFactory.Instance.CreateWhiteSwordSprite();
 
             levelDisplay = InventorySpriteFactory.Instance.CreateLevelNumberSprite();
             levelNumber = FontSpriteFactory.Instance.CreateOneSprite();
+            currentRoomMapMarker = InventorySpriteFactory.Instance.CreateCurrentRoomMapMarkerSprite();
+            treasureRoomMapMarker = InventorySpriteFactory.Instance.CreateTreasureRoomMapMarkerSprite();
+
+            currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
 
         public void Update()
@@ -55,7 +67,10 @@ namespace Sprint_0.Scripts.GameState
             rupeeCounter = numToSprites(123);
             keyCounter = numToSprites(456);
             bombCounter = numToSprites(789);
+            //Reminder to update link's health (Although we could pull directly from the instance in draw)
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
+            makeHeartArray();
+            currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
@@ -88,16 +103,21 @@ namespace Sprint_0.Scripts.GameState
                     if (/*Inventory.Instance.Map && */roomRow[j].Equals("1"))
                     {
                         roomSprite = InventorySpriteFactory.Instance.CreateRoomMapSprite();
-                    } else
+                    }
+                    else
                     {
                         roomSprite = InventorySpriteFactory.Instance.CreateEmptyMapSprite();
                     }
-                    Vector2 drawLocation = ObjectConstants.mapDrawLocation + new Vector2(j * ObjectConstants.standardWidthHeight / 2 * ObjectConstants.scale, i * ObjectConstants.standardWidthHeight / 4 * ObjectConstants.scale);
+                    Vector2 drawLocation = ObjectConstants.mapDrawLocation + Vector2.Multiply(new Vector2(j, i), ObjectConstants.roomMapSize);
                     roomSprite.Draw(spriteBatch, drawLocation);
                 }
             }
+            currentRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(currentRoom, ObjectConstants.roomMapSize));
+            if (Inventory.Instance.Compass)
+            {
+                treasureRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(ObjectConstants.TreasureRoomLocation, ObjectConstants.roomMapSize));
+            }
         }
-
 
 
         //-----  Weapon Related  -----//

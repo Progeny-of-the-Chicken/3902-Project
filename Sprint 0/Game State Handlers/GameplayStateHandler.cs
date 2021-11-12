@@ -27,6 +27,7 @@ namespace Sprint_0.GameStateHandlers
         public void Update(GameTime gameTime)
         {
             roomManager.Update(gameTime);
+            headsUpDisplay.Update();
         }
     }
 }
