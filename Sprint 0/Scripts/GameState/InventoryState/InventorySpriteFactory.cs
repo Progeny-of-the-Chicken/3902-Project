@@ -44,6 +44,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState
             return new CoverSprite(texture, destRec);
         }
 
+        public ISprite CreateMapColorCoverSprite()
+        {
+            return new MapColorCoverSprite(texture);
+        }
+
         public ISprite CreateSelectionSprite()
         {
             return new SelectionSprite(texture);
