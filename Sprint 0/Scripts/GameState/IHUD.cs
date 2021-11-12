@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.GameState
 {
     public interface IHUD
     {
-        void Draw() { }
+        void Update();
+        void Draw(SpriteBatch spriteBatch);
 
-        // TODO: Add the remaining necessary properties for the HUD
     }
 }

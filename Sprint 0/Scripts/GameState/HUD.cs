@@ -73,7 +73,7 @@ namespace Sprint_0.Scripts.GameState
             currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gt)
+        public void Draw(SpriteBatch spriteBatch)
         {
             //Background
             backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
@@ -100,7 +100,7 @@ namespace Sprint_0.Scripts.GameState
                 for (int j = 0; j < ObjectConstants.maxDungeonWidthHeight; j++)
                 {
                     ISprite roomSprite;
-                    if (/*Inventory.Instance.Map && */roomRow[j].Equals("1"))
+                    if (Inventory.Instance.Map && roomRow[j].Equals("1"))
                     {
                         roomSprite = InventorySpriteFactory.Instance.CreateRoomMapSprite();
                     }

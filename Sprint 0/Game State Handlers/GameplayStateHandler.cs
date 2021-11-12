@@ -21,7 +21,7 @@ namespace Sprint_0.GameStateHandlers
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             roomManager.Draw(sb);
-            headsUpDisplay.Draw(sb, gameTime);
+            headsUpDisplay.Draw(sb);
         }
 
         public void Update(GameTime gameTime)
