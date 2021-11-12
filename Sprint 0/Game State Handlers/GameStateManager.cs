@@ -54,7 +54,7 @@ namespace Sprint_0.GameStateHandlers
         public void SwapRooms(string fromRoomID, string toRoomID, FacingDirection scrollingDirection)
         {
             this._state = GameState.RoomSwap;
-            this.swapper = new RoomSwapStateHandler(fromRoomID, toRoomID, scrollingDirection);
+            this.swapper = new RoomSwapStateHandler(fromRoomID, toRoomID, scrollingDirection, this.link);
 
             System.Diagnostics.Debug.WriteLine("Swapped to state: Room Swap");
         }
