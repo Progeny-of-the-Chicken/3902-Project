@@ -13,16 +13,23 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         private Dictionary<ISprite, (Vector2, HashSet<FacingDirection>)> discoveredRooms;
         private ISprite playerDotSprite;
         private Vector2 playerDotLocation;
+        private bool compass = Inventory.Instance.Compass;
 
         public DiscoveredRoomsDisplay()
         {
-            InitializePlayerDotSprite();
+            if (compass)
+            {
+                InitializePlayerDotSprite();
+            }
             AssembleRoomSprites();
         }
 
         public void Update(GameTime gt)
         {
-            playerDotSprite.Update(gt);
+            if (compass)
+            {
+                playerDotSprite.Update(gt);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
@@ -31,7 +38,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             {
                 discoveredRoom.Key.Draw(spriteBatch, discoveredRoom.Value.Item1);
             }
-            playerDotSprite.Draw(spriteBatch, playerDotLocation);
+            if (compass)
+            {
+                playerDotSprite.Draw(spriteBatch, playerDotLocation);
+            }
         }
 
         public void Scroll(Vector2 displacement)
