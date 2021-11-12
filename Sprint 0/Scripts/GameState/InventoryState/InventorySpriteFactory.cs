@@ -85,5 +85,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new BlackHUDCoverSprite(texture);
         }
+
+        public ISprite CreateWhiteSwordSprite()
+        {
+            return new WhiteSwordSprite(texture);
+        }
     }
 }

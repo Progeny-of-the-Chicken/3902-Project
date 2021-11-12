@@ -14,6 +14,8 @@ namespace Sprint_0.Scripts.GameState
         ISprite[] keyCounter;
         ISprite[] bombCounter;
         ISprite[] heartArray;
+        ISprite secondaryWeaponSprite;
+        ISprite primaryWeaponSprite;
         int health;
         int maxHealth;
 
@@ -33,6 +35,8 @@ namespace Sprint_0.Scripts.GameState
             health = 7;
             maxHealth = 12;
             makeHeartArray();
+            secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
+            primaryWeaponSprite = InventorySpriteFactory.Instance.CreateWhiteSwordSprite();
         }
 
         public void Update()
@@ -41,16 +45,37 @@ namespace Sprint_0.Scripts.GameState
             rupeeCounter = numToSprites(123);
             keyCounter = numToSprites(456);
             bombCounter = numToSprites(789);
-
+            secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
         }
+
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
         {
             //Background
             backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
             drawNumbers(spriteBatch);
             drawHealth(spriteBatch);
+            secondaryWeaponSprite.Draw(spriteBatch, new Vector2(384, 72));
+            primaryWeaponSprite.Draw(spriteBatch, new Vector2(456, 72));
         }
 
+        //-----  Weapon Related  -----//
+        private Rectangle getFrameForWeapon(WeaponType weapon)
+        {
+            return weapon switch
+            {
+                WeaponType.BasicBoomerang => SpriteRectangles.weaponBasicBoomerangFrame,
+                WeaponType.MagicalBoomerang => SpriteRectangles.weaponMagicalBoomerangFrame,
+                WeaponType.Bomb => SpriteRectangles.weaponBombFrame,
+                WeaponType.BasicArrow => SpriteRectangles.weaponBasicArrowFrame,
+                WeaponType.SilverArrow => SpriteRectangles.weaponSilverArrowFrame,
+                WeaponType.Bow => SpriteRectangles.weaponBowFrame,
+                WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
+                // Default should never happen
+                _ => SpriteRectangles.weaponBlueCandleFrame
+            };
+        }
+
+        //-----  Health Related  -----//
         private void drawHealth(SpriteBatch spriteBatch)
         {
             //Do stuff with getting health from link here
@@ -86,6 +111,7 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
+        //----- Item Count Related -----//
         private void drawNumbers(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < ObjectConstants.maxDisplayableNumbers; i++)
