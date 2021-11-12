@@ -68,5 +68,22 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new CompassSprite(texture);
         }
+
+        public ISprite CreateFullHeartSprite()
+        {
+            return new FullHeartSprite(texture);
+        }
+        public ISprite CreateHalfHeartSprite()
+        {
+            return new HalfHeartSprite(texture);
+        }
+        public ISprite CreateEmptyHeartSprite()
+        {
+            return new EmptyHeartSprite(texture);
+        }
+        public ISprite CreateBlackHUDCoverSprite()
+        {
+            return new BlackHUDCoverSprite(texture);
+        }
     }
 }

@@ -13,6 +13,9 @@ namespace Sprint_0.Scripts.GameState
         ISprite[] rupeeCounter;
         ISprite[] keyCounter;
         ISprite[] bombCounter;
+        ISprite[] heartArray;
+        int health;
+        int maxHealth;
 
         public HUD()
         {
@@ -25,6 +28,11 @@ namespace Sprint_0.Scripts.GameState
             rupeeCounter = numToSprites(123);
             keyCounter = numToSprites(456);
             bombCounter = numToSprites(789);
+
+            heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
+            health = 7;
+            maxHealth = 12;
+            makeHeartArray();
         }
 
         public void Update()
@@ -37,12 +45,55 @@ namespace Sprint_0.Scripts.GameState
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
         {
+            //Background
             backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
+            drawNumbers(spriteBatch);
+            drawHealth(spriteBatch);
+        }
+
+        private void drawHealth(SpriteBatch spriteBatch)
+        {
+            //Do stuff with getting health from link here
+            for (int i = 0; i < ObjectConstants.maxMaxHealth / 2; i++)
+            {
+                Vector2 drawLocation = new Vector2((176 + 8 * (i % 8)) * ObjectConstants.scale, (32 + 8 * (i / 8)) * ObjectConstants.scale);
+                heartArray[i].Draw(spriteBatch, drawLocation);
+            }
+        }
+
+        private void makeHeartArray()
+        {
+            for (int i = 0; i < ObjectConstants.maxMaxHealth; i += 2)
+            {
+                ISprite heart = InventorySpriteFactory.Instance.CreateFullHeartSprite();
+                if (i > maxHealth)
+                {
+                    //black square
+                    heart = InventorySpriteFactory.Instance.CreateBlackHUDCoverSprite();
+                } else if (i >= health) {
+                    //empty heart
+                    heart = InventorySpriteFactory.Instance.CreateEmptyHeartSprite();
+                } else if (i == health - 1)
+                {
+                    //half heart
+                    heart = InventorySpriteFactory.Instance.CreateHalfHeartSprite();
+                } else
+                {
+                    //full heart
+                }
+                heartArray[i / 2] = heart;
+                System.Diagnostics.Debug.WriteLine("Index " + (i / 2) + " is a " + heart);
+            }
+        }
+
+        private void drawNumbers(SpriteBatch spriteBatch)
+        {
             for (int i = 0; i < ObjectConstants.maxDisplayableNumbers; i++)
             {
-                rupeeCounter[i].Draw(spriteBatch, new Vector2((96 + 8 * i) * ObjectConstants.scale, 16 * ObjectConstants.scale));
-                keyCounter[i].Draw(spriteBatch, new Vector2((96 + 8 * i) * ObjectConstants.scale, (16 + 16) * ObjectConstants.scale));
-                bombCounter[i].Draw(spriteBatch, new Vector2((96 + 8 * i )* ObjectConstants.scale, (16 + 24) * ObjectConstants.scale));
+                int xOffset = ObjectConstants.standardWidthHeight / 2 * i * ObjectConstants.scale;
+                rupeeCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.rupeeCounterLocation.X + xOffset, ObjectConstants.rupeeCounterLocation.Y));
+                keyCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.keyCounterLocation.X + xOffset, ObjectConstants.keyCounterLocation.Y));
+                bombCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.bombCounterLocation.X + xOffset, ObjectConstants.bombCounterLocation.Y));
             }
         }
 

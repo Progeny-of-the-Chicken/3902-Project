@@ -308,9 +308,13 @@ namespace Sprint_0
         //----- Inventory constant value -----//
         public const int selectedItemStartingIndex = 0;
 
-        //----- Font constant values -----//
+        //----- Font or HUD constant values -----//
         public const string fontSpritesheetFileName = "Font";
         public const int maxDisplayableNumbers = 3;
+        public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
+        public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
+        public const int maxMaxHealth = 32;
 
     }
 }
