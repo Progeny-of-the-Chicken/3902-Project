@@ -146,6 +146,11 @@ namespace Sprint_0
             new Rectangle(128, 24, 88, 16)
         };
         public static Rectangle discoveredRoomIndex0Frame = new Rectangle(519, 108, 8, 8);
+        public static List<Rectangle> playerDotFrames = new List<Rectangle>
+        {
+            new Rectangle(528, 126, 3, 3),
+            new Rectangle(582, 126, 3, 3)
+        };
 
         //----- Wall source rectangles -----//
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);

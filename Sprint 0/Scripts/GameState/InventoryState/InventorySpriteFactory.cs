@@ -68,5 +68,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new DiscoveredRoomSprite(texture, sourceRec);
         }
+
+        public ISprite CreatePlayerDotSprite()
+        {
+            return new PlayerDotSprite(texture);
+        }
     }
 }
