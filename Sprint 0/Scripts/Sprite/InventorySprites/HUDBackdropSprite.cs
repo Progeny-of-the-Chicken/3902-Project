@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite.ProjectileSprites
+namespace Sprint_0.Scripts.Sprite.InventorySprites
 {
-    public class ArrowPopSprite : ISprite
+    public class HUDBackdropSprite : ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = SpriteRectangles.arrowPopFrame;
+        private Rectangle frame = SpriteRectangles.HUDBackdropFrame;
         private int scale = ObjectConstants.scale;
 
-        public ArrowPopSprite(Texture2D textures)
+        public HUDBackdropSprite(Texture2D textures)
         {
             spritesheet = textures;
         }

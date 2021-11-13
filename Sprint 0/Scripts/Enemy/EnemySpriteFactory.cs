@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Sprint_0.Scripts.Sprite;
@@ -14,96 +11,92 @@ namespace Sprint_0.Scripts.Enemy
     class EnemySpriteFactory
     {
         Texture2D enemySprites;
-		Texture2D npcSprites;
-		Texture2D bossSprites;
+        Texture2D npcSprites;
+        Texture2D bossSprites;
 
-		private static EnemySpriteFactory instance = new EnemySpriteFactory();
-		public static EnemySpriteFactory Instance
-		{
-			get
-			{
-				return instance;
-			}
-		} 
-
-		Rectangle[] MagicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
-											  new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
-
-
-		private EnemySpriteFactory()
-		{
-
-		}
-
-		public void LoadAllTextures(ContentManager content)
+        private static EnemySpriteFactory instance = new EnemySpriteFactory();
+        public static EnemySpriteFactory Instance
         {
-			enemySprites = content.Load<Texture2D>("enemies");
-			npcSprites = content.Load<Texture2D>("npc");
-			bossSprites = content.Load<Texture2D>("bosses");
-		}
-
-		public ISprite CreateStalfosSprite(Rectangle frame)
-		{
-			return new UnanimatedFlipSprite(frame, enemySprites);
-		}
-
-		public ISprite CreateOldManSprite(Rectangle frame)
-        {
-			return new GenericUnanimatedEnemySprite(frame, npcSprites);
-        }
-		public ISprite CreateGelSprite(Rectangle[] frames)
-        {
-			return new GenericEnemySprite(frames, enemySprites);
-        }
-		public ISprite CreateZolSprite(Rectangle[] frames)
-        {
-			return new GenericEnemySprite(frames, enemySprites);
-        }
-		public ISprite CreateAquamentusMoveSprite(Rectangle[] frames)
-        {
-			return new GenericEnemySprite(frames, bossSprites);
-        }
-		public ISprite CreateAquamentusShootSprite(Rectangle[] frames)
-		{
-			return new GenericEnemySprite(frames, bossSprites);
-		}
-		public ISprite CreateKeeseSprite(Rectangle[] frames)
-        {
-			return new GenericEnemySprite(frames, enemySprites);
-        }
-		public ISprite CreateMagicProjectileSprite()
-		{
-			return new MagicProjectileSprite(MagicProjectileFrames, ObjectConstants.scale, bossSprites);
-		}
-		public ISprite CreateFrontGoriyaSprite(Rectangle frame)
-        {
-			return new AnimatedFlipSprite(frame, enemySprites);
-        }
-		public ISprite CreateBackGoriyaSprite(Rectangle frame)
-        {
-			return new AnimatedFlipSprite(frame, enemySprites);
-        }
-		public ISprite CreateRightGoriyaSprite(Rectangle[] frames)
-		{
-			return new GoriyaRightSprite(frames, enemySprites);
-		}
-		public ISprite CreateLeftGoriyaSprite(Rectangle[] frames)
-		{
-			return new GoriyaLeftSprite(frames, enemySprites);
-		}
-
-		public ISprite CreateWallmasterOpenSprite(float scale, Rectangle frame)
-        {
-			return new WallmasterOpenSprite(frame, scale, enemySprites);
-        }
-		public ISprite CreateWallmasterCloseSprite(float scale, Rectangle frame)
-        {
-			return new WallmasterCloseSprite(frame, scale, enemySprites);
+            get
+            {
+                return instance;
+            }
         }
 
-		public ISprite CreateSpikeTrapSprite(float scale, Rectangle frame)
+        private EnemySpriteFactory()
+        { }
+
+        public void LoadAllTextures(ContentManager content)
         {
-			return new SpikeTrapSprite(frame, scale, enemySprites);
+            enemySprites = content.Load<Texture2D>(ObjectConstants.enemiesFile);
+            npcSprites = content.Load<Texture2D>(ObjectConstants.npcFile);
+            bossSprites = content.Load<Texture2D>(ObjectConstants.bossesFile);
         }
-	}
+
+        public ISprite CreateStalfosSprite(Rectangle frame)
+        {
+            return new UnanimatedFlipSprite(frame, enemySprites);
+        }
+
+        public ISprite CreateOldManSprite(Rectangle frame)
+        {
+            return new GenericUnanimatedEnemySprite(frame, npcSprites);
+        }
+        public ISprite CreateGelSprite(Rectangle[] frames)
+        {
+            return new GenericEnemySprite(frames, enemySprites);
+        }
+        public ISprite CreateZolSprite(Rectangle[] frames)
+        {
+            return new GenericEnemySprite(frames, enemySprites);
+        }
+        public ISprite CreateAquamentusMoveSprite(Rectangle[] frames)
+        {
+            return new GenericEnemySprite(frames, bossSprites);
+        }
+        public ISprite CreateAquamentusShootSprite(Rectangle[] frames)
+        {
+            return new GenericEnemySprite(frames, bossSprites);
+        }
+        public ISprite CreateKeeseSprite(Rectangle[] frames)
+        {
+            return new GenericEnemySprite(frames, enemySprites);
+        }
+        //TODO: fix the magic projectile sprite to not take rectangles
+        public ISprite CreateMagicProjectileSprite()
+        {
+            return new MagicProjectileSprite(SpriteRectangles.magicProjectileFrames, bossSprites);
+        }
+        //TODO:Maybe not have so many sprites? just animate them right?
+        public ISprite CreateFrontGoriyaSprite(Rectangle frame)
+        {
+            return new AnimatedFlipSprite(frame, enemySprites);
+        }
+        public ISprite CreateBackGoriyaSprite(Rectangle frame)
+        {
+            return new AnimatedFlipSprite(frame, enemySprites);
+        }
+        public ISprite CreateRightGoriyaSprite(Rectangle[] frames)
+        {
+            return new GoriyaRightSprite(frames, enemySprites);
+        }
+        public ISprite CreateLeftGoriyaSprite(Rectangle[] frames)
+        {
+            return new GoriyaLeftSprite(frames, enemySprites);
+        }
+        //TODO:remove scale here
+        public ISprite CreateWallmasterOpenSprite(Rectangle frame)
+        {
+            return new WallmasterOpenSprite(frame, enemySprites);
+        }
+        public ISprite CreateWallmasterCloseSprite(Rectangle frame)
+        {
+            return new WallmasterCloseSprite(frame, enemySprites);
+        }
+
+        public ISprite CreateSpikeTrapSprite(Rectangle frame)
+        {
+            return new SpikeTrapSprite(frame, enemySprites);
+        }
+    }
 }

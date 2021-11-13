@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -20,8 +22,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
         private int maxDistance = ObjectConstants.arrowMaxDistance;
         private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
-        private bool pop = false;
-        private double popDurationSeconds = ObjectConstants.arrowPopDurationSeconds;
 
         public bool Friendly { get => friendly; }
 
@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             startPos = currentPos = spawnLoc;
             if (silver)
             {
-                maxDistance = (int) (maxDistance * silverArrowSpeedCoef);
+                maxDistance = (int)(maxDistance * silverArrowSpeedCoef);
             }
             SetSpriteVectors(direction, silver);
 
@@ -47,13 +47,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             sprite.Update(gt);
             collider.Update(currentPos);
-            if (!pop)
+
+            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
+            // Delete based on distance
+            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
             {
-                UpdateArrow(gt);
-            }
-            else
-            {
-                UpdatePop(gt);
+                ObjectsFromObjectsFactory.Instance.CreateEffect(currentPos + popOffset, EffectType.Pop);
+                delete = true;
             }
         }
 
@@ -77,50 +77,27 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             switch (direction)
             {
                 case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
-                    popOffset = new Vector2(4, -8);
+                    directionVector = ObjectConstants.RightUnitVector;
+                    popOffset = ObjectConstants.rightArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Right, silver);
                     break;
                 case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
-                    popOffset = new Vector2(-8, -20);
+                    directionVector = ObjectConstants.UpUnitVector;
+                    popOffset = ObjectConstants.upArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Up, silver);
                     break;
                 case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
-                    popOffset = new Vector2(-20, -8);
+                    directionVector = ObjectConstants.LeftUnitVector;
+                    popOffset = ObjectConstants.leftArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Left, silver);
                     break;
                 case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
-                    popOffset = new Vector2(-8, 4);
+                    directionVector = ObjectConstants.DownUnitVector;
+                    popOffset = ObjectConstants.downArrowPopOffset;
                     sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Down, silver);
                     break;
                 default:
                     break;
-            }
-        }
-
-        //----- Updates methods for individual sprites -----//
-
-        private void UpdateArrow(GameTime gt)
-        {
-            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
-            // Delete based on distance
-            if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
-            {
-                pop = true;
-                currentPos += popOffset;
-                sprite = ProjectileSpriteFactory.Instance.CreateArrowPopSprite();
-            }
-        }
-
-        private void UpdatePop(GameTime gt)
-        {
-            popDurationSeconds -= gt.ElapsedGameTime.TotalSeconds;
-            if (popDurationSeconds <= 0.0)
-            {
-                delete = true;
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.ProjectileSprites
@@ -9,7 +8,6 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         private Texture2D spritesheet;
         private Rectangle frame;
         private double rotation;
-        private Vector2 rotationOffset = new Vector2(8, 2.5f);
         private int scale = ObjectConstants.scale;
 
         public ArrowSprite(Texture2D textures, FacingDirection direction, bool silver)
@@ -26,16 +24,16 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
             switch (direction)
             {
                 case FacingDirection.Right:
-                    rotation = 0;
+                    rotation = ObjectConstants.zeroRotation;
                     break;
                 case FacingDirection.Up:
-                    rotation = (3 * Math.PI) / 2;
+                    rotation = ObjectConstants.degreeRotationCW270_s;
                     break;
                 case FacingDirection.Left:
-                    rotation = Math.PI;
+                    rotation = ObjectConstants.degreeRotationCW180_s;
                     break;
                 case FacingDirection.Down:
-                    rotation = Math.PI / 2;
+                    rotation = ObjectConstants.degreeRotationCW90_s;
                     break;
                 default:
                     break;
@@ -50,7 +48,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         public void Draw(SpriteBatch sb, Vector2 location)
         {
             Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frame.Width * scale, frame.Height * scale);
-            sb.Draw(spritesheet, dest, frame, Color.White, (float)rotation, rotationOffset, SpriteEffects.None, 0);
+            sb.Draw(spritesheet, dest, frame, Color.White, (float)rotation, ObjectConstants.arrowRotationOffset, SpriteEffects.None, ObjectConstants.noLayerDepth);
         }
     }
 }

@@ -9,416 +9,447 @@ using Sprint_0.Scripts.Projectiles;
 using System;
 using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
 
 public class Room : IRoom
 {
-	private Vector2 roomLocation;
-	private Rectangle spritesheetLocation;
-	private string roomId;
-	private string filePath;
-	private int scale;
-	private int YOFFSET;
-	private int WALLOFFSET;
+    public Vector2 roomLocation { get; }
+    private Rectangle spritesheetLocation;
+    private string roomId;
+    private string filePath;
+    private int scale;
+    private int YOFFSET;
+    private int WALLOFFSET;
 
-	private ILink link;
-	private EnemySet enemySet;
-	private ItemEntities itemSet;
-	private ProjectileEntities projectileSet;
-	private List<ITerrain> blocks;
-	private List<IWall> walls;
-	private CollisionHandlerSet collisionHandlerSet;
-	private List<IProjectile> projectileQueue;
+    private ILink link;
+    private EnemySet enemySet;
+    private ItemEntities itemSet;
+    private ProjectileEntities projectileSet;
+    private EffectSet effectSet;
+    private List<ITerrain> blocks;
+    private List<IWall> walls;
+    private CollisionHandlerSet collisionHandlerSet;
+    private List<IProjectile> projectileQueue;
+    private List<IEffect> effectQueue;
 
-	private bool enemiesFlag;
-	private List<String> RoomClear;
-
-	public Room(string roomId, ILink link)
-	{
-		this.scale = ObjectConstants.scale;
-		this.WALLOFFSET = 32 * this.scale;
-		this.YOFFSET = 64 * this.scale;
-
-		this.roomId = roomId;
-		int roomRow, roomCol;
-		roomRow = Int32.Parse(roomId.Substring(5, 1));
-		roomCol = Int32.Parse(roomId.Substring(4, 1));
-		roomLocation = new Vector2(roomCol, roomRow);
-
-		this.link = link;
-		enemySet = new EnemySet();
-		itemSet = new ItemEntities();
-		projectileSet = new ProjectileEntities();
-		blocks = new List<ITerrain>();
-		walls = new List<IWall>();
-
-		enemiesFlag = false;
-		RoomClear = new List<string>();
-
-		projectileQueue = new List<IProjectile>();
-
-		LoadRoom();
-
-		collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
-	}
-
-	public void Update(GameTime gt)
-	{
-		link.Update(gt);
-		enemySet.Update(gt);
-		itemSet.Update(gt);
-		projectileSet.Update(gt);
-		foreach(ITerrain block in blocks)
-        {
-			block.Update();
-        }
-		collisionHandlerSet.Update();
-		if (enemiesFlag && isAllEnemiesDead())
-		{
-			RoomCleared();
-		}
-	}
-
-
-	public void Draw(SpriteBatch spriteBatch)
-	{
-		//This needs to be updated once we have more than dungeon 1
-		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-		spriteBatch.Draw(texture, new Rectangle(0, YOFFSET, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
-
-		foreach (ITerrain block in blocks)
-		{
-			block.Draw(spriteBatch);
-		}
-
-		AddQueuedProjectiles();
-
-		foreach (IWall door in walls)
-		{
-			door.Draw(spriteBatch);
-		}
-		itemSet.Draw(spriteBatch);
-		projectileSet.Draw(spriteBatch);
-		enemySet.Draw(spriteBatch);
-		link.Draw(spriteBatch);
-	}
-
-	public string RoomId()
+    private bool enemiesFlag;
+    private List<String> RoomClear;
+    public Room(string roomId, ILink link)
     {
-		return roomId;
+        this.scale = ObjectConstants.scale;
+        this.WALLOFFSET = ObjectConstants.wallOffset;
+        this.YOFFSET = ObjectConstants.yOffsetForRoom;
+
+        this.roomId = roomId;
+        int roomRow, roomCol;
+        roomRow = Int32.Parse(roomId.Substring(ObjectConstants.rowParsePosition, ObjectConstants.rowAndColPraseLen));
+        roomCol = Int32.Parse(roomId.Substring(ObjectConstants.colParsePosition, ObjectConstants.rowAndColPraseLen));
+        roomLocation = new Vector2(roomCol, roomRow);
+
+        this.link = link;
+        enemySet = new EnemySet();
+        itemSet = new ItemEntities();
+        projectileSet = new ProjectileEntities();
+        blocks = new List<ITerrain>();
+        walls = new List<IWall>();
+        effectSet = new EffectSet();
+
+        enemiesFlag = false;
+        RoomClear = new List<string>();
+
+        projectileQueue = new List<IProjectile>();
+        effectQueue = new List<IEffect>();
+
+        LoadRoom();
+
+        collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
     }
 
-	//Start csv parsing
-	public void LoadRoom()
-	{
-        spritesheetLocation = new Rectangle(257 * (int)roomLocation.X + 1, 177 * (int)roomLocation.Y + 1, 256, 176);
+    public void Update(GameTime gt)
+    {
+        link.Update(gt);
+        enemySet.Update(gt);
+        itemSet.Update(gt);
+        projectileSet.Update(gt);
+        foreach (ITerrain block in blocks)
+        {
+            block.Update();
+        }
+        effectSet.Update(gt);
+        collisionHandlerSet.Update();
+        if (enemiesFlag && isAllEnemiesDead())
+        {
+            RoomCleared();
+        }
 
-		filePath = Environment.CurrentDirectory.ToString() + @"/../../../Scripts/Terrain/LevelData/Dungeon1/" + roomId + ".csv";
-		TextFieldParser csvReader = new TextFieldParser(filePath);
-		csvReader.Delimiters = new string[] { "," };
+        TransferQueuedEffects();
+    }
 
-		LoadBlockColliders(csvReader);
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        //This needs to be updated once we have more than dungeon 1
+        Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+        spriteBatch.Draw(texture, new Rectangle(ObjectConstants.xOffsetForRoom, YOFFSET, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
+
+        foreach (ITerrain block in blocks)
+        {
+            block.Draw(spriteBatch);
+        }
+
+        TransferQueuedProjectiles();
+
+        foreach (IWall door in walls)
+        {
+            door.Draw(spriteBatch);
+        }
+        itemSet.Draw(spriteBatch);
+        projectileSet.Draw(spriteBatch);
+        enemySet.Draw(spriteBatch);
+        link.Draw(spriteBatch);
+        effectSet.Draw(spriteBatch);
+    }
+
+    public string RoomId()
+    {
+        return roomId;
+    }
+
+    //Start csv parsing
+    public void LoadRoom()
+    {
+        spritesheetLocation = new Rectangle(ObjectConstants.roomWidthForScanIn * (int)roomLocation.X + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomHeightForScanIn * (int)roomLocation.Y + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomWidth, ObjectConstants.roomHeight);
+
+        filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + roomId + ObjectConstants.cvsExtension;
+        TextFieldParser csvReader = new TextFieldParser(filePath);
+        csvReader.Delimiters = new string[] { ObjectConstants.separator };
+
+        ObjectsFromObjectsFactory.Instance.LoadRoom(this);
+
+        LoadBlockColliders(csvReader);
         LoadEnemies(csvReader);
         LoadItems(csvReader);
-		if (!csvReader.EndOfData) LoadDoors(csvReader);
-		if (!csvReader.EndOfData) LoadSpecial(csvReader);
-
-		ObjectsFromObjectsFactory.Instance.LoadRoom(this);
+        if (!csvReader.EndOfData) LoadDoors(csvReader);
+        if (!csvReader.EndOfData) LoadSpecial(csvReader);
     }
 
-	void LoadBlockColliders(TextFieldParser csvReader)
-	{
-		string[] blockColliderString = csvReader.ReadFields();
-		if (blockColliderString[0] != "None")
-		{
-			for (int i = 0; i < blockColliderString.Length; i++)
-			{
-				if (!blockColliderString[i].Equals(""))
-				{
-					//first string in each pair notates location
-					float blockLocationX = float.Parse(blockColliderString[i].Substring(0, blockColliderString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-					float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-					Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
-
-					blocks.Add(new InvisibleSprite(blockLocation));
-				}
-			}
-		}
-	}
-
-	void LoadEnemies(TextFieldParser csvReader)
-	{
-		string[] enemyString = csvReader.ReadFields();
-		for (int i = 0; i < enemyString.Length; i+= 2)
+    void LoadBlockColliders(TextFieldParser csvReader)
+    {
+        string[] blockColliderString = csvReader.ReadFields();
+        if (blockColliderString[ObjectConstants.firstInArray] != ObjectConstants.lineIsEmpty)
         {
-			if (!enemyString[i].Equals(""))
+            for (int i = ObjectConstants.counterInitialVal_int; i < blockColliderString.Length; i++)
             {
-				//first string in each pair notates location
-				float enemyLocationX = float.Parse(enemyString[i].Substring(0, enemyString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-				Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
-
-				//second string in each pair notates enemy type
-				switch (enemyString[i+1])
+                if (!blockColliderString[i].Equals(ObjectConstants.emptyStr))
                 {
-					case "Aquamentus":
-						enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
-						break;
-					case "BladeTrap":
-						enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
-						break;
-					case "Gel":
-						enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
-						break;
-					case "Goriya":
-						enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
-						break;
-					case "Keese":
-						enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
-						break;
-					case "OldMan":
-						enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
-						break;
-					case "Stalfos":
-						enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
-						break;
-					case "WallMaster":
-						enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
-						break;
-					case "Zol":
-						enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
-						break;
-					default:
-						Console.WriteLine("Typo in Room " + roomId);
-						break;
-				}
-            }
-        }
-	}
+                    //first string in each pair notates location
+                    float blockLocationX = float.Parse(blockColliderString[i].Substring(ObjectConstants.xPosForParse, blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float blockLocationY = float.Parse(blockColliderString[i].Substring(blockColliderString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                    Vector2 blockLocation = new Vector2(blockLocationX, blockLocationY);
 
-	void LoadItems(TextFieldParser csvReader)
-	{
-		string[] itemString = csvReader.ReadFields();
-		for (int i = 0; i < itemString.Length; i += 2)
-		{
-			if (!itemString[i].Equals(""))
-			{
-				//first string in each pair notates location
-				float itemLocationX = float.Parse(itemString[i].Substring(0, itemString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-				float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-				Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
-
-				switch(itemString[i+1])
-                {
-					case "BowItem":
-						itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
-						break;
-					case "Compass":
-						itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
-						break;
-					case "HeartContainer":
-						itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
-						break;
-					case "Key":
-						itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
-						break;
-					case "Map":
-						itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
-						break;
-					case "TriforcePiece":
-						itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
-						break;
-					default:
-						Console.WriteLine("Type in Room " + roomId);
-						break;
+                    blocks.Add(new InvisibleSprite(blockLocation));
                 }
-			}
-		}
-			}
-
-	void LoadDoors(TextFieldParser csvReader)
-	{
-		Vector2 doorLocation = new Vector2(0, YOFFSET);
-		//Add 8 Wall segments
-		//North wall left side
-		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
-		//West wall top side
-		walls.Add(new InvisibleVerticleWall(doorLocation, this));
-		//North wall right side
-		doorLocation.X = scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
-		//East wall top side
-		doorLocation.X = scale * 224;
-		walls.Add(new InvisibleVerticleWall(doorLocation, this));
-		//East wall bottom side
-		doorLocation.Y += scale * 104;
-		walls.Add(new InvisibleVerticleWall(doorLocation, this));
-		//West wall bottom side
-		doorLocation.X = 0;
-		walls.Add(new InvisibleVerticleWall(doorLocation, this));
-		//South wall left side
-		doorLocation.Y = YOFFSET + scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
-		//South wall right side
-		doorLocation.X = scale * 144;
-		walls.Add(new InvisibleHorizontalWall(doorLocation, this));
-
-		string[] doorString = csvReader.ReadFields();
-
-		//East
-		doorLocation.X = 224 * scale;
-		doorLocation.Y = YOFFSET + 72 * scale;
-		if (doorString[0] != "") { 
-			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[0], doorLocation, this));
-			if (doorString[0].Equals("EastClosedSprite"))
-            {
-				enemiesFlag = true;
-				RoomClear.Add(doorString[0]);
-            }	
-		}
-		else
-			walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
-		
-		//North
-		doorLocation.X = 112 * scale;
-		doorLocation.Y = YOFFSET;
-		if (doorString.Length > 2 && doorString[2] != "") { 
-			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[2], doorLocation, this));
-			if (doorString[2].Equals("NorthClosedSprite"))
-			{
-				enemiesFlag = true;
-				RoomClear.Add(doorString[2]);
-			}
-		}
-		else
-			walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
-		
-		//West
-		doorLocation.X = 0;
-		doorLocation.Y = YOFFSET + 72 * scale;
-		if (doorString.Length > 4 && doorString[4] != "") { 
-			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[4], doorLocation, this));
-			if (doorString[4].Equals("WestClosedSprite"))
-			{
-				enemiesFlag = true;
-				RoomClear.Add(doorString[4]);
-			}
-		}
-		else
-			walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
-
-		//South
-		doorLocation.X = 112 * scale;
-		doorLocation.Y = YOFFSET + 144 * scale;
-		if (doorString.Length > 6 && doorString[6] != "") { 
-			walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[6], doorLocation, this));
-			if (doorString[6].Equals("SouthClosedSprite"))
-			{
-				enemiesFlag = true;
-				RoomClear.Add(doorString[6]);
-			}
-		}
-		else
-			walls.Add(WallSpriteFactory.Instance.CreateSouthWallSprite(doorLocation, this));
-
-	}
-
-	void LoadSpecial(TextFieldParser csvReader)
-	{
-		string[] specialString = csvReader.ReadFields();
-		for (int i = 0; i < specialString.Length; i += 2)
-        {
-			if (specialString[i] == "")
-            {
-				break;
-            }
-			float specialLocationX = float.Parse(specialString[i].Substring(0, specialString[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-			float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-			Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
-			switch (specialString[i+1])
-            {
-				case "MoveableBlockSprite":
-					blocks.Add(new MoveableBlockSprite(specialLocation));
-					break;
-				case "StairSprite":
-					blocks.Add(new StairSprite(specialLocation));
-					break;
-				case "HeartContainer":
-				case "Key":
-					enemiesFlag = true;
-					RoomClear.Add(specialString[i]);
-					RoomClear.Add(specialString[i + 1]);
-					break;
-				default:
-					//You shouldn't end up here
-					break;
             }
         }
-	}
-
-	public void AddProjectile(IProjectile item)
-    {
-		projectileQueue.Add(item);
     }
 
-	private void AddQueuedProjectiles()
+    void LoadEnemies(TextFieldParser csvReader)
     {
-		foreach (IProjectile projectile in projectileQueue)
+        string[] enemyString = csvReader.ReadFields();
+        for (int i = ObjectConstants.counterInitialVal_int; i < enemyString.Length; i += ObjectConstants.coordinateReadInAdjustment)
         {
-			projectileSet.Add(projectile);
+            if (!enemyString[i].Equals(ObjectConstants.emptyStr))
+            {
+                //first string in each pair notates location
+                float enemyLocationX = float.Parse(enemyString[i].Substring(ObjectConstants.xPosForParse, enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
+
+                //second string in each pair notates enemy type
+                switch (enemyString[i + ObjectConstants.nextCharInString])
+                {
+                    case ObjectConstants.AquamentusStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
+                        break;
+                    case ObjectConstants.BladeTrapStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
+                        break;
+                    case ObjectConstants.GelStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
+                        break;
+                    case ObjectConstants.GoriyaStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
+                        break;
+                    case ObjectConstants.KeeseStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
+                        break;
+                    case ObjectConstants.OldManStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
+                        break;
+                    case ObjectConstants.StalfosStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
+                        break;
+                    case ObjectConstants.WallMasterStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
+                        break;
+                    case ObjectConstants.ZolStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
+                        break;
+                    default:
+                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
+                        break;
+                }
+            }
         }
     }
 
-	public void ChangeDoor(IWall doorToRemove, String doorToAdd)
+    void LoadItems(TextFieldParser csvReader)
     {
-		Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
-		walls.Remove(doorToRemove);
-		walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this));
-    }
-
-	public bool isAllEnemiesDead()
-    {
-		return enemySet.Enemies.Count == 0;
-    }
-
-	private void RoomCleared()
-    {
-		String[] strArray = RoomClear.ToArray();
-		for (int i = 0; i < strArray.Length; i++)
+        string[] itemString = csvReader.ReadFields();
+        for (int i = ObjectConstants.counterInitialVal_int; i < itemString.Length; i += ObjectConstants.coordinateReadInAdjustment)
         {
-			enemiesFlag = false;
-			switch (strArray[i])
+            if (!itemString[i].Equals(ObjectConstants.emptyStr))
             {
-				case "EastClosedSprite":
-					ChangeDoor(walls.ToArray()[8], "EastDoorSprite");
-					break;
-				case "NorthClosedSprite":
-					ChangeDoor(walls.ToArray()[9], "NorthDoorSprite");
-					break;
-				case "WestClosedSprite":
-					ChangeDoor(walls.ToArray()[10], "WestDoorSprite");
-					break;
-				case "SouthClosedSprite":
-					ChangeDoor(walls.ToArray()[11], "SouthDoorSprite");
-					break;
-				default:
-					//Not a door
-					float specialLocationX = float.Parse(strArray[i].Substring(0, strArray[i].IndexOf(" "))) * 16 * this.scale + WALLOFFSET;
-					float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(" "))) * 16 * this.scale + YOFFSET + WALLOFFSET;
-					Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
-					i++;
-					switch (strArray[i])
+                //first string in each pair notates location
+                float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
+
+                switch (itemString[i + ObjectConstants.nextCharInString])
+                {
+                    case ObjectConstants.BowItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+                        break;
+                    case ObjectConstants.CompassStr:
+                        itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
+                        break;
+                    case ObjectConstants.HeartContainerStr:
+                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                        break;
+                    case ObjectConstants.KeyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
+                        break;
+                    case ObjectConstants.MapStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
+                        break;
+                    case ObjectConstants.TriforcePieceStr:
+                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
+                        break;
+                    default:
+                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
+                        break;
+                }
+            }
+        }
+    }
+
+    void LoadDoors(TextFieldParser csvReader)
+    {
+        Vector2 doorLocation = new Vector2(ObjectConstants.xPosForDoorOrigin, YOFFSET);
+        //Add 8 Wall segments
+        //North wall left side
+        walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+        //West wall top side
+        walls.Add(new InvisibleVerticleWall(doorLocation, this));
+        //North wall right side
+        doorLocation.X = scale * ObjectConstants.xPosForDoorRight;
+        walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+        //East wall top side
+        doorLocation.X = scale * ObjectConstants.xPosForDoorTop;
+        walls.Add(new InvisibleVerticleWall(doorLocation, this));
+        //East wall bottom side
+        doorLocation.Y += scale * ObjectConstants.yPosForDoorBottom;
+        walls.Add(new InvisibleVerticleWall(doorLocation, this));
+        //West wall bottom side
+        doorLocation.X = ObjectConstants.zero;
+        walls.Add(new InvisibleVerticleWall(doorLocation, this));
+        //South wall left side
+        doorLocation.Y = YOFFSET + scale * ObjectConstants.yPosForDoorLeft;
+        walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+        //South wall right side
+        doorLocation.X = scale * ObjectConstants.xPosForDoorRight;
+        walls.Add(new InvisibleHorizontalWall(doorLocation, this));
+
+        string[] doorString = csvReader.ReadFields();
+
+        //East
+        doorLocation.X = ObjectConstants.xPosForDoorTop * scale;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        if (doorString[ObjectConstants.firstInArray] != ObjectConstants.emptyStr)
+        {
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.firstInArray], doorLocation, this, doorString[ObjectConstants.firstInArray + ObjectConstants.nextInArray]));
+            if (doorString[ObjectConstants.firstInArray].Equals(ObjectConstants.EastClosedSpriteStr))
+            {
+                enemiesFlag = true;
+                RoomClear.Add(doorString[ObjectConstants.firstInArray]);
+            }
+        }
+        else
+            walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
+
+        //North
+        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
+        doorLocation.Y = YOFFSET;
+        if (doorString.Length > ObjectConstants.secondDoorInArray && doorString[ObjectConstants.secondDoorInArray] != ObjectConstants.emptyStr)
+        {
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.secondDoorInArray], doorLocation, this, doorString[ObjectConstants.secondDoorInArray + ObjectConstants.nextInArray]));
+            if (doorString[ObjectConstants.secondDoorInArray].Equals(ObjectConstants.NorthClosedSpriteStr))
+            {
+                enemiesFlag = true;
+                RoomClear.Add(doorString[ObjectConstants.secondDoorInArray]);
+            }
+        }
+        else
+            walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
+
+        //West
+        doorLocation.X = ObjectConstants.xPosForDoorOrigin;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        if (doorString.Length > ObjectConstants.thirdDoorInArray && doorString[ObjectConstants.thirdDoorInArray] != ObjectConstants.emptyStr)
+        {
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.thirdDoorInArray], doorLocation, this, doorString[ObjectConstants.thirdDoorInArray + ObjectConstants.nextInArray]));
+            if (doorString[ObjectConstants.thirdDoorInArray].Equals(ObjectConstants.WestClosedSpriteStr))
+            {
+                enemiesFlag = true;
+                RoomClear.Add(doorString[ObjectConstants.thirdDoorInArray]);
+            }
+        }
+        else
+            walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
+
+        //South
+        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
+        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorLeft * scale;
+        if (doorString.Length > ObjectConstants.fourthDoorInArray && doorString[ObjectConstants.fourthDoorInArray] != ObjectConstants.emptyStr)
+        {
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.fourthDoorInArray], doorLocation, this, doorString[ObjectConstants.fourthDoorInArray + ObjectConstants.nextInArray]));
+            if (doorString[ObjectConstants.fourthDoorInArray].Equals(ObjectConstants.SouthClosedSpriteStr))
+            {
+                enemiesFlag = true;
+                RoomClear.Add(doorString[ObjectConstants.fourthDoorInArray]);
+            }
+        }
+        else
+            walls.Add(WallSpriteFactory.Instance.CreateSouthWallSprite(doorLocation, this));
+
+    }
+
+    void LoadSpecial(TextFieldParser csvReader)
+    {
+        string[] specialString = csvReader.ReadFields();
+        for (int i = ObjectConstants.counterInitialVal_int; i < specialString.Length; i += ObjectConstants.coordinateReadInAdjustment)
+        {
+            if (specialString[i] == ObjectConstants.emptyStr)
+            {
+                break;
+            }
+            float specialLocationX = float.Parse(specialString[i].Substring(ObjectConstants.xPosForParse, specialString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+            float specialLocationY = float.Parse(specialString[i].Substring(specialString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+            Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
+            switch (specialString[i + ObjectConstants.nextCharInString])
+            {
+                case ObjectConstants.MoveableBlockSpriteStr:
+                    blocks.Add(new MoveableBlockSprite(specialLocation));
+                    break;
+                case ObjectConstants.StairSpriteStr:
+                    blocks.Add(new StairSprite(specialLocation));
+                    break;
+                case ObjectConstants.HeartContainerStr:
+                case ObjectConstants.KeyStr:
+                    enemiesFlag = true;
+                    RoomClear.Add(specialString[i]);
+                    RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
+                    break;
+                default:
+                    //You shouldn't end up here
+                    break;
+            }
+        }
+    }
+
+    public void AddProjectile(IProjectile item)
+    {
+        projectileQueue.Add(item);
+    }
+
+    private void TransferQueuedProjectiles()
+    {
+        foreach (IProjectile projectile in projectileQueue)
+        {
+            projectileSet.Add(projectile);
+        }
+        projectileQueue.Clear();
+    }
+
+    public void AddEffect(IEffect effect)
+    {
+        effectQueue.Add(effect);
+    }
+
+    private void TransferQueuedEffects()
+    {
+        foreach (IEffect effect in effectQueue)
+        {
+            effectSet.Add(effect);
+        }
+        effectQueue.Clear();
+    }
+
+    public void ChangeDoor(IWall doorToRemove, String doorToAdd)
+    {
+        Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);
+        string nextRoom = doorToRemove.NextRoom;
+        if (walls.Remove(doorToRemove))
+        {
+            walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this, nextRoom));
+            System.Diagnostics.Debug.WriteLine(doorToAdd);
+            collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
+        }
+    }
+
+    public bool isAllEnemiesDead()
+    {
+        return enemySet.Enemies.Count == 0;
+    }
+
+    private void RoomCleared()
+    {
+        String[] strArray = RoomClear.ToArray();
+        for (int i = ObjectConstants.counterInitialVal_int; i < strArray.Length; i++)
+        {
+            enemiesFlag = false;
+            switch (strArray[i])
+            {
+                case ObjectConstants.EastClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.EastDoorSpritePos], ObjectConstants.EastDoorSpriteStr);
+                    break;
+                case ObjectConstants.NorthClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.NorthDoorSpritePos], ObjectConstants.NorthDoorSpriteStr);
+                    break;
+                case ObjectConstants.WestClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.WestDoorSpritePos], ObjectConstants.WestDoorSpriteStr);
+                    break;
+                case ObjectConstants.SouthClosedSpriteStr:
+                    ChangeDoor(walls.ToArray()[ObjectConstants.SouthDoorSpritePos], ObjectConstants.SouthDoorSpriteStr);
+                    break;
+                default:
+                    //Not a door
+                    float specialLocationX = float.Parse(strArray[i].Substring(ObjectConstants.xPosForParse, strArray[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float specialLocationY = float.Parse(strArray[i].Substring(strArray[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                    Vector2 specialLocation = new Vector2(specialLocationX, specialLocationY);
+                    i++;
+                    switch (strArray[i])
                     {
-						case "Key":
+						case ObjectConstants.KeyStr:
 							itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
 							SFXManager.Instance.PlayKeySpawn();
 							break;
-						case "HeartContainer":
+						case ObjectConstants.HeartContainerStr:
 							itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
 							break;
                     }
-					break;
-			}
+                    break;
+            }
         }
     }
 }

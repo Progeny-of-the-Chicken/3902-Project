@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -10,6 +11,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
     {
         private IWall owner;
         private Rectangle hitbox;
+        RoomManager roomManager = RoomManager.Instance;
 
         public OpenWallCollider(IWall owner, Rectangle hitbox)
         {
@@ -31,7 +33,9 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
+            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle) * ObjectConstants.scale) ;
+            roomManager.SwitchToRoom(owner.NextRoom);
+            System.Diagnostics.Debug.WriteLine("Next room:" + owner.NextRoom);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

@@ -4,6 +4,7 @@ namespace Sprint_0.Scripts
 {
     public class LinkStateMachine
     {
+        //TODO:switch link to run off of gametime instead of frame counters
         private FacingDirection linksDirection;
         private int damageCounter;
         private int usingItemCounter;
@@ -18,26 +19,26 @@ namespace Sprint_0.Scripts
         {
             linksDirection = FacingDirection.Down;
             ResetCounters();
-            linksPosition = new Vector2(200, 200); //generic starting position
+            linksPosition = ObjectConstants.linkStartingPosition;
             linkHealth = ObjectConstants.linkStartingHealth;
             isSuspended = false;
         }
 
         public void Update()
         {
-            if(isSuspended)
+            if (isSuspended)
             {
                 ResetCounters();
             }
-            if (damageCounter > 0)
+            if (damageCounter > ObjectConstants.zero_int)
                 damageCounter--;
-            if (usingItemCounter > 0)
+            if (usingItemCounter > ObjectConstants.zero_int)
                 usingItemCounter--;
-            if (movingCounter > 0)
+            if (movingCounter > ObjectConstants.zero_int)
                 movingCounter--;
-            if (swordCounter > 0)
+            if (swordCounter > ObjectConstants.zero_int)
                 swordCounter--;
-            if (turningCounter > 0)
+            if (turningCounter > ObjectConstants.zero_int)
                 turningCounter--;
             if (IsMoving)
                 MoveInCurrentDirection();
@@ -45,11 +46,11 @@ namespace Sprint_0.Scripts
 
         public void ResetCounters()
         {
-            damageCounter = 0;
-            usingItemCounter = 0;
-            movingCounter = 0;
-            turningCounter = 0;
-            swordCounter = 0;
+            damageCounter = ObjectConstants.zero;
+            usingItemCounter = ObjectConstants.zero;
+            movingCounter = ObjectConstants.zero;
+            turningCounter = ObjectConstants.zero;
+            swordCounter = ObjectConstants.zero;
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -62,7 +63,7 @@ namespace Sprint_0.Scripts
             else
             {
                 SwitchToFaceNewDirection(direction);
-                turningCounter = 10;
+                turningCounter = ObjectConstants.linkTurningCounterDebounce;
             }
         }
 
@@ -104,9 +105,9 @@ namespace Sprint_0.Scripts
                 damageCounter = ObjectConstants.defaultCounterLength;
                 linkHealth -= damage;
 
-                if (linkHealth <= 0)
+                if (linkHealth <= ObjectConstants.zero)
                 {
-                    damageCounter += 90;
+                    damageCounter += ObjectConstants.linkDeathCounter;
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
                     SFXManager.Instance.PlayLinkDeath(); 
                 }
@@ -120,19 +121,19 @@ namespace Sprint_0.Scripts
 
         public void StopMoving()
         {
-            movingCounter = 0;
+            movingCounter = ObjectConstants.zero;
         }
 
         public void UseSword()
         {
             if (!DoingSomething())
-                swordCounter = 30;
+                swordCounter = ObjectConstants.defaultCounterLength;
         }
 
         public void UseItem()
         {
             if (!DoingSomething())
-                usingItemCounter = 30;
+                usingItemCounter = ObjectConstants.defaultCounterLength;
         }
 
         public void Suspend()
@@ -147,16 +148,18 @@ namespace Sprint_0.Scripts
 
         public bool DoingSomething()
         {
-            return usingItemCounter != 0 || damageCounter != 0 || movingCounter != 0 || swordCounter != 0;
+            return usingItemCounter != ObjectConstants.zero_int || damageCounter != ObjectConstants.zero_int ||
+                movingCounter != ObjectConstants.zero_int || swordCounter != ObjectConstants.zero_int;
         }
 
         public Vector2 ItemSpawnPosition
         {
             get
             {
-                float xDisp = 0, yDisp = 0;
+                float xDisp = ObjectConstants.zero_float, yDisp = ObjectConstants.zero_float;
                 switch (linksDirection)
                 {
+                    //TODO: need to come up with design for the item spawning, magic numbers will be refactored then
                     case FacingDirection.Left:
                         yDisp += 24;
                         break;
@@ -180,19 +183,19 @@ namespace Sprint_0.Scripts
 
         public FacingDirection FacingDirection { get => linksDirection; }
 
-        public bool IsMoving { get => movingCounter > 0; }
+        public bool IsMoving { get => movingCounter > ObjectConstants.zero_int; }
 
-        public bool IsTakingDamage { get => damageCounter > 0; }
+        public bool IsTakingDamage { get => damageCounter > ObjectConstants.zero_int; }
 
-        public bool SwordIsBeingUsed { get => swordCounter > 0; }
+        public bool SwordIsBeingUsed { get => swordCounter > ObjectConstants.zero_int; }
 
-        public bool IsUsingItem { get => usingItemCounter > 0; }
+        public bool IsUsingItem { get => usingItemCounter > ObjectConstants.zero_int; }
 
-        public bool IsTurning { get => turningCounter > 0; }
+        public bool IsTurning { get => turningCounter > ObjectConstants.zero_int; }
 
-        public bool IsAlive { get => linkHealth > 0 || damageCounter > 0; }
+        public bool IsAlive { get => linkHealth > ObjectConstants.zero_int || damageCounter > ObjectConstants.zero_int; }
 
-        public bool DeathAnimation { get => linkHealth == 0 && damageCounter > 0; }
+        public bool DeathAnimation { get => linkHealth <= ObjectConstants.zero_int && damageCounter > ObjectConstants.zero_int; }
 
         public bool IsSuspended { get => isSuspended; }
     }

@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
@@ -15,14 +17,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
         private bool friendly = false;
 
-        private double startTime = 0;
+        private double startTime = ObjectConstants.counterInitialVal_float;
         private double fuseDurationSeconds = ObjectConstants.bombFuseDurationSeconds;
-        private bool explode = false;
-        private double explodeDurationSeconds = ObjectConstants.bombExplodeDurationSeconds;
+        private double extraExplosionOffset = ObjectConstants.bombExtraExplosionOffset;
+        private double extraExplosionNumber = ObjectConstants.bombExtraExplosionNumber;
 
         public bool Friendly { get => friendly; }
 
-        public int Damage { get => ObjectConstants.bombDamage; }
+        public int Damage { get => 0; }
 
         public IProjectileCollider Collider { get => collider; }
 
@@ -58,13 +60,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Animation control
             sprite.Update(gt);
             collider.Update(pos);
-            if (!explode)
+
+            startTime += gt.ElapsedGameTime.TotalSeconds;
+            if (startTime > fuseDurationSeconds)
             {
-                UpdateBomb(gt);
-            }
-            else
-            {
-                UpdateExplode(gt);
+                SpawnExplosions();
+                ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
+                delete = true;
             }
         }
 
@@ -88,26 +90,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             pos += adjustment;
         }
 
-        //----- Updates methods for individual sprites -----//
-
-        private void UpdateBomb(GameTime gt)
+        private void SpawnExplosions()
         {
-            startTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startTime > fuseDurationSeconds)
+            ObjectsFromObjectsFactory.Instance.CreateEffect(pos, EffectType.Explosion);
+            for (double i = 0; i <= (2 * Math.PI); i += (2 * Math.PI / extraExplosionNumber))
             {
-                explode = true;
-                sprite = ProjectileSpriteFactory.Instance.CreateBombExplodeSprite();
-                ObjectsFromObjectsFactory.Instance.CreateBlastZoneFromBomb(pos);
-                startTime = 0.0;
-            }
-        }
-
-        private void UpdateExplode(GameTime gt)
-        {
-            startTime += gt.ElapsedGameTime.TotalSeconds;
-            if (startTime > explodeDurationSeconds)
-            {
-                delete = true;
+                Vector2 explosionSpawnOffset = new Vector2((float)(Math.Cos(i) * extraExplosionOffset), (float)(Math.Sin(i) * extraExplosionOffset));
+                ObjectsFromObjectsFactory.Instance.CreateEffect(pos + explosionSpawnOffset, EffectType.Explosion);
             }
         }
     }

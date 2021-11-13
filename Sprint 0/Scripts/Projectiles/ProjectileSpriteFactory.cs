@@ -25,17 +25,12 @@ namespace Sprint_0.Scripts.Projectiles
 
         public void LoadAllTextures(ContentManager content)
         {
-            spritesheet = content.Load<Texture2D>("LoZSprites");
+            spritesheet = content.Load<Texture2D>(ObjectConstants.projectileFile);
         }
 
         public ISprite CreateArrowSprite(FacingDirection direction, bool silver)
         {
             return new ArrowSprite(spritesheet, direction, silver);
-        }
-
-        public ISprite CreateArrowPopSprite()
-        {
-            return new ArrowPopSprite(spritesheet);
         }
 
         public ISprite CreateBoomerangSprite(bool magical)
@@ -46,11 +41,6 @@ namespace Sprint_0.Scripts.Projectiles
         public ISprite CreateBombSprite()
         {
             return new BombSprite(spritesheet);
-        }
-
-        public ISprite CreateBombExplodeSprite()
-        {
-            return new BombExplodeSprite(spritesheet);
         }
 
         public ISprite CreateFireSpellSprite()

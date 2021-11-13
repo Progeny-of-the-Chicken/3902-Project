@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -16,12 +13,10 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
-        Rectangle frame = new Rectangle(1, 59, 16, 16);
-
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
 
-        float timeSinceMove = 0;
+        float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         public int Damage { get => ObjectConstants.StalfosDamage; }
         int health = ObjectConstants.StalfosStartingHealth;
@@ -33,10 +28,12 @@ namespace Sprint_0.Scripts.Enemy
         public Stalfos(Vector2 location)
         {
             this.location = location;
-            random = new byte[2];
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite(frame);
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (frame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
+            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite(SpriteRectangles.stalfosFrame);
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             SetRandomDirection();
+
+            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
@@ -52,7 +49,7 @@ namespace Sprint_0.Scripts.Enemy
             if (timeSinceMove >= ObjectConstants.StalfosMoveTime)
             {
                 SetRandomDirection();
-                timeSinceMove = 0;
+                timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
             location += direction * ObjectConstants.StalfosMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
             collider.Update(location);
@@ -62,21 +59,22 @@ namespace Sprint_0.Scripts.Enemy
         {
             //First byte is vertical/horizontal, second is +/-
             randomDir.GetBytes(random);
-            if (random[0] % 2 == 0)
-            {
-                direction.X = (random[1] % 2) * 2 - 1;
-                direction.Y = 0;
-            }
+            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
+                direction = Vector2.UnitX;
             else
-            {
-                direction.X = 0;
-                direction.Y = (random[1] % 2) * 2 - 1;
-            }
+                direction = Vector2.UnitY;
+            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
+                direction *= ObjectConstants.vectorFlip;
         }
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0); 
+            if (health <= ObjectConstants.zero)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                delete = true;
+                SFXManager.Instance.PlayEnemyDeath();
+            }
             SFXManager.Instance.PlayEnemyHit();
         }
         public void KnockBack(Vector2 knockback)

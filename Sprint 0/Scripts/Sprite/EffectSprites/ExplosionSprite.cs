@@ -2,18 +2,18 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint_0.Scripts.Sprite.ProjectileSprites
+namespace Sprint_0.Scripts.Sprite.EffectSprites
 {
-    public class BombExplodeSprite : ISprite
+    public class ExplosionSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = SpriteRectangles.bombExplodeFrames;
+        private List<Rectangle> frames = SpriteRectangles.explosionFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
-        private double startTimeSeconds = 0.0;
-        private int frameIndex = 0;
+        private double startTimeSeconds = ObjectConstants.counterInitialVal_double;
+        private int frameIndex = ObjectConstants.firstFrame;
         private int scale = ObjectConstants.scale;
 
-        public BombExplodeSprite(Texture2D textures)
+        public ExplosionSprite(Texture2D textures)
         {
             spritesheet = textures;
         }
@@ -26,9 +26,9 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
                 frameIndex++;
                 if (frameIndex == frames.Count)
                 {
-                    frameIndex = 0;
+                    frameIndex = ObjectConstants.firstFrame;
                 }
-                startTimeSeconds = 0.0;
+                startTimeSeconds = ObjectConstants.counterInitialVal_double;
             }
         }
 

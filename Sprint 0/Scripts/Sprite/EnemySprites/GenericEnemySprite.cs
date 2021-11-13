@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sprint_0.Scripts.Sprite.EnemySprites
 {
@@ -11,8 +8,8 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
         Rectangle[] frames;
         Texture2D sprite;
 
-        float timeSinceFrame = 0;
-        int currentFrame = 0;
+        float timeSinceFrame = ObjectConstants.counterInitialVal_float;
+        int currentFrame = ObjectConstants.firstFrame;
         public GenericEnemySprite(Rectangle[] frames, Texture2D spriteSheet)
         {
             this.frames = frames;
@@ -21,10 +18,10 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
         public void Update(GameTime gt)
         {
             timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= 1 / ObjectConstants.DefaultEnemyFramesPerSecond)
+            if (timeSinceFrame >= ObjectConstants.oneSecond_double / ObjectConstants.DefaultEnemyFramesPerSecond)
             {
-                currentFrame = (currentFrame + 1) % frames.Length;
-                timeSinceFrame = 0;
+                currentFrame = (currentFrame + ObjectConstants.nextInArray) % frames.Length;
+                timeSinceFrame = ObjectConstants.counterInitialVal_float;
             }
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)

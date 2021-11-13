@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Projectiles
 {
@@ -25,19 +26,19 @@ namespace Sprint_0.Scripts.Projectiles
             return new Arrow(location, direction, silver);
         }
 
-        public IProjectile CreateLinkBasicBoomerang(Vector2 location, FacingDirection direction)
+        public IProjectile CreateLinkBasicBoomerang(Vector2 location, FacingDirection direction, Link link)
         {
-            return new Boomerang(location, direction, false, true);
+            return new Boomerang(location, direction, false, link);
         }
 
-        public IProjectile CreateLinkMagicalBoomerang(Vector2 location, FacingDirection direction)
+        public IProjectile CreateLinkMagicalBoomerang(Vector2 location, FacingDirection direction, Link link)
         {
-            return new Boomerang(location, direction, true, true);
+            return new Boomerang(location, direction, true, link);
         }
 
-        public IProjectile CreateEnemyBoomerang(Vector2 location, FacingDirection direction)
+        public IProjectile CreateEnemyBoomerang(Vector2 location, FacingDirection direction, IEnemy enemy)
         {
-            return new Boomerang(location, direction, false, false);
+            return new Boomerang(location, direction, false, enemy);
         }
 
         public IProjectile CreateBomb(Vector2 location, FacingDirection direction)

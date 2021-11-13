@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
@@ -7,15 +6,17 @@ using Sprint_0.Scripts.Collider.Terrain;
 
 public class NorthWallSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(815, 11, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.NorthWallSpriteFrame;
     Rectangle destination;
     GenericWallCollider collider;
     public IWallCollider Collider { get => collider; }
     Room room;
+    string nextRoom;
+    public String NextRoom { get => nextRoom; }
 
     public NorthWallSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new GenericWallCollider(this, destination);
         this.room = room;
     }
