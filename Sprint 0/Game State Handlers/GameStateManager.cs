@@ -42,7 +42,7 @@ namespace Sprint_0.GameStateHandlers
         public void Init(Link link)
         {
             this.link = link;
-            loadHandlers();
+            this.gameplay = new GameplayStateHandler(this.link);
         }
 
         public void StartGameplay()
@@ -57,6 +57,20 @@ namespace Sprint_0.GameStateHandlers
             this.swapper = new RoomSwapStateHandler(fromRoomID, toRoomID, scrollingDirection, this.link);
 
             System.Diagnostics.Debug.WriteLine("Swapped to state: Room Swap");
+        }
+
+        public void OpenInventory()
+        {
+            this._state = GameState.Inventory;
+
+            // Put rest of inventory initialization logic here
+        }
+
+        public void OpenMenu()
+        {
+            this._state = GameState.Menu;
+
+            // Put rest of menu open logic here
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
@@ -95,14 +109,6 @@ namespace Sprint_0.GameStateHandlers
                 default:
                     break;
             }
-        }
-
-        /*--------------- Helper Methods ---------------*/
-
-
-        private void loadHandlers()
-        {
-            this.gameplay = new GameplayStateHandler(this.link);
         }
     }
 }
