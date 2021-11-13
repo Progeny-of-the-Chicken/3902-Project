@@ -9,6 +9,7 @@ using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
 using Sprint_0.GameStateHandlers;
+using Sprint_0.Scripts.GameState.InventoryState;
 
 namespace Sprint_0
 {
@@ -54,6 +55,8 @@ namespace Sprint_0
             ProjectileSpriteFactory.Instance.LoadAllTextures(this.Content);
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
+            InventorySpriteFactory.Instance.LoadAllTextures(this.Content);
+            FontSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
             roomManager = RoomManager.Instance;
@@ -110,9 +113,9 @@ namespace Sprint_0
         public void PrevRoom()
         {
             roomNum--;
-            if (roomNum < ObjectConstants.counterInitialVal_int + ObjectConstants.nextInArray)
+            if (roomNum < ObjectConstants.counterInitialVal_int)
             {
-                roomNum = ObjectConstants.rooms.Length;
+                roomNum = ObjectConstants.rooms.Length - 1;
             }
             ChangeRoom();
         }

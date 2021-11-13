@@ -39,6 +39,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState
             return new MapBackdropSprite(texture);
         }
 
+        public ISprite CreateHUDBackdropSprite()
+        {
+            return new HUDBackdropSprite(texture);
+        }
+
         public ISprite CreateCoverSprite(Rectangle destRec)
         {
             return new CoverSprite(texture, destRec);
@@ -62,6 +67,53 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         public ISprite CreateCompassSprite()
         {
             return new CompassSprite(texture);
+        }
+
+        public ISprite CreateFullHeartSprite()
+        {
+            return new FullHeartSprite(texture);
+        }
+        public ISprite CreateHalfHeartSprite()
+        {
+            return new HalfHeartSprite(texture);
+        }
+        public ISprite CreateEmptyHeartSprite()
+        {
+            return new EmptyHeartSprite(texture);
+        }
+        public ISprite CreateBlackHUDCoverSprite()
+        {
+            return new BlackHUDCoverSprite(texture);
+        }
+
+        public ISprite CreateWhiteSwordSprite()
+        {
+            return new WhiteSwordSprite(texture);
+        }
+
+        public ISprite CreateEmptyMapSprite()
+        {
+            return new EmptyMapSprite(texture);
+        }
+
+        public ISprite CreateRoomMapSprite()
+        {
+            return new RoomMapSprite(texture);
+        }
+
+        public ISprite CreateLevelNumberSprite()
+        {
+            return new LevelNumberSprite(texture);
+        }
+
+        public ISprite CreateCurrentRoomMapMarkerSprite()
+        {
+            return new CurrentRoomMapMarkerSprite(texture);
+        }
+
+        public ISprite CreateTreasureRoomMapMarkerSprite()
+        {
+            return new TreasureRoomMapMarkerSprite(texture);
         }
     }
 }
