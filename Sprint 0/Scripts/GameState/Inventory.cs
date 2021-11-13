@@ -19,7 +19,10 @@ namespace Sprint_0.Scripts.GameState
             Weapons = new List<WeaponType>
             {
                 WeaponType.BlueCandle,
-                WeaponType.BasicBoomerang
+                WeaponType.BasicBoomerang,
+                WeaponType.MagicalBoomerang,
+                WeaponType.BasicArrow,
+                WeaponType.Bomb
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             Map = false;
