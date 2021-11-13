@@ -13,11 +13,11 @@ using Sprint_0.Scripts.Effect;
 
 public class Room : IRoom
 {
-	private Vector2 roomLocation;
-	private Rectangle spritesheetLocation;
-	private string roomId;
-	private string filePath;
-	private int scale;
+    public Vector2 roomLocation { get; }
+    private Rectangle spritesheetLocation;
+    private string roomId;
+    private string filePath;
+    private int scale;
 	private int WALLOFFSET;
     private int YOFFSET;
 	private Vector2 _roomDrawPoint;
