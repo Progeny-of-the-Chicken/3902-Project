@@ -54,7 +54,7 @@ namespace Sprint_0
         //----- Enemy constant values -----//
         //Default
         public const int DefaultEnemyDamage = 1;
-        public const int DefaultEnemyHealth = 100;
+        public const int DefaultEnemyHealth = 1;
         public const double DefaultEnemyKnockbackTime = 0.5f;
         public const float DefaultEnemyKnockbackSpeed = 4 * scale * standardWidthHeight;
         public const float DefaultEnemyKnockbackToLink = 2 * scale * standardWidthHeight;
@@ -62,7 +62,7 @@ namespace Sprint_0
         public const double DefaultEnemyMoveTime = 1.0;
         public const double DefaultEnemyPauseTime = 1.0;
         //Aquamentus
-        public const int AquamentusDamage = DefaultEnemyDamage;
+        public const int AquamentusDamage = 2;
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
         public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
         public const double AquamentusShootSpriteTime = 0.5f;
@@ -90,9 +90,9 @@ namespace Sprint_0
         public const int StalfosDamage = DefaultEnemyDamage;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
         public const float StalfosMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int StalfosStartingHealth = DefaultEnemyHealth;
+        public const int StalfosStartingHealth = 2;
         //Zol
-        public const int ZolDamage = DefaultEnemyDamage;
+        public const int ZolDamage = 2;
         public const double ZolMoveTime = DefaultEnemyMoveTime;
         public const float ZolMoveSpeed = DefaultEnemyMoveSpeed;
         public const double ZolPauseTime = DefaultEnemyPauseTime;
