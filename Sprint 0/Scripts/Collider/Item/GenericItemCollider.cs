@@ -70,5 +70,10 @@ namespace Sprint_0.Scripts.Collider.Item
         {
             _hitbox.Location = location.ToPoint();
         }
+
+        public void OnLinkCollision(Link link)
+        {
+            link.PickUpItem();
+        }
     }
 }

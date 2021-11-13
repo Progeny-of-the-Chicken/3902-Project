@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            if(player.CanBeAffectedByEnemy)
+            if (player.CanBeAffectedByEnemy)
             {
                 Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
                 //playing it safe to avoid dividebyzero
@@ -33,7 +33,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                     pushBack.Normalize();
                     pushBack *= ObjectConstants.DefaultEnemyKnockback;
                 }
-                player.PushBackBy(pushBack);
+                player.PushBackGentlyBy(pushBack);
                 player.TakeDamage(Owner.Damage);
             }
         }

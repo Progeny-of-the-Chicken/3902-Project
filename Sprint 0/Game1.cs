@@ -30,7 +30,7 @@ namespace Sprint_0
             Content.RootDirectory = ObjectConstants.contentLocation;
             IsMouseVisible = true;
 
-            link = new Link();
+            link = Link.Instance;
             kc = new KeyboardController(this);
 
             //Just for Sprint 3
