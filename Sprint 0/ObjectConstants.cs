@@ -22,7 +22,7 @@ namespace Sprint_0
         public const int zero_int = 0;
         public const double zero_double = 0;
         public const int PreferredBackBufferWidth = 256;
-        public const int PreferredBackBufferHeight = 240;
+        public const int PreferredBackBufferHeight = 232;
 
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
@@ -213,7 +213,7 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string startRoom = "Room20";
+        public const string startRoom = "Room25";
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
         public const string contentLocation = "Content";
@@ -239,7 +239,7 @@ namespace Sprint_0
 
         //----- wall/block constant values -----//
         public const int wallOffset = scale * standardWidthHeight * 2;
-        public const int yOffsetForRoom = scale * standardWidthHeight * 4;
+        public const int yOffsetForRoom = scale * standardWidthHeight * 7 / 2;
         public const int rowParsePosition = 5;
         public const int colParsePosition = 4;
         public const int rowAndColPraseLen = 1;
@@ -307,14 +307,32 @@ namespace Sprint_0
         public const int inventoryMoveSelectionLeftIndex = -1;
         public const int inventoryMoveSelectionDownIndex = 4;
         public const int selectedItemStartingIndex = 0;
+
+        //----- Font or HUD constant values -----//
+        public const string fontSpritesheetFileName = "Font";
+        public const int maxDisplayableNumbers = 3;
+        public static Vector2 mapDrawLocation = new Vector2(16 * scale, 16 * scale);
+        public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
+        public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
+        public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 primaryWeaponLocation = new Vector2(152 * scale, 24 * scale);
+        public static Vector2 secondaryWeaponLocation = new Vector2(128 * scale, 24 * scale);
+        public static Vector2 DungeonLevelDisplayLocation = new Vector2(16 * scale, 8 * scale);
+        public static Vector2 DungeonLevelNumberDisplayLocation = new Vector2(64 * scale, 8 * scale);
+        public const int maxMaxHealth = 32;
+        public const int maxDungeonWidthHeight = 8;
+        public static Vector2 roomMapSize = new Vector2(8 * scale, 4 * scale);
+        public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
+        public static Vector2 TreasureRoomLocation = new Vector2(5, 1);
+
         // Discovered rooms
         public const int discoveredRoomsMaxIndex = 15;
         public const int discoveredRoomsTotalDoorStates = 2;
         public const int discoveredRoomsSourcePixelDistance = 9;
         public static Vector2 discoveredRoomsInitialLocationFromBackdrop = new Vector2(128, 96) * scale;
         public static Vector2 discoveredRoomsD1LocationOffset = new Vector2(16, 8) * scale;
-        public const int discoveredRoomsWidthHeight = 8 * scale;
         public static Vector2 playerDotOffsetFromRoom = new Vector2(2) * scale;
+        public const int discoveredRoomsWidthHeight = 8 * scale;
 
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;

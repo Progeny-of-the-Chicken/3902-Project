@@ -56,6 +56,7 @@ namespace Sprint_0
             EnemySpriteFactory.Instance.LoadAllTextures(this.Content);
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
             InventorySpriteFactory.Instance.LoadAllTextures(this.Content);
+            FontSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
             roomManager = RoomManager.Instance;
@@ -112,9 +113,9 @@ namespace Sprint_0
         public void PrevRoom()
         {
             roomNum--;
-            if (roomNum < ObjectConstants.counterInitialVal_int + ObjectConstants.nextInArray)
+            if (roomNum < ObjectConstants.counterInitialVal_int)
             {
-                roomNum = ObjectConstants.rooms.Length;
+                roomNum = ObjectConstants.rooms.Length - 1;
             }
             ChangeRoom();
         }
