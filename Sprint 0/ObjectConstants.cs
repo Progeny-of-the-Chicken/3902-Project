@@ -53,8 +53,6 @@ namespace Sprint_0
 
         //----- Enemy constant values -----//
         //Default
-        public const int DefaultEnemyDamage = 1;
-        public const int DefaultEnemyHealth = 1;
         public const double DefaultEnemyKnockbackTime = 0.5f;
         public const float DefaultEnemyKnockbackSpeed = 4 * scale * standardWidthHeight;
         public const float DefaultEnemyKnockbackToLink = 2 * scale * standardWidthHeight;
@@ -66,28 +64,28 @@ namespace Sprint_0
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
         public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
         public const double AquamentusShootSpriteTime = 0.5f;
-        public const int AquamentusStartingHealth = 1;
+        public const int AquamentusStartingHealth = 6;
         //Gel
-        public const int GelDamage = DefaultEnemyDamage;
+        public const int GelDamage = 1;
         public const double GelMoveTime = DefaultEnemyMoveTime;
         public const float GelMoveSpeed = DefaultEnemyMoveSpeed;
         public const double GelPauseTime = DefaultEnemyPauseTime;
-        public const int GelStartingHealth = DefaultEnemyHealth;
+        public const int GelStartingHealth = 1;
         //Goriya
-        public const int GoriyaDamage = DefaultEnemyDamage;
+        public const int GoriyaDamage = 1;
         public const double GoriyaMoveTime = 1.5;
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int GoriyaStartingHealth = DefaultEnemyHealth;
+        public const int GoriyaStartingHealth = 1;
         //Keese
-        public const int KeeseDamage = DefaultEnemyDamage;
+        public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
         public const float KeeseMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int KeeseStartingHealth = DefaultEnemyHealth;
+        public const int KeeseStartingHealth = 1;
         //OldMan
         public const int OldManDamage = 0;
         public const int OldManStartingHealth = 1;
         //Stalfos
-        public const int StalfosDamage = DefaultEnemyDamage;
+        public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
         public const float StalfosMoveSpeed = DefaultEnemyMoveSpeed;
         public const int StalfosStartingHealth = 2;
@@ -96,7 +94,7 @@ namespace Sprint_0
         public const double ZolMoveTime = DefaultEnemyMoveTime;
         public const float ZolMoveSpeed = DefaultEnemyMoveSpeed;
         public const double ZolPauseTime = DefaultEnemyPauseTime;
-        public const int ZolStartingHealth = DefaultEnemyHealth;
+        public const int ZolStartingHealth = 1;
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
 
