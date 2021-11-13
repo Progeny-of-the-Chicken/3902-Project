@@ -110,6 +110,7 @@ namespace Sprint_0
         public const int AquamentusDamage = DefaultEnemyDamage;
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
         public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
+        public const double AquamentusReloadTime = 2;
         public const double AquamentusShootSpriteTime = 0.5f;
         public const int AquamentusStartingHealth = 1;
         //Gel

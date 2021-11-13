@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 namespace Sprint_0.Scripts
@@ -10,9 +11,12 @@ namespace Sprint_0.Scripts
         {
             get => instance;
         }
+        bool musicStopped = false;
+        double stopTimer = ObjectConstants.zero;
 
         private SFXManager()
         {
+
         }
         SoundEffect bombExplosion;
         SoundEffect bombPlacement;
@@ -104,6 +108,21 @@ namespace Sprint_0.Scripts
             shoreInstance.IsLooped = true;
             textScrollInstance.IsLooped = true;
             textScrollSlowInstance.IsLooped = true;
+
+            PlayMusic();
+        }
+
+        public void Update(GameTime gt)
+        {
+            if (musicStopped)
+            {
+                stopTimer -= gt.ElapsedGameTime.TotalSeconds;
+                if(stopTimer <= 0)
+                {
+                    musicStopped = false;
+                    PlayMusic();
+                }
+            }
         }
 
         public void PlayBombExplosion()
@@ -144,7 +163,7 @@ namespace Sprint_0.Scripts
         }
         public void PlayFanfare()
         {
-            fanfare.Play();
+            InterruptMusic(fanfare);
         }
         public void PlayFireArrowBoomerang()
         {
@@ -212,7 +231,7 @@ namespace Sprint_0.Scripts
         }
         public void PlayTriforcePiece()
         {
-            triforcePiece.Play();
+            InterruptMusic(triforcePiece);
         }
 
         //Looping sounds
@@ -263,6 +282,14 @@ namespace Sprint_0.Scripts
         public void StopTextScrollSlow()
         {
             textScrollSlowInstance.Stop();
+        }
+
+        public void InterruptMusic(SoundEffect sound)
+        {
+            musicStopped = true;
+            StopMusic();
+            sound.Play();
+            stopTimer = sound.Duration.TotalSeconds;
         }
     }
 }

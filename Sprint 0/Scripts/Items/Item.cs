@@ -49,7 +49,8 @@ namespace Sprint_0.Scripts.Items
                 case ItemType.YellowRuby:
                     SFXManager.Instance.PlayPickUpRupee();
                     break;
-                case ItemType.HeartContainer:
+                case ItemType.BoomerangItem:
+                case ItemType.BowItem:
                     SFXManager.Instance.PlayFanfare();
                     break;
                 case ItemType.TriforcePiece:

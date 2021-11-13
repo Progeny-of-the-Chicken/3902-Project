@@ -63,7 +63,6 @@ namespace Sprint_0
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
             gameStateMachine = new GameStateMachine(link);
-            SFXManager.Instance.PlayMusic();
         }
 
         protected override void Update(GameTime gameTime)
@@ -76,6 +75,7 @@ namespace Sprint_0
             mc.Update();
 
             gameStateMachine.Update(gameTime);
+            SFXManager.Instance.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

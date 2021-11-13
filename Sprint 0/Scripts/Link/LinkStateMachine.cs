@@ -104,7 +104,7 @@ namespace Sprint_0.Scripts
 
                 damageCounter = ObjectConstants.defaultCounterLength;
                 linkHealth -= damage;
-
+                SFXManager.Instance.PlayLinkHit();  //putting this here so it doesn't play continuously while link stands in a fire
                 if (linkHealth <= ObjectConstants.zero)
                 {
                     damageCounter += ObjectConstants.linkDeathCounter;

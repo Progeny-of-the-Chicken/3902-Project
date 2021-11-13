@@ -39,6 +39,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             linkOwner = link;
             friendly = true;
             InitializeObject(spawnLoc, direction, magical);
+            SFXManager.Instance.PlayFireArrowBoomerang();
         }
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
         {
@@ -122,8 +123,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
             collider = ProjectileColliderFactory.Instance.CreateBoomerangCollider(this);
             ReturnState = false;
-
-            SFXManager.Instance.PlayFireArrowBoomerang();
         }
 
         private void ThrowUpdate(GameTime gt)

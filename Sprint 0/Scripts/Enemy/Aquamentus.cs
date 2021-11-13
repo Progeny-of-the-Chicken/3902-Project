@@ -36,12 +36,13 @@ namespace Sprint_0.Scripts.Enemy
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(SpriteRectangles.aquamentusMoveFrames);
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(SpriteRectangles.aquamentusShootFrames);
             sprite = moveSprite;
-            projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, FacingDirection.Left);
+            projectiles = new List<IProjectile>();
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
 
             ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            SFXManager.Instance.PlayBossScream1();
         }
         public void Update(GameTime t)
         {
@@ -49,7 +50,7 @@ namespace Sprint_0.Scripts.Enemy
             sprite.Update(t);
 
             timeSinceFire += (float)t.ElapsedGameTime.TotalSeconds;
-            if (projectiles.ToArray()[ObjectConstants.firstInArray].CheckDelete())
+            if (timeSinceFire >= ObjectConstants.AquamentusReloadTime)
             {
                 ShootProjectile();
             }
@@ -76,8 +77,9 @@ namespace Sprint_0.Scripts.Enemy
         void ShootProjectile()
         {
             timeSinceFire = ObjectConstants.counterInitialVal_float;
-            projectiles = ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location, FacingDirection.Left);
+            projectiles = ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location - ObjectConstants.LeftUnitVector * ObjectConstants.scaledStdWidthHeight, FacingDirection.Left);
             sprite = shootSprite;
+            SFXManager.Instance.PlayBossScream1();
         }
 
         public void TakeDamage(int damage)

@@ -52,7 +52,6 @@ namespace Sprint_0.Scripts
         {
             linkState.TakeDamage(damage);
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            SFXManager.Instance.PlayLinkHit();
         }
 
         public void PushBackBy(Vector2 direction)

@@ -51,7 +51,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
             collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
             friendly = false;
-            SFXManager.Instance.PlayFireMagicRod();
         }
 
         public void Update(GameTime gt)
