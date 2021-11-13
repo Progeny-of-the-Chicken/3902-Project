@@ -47,7 +47,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         }
 
         public void SelectWeapon()
-         {
+        {
             Inventory.Instance.SelectedWeaponIndex = selectionIndex;
             selectedWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[selectionIndex]));
         }
