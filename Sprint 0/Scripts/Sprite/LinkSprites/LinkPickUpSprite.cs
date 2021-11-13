@@ -26,7 +26,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             float dt = (float)gt.ElapsedGameTime.TotalSeconds;
             changeFrameCounter += dt;
-            bool changeFrame = changeFrameCounter > ObjectConstants.linkFrameChangeFreq;
+            bool changeFrame = changeFrameCounter > ObjectConstants.linkItemPickUpFrameChangeFreq;
             if (changeFrame)
             {
                 changeFrameCounter = ObjectConstants.counterInitialVal_float;

@@ -168,7 +168,7 @@ namespace Sprint_0.Scripts
         public void PickUpItem()
         {
             ResetCountersCausedByPlayer();
-            pickUpItemCounter = ObjectConstants.linkUseItemTime;
+            pickUpItemCounter = ObjectConstants.linkPickUpItemTime;
         }
 
         public void Suspend()
