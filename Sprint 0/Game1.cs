@@ -118,7 +118,7 @@ namespace Sprint_0
         //Just for sprint 3
         void ChangeRoom()
         {
-			GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), ObjectConstants.rooms[roomNum], FacingDirection.Right);
+			GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), ObjectConstants.rooms[roomNum], FacingDirection.Up);
         }
 
         public void NextRoom()

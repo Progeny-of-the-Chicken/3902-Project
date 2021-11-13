@@ -6,19 +6,6 @@ namespace Sprint_0
 {
     public static class ObjectConstants
     {
-        //----- Room Constant Values -----//
-        // 64 is the ammount of space needed for the HUD above the map
-        public static int YOFFSET { get { return 64 * scale; } }
-
-        public const int minRoomX = 0;
-        public const int maxRoomX = 224;
-        public const int minRoomY = 0;
-        public const int maxRoomY = 144;
-
-        public static int midRoomY { get { return (maxRoomY + minRoomY) / 2; } }
-        public static int midRoomX { get { return (maxRoomX + minRoomX) / 2; } }
-
-
         //----- Sprite constant values -----//
         public const int scale = 3;
         public const double itemAnimationDelaySeconds = 0.1;
@@ -55,7 +42,7 @@ namespace Sprint_0
 
 
         //----- Link constant values -----//
-        public const int linkSpeed = 1;
+        public const int linkSpeed = 2;
         public const int linkStartingHealth = 6;
         public const int linkTurningCounterDebounce = 10;
         public const int linkDeathCounter = 90;
@@ -112,6 +99,7 @@ namespace Sprint_0
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = DefaultEnemyDamage;
+
 
         //----- Enemy constant values -----//
         //Default
@@ -179,12 +167,14 @@ namespace Sprint_0
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
+
         //----- Collision constant values -----//
         public static Vector2 degreeRotationCW90_v = new Vector2(0, -1);
         public static Vector2 degreesRotationCW180_v = new Vector2(-1, -1);
         public static Vector2 degreesRotationCW270_v = new Vector2(-1, 0);
         public const int zero = 0;
         public const int xOnScreenBorder = 0;
+
 
         //----- string constant values -----//
         public const string secretRoom = "Room00";
@@ -252,28 +242,48 @@ namespace Sprint_0
         public const string SouthLockedSpriteStr = "SouthLockedSprite";
         public const string SouthWallSpriteStr = "SouthWallSprite";
 
+
         //----- wall/block constant values -----//
-        public const int wallOffset = scale * standardWidthHeight * 2;
-        public const int yOffsetForRoom = scale * standardWidthHeight * 4;
         public const int rowParsePosition = 5;
         public const int colParsePosition = 4;
         public const int rowAndColPraseLen = 1;
+
+        public const int wallOffset = scale * standardWidthHeight * 2;
+        public const int yOffsetForRoom = scale * standardWidthHeight * 4;
         public const int xOffsetForRoom = 0;
+
         public const int roomWidth = 256;
         public const int roomHeight = 176;
+
         public const int roomWidthForScanIn = 257;
         public const int roomHeightForScanIn = 177;
         public const int roomReadInAdjustment = 1;
         public const int coordinateReadInAdjustment = 2;
         public const int nextCharInString = 1;
+
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
+        
+
+
+
+        public const int yPosForNorthDoor = 0;
+        public const int yPosForEastWestDoor = 72;
+        public const int yPosForSouthDoor = 144;
+
+        public const int xPosForNorthSouthDoor = 112;
+        public const int xPosForEastDoor = 224;
+        public const int xPosForWestDoor = 0;
+
+
+
+
+
+
         public const int xPosForDoorRight = 144;
-        public const int xPosForDoorTop = 224;
         public const int yPosForDoorBottom = 104;
         public const int yPosForDoorLeft = 144;
-        public const int yPosForDoorEast = 72;
-        public const int xPosForDoorNorth = 112;
+
         public const int EastDoorSpritePos = 8;
         public const int NorthDoorSpritePos = 9;
         public const int WestDoorSpritePos = 10;

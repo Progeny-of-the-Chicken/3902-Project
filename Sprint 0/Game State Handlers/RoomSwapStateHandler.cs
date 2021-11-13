@@ -131,22 +131,22 @@ namespace Sprint_0.GameStateHandlers
         {
             Vector2 spawnPos;
             int scale = ObjectConstants.scale;
-            int YOFFSET = ObjectConstants.YOFFSET;
+            int YOFFSET = ObjectConstants.yOffsetForRoom;
             int tileSize = ObjectConstants.squareTileWidthHeight * scale;
 
             switch (scrollingDirection)
             {
                 case FacingDirection.Right:
-                    spawnPos = new Vector2(ObjectConstants.maxRoomX * scale - tileSize, ObjectConstants.midRoomY * scale + YOFFSET + (tileSize / 2));
+                    spawnPos = new Vector2(ObjectConstants.xPosForEastDoor * scale - tileSize, ObjectConstants.yPosForEastWestDoor * scale + YOFFSET + (tileSize / 2));
                     break;
                 case FacingDirection.Left:
-                    spawnPos = new Vector2(ObjectConstants.minRoomX * scale + (tileSize * 2), ObjectConstants.midRoomY * scale + YOFFSET + (tileSize / 2));
+                    spawnPos = new Vector2(ObjectConstants.xPosForWestDoor * scale + (tileSize * 2), ObjectConstants.yPosForEastWestDoor * scale + YOFFSET + (tileSize / 2));
                     break;
                 case FacingDirection.Up:
-                    spawnPos = new Vector2(ObjectConstants.midRoomX * scale + (tileSize / 2), ObjectConstants.minRoomY * scale + YOFFSET + tileSize);
+                    spawnPos = new Vector2(ObjectConstants.xPosForNorthSouthDoor * scale + (tileSize / 2), ObjectConstants.yPosForNorthDoor * scale + YOFFSET + 2 * tileSize);
                     break;
                 case FacingDirection.Down:
-                    spawnPos = new Vector2(ObjectConstants.midRoomX * scale + (tileSize / 2), ObjectConstants.maxRoomY * scale + YOFFSET - tileSize);
+                    spawnPos = new Vector2(ObjectConstants.xPosForNorthSouthDoor * scale + (tileSize / 2), ObjectConstants.yPosForSouthDoor * scale + YOFFSET - tileSize);
                     break;
                 default:
                     spawnPos = new Vector2();
