@@ -111,12 +111,17 @@ namespace Sprint_0
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
 
-        //Magic projectile
+        // Magic projectile
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
 
+        // Sword beam
+        public const double swordBeamSpeedPerSecond = 100 * scale;
+        public const int swordBeamMaxDistance = 150 * scale;
+        public const int swordBeamDamage = 3;
+        public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
 
         //----- Enemy constant values -----//
 
