@@ -4,16 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.InventorySprites
 {
-    public class SelectionSprite : ISprite
+    public class TreasureDotSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = SpriteRectangles.selectionFrames;
+        private List<Rectangle> frames = SpriteRectangles.treasureDotFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
         private double startTimeSeconds = ObjectConstants.zero_double;
         private int frameIndex = ObjectConstants.zero_int;
         private int scale = ObjectConstants.scale;
 
-        public SelectionSprite(Texture2D textures)
+        public TreasureDotSprite(Texture2D textures)
         {
             spritesheet = textures;
         }

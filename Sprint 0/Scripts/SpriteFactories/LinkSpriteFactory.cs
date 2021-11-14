@@ -45,6 +45,8 @@ namespace Sprint_0.Scripts.SpriteFactories
                 return new LinkTakingDamageSprite(linkState);
             if (linkState.IsUsingItem)
                 return new LinkUsingItemSprite(linkState);
+            if (linkState.IsPickingUpItem)
+                return new LinkPickUpSprite(linkState);
             else
                 return new LinkStandingSprite(linkState);
         }

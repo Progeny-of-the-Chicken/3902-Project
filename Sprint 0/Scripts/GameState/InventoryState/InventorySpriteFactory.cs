@@ -49,6 +49,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState
             return new CoverSprite(texture, destRec);
         }
 
+        public ISprite CreateMapColorCoverSprite()
+        {
+            return new MapColorCoverSprite(texture);
+        }
+
         public ISprite CreateSelectionSprite()
         {
             return new SelectionSprite(texture);
@@ -114,6 +119,21 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         public ISprite CreateTreasureRoomMapMarkerSprite()
         {
             return new TreasureRoomMapMarkerSprite(texture);
+		}
+
+        public ISprite CreateDiscoveredRoomSprite(Rectangle sourceRec)
+        {
+            return new DiscoveredRoomSprite(texture, sourceRec);
+        }
+
+        public ISprite CreatePlayerDotSprite()
+        {
+            return new PlayerDotSprite(texture);
+        }
+
+        public ISprite CreateTreasureDotSprite()
+        {
+            return new TreasureDotSprite(texture);
         }
     }
 }

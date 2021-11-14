@@ -19,11 +19,16 @@ namespace Sprint_0.Scripts.GameState
             Weapons = new List<WeaponType>
             {
                 WeaponType.BlueCandle,
-                WeaponType.BasicBoomerang
+                WeaponType.BasicBoomerang,
+                WeaponType.MagicalBoomerang,
+                WeaponType.Bomb
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             Map = false;
             Compass = false;
+            Rupee = ObjectConstants.inventoryStartingRupees;
+            Key = ObjectConstants.inventoryStartingKeys;
+            Bomb = ObjectConstants.inventoryStartingBombs;
         }
 
         public List<WeaponType> Weapons { get; set; }
@@ -34,6 +39,12 @@ namespace Sprint_0.Scripts.GameState
 
         public bool Compass { get; set; }
 
-        // TODO: Add more properties as needed by HUD
+        public int Rupee { get; set; }
+
+        public int Key { get; set; }
+
+        public int Bomb { get; set; }
+
+        // TODO: Add link's health
     }
 }

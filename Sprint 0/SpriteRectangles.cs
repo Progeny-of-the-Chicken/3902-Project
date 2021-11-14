@@ -29,6 +29,11 @@ namespace Sprint_0
             new Rectangle(35, 47, 16, 29),
             new Rectangle(53, 47, 16, 18) };
 
+        public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 12, 16),
+            new Rectangle(231, 11, 16, 16),
+            new Rectangle(214, 11, 12, 16),
+            new Rectangle(231, 11, 16, 16)};
+
         public static Rectangle linkUsingItemDownFrame = new Rectangle(107, 11, 16, 16);
         public static Rectangle linkUsingItemRightFrame = new Rectangle(124, 12, 16, 16);
         public static Rectangle linkUsingItemUpFrame = new Rectangle(141, 11, 16, 16);
@@ -145,6 +150,15 @@ namespace Sprint_0
             new Rectangle(132, 48, 80, 32),
             new Rectangle(128, 24, 88, 16)
         };
+        public static Rectangle discoveredRoomIndex0Frame = new Rectangle(519, 108, 8, 8);
+        public static Rectangle playerDotFrames = new Rectangle(528, 126, 3, 3);
+        public static List<Rectangle> treasureDotFrames = new List<Rectangle>
+        {
+            new Rectangle(537, 126, 3, 3),
+            new Rectangle(546, 126, 3, 3)
+        };
+
+        public static Rectangle mapColorCoverSpriteFrame = new Rectangle(458, 120, 16, 16);
 
         //----- HUD source rectangles -----//
         public static Rectangle HUDBackdropFrame = new Rectangle(258, 11, 256, 56);

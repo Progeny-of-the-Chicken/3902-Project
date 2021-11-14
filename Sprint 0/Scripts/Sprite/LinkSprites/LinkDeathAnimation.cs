@@ -11,7 +11,8 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle frame;
         private Vector2 position;
         private FacingDirection direction;
-        private int animationCounter;
+        private float animationCounter;
+        private float changeFrameCounter;
         private Color randColor;
         private Random rand = new Random();
 
@@ -21,26 +22,26 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             this.direction = FacingDirection.Down;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             SetFramesForDirection();
-            animationCounter = ObjectConstants.counterInitialVal_int;
+            animationCounter = ObjectConstants.counterInitialVal_float;
+            changeFrameCounter = ObjectConstants.counterInitialVal_float;
         }
 
 
         public void Update(GameTime gt)
         {
-            animationCounter++;
-            //TODO:simpilify if else, switch to run off of gametime instead of frame counters
-            if (animationCounter < ObjectConstants.defaultCounterLength)
+            float dt = (float)gt.ElapsedGameTime.TotalSeconds;
+            animationCounter += dt;
+            changeFrameCounter += dt;
+            bool changeFrame = changeFrameCounter > ObjectConstants.linkFrameChangeFreq;
+            randColor = Color.White;
+            if (changeFrame)
             {
-                if (animationCounter % ObjectConstants.oneInFive == ObjectConstants.zero_int)
+                changeFrameCounter = ObjectConstants.counterInitialVal_float;
+                if (animationCounter < ObjectConstants.linkTakeDamageTime)
                     randColor = new Color(RandomRGB(), RandomRGB(), RandomRGB());
-            }
-            else
-            {
-                randColor = Color.White;
-                if (animationCounter % ObjectConstants.oneInFive == ObjectConstants.zero_int)
+                else
                     SetNewDirection();
             }
-
         }
 
         private int RandomRGB()
