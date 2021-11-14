@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
-using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
+using System;
 
 namespace Sprint_0.Scripts
 {
@@ -14,8 +14,16 @@ namespace Sprint_0.Scripts
         LinkStateMachine linkState;
         private LinkCollider _collider;
         public IPlayerCollider collider { get => _collider; }
+        private static Link instance = new Link();
+        public static Link Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
-        public Link()
+        private Link()
         {
             linkState = new LinkStateMachine();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
@@ -24,6 +32,7 @@ namespace Sprint_0.Scripts
             _collider = new LinkCollider(this, spawnHitbox);
         }
 
+
         public void Draw(SpriteBatch sb)
         {
             LinkSprite.Draw(sb, linkState.Position);
@@ -31,17 +40,16 @@ namespace Sprint_0.Scripts
 
         public void Update(GameTime gt)
         {
-            linkState.Update();
+            linkState.Update(gt);
             if (!linkState.DoingSomething())
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-
             LinkSprite.Update(gt);
             _collider.Update(linkState.Position);
         }
 
         public void GoInDirection(FacingDirection direction)
         {
-            if (!linkState.IsMoving && !linkState.IsTurning)
+            if (linkState.CanDoNewThing())
             {
                 linkState.GoInDirection(direction);
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
@@ -54,14 +62,15 @@ namespace Sprint_0.Scripts
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
-        public void PushBackBy(Vector2 direction)
+        public void PushBackInstantlyBy(Vector2 direction)
         {
-            linkState.PushBackBy(direction);
+            linkState.PushBackBy(direction, ObjectConstants.zero_double);
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
-
-        public bool IsMoving()
+        public void PushBackGentlyBy(Vector2 direction)
         {
-            return linkState.IsMoving;
+            linkState.PushBackBy(direction, ObjectConstants.linkStdMoveTime);
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
         public void StopMoving()
@@ -79,6 +88,12 @@ namespace Sprint_0.Scripts
         public void UseItem()
         {
             linkState.UseItem();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
+        public void PickUpItem()
+        {
+            linkState.PickUpItem();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
@@ -109,7 +124,7 @@ namespace Sprint_0.Scripts
 
         public bool IsSuspended { get => linkState.IsSuspended; }
 
-        public bool CanBeAffectedByEnemy { get => !linkState.IsTakingDamage; }
+        public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack); }
     }
 
 }

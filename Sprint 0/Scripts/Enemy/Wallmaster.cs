@@ -24,12 +24,15 @@ namespace Sprint_0.Scripts.Enemy
         const int knockbackDistance = 50; //TODO: this magic number appears more than once and needs to be standardized
         bool delete = false;
         bool grab = false;
+        bool inKnockBack = false;
 
         float moveSpeed;
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
+        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
 
         Vector2 location;
         Vector2 direction;
+        Vector2 knockbackDirection;
 
         Link grabbedLink;
         public Wallmaster(Vector2 location)
@@ -115,11 +118,17 @@ namespace Sprint_0.Scripts.Enemy
             {
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;
+                SFXManager.Instance.PlayEnemyDeath();
             }
+            SFXManager.Instance.PlayEnemyHit();
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback * knockbackDistance;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //TODO: add gradual knockback to wallmaster
         }
         public bool CheckDelete()
         {

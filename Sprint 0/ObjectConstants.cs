@@ -45,13 +45,19 @@ namespace Sprint_0
 
 
         //----- Link constant values -----//
-        public const int linkSpeed = 2;
-        public const int linkStartingHealth = 6;
-        public const int linkTurningCounterDebounce = 10;
-        public const int linkDeathCounter = 90;
+        public const int linkStdMoveDist = scaledStdWidthHeight / 2;
+        public const float linkStdMoveTime = 0.25f;
+        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
+        public const float linkDeathAnimationTime = 1.5f;
+        public const float linkTakeDamageTime = 1;
+        public const float linkUseItemTime = 0.5f;
+        public const float linkPickUpItemTime = 1f;
+        public const float linkFrameChangeFreq = 0.05f;
+        public const float linkItemPickUpFrameChangeFreq = 0.2f;
+        public const int linkStartingHealth = 20;
+        public const float linkTurningCounterDebounce = 0.15f;
+        public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
-        public const int bouncebackDistance = 90;
-        public const int squareTileWidthHeight = 16;
         public static Vector2 linkStartingPosition = new Vector2(200, 400); //generic starting position
 
 
@@ -109,62 +115,57 @@ namespace Sprint_0
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
-        public const int magicProjectileDamage = DefaultEnemyDamage;
+        public const int magicProjectileDamage = 1;
 
 
         //----- Enemy constant values -----//
 
         //Default
-        public const int DefaultEnemyDamage = 1;
-        public const int DefaultEnemyHealth = 1;
-        public const int DefaultEnemyKnockback = 2 * scale * standardWidthHeight;
+        public const double DefaultEnemyKnockbackTime = 0.5f;
+        public const float DefaultEnemyKnockbackSpeed = 4 * scale * standardWidthHeight;
+        public const float DefaultEnemyKnockbackToLink = 2 * scale * standardWidthHeight;
         public const float DefaultEnemyMoveSpeed = 2 * scale * standardWidthHeight;
         public const double DefaultEnemyMoveTime = 1.0;
         public const double DefaultEnemyPauseTime = 1.0;
 
         //Aquamentus
-        public const int AquamentusDamage = DefaultEnemyDamage;
+        public const int AquamentusDamage = 2;
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
         public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
+        public const double AquamentusReloadTime = 2;
         public const double AquamentusShootSpriteTime = 0.5f;
-        public const int AquamentusStartingHealth = 1;
-
+        public const int AquamentusStartingHealth = 6;
         //Gel
-        public const int GelDamage = DefaultEnemyDamage;
+        public const int GelDamage = 1;
         public const double GelMoveTime = DefaultEnemyMoveTime;
         public const float GelMoveSpeed = DefaultEnemyMoveSpeed;
         public const double GelPauseTime = DefaultEnemyPauseTime;
-        public const int GelStartingHealth = DefaultEnemyHealth;
-
+        public const int GelStartingHealth = 1;
         //Goriya
-        public const int GoriyaDamage = DefaultEnemyDamage;
+        public const int GoriyaDamage = 1;
         public const double GoriyaMoveTime = 1.5;
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int GoriyaStartingHealth = DefaultEnemyHealth;
-
+        public const int GoriyaStartingHealth = 1;
         //Keese
-        public const int KeeseDamage = DefaultEnemyDamage;
+        public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
         public const float KeeseMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int KeeseStartingHealth = DefaultEnemyHealth;
-
+        public const int KeeseStartingHealth = 1;
         //OldMan
         public const int OldManDamage = 0;
         public const int OldManStartingHealth = 1;
 
         //Stalfos
-        public const int StalfosDamage = DefaultEnemyDamage;
+        public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
         public const float StalfosMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int StalfosStartingHealth = DefaultEnemyHealth;
-
+        public const int StalfosStartingHealth = 2;
         //Zol
-        public const int ZolDamage = DefaultEnemyDamage;
+        public const int ZolDamage = 2;
         public const double ZolMoveTime = DefaultEnemyMoveTime;
         public const float ZolMoveSpeed = DefaultEnemyMoveSpeed;
         public const double ZolPauseTime = DefaultEnemyPauseTime;
-        public const int ZolStartingHealth = DefaultEnemyHealth;
-
+        public const int ZolStartingHealth = 1;
         //SpikeTrap
         public const int vectorFlip = -1;
         public const int spikeTrapSpeed = 25 * scale;

@@ -8,12 +8,10 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
     {
         private Texture2D sheet;
         private Rectangle frame;
-        private Vector2 position;
         private FacingDirection direction;
 
         public LinkStandingSprite(LinkStateMachine state)
         {
-            position = state.Position;
             this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesForDirection();
@@ -27,9 +25,9 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         public void Draw(SpriteBatch sb, Vector2 loc)
         {
             if (direction == FacingDirection.Left)
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White, ObjectConstants.zeroRotation, new Vector2(), SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
+                sb.Draw(sheet, new Rectangle((int)loc.X, (int)loc.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White, ObjectConstants.zeroRotation, new Vector2(), SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
             else
-                sb.Draw(sheet, new Rectangle((int)position.X, (int)position.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White);
+                sb.Draw(sheet, new Rectangle((int)loc.X, (int)loc.Y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame, Color.White);
         }
 
         private void setFramesForDirection()

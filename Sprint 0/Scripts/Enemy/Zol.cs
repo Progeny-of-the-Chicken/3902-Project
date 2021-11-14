@@ -20,6 +20,8 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
 
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
+        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
+        bool inKnockBack = false;
         bool delete = false;
 
         public int Damage { get => ObjectConstants.ZolDamage; }
@@ -27,6 +29,7 @@ namespace Sprint_0.Scripts.Enemy
 
         Vector2 location;
         Vector2 direction;
+        Vector2 knockbackDirection;
 
         public Zol(Vector2 location)
         {
@@ -39,25 +42,42 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void Update(GameTime t)
         {
-            timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.ZolPauseTime)
+            if (!inKnockBack)
             {
                 Move(t);
             }
+            else
+            {
+                GetKnockedBack(t);
+            }
+            collider.Update(location);
             sprite.Update(t);
         }
 
         public void Move(GameTime t)
         {
+            timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
             if (timeSinceMove >= ObjectConstants.ZolMoveTime + ObjectConstants.ZolPauseTime)
             {
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-
-            location += direction * ObjectConstants.ZolMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            collider.Update(location);
+            if (timeSinceMove >= ObjectConstants.ZolPauseTime)
+            {
+                location += direction * ObjectConstants.ZolMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+            }
         }
+        void GetKnockedBack(GameTime t)
+        {
+            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
+            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
+            {
+                inKnockBack = false;
+                timeSinceKnockback = 0;
+            }
+        }
+
         void SetRandomDirection()
         {
             //First byte is vertical/horizontal, second is +/-
@@ -76,11 +96,19 @@ namespace Sprint_0.Scripts.Enemy
             {
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;
+                SFXManager.Instance.PlayEnemyDeath();
             }
+            SFXManager.Instance.PlayEnemyHit();
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            inKnockBack = true;
+            knockback.Normalize();
+            knockbackDirection = knockback;
         }
         public bool CheckDelete()
         {

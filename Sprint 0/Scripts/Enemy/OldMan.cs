@@ -43,9 +43,13 @@ namespace Sprint_0.Scripts.Enemy
             //health -= damage;
             //delete = (health <= 0);
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
-            //location += knockback;
+            //Old man stands his ground
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //The old man does not budge under the force of your sword
         }
         public bool CheckDelete()
         {

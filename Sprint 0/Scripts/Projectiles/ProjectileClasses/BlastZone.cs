@@ -23,6 +23,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             pos = location;
             collider = ProjectileColliderFactory.Instance.CreateBlastZoneCollider(this);
             friendly = true;
+            SFXManager.Instance.PlayBombExplosion();
         }
 
         public void Update(GameTime gameTime)

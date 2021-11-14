@@ -7,13 +7,11 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
     public class LinkMovingSprite : ISprite
     {
         private Texture2D sheet;
-
         private FacingDirection direction;
         private LinkStateMachine state;
         int x;
         int y;
-        private int frameNum = ObjectConstants.counterInitialVal_int;
-        private int maxFrames = ObjectConstants.defaultCounterLength;
+        private float changeFrameCounter;
         private Rectangle frame1;
         private Rectangle frame2;
         private bool isFrame1 = true;
@@ -24,22 +22,20 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesForDirection();
+            changeFrameCounter = ObjectConstants.counterInitialVal_float;
         }
 
         public void Update(GameTime gt)
         {
-            frameNum++;
-            if (frameNum == maxFrames)
+            float dt = (float)gt.ElapsedGameTime.TotalSeconds;
+            changeFrameCounter += dt;
+            bool changeFrame = changeFrameCounter > ObjectConstants.linkFrameChangeFreq;
+            if (changeFrame)
             {
-                frameNum = ObjectConstants.counterInitialVal_int;
-            }
-
-            // Every set number of frames, determined by the stepSpeed, the next frame of the step will be loaded.
-            if ((frameNum % ObjectConstants.oneInFive) == ObjectConstants.zero_int)
-            {
+                changeFrameCounter = ObjectConstants.counterInitialVal_float;
                 isFrame1 = !isFrame1;
-            }
 
+            }
             x = (int)state.Position.X;
             y = (int)state.Position.Y;
         }

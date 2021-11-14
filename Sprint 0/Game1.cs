@@ -52,7 +52,7 @@ namespace Sprint_0
             Content.RootDirectory = ObjectConstants.contentLocation;
             IsMouseVisible = true;
 
-            link = new Link();
+            link = Link.Instance;
             kc = new KeyboardController(this);
 
             //Just for Sprint 3
@@ -81,6 +81,7 @@ namespace Sprint_0
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
             InventorySpriteFactory.Instance.LoadAllTextures(this.Content);
             FontSpriteFactory.Instance.LoadAllTextures(this.Content);
+            SFXManager.Instance.LoadAllSounds(this.Content);
 
             base.LoadContent();
             roomManager = RoomManager.Instance;
@@ -97,6 +98,7 @@ namespace Sprint_0
             //Just for Sprint 3
             mc.Update();
 
+            SFXManager.Instance.Update(gameTime);
             GameStateManager.Instance.Update(gameTime);
         }
 

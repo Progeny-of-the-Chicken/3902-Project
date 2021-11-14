@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             if (!Owner.Friendly)
             {
                 link.TakeDamage(Owner.Damage);
-                link.PushBackBy(Overlap.DirectionToMoveObjectOff(link.collider.CollisionRectangle, _hitbox));
+                link.PushBackGentlyBy(Overlap.DirectionToMoveObjectOff(link.collider.CollisionRectangle, _hitbox));
                 ((Boomerang)Owner).BounceOffWall();
             }
         }
@@ -41,7 +41,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             if (Owner.Friendly)
             {
                 enemy.TakeDamage(Owner.Damage);
-                enemy.KnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
                 ((Boomerang)Owner).BounceOffWall();
             }
         }
