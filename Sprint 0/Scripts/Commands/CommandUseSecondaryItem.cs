@@ -21,8 +21,11 @@ namespace Sprint_0.Scripts.Commands
             switch (type)
             {
                 case WeaponType.Bow:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
-                    // TODO: Decrement rupee count
+                    if (Inventory.Instance.Rupee > 0)
+                    {
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
+                        Inventory.Instance.Rupee--;
+                    }
                     break;
                 case WeaponType.BasicBoomerang:
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
@@ -31,7 +34,11 @@ namespace Sprint_0.Scripts.Commands
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.Position, link.FacingDirection, link));
                     break;
                 case WeaponType.Bomb:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateBomb(link.Position, link.FacingDirection));
+                    if (Inventory.Instance.Bomb > 0)
+                    {
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateBomb(link.Position, link.FacingDirection));
+                        Inventory.Instance.Bomb--;
+                    }
                     break;
                 case WeaponType.BlueCandle:
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateFireSpell(link.Position, link.FacingDirection));

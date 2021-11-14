@@ -21,7 +21,6 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.BlueCandle,
                 WeaponType.BasicBoomerang,
                 WeaponType.MagicalBoomerang,
-                WeaponType.BasicArrow,
                 WeaponType.Bomb
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
@@ -45,5 +44,7 @@ namespace Sprint_0.Scripts.GameState
         public int Key { get; set; }
 
         public int Bomb { get; set; }
+
+        // TODO: Add link's health
     }
 }

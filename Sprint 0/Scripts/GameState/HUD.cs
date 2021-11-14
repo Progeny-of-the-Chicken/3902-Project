@@ -12,7 +12,6 @@ namespace Sprint_0.Scripts.GameState
 {
     //TODO: Update Map thingy when player can pick up map
     //TODO: Update health to when moved to Link/Inventory
-    //TODO: Update counters when moved to Link/Inventory
     public class HUD : IHUD
     {
         ISprite backgroundSprite;
