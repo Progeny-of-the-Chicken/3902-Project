@@ -84,7 +84,7 @@ namespace Sprint_0
         public const int blastZonePositionOffset = -8;
         public const int blastZoneWidthHeight = 32;
         public const int blastZoneCounter = 1;
-        public const int blastZoneDamage = 1;
+        public const int blastZoneDamage = 3;
         public static Rectangle blastZoneSize = new Rectangle(0, 0, blastZoneWidthHeight, blastZoneWidthHeight);
 
         // Bomb

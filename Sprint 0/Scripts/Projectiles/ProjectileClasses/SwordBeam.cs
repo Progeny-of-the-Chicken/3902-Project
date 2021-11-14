@@ -34,8 +34,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             SetSpriteVectors(direction);
             sprite = ProjectileSpriteFactory.Instance.CreateSwordBeamSprite(direction);
 
-            // TODO: Create collider
-            collider = ProjectileColliderFactory.Instance.CreateArrowCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateSwordBeamCollider(this, direction);
             friendly = true;
             SFXManager.Instance.PlaySwordShoot();
         }

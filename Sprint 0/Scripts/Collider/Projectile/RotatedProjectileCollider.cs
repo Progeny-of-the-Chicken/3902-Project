@@ -17,17 +17,9 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public RotatedProjectileCollider(IProjectile owner, FacingDirection direction)
         {
             Owner = owner;
-            if (owner is Arrow)
-            {
-                // No size variation between basic and silver arrows
-                _hitbox = SpriteRectangles.basicArrowFrame;
-            }
-            else if (owner is SwordAttackHitbox)
-            {
-                _hitbox = ObjectConstants.swordAttackHitBoxSize;
-            }
-            _hitbox.Size *= new Point(ObjectConstants.scale);
 
+            GetHitboxForOwner();
+            _hitbox.Size *= new Point(ObjectConstants.scale);
             AdjustHitbox(direction);
         }
 
@@ -49,6 +41,17 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         //----- Helper method for initializing the hitbox -----//
 
+        private Rectangle GetHitboxForOwner()
+        {
+            return Owner switch
+            {
+                Arrow => SpriteRectangles.basicArrowFrame,
+                SwordAttackHitbox => ObjectConstants.swordAttackHitBoxSize,
+                SwordBeam => SpriteRectangles.swordBeamFrames[ObjectConstants.firstFrame],
+                // Should never happen
+                _ => Rectangle.Empty
+            };
+        }
         private void AdjustHitbox(FacingDirection direction)
         {
             // Rotate hitbox pi/2 if needed, keep location at top-left corner
