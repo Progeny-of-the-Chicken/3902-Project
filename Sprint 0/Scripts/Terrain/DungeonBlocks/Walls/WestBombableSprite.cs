@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 
 public class WestBombableSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(815, 44, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.WestBombableSpriteFrame;
     Rectangle destination;
     BombableWallCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -15,11 +15,12 @@ public class WestBombableSprite : IWall
     string nextRoom;
     public String NextRoom { get => nextRoom; }
 
-    public WestBombableSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    public WestBombableSprite(Vector2 screenLocation, Room room, String nextRoom)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new BombableWallCollider(this, destination);
         this.room = room;
+        this.nextRoom = nextRoom;
     }
 
     public void Update()
@@ -35,8 +36,9 @@ public class WestBombableSprite : IWall
 
     public void SwapDoor()
     {
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "WestBombedSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.WestBombedSpriteStr);
         command.Execute();
+        SFXManager.Instance.PlaySecretFound();
     }
 
 }

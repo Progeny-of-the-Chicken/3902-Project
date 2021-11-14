@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
+            link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
             owner.SwapDoor();
         }
 

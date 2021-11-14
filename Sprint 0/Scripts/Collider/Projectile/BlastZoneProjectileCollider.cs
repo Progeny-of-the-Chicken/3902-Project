@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public BlastZoneProjectileCollider(IProjectile owner)
         {
             this.Owner = owner;
-            _hitbox = new Rectangle(0, 0, ObjectConstants.blastZoneWidthHeight, ObjectConstants.blastZoneWidthHeight);
+            _hitbox = ObjectConstants.blastZoneSize;
             _hitbox.Size *= new Point(ObjectConstants.scale);
         }
 
@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(Owner.Damage);
-            player.PushBackBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
+            player.PushBackGentlyBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
         }
 
         public void OnEnemyCollision(IEnemy enemy)

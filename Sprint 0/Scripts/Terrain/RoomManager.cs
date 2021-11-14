@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -21,13 +20,14 @@ namespace Sprint_0.Scripts.Terrain
             }
         }
         private RoomManager()
-        { 
+        {
             dormentRooms = new Dictionary<string, IRoom>();
         }
         public void Init(ILink player)
         {
             this.link = player;
-            activeRoom = new Room("Room20", this.link);
+            activeRoom = new Room(ObjectConstants.startRoom, this.link);
+            RoomTracker.Instance.Init(activeRoom.RoomId());
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -38,7 +38,8 @@ namespace Sprint_0.Scripts.Terrain
         public void SwitchToRoom(string roomID)
         {
             dormentRooms.Add(activeRoom.RoomId(), activeRoom);
-            if(dormentRooms.ContainsKey(roomID))
+            RoomTracker.Instance.RegisterRoom(activeRoom.RoomId(), roomID);
+            if (dormentRooms.ContainsKey(roomID))
             {
                 dormentRooms.Remove(roomID, out activeRoom);
             }
@@ -51,6 +52,20 @@ namespace Sprint_0.Scripts.Terrain
         public void Update(GameTime gt)
         {
             activeRoom.Update(gt);
+        }
+
+        public IRoom LoadRoom(string roomID)
+        {
+            if (dormentRooms.ContainsKey(roomID))
+            {
+                return dormentRooms[roomID];
+            }
+            else
+            {
+                //IRoom newRoom = new Room(roomID, link);
+                //dormentRooms.Add(roomID, newRoom);
+                return new Room(roomID, link);
+            }
         }
 
         public IRoom CurrentRoom

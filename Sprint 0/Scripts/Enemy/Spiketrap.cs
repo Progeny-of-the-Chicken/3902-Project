@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
-using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
 
 namespace Sprint_0.Scripts.Enemy
 {
     class SpikeTrap : IEnemy
     {
+        //TODO: additional refactoring needed with magic numbers
         ISprite sprite;
         IEnemyCollider DamageCollider;
         IEnemyCollider XDetectionCollider;
         IEnemyCollider YDetectionCollider;
-        public IEnemyCollider Collider {get => DamageCollider;}
+        public IEnemyCollider Collider { get => DamageCollider; }
         public IEnemyCollider XCollider { get => XDetectionCollider; }
 
         public IEnemyCollider YCollider { get => YDetectionCollider; }
 
-        Rectangle damageFrame = new Rectangle(164, 59, 16, 16);
         Rectangle RectangleX;
         Rectangle RectangleY;
         Vector2 OriginalLocation;
@@ -32,7 +26,7 @@ namespace Sprint_0.Scripts.Enemy
         public Vector2 Location { get => location; }
 
         public int Damage { get => damage; }
-        const int knockbackDistance = 50;
+        const int knockbackDistance = 50;//TODO: magic number 50
         bool delete = false;
 
         Vector2 location;
@@ -40,15 +34,15 @@ namespace Sprint_0.Scripts.Enemy
         public SpikeTrap(Vector2 location)
         {
             this.location = location;
-            moveSpeed = 25 * ObjectConstants.scale;
+            moveSpeed = ObjectConstants.spikeTrapSpeed;
             OriginalLocation = location;
             direction = Vector2.Zero;
-            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
-            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (int)(damageFrame.Width * ObjectConstants.scale), (int)(damageFrame.Height * ObjectConstants.scale)));
+            RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (25 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.standardWidthHeight);
+            RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.scaledStdWidthHeight)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.scaledStdWidthHeight));
+            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
             XDetectionCollider = new DetectionCollider(this, RectangleX);
             YDetectionCollider = new DetectionCollider(this, RectangleY);
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(ObjectConstants.scale, damageFrame);
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
         }
 
         public void Update(GameTime gt)
@@ -57,19 +51,20 @@ namespace Sprint_0.Scripts.Enemy
             {
                 Move(gt);
                 sprite.Update(gt);
-            } else
+            }
+            else
             {
                 SetOriginalPosition(gt);
             }
-            
-            
+
+
         }
 
         void Move(GameTime gt)
         {
             //move according to link's position
             location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            
+
             DamageCollider.Update(location);
         }
 
@@ -84,12 +79,13 @@ namespace Sprint_0.Scripts.Enemy
             if (location != OriginalLocation)
             {
                 location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            } else
+            }
+            else
             {
                 hasHit = false;
                 direction = Vector2.Zero;
             }
-            
+
         }
 
         public void TakeDamage(int damage)

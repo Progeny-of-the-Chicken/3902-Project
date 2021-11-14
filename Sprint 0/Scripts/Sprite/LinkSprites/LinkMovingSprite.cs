@@ -1,80 +1,57 @@
-﻿using System;
-using Sprint_0.Scripts.SpriteFactories;
+﻿using Sprint_0.Scripts.SpriteFactories;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkMovingSprite: ISprite
+    public class LinkMovingSprite : ISprite
     {
         private Texture2D sheet;
-
-        private Rectangle forwardSpritesheetLocation_1 = new Rectangle(1, 11, 15, 16);
-        private Rectangle forwardSpritesheetLocation_2 = new Rectangle(19, 11, 15, 16);
-        private Rectangle rightSpritesheetLocation_1 = new Rectangle(34, 11, 16, 16);
-        private Rectangle rightSpritesheetLocation_2 = new Rectangle(51, 12, 16, 16);
-        private Rectangle backwardSpritesheetLocation_1 = new Rectangle(70, 11, 15, 16);
-        private Rectangle backwardSpritesheetLocation_2 = new Rectangle(87, 11, 15, 16);
-
         private FacingDirection direction;
         private LinkStateMachine state;
         int x;
         int y;
-
-        private int stepSpeed = 5; // Lower is faster
-        private int frameNum = 0;
-        private int maxFrames = 30;
+        private float changeFrameCounter;
         private Rectangle frame1;
         private Rectangle frame2;
         private bool isFrame1 = true;
 
-        private int pixel = 3;
-        private int standardWidthHeight; // Defined by pixel
-
-
         public LinkMovingSprite(LinkStateMachine state)
         {
-            standardWidthHeight = 16 * pixel;
             this.state = state;
             this.direction = state.FacingDirection;
             sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
             setFramesForDirection();
+            changeFrameCounter = ObjectConstants.counterInitialVal_float;
         }
-
 
         public void Update(GameTime gt)
         {
-            frameNum++;
-            if (frameNum == maxFrames)
+            float dt = (float)gt.ElapsedGameTime.TotalSeconds;
+            changeFrameCounter += dt;
+            bool changeFrame = changeFrameCounter > ObjectConstants.linkFrameChangeFreq;
+            if (changeFrame)
             {
-                frameNum = 0;
-            }
-
-            // Every set number of frames, determined by the stepSpeed, the next frame of the step will be loaded.
-            if ((frameNum % stepSpeed) == 0)
-            {
+                changeFrameCounter = ObjectConstants.counterInitialVal_float;
                 isFrame1 = !isFrame1;
-            }
 
+            }
             x = (int)state.Position.X;
             y = (int)state.Position.Y;
         }
 
-
+        //TODO: should draw and update according to links location
         public void Draw(SpriteBatch sb, Vector2 loc)
-        { 
+        {
             if (isFrame1)
             {
                 drawFrame1(sb);
-            } else
+            }
+            else
             {
                 drawFrame2(sb);
             }
         }
-
-
-
 
         /*------------------------- Helper methods -------------------------*/
 
@@ -85,10 +62,10 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
                 case FacingDirection.Left:
                     int offsetX = x;
 
-                    sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame1, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    sb.Draw(sheet, new Rectangle(offsetX, y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame1, Color.White, ObjectConstants.zeroRotation, new Vector2(), SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
                     break;
                 default:
-                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame1, Color.White);
+                    sb.Draw(sheet, new Rectangle(x, y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame1, Color.White);
                     break;
             }
         }
@@ -98,15 +75,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             switch (direction)
             {
                 case FacingDirection.Left:
-                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    sb.Draw(sheet, new Rectangle(x, y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame2, Color.White, ObjectConstants.zeroRotation, new Vector2(), SpriteEffects.FlipHorizontally, ObjectConstants.noLayerDepth);
                     break;
                 case FacingDirection.Down:
-                    int offsetX = x + pixel;
-
-                    sb.Draw(sheet, new Rectangle(offsetX, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
+                    int offsetX = x + ObjectConstants.scale;
+                    sb.Draw(sheet, new Rectangle(offsetX, y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame2, Color.White);
                     break;
                 default:
-                    sb.Draw(sheet, new Rectangle(x, y, standardWidthHeight, standardWidthHeight), frame2, Color.White);
+                    sb.Draw(sheet, new Rectangle(x, y, ObjectConstants.scaledStdWidthHeight, ObjectConstants.scaledStdWidthHeight), frame2, Color.White);
                     break;
             }
         }
@@ -116,20 +92,17 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             switch (direction)
             {
                 case FacingDirection.Up:
-                    frame1 = backwardSpritesheetLocation_1;
-                    frame2 = backwardSpritesheetLocation_2;
+                    frame1 = SpriteRectangles.linkBackwardSpritesheetLocation_1;
+                    frame2 = SpriteRectangles.linkBackwardSpritesheetLocation_2;
                     break;
                 case FacingDirection.Down:
-                    frame1 = forwardSpritesheetLocation_1;
-                    frame2 = forwardSpritesheetLocation_2;
+                    frame1 = SpriteRectangles.linkForwardSpritesheetLocation_1;
+                    frame2 = SpriteRectangles.linkForwardSpritesheetLocation_2;
                     break;
                 case FacingDirection.Left:
-                    frame1 = rightSpritesheetLocation_1;
-                    frame2 = rightSpritesheetLocation_2;
-                    break;
                 case FacingDirection.Right:
-                    frame1 = rightSpritesheetLocation_1;
-                    frame2 = rightSpritesheetLocation_2;
+                    frame1 = SpriteRectangles.linkRightSpritesheetLocation_1;
+                    frame2 = SpriteRectangles.linkRightSpritesheetLocation_2;
                     break;
                 default:
                     break;

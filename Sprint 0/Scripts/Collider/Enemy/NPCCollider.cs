@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
@@ -22,9 +19,8 @@ namespace Sprint_0.Scripts.Collider.Enemy
         }
         public void OnPlayerCollision(Link player)
         {
-            Vector2 pushBack = Vector2.Zero;
-            pushBack = Overlap.DirectionToMoveObjectOff(hitbox, player.collider.CollisionRectangle);
-            player.PushBackBy(pushBack);
+            Vector2 pushBack = Overlap.DirectionToMoveObjectOff(hitbox, player.collider.CollisionRectangle);
+            player.PushBackInstantlyBy(pushBack);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

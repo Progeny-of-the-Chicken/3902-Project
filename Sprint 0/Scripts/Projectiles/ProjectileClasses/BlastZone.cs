@@ -23,12 +23,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             pos = location;
             collider = ProjectileColliderFactory.Instance.CreateBlastZoneCollider(this);
             friendly = true;
+            SFXManager.Instance.PlayBombExplosion();
         }
 
         public void Update(GameTime gameTime)
         {
             collider.Update(pos);
-            if (blastZoneCounter <= 0)
+            if (blastZoneCounter <= ObjectConstants.zero_float)
             {
                 delete = true;
             }

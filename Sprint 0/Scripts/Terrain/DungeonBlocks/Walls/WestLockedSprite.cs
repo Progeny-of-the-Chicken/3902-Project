@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 
 public class WestLockedSprite : IWall
 {
-    private Rectangle spritesheetLocation = new Rectangle(881, 44, 32, 32);
+    private Rectangle spritesheetLocation = SpriteRectangles.WestLockedSpriteFrame;
     Rectangle destination;
     LockedDoorCollider collider;
     public IWallCollider Collider { get => collider; }
@@ -15,11 +15,12 @@ public class WestLockedSprite : IWall
     string nextRoom;
     public String NextRoom { get => nextRoom; }
 
-    public WestLockedSprite(Vector2 screenLocation, Room room)
-    { 
-        destination = new Rectangle((int) screenLocation.X,(int) screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
+    public WestLockedSprite(Vector2 screenLocation, Room room, String nextRoom)
+    {
+        destination = new Rectangle((int)screenLocation.X, (int)screenLocation.Y, ObjectConstants.scale * spritesheetLocation.Width, ObjectConstants.scale * spritesheetLocation.Height);
         collider = new LockedDoorCollider(this, destination);
         this.room = room;
+        this.nextRoom = nextRoom;
     }
 
     public void Update()
@@ -35,7 +36,8 @@ public class WestLockedSprite : IWall
 
     public void SwapDoor()
     {
-        CommandSwapDoor command = new CommandSwapDoor(room, this, "WestDoorSprite");
+        CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.WestDoorSpriteStr);
         command.Execute();
+        SFXManager.Instance.PlayDoorUnlocking();
     }
 }

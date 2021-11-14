@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
@@ -27,7 +24,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            if(player.CanBeAffectedByEnemy)
+            if (player.CanBeAffectedByEnemy)
             {
                 Vector2 pushBack = Overlap.DirectionToMoveObjectOff(this.hitbox, player.collider.CollisionRectangle);
                 //playing it safe to avoid dividebyzero
@@ -36,10 +33,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                     pushBack.Normalize();
                     pushBack *= ObjectConstants.DefaultEnemyKnockbackToLink;
                 }
-                //not sure if we need this line or not
-                //player.StopMoving();
-                player.PushBackBy(pushBack);
-
+                player.PushBackGentlyBy(pushBack);
                 player.TakeDamage(Owner.Damage);
             }
         }

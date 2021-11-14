@@ -20,9 +20,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
-        private double startT = 0;
+        private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-
+        private double tBounceOffset = ObjectConstants.counterInitialVal_double;
         private Link linkOwner;
         private IEnemy enemyOwner;
 
@@ -39,8 +39,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             linkOwner = link;
             friendly = true;
             InitializeObject(spawnLoc, direction, magical);
+            SFXManager.Instance.PlayFireArrowBoomerang();
         }
-
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
         {
             enemyOwner = enemy;
@@ -52,7 +52,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
             // Movement control
             sprite.Update(gt);
-            if (startT == 0)
+            if (startT == ObjectConstants.counterInitialVal_double)
             {
                 startT = gt.TotalGameTime.TotalSeconds;
             }
@@ -66,8 +66,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             collider.Update(currentPos);
             // Delete on boomerang return
-            // TODO: Delete this after properly despawned by thrower
-            if (directionVector.X * (currentPos.X - startPos.X) < 0 || directionVector.Y * (currentPos.Y - startPos.Y) < 0)
+            if (directionVector.X * (currentPos.X - startPos.X) < ObjectConstants.zero_float || directionVector.Y * (currentPos.Y - startPos.Y) < ObjectConstants.zero_float)
             {
                 delete = true;
             }
@@ -106,16 +105,16 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             switch (direction)
             {
                 case FacingDirection.Right:
-                    directionVector = new Vector2(1, 0);
+                    directionVector = ObjectConstants.RightUnitVector;
                     break;
                 case FacingDirection.Up:
-                    directionVector = new Vector2(0, -1);
+                    directionVector = ObjectConstants.UpUnitVector;
                     break;
                 case FacingDirection.Left:
-                    directionVector = new Vector2(-1, 0);
+                    directionVector = ObjectConstants.LeftUnitVector;
                     break;
                 case FacingDirection.Down:
-                    directionVector = new Vector2(0, 1);
+                    directionVector = ObjectConstants.DownUnitVector;
                     break;
                 default:
                     break;
@@ -131,7 +130,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             double t = gt.TotalGameTime.TotalSeconds - startT + tInitialOffset;
             double posChange = (t * speedPerSecond + t * t * decelPerSecond);
             currentPos += directionVector * (float)posChange;
-            if (!ReturnState && (posChange < 0))
+            if (!ReturnState && (posChange < ObjectConstants.zero_double))
             {
                 ReturnState = true;
             }

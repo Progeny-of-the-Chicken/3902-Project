@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Projectiles
 
         public void LoadAllTextures(ContentManager content)
         {
-            spritesheet = content.Load<Texture2D>("LoZSprites");
+            spritesheet = content.Load<Texture2D>(ObjectConstants.projectileFile);
         }
 
         public ISprite CreateArrowSprite(FacingDirection direction, bool silver)

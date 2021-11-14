@@ -24,13 +24,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             pos = spawnLoc;
             collider = ProjectileColliderFactory.Instance.CreateSwordAttackHitboxCollider(this, direction);
             friendly = true;
+            SFXManager.Instance.PlaySwordSlash();
         }
 
         public void Update(GameTime gt)
         {
             collider.Update(pos);
             swordCounter--;
-            if (swordCounter <= 0)
+            if (swordCounter <= ObjectConstants.counterInitialVal_int)
             {
                 delete = true;
             }

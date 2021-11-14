@@ -4,7 +4,7 @@ using Sprint_0.Scripts.Commands;
 
 namespace Sprint_0.Scripts.Controller
 {
-	public class KeyboardController
+	public class KeyboardController : IController
     {
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
@@ -37,21 +37,17 @@ namespace Sprint_0.Scripts.Controller
 		//Add keybinds here
 		private void setCommands()
 		{
-			this.RegisterCommand(controllerMappings, Keys.D1, new CommandShootBasicArrow(game));
-			this.RegisterCommand(controllerMappings, Keys.D2, new CommandShootArrow(game));
-			this.RegisterCommand(controllerMappings, Keys.D3, new CommandThrowBasicBoomerangLink(game));
-			this.RegisterCommand(controllerMappings, Keys.D4, new CommandThrowMagicalBoomerangLink(game));
-			this.RegisterCommand(controllerMappings, Keys.D5, new CommandCastFireSpell(game));
-			this.RegisterCommand(controllerMappings, Keys.D6, new CommandPlaceBomb(game));
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
+			this.RegisterCommand(controllerMappings, Keys.I, new CommandEnterInventory(game));
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.S, new LinkChangeDirectionDown(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link, game));
-			this.RegisterCommand(linkControllerMappings, Keys.Z, new LinkUseSword(game.link, game));
+			this.RegisterCommand(linkControllerMappings, Keys.B, new CommandUseSecondaryItem(game));
 			this.RegisterCommand(linkControllerMappings, Keys.E, new LinkTakeDamage(game.link));
+			this.RegisterCommand(controllerMappings, Keys.M, new ToggleMute());
 		}
 
 		//Update checks for keys pressed and calls the respective command
