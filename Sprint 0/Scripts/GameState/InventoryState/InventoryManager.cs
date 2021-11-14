@@ -26,6 +26,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState
 
         public void Init()
         {
+            displays.Clear();
             displays.Add(new BackdropDisplay());
             displays.Add(new InventoryDisplay());
             displays.Add(new DiscoveredRoomsDisplay());

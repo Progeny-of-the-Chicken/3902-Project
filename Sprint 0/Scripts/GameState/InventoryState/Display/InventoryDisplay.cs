@@ -25,7 +25,6 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         {
             selectionSprite.Update(gt);
             // No animation for weapons
-            // TODO: Check whether placeholder colors need to be covered by black boxes
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
@@ -80,7 +79,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         private bool ValidSelectionMovement(int indexToTest)
         {
-            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex && indexToTest < itemSprites.Count);
+            return (indexToTest >= ObjectConstants.inventoryWeaponListStartIndex && indexToTest < Inventory.Instance.Weapons.Count);
         }
 
         //----- Helper methods to set up weapon sprites from inventory -----//

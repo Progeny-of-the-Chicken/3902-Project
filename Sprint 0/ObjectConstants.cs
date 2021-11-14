@@ -297,11 +297,13 @@ namespace Sprint_0
         public const double bombExtraExplosionNumber = 6;
 
         //----- Inventory GUI constant values -----//
-        public const string inventorySpritesheetFileName = "InventorySpritesheetAdjusted";
+        public const string inventorySpritesheetFileName = "InventorySpritesheet";
         public const int inventoryDisplayListIndex = 1;
         // Backdrop
         public static Vector2 backdropSpawnLocation = Vector2.Zero;
         public static Vector2 mapBackdropFromBackdrop = new Vector2(0, 88) * scale;
+        public static Vector2 mapColorCoverFromBackdrop = new Vector2(128, 96) * scale;
+        public const int mapColorCoverWidthHeightScale = 4;
         // Weapon
         public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
         public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
@@ -329,8 +331,6 @@ namespace Sprint_0
         public const int inventoryMoveSelectionUpIndex = -4;
         public const int inventoryMoveSelectionLeftIndex = -1;
         public const int inventoryMoveSelectionDownIndex = 4;
-
-        //----- Inventory constant value -----//
         public const int selectedItemStartingIndex = 0;
 
         //----- Font or HUD constant values -----//
@@ -350,5 +350,22 @@ namespace Sprint_0
         public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
         public static Vector2 TreasureRoomLocation = new Vector2(5, 1);
 
+        // Discovered rooms
+        public const int discoveredRoomsMaxIndex = 15;
+        public const int discoveredRoomsTotalDoorStates = 2;
+        public const int discoveredRoomsSourcePixelDistance = 9;
+        public static Vector2 discoveredRoomsInitialLocationFromBackdrop = new Vector2(128, 96) * scale;
+        public static Vector2 discoveredRoomsD1LocationOffset = new Vector2(16, 8) * scale;
+        public static Vector2 dotOffsetFromRoom = new Vector2(2) * scale;
+        public const int discoveredRoomsWidthHeight = 8 * scale;
+
+        //----- RoomTracker constant values -----//
+        public const int roomStringXIndex = 4;
+        public const int roomStringYIndex = 5;
+
+        //----- Inventory constant values -----//
+        public const int inventoryStartingRupees = 0;
+        public const int inventoryStartingKeys = 0;
+        public const int inventoryStartingBombs = 0;
     }
 }

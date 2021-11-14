@@ -31,6 +31,7 @@ namespace Sprint_0.GameStateHandlers
 
         // Game State Handlers
         GameplayStateHandler gameplay;
+        InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
 
         public GameStateManager()
@@ -62,7 +63,7 @@ namespace Sprint_0.GameStateHandlers
         public void OpenInventory()
         {
             this._state = GameState.Inventory;
-
+            inventory = new InventoryStateHandler();
             // Put rest of inventory initialization logic here
         }
 
@@ -83,6 +84,7 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    inventory.Draw(sb, gameTime);
                     break;
                 case GameState.RoomSwap:
                     swapper.Draw(sb, gameTime);
@@ -102,6 +104,7 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    inventory.Update(gameTime);
                     break;
                 case GameState.RoomSwap:
                     swapper.Update(gameTime);
