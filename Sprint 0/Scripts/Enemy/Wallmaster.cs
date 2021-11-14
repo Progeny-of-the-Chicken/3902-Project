@@ -115,7 +115,9 @@ namespace Sprint_0.Scripts.Enemy
             {
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;
+                SFXManager.Instance.PlayEnemyDeath();
             }
+            SFXManager.Instance.PlayEnemyHit();
         }
         public void KnockBack(Vector2 knockback)
         {
