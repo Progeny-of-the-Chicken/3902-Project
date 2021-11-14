@@ -21,15 +21,8 @@ namespace Sprint_0.Scripts.Commands
             switch (type)
             {
                 case WeaponType.Bow:
-                    // Prioritize silver arrows
-                    if (Inventory.Instance.Weapons.Contains(WeaponType.SilverArrow))
-                    {
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
-                    }
-                    else if (Inventory.Instance.Weapons.Contains(WeaponType.BasicArrow))
-                    {
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, false));
-                    }
+                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
+                    // TODO: Decrement rupee count
                     break;
                 case WeaponType.BasicBoomerang:
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
