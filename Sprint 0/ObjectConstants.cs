@@ -54,7 +54,7 @@ namespace Sprint_0
         public const float linkPickUpItemTime = 1f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
-        public const int linkStartingHealth = 20;
+        public const int linkStartingHealth = 12;
         public const float linkTurningCounterDebounce = 0.15f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;

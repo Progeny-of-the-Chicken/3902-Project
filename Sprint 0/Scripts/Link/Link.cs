@@ -118,6 +118,8 @@ namespace Sprint_0.Scripts
 
         public Vector2 ItemSpawnPosition { get => linkState.ItemSpawnPosition; }
 
+        public int Health { get => linkState.linkHealth; }
+
         public bool IsAlive { get => linkState.IsAlive; }
 
         public bool DeathAnimation { get => linkState.DeathAnimation; }

@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts
         private double pickUpItemCounter;
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
-        private int linkHealth;
+        public int linkHealth;
         private bool isSuspended;
 
         public LinkStateMachine()
