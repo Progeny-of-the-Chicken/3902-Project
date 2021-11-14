@@ -115,7 +115,7 @@ namespace Sprint_0
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
-        public const int magicProjectileDamage = DefaultEnemyDamage;
+        public const int magicProjectileDamage = 1;
 
 
         //----- Enemy constant values -----//
