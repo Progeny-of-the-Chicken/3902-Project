@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts
 {
@@ -15,7 +16,7 @@ namespace Sprint_0.Scripts
         private double pickUpItemCounter;
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
-        public int linkHealth;
+        public double linkHealth;
         public int linkMaxHealth;
         private bool isSuspended;
 
@@ -130,7 +131,14 @@ namespace Sprint_0.Scripts
             {
                 ResetCountersCausedByPlayer();
                 damageCounter = ObjectConstants.linkTakeDamageTime;
-                linkHealth -= damage;
+                if (!Inventory.Instance.BlueRing)
+                {
+                    linkHealth -= damage;
+                }
+                else
+                {
+                    linkHealth -= (double)damage / ObjectConstants.oneInTwo;
+                }
                 SFXManager.Instance.PlayLinkHit();  //putting this here so it doesn't play continuously while link stands in a fire
                 if (linkHealth <= ObjectConstants.zero)
                 {

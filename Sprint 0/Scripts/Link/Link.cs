@@ -118,7 +118,7 @@ namespace Sprint_0.Scripts
 
         public Vector2 ItemSpawnPosition { get => linkState.ItemSpawnPosition; }
 
-        public int Health { get => linkState.linkHealth; }
+        public int Health { get => (int)Math.Ceiling(linkState.linkHealth); }
 
         public int MaxHealth { get => linkState.linkMaxHealth; }
 
