@@ -11,6 +11,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
     {
         // Sprite, sprite location and known used doors
         private Dictionary<ISprite, (Vector2, HashSet<FacingDirection>)> discoveredRooms;
+        private Dictionary<ISprite, Vector2> dotSprites;
         private ISprite playerDotSprite;
         private Vector2 playerDotLocation;
         private bool compass = Inventory.Instance.Compass;
@@ -18,19 +19,17 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         public DiscoveredRoomsDisplay()
         {
             discoveredRooms = new Dictionary<ISprite, (Vector2, HashSet<FacingDirection>)>();
-            if (compass)
-            {
-                InitializePlayerDotSprite();
-            }
+            InitializeDotSprites();
             AssembleRoomSprites();
         }
 
         public void Update(GameTime gt)
         {
-            if (compass)
+            foreach (KeyValuePair<ISprite, Vector2> dotSprite in dotSprites)
             {
-                playerDotSprite.Update(gt);
+                dotSprite.Key.Update(gt);
             }
+            // No animation for discovered rooms
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
@@ -39,9 +38,9 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             {
                 discoveredRoom.Key.Draw(spriteBatch, discoveredRoom.Value.Item1);
             }
-            if (compass)
+            foreach (KeyValuePair<ISprite, Vector2> dotSprite in dotSprites)
             {
-                playerDotSprite.Draw(spriteBatch, playerDotLocation);
+                dotSprite.Key.Draw(spriteBatch, dotSprite.Value);
             }
         }
 
@@ -55,10 +54,14 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
 
         //----- Initialization helper methods -----//
 
-        private void InitializePlayerDotSprite()
+        private void InitializeDotSprites()
         {
-            playerDotSprite = InventorySpriteFactory.Instance.CreatePlayerDotSprite();
-            playerDotLocation = GetLocationForRoomSprite(RoomTracker.Instance.ActiveRoomCoords) + ObjectConstants.playerDotOffsetFromRoom;
+            dotSprites = new Dictionary<ISprite, Vector2>();
+            dotSprites.Add(InventorySpriteFactory.Instance.CreatePlayerDotSprite(), GetLocationForRoomSprite(RoomTracker.Instance.ActiveRoomCoords) + ObjectConstants.dotOffsetFromRoom);
+            if (compass)
+            {
+                dotSprites.Add(InventorySpriteFactory.Instance.CreateTreasureDotSprite(), GetLocationForRoomSprite(ObjectConstants.TreasureRoomLocation) + ObjectConstants.dotOffsetFromRoom);
+            }
         }
 
         private void AssembleRoomSprites()

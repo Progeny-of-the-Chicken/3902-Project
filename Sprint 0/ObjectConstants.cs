@@ -331,7 +331,7 @@ namespace Sprint_0
         public const int discoveredRoomsSourcePixelDistance = 9;
         public static Vector2 discoveredRoomsInitialLocationFromBackdrop = new Vector2(128, 96) * scale;
         public static Vector2 discoveredRoomsD1LocationOffset = new Vector2(16, 8) * scale;
-        public static Vector2 playerDotOffsetFromRoom = new Vector2(2) * scale;
+        public static Vector2 dotOffsetFromRoom = new Vector2(2) * scale;
         public const int discoveredRoomsWidthHeight = 8 * scale;
 
         //----- RoomTracker constant values -----//

@@ -130,5 +130,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             return new PlayerDotSprite(texture);
         }
+
+        public ISprite CreateTreasureDotSprite()
+        {
+            return new TreasureDotSprite(texture);
+        }
     }
 }

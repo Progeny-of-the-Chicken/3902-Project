@@ -7,10 +7,7 @@ namespace Sprint_0.Scripts.Sprite.InventorySprites
     public class PlayerDotSprite : ISprite
     {
         private Texture2D spritesheet;
-        private List<Rectangle> frames = SpriteRectangles.playerDotFrames;
-        private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
-        private double startTimeSeconds = ObjectConstants.zero_double;
-        private int frameIndex = ObjectConstants.zero_int;
+        private Rectangle frame = SpriteRectangles.playerDotFrames;
         private int scale = ObjectConstants.scale;
 
         public PlayerDotSprite(Texture2D textures)
@@ -20,22 +17,13 @@ namespace Sprint_0.Scripts.Sprite.InventorySprites
 
         public void Update(GameTime gt)
         {
-            startTimeSeconds += gt.ElapsedGameTime.TotalSeconds;
-            if (startTimeSeconds > animationDelaySeconds)
-            {
-                frameIndex++;
-                if (frameIndex == frames.Count)
-                {
-                    frameIndex = ObjectConstants.zero_int;
-                }
-                startTimeSeconds = ObjectConstants.zero_double;
-            }
+            // No animation
         }
 
         public void Draw(SpriteBatch sb, Vector2 location)
         {
-            Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frames[frameIndex].Width * scale, frames[frameIndex].Height * scale);
-            sb.Draw(spritesheet, dest, frames[frameIndex], Color.White);
+            Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frame.Width * scale, frame.Height * scale);
+            sb.Draw(spritesheet, dest, frame, Color.White);
         }
     }
 }
