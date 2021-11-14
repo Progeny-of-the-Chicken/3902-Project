@@ -85,7 +85,7 @@ namespace Sprint_0
             base.LoadContent();
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
-            GameStateManager.Instance.Init(link);
+            GameStateManager.Instance.Init(link, this);
         }
 
         protected override void Update(GameTime gameTime)

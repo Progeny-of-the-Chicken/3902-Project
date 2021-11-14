@@ -9,6 +9,7 @@ namespace Sprint_0.Scripts.Controller
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private Dictionary<Keys, ICommand> linkControllerMappings;
+		private bool paused = false;
 
 		private Game1 game;
 
@@ -39,6 +40,7 @@ namespace Sprint_0.Scripts.Controller
 		{
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
 			this.RegisterCommand(controllerMappings, Keys.I, new CommandEnterInventory(game));
+			this.RegisterCommand(controllerMappings, Keys.P, new PauseCommand());
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
@@ -55,16 +57,32 @@ namespace Sprint_0.Scripts.Controller
 			KeyboardState keyboardState = Keyboard.GetState();
 			Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
-			foreach (Keys key in pressedKeys)
-			{
-				executeCommandsForKey(key, controllerMappings);
-				if(!game.link.IsSuspended)
+            if (!paused)
+            {
+				foreach (Keys key in pressedKeys)
 				{
-					executeCommandsForKey(key, linkControllerMappings);
+					executeCommandsForKey(key, controllerMappings);
+					if (!game.link.IsSuspended)
+					{
+						executeCommandsForKey(key, linkControllerMappings);
+					}
 				}
-			}
+			} else
+            {
+				// This checks specifically for the pause key because we don't want to
+				// be able to fire any other commands than the pause command while paused.
+				if (pauseKeyPressed(pressedKeys))
+                {
+					executeCommandsForKey(Keys.P, controllerMappings);
+				}
+            }
 
 			previousKeys = keyboardState;
+		}
+
+		public void SetPauseState(bool paused)
+		{
+			this.paused = paused;
 		}
 
 
@@ -89,11 +107,29 @@ namespace Sprint_0.Scripts.Controller
         }
 
 		private void executeCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
-        {
+		{
 			if (mappings.ContainsKey(key) && (previousKeys.IsKeyUp(key) || MovementKeyIsBeingHeldDown(key, previousKeys)))
 			{
 				mappings[key].Execute();
 			}
 		}
-	}
+
+		private void unpause()
+        {
+			new PauseCommand().Execute();
+        }
+
+		private bool pauseKeyPressed(Keys[] pressedKeys)
+		{
+			for (int i = 0; i < pressedKeys.Length; i++)
+            {
+				if (pressedKeys[i] == Keys.P)
+                {
+					return true;
+                }
+            }
+
+			return false;
+        }
+    }
 }

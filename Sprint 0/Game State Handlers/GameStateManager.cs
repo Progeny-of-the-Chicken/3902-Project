@@ -27,6 +27,8 @@ namespace Sprint_0.GameStateHandlers
 
         private GameState _state;
         private Link link;
+        private Game1 game;
+
         public GameState state { get => _state; }
 
         // Game State Handlers
@@ -40,10 +42,12 @@ namespace Sprint_0.GameStateHandlers
             this._state = GameState.Gameplay;
         }
 
-        public void Init(Link link)
+        public void Init(Link link, Game1 game)
         {
             this.link = link;
-            this.gameplay = new GameplayStateHandler(this.link);
+            this.game = game;
+
+            gameplay = new GameplayStateHandler(link, game);
         }
 
         public void StartGameplay()
@@ -63,8 +67,27 @@ namespace Sprint_0.GameStateHandlers
         public void OpenInventory()
         {
             this._state = GameState.Inventory;
-            inventory = new InventoryStateHandler();
+            inventory = new InventoryStateHandler(game);
             // Put rest of inventory initialization logic here
+        }
+
+        public void TogglePause()
+        {
+            switch (_state)
+            {
+                case GameState.Gameplay:
+                    gameplay.TogglePause();
+                    break;
+                case GameState.Menu:
+                    break;
+                case GameState.Inventory:
+                    inventory.TogglePause();
+                    break;
+                case GameState.RoomSwap:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void OpenMenu()

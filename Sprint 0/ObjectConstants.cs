@@ -26,6 +26,10 @@ namespace Sprint_0
         public const int PreferredBackBufferHeight = 232;
 
 
+        //----- Game state constants -----//
+        public static char[] pausedLetters = { 'p', 'a', 'u', 's', 'e', 'd' };
+
+
         //----- Vector constant values -----//
         public static Vector2 UpUnitVector = new Vector2(0, -1);
         public static Vector2 DownUnitVector = new Vector2(0, 1);
@@ -368,6 +372,7 @@ namespace Sprint_0
 
         //----- Font or HUD constant values -----//
         public const string fontSpritesheetFileName = "Font";
+        public const string fontClearBackgroundSpritesheetFileName = "FontClearBackground";
         public const int maxDisplayableNumbers = 3;
         public static Vector2 mapDrawLocation = new Vector2(16 * scale, 16 * scale);
         public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
