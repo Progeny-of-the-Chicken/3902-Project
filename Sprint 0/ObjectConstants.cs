@@ -45,13 +45,19 @@ namespace Sprint_0
 
 
         //----- Link constant values -----//
-        public const int linkSpeed = 2;
-        public const int linkStartingHealth = 6;
-        public const int linkTurningCounterDebounce = 10;
-        public const int linkDeathCounter = 90;
+        public const int linkStdMoveDist = scaledStdWidthHeight / 2;
+        public const float linkStdMoveTime = 0.25f;
+        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
+        public const float linkDeathAnimationTime = 1.5f;
+        public const float linkTakeDamageTime = 1;
+        public const float linkUseItemTime = 0.5f;
+        public const float linkPickUpItemTime = 1f;
+        public const float linkFrameChangeFreq = 0.05f;
+        public const float linkItemPickUpFrameChangeFreq = 0.2f;
+        public const int linkStartingHealth = 20;
+        public const float linkTurningCounterDebounce = 0.15f;
+        public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
-        public const int bouncebackDistance = 90;
-        public const int squareTileWidthHeight = 16;
         public static Vector2 linkStartingPosition = new Vector2(200, 400); //generic starting position
 
 

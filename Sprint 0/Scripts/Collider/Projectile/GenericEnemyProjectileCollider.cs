@@ -32,7 +32,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(Owner.Damage);
-            player.PushBackBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
+            player.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
         }
 
         public void OnEnemyCollision(IEnemy enemy)

@@ -124,7 +124,7 @@ namespace Sprint_0.GameStateHandlers
             Vector2 spawnPos;
             int scale = ObjectConstants.scale;
             int YOFFSET = ObjectConstants.yOffsetForRoom;
-            int tileSize = ObjectConstants.squareTileWidthHeight * scale;
+            int tileSize = ObjectConstants.standardWidthHeight * scale;
 
             switch (scrollingDirection)
             {
