@@ -28,6 +28,9 @@ namespace Sprint_0
 
         //----- Game state constants -----//
         public static char[] pausedLetters = { 'p', 'a', 'u', 's', 'e', 'd' };
+        public const int pauseDisplayStartingPointX = 232;
+        public const int pauseDisplayStartingPointY = 400;
+        public const int letterSpacing = 8;
 
 
         //----- Vector constant values -----//

@@ -51,8 +51,8 @@ namespace Sprint_0.GameStateHandlers
 
         private void drawPausedLetters(SpriteBatch sb)
         {
-            int xRef = 200;
-            int yRef = 400;
+            int xRef = ObjectConstants.pauseDisplayStartingPointX;
+            int yRef = ObjectConstants.pauseDisplayStartingPointY;
             int letterSpacing = 8;
             int xStep = ObjectConstants.standardWidthHeight * ObjectConstants.scale + letterSpacing;
 
