@@ -11,4 +11,8 @@ public interface IRoom
 	string RoomId();
 	void AddProjectile(IProjectile item);
 	void AddEffect(IEffect effect);
+	void PrepareForTransition();
+	void TransitionEnded();
+	void UpdateDrawPoint(Vector2 dp);
+	Vector2 roomDrawPoint { get; }
 }

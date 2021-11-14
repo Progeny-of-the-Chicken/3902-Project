@@ -1,4 +1,5 @@
-﻿using Sprint_0.Scripts.Controller;
+﻿using Sprint_0.GameStateHandlers;
+using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0.Scripts.Commands.InventoryState
 {
@@ -13,7 +14,7 @@ namespace Sprint_0.Scripts.Commands.InventoryState
 
         public void Execute()
         {
-            game.gameStateMachine.SetState(GameStateHandlers.GameState.Gameplay);
+            GameStateManager.Instance.StartGameplay();
             // TODO: Make this change in the game state handler
             game.kc = new KeyboardController(game);
         }

@@ -1,4 +1,5 @@
-﻿using Sprint_0.Scripts.Controller;
+﻿using Sprint_0.GameStateHandlers;
+using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0.Scripts.Commands
 {
@@ -13,7 +14,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            game.gameStateMachine.SetState(GameStateHandlers.GameState.Inventory);
+            GameStateManager.Instance.OpenInventory();
             // TODO: Make the controller change from the game state machine
             game.kc = new InventoryStateController(game);
         }

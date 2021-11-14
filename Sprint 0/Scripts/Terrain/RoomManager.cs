@@ -54,6 +54,20 @@ namespace Sprint_0.Scripts.Terrain
             activeRoom.Update(gt);
         }
 
+        public IRoom LoadRoom(string roomID)
+        {
+            if (dormentRooms.ContainsKey(roomID))
+            {
+                return dormentRooms[roomID];
+            }
+            else
+            {
+                //IRoom newRoom = new Room(roomID, link);
+                //dormentRooms.Add(roomID, newRoom);
+                return new Room(roomID, link);
+            }
+        }
+
         public IRoom CurrentRoom
         {
             get
