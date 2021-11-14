@@ -87,6 +87,12 @@ namespace Sprint_0
             new Rectangle(127, 189, 8, 8)
         };
         public static Rectangle fireSpellFrame = new Rectangle(215, 185, 16, 16);
+        public static List<Rectangle> swordBeamFrames = new List<Rectangle>
+        {
+            new Rectangle(10, 159, 16, 7),
+            new Rectangle(80, 159, 16, 7),
+            new Rectangle(115, 159, 16, 7)
+        };
 
         //----- Enemy source rectangles -----//
         //Aquamentus

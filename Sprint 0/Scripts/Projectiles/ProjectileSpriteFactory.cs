@@ -47,5 +47,10 @@ namespace Sprint_0.Scripts.Projectiles
         {
             return new FireSpellSprite(spritesheet);
         }
+
+        public ISprite CreateSwordBeamSprite()
+        {
+            return new SwordBeamSprite(spritesheet);
+        }
     }
 }
