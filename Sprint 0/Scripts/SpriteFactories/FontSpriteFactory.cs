@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.Font;
+using Sprint_0.Scripts.Sprite.Font.Letters;
 
 namespace Sprint_0.Scripts.SpriteFactories
 {
@@ -75,6 +76,11 @@ namespace Sprint_0.Scripts.SpriteFactories
         public ISprite CreateNineSprite()
         {
             return new NineSprite(texture);
+        }
+
+        public ISprite CreateLetterSprite(char letter)
+        {
+            return new LetterSprite(texture, letter);
         }
     }
 }
