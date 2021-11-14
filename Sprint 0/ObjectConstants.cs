@@ -154,7 +154,11 @@ namespace Sprint_0
         //OldMan
         public const int OldManDamage = 0;
         public const int OldManStartingHealth = 1;
-
+        //Rope
+        public const int RopeDamage = 1;
+        public const double RopeMoveTime = DefaultEnemyMoveTime;
+        public const float RopeMoveSpeed = DefaultEnemyMoveSpeed;
+        public const int RopeStartingHealth = 1;
         //Stalfos
         public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
