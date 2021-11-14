@@ -41,30 +41,8 @@ namespace Sprint_0.GameStateHandlers
             toRoom.PrepareForTransition();
 
             fromRoomOriginDrawPoint = fromRoom.roomDrawPoint;
-            toRoomOriginDrawPoint = new Vector2(fromRoomOriginDrawPoint.X, fromRoomOriginDrawPoint.Y);
+            toRoomOriginDrawPoint = calculateEnteringRoomOriginDrawPoint();
 
-            switch(scrollingDirection)
-            {
-                // Current room moves to the right, new room appears from left
-                case FacingDirection.Right:
-                    toRoomOriginDrawPoint += new Vector2(-horizontalScrollDist, 0);
-                    break;
-                case FacingDirection.Left:
-                    toRoomOriginDrawPoint += new Vector2(horizontalScrollDist, 0);
-                    break;
-
-                // Current room moves up, new room appears from bottom
-                case FacingDirection.Up:
-                    toRoomOriginDrawPoint += new Vector2(0, verticalScrollDist);
-                    break;
-                case FacingDirection.Down:
-                    toRoomOriginDrawPoint += new Vector2(0, -verticalScrollDist);
-                    break;
-                default:
-                    break;
-            }
-
-            
             toRoom.UpdateDrawPoint(toRoomOriginDrawPoint);
         }
 
@@ -74,29 +52,7 @@ namespace Sprint_0.GameStateHandlers
 
             if (currFrame <= frames)
             {
-                Vector2 step;
-
-                switch (scrollingDirection)
-                {
-                    // Current room moves to the right, new room appears from left
-                    case FacingDirection.Right:
-                        step = new Vector2(horizontalScrollDist / frames, 0);
-                        break;
-                    case FacingDirection.Left:
-                        step = new Vector2(-horizontalScrollDist / frames, 0);
-                        break;
-
-                    // Current room moves up, new room appears from bottom
-                    case FacingDirection.Up:
-                        step = new Vector2(0, -verticalScrollDist / frames);
-                        break;
-                    case FacingDirection.Down:
-                        step = new Vector2(0, verticalScrollDist / frames);
-                        break;
-                    default:
-                        step = new Vector2();
-                        break;
-                }
+                Vector2 step = calculateStep();
 
                 fromRoom.UpdateDrawPoint(fromRoom.roomDrawPoint + step);
                 toRoom.UpdateDrawPoint(toRoom.roomDrawPoint + step);
@@ -107,7 +63,6 @@ namespace Sprint_0.GameStateHandlers
                 currFrame++;
             } else
             {
-                // Do whatever needed to swap game states
                 // Do whatever needed to return to Gameplay
                 currFrame = 0;
                 fromRoom.TransitionEnded();
@@ -129,7 +84,39 @@ namespace Sprint_0.GameStateHandlers
             fromRoom.Update(gameTime);
         }
 
+
         /*--------------- Helper Methods ---------------*/
+
+
+        // Method that calculates the initial position of the room link is entering
+        // for the animation. Will start off screen and be animated onto the screen.
+        private Vector2 calculateEnteringRoomOriginDrawPoint()
+        {
+            Vector2 result = new Vector2(fromRoomOriginDrawPoint.X, fromRoomOriginDrawPoint.Y);
+
+            switch (scrollingDirection)
+            {
+                // Current room moves to the right, new room appears from left
+                case FacingDirection.Right:
+                    result += new Vector2(-horizontalScrollDist, 0);
+                    break;
+                case FacingDirection.Left:
+                    result += new Vector2(horizontalScrollDist, 0);
+                    break;
+
+                // Current room moves up, new room appears from bottom
+                case FacingDirection.Up:
+                    result += new Vector2(0, verticalScrollDist);
+                    break;
+                case FacingDirection.Down:
+                    result += new Vector2(0, -verticalScrollDist);
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
 
         // Method that sets link's spawn point in the room he enters
         private void setSpawnPostion()
@@ -159,6 +146,36 @@ namespace Sprint_0.GameStateHandlers
             }
 
             link.ResetPosition(spawnPos);
+        }
+
+        // Determines the step size and direction that should be animated each frame
+        private Vector2 calculateStep()
+        {
+            Vector2 step;
+
+            switch (scrollingDirection)
+            {
+                // Current room moves to the right, new room appears from left
+                case FacingDirection.Right:
+                    step = new Vector2(horizontalScrollDist / frames, 0);
+                    break;
+                case FacingDirection.Left:
+                    step = new Vector2(-horizontalScrollDist / frames, 0);
+                    break;
+
+                // Current room moves up, new room appears from bottom
+                case FacingDirection.Up:
+                    step = new Vector2(0, -verticalScrollDist / frames);
+                    break;
+                case FacingDirection.Down:
+                    step = new Vector2(0, verticalScrollDist / frames);
+                    break;
+                default:
+                    step = new Vector2();
+                    break;
+            }
+
+            return step;
         }
     }
 }
