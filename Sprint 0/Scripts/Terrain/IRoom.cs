@@ -7,7 +7,12 @@ public interface IRoom
 {
 	void Update(GameTime gt);
 	void Draw(SpriteBatch spriteBatch);
+	Vector2 roomLocation { get; }
 	string RoomId();
 	void AddProjectile(IProjectile item);
 	void AddEffect(IEffect effect);
+	void PrepareForTransition();
+	void TransitionEnded();
+	void UpdateDrawPoint(Vector2 dp);
+	Vector2 roomDrawPoint { get; }
 }

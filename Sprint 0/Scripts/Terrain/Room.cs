@@ -13,55 +13,60 @@ using Sprint_0.Scripts.Effect;
 
 public class Room : IRoom
 {
-    private Vector2 roomLocation;
+    public Vector2 roomLocation { get; }
     private Rectangle spritesheetLocation;
     private string roomId;
     private string filePath;
     private int scale;
+	private int WALLOFFSET;
     private int YOFFSET;
-    private int WALLOFFSET;
+	private Vector2 _roomDrawPoint;
+	public Vector2 roomDrawPoint { get => _roomDrawPoint; }
 
-    private ILink link;
-    private EnemySet enemySet;
-    private ItemEntities itemSet;
-    private ProjectileEntities projectileSet;
-    private EffectSet effectSet;
-    private List<ITerrain> blocks;
-    private List<IWall> walls;
-    private CollisionHandlerSet collisionHandlerSet;
-    private List<IProjectile> projectileQueue;
-    private List<IEffect> effectQueue;
+	private ILink link;
+	private EnemySet enemySet;
+	private ItemEntities itemSet;
+	private ProjectileEntities projectileSet;
+	private EffectSet effectSet;
+	private List<ITerrain> blocks;
+	private List<IWall> walls;
+	private CollisionHandlerSet collisionHandlerSet;
+	private List<IProjectile> projectileQueue;
+	private List<IEffect> effectQueue;
 
-    private bool enemiesFlag;
-    private List<String> RoomClear;
+	private bool enemiesFlag;
+	private List<String> RoomClear;
+	private bool inTransition = false;
+
     public Room(string roomId, ILink link)
     {
-        this.scale = ObjectConstants.scale;
-        this.WALLOFFSET = ObjectConstants.wallOffset;
-        this.YOFFSET = ObjectConstants.yOffsetForRoom;
+        // Point of reference that is used for the Draw() method. Used to easily translate the room during transitions.
+        this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
 
+        this.scale = ObjectConstants.scale;
+        this.YOFFSET = ObjectConstants.yOffsetForRoom;
+        this.WALLOFFSET = ObjectConstants.wallOffset;
         this.roomId = roomId;
         int roomRow, roomCol;
         roomRow = Int32.Parse(roomId.Substring(ObjectConstants.rowParsePosition, ObjectConstants.rowAndColPraseLen));
         roomCol = Int32.Parse(roomId.Substring(ObjectConstants.colParsePosition, ObjectConstants.rowAndColPraseLen));
         roomLocation = new Vector2(roomCol, roomRow);
-
         this.link = link;
+
         enemySet = new EnemySet();
         itemSet = new ItemEntities();
         projectileSet = new ProjectileEntities();
         blocks = new List<ITerrain>();
         walls = new List<IWall>();
         effectSet = new EffectSet();
-
         enemiesFlag = false;
+
         RoomClear = new List<string>();
 
         projectileQueue = new List<IProjectile>();
         effectQueue = new List<IEffect>();
 
         LoadRoom();
-
         collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
     }
 
@@ -71,12 +76,15 @@ public class Room : IRoom
         enemySet.Update(gt);
         itemSet.Update(gt);
         projectileSet.Update(gt);
+
         foreach (ITerrain block in blocks)
         {
             block.Update();
         }
+
         effectSet.Update(gt);
         collisionHandlerSet.Update();
+
         if (enemiesFlag && isAllEnemiesDead())
         {
             RoomCleared();
@@ -87,27 +95,34 @@ public class Room : IRoom
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        //This needs to be updated once we have more than dungeon 1
-        Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-        spriteBatch.Draw(texture, new Rectangle(ObjectConstants.xOffsetForRoom, YOFFSET, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
+		//This needs to be updated once we have more than dungeon 1
+		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
 
-        foreach (ITerrain block in blocks)
+		// If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
+		if (!inTransition)
         {
-            block.Draw(spriteBatch);
-        }
+			foreach (ITerrain block in blocks)
+			{
+				block.Draw(spriteBatch);
+			}
 
-        TransferQueuedProjectiles();
+			TransferQueuedProjectiles();
+			foreach (IWall door in walls)
 
-        foreach (IWall door in walls)
-        {
-            door.Draw(spriteBatch);
-        }
-        itemSet.Draw(spriteBatch);
-        projectileSet.Draw(spriteBatch);
-        enemySet.Draw(spriteBatch);
-        link.Draw(spriteBatch);
-        effectSet.Draw(spriteBatch);
-    }
+			{
+				door.Draw(spriteBatch);
+			}
+
+			itemSet.Draw(spriteBatch);
+			projectileSet.Draw(spriteBatch);
+			link.Draw(spriteBatch);
+			enemySet.Draw(spriteBatch);
+			effectSet.Draw(spriteBatch);
+		}
+	}
+
+    
 
     public string RoomId()
     {
@@ -254,7 +269,7 @@ public class Room : IRoom
         doorLocation.X = scale * ObjectConstants.xPosForDoorRight;
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
         //East wall top side
-        doorLocation.X = scale * ObjectConstants.xPosForDoorTop;
+        doorLocation.X = scale * ObjectConstants.xPosForEastDoor;
         walls.Add(new InvisibleVerticleWall(doorLocation, this));
         //East wall bottom side
         doorLocation.Y += scale * ObjectConstants.yPosForDoorBottom;
@@ -272,8 +287,8 @@ public class Room : IRoom
         string[] doorString = csvReader.ReadFields();
 
         //East
-        doorLocation.X = ObjectConstants.xPosForDoorTop * scale;
-        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        doorLocation.X = ObjectConstants.xPosForEastDoor * scale;
+        doorLocation.Y = ObjectConstants.yPosForEastWestDoor * scale + YOFFSET;
         if (doorString[ObjectConstants.firstInArray] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.firstInArray], doorLocation, this, doorString[ObjectConstants.firstInArray + ObjectConstants.nextInArray]));
@@ -284,11 +299,13 @@ public class Room : IRoom
             }
         }
         else
+        {
             walls.Add(WallSpriteFactory.Instance.CreateEastWallSprite(doorLocation, this));
+        }
 
         //North
-        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
-        doorLocation.Y = YOFFSET;
+        doorLocation.X = ObjectConstants.xPosForNorthSouthDoor * scale;
+        doorLocation.Y = ObjectConstants.yPosForNorthDoor * scale + YOFFSET;
         if (doorString.Length > ObjectConstants.secondDoorInArray && doorString[ObjectConstants.secondDoorInArray] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.secondDoorInArray], doorLocation, this, doorString[ObjectConstants.secondDoorInArray + ObjectConstants.nextInArray]));
@@ -299,11 +316,13 @@ public class Room : IRoom
             }
         }
         else
+        {
             walls.Add(WallSpriteFactory.Instance.CreateNorthWallSprite(doorLocation, this));
+        }
 
         //West
-        doorLocation.X = ObjectConstants.xPosForDoorOrigin;
-        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorEast * scale;
+        doorLocation.X = ObjectConstants.xPosForWestDoor * scale;
+        doorLocation.Y = ObjectConstants.yPosForEastWestDoor * scale + YOFFSET;
         if (doorString.Length > ObjectConstants.thirdDoorInArray && doorString[ObjectConstants.thirdDoorInArray] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.thirdDoorInArray], doorLocation, this, doorString[ObjectConstants.thirdDoorInArray + ObjectConstants.nextInArray]));
@@ -317,8 +336,8 @@ public class Room : IRoom
             walls.Add(WallSpriteFactory.Instance.CreateWestWallSprite(doorLocation, this));
 
         //South
-        doorLocation.X = ObjectConstants.xPosForDoorNorth * scale;
-        doorLocation.Y = YOFFSET + ObjectConstants.yPosForDoorLeft * scale;
+        doorLocation.X = ObjectConstants.xPosForNorthSouthDoor * scale;
+        doorLocation.Y = ObjectConstants.yPosForSouthDoor * scale + YOFFSET;
         if (doorString.Length > ObjectConstants.fourthDoorInArray && doorString[ObjectConstants.fourthDoorInArray] != ObjectConstants.emptyStr)
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorString[ObjectConstants.fourthDoorInArray], doorLocation, this, doorString[ObjectConstants.fourthDoorInArray + ObjectConstants.nextInArray]));
@@ -450,4 +469,20 @@ public class Room : IRoom
             }
         }
     }
+
+    public void PrepareForTransition()
+    {
+		inTransition = true;
+    }
+
+    public void TransitionEnded()
+    {
+		inTransition = false;
+		this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
+	}
+
+	public void UpdateDrawPoint(Vector2 dp)
+    {
+		this._roomDrawPoint = dp;
+	}
 }

@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Terrain
         {
             this.link = player;
             activeRoom = new Room(ObjectConstants.startRoom, this.link);
+            RoomTracker.Instance.Init(activeRoom.RoomId());
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -37,6 +38,7 @@ namespace Sprint_0.Scripts.Terrain
         public void SwitchToRoom(string roomID)
         {
             dormentRooms.Add(activeRoom.RoomId(), activeRoom);
+            RoomTracker.Instance.RegisterRoom(activeRoom.RoomId(), roomID);
             if (dormentRooms.ContainsKey(roomID))
             {
                 dormentRooms.Remove(roomID, out activeRoom);
@@ -50,6 +52,20 @@ namespace Sprint_0.Scripts.Terrain
         public void Update(GameTime gt)
         {
             activeRoom.Update(gt);
+        }
+
+        public IRoom LoadRoom(string roomID)
+        {
+            if (dormentRooms.ContainsKey(roomID))
+            {
+                return dormentRooms[roomID];
+            }
+            else
+            {
+                //IRoom newRoom = new Room(roomID, link);
+                //dormentRooms.Add(roomID, newRoom);
+                return new Room(roomID, link);
+            }
         }
 
         public IRoom CurrentRoom

@@ -123,6 +123,57 @@ namespace Sprint_0
             new Rectangle(196, 185, 16, 16),
             new Rectangle(0, 0, 0, 0)
         };
+
+        //----- Inventory GUI source rectangles -----//
+        public static Rectangle weaponBackdropFrame = new Rectangle(1, 11, 256, 88);
+        public static Rectangle mapBackdropFrame = new Rectangle(258, 112, 256, 88);
+        public static List<Rectangle> selectionFrames = new List<Rectangle>
+        {
+            new Rectangle(519, 137, 16, 16),
+            new Rectangle(536, 137, 16, 16)
+        };
+        public static Rectangle weaponBasicSwordFrame = new Rectangle(555, 137, 8, 16);
+        public static Rectangle weaponBasicBoomerangFrame = new Rectangle(584, 137, 8, 16);
+        public static Rectangle weaponMagicalBoomerangFrame = new Rectangle(593, 137, 8, 16);
+        public static Rectangle weaponBombFrame = new Rectangle(604, 137, 8, 16);
+        public static Rectangle weaponBasicArrowFrame = new Rectangle(615, 137, 8, 16);
+        public static Rectangle weaponSilverArrowFrame = new Rectangle(624, 137, 8, 16);
+        public static Rectangle weaponBowFrame = new Rectangle(633, 137, 8, 16);
+        public static Rectangle weaponBlueCandleFrame = new Rectangle(644, 137, 8, 16);
+        public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
+        public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
+        public static List<Rectangle> backdropCoverFrames = new List<Rectangle>
+        {
+            new Rectangle(44, 152, 15, 16),
+            new Rectangle(48, 112, 8, 16),
+            new Rectangle(68, 48, 8, 16),
+            new Rectangle(132, 48, 80, 32),
+            new Rectangle(128, 24, 88, 16)
+        };
+        public static Rectangle discoveredRoomIndex0Frame = new Rectangle(519, 108, 8, 8);
+        public static Rectangle playerDotFrames = new Rectangle(528, 126, 3, 3);
+        public static List<Rectangle> treasureDotFrames = new List<Rectangle>
+        {
+            new Rectangle(537, 126, 3, 3),
+            new Rectangle(546, 126, 3, 3)
+        };
+
+        public static Rectangle mapColorCoverSpriteFrame = new Rectangle(458, 120, 16, 16);
+
+        //----- HUD source rectangles -----//
+        public static Rectangle HUDBackdropFrame = new Rectangle(258, 11, 256, 56);
+        public static Rectangle fullHeartFrame = new Rectangle(645, 117, 8, 8);
+        public static Rectangle halfHeartFrame = new Rectangle(636, 117, 8, 8);
+        public static Rectangle emptyHeartFrame = new Rectangle(627, 117, 8, 8);
+        public static Rectangle blackHUDCoverFrame = new Rectangle(2, 12, 8, 8);
+        public static Rectangle whiteSwordFrame = new Rectangle(564, 137, 8, 16);
+        public static Rectangle noRoomFrame = new Rectangle(663, 112, 8, 4);
+        public static Rectangle hasRoomFrame = new Rectangle(663, 108, 8, 4);
+        public static Rectangle levelNumberFrame = new Rectangle(584, 1, 64, 8);
+        public static Rectangle currentRoomMapMarkerFrame = new Rectangle(528, 126, 3, 3);
+        public static Rectangle treasureRoomMapMarkerFrame = new Rectangle(537, 126, 3, 3);
+
+        //----- Terrain source rectangles -----//
         public static Rectangle MovableBlockFrame = new Rectangle(1001, 11, 16, 16);
         public static Rectangle StairFrame = new Rectangle(1035, 28, 16, 16);
         public static Rectangle EastDoorSpriteFrame = new Rectangle(848, 77, 32, 32);
@@ -151,5 +202,18 @@ namespace Sprint_0
         public static Rectangle EastWallSpriteFrame = new Rectangle(815, 77, 32, 32);
         public static Rectangle EastLockedSpriteFrame = new Rectangle(881, 77, 32, 32);
         public static Rectangle EastClosedSpriteFrame = new Rectangle(914, 77, 32, 32);
+
+
+        //----- Font source rectangles -----//
+        public static Rectangle fontZeroFrame = new Rectangle(335, 24, 8, 8);
+        public static Rectangle fontOneFrame = new Rectangle(351, 24, 8, 8);
+        public static Rectangle fontTwoFrame = new Rectangle(367, 24, 8, 8);
+        public static Rectangle fontThreeFrame = new Rectangle(383, 24, 8, 8);
+        public static Rectangle fontFourFrame = new Rectangle(399, 23, 8, 8);
+        public static Rectangle fontFiveFrame = new Rectangle(415, 23, 8, 8);
+        public static Rectangle fontSixFrame = new Rectangle(431, 23, 8, 8);
+        public static Rectangle fontSevenFrame = new Rectangle(447, 23, 8, 8);
+        public static Rectangle fontEightFrame = new Rectangle(463, 23, 8, 8);
+        public static Rectangle fontNineFrame = new Rectangle(479, 23, 8, 8);
     }
 }
