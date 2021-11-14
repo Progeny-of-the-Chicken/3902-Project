@@ -40,9 +40,9 @@ namespace Sprint_0.Scripts.GameState
             bombCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
 
             //Replace numbers with link's inventory when added
-            rupeeCounter = numToSprites(123);
-            keyCounter = numToSprites(456);
-            bombCounter = numToSprites(789);
+            rupeeCounter = numToSprites(Inventory.Instance.Rupee);
+            keyCounter = numToSprites(Inventory.Instance.Key);
+            bombCounter = numToSprites(Inventory.Instance.Bomb);
 
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
@@ -64,9 +64,9 @@ namespace Sprint_0.Scripts.GameState
         public void Update()
         {
             //Replace numbers with link's inventory when added
-            rupeeCounter = numToSprites(123);
-            keyCounter = numToSprites(456);
-            bombCounter = numToSprites(789);
+            rupeeCounter = numToSprites(Inventory.Instance.Rupee);
+            keyCounter = numToSprites(Inventory.Instance.Key);
+            bombCounter = numToSprites(Inventory.Instance.Bomb);
             //Reminder to update link's health (Although we could pull directly from the instance in draw)
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             makeHeartArray();

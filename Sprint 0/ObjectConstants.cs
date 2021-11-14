@@ -337,5 +337,10 @@ namespace Sprint_0
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;
         public const int roomStringYIndex = 5;
+
+        //----- Inventory constant values -----//
+        public const int inventoryStartingRupees = 0;
+        public const int inventoryStartingKeys = 0;
+        public const int inventoryStartingBombs = 0;
     }
 }
