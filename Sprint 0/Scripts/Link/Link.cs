@@ -120,6 +120,8 @@ namespace Sprint_0.Scripts
 
         public int Health { get => linkState.linkHealth; }
 
+        public int MaxHealth { get => linkState.linkMaxHealth; }
+
         public bool IsAlive { get => linkState.IsAlive; }
 
         public bool DeathAnimation { get => linkState.DeathAnimation; }

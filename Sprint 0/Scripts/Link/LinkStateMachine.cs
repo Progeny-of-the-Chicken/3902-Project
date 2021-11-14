@@ -16,6 +16,7 @@ namespace Sprint_0.Scripts
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
         public int linkHealth;
+        public int linkMaxHealth;
         private bool isSuspended;
 
         public LinkStateMachine()
@@ -25,6 +26,7 @@ namespace Sprint_0.Scripts
             ResetCountersCausedByExternal();
             linksPosition = ObjectConstants.linkStartingPosition;
             linkHealth = ObjectConstants.linkStartingHealth;
+            linkMaxHealth = ObjectConstants.linkStartingHealth;
             isSuspended = false;
         }
 
