@@ -13,6 +13,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
         {
             backdropSprites.Add(InventorySpriteFactory.Instance.CreateWeaponBackdropSprite(), ObjectConstants.backdropSpawnLocation);
             backdropSprites.Add(InventorySpriteFactory.Instance.CreateMapBackdropSprite(), ObjectConstants.backdropSpawnLocation + ObjectConstants.mapBackdropFromBackdrop);
+            backdropSprites.Add(InventorySpriteFactory.Instance.CreateMapColorCoverSprite(), ObjectConstants.backdropSpawnLocation + ObjectConstants.discoveredRoomsInitialLocationFromBackdrop);
             foreach (Rectangle destRec in SpriteRectangles.backdropCoverFrames)
             {
                 backdropSprites.Add(InventorySpriteFactory.Instance.CreateCoverSprite(destRec), ObjectConstants.backdropSpawnLocation + (destRec.Location.ToVector2() * ObjectConstants.scale));

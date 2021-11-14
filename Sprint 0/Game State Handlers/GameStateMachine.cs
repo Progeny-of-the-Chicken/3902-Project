@@ -20,6 +20,7 @@ namespace Sprint_0.GameStateHandlers
 
         // Game State Handlers
         GameplayStateHandler gameplay;
+        InventoryStateHandler inventory;
 
         public GameStateMachine(Link link)
         {
@@ -33,6 +34,10 @@ namespace Sprint_0.GameStateHandlers
         public void SetState(GameState newState)
         {
             this._state = newState;
+            if (newState == GameState.Inventory)
+            {
+                inventory = new InventoryStateHandler();
+            }
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
@@ -45,6 +50,7 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    inventory.Draw(sb, gameTime);
                     break;
                 default:
                     break;
@@ -61,6 +67,7 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
+                    inventory.Update(gameTime);
                     break;
                 default:
                     break;
@@ -73,6 +80,7 @@ namespace Sprint_0.GameStateHandlers
         private void loadHandlers()
         {
             this.gameplay = new GameplayStateHandler(this.link);
+            inventory = new InventoryStateHandler();
         }
     }
 }

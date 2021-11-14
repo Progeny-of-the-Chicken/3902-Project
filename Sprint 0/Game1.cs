@@ -18,7 +18,7 @@ namespace Sprint_0
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        KeyboardController kc;
+        public IController kc;
         public Link link;
         public IRoomManager roomManager;
         public GameStateMachine gameStateMachine;

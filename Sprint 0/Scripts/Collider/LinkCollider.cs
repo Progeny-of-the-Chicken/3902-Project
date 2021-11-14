@@ -5,6 +5,7 @@ using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts
 {
@@ -38,6 +39,25 @@ namespace Sprint_0.Scripts
 
         public void OnItemCollision(IItem item)
         {
+            switch (item.Type)
+            {
+                case ItemType.BoomerangItem:
+                    Inventory.Instance.Weapons.Add(WeaponType.BasicBoomerang);
+                    break;
+                case ItemType.BowItem:
+                    Inventory.Instance.Weapons.Add(WeaponType.Bow);
+                    break;
+                case ItemType.BombItem:
+                    // TODO: Add bombs to inventory
+                    break;
+                case ItemType.BasicMapItem:
+                    Inventory.Instance.Map = true;
+                    break;
+                case ItemType.Compass:
+                    Inventory.Instance.Compass = true;
+                    break;
+                // TODO: Add more cases for remaining items pertaining to HUD
+            }
             item.Despawn();
         }
 
@@ -52,6 +72,13 @@ namespace Sprint_0.Scripts
         public void Update(Vector2 location)
         {
             hitbox.Location = location.ToPoint();
+        }
+
+        //----- Helper method for different item type responses -----//
+
+        private void RemoveMe()
+        {
+
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Terrain
         {
             this.link = player;
             activeRoom = new Room(ObjectConstants.startRoom, this.link);
+            RoomTracker.Instance.Init(activeRoom.RoomId());
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -37,6 +38,7 @@ namespace Sprint_0.Scripts.Terrain
         public void SwitchToRoom(string roomID)
         {
             dormentRooms.Add(activeRoom.RoomId(), activeRoom);
+            RoomTracker.Instance.RegisterRoom(activeRoom.RoomId(), roomID);
             if (dormentRooms.ContainsKey(roomID))
             {
                 dormentRooms.Remove(roomID, out activeRoom);
