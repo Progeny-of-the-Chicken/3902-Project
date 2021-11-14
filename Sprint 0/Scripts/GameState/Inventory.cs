@@ -24,6 +24,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.Bomb
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
+            BlueRing = true;
             Map = false;
             Compass = false;
             Rupee = ObjectConstants.inventoryStartingRupees;
@@ -35,6 +36,8 @@ namespace Sprint_0.Scripts.GameState
 
         public int SelectedWeaponIndex { get; set; }
 
+        public bool BlueRing { get; set; }
+
         public bool Map { get; set; }
 
         public bool Compass { get; set; }
@@ -44,7 +47,5 @@ namespace Sprint_0.Scripts.GameState
         public int Key { get; set; }
 
         public int Bomb { get; set; }
-
-        // TODO: Add link's health
     }
 }
