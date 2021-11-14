@@ -31,6 +31,16 @@ namespace Sprint_0.Scripts.GameState
         int health;
         int maxHealth;
 
+        private static HUD instance = new HUD();
+
+        public static HUD Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
         public HUD()
         {
             backgroundSprite = InventorySpriteFactory.Instance.CreateHUDBackdropSprite();

@@ -2,14 +2,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts;
+using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
     public class RoomSwapStateHandler: IGameStateHandler
     {
-        private const int verticalScrollDist = 800;
-        private const int horizontalScrollDist = 1200;
+        private const int verticalScrollDist = ObjectConstants.roomswapAnimationVerticalScrollDist;
+        private const int horizontalScrollDist = ObjectConstants.roomswapAnimationHorizontalScrollDist;
         private Vector2 toRoomOriginDrawPoint;
         private Vector2 fromRoomOriginDrawPoint;
 
@@ -21,8 +22,9 @@ namespace Sprint_0.GameStateHandlers
         private Link link;
 
         // Constants that define how many frames the animation will take/the step size of each new frame
-        private const int frames = 80;
+        private const int frames = ObjectConstants.roomswapAnimationDurationInFrames;
         private int currFrame = 0;
+
 
         public RoomSwapStateHandler(string fID, string tID, FacingDirection dir, Link l)
         {
@@ -68,6 +70,8 @@ namespace Sprint_0.GameStateHandlers
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
+            HUD.Instance.Draw(sb);
+
             if (currFrame <= frames)
             {
                 Vector2 step;
@@ -104,6 +108,7 @@ namespace Sprint_0.GameStateHandlers
             } else
             {
                 // Do whatever needed to swap game states
+                // Do whatever needed to return to Gameplay
                 currFrame = 0;
                 fromRoom.TransitionEnded();
                 toRoom.TransitionEnded();
