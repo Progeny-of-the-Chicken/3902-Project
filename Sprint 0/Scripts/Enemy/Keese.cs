@@ -21,13 +21,15 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
 
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
-
+        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
         public int Damage { get => ObjectConstants.KeeseDamage; }
         int health = ObjectConstants.KeeseStartingHealth;
         bool delete = false;
+        bool inKnockBack = false;
 
         Vector2 location;
         Vector2 directionVector;
+        Vector2 knockbackDirection;
 
         public Keese(Vector2 location)
         {
@@ -43,11 +45,19 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gt)
         {
-            Move(gt);
-            if (directionVector != Vector2.Zero)
+            if (!inKnockBack)
             {
-                sprite.Update(gt);
+                Move(gt);
+                if (directionVector != Vector2.Zero)
+                {
+                    sprite.Update(gt);
+                }
             }
+            else
+            {
+                GetKnockedBack(gt);
+            }
+            collider.Update(location);
         }
 
         public void Move(GameTime gt)
@@ -59,7 +69,16 @@ namespace Sprint_0.Scripts.Enemy
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
             location += directionVector * ObjectConstants.KeeseMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            collider.Update(location);
+        }
+        void GetKnockedBack(GameTime t)
+        {
+            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
+            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
+            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
+            {
+                inKnockBack = false;
+                timeSinceKnockback = 0;
+            }
         }
         void SetRandomDirection()
         {
@@ -78,9 +97,15 @@ namespace Sprint_0.Scripts.Enemy
             }
             SFXManager.Instance.PlayEnemyHit();
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            inKnockBack = true;
+            knockback.Normalize();
+            knockbackDirection = knockback;
         }
         public bool CheckDelete()
         {

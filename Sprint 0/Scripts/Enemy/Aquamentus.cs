@@ -93,9 +93,13 @@ namespace Sprint_0.Scripts.Enemy
             }
             SFXManager.Instance.PlayBossHit();
         }
-        public void KnockBack(Vector2 knockback)
+        public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback;
+        }
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //Aquamentus doesn't get knocked back when hit
         }
         public bool CheckDelete()
         {
