@@ -1,4 +1,7 @@
-﻿namespace Sprint_0.Scripts.Commands.InventoryState
+﻿using Sprint_0.GameStateHandlers;
+using Sprint_0.Scripts.Controller;
+
+namespace Sprint_0.Scripts.Commands.InventoryState
 {
     public class CommandReturnToGameState : ICommand
     {
@@ -11,7 +14,9 @@
 
         public void Execute()
         {
-            // TODO: Implement state transition here
+            GameStateManager.Instance.StartGameplay();
+            // TODO: Make this change in the game state handler
+            game.kc = new KeyboardController(game);
         }
     }
 }

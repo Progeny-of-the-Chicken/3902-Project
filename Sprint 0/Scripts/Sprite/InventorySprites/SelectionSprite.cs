@@ -9,8 +9,8 @@ namespace Sprint_0.Scripts.Sprite.InventorySprites
         private Texture2D spritesheet;
         private List<Rectangle> frames = SpriteRectangles.selectionFrames;
         private double animationDelaySeconds = ObjectConstants.itemAnimationDelaySeconds;
-        private double startTimeSeconds = 0.0;
-        private int frameIndex = 0; // TODO: Adjust with magic number changes
+        private double startTimeSeconds = ObjectConstants.zero_double;
+        private int frameIndex = ObjectConstants.zero_int;
         private int scale = ObjectConstants.scale;
 
         public SelectionSprite(Texture2D textures)
@@ -26,9 +26,9 @@ namespace Sprint_0.Scripts.Sprite.InventorySprites
                 frameIndex++;
                 if (frameIndex == frames.Count)
                 {
-                    frameIndex = 0;
+                    frameIndex = ObjectConstants.zero_int;
                 }
-                startTimeSeconds = 0.0;
+                startTimeSeconds = ObjectConstants.zero_double;
             }
         }
 

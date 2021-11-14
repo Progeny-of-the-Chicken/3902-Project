@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 using System;
 
@@ -37,5 +38,6 @@ public class EastBombableSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.EastBombedSpriteStr);
         command.Execute();
+        SFXManager.Instance.PlaySecretFound();
     }
 }

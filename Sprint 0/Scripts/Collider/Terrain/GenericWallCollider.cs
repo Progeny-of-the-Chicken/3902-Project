@@ -24,13 +24,13 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnEnemyCollision(IEnemy enemy)
         {
             Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
-            enemy.KnockBack(adjustmentForEnemy);
+            enemy.SuddenKnockBack(adjustmentForEnemy);
         }
 
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            link.PushBackBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
+            link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
         }
 
         public void OnProjectileCollision(IProjectile projectile)

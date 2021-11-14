@@ -13,7 +13,9 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            link.TakeDamage(ObjectConstants.DefaultEnemyDamage);
+            //Do we even use this command?
+            //Should we even use this command? We need link to be able to take various amounts of damage from different enemies
+            link.TakeDamage(ObjectConstants.KeeseDamage);
         }
     }
 }

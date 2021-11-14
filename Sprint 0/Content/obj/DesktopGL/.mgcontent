@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/bosses.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Dungeon1Eagle.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/DungeonTileset.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/enemies.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Font.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/InventorySpritesheet.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/LinkSpriteSheet.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/LoZItems.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/LoZSprites.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/npc.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/OverworldTileset.png</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/Dungeon Theme.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Arrow_Boomerang.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Bomb_Blow.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Bomb_Drop.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Boss_Hit.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Boss_Scream1.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Boss_Scream2.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Boss_Scream3.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Candle.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Door_Unlock.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Enemy_Die.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Enemy_Hit.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Fanfare.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Get_Heart.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Get_Item.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Get_Rupee.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Key_Appear.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Link_Die.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Link_Hurt.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_LowHealth.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_MagicalRod.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Recorder.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Refill_Loop.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Secret.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Shield.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Shore.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Stairs.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Sword_Combined.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Sword_Shoot.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Sword_Slash.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Text.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/LOZ_Text_Slow.wav</File>
+    <File>C:/Users/keith/source/repos/3902-Project/Sprint 0/Content/Sounds/Triforce Piece.wav</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

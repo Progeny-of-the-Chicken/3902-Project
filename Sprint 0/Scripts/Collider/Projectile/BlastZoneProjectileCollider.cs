@@ -28,13 +28,13 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(Owner.Damage);
-            player.PushBackBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
+            player.PushBackGentlyBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
         }
 
         public void OnEnemyCollision(IEnemy enemy)
         {
             enemy.TakeDamage(Owner.Damage);
-            enemy.KnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
         }
     }
 }

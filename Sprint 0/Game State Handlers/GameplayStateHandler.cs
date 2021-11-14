@@ -15,7 +15,7 @@ namespace Sprint_0.GameStateHandlers
         {
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
-            headsUpDisplay = new HUD();
+            headsUpDisplay = HUD.Instance;
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)

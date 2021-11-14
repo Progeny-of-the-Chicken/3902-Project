@@ -13,15 +13,36 @@ using Sprint_0.Scripts.GameState.InventoryState;
 
 namespace Sprint_0
 {
+    public static class Extensions
+    {
+        public static FacingDirection Opposite(this FacingDirection dir)
+        {
+            switch (dir)
+            {
+                case FacingDirection.Left:
+                    return FacingDirection.Right;
+                case FacingDirection.Right:
+                    return FacingDirection.Left;
+                case FacingDirection.Up:
+                    return FacingDirection.Down;
+                case FacingDirection.Down:
+                    return FacingDirection.Up;
+                default:
+                    // Should never happen
+                    return FacingDirection.Up;
+            }
+        }
+    }
     public enum FacingDirection { Right, Left, Up, Down };
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        KeyboardController kc;
+        public IController kc;
         public Link link;
         public IRoomManager roomManager;
-        public GameStateMachine gameStateMachine;
+
         MouseController mc;
         int roomNum = ObjectConstants.counterInitialVal_int;
 
@@ -31,11 +52,14 @@ namespace Sprint_0
             Content.RootDirectory = ObjectConstants.contentLocation;
             IsMouseVisible = true;
 
-            link = new Link();
+            link = Link.Instance;
             kc = new KeyboardController(this);
 
             //Just for Sprint 3
             mc = new MouseController(this);
+
+            roomManager = RoomManager.Instance;
+            roomManager.Init(link);
         }
 
         protected override void Initialize()
@@ -57,11 +81,12 @@ namespace Sprint_0
             EffectSpriteFactory.Instance.LoadAllTextures(this.Content);
             InventorySpriteFactory.Instance.LoadAllTextures(this.Content);
             FontSpriteFactory.Instance.LoadAllTextures(this.Content);
+            SFXManager.Instance.LoadAllSounds(this.Content);
 
             base.LoadContent();
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
-            gameStateMachine = new GameStateMachine(link);
+            GameStateManager.Instance.Init(link);
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,7 +98,8 @@ namespace Sprint_0
             //Just for Sprint 3
             mc.Update();
 
-            gameStateMachine.Update(gameTime);
+            SFXManager.Instance.Update(gameTime);
+            GameStateManager.Instance.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -82,8 +108,8 @@ namespace Sprint_0
 
             _spriteBatch.Begin();
 
-            gameStateMachine.Draw(_spriteBatch, gameTime);
-
+            GameStateManager.Instance.Draw(_spriteBatch, gameTime);
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -97,7 +123,7 @@ namespace Sprint_0
         //Just for sprint 3
         void ChangeRoom()
         {
-            roomManager.SwitchToRoom(ObjectConstants.rooms[roomNum]);
+			GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), ObjectConstants.rooms[roomNum], FacingDirection.Up);
         }
 
         public void NextRoom()

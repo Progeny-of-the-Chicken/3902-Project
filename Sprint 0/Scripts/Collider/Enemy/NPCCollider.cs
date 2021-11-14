@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
             Vector2 pushBack = Overlap.DirectionToMoveObjectOff(hitbox, player.collider.CollisionRectangle);
-            player.PushBackBy(pushBack);
+            player.PushBackInstantlyBy(pushBack);
         }
 
         public void OnProjectileCollision(IProjectile projectile)

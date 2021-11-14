@@ -10,5 +10,7 @@ namespace Sprint_0.Scripts.Collider.Item
         Rectangle Hitbox { get; }
 
         void Update(Vector2 location);
+
+        void OnLinkCollision(Link link);
     }
 }
