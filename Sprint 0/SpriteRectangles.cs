@@ -100,6 +100,8 @@ namespace Sprint_0
         public static Rectangle[] keeseFrames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
         //Old Man
         public static Rectangle oldManFrame = new Rectangle(1, 11, 16, 16);
+        //Rope
+        public static Rectangle[] ropeFrames = { new Rectangle(126, 59, 16, 16), new Rectangle(144, 59, 16, 16) };
         //SpikeTrap
         public static Rectangle spikeTrapFrame = new Rectangle(164, 59, 16, 16);
         //Stalfos

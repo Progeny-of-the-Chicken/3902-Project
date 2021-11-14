@@ -28,6 +28,10 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new Stalfos(location);
 		}
+		public IEnemy CreateRope(Vector2 location)
+        {
+			return new Rope(location);
+        }
 		public IEnemy CreateOldMan(Vector2 location)
         {
 			return new OldMan(location);

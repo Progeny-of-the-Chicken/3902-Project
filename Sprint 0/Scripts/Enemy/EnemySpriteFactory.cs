@@ -35,56 +35,62 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateStalfosSprite(Rectangle frame)
         {
-            return new UnanimatedFlipSprite(frame, enemySprites);
+            return new FlippingSprite(frame, enemySprites);
         }
 
+        public ISprite CreateRightRopeSprite(Rectangle[] frames)
+        {
+            return new AnimatedEnemySprite(frames, enemySprites);
+        }
+        public ISprite CreateLeftRopeSprite(Rectangle[] frames)
+        {
+            return new AnimatedFlippedSprite(frames, enemySprites);
+        }
         public ISprite CreateOldManSprite(Rectangle frame)
         {
-            return new GenericUnanimatedEnemySprite(frame, npcSprites);
+            return new UnanimatedEnemySprite(frame, npcSprites);
         }
         public ISprite CreateGelSprite(Rectangle[] frames)
         {
-            return new GenericEnemySprite(frames, enemySprites);
+            return new AnimatedEnemySprite(frames, enemySprites);
         }
         public ISprite CreateZolSprite(Rectangle[] frames)
         {
-            return new GenericEnemySprite(frames, enemySprites);
+            return new AnimatedEnemySprite(frames, enemySprites);
         }
         public ISprite CreateAquamentusMoveSprite(Rectangle[] frames)
         {
-            return new GenericEnemySprite(frames, bossSprites);
+            return new AnimatedEnemySprite(frames, bossSprites);
         }
         public ISprite CreateAquamentusShootSprite(Rectangle[] frames)
         {
-            return new GenericEnemySprite(frames, bossSprites);
+            return new AnimatedEnemySprite(frames, bossSprites);
         }
         public ISprite CreateKeeseSprite(Rectangle[] frames)
         {
-            return new GenericEnemySprite(frames, enemySprites);
+            return new AnimatedFlippedSprite(frames, enemySprites);
         }
         //TODO: fix the magic projectile sprite to not take rectangles
         public ISprite CreateMagicProjectileSprite()
         {
             return new MagicProjectileSprite(SpriteRectangles.magicProjectileFrames, bossSprites);
         }
-        //TODO:Maybe not have so many sprites? just animate them right?
         public ISprite CreateFrontGoriyaSprite(Rectangle frame)
         {
-            return new AnimatedFlipSprite(frame, enemySprites);
+            return new FlippingSprite(frame, enemySprites);
         }
         public ISprite CreateBackGoriyaSprite(Rectangle frame)
         {
-            return new AnimatedFlipSprite(frame, enemySprites);
+            return new FlippingSprite(frame, enemySprites);
         }
         public ISprite CreateRightGoriyaSprite(Rectangle[] frames)
         {
-            return new GoriyaRightSprite(frames, enemySprites);
+            return new AnimatedEnemySprite(frames, enemySprites);
         }
         public ISprite CreateLeftGoriyaSprite(Rectangle[] frames)
         {
-            return new GoriyaLeftSprite(frames, enemySprites);
+            return new AnimatedFlippedSprite(frames, enemySprites);
         }
-        //TODO:remove scale here
         public ISprite CreateWallmasterOpenSprite(Rectangle frame)
         {
             return new WallmasterOpenSprite(frame, enemySprites);
