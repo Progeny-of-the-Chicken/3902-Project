@@ -69,6 +69,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(Keys.B, new CommandSelectWeapon(game));
 			this.RegisterCommand(Keys.R, new CommandReturnToGameState(game));
 			this.RegisterCommand(Keys.Space, new CommandPauseGame(game));
+			this.RegisterCommand(Keys.M, new ToggleMute());
 			this.RegisterCommand(Keys.P, new PauseCommand());
 		}
 

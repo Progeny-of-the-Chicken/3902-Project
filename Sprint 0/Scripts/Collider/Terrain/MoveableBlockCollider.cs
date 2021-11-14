@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             if (!(enemy is Keese))
             {
                 Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
-                enemy.KnockBack(adjustmentForEnemy);
+                enemy.SuddenKnockBack(adjustmentForEnemy);
             }
         }
 

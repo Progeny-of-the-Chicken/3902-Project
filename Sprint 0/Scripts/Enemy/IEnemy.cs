@@ -15,7 +15,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public void TakeDamage(int damage);
 
-        public void KnockBack(Vector2 knockback);
+        public void SuddenKnockBack(Vector2 knockback);
+
+        public void GradualKnockBack(Vector2 knockback);
 
         public bool CheckDelete();
     }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 
 public class SouthClosedSprite : IWall
@@ -37,6 +38,7 @@ public class SouthClosedSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.SouthDoorSpriteStr);
         command.Execute();
+        SFXManager.Instance.PlaySecretFound();
     }
 
 }

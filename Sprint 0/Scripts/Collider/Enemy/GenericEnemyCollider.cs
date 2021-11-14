@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 if (!pushBack.Equals(Vector2.Zero))
                 {
                     pushBack.Normalize();
-                    pushBack *= ObjectConstants.DefaultEnemyKnockback;
+                    pushBack *= ObjectConstants.DefaultEnemyKnockbackToLink;
                 }
                 player.PushBackGentlyBy(pushBack);
                 player.TakeDamage(Owner.Damage);

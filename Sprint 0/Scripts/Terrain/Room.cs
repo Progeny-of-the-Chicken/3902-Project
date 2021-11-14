@@ -10,6 +10,7 @@ using System;
 using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts;
 
 public class Room : IRoom
 {
@@ -458,12 +459,13 @@ public class Room : IRoom
                     i++;
                     switch (strArray[i])
                     {
-                        case ObjectConstants.KeyStr:
-                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
-                            break;
-                        case ObjectConstants.HeartContainerStr:
-                            itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
-                            break;
+						case ObjectConstants.KeyStr:
+							itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
+							SFXManager.Instance.PlayKeySpawn();
+							break;
+						case ObjectConstants.HeartContainerStr:
+							itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
+							break;
                     }
                     break;
             }

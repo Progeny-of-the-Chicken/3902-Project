@@ -129,8 +129,13 @@ namespace Sprint_0.Scripts
                 ResetCountersCausedByPlayer();
                 damageCounter = ObjectConstants.linkTakeDamageTime;
                 linkHealth -= damage;
-                if (linkHealth == ObjectConstants.zero)
+                SFXManager.Instance.PlayLinkHit();  //putting this here so it doesn't play continuously while link stands in a fire
+                if (linkHealth <= ObjectConstants.zero)
+                {
                     damageCounter += ObjectConstants.linkDeathCounter;
+                    SFXManager.Instance.StopMusic();    //not sure where else to put this
+                    SFXManager.Instance.PlayLinkDeath(); 
+                }
             }
         }
 
