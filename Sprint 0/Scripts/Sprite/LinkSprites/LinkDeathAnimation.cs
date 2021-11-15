@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             position = state.Position;
             this.direction = FacingDirection.Down;
-            sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
             SetFramesForDirection();
             animationCounter = ObjectConstants.counterInitialVal_float;
             changeFrameCounter = ObjectConstants.counterInitialVal_float;

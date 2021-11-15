@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts
             this.direction = linkState.FacingDirection;
             animateSwordCounter = ObjectConstants.defaultCounterLength;
             this.position = linkState.Position;
-            sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
             setFramesBasedOnDirection();
         }
 

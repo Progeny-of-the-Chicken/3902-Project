@@ -82,7 +82,6 @@ namespace Sprint_0.Scripts
         {
             linkState.UseSword();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            ObjectsFromObjectsFactory.Instance.CreateSwordAttackHitboxFromLink(Position, FacingDirection);
         }
 
         public void UseItem()
@@ -117,6 +116,10 @@ namespace Sprint_0.Scripts
         public Vector2 Position { get => linkState.Position; }
 
         public Vector2 ItemSpawnPosition { get => linkState.ItemSpawnPosition; }
+
+        public int Health { get => (int)Math.Ceiling(linkState.linkHealth); set { linkState.linkHealth = value; } }
+
+        public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkHealth = value; } }
 
         public bool IsAlive { get => linkState.IsAlive; }
 

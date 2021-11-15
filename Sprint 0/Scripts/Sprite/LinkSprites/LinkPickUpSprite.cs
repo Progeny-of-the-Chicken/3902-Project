@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
 
         public LinkPickUpSprite(LinkStateMachine state)
         {
-            sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
             frames = SpriteRectangles.linkPickUpItemFrames;
             frameNum = ObjectConstants.firstFrame;
             currentFrame = frames[frameNum];

@@ -92,11 +92,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void SpawnExplosions()
         {
-            ObjectsFromObjectsFactory.Instance.CreateEffect(pos, EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(pos, EffectType.Explosion);
             for (double i = 0; i <= (2 * Math.PI); i += (2 * Math.PI / extraExplosionNumber))
             {
                 Vector2 explosionSpawnOffset = new Vector2((float)(Math.Cos(i) * extraExplosionOffset), (float)(Math.Sin(i) * extraExplosionOffset));
-                ObjectsFromObjectsFactory.Instance.CreateEffect(pos + explosionSpawnOffset, EffectType.Explosion);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(pos + explosionSpawnOffset, EffectType.Explosion);
             }
         }
     }
