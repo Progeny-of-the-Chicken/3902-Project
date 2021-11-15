@@ -45,7 +45,6 @@ namespace Sprint_0.Scripts.Enemy
         Vector2 direction;
         public SpikeTrap(Vector2 location)
         {
-            //
             this.location = location;
             moveSpeed = 25 * ObjectConstants.scale;
             OriginalLocation = location;
@@ -54,19 +53,14 @@ namespace Sprint_0.Scripts.Enemy
             RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (12 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.scaledStdWidthHeight * 2);
             RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight * 2, (8 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.scaledStdWidthHeight * 2, (7 * ObjectConstants.scaledStdWidthHeight));
-            //RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            //RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
-            //XDetectionCollider = new DetectionCollider(this, RectangleX);
             DetectionColliderRight = new DetectionColliderRight(this, RectangleXRight);
             DetectionColliderLeft = new DetectionColliderLeft(this, RectangleXLeft);
-            //YDetectionCollider = new DetectionCollider(this, RectangleY);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
             DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
             sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
             count = 0;
             back = false;
-            //
         }
 
         public void Update(GameTime gt)
@@ -81,7 +75,12 @@ namespace Sprint_0.Scripts.Enemy
             {
                 location += direction * (moveSpeed * 2) * (float)gt.ElapsedGameTime.TotalSeconds; //fix
                 count++;
-                if (count == 75)
+                if (count == 100 && direction.Y == 0)
+                {
+                    back = true;
+                    count *= 2;
+                }
+                else if (count == 55 && direction.X == 0)
                 {
                     back = true;
                     count *= 2;
