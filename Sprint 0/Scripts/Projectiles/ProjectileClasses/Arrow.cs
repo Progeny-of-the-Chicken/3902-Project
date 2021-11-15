@@ -69,6 +69,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(currentPos + popOffset, EffectType.Pop);
             delete = true;
         }
 

@@ -1,4 +1,5 @@
-﻿using Sprint_0.GameStateHandlers;
+using Microsoft.Xna.Framework.Input;
+using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0.Scripts.Commands.InventoryState
@@ -15,7 +16,7 @@ namespace Sprint_0.Scripts.Commands.InventoryState
         public void Execute()
         {
             GameStateManager.Instance.StartGameplay();
-            game.kc = new KeyboardController(game);
+            game.kc = new KeyboardController(game, Keyboard.GetState());
         }
     }
 }
