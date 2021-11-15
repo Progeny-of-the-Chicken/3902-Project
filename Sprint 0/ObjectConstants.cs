@@ -120,7 +120,7 @@ namespace Sprint_0
         // Sword beam
         public const double swordBeamSpeedPerSecond = 100 * scale;
         public const int swordBeamMaxDistance = 150 * scale;
-        public const int swordBeamDamage = 3;
+        public const int swordBeamDamage = 2;
         public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
 
         //----- Enemy constant values -----//
