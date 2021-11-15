@@ -40,7 +40,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         {
             if (projectile is Arrow)
             {
-                projectile.Despawn();
+                //not needed
             }
         }
     }
