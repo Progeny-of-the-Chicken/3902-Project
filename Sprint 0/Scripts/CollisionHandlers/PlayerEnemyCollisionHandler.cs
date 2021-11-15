@@ -25,12 +25,17 @@ namespace Sprint_0.Scripts.CollisionHandlers
                     //if we implement logic for enemy collision in link collider we'll put uncomment the next line
                     //link.collider.OnEnemyCollision(enemy);
                     enemy.Collider.OnPlayerCollision(link);
-                    SpikeTrap cast = enemy as SpikeTrap;
-                    if(cast != null)
+                    SpikeTrap spikeTrap = enemy as SpikeTrap;
+                    if(spikeTrap != null)
                     {
-                        cast.XCollider.OnPlayerCollision(link);
-                        cast.YCollider.OnPlayerCollision(link);
+                        spikeTrap.XCollider.OnPlayerCollision(link);
+                        spikeTrap.YCollider.OnPlayerCollision(link);
                     }
+                }
+                Rope rope = enemy as Rope;
+                if (rope != null && link.collider.CollisionRectangle.Intersects(rope.ChaseCollider.Hitbox))
+                {
+                    rope.ChaseCollider.OnPlayerCollision(link);
                 }
             }
         }

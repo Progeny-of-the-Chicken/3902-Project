@@ -4,18 +4,21 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using System.Collections.Generic;
 
 namespace Sprint_0.Scripts.Enemy
 {
     public class Rope : IEnemy
     {
-        ISprite sprite;
-
         ISprite leftSprite;
         ISprite rightSprite;
 
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
+        public IEnemyCollider ChaseCollider { get => dependency.chaseCollider; }
+
+        IEnemyCollider leftCollider;
+        IEnemyCollider rightCollider;
 
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
@@ -25,22 +28,35 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => ObjectConstants.RopeDamage; }
         int health = ObjectConstants.RopeStartingHealth;
+
         bool delete = false;
         bool inKnockBack = false;
-
+        bool chasing = false;
         Vector2 location;
-        Vector2 direction;
+
+        FacingDirection direction;
         Vector2 knockbackDirection;
 
+        (Vector2 directionVector, ISprite sprite, IEnemyCollider chaseCollider) dependency;
+
+        Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)> directionDependencies;
         public Rope(Vector2 location)
         {
             this.location = location;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             
-            rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite(SpriteRectangles.ropeFrames);
-            leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite(SpriteRectangles.ropeFrames);
-            sprite = rightSprite;
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.ropeFrames[ObjectConstants.zero].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            leftCollider = new DetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
+            rightCollider = new DetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
+            
+            leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite(SpriteRectangles.ropeFrames);
+            rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite(SpriteRectangles.ropeFrames);
+
+            directionDependencies = new Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)>();
+            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, leftSprite, leftCollider));
+            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, rightSprite, rightCollider));
+            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, rightSprite, rightCollider));
+            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, rightSprite, rightCollider));
             SetRandomDirection();
 
             ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
@@ -51,13 +67,14 @@ namespace Sprint_0.Scripts.Enemy
             if (!inKnockBack)
             {
                 Move(gt);
-                sprite.Update(gt);
+                dependency.sprite.Update(gt);
             }
             else
             {
                 GetKnockedBack(gt);
             }
             collider.Update(location);
+            dependency.chaseCollider.Update(location);
         }
 
         public void Move(GameTime gt)
@@ -68,7 +85,10 @@ namespace Sprint_0.Scripts.Enemy
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            location += direction * ObjectConstants.RopeMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            if (chasing)    location += dependency.directionVector * ObjectConstants.RopeChaseSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            else            location += dependency.directionVector * ObjectConstants.RopeMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            
+            chasing = false;
         }
         void GetKnockedBack(GameTime t)
         {
@@ -83,18 +103,9 @@ namespace Sprint_0.Scripts.Enemy
 
         void SetRandomDirection()
         {
-            //First byte is vertical/horizontal, second is +/-
             randomDir.GetBytes(random);
-            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction = Vector2.UnitX;
-            else
-                direction = Vector2.UnitY;
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction *= ObjectConstants.vectorFlip;
-            if (direction == ObjectConstants.LeftUnitVector)
-                sprite = leftSprite;
-            else
-                sprite = rightSprite;
+            direction = (FacingDirection)(random[ObjectConstants.firstInArray] % ObjectConstants.oneInFour);
+            directionDependencies.TryGetValue(direction, out dependency);
         }
         public void TakeDamage(int damage)
         {
@@ -118,6 +129,16 @@ namespace Sprint_0.Scripts.Enemy
             knockbackDirection = knockback;
         }
 
+        public void ChaseLink()
+        {
+            chasing = true;
+            if (direction != FacingDirection.Left)
+            {
+                direction = FacingDirection.Right;
+                directionDependencies.TryGetValue(direction, out dependency);
+            }
+        }
+
         public bool CheckDelete()
         {
             return delete;
@@ -125,7 +146,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, location);
+            dependency.sprite.Draw(sb, location);
         }
     }
 }
