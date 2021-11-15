@@ -107,22 +107,35 @@ namespace Sprint_0.Scripts.Enemy
 
         public void MoveRight()
         {
-            direction = Vector2.UnitX;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = Vector2.UnitX;
+
+            }
         }
 
         public void MoveLeft()
         {
-            direction = -Vector2.UnitX;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = -Vector2.UnitX;
+            }
         }
 
         public void MoveUp()
         {
-            direction = Vector2.UnitY;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = Vector2.UnitY;
+            }
         }
 
         public void MoveDown()
         {
-            direction = -Vector2.UnitY;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = -Vector2.UnitY;
+            }
         }
 
         public void TakeDamage(int damage)
