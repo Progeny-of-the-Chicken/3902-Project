@@ -55,16 +55,16 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gt)
         {
-            if (grab == false)
-            {
+            //if (grab == false)
+           // {
                 SearchMove(gt);
                 sprite.Update(gt);
                 collider.Update(location);
-            } else
-            {
-                yeetLink();
-                sprite.Update(gt);
-            }
+            //} else
+            //{
+             //   yeetLink();
+           //     sprite.Update(gt);
+           // }
         }
 
         void SearchMove(GameTime gt)
@@ -80,7 +80,7 @@ namespace Sprint_0.Scripts.Enemy
 
         void yeetLink()
         {
-            if (location.X > 0)
+            if (location.X != 0)
             {
                 --location.X;
                 grabbedLink.ResetPosition(location);
