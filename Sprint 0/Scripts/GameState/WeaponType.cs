@@ -8,6 +8,7 @@
         BasicArrow,
         SilverArrow,
         Bow,
-        BlueCandle
+        BlueCandle,
+        Potion
     }
 }

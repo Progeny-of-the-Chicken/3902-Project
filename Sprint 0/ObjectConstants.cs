@@ -91,7 +91,7 @@ namespace Sprint_0
         public const int blastZonePositionOffset = -8;
         public const int blastZoneWidthHeight = 32;
         public const int blastZoneCounter = 1;
-        public const int blastZoneDamage = 1;
+        public const int blastZoneDamage = 3;
         public static Rectangle blastZoneSize = new Rectangle(0, 0, blastZoneWidthHeight, blastZoneWidthHeight);
 
         // Bomb
@@ -118,12 +118,17 @@ namespace Sprint_0
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
 
-        //Magic projectile
+        // Magic projectile
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
 
+        // Sword beam
+        public const double swordBeamSpeedPerSecond = 100 * scale;
+        public const int swordBeamMaxDistance = 150 * scale;
+        public const int swordBeamDamage = 2;
+        public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
 
         //----- Enemy constant values -----//
 
@@ -215,6 +220,7 @@ namespace Sprint_0
         public const string itemFile = "LoZItems";
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
+        public const string blueLinkFile = "BlueLinkSpriteSheet";
         public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
@@ -319,7 +325,12 @@ namespace Sprint_0
         public const double explosionDurationSeconds = 0.3;
         public const double bombExtraExplosionOffset = 16 * scale;
         public const double bombExtraExplosionNumber = 6;
-
+        public const double swordBeamExplosionDurationSeconds = 0.4;
+        public const double swordBeamExplosionSpeed = 40 * scale;
+        public static Vector2 swordBeamExplosionRightOffset = new Vector2(2, -4) * scale;
+        public static Vector2 swordBeamExplosionUpOffset = new Vector2(-4, -6) * scale;
+        public static Vector2 swordBeamExplosionLeftOffset = new Vector2(-2, -4) * scale;
+        public static Vector2 swordBeamExplosionDownOffset = new Vector2(-4, 6) * scale;
 
         //----- Room swapping animation constants -----//
         public const int roomswapAnimationVerticalScrollDist = 800;
@@ -340,6 +351,7 @@ namespace Sprint_0
         // Weapon
         public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
         public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
+        public static Vector2 blueRingFromBackdropLocation = new Vector2(164, 24) * scale;
         public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
         public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;
         public static List<Vector2> inventoryWeaponLocations = new List<Vector2>
@@ -402,8 +414,12 @@ namespace Sprint_0
 
 
         //----- Inventory constant values -----//
-        public const int inventoryStartingRupees = 0;
+        public const int inventoryStartingRupees = 10;
         public const int inventoryStartingKeys = 0;
-        public const int inventoryStartingBombs = 0;
+        public const int inventoryStartingBombs = 4;
+        public const int fullHeartHealthValue = 2;
+        public const int inventoryYellowRupeeValue = 1;
+        public const int inventoryBlueRupeeValue = 5;
+        public const int inventoryBasicKeyValue = 1;
     }
 }

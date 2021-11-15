@@ -47,5 +47,10 @@ namespace Sprint_0.Scripts.Projectiles
         {
             return new FireSpellSprite(spritesheet);
         }
+
+        public ISprite CreateSwordBeamSprite(FacingDirection direction)
+        {
+            return new SwordBeamSprite(spritesheet, direction);
+        }
     }
 }

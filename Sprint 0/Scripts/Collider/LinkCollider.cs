@@ -56,7 +56,34 @@ namespace Sprint_0.Scripts
                 case ItemType.Compass:
                     Inventory.Instance.Compass = true;
                     break;
-                // TODO: Add more cases for remaining items pertaining to HUD
+                case ItemType.SmallHeartItem:
+                    Link.Instance.Health += ObjectConstants.fullHeartHealthValue;
+                    break;
+                case ItemType.HeartContainer:
+                    Link.Instance.MaxHealth += ObjectConstants.fullHeartHealthValue;
+                    Link.Instance.Health += ObjectConstants.fullHeartHealthValue;
+                    break;
+                case ItemType.Fairy:
+                    Link.Instance.Health += Link.Instance.MaxHealth;
+                    break;
+                case ItemType.BlueRuby:
+                    Inventory.Instance.Rupee += ObjectConstants.inventoryBlueRupeeValue;
+                    break;
+                case ItemType.YellowRuby:
+                    Inventory.Instance.Rupee += ObjectConstants.inventoryYellowRupeeValue;
+                    break;
+                case ItemType.BasicKey:
+                    Inventory.Instance.Key += ObjectConstants.inventoryBasicKeyValue;
+                    break;
+                case ItemType.Clock:
+                    // Unimplemented
+                    break;
+                case ItemType.MagicKey:
+                    // Unimplemented
+                    break;
+                case ItemType.TriforcePiece:
+                    // TODO: End game
+                    break;
             }
             item.Despawn();
         }

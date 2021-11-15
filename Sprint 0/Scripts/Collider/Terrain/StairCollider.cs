@@ -39,7 +39,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            //TODO: I don't think there are but maybe there should be interactions with specific projectiles
+            // No projectile interaction
         }
 
         public void Update(Vector2 location)

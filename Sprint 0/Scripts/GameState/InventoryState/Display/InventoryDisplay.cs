@@ -100,6 +100,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 Vector2 weaponSlot = backdropLocation + ObjectConstants.inventorySlotLocations[i] + ObjectConstants.inventoryWeaponFromSlotOffset;
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateWeaponSprite(sourceRec), weaponSlot);
             }
+            // Blue ring
+            if (Inventory.Instance.BlueRing)
+            {
+                itemSprites.Add(InventorySpriteFactory.Instance.CreateBlueRingSprite(), backdropLocation + ObjectConstants.blueRingFromBackdropLocation);
+            }
             // Map and compass
             if (Inventory.Instance.Map)
             {
@@ -125,6 +130,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 WeaponType.SilverArrow => SpriteRectangles.weaponSilverArrowFrame,
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
+                WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };

@@ -4,16 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkUsingItemSprite : ISprite
+    public class BlueLinkUsingItemSprite : ISprite
     {
         private Texture2D sheet;
         private FacingDirection direction;
         private Rectangle frame;
 
-        public LinkUsingItemSprite(LinkStateMachine state)
+        public BlueLinkUsingItemSprite(LinkStateMachine state)
         {
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             setFramesForDirection();
         }
 

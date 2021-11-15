@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkMovingSprite : ISprite
+    public class BlueLinkMovingSprite : ISprite
     {
         private Texture2D sheet;
         private FacingDirection direction;
@@ -16,11 +16,11 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle frame2;
         private bool isFrame1 = true;
 
-        public LinkMovingSprite(LinkStateMachine state)
+        public BlueLinkMovingSprite(LinkStateMachine state)
         {
             this.state = state;
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             setFramesForDirection();
             changeFrameCounter = ObjectConstants.counterInitialVal_float;
         }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkPickUpSprite : ISprite
+    public class BlueLinkPickUpSprite : ISprite
     {
         private Texture2D sheet;
         private float changeFrameCounter;
@@ -13,9 +13,9 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Rectangle[] frames;
         private Rectangle currentFrame;
 
-        public LinkPickUpSprite(LinkStateMachine state)
+        public BlueLinkPickUpSprite(LinkStateMachine state)
         {
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             frames = SpriteRectangles.linkPickUpItemFrames;
             frameNum = ObjectConstants.firstFrame;
             currentFrame = frames[frameNum];

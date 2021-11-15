@@ -5,7 +5,7 @@ using System;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkTakingDamageSprite : ISprite
+    public class BlueLinkTakingDamageSprite : ISprite
     {
         private Texture2D sheet;
         private Rectangle frame;
@@ -15,10 +15,10 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Random rand = new Random();
 
 
-        public LinkTakingDamageSprite(LinkStateMachine state)
+        public BlueLinkTakingDamageSprite(LinkStateMachine state)
         {
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             setFramesForDirection();
             colorCounter = ObjectConstants.counterInitialVal_int;
         }

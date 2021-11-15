@@ -43,6 +43,10 @@ namespace Sprint_0.Scripts.Commands
                 case WeaponType.BlueCandle:
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateFireSpell(link.Position, link.FacingDirection));
                     break;
+                case WeaponType.Potion:
+                    Link.Instance.Health = (int)(Link.Instance.MaxHealth);
+                    Inventory.Instance.RemoveWeapon(WeaponType.Potion);
+                    break;
             }
             link.UseItem();
         }

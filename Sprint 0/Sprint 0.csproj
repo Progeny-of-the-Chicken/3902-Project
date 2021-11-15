@@ -31,6 +31,7 @@
     <None Remove="Scripts\Commands\InventoryState\" />
     <None Remove="Scripts\Sprite\Font\Letters\" />
     <None Remove="Scripts\Sprite\Font\Numbers\" />
+    <None Remove="Scripts\Sprite\BlueLinkSprites\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -61,5 +62,6 @@
     <Folder Include="Scripts\Commands\InventoryState\" />
     <Folder Include="Scripts\Sprite\Font\Letters\" />
     <Folder Include="Scripts\Sprite\Font\Numbers\" />
+    <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
   </ItemGroup>
 </Project>

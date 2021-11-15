@@ -8,39 +8,35 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
-    public class Arrow : IProjectile
+    public class SwordBeam : IProjectile
     {
         private ISprite sprite;
         private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
-        private Vector2 popOffset;
+        private Vector2 explosionOffset;
         private bool delete = false;
         private bool friendly = false;
 
-        private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
-        private int maxDistance = ObjectConstants.arrowMaxDistance;
-        private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
+        private double speedPerSecond = ObjectConstants.swordBeamSpeedPerSecond;
+        private int maxDistance = ObjectConstants.swordBeamMaxDistance;
 
         public bool Friendly { get => friendly; }
 
-        public int Damage { get => ObjectConstants.arrowDamage; }
+        public int Damage { get => ObjectConstants.swordBeamDamage; }
 
         public IProjectileCollider Collider { get => collider; }
 
-        public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
+        public SwordBeam(Vector2 spawnLoc, FacingDirection direction)
         {
             startPos = currentPos = spawnLoc;
-            if (silver)
-            {
-                maxDistance = (int)(maxDistance * silverArrowSpeedCoef);
-            }
-            SetSpriteVectors(direction, silver);
+            SetSpriteVectors(direction);
+            sprite = ProjectileSpriteFactory.Instance.CreateSwordBeamSprite(direction);
 
-            collider = ProjectileColliderFactory.Instance.CreateArrowCollider(this, direction);
+            collider = ProjectileColliderFactory.Instance.CreateSwordBeamCollider(this, direction);
             friendly = true;
-            SFXManager.Instance.PlayFireArrowBoomerang();
+            SFXManager.Instance.PlaySwordShoot();
         }
 
         public void Update(GameTime gt)
@@ -52,8 +48,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Delete based on distance
             if (Math.Abs(currentPos.X - startPos.X) > maxDistance || Math.Abs(currentPos.Y - startPos.Y) > maxDistance)
             {
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(currentPos + popOffset, EffectType.Pop);
-                delete = true;
+                Despawn();
             }
         }
 
@@ -69,32 +64,29 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            ObjectsFromObjectsFactory.Instance.CreateSwordBeamExplosion(currentPos + explosionOffset);
             delete = true;
         }
 
-        private void SetSpriteVectors(FacingDirection direction, bool silver)
+        private void SetSpriteVectors(FacingDirection direction)
         {
             switch (direction)
             {
                 case FacingDirection.Right:
                     directionVector = ObjectConstants.RightUnitVector;
-                    popOffset = ObjectConstants.rightArrowPopOffset;
-                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Right, silver);
+                    explosionOffset = ObjectConstants.swordBeamExplosionRightOffset;
                     break;
                 case FacingDirection.Up:
                     directionVector = ObjectConstants.UpUnitVector;
-                    popOffset = ObjectConstants.upArrowPopOffset;
-                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Up, silver);
+                    explosionOffset = ObjectConstants.swordBeamExplosionUpOffset;
                     break;
                 case FacingDirection.Left:
                     directionVector = ObjectConstants.LeftUnitVector;
-                    popOffset = ObjectConstants.leftArrowPopOffset;
-                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Left, silver);
+                    explosionOffset = ObjectConstants.swordBeamExplosionLeftOffset;
                     break;
                 case FacingDirection.Down:
                     directionVector = ObjectConstants.DownUnitVector;
-                    popOffset = ObjectConstants.downArrowPopOffset;
-                    sprite = ProjectileSpriteFactory.Instance.CreateArrowSprite(FacingDirection.Down, silver);
+                    explosionOffset = ObjectConstants.swordBeamExplosionDownOffset;
                     break;
                 default:
                     break;

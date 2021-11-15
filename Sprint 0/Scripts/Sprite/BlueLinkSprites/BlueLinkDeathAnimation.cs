@@ -5,7 +5,7 @@ using System;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkDeathSprite : ISprite
+    public class BlueLinkDeathSprite : ISprite
     {
         private Texture2D sheet;
         private Rectangle frame;
@@ -16,11 +16,11 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         private Color randColor;
         private Random rand = new Random();
 
-        public LinkDeathSprite(LinkStateMachine state)
+        public BlueLinkDeathSprite(LinkStateMachine state)
         {
             position = state.Position;
             this.direction = FacingDirection.Down;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             SetFramesForDirection();
             animationCounter = ObjectConstants.counterInitialVal_float;
             changeFrameCounter = ObjectConstants.counterInitialVal_float;
