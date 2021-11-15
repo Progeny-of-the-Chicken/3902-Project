@@ -77,9 +77,26 @@ namespace Sprint_0.Scripts.Enemy
 
         void Move(GameTime gt)
         {
-            //move according to link's position
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-
+            if (back == false)
+            {
+                location += direction * (moveSpeed * 2) * (float)gt.ElapsedGameTime.TotalSeconds; //fix
+                count++;
+                if (count == 75)
+                {
+                    back = true;
+                    count *= 2;
+                }
+            }
+            else
+            {
+                location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count--;
+                if (count == 0)
+                {
+                    back = false;
+                    direction = Vector2.Zero;
+                }
+            }
             DamageCollider.Update(location);
         }
 
