@@ -100,10 +100,29 @@ namespace Sprint_0.Scripts.Enemy
             DamageCollider.Update(location);
         }
 
-        public void SetHasHit(Vector2 direction)
+        public void SetDirection(Vector2 direction)
         {
             this.direction = direction;
-            hasHit = true;
+        }
+
+        public void MoveRight()
+        {
+            direction = Vector2.UnitX;
+        }
+
+        public void MoveLeft()
+        {
+            direction = -Vector2.UnitX;
+        }
+
+        public void MoveUp()
+        {
+            direction = Vector2.UnitY;
+        }
+
+        public void MoveDown()
+        {
+            direction = -Vector2.UnitY;
         }
 
         public void TakeDamage(int damage)

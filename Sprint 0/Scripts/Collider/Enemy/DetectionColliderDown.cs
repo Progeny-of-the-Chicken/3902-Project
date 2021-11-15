@@ -15,14 +15,14 @@ namespace Sprint_0.Scripts.Collider.Enemy
 {
     class DetectionColliderDown : IEnemyCollider
     {
-        public IEnemy owner { get => owner; }
+        public IEnemy Owner { get => Owner; }
         private SpikeTrap _owner;
-        public Rectangle collisionRectangle { get => rectangle; }
+        public Rectangle Hitbox { get => rectangle; }
         private Rectangle rectangle;
-        public DetectionColliderDown(IEnemy owner, Rectangle collisionRectangle)
+        public DetectionColliderDown(IEnemy owner, Rectangle Hitbox)
         {
             this._owner = (SpikeTrap)owner;
-            this.rectangle = collisionRectangle;
+            this.rectangle = Hitbox;
         }
         public void Update(Vector2 location)
         {
@@ -31,27 +31,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            //Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.collisionRectangle);
-            //Vector2 direction = Vector2.Zero;
-            //if (intersect.Width >= intersect.Height)
-            //{
-            //  direction = Vector2.UnitX;
-            //if (intersect.Location.X < _owner.Location.X)
-            //{
-            //        direction *= -1;
-            //    }
-            //}
-            //else
-            //{
-
-            //    direction = Vector2.UnitY;
-            //    if (intersect.Location.X < _owner.Location.Y)
-            //    {
-            //        direction *= -1;
-            //    }
-            //}
-
-            //TODO: PLAYER MOVE DOWN
             _owner.MoveDown();
 
         }
