@@ -1,21 +1,28 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
-    class SpikeTrapCollider : IEnemyCollider
+    class DetectionColliderUp : IEnemyCollider
     {
-
-        public IEnemy Owner { get => owner; }
-        private SpikeTrap owner;
+        public IEnemy Owner { get => Owner; }
+        private SpikeTrap _owner;
         public Rectangle Hitbox { get => rectangle; }
         private Rectangle rectangle;
-        public SpikeTrapCollider(IEnemy owner, Rectangle collisionRectangle)
+        public DetectionColliderUp(IEnemy owner, Rectangle Hitbox)
         {
-            this.owner = (SpikeTrap)owner;
-            this.rectangle = collisionRectangle;
+            this._owner = (SpikeTrap)owner;
+            this.rectangle = Hitbox;
         }
         public void Update(Vector2 location)
         {
@@ -24,14 +31,16 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            player.TakeDamage(owner.Damage);
+
+            _owner.MoveUp();
+
         }
 
         public void OnProjectileCollision(IProjectile projectile)
         {
             if (projectile is Arrow)
             {
-                projectile.Despawn();
+                //not needed
             }
         }
     }
