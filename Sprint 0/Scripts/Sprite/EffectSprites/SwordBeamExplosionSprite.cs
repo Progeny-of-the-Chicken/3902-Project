@@ -37,7 +37,7 @@ namespace Sprint_0.Scripts.Sprite.EffectSprites
         public void Draw(SpriteBatch sb, Vector2 location)
         {
             Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frames[frameIndex].Width * scale, frames[frameIndex].Height * scale);
-            sb.Draw(spritesheet, dest, frames[frameIndex], Color.White);
+            sb.Draw(spritesheet, dest, frames[frameIndex], Color.White, ObjectConstants.zeroRotation, Vector2.Zero, flipValue, ObjectConstants.noLayerDepth);
         }
     }
 }

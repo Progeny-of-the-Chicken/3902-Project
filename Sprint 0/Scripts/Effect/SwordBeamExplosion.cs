@@ -15,9 +15,9 @@ namespace Sprint_0.Scripts.Effect
 
         public SwordBeamExplosion(Vector2 location, Vector2 direction)
         {
-            sprite = EffectSpriteFactory.Instance.CreateSwordBeamExplosionSprite(GetSpriteEffectsForVector());
             this.location = location;
             this.direction = direction;
+            sprite = EffectSpriteFactory.Instance.CreateSwordBeamExplosionSprite(GetSpriteEffectsForVector());
         }
 
         public void Update(GameTime gameTime)
@@ -49,11 +49,11 @@ namespace Sprint_0.Scripts.Effect
             SpriteEffects flipValue = SpriteEffects.None;
             if (direction.X > 0)
             {
-                flipValue = flipValue | SpriteEffects.FlipVertically;
+                flipValue |= SpriteEffects.FlipHorizontally;
             }
             if (direction.Y > 0)
             {
-                flipValue = flipValue | SpriteEffects.FlipVertically;
+                flipValue |= SpriteEffects.FlipVertically;
             }
             return flipValue;
         }
