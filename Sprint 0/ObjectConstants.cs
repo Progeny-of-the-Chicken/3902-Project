@@ -317,7 +317,12 @@ namespace Sprint_0
         public const double explosionDurationSeconds = 0.3;
         public const double bombExtraExplosionOffset = 16 * scale;
         public const double bombExtraExplosionNumber = 6;
-
+        public const double swordBeamExplosionDurationSeconds = 0.4;
+        public const double swordBeamExplosionSpeed = 40 * scale;
+        public static Vector2 swordBeamExplosionRightOffset = new Vector2(2, -4) * scale;
+        public static Vector2 swordBeamExplosionUpOffset = new Vector2(-4, -6) * scale;
+        public static Vector2 swordBeamExplosionLeftOffset = new Vector2(-2, -4) * scale;
+        public static Vector2 swordBeamExplosionDownOffset = new Vector2(-4, 6) * scale;
 
         //----- Room swapping animation constants -----//
         public const int roomswapAnimationVerticalScrollDist = 800;

@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private Vector2 directionVector;
         private Vector2 currentPos;
         private Vector2 startPos;
-        private Vector2 popOffset;
+        private Vector2 explosionOffset;
         private bool delete = false;
         private bool friendly = false;
 
@@ -64,30 +64,29 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
-            // TODO: Spawn effects here
+            ObjectsFromObjectsFactory.Instance.CreateSwordBeamExplosion(currentPos + explosionOffset);
             delete = true;
         }
 
-        // TODO: Simplify switch if it doesn't need a pop offset
         private void SetSpriteVectors(FacingDirection direction)
         {
             switch (direction)
             {
                 case FacingDirection.Right:
                     directionVector = ObjectConstants.RightUnitVector;
-                    popOffset = ObjectConstants.rightArrowPopOffset;
+                    explosionOffset = ObjectConstants.swordBeamExplosionRightOffset;
                     break;
                 case FacingDirection.Up:
                     directionVector = ObjectConstants.UpUnitVector;
-                    popOffset = ObjectConstants.upArrowPopOffset;
+                    explosionOffset = ObjectConstants.swordBeamExplosionUpOffset;
                     break;
                 case FacingDirection.Left:
                     directionVector = ObjectConstants.LeftUnitVector;
-                    popOffset = ObjectConstants.leftArrowPopOffset;
+                    explosionOffset = ObjectConstants.swordBeamExplosionLeftOffset;
                     break;
                 case FacingDirection.Down:
                     directionVector = ObjectConstants.DownUnitVector;
-                    popOffset = ObjectConstants.downArrowPopOffset;
+                    explosionOffset = ObjectConstants.swordBeamExplosionDownOffset;
                     break;
                 default:
                     break;
