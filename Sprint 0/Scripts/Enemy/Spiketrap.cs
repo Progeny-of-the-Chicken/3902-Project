@@ -26,6 +26,7 @@ namespace Sprint_0.Scripts.Enemy
         public Vector2 Location { get => location; }
 
         public int Damage { get => damage; }
+        public Vector2 Position { get => location; }
         const int knockbackDistance = 50;//TODO: magic number 50
         bool delete = false;
 

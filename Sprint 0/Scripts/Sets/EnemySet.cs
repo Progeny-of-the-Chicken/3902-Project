@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Commands;
 
 namespace Sprint_0.Scripts.Sets
 {
@@ -12,11 +13,13 @@ namespace Sprint_0.Scripts.Sets
         public HashSet<IEnemy> Enemies { get => enemies; }
         HashSet<IEnemy> enemies;
         HashSet<IEnemy> toBeRemoved;
+        DropItemCommand itemDropper;
 
         public EnemySet()
         {
             enemies = new HashSet<IEnemy>();
             toBeRemoved = new HashSet<IEnemy>();
+            itemDropper = new DropItemCommand();
         }
 
         public void Add(IEnemy enemy)
@@ -26,7 +29,7 @@ namespace Sprint_0.Scripts.Sets
 
         public void Update(GameTime gameTime)
         {
-            foreach(IEnemy enemy in enemies)
+            foreach (IEnemy enemy in enemies)
             {
                 enemy.Update(gameTime);
                 if (enemy.CheckDelete())
@@ -34,8 +37,9 @@ namespace Sprint_0.Scripts.Sets
                     toBeRemoved.Add(enemy);
                 }
             }
-            foreach(IEnemy enemy in toBeRemoved)
+            foreach (IEnemy enemy in toBeRemoved)
             {
+                itemDropper.Execute(enemy);
                 enemies.Remove(enemy);
             }
             toBeRemoved.Clear();

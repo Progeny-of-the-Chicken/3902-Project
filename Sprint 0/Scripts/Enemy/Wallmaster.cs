@@ -19,6 +19,7 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         public int Damage { get => _damage; }
+        public Vector2 Position { get => location; }
         int _damage;
         int health = ObjectConstants.WallMasterHealth;
         const int knockbackDistance = 50; //TODO: this magic number appears more than once and needs to be standardized
