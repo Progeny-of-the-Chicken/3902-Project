@@ -44,12 +44,13 @@ namespace Sprint_0.Scripts.Controller
 
 		private void setCommands()
 		{
+			this.RegisterCommand(Keys.Q, new CommandQuit(game));
 			this.RegisterCommand(Keys.W, new CommandMoveSelectionUp(game));
 			this.RegisterCommand(Keys.A, new CommandMoveSelectionLeft(game));
 			this.RegisterCommand(Keys.S, new CommandMoveSelectionDown(game));
 			this.RegisterCommand(Keys.D, new CommandMoveSelectionRight(game));
 			this.RegisterCommand(Keys.B, new CommandSelectWeapon(game));
-			this.RegisterCommand(Keys.E, new CommandReturnToGameState(game));
+			this.RegisterCommand(Keys.R, new CommandReturnToGameState(game));
 			this.RegisterCommand(Keys.Space, new CommandPauseGame(game));
 			this.RegisterCommand(Keys.M, new ToggleMute());
 		}

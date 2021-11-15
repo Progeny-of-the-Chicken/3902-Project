@@ -87,5 +87,15 @@ namespace Sprint_0.Scripts.Collider.Item
         {
             return new GenericItemCollider(item);
         }
+
+        public IItemCollider CreateBasicArrowItemCollider(IItem item)
+        {
+            return new GenericItemCollider(item);
+        }
+
+        public IItemCollider CreateSilverArrowItemCollider(IItem item)
+        {
+            return new GenericItemCollider(item);
+        }
     }
 }

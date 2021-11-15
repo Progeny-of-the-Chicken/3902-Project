@@ -15,7 +15,6 @@ namespace Sprint_0.Scripts.Commands.InventoryState
         public void Execute()
         {
             GameStateManager.Instance.StartGameplay();
-            // TODO: Make this change in the game state handler
             game.kc = new KeyboardController(game);
         }
     }

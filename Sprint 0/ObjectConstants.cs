@@ -70,9 +70,9 @@ namespace Sprint_0
         public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
 
         // Arrow
-        public const double arrowSpeedPerSecond = 150.0;
-        public const int arrowMaxDistance = 200;
-        public const double silverArrowSpeedCoef = 1.5;
+        public const double arrowSpeedPerSecond = 100.0 * scale;
+        public const int arrowMaxDistance = 100 * scale;
+        public const double silverArrowDistanceCoef = 1.5;
         public const int arrowDamage = 1;
         public static Vector2 rightArrowPopOffset = new Vector2(4, -8);
         public static Vector2 upArrowPopOffset = new Vector2(-8, -20);
@@ -344,6 +344,8 @@ namespace Sprint_0
         // Weapon
         public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
         public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
+        public static Vector2 basicArrowFromBackdropLocation = new Vector2(130, 24) * scale;
+        public static Vector2 silverArrowFromBackdropLocation = new Vector2(137, 24) * scale;
         public static Vector2 blueRingFromBackdropLocation = new Vector2(164, 24) * scale;
         public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
         public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;

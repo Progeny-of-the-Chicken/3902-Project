@@ -58,6 +58,12 @@ namespace Sprint_0.Scripts.Collider.Item
                 case ItemType.TriforcePiece:
                     _hitbox = SpriteRectangles.triforcePieceFrames[ObjectConstants.firstFrame];
                     break;
+                case ItemType.BasicArrowItem:
+                    _hitbox = SpriteRectangles.basicArrowItemFrame;
+                    break;
+                case ItemType.SilverArrowItem:
+                    _hitbox = SpriteRectangles.silverArrowItemFrame;
+                    break;
                 default:
                     // Should never happen
                     _hitbox = SpriteRectangles.smallHeartFrames[ObjectConstants.firstFrame];

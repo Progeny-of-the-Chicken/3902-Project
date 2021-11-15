@@ -22,10 +22,13 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.BasicBoomerang,
                 WeaponType.MagicalBoomerang,
                 WeaponType.Bomb,
-                WeaponType.Potion
+                WeaponType.Potion,
+                WeaponType.Bow
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             BlueRing = true;
+            BasicArrows = false;
+            SilverArrows = false;
             Map = false;
             Compass = false;
             Rupee = ObjectConstants.inventoryStartingRupees;
@@ -47,6 +50,10 @@ namespace Sprint_0.Scripts.GameState
         public int SelectedWeaponIndex { get; set; }
 
         public bool BlueRing { get; set; }
+
+        public bool BasicArrows { get; set; }
+
+        public bool SilverArrows { get; set; }
 
         public bool Map { get; set; }
 
