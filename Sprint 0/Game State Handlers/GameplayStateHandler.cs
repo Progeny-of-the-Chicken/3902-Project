@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
+using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
@@ -51,14 +53,15 @@ namespace Sprint_0.GameStateHandlers
         public void TogglePause()
         {
             paused = !paused;
-            game.kc.SetPauseState(paused);
 
             if (paused)
             {
                 link.Suspend();
+                game.kc = new PausedKeyboardController(game, Keyboard.GetState());
             } else
             {
                 link.UnSuspend();
+                game.kc = new KeyboardController(game, Keyboard.GetState());
             }
         }
 

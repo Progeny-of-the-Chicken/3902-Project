@@ -9,7 +9,6 @@ namespace Sprint_0.Scripts.Controller
 		//Dictionary Linking keys to commands
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private Dictionary<Keys, ICommand> linkControllerMappings;
-		private bool paused = false;
 
 		private Game1 game;
 
@@ -17,7 +16,7 @@ namespace Sprint_0.Scripts.Controller
 		KeyboardState previousKeys;
 
 		//Constructor
-		public KeyboardController(Game1 game)
+		public KeyboardController(Game1 game, KeyboardState prevState)
 		{
 			this.game = game;
 
@@ -25,6 +24,7 @@ namespace Sprint_0.Scripts.Controller
 			linkControllerMappings = new Dictionary<Keys, ICommand>();
 
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+			previousKeys = prevState;
 
 			setCommands();
 		}
@@ -58,32 +58,16 @@ namespace Sprint_0.Scripts.Controller
 			KeyboardState keyboardState = Keyboard.GetState();
 			Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
-            if (!paused)
-            {
-				foreach (Keys key in pressedKeys)
+			foreach (Keys key in pressedKeys)
+			{
+				executeCommandsForKey(key, controllerMappings);
+				if (!game.link.IsSuspended)
 				{
-					executeCommandsForKey(key, controllerMappings);
-					if (!game.link.IsSuspended)
-					{
-						executeCommandsForKey(key, linkControllerMappings);
-					}
+					executeCommandsForKey(key, linkControllerMappings);
 				}
-			} else
-            {
-				// This checks specifically for the pause key because we don't want to
-				// be able to fire any other commands than the pause command while paused.
-				if (pauseKeyPressed(pressedKeys))
-                {
-					executeCommandsForKey(Keys.P, controllerMappings);
-				}
-            }
+			}
 
 			previousKeys = keyboardState;
-		}
-
-		public void SetPauseState(bool paused)
-		{
-			this.paused = paused;
 		}
 
 
@@ -114,23 +98,5 @@ namespace Sprint_0.Scripts.Controller
 				mappings[key].Execute();
 			}
 		}
-
-		private void unpause()
-        {
-			new PauseCommand().Execute();
-        }
-
-		private bool pauseKeyPressed(Keys[] pressedKeys)
-		{
-			for (int i = 0; i < pressedKeys.Length; i++)
-            {
-				if (pressedKeys[i] == Keys.P)
-                {
-					return true;
-                }
-            }
-
-			return false;
-        }
     }
 }

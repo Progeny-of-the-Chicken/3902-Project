@@ -10,6 +10,7 @@ using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
 using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.GameState.InventoryState;
+using Microsoft.Xna.Framework.Input;
 
 namespace Sprint_0
 {
@@ -53,7 +54,7 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             link = Link.Instance;
-            kc = new KeyboardController(this);
+            kc = new KeyboardController(this, Keyboard.GetState());
 
             //Just for Sprint 3
             mc = new MouseController(this);
