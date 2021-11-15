@@ -36,7 +36,7 @@ namespace Sprint_0.Scripts.Enemy
             this.location = location;
             direction = ObjectConstants.LeftUnitVector;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateZolSprite(SpriteRectangles.zolFrames);
+            sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
         }

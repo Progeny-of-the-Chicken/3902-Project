@@ -49,8 +49,8 @@ namespace Sprint_0.Scripts.Enemy
             leftCollider = new RopeDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
             rightCollider = new RopeDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
             
-            leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite(SpriteRectangles.ropeFrames);
-            rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite(SpriteRectangles.ropeFrames);
+            leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite();
+            rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite();
 
             directionDependencies = new Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)>();
             directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, leftSprite, leftCollider));

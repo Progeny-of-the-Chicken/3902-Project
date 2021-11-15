@@ -40,10 +40,8 @@ namespace Sprint_0.Scripts.Enemy
             RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (25 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.standardWidthHeight);
             RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.scaledStdWidthHeight)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.scaledStdWidthHeight));
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
-            //Replace this with the new SpikeTrap implementation. DO NOT MERGE ANYTHING FROM THIS FILE
-            //XDetectionCollider = new RopeDetectionCollider(this, RectangleX);
-            //YDetectionCollider = new RopeDetectionCollider(this, RectangleY);
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
+            //Only line that should be merged from this branch is the next line
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite();
         }
 
         public void Update(GameTime gt)

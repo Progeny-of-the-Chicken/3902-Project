@@ -41,8 +41,8 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = ObjectConstants.WallMasterMoveSpeed;
             direction = ObjectConstants.LeftUnitVector;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(SpriteRectangles.wallMasterOpenFrame);
-            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(SpriteRectangles.wallMasterCloseFrame);
+            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite();
+            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite();
             sprite = openSprite;
             collider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.wallMasterOpenFrame.Width * ObjectConstants.scale), (SpriteRectangles.wallMasterOpenFrame.Height * ObjectConstants.scale)));
         }

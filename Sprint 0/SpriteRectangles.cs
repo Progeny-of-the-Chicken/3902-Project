@@ -111,6 +111,8 @@ namespace Sprint_0
         public static Rectangle[] goriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
         //Keese
         public static Rectangle[] keeseFrames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
+        //Merchant
+        public static Rectangle merchantFrame = new Rectangle(109, 11, 16, 16);
         //Old Man
         public static Rectangle oldManFrame = new Rectangle(1, 11, 16, 16);
         //Rope

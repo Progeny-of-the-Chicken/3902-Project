@@ -33,18 +33,18 @@ namespace Sprint_0.Scripts.Enemy
             bossSprites = content.Load<Texture2D>(ObjectConstants.bossesFile);
         }
 
-        public ISprite CreateStalfosSprite(Rectangle frame)
+        public ISprite CreateStalfosSprite()
         {
-            return new FlippingSprite(frame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites);
         }
 
-        public ISprite CreateRightRopeSprite(Rectangle[] frames)
+        public ISprite CreateRightRopeSprite()
         {
-            return new AnimatedEnemySprite(frames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.ropeFrames, enemySprites);
         }
-        public ISprite CreateLeftRopeSprite(Rectangle[] frames)
+        public ISprite CreateLeftRopeSprite()
         {
-            return new AnimatedFlippedSprite(frames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.ropeFrames, enemySprites);
         }
         public ISprite CreateDodongoRightSprite()
         {
@@ -78,63 +78,67 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new FlippingSprite(SpriteRectangles.dodongoExplodeUpFrame, bossSprites);
         }
-        public ISprite CreateOldManSprite(Rectangle frame)
+        public ISprite CreateMerchantSprite()
         {
-            return new UnanimatedEnemySprite(frame, npcSprites);
+            return new UnanimatedEnemySprite(SpriteRectangles.merchantFrame, npcSprites);
         }
-        public ISprite CreateGelSprite(Rectangle[] frames)
+        public ISprite CreateOldManSprite()
         {
-            return new AnimatedEnemySprite(frames, enemySprites);
+            return new UnanimatedEnemySprite(SpriteRectangles.oldManFrame, npcSprites);
         }
-        public ISprite CreateZolSprite(Rectangle[] frames)
+        public ISprite CreateGelSprite()
         {
-            return new AnimatedEnemySprite(frames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.gelFrames, enemySprites);
         }
-        public ISprite CreateAquamentusMoveSprite(Rectangle[] frames)
+        public ISprite CreateZolSprite()
         {
-            return new AnimatedEnemySprite(frames, bossSprites);
+            return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites);
         }
-        public ISprite CreateAquamentusShootSprite(Rectangle[] frames)
+        public ISprite CreateAquamentusMoveSprite()
         {
-            return new AnimatedEnemySprite(frames, bossSprites);
+            return new AnimatedEnemySprite(SpriteRectangles.aquamentusMoveFrames, bossSprites);
         }
-        public ISprite CreateKeeseSprite(Rectangle[] frames)
+        public ISprite CreateAquamentusShootSprite()
         {
-            return new AnimatedFlippedSprite(frames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.aquamentusShootFrames, bossSprites);
+        }
+        public ISprite CreateKeeseSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites);
         }
         //TODO: fix the magic projectile sprite to not take rectangles
         public ISprite CreateMagicProjectileSprite()
         {
             return new MagicProjectileSprite(SpriteRectangles.magicProjectileFrames, bossSprites);
         }
-        public ISprite CreateFrontGoriyaSprite(Rectangle frame)
+        public ISprite CreateFrontGoriyaSprite()
         {
-            return new FlippingSprite(frame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.goriyaFrontFrame, enemySprites);
         }
-        public ISprite CreateBackGoriyaSprite(Rectangle frame)
+        public ISprite CreateBackGoriyaSprite()
         {
-            return new FlippingSprite(frame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.goriyaBackFrame, enemySprites);
         }
-        public ISprite CreateRightGoriyaSprite(Rectangle[] frames)
+        public ISprite CreateRightGoriyaSprite()
         {
-            return new AnimatedEnemySprite(frames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.goriyaRightFrames, enemySprites);
         }
-        public ISprite CreateLeftGoriyaSprite(Rectangle[] frames)
+        public ISprite CreateLeftGoriyaSprite()
         {
-            return new AnimatedFlippedSprite(frames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.goriyaRightFrames, enemySprites);
         }
-        public ISprite CreateWallmasterOpenSprite(Rectangle frame)
+        public ISprite CreateWallmasterOpenSprite()
         {
-            return new WallmasterOpenSprite(frame, enemySprites);
+            return new WallmasterOpenSprite(SpriteRectangles.wallMasterOpenFrame, enemySprites);
         }
-        public ISprite CreateWallmasterCloseSprite(Rectangle frame)
+        public ISprite CreateWallmasterCloseSprite()
         {
-            return new WallmasterCloseSprite(frame, enemySprites);
+            return new WallmasterCloseSprite(SpriteRectangles.wallMasterCloseFrame, enemySprites);
         }
 
-        public ISprite CreateSpikeTrapSprite(Rectangle frame)
+        public ISprite CreateSpikeTrapSprite()
         {
-            return new SpikeTrapSprite(frame, enemySprites);
+            return new SpikeTrapSprite(SpriteRectangles.spikeTrapFrame, enemySprites);
         }
     }
 }

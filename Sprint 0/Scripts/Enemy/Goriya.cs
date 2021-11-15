@@ -39,10 +39,10 @@ namespace Sprint_0.Scripts.Enemy
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             randomDir = new RNGCryptoServiceProvider();
             directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, EnemySpriteFactory.Instance.CreateRightGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
-            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite(SpriteRectangles.goriyaRightFrames)));
-            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, EnemySpriteFactory.Instance.CreateBackGoriyaSprite(SpriteRectangles.goriyaBackFrame)));
-            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite(SpriteRectangles.goriyaFrontFrame)));
+            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, EnemySpriteFactory.Instance.CreateRightGoriyaSprite()));
+            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite()));
+            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, EnemySpriteFactory.Instance.CreateBackGoriyaSprite()));
+            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite()));
             direction = FacingDirection.Down;
             directionDependencies.TryGetValue(direction, out dependency);
 
