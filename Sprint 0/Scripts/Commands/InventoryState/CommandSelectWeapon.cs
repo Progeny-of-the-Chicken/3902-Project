@@ -13,7 +13,6 @@ namespace Sprint_0.Scripts.Commands.InventoryState
 
         public void Execute()
         {
-            // TODO: loop this through game
             InventoryManager.Instance.SelectWeapon();
         }
     }
