@@ -8,28 +8,37 @@ namespace Sprint_0.Scripts.Enemy
     class SpikeTrap : IEnemy
     {
         //
-
-        //
-        //TODO: additional refactoring needed with magic numbers
         ISprite sprite;
         IEnemyCollider DamageCollider;
-        IEnemyCollider XDetectionCollider;
-        IEnemyCollider YDetectionCollider;
-        public IEnemyCollider Collider { get => DamageCollider; }
-        public IEnemyCollider XCollider { get => XDetectionCollider; }
+        IEnemyCollider DetectionColliderRight;
+        IEnemyCollider DetectionColliderLeft;
+        IEnemyCollider DetectionColliderUp;
+        IEnemyCollider DetectionColliderDown;
+        public IEnemyCollider Collider {get => DamageCollider;}
+        public IEnemyCollider ColliderRight { get => DetectionColliderRight; }
 
-        public IEnemyCollider YCollider { get => YDetectionCollider; }
+        public IEnemyCollider ColliderLeft { get => DetectionColliderLeft; }
 
-        Rectangle RectangleX;
-        Rectangle RectangleY;
+        public IEnemyCollider ColliderUp { get => DetectionColliderUp; }
+
+        public IEnemyCollider ColliderDown { get => DetectionColliderDown; }
+
+        Rectangle damageFrame = new Rectangle(164, 59, 16, 16);
+        Rectangle RectangleXLeft;
+        Rectangle RectangleXRight;
+        Rectangle RectangleYDown;
+        Rectangle RectangleYUp;
         Vector2 OriginalLocation;
         float moveSpeed;
         bool hasHit = false;
         int damage;
-        public Vector2 Location { get => location; }
+        int count;
+        bool back;
 
+        //
+        //TODO: additional refactoring needed with magic numbers
+        public Vector2 Location { get => location; }
         public int Damage { get => damage; }
-        const int knockbackDistance = 50;//TODO: magic number 50
         bool delete = false;
 
         Vector2 location;
@@ -62,17 +71,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gt)
         {
-            if (hasHit == false)
-            {
-                Move(gt);
-                sprite.Update(gt);
-            }
-            else
-            {
-                SetOriginalPosition(gt);
-            }
-
-
+            Move(gt);
+            sprite.Update(gt);
         }
 
         void Move(GameTime gt)
@@ -89,27 +89,13 @@ namespace Sprint_0.Scripts.Enemy
             hasHit = true;
         }
 
-        public void SetOriginalPosition(GameTime gt)
-        {
-            if (location != OriginalLocation)
-            {
-                location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            }
-            else
-            {
-                hasHit = false;
-                direction = Vector2.Zero;
-            }
-
-        }
-
         public void TakeDamage(int damage)
         {
             //these do not take damage
         }
         public void SuddenKnockBack(Vector2 knockback)
         {
-            location += knockback * knockbackDistance;
+            location += knockback;
         }
         public void GradualKnockBack(Vector2 knockback)
         {
