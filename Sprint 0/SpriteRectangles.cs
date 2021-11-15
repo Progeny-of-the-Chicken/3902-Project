@@ -120,6 +120,7 @@ namespace Sprint_0
         public static Rectangle wallMasterCloseFrame = new Rectangle(410, 11, 14, 16);
         //Zol
         public static Rectangle[] zolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
+
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);
         public static List<Rectangle> explosionFrames = new List<Rectangle>
@@ -128,6 +129,13 @@ namespace Sprint_0
             new Rectangle(179, 185, 16, 16),
             new Rectangle(196, 185, 16, 16),
             new Rectangle(0, 0, 0, 0)
+        };
+        public static List<Rectangle> swordBeamExplosionFrames = new List<Rectangle>
+        {
+            new Rectangle(27, 157, 8, 10),
+            new Rectangle(62, 157, 8, 10),
+            new Rectangle(97, 157, 8, 10),
+            new Rectangle(132, 157, 8, 10)
         };
 
         //----- Inventory GUI source rectangles -----//
