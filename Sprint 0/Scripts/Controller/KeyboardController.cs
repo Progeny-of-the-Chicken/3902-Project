@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Controller
 		KeyboardState previousKeys;
 
 		//Constructor
-		public KeyboardController(Game1 game)
+		public KeyboardController(Game1 game, KeyboardState prevState)
 		{
 			this.game = game;
 
@@ -24,6 +24,7 @@ namespace Sprint_0.Scripts.Controller
 			linkControllerMappings = new Dictionary<Keys, ICommand>();
 
 			Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+			previousKeys = prevState;
 
 			setCommands();
 		}
@@ -39,6 +40,7 @@ namespace Sprint_0.Scripts.Controller
 		{
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
 			this.RegisterCommand(controllerMappings, Keys.I, new CommandEnterInventory(game));
+			this.RegisterCommand(controllerMappings, Keys.P, new PauseCommand());
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
@@ -59,7 +61,7 @@ namespace Sprint_0.Scripts.Controller
 			foreach (Keys key in pressedKeys)
 			{
 				executeCommandsForKey(key, controllerMappings);
-				if(!game.link.IsSuspended)
+				if (!game.link.IsSuspended)
 				{
 					executeCommandsForKey(key, linkControllerMappings);
 				}
@@ -90,11 +92,11 @@ namespace Sprint_0.Scripts.Controller
         }
 
 		private void executeCommandsForKey(Keys key, Dictionary<Keys, ICommand> mappings)
-        {
+		{
 			if (mappings.ContainsKey(key) && (previousKeys.IsKeyUp(key) || MovementKeyIsBeingHeldDown(key, previousKeys)))
 			{
 				mappings[key].Execute();
 			}
 		}
-	}
+    }
 }

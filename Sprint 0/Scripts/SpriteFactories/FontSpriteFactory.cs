@@ -2,12 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.Font;
+using Sprint_0.Scripts.Sprite.Font.Letters;
 
 namespace Sprint_0.Scripts.SpriteFactories
 {
     public class FontSpriteFactory
     {
         private Texture2D texture;
+        private Texture2D clearTexture;
         private static FontSpriteFactory instance = new FontSpriteFactory();
 
         public static FontSpriteFactory Instance
@@ -25,6 +27,7 @@ namespace Sprint_0.Scripts.SpriteFactories
         public void LoadAllTextures(ContentManager content)
         {
             texture = content.Load<Texture2D>(ObjectConstants.fontSpritesheetFileName);
+            clearTexture = content.Load<Texture2D>(ObjectConstants.fontClearBackgroundSpritesheetFileName);
         }
 
         public ISprite CreateZeroSprite()
@@ -75,6 +78,11 @@ namespace Sprint_0.Scripts.SpriteFactories
         public ISprite CreateNineSprite()
         {
             return new NineSprite(texture);
+        }
+
+        public ISprite CreateLetterSprite(char letter)
+        {
+            return new LetterSprite(clearTexture, letter);
         }
     }
 }
