@@ -7,6 +7,9 @@ namespace Sprint_0.Scripts.Enemy
 {
     class SpikeTrap : IEnemy
     {
+        //
+
+        //
         //TODO: additional refactoring needed with magic numbers
         ISprite sprite;
         IEnemyCollider DamageCollider;
