@@ -87,7 +87,11 @@ namespace Sprint_0.Scripts.Enemy
             {
                 location += direction * (moveSpeed * 2) * (float)gt.ElapsedGameTime.TotalSeconds; //fix
                 count++;
-                if (count == 75)
+                if (count == 100 && direction.Y == 0)
+                {
+                    back = true;
+                    count *= 2;
+                } else if (count == 55 && direction.X == 0)
                 {
                     back = true;
                     count *= 2;
@@ -112,42 +116,40 @@ namespace Sprint_0.Scripts.Enemy
 
         public void MoveRight()
         {
-            direction = Vector2.UnitX;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = Vector2.UnitX;
+            }
         }
 
         public void MoveLeft()
         {
-            direction = -Vector2.UnitX;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = -Vector2.UnitX;
+            }
         }
 
         public void MoveUp()
         {
-            direction = Vector2.UnitY;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = Vector2.UnitY;
+            }
         }
 
         public void MoveDown()
         {
-            direction = -Vector2.UnitY;
+            if (direction.X == 0 && direction.Y == 0)
+            {
+                direction = -Vector2.UnitY;
+            }
         }
 
         public void SetHasHit()
         {
             hasHit = true;
         }
-
-      //  public void SetOriginalPosition(GameTime gt)
-       // {
-       //     if (count > 5 && count > 0)
-         //   {
-          //      location -= direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-         //   } else
-          //  {
-          //      hasHit = false;
-         //       direction = Vector2.Zero;
-          //      count = 0;
-         //   }
-            
-       // }
 
 
         public void TakeDamage(int damage)
