@@ -53,10 +53,10 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = 25 * ObjectConstants.scale;
             OriginalLocation = location;
             direction = Vector2.Zero;
-            RectangleXLeft = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (13 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (8 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
-            RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.standardWidthHeight, (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            RectangleXLeft = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (13 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight * 2);
+            RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight * 2);
+            RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight * 2, (8 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.standardWidthHeight * 2, (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             //RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
             //RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (int)(damageFrame.Width * ObjectConstants.scale), (int)(damageFrame.Height * ObjectConstants.scale)));
