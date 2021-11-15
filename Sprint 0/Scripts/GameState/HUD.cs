@@ -14,6 +14,8 @@ namespace Sprint_0.Scripts.GameState
     //TODO: Update health to when moved to Link/Inventory
     public class HUD : IHUD
     {
+        int yOffset
+
         ISprite backgroundSprite;
         ISprite[] rupeeCounter;
         ISprite[] keyCounter;
@@ -31,7 +33,7 @@ namespace Sprint_0.Scripts.GameState
         int health;
         int maxHealth;
 
-        private static HUD instance = new HUD();
+        private static HUD instance = new HUD(yOffset);
 
         public static HUD Instance
         {
@@ -41,7 +43,7 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
-        public HUD()
+        public HUD(int yOffset)
         {
             backgroundSprite = InventorySpriteFactory.Instance.CreateHUDBackdropSprite();
             rupeeCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
