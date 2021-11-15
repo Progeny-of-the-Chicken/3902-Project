@@ -82,7 +82,6 @@ namespace Sprint_0.Scripts
         {
             linkState.UseSword();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
-            ObjectsFromObjectsFactory.Instance.CreateSwordAttackHitboxFromLink(Position, FacingDirection);
         }
 
         public void UseItem()

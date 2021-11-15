@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
         {
             Owner = owner;
 
-            GetHitboxForOwner();
+            _hitbox = GetHitboxForOwner();
             _hitbox.Size *= new Point(ObjectConstants.scale);
             AdjustHitbox(direction);
         }
@@ -43,14 +43,21 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         private Rectangle GetHitboxForOwner()
         {
-            return Owner switch
+            Rectangle frame;
+            if (Owner is Arrow)
             {
-                Arrow => SpriteRectangles.basicArrowFrame,
-                SwordAttackHitbox => ObjectConstants.swordAttackHitBoxSize,
-                SwordBeam => SpriteRectangles.swordBeamFrames[ObjectConstants.firstFrame],
-                // Should never happen
-                _ => Rectangle.Empty
-            };
+                frame = SpriteRectangles.basicArrowFrame;
+            }
+            else if (Owner is SwordAttackHitbox)
+            {
+                frame = ObjectConstants.swordAttackHitBoxSize;
+            }
+            else
+            {
+                // Sword beam
+                frame = SpriteRectangles.swordBeamFrames[ObjectConstants.firstFrame];
+            }
+            return frame;
         }
         private void AdjustHitbox(FacingDirection direction)
         {
