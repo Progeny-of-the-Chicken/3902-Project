@@ -251,6 +251,10 @@ namespace Sprint_0.Scripts
         {
             musicInstance.Stop();
         }
+        public void PauseMusic()
+        {
+            musicInstance.Pause();
+        }
         public void PlayRefillLoop()
         {
             refillLoopInstance.Play();

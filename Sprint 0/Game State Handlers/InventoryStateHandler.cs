@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState.InventoryState;
 using Sprint_0.Scripts.Sprite;
@@ -48,9 +49,11 @@ namespace Sprint_0.GameStateHandlers
             if (paused)
             {
                 game.kc = new PausedKeyboardController(game, Keyboard.GetState());
+                SFXManager.Instance.PauseMusic();
             } else
             {
                 game.kc = new InventoryStateController(game, Keyboard.GetState());
+                SFXManager.Instance.PlayMusic();
             }
         }
 
