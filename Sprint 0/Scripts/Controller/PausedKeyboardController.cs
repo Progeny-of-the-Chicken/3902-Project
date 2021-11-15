@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Commands;
-using Sprint_0.Scripts.Commands.InventoryState;
 
 namespace Sprint_0.Scripts.Controller
 {
-	public class InventoryStateController : IController
-    {
+	public class PausedKeyboardController : IController
+	{
 		private Game1 game;
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private KeyboardState previousKeys;
 
-		public InventoryStateController(Game1 game, KeyboardState prevState)
+		public PausedKeyboardController(Game1 game, KeyboardState prevState)
 		{
 			this.game = game;
 			controllerMappings = new Dictionary<Keys, ICommand>();
@@ -46,12 +46,6 @@ namespace Sprint_0.Scripts.Controller
 
 		private void setCommands()
 		{
-			this.RegisterCommand(Keys.W, new CommandMoveSelectionUp(game));
-			this.RegisterCommand(Keys.A, new CommandMoveSelectionLeft(game));
-			this.RegisterCommand(Keys.S, new CommandMoveSelectionDown(game));
-			this.RegisterCommand(Keys.D, new CommandMoveSelectionRight(game));
-			this.RegisterCommand(Keys.B, new CommandSelectWeapon(game));
-			this.RegisterCommand(Keys.R, new CommandReturnToGameState(game));
 			this.RegisterCommand(Keys.M, new ToggleMute());
 			this.RegisterCommand(Keys.P, new PauseCommand());
 		}

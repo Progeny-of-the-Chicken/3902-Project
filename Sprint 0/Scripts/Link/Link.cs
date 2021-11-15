@@ -124,7 +124,7 @@ namespace Sprint_0.Scripts
 
         public bool IsSuspended { get => linkState.IsSuspended; }
 
-        public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack); }
+        public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
     }
 
 }

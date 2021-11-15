@@ -1,4 +1,5 @@
-﻿using Sprint_0.GameStateHandlers;
+﻿using Microsoft.Xna.Framework.Input;
+using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.Controller;
 
 namespace Sprint_0.Scripts.Commands
@@ -16,7 +17,7 @@ namespace Sprint_0.Scripts.Commands
         {
             GameStateManager.Instance.OpenInventory();
             // TODO: Make the controller change from the game state machine
-            game.kc = new InventoryStateController(game);
+            game.kc = new InventoryStateController(game, Keyboard.GetState());
         }
     }
 }

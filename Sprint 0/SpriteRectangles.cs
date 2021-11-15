@@ -227,5 +227,32 @@ namespace Sprint_0
         public static Rectangle fontSevenFrame = new Rectangle(447, 23, 8, 8);
         public static Rectangle fontEightFrame = new Rectangle(463, 23, 8, 8);
         public static Rectangle fontNineFrame = new Rectangle(479, 23, 8, 8);
+
+        public static Rectangle fontAFrame = new Rectangle(496, 24, 8, 8);
+        public static Rectangle fontBFrame = new Rectangle(512, 24, 8, 8);
+        public static Rectangle fontCFrame = new Rectangle(528, 24, 8, 8);
+        public static Rectangle fontDFrame = new Rectangle(544, 24, 8, 8);
+        public static Rectangle fontEFrame = new Rectangle(560, 24, 8, 8);
+        public static Rectangle fontFFrame = new Rectangle(576, 24, 8, 8);
+        public static Rectangle fontGFrame = new Rectangle(336, 40, 8, 8);
+        public static Rectangle fontHFrame = new Rectangle(352, 40, 8, 8);
+        public static Rectangle fontIFrame = new Rectangle(368, 40, 8, 8);
+        public static Rectangle fontJFrame = new Rectangle(384, 40, 8, 8);
+        public static Rectangle fontKFrame = new Rectangle(400, 40, 8, 8);
+        public static Rectangle fontLFrame = new Rectangle(416, 40, 8, 8);
+        public static Rectangle fontMFrame = new Rectangle(432, 40, 8, 8);
+        public static Rectangle fontNFrame = new Rectangle(448, 40, 8, 8);
+        public static Rectangle fontOFrame = new Rectangle(464, 40, 8, 8);
+        public static Rectangle fontPFrame = new Rectangle(480, 40, 8, 8);
+        public static Rectangle fontQFrame = new Rectangle(496, 40, 8, 8);
+        public static Rectangle fontRFrame = new Rectangle(512, 40, 8, 8);
+        public static Rectangle fontSFrame = new Rectangle(528, 40, 8, 8);
+        public static Rectangle fontTFrame = new Rectangle(544, 40, 8, 8);
+        public static Rectangle fontUFrame = new Rectangle(560, 40, 8, 8);
+        public static Rectangle fontVFrame = new Rectangle(576, 40, 8, 8);
+        public static Rectangle fontWFrame = new Rectangle(336, 64, 8, 8);
+        public static Rectangle fontXFrame = new Rectangle(352, 64, 8, 8);
+        public static Rectangle fontYFrame = new Rectangle(368, 64, 8, 8);
+        public static Rectangle fontZFrame = new Rectangle(384, 64, 8, 8);
     }
 }
