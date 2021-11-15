@@ -21,7 +21,8 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.BlueCandle,
                 WeaponType.BasicBoomerang,
                 WeaponType.MagicalBoomerang,
-                WeaponType.Bomb
+                WeaponType.Bomb,
+                WeaponType.Potion
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             BlueRing = true;
@@ -33,6 +34,15 @@ namespace Sprint_0.Scripts.GameState
         }
 
         public List<WeaponType> Weapons { get; set; }
+
+        public void RemoveWeapon(WeaponType weapon)
+        {
+            if (Weapons.IndexOf(weapon) == SelectedWeaponIndex)
+            {
+                SelectedWeaponIndex--;
+            }
+            Weapons.Remove(weapon);
+        }
 
         public int SelectedWeaponIndex { get; set; }
 

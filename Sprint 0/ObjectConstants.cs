@@ -406,9 +406,9 @@ namespace Sprint_0
 
 
         //----- Inventory constant values -----//
-        public const int inventoryStartingRupees = 0;
+        public const int inventoryStartingRupees = 10;
         public const int inventoryStartingKeys = 0;
-        public const int inventoryStartingBombs = 0;
+        public const int inventoryStartingBombs = 4;
         public const int fullHeartHealthValue = 2;
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
