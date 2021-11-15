@@ -139,6 +139,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.SilverArrow => SpriteRectangles.weaponSilverArrowFrame,
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
+                WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };
