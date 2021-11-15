@@ -28,10 +28,11 @@ namespace Sprint_0.Scripts
             double dropFreq = getDropFrequencyForType(enemy.GetType());
             double randomNum = random.NextDouble();
 
-            killCounter++;
 
             if (randomNum < dropFreq)
                 items.Add(dropNextItem(enemy));
+
+            killCounter++;
         }
 
         private IItem dropNextItem(IEnemy enemy)
