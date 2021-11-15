@@ -396,6 +396,7 @@ namespace Sprint_0
         public static Vector2 DungeonLevelNumberDisplayLocation = new Vector2(64 * scale, 8 * scale);
         public const int maxMaxHealth = 32;
         public const int maxDungeonWidthHeight = 8;
+        public const int HUDYOffsetInInventory = 176 * scale;
         public static Vector2 roomMapSize = new Vector2(8 * scale, 4 * scale);
         public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
         public static Vector2 TreasureRoomLocation = new Vector2(5, 1);
