@@ -5,7 +5,7 @@ using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts
 {
-    public class LinkSwordSprite : ISprite
+    public class BlueLinkSwordSprite : ISprite
     {
         private Texture2D sheet;
         private Rectangle destinationPos;
@@ -15,12 +15,12 @@ namespace Sprint_0.Scripts
         private Vector2 position;
         private int animateSwordCounter;
 
-        public LinkSwordSprite(LinkStateMachine linkState)
+        public BlueLinkSwordSprite(LinkStateMachine linkState)
         {
             this.direction = linkState.FacingDirection;
             animateSwordCounter = ObjectConstants.defaultCounterLength;
             this.position = linkState.Position;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             setFramesBasedOnDirection();
         }
 

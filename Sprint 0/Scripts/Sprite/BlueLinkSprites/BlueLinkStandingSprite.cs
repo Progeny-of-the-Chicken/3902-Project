@@ -4,22 +4,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.LinkSprites
 {
-    public class LinkUsingItemSprite : ISprite
+    public class BlueLinkStandingSprite : ISprite
     {
         private Texture2D sheet;
-        private FacingDirection direction;
         private Rectangle frame;
+        private FacingDirection direction;
 
-        public LinkUsingItemSprite(LinkStateMachine state)
+        public BlueLinkStandingSprite(LinkStateMachine state)
         {
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBlueSpriteSheet();
             setFramesForDirection();
         }
 
         public void Update(GameTime gt)
         {
-            //No Update
+            //just standing no need to update
         }
 
         public void Draw(SpriteBatch sb, Vector2 loc)
@@ -35,14 +35,14 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
             switch (direction)
             {
                 case FacingDirection.Up:
-                    frame = SpriteRectangles.linkUsingItemUpFrame;
+                    frame = SpriteRectangles.linkBackwardSpritesheetLocation_1;
                     break;
                 case FacingDirection.Down:
-                    frame = SpriteRectangles.linkUsingItemDownFrame;
+                    frame = SpriteRectangles.linkForwardSpritesheetLocation_1;
                     break;
                 case FacingDirection.Left:
                 case FacingDirection.Right:
-                    frame = SpriteRectangles.linkUsingItemRightFrame;
+                    frame = SpriteRectangles.linkRightSpritesheetLocation_1;
                     break;
                 default:
                     break;

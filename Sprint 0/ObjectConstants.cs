@@ -213,6 +213,7 @@ namespace Sprint_0
         public const string itemFile = "LoZItems";
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
+        public const string blueLinkFile = "BlueLinkSpriteSheet";
         public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
