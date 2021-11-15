@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts.Enemy;
 
 public interface IRoom
 {
@@ -11,6 +12,7 @@ public interface IRoom
 	string RoomId();
 	void AddProjectile(IProjectile item);
 	void AddEffect(IEffect effect);
+	void AddEnemy(IEnemy enemy);
 	void PrepareForTransition();
 	void TransitionEnded();
 	void UpdateDrawPoint(Vector2 dp);

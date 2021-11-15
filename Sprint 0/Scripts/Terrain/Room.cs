@@ -405,6 +405,11 @@ public class Room : IRoom
         effectQueue.Add(effect);
     }
 
+    public void AddEnemy(IEnemy enemy)
+    {
+        enemySet.Add(enemy);
+    }
+
     private void TransferQueuedEffects()
     {
         foreach (IEffect effect in effectQueue)

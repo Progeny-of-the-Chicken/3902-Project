@@ -64,5 +64,10 @@ namespace Sprint_0.Scripts.Terrain
         {
             room.AddEffect(new Effect.Effect(location, type));
         }
+        public void CreateGelsFromZol(Vector2 location)
+        {
+            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
+            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
+        }
     }
 }

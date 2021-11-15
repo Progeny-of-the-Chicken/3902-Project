@@ -97,6 +97,7 @@ namespace Sprint_0.Scripts.Enemy
                 ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
+                ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(location);
             }
             SFXManager.Instance.PlayEnemyHit();
         }
@@ -106,9 +107,13 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
-            knockback.Normalize();
-            knockbackDirection = knockback;
+            //Don't move if you're going to be deleted so the Gels spawn properly
+            if (!delete)
+            {
+                inKnockBack = true;
+                knockback.Normalize();
+                knockbackDirection = knockback;
+            }
         }
         public bool CheckDelete()
         {
