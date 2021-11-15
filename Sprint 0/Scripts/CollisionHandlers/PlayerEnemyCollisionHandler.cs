@@ -26,6 +26,26 @@ namespace Sprint_0.Scripts.CollisionHandlers
                     //link.collider.OnEnemyCollision(enemy);
                     enemy.Collider.OnPlayerCollision(link);
                 }
+                    SpikeTrap cast = enemy as SpikeTrap;
+                    if (cast != null)
+                    {
+                        if (link.collider.CollisionRectangle.Intersects(cast.ColliderUp.collisionRectangle))
+                        {
+                            cast.ColliderUp.OnPlayerCollision(link);
+                        }
+                        if (link.collider.CollisionRectangle.Intersects(cast.ColliderDown.collisionRectangle))
+                        {
+                            cast.ColliderDown.OnPlayerCollision(link);
+                        }
+                        if (link.collider.CollisionRectangle.Intersects(cast.ColliderRight.collisionRectangle))
+                        {
+                            cast.ColliderRight.OnPlayerCollision(link);
+                        }
+                        if (link.collider.CollisionRectangle.Intersects(cast.ColliderLeft.collisionRectangle))
+                        {
+                            cast.ColliderLeft.OnPlayerCollision(link);
+                        }
+                    }
             }
         }
     }
