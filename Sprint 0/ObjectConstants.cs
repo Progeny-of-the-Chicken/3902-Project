@@ -135,6 +135,12 @@ namespace Sprint_0
         public const double AquamentusReloadTime = 2;
         public const double AquamentusShootSpriteTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
+        //Dodongo
+        public const int DodongoDamage = 2;
+        public const float DodongoMoveSpeed = DefaultEnemyMoveSpeed;
+        public const double DodongoMoveTime = DefaultEnemyMoveTime;
+        public const double DodongoStunTime = 1;
+        public const int DodongoStartingHealth = basicSwordDamage * 2;
         //Gel
         public const int GelDamage = 1;
         public const double GelMoveTime = DefaultEnemyMoveTime;

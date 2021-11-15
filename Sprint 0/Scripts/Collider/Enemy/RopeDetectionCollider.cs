@@ -5,14 +5,14 @@ using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Collider.Enemy
 {
-    class DetectionCollider : IEnemyCollider
+    class RopeDetectionCollider : IEnemyCollider
     {
         public IEnemy Owner { get => owner; }
-        private IEnemy owner;
+        private Rope owner;
         public Rectangle Hitbox { get => rectangle; }
         private Rectangle rectangle;
         private Vector2 location;
-        public DetectionCollider(IEnemy owner, Rectangle collisionRectangle)
+        public RopeDetectionCollider(Rope owner, Rectangle collisionRectangle)
         {
             this.owner = owner;
             this.rectangle = collisionRectangle;
@@ -31,12 +31,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnPlayerCollision(Link player)
         {
-            //Need to rework a way for this to work with rope or spiketrap. Maybe new method in IEnemy?
-            Rope rope = owner as Rope;
-            if(rope != null)
-            {
-                rope.ChaseLink();
-            }
+            owner.ChaseLink();
         }
 
         public void OnProjectileCollision(IProjectile projectile)

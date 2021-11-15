@@ -32,6 +32,10 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Rope(location);
         }
+		public IEnemy CreateDodongo(Vector2 location)
+        {
+			return new Dodongo(location);
+        }
 		public IEnemy CreateOldMan(Vector2 location)
         {
 			return new OldMan(location);

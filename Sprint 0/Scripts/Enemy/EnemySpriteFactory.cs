@@ -46,6 +46,38 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new AnimatedFlippedSprite(frames, enemySprites);
         }
+        public ISprite CreateDodongoRightSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.dodongoRightFrames, bossSprites);
+        }
+        public ISprite CreateDodongoLeftSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.dodongoRightFrames, bossSprites);
+        }
+        public ISprite CreateDodongoDownSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.dodongoDownFrame, bossSprites);
+        }
+        public ISprite CreateDodongoUpSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.dodongoUpFrame, bossSprites);
+        }
+        public ISprite CreateDodongoExplodeRightSprite()
+        {
+            return new UnanimatedEnemySprite(SpriteRectangles.dodongoExplodeRightFrame, bossSprites);
+        }
+        public ISprite CreateDodongoExplodeLeftSprite()
+        {
+            return new UnanimatedEnemySprite(SpriteRectangles.dodongoExplodeRightFrame, bossSprites);
+        }
+        public ISprite CreateDodongoExplodeDownSprite()
+        {
+            return new UnanimatedEnemySprite(SpriteRectangles.dodongoExplodeDownFrame, bossSprites);
+        }
+        public ISprite CreateDodongoExplodeUpSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.dodongoExplodeUpFrame, bossSprites);
+        }
         public ISprite CreateOldManSprite(Rectangle frame)
         {
             return new UnanimatedEnemySprite(frame, npcSprites);
