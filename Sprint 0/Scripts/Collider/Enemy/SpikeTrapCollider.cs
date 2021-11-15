@@ -25,24 +25,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
             player.TakeDamage(owner.Damage);
-            Rectangle intersect = Rectangle.Intersect(player.collider.CollisionRectangle, this.Hitbox);
-            Vector2 direction;
-            if (intersect.Width > intersect.Height)
-            {
-                direction = Vector2.UnitX;
-                if (intersect.Location.X < owner.Location.X)
-                {
-                    direction *= ObjectConstants.vectorFlip;
-                }
-            } else
-            {
-                direction = Vector2.UnitY;
-                if (intersect.Location.X < owner.Location.Y)
-                {
-                    direction *= ObjectConstants.vectorFlip;
-                }
-            }
-            owner.SetHasHit(direction);
         }
 
         public void OnProjectileCollision(IProjectile projectile)
