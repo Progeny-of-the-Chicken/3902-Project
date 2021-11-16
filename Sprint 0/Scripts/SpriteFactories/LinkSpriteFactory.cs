@@ -86,7 +86,5 @@ namespace Sprint_0.Scripts.SpriteFactories
             else
                 return new BlueLinkStandingSprite(linkState);
         }
-
-
     }
 }

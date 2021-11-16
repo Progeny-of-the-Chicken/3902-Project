@@ -328,6 +328,7 @@ namespace Sprint_0
 
 
         //----- wall/block constant values -----//
+        public const int fullScreen = 1200;
         public const int wallOffset = scale * standardWidthHeight * 2;
         public const int yOffsetForRoom = scale * standardWidthHeight * 7 / 2;
         public const int rowParsePosition = 5;

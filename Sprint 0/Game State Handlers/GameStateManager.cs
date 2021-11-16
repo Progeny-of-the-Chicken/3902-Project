@@ -1,7 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
+using Sprint_0.Scripts.Controller;
+using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
@@ -10,7 +14,8 @@ namespace Sprint_0.GameStateHandlers
         Menu,
         Gameplay,
         Inventory,
-        RoomSwap
+        RoomSwap,
+        GameOver
     }
 
     public class GameStateManager
@@ -35,6 +40,7 @@ namespace Sprint_0.GameStateHandlers
         GameplayStateHandler gameplay;
         InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
+        GameOverStateHandler gameOver;
 
         public GameStateManager()
         {
@@ -48,6 +54,25 @@ namespace Sprint_0.GameStateHandlers
             this.game = game;
 
             gameplay = new GameplayStateHandler(link, game);
+        }
+
+        public void RestartGame()
+        {
+            System.Diagnostics.Debug.WriteLine("Restarting Game");
+            StartGameplay();
+            game.roomNum = ObjectConstants.counterInitialVal_int;
+            game.kc = new KeyboardController(game, Keyboard.GetState());
+            Link.Instance.reset();
+            Inventory.Instance.reset();
+            RoomManager.Instance.reset();
+            
+        }
+
+        public void GameOver()
+        {
+            this._state = GameState.GameOver;
+            gameOver = new GameOverStateHandler();
+            game.kc = new GameOverStateController(game, Keyboard.GetState());
         }
 
         public void StartGameplay()
@@ -99,6 +124,7 @@ namespace Sprint_0.GameStateHandlers
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
+
             switch (_state)
             {
                 case GameState.Gameplay:
@@ -111,6 +137,9 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.RoomSwap:
                     swapper.Draw(sb, gameTime);
+                    break;
+                case GameState.GameOver:
+                    gameOver.Draw(sb, gameTime);
                     break;
                 default:
                     break;
@@ -131,6 +160,9 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.RoomSwap:
                     swapper.Update(gameTime);
+                    break;
+                case GameState.GameOver:
+                    gameOver.Update(gameTime);
                     break;
                 default:
                     break;

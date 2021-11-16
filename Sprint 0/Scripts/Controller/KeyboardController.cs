@@ -42,11 +42,11 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.E, new CommandEnterInventory(game));
 			this.RegisterCommand(controllerMappings, Keys.P, new PauseCommand());
 
-			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.S, new LinkChangeDirectionDown(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(game.link));
-			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(game.link, game));
+			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(Link.Instance));
+			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(Link.Instance));
+			this.RegisterCommand(linkControllerMappings, Keys.S, new LinkChangeDirectionDown(Link.Instance));
+			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(Link.Instance));
+			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(Link.Instance, game));
 			this.RegisterCommand(linkControllerMappings, Keys.B, new CommandUseSecondaryItem(game));
 			this.RegisterCommand(controllerMappings, Keys.M, new ToggleMute());
 		}
@@ -60,7 +60,7 @@ namespace Sprint_0.Scripts.Controller
 			foreach (Keys key in pressedKeys)
 			{
 				executeCommandsForKey(key, controllerMappings);
-				if (!game.link.IsSuspended)
+				if (!Link.Instance.IsSuspended)
 				{
 					executeCommandsForKey(key, linkControllerMappings);
 				}

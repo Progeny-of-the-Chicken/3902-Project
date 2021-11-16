@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Commands
         public CommandUseSecondaryItem(Game1 game)
         {
             this.game = game;
-            link = game.link;
+            link = Link.Instance;
         }
 
         public void Execute()
