@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.EnemySprites
 {
-    class GenericUnanimatedEnemySprite : ISprite
+    class UnanimatedEnemySprite : ISprite
     {
         Rectangle frame;
         Texture2D sprite;
 
-        public GenericUnanimatedEnemySprite(Rectangle frame, Texture2D spriteSheet)
+        public UnanimatedEnemySprite(Rectangle frame, Texture2D spriteSheet)
         {
             this.frame = frame;
             sprite = spriteSheet;

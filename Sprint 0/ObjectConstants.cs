@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0
 {
@@ -31,6 +33,7 @@ namespace Sprint_0
         public const int pauseDisplayStartingPointX = 232;
         public const int pauseDisplayStartingPointY = 400;
         public const int letterSpacing = 8;
+        public const int bombsFromDrop = 4;
 
 
         //----- Vector constant values -----//
@@ -61,7 +64,7 @@ namespace Sprint_0
         public const float linkPickUpItemTime = 1f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
-        public const int linkStartingHealth = 20;
+        public const int linkStartingHealth = 12;
         public const float linkTurningCounterDebounce = 0.05f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
@@ -77,9 +80,9 @@ namespace Sprint_0
         public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
 
         // Arrow
-        public const double arrowSpeedPerSecond = 150.0;
-        public const int arrowMaxDistance = 200;
-        public const double silverArrowSpeedCoef = 1.5;
+        public const double arrowSpeedPerSecond = 100.0 * scale;
+        public const int arrowMaxDistance = 100 * scale;
+        public const double silverArrowDistanceCoef = 1.5;
         public const int arrowDamage = 1;
         public static Vector2 rightArrowPopOffset = new Vector2(4, -8);
         public static Vector2 upArrowPopOffset = new Vector2(-8, -20);
@@ -91,7 +94,7 @@ namespace Sprint_0
         public const int blastZonePositionOffset = -8;
         public const int blastZoneWidthHeight = 32;
         public const int blastZoneCounter = 1;
-        public const int blastZoneDamage = 1;
+        public const int blastZoneDamage = 3;
         public static Rectangle blastZoneSize = new Rectangle(0, 0, blastZoneWidthHeight, blastZoneWidthHeight);
 
         // Bomb
@@ -118,12 +121,17 @@ namespace Sprint_0
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
 
-        //Magic projectile
+        // Magic projectile
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
 
+        // Sword beam
+        public const double swordBeamSpeedPerSecond = 100 * scale;
+        public const int swordBeamMaxDistance = 150 * scale;
+        public const int swordBeamDamage = 2;
+        public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
 
         //----- Enemy constant values -----//
 
@@ -142,6 +150,12 @@ namespace Sprint_0
         public const double AquamentusReloadTime = 2;
         public const double AquamentusShootSpriteTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
+        //Dodongo
+        public const int DodongoDamage = 2;
+        public const float DodongoMoveSpeed = DefaultEnemyMoveSpeed;
+        public const double DodongoMoveTime = DefaultEnemyMoveTime;
+        public const double DodongoStunTime = 1;
+        public const int DodongoStartingHealth = basicSwordDamage * 2;
         //Gel
         public const int GelDamage = 1;
         public const double GelMoveTime = DefaultEnemyMoveTime;
@@ -161,7 +175,12 @@ namespace Sprint_0
         //OldMan
         public const int OldManDamage = 0;
         public const int OldManStartingHealth = 1;
-
+        //Rope
+        public const int RopeDamage = 1;
+        public const double RopeMoveTime = DefaultEnemyMoveTime;
+        public const float RopeMoveSpeed = DefaultEnemyMoveSpeed;
+        public const float RopeChaseSpeed = RopeMoveSpeed * 2;
+        public const int RopeStartingHealth = 1;
         //Stalfos
         public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
@@ -176,6 +195,12 @@ namespace Sprint_0
         //SpikeTrap
         public const int vectorFlip = -1;
         public const int spikeTrapSpeed = 25 * scale;
+        public const int roomWidthInBlocks = 12;
+        public const int roomHeightInBlocks = 7;
+        public const int spikeTrapSpawnAdjustment = 1;
+        public const int doubleTheValue = 2;
+        public const int SpikeTrapWidthMovementTicks = 100;
+        public const int SpikeTrapHeightMovementTicks = 55;
 
         //WallMaster
         public const int WallMasterHealth = 3;
@@ -215,6 +240,7 @@ namespace Sprint_0
         public const string itemFile = "LoZItems";
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
+        public const string blueLinkFile = "BlueLinkSpriteSheet";
         public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
@@ -223,19 +249,34 @@ namespace Sprint_0
         public const string spaceStr = " ";
         public const string AquamentusStr = "Aquamentus";
         public const string BladeTrapStr = "BladeTrap";
+        public const string DodongoStr = "Dodongo";
         public const string GelStr = "Gel";
         public const string GoriyaStr = "Goriya";
         public const string KeeseStr = "Keese";
         public const string OldManStr = "OldMan";
+        public const string MerchantStr = "Merchant";
+        public const string RopeStr = "Rope";
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
-        public const string BowItemStr = "BowItem";
-        public const string CompassStr = "Compass";
+        public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
+        public const string FairyStr = "Fairy";
+        public const string ClockStr = "Clock";
+        public const string BlueRubyStr = "BlueRuby";
+        public const string YellowRubyStr = "YellowRuby";
+        public const string BasicMapItemStr = "BasicMapItem";
+        public const string BoomerangItemStr = "BoomerangItem";
+        public const string BombItemStr = "BombItem";
+        public const string BowItemStr = "BowItem";
+        public const string BasicKeyStr = "BasicKey";
+        public const string MagicKeyStr = "MagicKey";
+        public const string CompassStr = "Compass";
+        public const string TriforcePieceStr = "TriforcePiece";
+        public const string BasicArrowItemStr = "BasicArrowItem";
+        public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
-        public const string TriforcePieceStr = "TriforcePiece";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
         public const string NorthClosedSpriteStr = "NorthClosedSprite";
@@ -293,7 +334,7 @@ namespace Sprint_0
 
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
-        
+
         public const int yPosForNorthDoor = 0;
         public const int yPosForEastWestDoor = 72;
         public const int yPosForSouthDoor = 144;
@@ -319,11 +360,16 @@ namespace Sprint_0
         public const double explosionDurationSeconds = 0.3;
         public const double bombExtraExplosionOffset = 16 * scale;
         public const double bombExtraExplosionNumber = 6;
-
+        public const double swordBeamExplosionDurationSeconds = 0.4;
+        public const double swordBeamExplosionSpeed = 40 * scale;
+        public static Vector2 swordBeamExplosionRightOffset = new Vector2(2, -4) * scale;
+        public static Vector2 swordBeamExplosionUpOffset = new Vector2(-4, -6) * scale;
+        public static Vector2 swordBeamExplosionLeftOffset = new Vector2(-2, -4) * scale;
+        public static Vector2 swordBeamExplosionDownOffset = new Vector2(-4, 6) * scale;
 
         //----- Room swapping animation constants -----//
-        public const int roomswapAnimationVerticalScrollDist = 800;
-        public const int roomswapAnimationHorizontalScrollDist = 1200;
+        public const int roomswapAnimationVerticalScrollDist = 176 * scale;
+        public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
         public const int roomswapAnimationDurationInFrames = 80;
 
 
@@ -340,6 +386,9 @@ namespace Sprint_0
         // Weapon
         public static Vector2 weaponFromBackdropLocation = new Vector2(132, 48) * scale;
         public static Vector2 selectionWeaponFromBackdropLocation = new Vector2(68, 48) * scale;
+        public static Vector2 basicArrowFromBackdropLocation = new Vector2(130, 24) * scale;
+        public static Vector2 silverArrowFromBackdropLocation = new Vector2(137, 24) * scale;
+        public static Vector2 blueRingFromBackdropLocation = new Vector2(164, 24) * scale;
         public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
         public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;
         public static List<Vector2> inventoryWeaponLocations = new List<Vector2>
@@ -382,6 +431,10 @@ namespace Sprint_0
         public static Vector2 DungeonLevelNumberDisplayLocation = new Vector2(64 * scale, 8 * scale);
         public const int maxMaxHealth = 32;
         public const int maxDungeonWidthHeight = 8;
+        public const int HUDYOffsetInInventory = 176 * scale;
+        public const int HealthDrawLocationX = 176;
+        public const int HealthDrawLocationY = 32;
+        public const int maxHeartsPerLine = 8;
         public static Vector2 roomMapSize = new Vector2(8 * scale, 4 * scale);
         public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
         public static Vector2 TreasureRoomLocation = new Vector2(5, 1);
@@ -401,9 +454,72 @@ namespace Sprint_0
         public const int roomStringYIndex = 5;
 
 
+        //----- DropTable constant values -----//
+        public const double groupADropRate = 0.31;
+        public const double groupBDropRate = 0.41;
+        public const double groupCDropRate = 0.59;
+        public const double groupDDropRate = 0.41;
+        public const double groupXDropRate = 0;
+        public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static ItemType[] groupAItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupBItems = {
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.BombItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupCItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby };
+        public static ItemType[] groupDItems = {
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem, };
+
+        //Group X doesn't drop anything
+
+
         //----- Inventory constant values -----//
-        public const int inventoryStartingRupees = 0;
+        public const int inventoryStartingRupees = 10;
         public const int inventoryStartingKeys = 0;
-        public const int inventoryStartingBombs = 0;
+        public const int inventoryStartingBombs = 4;
+        public const int fullHeartHealthValue = 2;
+        public const int inventoryYellowRupeeValue = 1;
+        public const int inventoryBlueRupeeValue = 5;
+        public const int inventoryBasicKeyValue = 1;
     }
 }

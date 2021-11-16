@@ -40,7 +40,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            if (projectile is Arrow)
+            if (projectile is Arrow || projectile is SwordBeam)
             {
                 projectile.Despawn();
             }

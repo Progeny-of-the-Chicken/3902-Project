@@ -67,6 +67,8 @@ namespace Sprint_0
             new Rectangle(275, 3, 10, 10),
             new Rectangle(275, 19, 10, 10)
         };
+        public static Rectangle basicArrowItemFrame = new Rectangle(154, 0, 5, 16);
+        public static Rectangle silverArrowItemFrame = new Rectangle(154, 16, 5, 16);
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
@@ -87,11 +89,25 @@ namespace Sprint_0
             new Rectangle(127, 189, 8, 8)
         };
         public static Rectangle fireSpellFrame = new Rectangle(215, 185, 16, 16);
+        public static List<Rectangle> swordBeamFrames = new List<Rectangle>
+        {
+            new Rectangle(10, 159, 16, 7),
+            new Rectangle(80, 159, 16, 7),
+            new Rectangle(115, 159, 16, 7)
+        };
 
         //----- Enemy source rectangles -----//
         //Aquamentus
         public static Rectangle[] aquamentusMoveFrames = { new Rectangle(51, 11, 24, 31), new Rectangle(76, 11, 24, 31) };
         public static Rectangle[] aquamentusShootFrames = { new Rectangle(1, 11, 24, 31), new Rectangle(26, 11, 24, 31) };
+        //Dodongo
+        public static Rectangle[] dodongoRightFrames = { new Rectangle(69, 58, 28, 16), new Rectangle(102, 58, 28, 16) };
+        public static Rectangle dodongoUpFrame = new Rectangle(35, 58, 16, 16);
+        public static Rectangle dodongoDownFrame = new Rectangle(1, 58, 16, 16);
+        public static Rectangle dodongoExplodeRightFrame = new Rectangle(135, 58, 32, 16);
+        public static Rectangle dodongoExplodeUpFrame = new Rectangle(52, 58, 16, 16);
+        public static Rectangle dodongoExplodeDownFrame = new Rectangle(18, 58, 16, 16);
+
         //Magic Projectile
         public static Rectangle[] magicProjectileFrames = { new Rectangle(101, 14, 8, 10), new Rectangle(110, 14, 8, 10),
                                               new Rectangle(119, 14, 8, 10), new Rectangle(128, 14, 8, 10) };
@@ -103,8 +119,12 @@ namespace Sprint_0
         public static Rectangle[] goriyaRightFrames = { new Rectangle(256, 10, 14, 17), new Rectangle(274, 11, 16, 16) };
         //Keese
         public static Rectangle[] keeseFrames = { new Rectangle(200, 14, 16, 12), new Rectangle(183, 14, 18, 10) };
+        //Merchant
+        public static Rectangle merchantFrame = new Rectangle(109, 11, 16, 16);
         //Old Man
         public static Rectangle oldManFrame = new Rectangle(1, 11, 16, 16);
+        //Rope
+        public static Rectangle[] ropeFrames = { new Rectangle(126, 59, 16, 16), new Rectangle(144, 59, 16, 16) };
         //SpikeTrap
         public static Rectangle spikeTrapFrame = new Rectangle(164, 59, 16, 16);
         //Stalfos
@@ -114,6 +134,7 @@ namespace Sprint_0
         public static Rectangle wallMasterCloseFrame = new Rectangle(410, 11, 14, 16);
         //Zol
         public static Rectangle[] zolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
+
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);
         public static List<Rectangle> explosionFrames = new List<Rectangle>
@@ -122,6 +143,13 @@ namespace Sprint_0
             new Rectangle(179, 185, 16, 16),
             new Rectangle(196, 185, 16, 16),
             new Rectangle(0, 0, 0, 0)
+        };
+        public static List<Rectangle> swordBeamExplosionFrames = new List<Rectangle>
+        {
+            new Rectangle(27, 157, 8, 10),
+            new Rectangle(62, 157, 8, 10),
+            new Rectangle(97, 157, 8, 10),
+            new Rectangle(132, 157, 8, 10)
         };
 
         //----- Inventory GUI source rectangles -----//
@@ -140,6 +168,10 @@ namespace Sprint_0
         public static Rectangle weaponSilverArrowFrame = new Rectangle(624, 137, 8, 16);
         public static Rectangle weaponBowFrame = new Rectangle(633, 137, 8, 16);
         public static Rectangle weaponBlueCandleFrame = new Rectangle(644, 137, 8, 16);
+        public static Rectangle weaponPotionFrame = new Rectangle(695, 136, 8, 16);
+        public static Rectangle inventoryBasicArrowFrame = new Rectangle(617, 137, 5, 16);
+        public static Rectangle inventorySilverArrowFrame = new Rectangle(626, 137, 5, 16);
+        public static Rectangle inventoryBlueRingFrame = new Rectangle(549, 156, 8, 16);
         public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
         public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
         public static List<Rectangle> backdropCoverFrames = new List<Rectangle>

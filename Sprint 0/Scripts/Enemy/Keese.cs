@@ -23,6 +23,7 @@ namespace Sprint_0.Scripts.Enemy
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
         float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
         public int Damage { get => ObjectConstants.KeeseDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.KeeseStartingHealth;
         bool delete = false;
         bool inKnockBack = false;
@@ -36,11 +37,11 @@ namespace Sprint_0.Scripts.Enemy
             this.location = location;
             directionVector = Vector2.Zero;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite(SpriteRectangles.keeseFrames);
+            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
@@ -91,7 +92,7 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
             }

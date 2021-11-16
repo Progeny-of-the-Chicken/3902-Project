@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Controller;
+using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.GameState.InventoryState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
@@ -11,6 +12,7 @@ namespace Sprint_0.GameStateHandlers
     public class InventoryStateHandler: IGameStateHandler
     {
         private IInventoryManager inventoryManager;
+        private HUD headsUpDisplay;
         private bool paused = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Game1 game;
@@ -18,6 +20,7 @@ namespace Sprint_0.GameStateHandlers
         public InventoryStateHandler(Game1 game)
         {
             this.game = game;
+            headsUpDisplay = new HUD(ObjectConstants.HUDYOffsetInInventory);
             inventoryManager = InventoryManager.Instance;
             inventoryManager.Init();
             initializeLetterSprites();
@@ -26,6 +29,7 @@ namespace Sprint_0.GameStateHandlers
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             inventoryManager.Draw(sb, gameTime);
+            headsUpDisplay.Draw(sb);
 
             if (paused)
             {
@@ -35,6 +39,7 @@ namespace Sprint_0.GameStateHandlers
 
         public void Update(GameTime gameTime)
         {
+            headsUpDisplay.Update();
             if (!paused)
             {
                 inventoryManager.Update(gameTime);

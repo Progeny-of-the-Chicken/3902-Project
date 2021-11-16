@@ -60,9 +60,22 @@ namespace Sprint_0.Scripts.Terrain
             return projectile;
         }
 
-        public void CreateEffect(Vector2 location, EffectType type)
+        public void CreateStaticEffect(Vector2 location, EffectType type)
         {
-            room.AddEffect(new Effect.Effect(location, type));
+            room.AddEffect(new Effect.StaticEffect(location, type));
+        }
+
+        public void CreateSwordBeamExplosion(Vector2 location)
+        {
+            foreach (IEffect effect in EffectFactory.Instance.CreateSwordBeamExplosion(location))
+            {
+                room.AddEffect(effect);
+            }
+        }
+        public void CreateGelsFromZol(Vector2 location)
+        {
+            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
+            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
         }
     }
 }
