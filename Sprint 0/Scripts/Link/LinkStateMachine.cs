@@ -146,6 +146,11 @@ namespace Sprint_0.Scripts
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
                     SFXManager.Instance.PlayLinkDeath();
                 }
+
+                if(linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
+                {
+                    SFXManager.Instance.PlayLowHealth();
+                }
             }
         }
 
@@ -204,6 +209,14 @@ namespace Sprint_0.Scripts
         public bool CanDoNewThing()
         {
             return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
+        }
+
+        public void HealBy(int health)
+        {
+            if (linkHealth + health >= linkMaxHealth)
+                linkHealth = linkMaxHealth;
+            else
+                linkHealth += health;
         }
 
         public Vector2 Position { get => linksPosition; }

@@ -13,23 +13,29 @@ namespace Sprint_0.Scripts.Sets
         public HashSet<IEnemy> Enemies { get => enemies; }
         HashSet<IEnemy> enemies;
         HashSet<IEnemy> toBeRemoved;
+        HashSet<IEnemy> toBeAdded;
         DropItemCommand itemDropper;
 
         public EnemySet()
         {
             enemies = new HashSet<IEnemy>();
             toBeRemoved = new HashSet<IEnemy>();
+            toBeAdded = new HashSet<IEnemy>();
             itemDropper = new DropItemCommand();
         }
 
         public void Add(IEnemy enemy)
         {
-            enemies.Add(enemy);
+            toBeAdded.Add(enemy);
         }
 
         public void Update(GameTime gameTime)
         {
-            foreach (IEnemy enemy in enemies)
+            foreach(IEnemy enemy in toBeAdded)
+            {
+                enemies.Add(enemy);
+            }
+            foreach(IEnemy enemy in enemies)
             {
                 enemy.Update(gameTime);
                 if (enemy.CheckDelete())
@@ -42,6 +48,7 @@ namespace Sprint_0.Scripts.Sets
                 itemDropper.Execute(enemy);
                 enemies.Remove(enemy);
             }
+            toBeAdded.Clear();
             toBeRemoved.Clear();
         }
         public void Draw(SpriteBatch sb)

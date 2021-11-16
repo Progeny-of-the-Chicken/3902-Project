@@ -38,7 +38,6 @@ public class WestBombableSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.WestBombedSpriteStr);
         command.Execute();
-        SFXManager.Instance.PlaySecretFound();
     }
 
 }

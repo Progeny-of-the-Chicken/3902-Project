@@ -49,7 +49,7 @@ namespace Sprint_0.Scripts.Commands
                     RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateFireSpell(link.Position, link.FacingDirection));
                     break;
                 case WeaponType.Potion:
-                    Link.Instance.Health = (int)(Link.Instance.MaxHealth);
+                    Link.Instance.HealBy((int)(Link.Instance.MaxHealth));
                     Inventory.Instance.RemoveWeapon(WeaponType.Potion);
                     break;
             }

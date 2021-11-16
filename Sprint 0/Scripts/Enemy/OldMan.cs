@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         public OldMan(Vector2 location)
         {
             this.location = location;
-            sprite = EnemySpriteFactory.Instance.CreateOldManSprite(SpriteRectangles.oldManFrame);
+            sprite = EnemySpriteFactory.Instance.CreateOldManSprite();
             collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.oldManFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
         }
 

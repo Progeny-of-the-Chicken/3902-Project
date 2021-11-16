@@ -32,7 +32,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite(SpriteRectangles.stalfosFrame);
+            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             SetRandomDirection();
 

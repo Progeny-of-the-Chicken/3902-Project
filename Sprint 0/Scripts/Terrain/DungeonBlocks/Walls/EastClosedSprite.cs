@@ -37,6 +37,6 @@ public class EastClosedSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.EastDoorSpriteStr);
         command.Execute();
-        SFXManager.Instance.PlaySecretFound();
+        SFXManager.Instance.PlayDoorUnlocking();
     }
 }

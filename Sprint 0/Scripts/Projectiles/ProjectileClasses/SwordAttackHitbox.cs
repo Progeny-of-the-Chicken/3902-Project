@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -21,7 +22,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public SwordAttackHitbox(Vector2 spawnLoc, FacingDirection direction)
         {
-            pos = spawnLoc;
+            pos = SpawnHelper.Instance.CenterLocationOnLinkSword(spawnLoc, direction, new Vector2(ObjectConstants.linkWidthHeight), ObjectConstants.swordHitboxWidthHeight);
             collider = ProjectileColliderFactory.Instance.CreateSwordAttackHitboxCollider(this, direction);
             friendly = true;
             SFXManager.Instance.PlaySwordSlash();

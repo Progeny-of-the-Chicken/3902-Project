@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         {
             link.StopMoving();
             RoomManager.Instance.SwitchToRoom(ObjectConstants.secretRoom);
-
+            SFXManager.Instance.PlayStairs();
         }
 
         public void OnProjectileCollision(IProjectile projectile)

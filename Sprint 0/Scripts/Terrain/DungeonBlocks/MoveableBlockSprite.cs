@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0;
+using Sprint_0.Scripts;
 using Sprint_0.Scripts.Collider.Terrain;
 
 public class MoveableBlockSprite : ITerrain
@@ -39,6 +40,7 @@ public class MoveableBlockSprite : ITerrain
             {
                 destination.Y += ObjectConstants.scale * spritesheetLocation.Width;
             }
+            SFXManager.Instance.PlaySecretFound();
         }
         else
         {

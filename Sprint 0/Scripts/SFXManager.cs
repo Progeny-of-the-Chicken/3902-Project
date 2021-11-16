@@ -31,6 +31,7 @@ namespace Sprint_0.Scripts
         SoundEffect fireArrowBoomerang;
         SoundEffect fireCandle;
         SoundEffect fireMagicRod;
+        SoundEffect gameOver;               //definitely needs to be loopable
         SoundEffect keySpawn;
         SoundEffect linkDeath;
         SoundEffect linkHit;
@@ -52,6 +53,7 @@ namespace Sprint_0.Scripts
         SoundEffect textScrollSlow;         //probably needs to be loopable
         SoundEffect triforcePiece;
 
+        SoundEffectInstance gameOverInstance;
         SoundEffectInstance lowHealthInstance;
         SoundEffectInstance musicInstance;
         SoundEffectInstance refillLoopInstance;
@@ -74,6 +76,7 @@ namespace Sprint_0.Scripts
             fireArrowBoomerang = content.Load<SoundEffect>("Sounds/LOZ_Arrow_Boomerang");
             fireCandle = content.Load<SoundEffect>("Sounds/LOZ_Candle");
             fireMagicRod = content.Load<SoundEffect>("Sounds/LOZ_MagicalRod");
+            gameOver = content.Load<SoundEffect>("Sounds/GameOver");
             keySpawn = content.Load<SoundEffect>("Sounds/LOZ_Key_Appear");
             linkDeath = content.Load<SoundEffect>("Sounds/LOZ_Link_Die");
             linkHit = content.Load<SoundEffect>("Sounds/LOZ_Link_Hurt");
@@ -95,6 +98,7 @@ namespace Sprint_0.Scripts
             textScrollSlow = content.Load<SoundEffect>("Sounds/LOZ_Text_Slow");
             triforcePiece = content.Load<SoundEffect>("Sounds/Triforce Piece");
 
+            gameOverInstance = gameOver.CreateInstance();
             lowHealthInstance = lowHealth.CreateInstance();
             musicInstance = music.CreateInstance();
             refillLoopInstance = refillLoop.CreateInstance();
@@ -102,6 +106,7 @@ namespace Sprint_0.Scripts
             textScrollInstance = textScroll.CreateInstance();
             textScrollSlowInstance = textScrollSlow.CreateInstance();
 
+            gameOverInstance.IsLooped = true;
             lowHealthInstance.IsLooped = true;
             musicInstance.IsLooped = true;
             refillLoopInstance.IsLooped = true;
@@ -250,6 +255,18 @@ namespace Sprint_0.Scripts
         public void StopMusic()
         {
             musicInstance.Stop();
+        }
+        public void PlayGameOver()
+        {
+            gameOverInstance.Play();
+        }
+        public void StopGameOver()
+        {
+            gameOverInstance.Stop();
+        }
+        public void PauseMusic()
+        {
+            musicInstance.Pause();
         }
         public void PlayRefillLoop()
         {

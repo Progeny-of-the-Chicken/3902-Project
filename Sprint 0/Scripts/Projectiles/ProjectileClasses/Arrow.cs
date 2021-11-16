@@ -5,6 +5,7 @@ using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -31,7 +32,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public Arrow(Vector2 spawnLoc, FacingDirection direction, bool silver)
         {
-            startPos = currentPos = spawnLoc;
+            startPos = currentPos = SpawnHelper.Instance.CenterLocationOnLinkSword(spawnLoc, direction, new Vector2(ObjectConstants.linkWidthHeight), ObjectConstants.arrowWidthHeight);
             if (silver)
             {
                 maxDistance = (int)(maxDistance * silverArrowSpeedCoef);
