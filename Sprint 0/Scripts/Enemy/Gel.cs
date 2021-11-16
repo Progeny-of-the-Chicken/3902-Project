@@ -35,7 +35,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateGelSprite(SpriteRectangles.gelFrames);
+            sprite = EnemySpriteFactory.Instance.CreateGelSprite();
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);

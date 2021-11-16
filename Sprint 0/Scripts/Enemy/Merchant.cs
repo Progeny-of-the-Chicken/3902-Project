@@ -9,23 +9,23 @@ using Sprint_0.Scripts.Collider.Enemy;
 
 namespace Sprint_0.Scripts.Enemy
 {
-    public class OldMan : IEnemy
+    public class Merchant : IEnemy
     {
         private ISprite sprite;
         private Vector2 location;
+        public Vector2 Position { get => location; }
 
         public int Damage { get => damage; }
-        public Vector2 Position { get => location; }
         public IEnemyCollider Collider { get => collider; }
         IEnemyCollider collider;
         const int damage = ObjectConstants.OldManDamage;
         bool delete = false;
 
-        public OldMan(Vector2 location)
+        public Merchant(Vector2 location)
         {
             this.location = location;
-            sprite = EnemySpriteFactory.Instance.CreateOldManSprite();
-            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.oldManFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            sprite = EnemySpriteFactory.Instance.CreateMerchantSprite();
+            collider = new NPCCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.merchantFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
         }
 
         public void Update(GameTime gt)

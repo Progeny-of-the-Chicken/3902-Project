@@ -150,6 +150,12 @@ namespace Sprint_0
         public const double AquamentusReloadTime = 2;
         public const double AquamentusShootSpriteTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
+        //Dodongo
+        public const int DodongoDamage = 2;
+        public const float DodongoMoveSpeed = DefaultEnemyMoveSpeed;
+        public const double DodongoMoveTime = DefaultEnemyMoveTime;
+        public const double DodongoStunTime = 1;
+        public const int DodongoStartingHealth = basicSwordDamage * 2;
         //Gel
         public const int GelDamage = 1;
         public const double GelMoveTime = DefaultEnemyMoveTime;
@@ -169,7 +175,12 @@ namespace Sprint_0
         //OldMan
         public const int OldManDamage = 0;
         public const int OldManStartingHealth = 1;
-
+        //Rope
+        public const int RopeDamage = 1;
+        public const double RopeMoveTime = DefaultEnemyMoveTime;
+        public const float RopeMoveSpeed = DefaultEnemyMoveSpeed;
+        public const float RopeChaseSpeed = RopeMoveSpeed * 2;
+        public const int RopeStartingHealth = 1;
         //Stalfos
         public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
@@ -232,10 +243,13 @@ namespace Sprint_0
         public const string spaceStr = " ";
         public const string AquamentusStr = "Aquamentus";
         public const string BladeTrapStr = "BladeTrap";
+        public const string DodongoStr = "Dodongo";
         public const string GelStr = "Gel";
         public const string GoriyaStr = "Goriya";
         public const string KeeseStr = "Keese";
         public const string OldManStr = "OldMan";
+        public const string MerchantStr = "Merchant";
+        public const string RopeStr = "Rope";
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";

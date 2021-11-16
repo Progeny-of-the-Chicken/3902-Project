@@ -64,10 +64,9 @@ namespace Sprint_0.Scripts.Enemy
             //YDetectionCollider = new DetectionCollider(this, RectangleY);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
             DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
             count = 0;
             back = false;
-            //
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite();
         }
 
         public void Update(GameTime gt)

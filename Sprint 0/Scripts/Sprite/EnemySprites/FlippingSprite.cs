@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.Scripts.Sprite;
 
-
-namespace Sprint_0.Scripts.Sprite
+namespace Sprint_0.Scripts.Sprites.EnemySprites
 {
-    class AnimatedFlipSprite : ISprite
+    class FlippingSprite : ISprite
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
-
-        private SpriteEffects effect = SpriteEffects.None;
+        SpriteEffects effect = SpriteEffects.None;
 
         private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
-        public AnimatedFlipSprite(Rectangle rectangle, Texture2D spriteSheet)
+        public FlippingSprite(Rectangle rectangle, Texture2D spriteSheet)
         {
             sourceRectangle = rectangle;
             sprite = spriteSheet;
@@ -38,7 +37,6 @@ namespace Sprint_0.Scripts.Sprite
         {
             Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (sourceRectangle.Size.ToVector2() * ObjectConstants.scale).ToPoint());
             spriteBatch.Draw(sprite, destinationRectangle, sourceRectangle, Color.White, ObjectConstants.zeroRotation, Vector2.Zero, effect, ObjectConstants.noLayerDepth);
-
         }
     }
 }
