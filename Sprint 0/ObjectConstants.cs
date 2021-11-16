@@ -66,6 +66,7 @@ namespace Sprint_0
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
         public static Vector2 linkStartingPosition = new Vector2(358, 408); //generic starting position
+        public const float lowHealthThreshold = 3;
 
 
         //----- Item constant values -----//
