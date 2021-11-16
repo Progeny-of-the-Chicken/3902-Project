@@ -63,14 +63,14 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.Compass = true;
                     break;
                 case ItemType.SmallHeartItem:
-                    Link.Instance.Health += ObjectConstants.fullHeartHealthValue;
+                    Link.Instance.HealBy(ObjectConstants.fullHeartHealthValue);
                     break;
                 case ItemType.HeartContainer:
                     Link.Instance.MaxHealth += ObjectConstants.fullHeartHealthValue;
-                    Link.Instance.Health += ObjectConstants.fullHeartHealthValue;
+                    Link.Instance.HealBy(ObjectConstants.fullHeartHealthValue);
                     break;
                 case ItemType.Fairy:
-                    Link.Instance.Health += Link.Instance.MaxHealth;
+                    Link.Instance.HealBy(Link.Instance.MaxHealth);
                     break;
                 case ItemType.BlueRuby:
                     Inventory.Instance.Rupee += ObjectConstants.inventoryBlueRupeeValue;
