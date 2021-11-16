@@ -100,6 +100,7 @@ namespace Sprint_0.Scripts
         {
             linksPosition = newPosition;
         }
+
         private void MoveInDirection(float dt, FacingDirection direction)
         {
             switch (direction)
