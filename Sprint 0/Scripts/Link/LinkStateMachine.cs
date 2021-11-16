@@ -206,33 +206,6 @@ namespace Sprint_0.Scripts
             return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
         }
 
-        public Vector2 ItemSpawnPosition
-        {
-            get
-            {
-                float xDisp = ObjectConstants.zero_float, yDisp = ObjectConstants.zero_float;
-                switch (linksDirection)
-                {
-                    //TODO: need to come up with design for the item spawning, magic numbers will be refactored then
-                    case FacingDirection.Left:
-                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
-                        break;
-                    case FacingDirection.Right:
-                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
-                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
-                        break;
-                    case FacingDirection.Up:
-                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
-                        break;
-                    case FacingDirection.Down:
-                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
-                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
-                        break;
-                }
-                return new Vector2(linksPosition.X + xDisp, linksPosition.Y + yDisp);
-            }
-        }
-
         public Vector2 Position { get => linksPosition; }
 
         public FacingDirection FacingDirection { get => linksDirection; }
