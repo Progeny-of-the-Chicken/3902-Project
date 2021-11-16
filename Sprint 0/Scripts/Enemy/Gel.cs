@@ -24,6 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         bool inKnockBack = false;
 
         public int Damage { get => ObjectConstants.GelDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.GelStartingHealth;
 
         Vector2 location;
@@ -41,7 +42,7 @@ namespace Sprint_0.Scripts.Enemy
 
             SetRandomDirection();
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
@@ -66,7 +67,7 @@ namespace Sprint_0.Scripts.Enemy
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            if(timeSinceMove >= ObjectConstants.GelPauseTime)
+            if (timeSinceMove >= ObjectConstants.GelPauseTime)
             {
                 location += direction * ObjectConstants.GelMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
             }
@@ -98,7 +99,7 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
             }

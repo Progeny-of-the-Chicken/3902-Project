@@ -19,6 +19,7 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
 
         public int Damage { get => ObjectConstants.GoriyaDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.GoriyaStartingHealth;
         bool delete = false;
         bool inKnockBack = false;
@@ -50,19 +51,19 @@ namespace Sprint_0.Scripts.Enemy
 
             boomerang = null;
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
         {
             if (boomerang == null)
             {
-                if (!inKnockBack) 
-                { 
+                if (!inKnockBack)
+                {
                     Move(t);
                     dependency.sprite.Update(t);
                 }
-                else 
+                else
                 {
                     GetKnockedBack(t);
                 }
@@ -122,7 +123,7 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
             }

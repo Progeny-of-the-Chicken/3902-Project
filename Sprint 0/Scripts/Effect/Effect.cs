@@ -4,14 +4,14 @@ using Sprint_0.Scripts.Sprite;
 
 namespace Sprint_0.Scripts.Effect
 {
-    public class Effect : IEffect
+    public class StaticEffect : IEffect
     {
         private ISprite sprite;
         private Vector2 location;
         private double durationSeconds;
         private bool delete = false;
 
-        public Effect(Vector2 location, EffectType type)
+        public StaticEffect(Vector2 location, EffectType type)
         {
             this.location = location;
             InitializeByType(type);

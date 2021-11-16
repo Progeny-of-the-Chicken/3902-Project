@@ -21,9 +21,14 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.BlueCandle,
                 WeaponType.BasicBoomerang,
                 WeaponType.MagicalBoomerang,
-                WeaponType.Bomb
+                WeaponType.Bomb,
+                WeaponType.Potion,
+                WeaponType.Bow
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
+            BlueRing = true;
+            BasicArrows = false;
+            SilverArrows = false;
             Map = false;
             Compass = false;
             Rupee = ObjectConstants.inventoryStartingRupees;
@@ -33,7 +38,22 @@ namespace Sprint_0.Scripts.GameState
 
         public List<WeaponType> Weapons { get; set; }
 
+        public void RemoveWeapon(WeaponType weapon)
+        {
+            if (Weapons.IndexOf(weapon) == SelectedWeaponIndex)
+            {
+                SelectedWeaponIndex--;
+            }
+            Weapons.Remove(weapon);
+        }
+
         public int SelectedWeaponIndex { get; set; }
+
+        public bool BlueRing { get; set; }
+
+        public bool BasicArrows { get; set; }
+
+        public bool SilverArrows { get; set; }
 
         public bool Map { get; set; }
 
@@ -44,7 +64,5 @@ namespace Sprint_0.Scripts.GameState
         public int Key { get; set; }
 
         public int Bomb { get; set; }
-
-        // TODO: Add link's health
     }
 }

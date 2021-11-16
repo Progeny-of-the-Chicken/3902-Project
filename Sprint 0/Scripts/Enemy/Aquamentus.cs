@@ -17,6 +17,7 @@ namespace Sprint_0.Scripts.Enemy
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
+        public Vector2 Position { get => location; }
         private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
@@ -41,7 +42,7 @@ namespace Sprint_0.Scripts.Enemy
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
             SFXManager.Instance.PlayBossScream1();
         }
         public void Update(GameTime t)
@@ -87,7 +88,7 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayBossScream1();
             }

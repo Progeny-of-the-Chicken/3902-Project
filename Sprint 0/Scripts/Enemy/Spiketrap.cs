@@ -34,6 +34,7 @@ namespace Sprint_0.Scripts.Enemy
         bool back;
         public Vector2 Location { get => location; }
         public int Damage { get => damage; }
+        public Vector2 Position { get => location; }
         bool delete = false;
 
         Vector2 location;

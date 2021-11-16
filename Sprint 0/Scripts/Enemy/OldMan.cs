@@ -15,6 +15,7 @@ namespace Sprint_0.Scripts.Enemy
         private Vector2 location;
 
         public int Damage { get => damage; }
+        public Vector2 Position { get => location; }
         public IEnemyCollider Collider { get => collider; }
         IEnemyCollider collider;
         const int damage = ObjectConstants.OldManDamage;

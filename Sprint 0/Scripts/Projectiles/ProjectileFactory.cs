@@ -69,5 +69,10 @@ namespace Sprint_0.Scripts.Projectiles
         {
             return new SwordAttackHitbox(location, direction);
         }
+
+        public IProjectile CreateSwordBeam(Vector2 location, FacingDirection direction)
+        {
+            return new SwordBeam(location, direction);
+        }
     }
 }
