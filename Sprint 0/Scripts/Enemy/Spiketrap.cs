@@ -53,14 +53,10 @@ namespace Sprint_0.Scripts.Enemy
             RectangleXLeft = new Rectangle((int)location.X - (12 * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (13 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.scaledStdWidthHeight * 2);
             RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (12 * ObjectConstants.scaledStdWidthHeight), ObjectConstants.scaledStdWidthHeight * 2);
             RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight * 2, (8 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
-            RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.scaledStdWidthHeight * 2, (7 * ObjectConstants.scaledStdWidthHeight));
-            //RectangleX = new Rectangle((int)location.X - (12 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), (int)location.Y, (25 * ObjectConstants.standardWidthHeight * ObjectConstants.scale), ObjectConstants.standardWidthHeight);
-            //RectangleY = new Rectangle((int)location.X, ((int)location.Y - (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight, (15 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
-            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
-            //XDetectionCollider = new DetectionCollider(this, RectangleX);
+            RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.standardWidthHeight * 2, (7 * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
+            DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y , (int)(damageFrame.Width * ObjectConstants.scale), (int)(damageFrame.Height * ObjectConstants.scale)));
             DetectionColliderRight = new DetectionColliderRight(this, RectangleXRight);
             DetectionColliderLeft = new DetectionColliderLeft(this, RectangleXLeft);
-            //YDetectionCollider = new DetectionCollider(this, RectangleY);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
             DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
             sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
