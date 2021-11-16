@@ -68,7 +68,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateDodongoExplodeLeftSprite()
         {
-            return new UnanimatedEnemySprite(SpriteRectangles.dodongoExplodeRightFrame, bossSprites);
+            return new UnanimatedFlippedSprite(SpriteRectangles.dodongoExplodeRightFrame, bossSprites);
         }
         public ISprite CreateDodongoExplodeDownSprite()
         {

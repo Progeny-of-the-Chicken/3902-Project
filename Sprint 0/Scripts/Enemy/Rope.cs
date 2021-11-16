@@ -59,7 +59,7 @@ namespace Sprint_0.Scripts.Enemy
             directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, rightSprite, rightCollider));
             SetRandomDirection();
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
@@ -114,7 +114,7 @@ namespace Sprint_0.Scripts.Enemy
             if (health <= ObjectConstants.zero)
             {
                 SFXManager.Instance.PlayEnemyDeath();
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
             }
         }

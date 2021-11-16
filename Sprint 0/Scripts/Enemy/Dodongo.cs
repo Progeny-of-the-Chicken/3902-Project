@@ -24,11 +24,10 @@ namespace Sprint_0.Scripts.Enemy
         public int Damage { get => ObjectConstants.DodongoDamage; }
         int health = ObjectConstants.DodongoStartingHealth;
         bool delete = false;
-        bool inKnockBack = false;
-
+        bool stunned = false;
+        
         FacingDirection direction;
         Vector2 location;
-        Vector2 knockbackDirection;
         (Vector2 directionVector, ISprite walkSprite, ISprite explodeSprite, IEnemyCollider collider) dependency;
 
         Dictionary<FacingDirection, (Vector2, ISprite, ISprite, IEnemyCollider)> directionDependencies;
@@ -48,23 +47,25 @@ namespace Sprint_0.Scripts.Enemy
             SetRandomDirection();
             detectionCollider = new DodongoDetectionCollider(this, new Rectangle((location + dependency.directionVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), (Vector2.One * ObjectConstants.scaledStdWidthHeight).ToPoint()));
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
-            SFXManager.Instance.PlayBossScream1();
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
         {
-            if (!inKnockBack)
+            if (!stunned)
             {
                 Move(gt);
-                sprite.Update(gt);
             }
             else
             {
                 GetKnockedBack(gt);
             }
+            sprite.Update(gt);
             dependency.collider.Update(location);
-            detectionCollider.Update(location + dependency.directionVector * ObjectConstants.scaledStdWidthHeight);
+            if (direction == FacingDirection.Right) 
+                detectionCollider.Update(location + Vector2.UnitX * SpriteRectangles.dodongoRightFrames[ObjectConstants.firstFrame].Width * ObjectConstants.scale);
+            else 
+                detectionCollider.Update(location + dependency.directionVector * ObjectConstants.scaledStdWidthHeight);
         }
 
         void Move(GameTime gt)
@@ -82,10 +83,9 @@ namespace Sprint_0.Scripts.Enemy
         void GetKnockedBack(GameTime t)
         {
             timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
-            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
             if (timeSinceKnockback >= ObjectConstants.DodongoStunTime)
             {
-                inKnockBack = false;
+                stunned = false;
                 timeSinceKnockback = 0;
                 sprite = dependency.walkSprite;
             }
@@ -101,12 +101,12 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void TakeDamage(int damage)
         {
-            if (inKnockBack)
+            if (stunned)
             {
                 health -= damage;
                 if (health <= ObjectConstants.zero)
                 {
-                    ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                    ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                     delete = true;
                     SFXManager.Instance.PlayBossScream1();
                 }
@@ -119,13 +119,17 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
-            knockbackDirection = knockback;
-            TakeDamage(ObjectConstants.basicSwordDamage);
+            //Unused
         }
         public void SuddenKnockBack(Vector2 knockback)
         {
             location += knockback;
+        }
+        public void Stun()
+        {
+            stunned = true;
+            TakeDamage(ObjectConstants.basicSwordDamage);
+            sprite = dependency.explodeSprite;
         }
         public bool CheckDelete()
         {

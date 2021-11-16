@@ -104,7 +104,7 @@ namespace Sprint_0
         public static Rectangle[] dodongoRightFrames = { new Rectangle(69, 58, 28, 16), new Rectangle(102, 58, 28, 16) };
         public static Rectangle dodongoUpFrame = new Rectangle(35, 58, 16, 16);
         public static Rectangle dodongoDownFrame = new Rectangle(1, 58, 16, 16);
-        public static Rectangle dodongoExplodeRightFrame = new Rectangle(135, 58, 16, 16);
+        public static Rectangle dodongoExplodeRightFrame = new Rectangle(135, 58, 32, 16);
         public static Rectangle dodongoExplodeUpFrame = new Rectangle(52, 58, 16, 16);
         public static Rectangle dodongoExplodeDownFrame = new Rectangle(18, 58, 16, 16);
 
