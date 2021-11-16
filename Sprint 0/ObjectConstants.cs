@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0
 {
@@ -426,6 +428,65 @@ namespace Sprint_0
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;
         public const int roomStringYIndex = 5;
+
+
+        //----- DropTable constant values -----//
+        public const double groupADropRate = 0.31;
+        public const double groupBDropRate = 0.41;
+        public const double groupCDropRate = 0.59;
+        public const double groupDDropRate = 0.41;
+        public const double groupXDropRate = 0;
+        public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static ItemType[] groupAItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupBItems = {
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.BombItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupCItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby };
+        public static ItemType[] groupDItems = {
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem, };
+
+        //Group X doesn't drop anything
 
 
         //----- Inventory constant values -----//

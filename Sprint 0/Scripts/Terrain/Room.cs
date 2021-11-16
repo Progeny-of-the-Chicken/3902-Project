@@ -23,7 +23,7 @@ public class Room : IRoom
     private int YOFFSET;
     private Vector2 _roomDrawPoint;
     public Vector2 roomDrawPoint { get => _roomDrawPoint; }
-
+    public ItemEntities ItemSet { get => itemSet; }
     private ILink link;
     private EnemySet enemySet;
     private ItemEntities itemSet;

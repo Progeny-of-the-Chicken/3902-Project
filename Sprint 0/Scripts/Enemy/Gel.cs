@@ -24,6 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         bool inKnockBack = false;
 
         public int Damage { get => ObjectConstants.GelDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.GelStartingHealth;
 
         Vector2 location;
@@ -66,7 +67,7 @@ namespace Sprint_0.Scripts.Enemy
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            if(timeSinceMove >= ObjectConstants.GelPauseTime)
+            if (timeSinceMove >= ObjectConstants.GelPauseTime)
             {
                 location += direction * ObjectConstants.GelMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
             }
