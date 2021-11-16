@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         public LinkUsingItemSprite(LinkStateMachine state)
         {
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
             setFramesForDirection();
         }
 

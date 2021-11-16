@@ -48,15 +48,14 @@ namespace Sprint_0.Scripts.GameState
             keyCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
             bombCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
 
-            //Replace numbers with link's inventory when added
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
 
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
-            health = 7;
-            maxHealth = 12;
+            health = Link.Instance.Health;
+            maxHealth = ObjectConstants.linkStartingHealth;
             makeHeartArray();
 
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
@@ -72,12 +71,11 @@ namespace Sprint_0.Scripts.GameState
 
         public void Update()
         {
-            //Replace numbers with link's inventory when added
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
-            //Reminder to update link's health (Although we could pull directly from the instance in draw)
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
+            health = Link.Instance.Health;
             makeHeartArray();
             currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
@@ -141,6 +139,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.SilverArrow => SpriteRectangles.weaponSilverArrowFrame,
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
+                WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };
@@ -162,18 +161,22 @@ namespace Sprint_0.Scripts.GameState
             for (int i = 0; i < ObjectConstants.maxMaxHealth; i += 2)
             {
                 ISprite heart = InventorySpriteFactory.Instance.CreateFullHeartSprite();
-                if (i > maxHealth)
+                if (i >= maxHealth)
                 {
                     //black square
                     heart = InventorySpriteFactory.Instance.CreateBlackHUDCoverSprite();
-                } else if (i >= health) {
+                }
+                else if (i >= health)
+                {
                     //empty heart
                     heart = InventorySpriteFactory.Instance.CreateEmptyHeartSprite();
-                } else if (i == health - 1)
+                }
+                else if (i == health - 1)
                 {
                     //half heart
                     heart = InventorySpriteFactory.Instance.CreateHalfHeartSprite();
-                } else
+                }
+                else
                 {
                     //full heart
                 }

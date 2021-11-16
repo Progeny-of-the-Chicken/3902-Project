@@ -52,5 +52,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
         {
             return new RotatedProjectileCollider(projectile, direction);
         }
+
+        public IProjectileCollider CreateSwordBeamCollider(IProjectile projectile, FacingDirection direction)
+        {
+            return new RotatedProjectileCollider(projectile, direction);
+        }
     }
 }

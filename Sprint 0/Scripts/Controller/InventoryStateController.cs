@@ -46,6 +46,7 @@ namespace Sprint_0.Scripts.Controller
 
 		private void setCommands()
 		{
+			this.RegisterCommand(Keys.Q, new CommandQuit(game));
 			this.RegisterCommand(Keys.W, new CommandMoveSelectionUp(game));
 			this.RegisterCommand(Keys.A, new CommandMoveSelectionLeft(game));
 			this.RegisterCommand(Keys.S, new CommandMoveSelectionDown(game));

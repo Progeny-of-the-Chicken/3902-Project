@@ -25,17 +25,31 @@ namespace Sprint_0.Scripts.CollisionHandlers
                     //if we implement logic for enemy collision in link collider we'll put uncomment the next line
                     //link.collider.OnEnemyCollision(enemy);
                     enemy.Collider.OnPlayerCollision(link);
-                    SpikeTrap spikeTrap = enemy as SpikeTrap;
-                    if(spikeTrap != null)
-                    {
-                        spikeTrap.XCollider.OnPlayerCollision(link);
-                        spikeTrap.YCollider.OnPlayerCollision(link);
-                    }
                 }
-                Rope rope = enemy as Rope;
-                if (rope != null && link.collider.CollisionRectangle.Intersects(rope.ChaseCollider.Hitbox))
+                SpikeTrap cast = enemy as SpikeTrap;
+                if (cast != null)
                 {
-                    rope.ChaseCollider.OnPlayerCollision(link);
+                    if (link.collider.CollisionRectangle.Intersects(cast.ColliderUp.Hitbox))
+                    {
+                        cast.ColliderUp.OnPlayerCollision(link);
+                    }
+                    if (link.collider.CollisionRectangle.Intersects(cast.ColliderDown.Hitbox))
+                    {
+                        cast.ColliderDown.OnPlayerCollision(link);
+                    }
+                    if (link.collider.CollisionRectangle.Intersects(cast.ColliderRight.Hitbox))
+                    {
+                        cast.ColliderRight.OnPlayerCollision(link);
+                    }
+                    if (link.collider.CollisionRectangle.Intersects(cast.ColliderLeft.Hitbox))
+                    {
+                        cast.ColliderLeft.OnPlayerCollision(link);
+                    }
+                    Rope rope = enemy as Rope;
+                    if (rope != null && link.collider.CollisionRectangle.Intersects(rope.ChaseCollider.Hitbox))
+                    {
+                        rope.ChaseCollider.OnPlayerCollision(link);
+                    }
                 }
             }
         }

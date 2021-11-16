@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         public LinkTakingDamageSprite(LinkStateMachine state)
         {
             this.direction = state.FacingDirection;
-            sheet = LinkSpriteFactory.Instance.GetSpriteSheet();
+            sheet = LinkSpriteFactory.Instance.GetBaseSpriteSheet();
             setFramesForDirection();
             colorCounter = ObjectConstants.counterInitialVal_int;
         }
