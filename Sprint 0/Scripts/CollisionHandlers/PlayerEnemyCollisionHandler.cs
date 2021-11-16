@@ -48,19 +48,19 @@ namespace Sprint_0.Scripts.CollisionHandlers
                     }
                     if (cast2 != null)
                     {
-                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderUp.collisionRectangle))
+                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderUp.Hitbox))
                         {
                             cast2.WMDColliderUp.OnPlayerCollision(link);
                         }
-                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderDown.collisionRectangle))
+                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderDown.Hitbox))
                         {
                             cast2.WMDColliderDown.OnPlayerCollision(link);
                         }
-                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderRight.collisionRectangle))
+                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderRight.Hitbox))
                         {
                             cast2.WMDColliderRight.OnPlayerCollision(link);
                         }
-                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderLeft.collisionRectangle))
+                        if (link.collider.CollisionRectangle.Intersects(cast2.WMDColliderLeft.Hitbox))
                         {
                             cast2.WMDColliderLeft.OnPlayerCollision(link);
                         }
