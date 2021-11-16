@@ -96,6 +96,10 @@ namespace Sprint_0.Scripts
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
+        public void HealBy(int health)
+        {
+            linkState.HealBy(health);
+        }
         public void ResetPosition(Vector2 newPosition)
         {
             linkState.ResetPosition(newPosition);
@@ -115,7 +119,7 @@ namespace Sprint_0.Scripts
 
         public Vector2 Position { get => linkState.Position; }
 
-        public int Health { get => (int)Math.Ceiling(linkState.linkHealth); set { linkState.linkHealth = value; } }
+        public int Health { get => (int)Math.Ceiling(linkState.linkHealth); }
 
         public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkHealth = value; } }
 

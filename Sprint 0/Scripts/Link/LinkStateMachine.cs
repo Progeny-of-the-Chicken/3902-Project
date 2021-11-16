@@ -206,6 +206,14 @@ namespace Sprint_0.Scripts
             return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
         }
 
+        public void HealBy(int health)
+        {
+            if (linkHealth + health >= linkMaxHealth)
+                linkHealth = linkMaxHealth;
+            else
+                linkHealth += health;
+        }
+
         public Vector2 Position { get => linksPosition; }
 
         public FacingDirection FacingDirection { get => linksDirection; }
