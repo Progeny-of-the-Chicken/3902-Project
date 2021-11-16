@@ -42,13 +42,19 @@ namespace Sprint_0.Scripts
             switch (item.Type)
             {
                 case ItemType.BoomerangItem:
-                    Inventory.Instance.Weapons.Add(WeaponType.BasicBoomerang);
+                    if (!Inventory.Instance.Weapons.Contains(WeaponType.BasicBoomerang))
+                    {
+                        Inventory.Instance.Weapons.Add(WeaponType.BasicBoomerang);
+                    }
                     break;
                 case ItemType.BowItem:
-                    Inventory.Instance.Weapons.Add(WeaponType.Bow);
+                    if (!Inventory.Instance.Weapons.Contains(WeaponType.Bow))
+                    {
+                        Inventory.Instance.Weapons.Add(WeaponType.Bow);
+                    }
                     break;
                 case ItemType.BombItem:
-                    // TODO: Add bombs to inventory
+                    Inventory.Instance.Bomb += 4;
                     break;
                 case ItemType.BasicMapItem:
                     Inventory.Instance.Map = true;
@@ -83,6 +89,12 @@ namespace Sprint_0.Scripts
                     break;
                 case ItemType.TriforcePiece:
                     // TODO: End game
+                    break;
+                case ItemType.BasicArrowItem:
+                    Inventory.Instance.BasicArrows = true;
+                    break;
+                case ItemType.SilverArrowItem:
+                    Inventory.Instance.SilverArrows = true;
                     break;
             }
             item.Despawn();

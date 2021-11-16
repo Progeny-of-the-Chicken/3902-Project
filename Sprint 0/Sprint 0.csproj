@@ -29,9 +29,9 @@
     <None Remove="Scripts\Sprite\InventoryGUISprites\" />
     <None Remove="Scripts\GameState\Inventory\Display\" />
     <None Remove="Scripts\Commands\InventoryState\" />
+    <None Remove="Scripts\Sprite\BlueLinkSprites\" />
     <None Remove="Scripts\Sprite\Font\Letters\" />
     <None Remove="Scripts\Sprite\Font\Numbers\" />
-    <None Remove="Scripts\Sprite\BlueLinkSprites\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -60,8 +60,8 @@
     <Folder Include="Scripts\GameState\InventoryState\" />
     <Folder Include="Scripts\GameState\InventoryState\Display\" />
     <Folder Include="Scripts\Commands\InventoryState\" />
+    <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
     <Folder Include="Scripts\Sprite\Font\Letters\" />
     <Folder Include="Scripts\Sprite\Font\Numbers\" />
-    <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
   </ItemGroup>
 </Project>

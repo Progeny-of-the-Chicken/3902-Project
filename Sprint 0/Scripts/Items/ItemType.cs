@@ -15,6 +15,8 @@
         BasicKey,
         MagicKey,
         Compass,
-        TriforcePiece
+        TriforcePiece,
+        BasicArrowItem,
+        SilverArrowItem
     }
 }

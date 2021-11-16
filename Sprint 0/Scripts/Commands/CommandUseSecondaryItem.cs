@@ -21,9 +21,14 @@ namespace Sprint_0.Scripts.Commands
             switch (type)
             {
                 case WeaponType.Bow:
-                    if (Inventory.Instance.Rupee > 0)
+                    if (Inventory.Instance.Rupee > 0 && Inventory.Instance.SilverArrows)
                     {
                         RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
+                        Inventory.Instance.Rupee--;
+                    }
+                    else if (Inventory.Instance.Rupee > 0 && Inventory.Instance.BasicArrows)
+                    {
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, false));
                         Inventory.Instance.Rupee--;
                     }
                     break;

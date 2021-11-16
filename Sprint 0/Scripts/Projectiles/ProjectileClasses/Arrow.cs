@@ -21,7 +21,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
         private int maxDistance = ObjectConstants.arrowMaxDistance;
-        private double silverArrowSpeedCoef = ObjectConstants.silverArrowSpeedCoef;
+        private double silverArrowSpeedCoef = ObjectConstants.silverArrowDistanceCoef;
 
         public bool Friendly { get => friendly; }
 
@@ -69,6 +69,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(currentPos + popOffset, EffectType.Pop);
             delete = true;
         }
 
