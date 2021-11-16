@@ -65,8 +65,8 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = 25 * ObjectConstants.scale;
             direction = Vector2.Zero;
             random = new byte[2];
-            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(ObjectConstants.scale, openFrame);
-            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(ObjectConstants.scale, openFrame);
+            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(openFrame);
+            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(openFrame);
             sprite = openSprite;
             upFrame = new Rectangle((int)location.X, (int)location.Y - (2 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
             downFrame = new Rectangle((int)location.X, (int)location.Y + (3 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
