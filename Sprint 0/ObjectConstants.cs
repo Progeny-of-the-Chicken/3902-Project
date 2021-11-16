@@ -176,6 +176,12 @@ namespace Sprint_0
         //SpikeTrap
         public const int vectorFlip = -1;
         public const int spikeTrapSpeed = 25 * scale;
+        public const int roomWidthInBlocks = 12;
+        public const int roomHeightInBlocks = 7;
+        public const int spikeTrapSpawnAdjustment = 1;
+        public const int doubleTheValue = 2;
+        public const int SpikeTrapWidthMovementTicks = 100;
+        public const int SpikeTrapHeightMovementTicks = 55;
 
         //WallMaster
         public const int WallMasterHealth = 3;
@@ -293,7 +299,7 @@ namespace Sprint_0
 
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
-        
+
         public const int yPosForNorthDoor = 0;
         public const int yPosForEastWestDoor = 72;
         public const int yPosForSouthDoor = 144;
