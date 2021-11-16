@@ -37,21 +37,19 @@ While the game is paused you can use:
 - P to unpause
 - M to mute the game
 
-KNOWN BUGS: 
-
--Wallmaster does not dissapear
--Wallmaster only moves once
-Goriya facing a wall spawns ghost boomerangs
-Clock is not implemented
-Switching between arrows is not implemented
--If a Zol is hit from the top or left, the Gels it spawn may die instantly
--Game over music is not implemented
--The potion heals link instantly rather than pausing the game as his health slowly increases
--Ladder is not implemented
--Magical key has no implementation, just the ability to be picked up
+# Known Issues
 - Doors don't render while room is switching
 - Bombs do not affect adjacent rooms
 - Link knockback does not knock link back in half block increments
 - Potion does not have sound effect
 - Link can use weapons while not standing still
+- Goriya facing a wall spawns ghost boomerangs
+- Potion is an instant heal instead of heal over time
 
+# Not Implemented
+- Clock
+- Switching Between Arrows
+- Ladder
+- Magical Key (can only be picked up)
+- Merchant does not sell anything
+- Old man text
