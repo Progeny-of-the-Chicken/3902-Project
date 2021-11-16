@@ -55,7 +55,7 @@ namespace Sprint_0
 
 
         //----- Link constant values -----//
-        public const int linkStdMoveDist = scaledStdWidthHeight;
+        public const int linkStdMoveDist = scaledStdWidthHeight / 2;
         public const float linkStdMoveTime = 0.25f;
         public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
         public const float linkDeathAnimationTime = 1.5f;
@@ -64,7 +64,7 @@ namespace Sprint_0
         public const float linkPickUpItemTime = 1f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
-        public const int linkStartingHealth = 1;
+        public const int linkStartingHealth = 12;
         public const float linkTurningCounterDebounce = 0.05f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
