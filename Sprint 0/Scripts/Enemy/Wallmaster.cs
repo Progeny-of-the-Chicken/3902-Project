@@ -32,6 +32,7 @@ namespace Sprint_0.Scripts.Enemy
         const int knockbackDistance = 50;
         bool delete = false;
         bool grab = false;
+        int count;
 
         const float moveTime = 1;
         float moveSpeed;
@@ -45,12 +46,13 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             moveSpeed = 25 * ObjectConstants.scale;
-            direction = new Vector2(-1, 0);
+            direction = Vector2.Zero;
             random = new byte[2];
             openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(ObjectConstants.scale, openFrame);
             closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(ObjectConstants.scale, openFrame);
             sprite = openSprite;
             collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(openFrame.Width * ObjectConstants.scale), (int)(openFrame.Height * ObjectConstants.scale)));
+            count = 0;
         }
 
         public void Update(GameTime gt)
@@ -69,13 +71,27 @@ namespace Sprint_0.Scripts.Enemy
 
         void SearchMove(GameTime gt)
         {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (count < 20)
             {
-                SetRandomDirection();
-                timeSinceMove = 0;
+                direction = -Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            } else if (count >= 20 && count < 75)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            } else if (count >= 75 && count < 95)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            } else if (count >= 95)
+            {
+                direction = Vector2.Zero;
+                count = 0;
             }
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+
         }
 
         void yeetLink()
@@ -89,22 +105,6 @@ namespace Sprint_0.Scripts.Enemy
 
                 RoomManager.Instance.SwitchToRoom("Room25");
                 grabbedLink.UnSuspend();
-            }
-        }
-
-        void SetRandomDirection()
-        {
-            //First byte is vertical/horizontal, second is +/-
-            randomDir.GetBytes(random);
-            if (random[0] % 2 == 0)
-            {
-                direction.X = (random[1] % 2) * 2 - 1;
-                direction.Y = 0;
-            }
-            else
-            {
-                direction.X = 0;
-                direction.Y = (random[1] % 2) * 2 - 1;
             }
         }
 

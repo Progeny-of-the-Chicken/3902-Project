@@ -21,7 +21,8 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 foreach (IWall wall in walls)
                 {
-                    if (wall.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle))
+                    Wallmaster cast = enemy as Wallmaster;
+                    if (wall.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle) && cast == null)
                     {
                         wall.Collider.OnEnemyCollision(enemy);
                     }

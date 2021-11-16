@@ -36,6 +36,7 @@ namespace Sprint_0.Scripts.Enemy
         const float moveTime = 1;
         float moveSpeed;
         float timeSinceMove = 0;
+        int count;
 
         Vector2 location;
         Vector2 direction;
@@ -55,28 +56,44 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gt)
         {
-            if (grab == false)
-            {
+           // if (grab == false)
+          //  {
                 SearchMove(gt);
                 sprite.Update(gt);
                 collider.Update(location);
-            }
-            else
-            {
-                yeetLink();
-                sprite.Update(gt);
-            }
+          //  }
+          //  else
+          //  {
+            //    yeetLink();
+           //     sprite.Update(gt);
+           // }
         }
 
         void SearchMove(GameTime gt)
         {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (count < 20)
             {
-                SetRandomDirection();
-                timeSinceMove = 0;
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
             }
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            else if (count >= 20 && count < 75)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 75 && count < 95)
+            {
+                direction = -Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 95)
+            {
+                direction = Vector2.Zero;
+                count = 0;
+            }
         }
 
         void yeetLink()

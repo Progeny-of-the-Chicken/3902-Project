@@ -32,6 +32,7 @@ namespace Sprint_0.Scripts.Enemy
         const int knockbackDistance = 50;
         bool delete = false;
         bool grab = false;
+        int count;
 
         const float moveTime = 1;
         float moveSpeed;
@@ -51,6 +52,7 @@ namespace Sprint_0.Scripts.Enemy
             closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(ObjectConstants.scale, openFrame);
             sprite = openSprite;
             collider = new GenericEnemyCollider(this, new Rectangle(0, 0, (int)(openFrame.Width * ObjectConstants.scale), (int)(openFrame.Height * ObjectConstants.scale)));
+            count = 0;
         }
 
         public void Update(GameTime gt)
@@ -70,13 +72,29 @@ namespace Sprint_0.Scripts.Enemy
 
         void SearchMove(GameTime gt)
         {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (count < 20)
             {
-                SetRandomDirection();
-                timeSinceMove = 0;
+                direction = -Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
             }
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            else if (count >= 20 && count < 75)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 75 && count < 95)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 95)
+            {
+                direction = Vector2.Zero;
+                count = 0;
+            }
         }
 
         void yeetLink()

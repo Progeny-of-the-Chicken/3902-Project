@@ -60,5 +60,6 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Wallmaster(location);
         }
+
 	}
 }

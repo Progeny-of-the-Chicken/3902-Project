@@ -20,10 +20,12 @@ namespace Sprint_0.Scripts.CollisionHandlers
             {
                 foreach (ITerrain block in blocks)
                 {
-                    if (block.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle))
+                    Wallmaster cast = enemy as Wallmaster;
+                    if (block.Collider.Hitbox.Intersects(enemy.Collider.collisionRectangle) && cast == null)
                     {
                         block.Collider.OnEnemyCollision(enemy);
                     }
+
                 }
             }
         }
