@@ -97,9 +97,9 @@ public class Room : IRoom
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        //This needs to be updated once we have more than dungeon 1
-        Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-        spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
+		//This needs to be updated once we have more than dungeon 1
+		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
 
         // If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
         if (!inTransition)

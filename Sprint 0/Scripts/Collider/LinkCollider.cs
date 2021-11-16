@@ -54,7 +54,7 @@ namespace Sprint_0.Scripts
                     }
                     break;
                 case ItemType.BombItem:
-                    Inventory.Instance.Bomb += 4;
+                    Inventory.Instance.Bomb += ObjectConstants.bombsFromDrop;
                     break;
                 case ItemType.BasicMapItem:
                     Inventory.Instance.Map = true;
