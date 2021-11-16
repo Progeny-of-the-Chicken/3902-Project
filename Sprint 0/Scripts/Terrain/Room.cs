@@ -189,6 +189,9 @@ public class Room : IRoom
                     case ObjectConstants.BladeTrapStr:
                         enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
                         break;
+                    case ObjectConstants.DodongoStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateDodongo(enemyLocation));
+                        break;
                     case ObjectConstants.GelStr:
                         enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
                         break;
@@ -200,6 +203,12 @@ public class Room : IRoom
                         break;
                     case ObjectConstants.OldManStr:
                         enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
+                        break;
+                    case ObjectConstants.MerchantStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMerchant(enemyLocation));
+                        break;
+                    case ObjectConstants.RopeStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateRope(enemyLocation));
                         break;
                     case ObjectConstants.StalfosStr:
                         enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
@@ -439,6 +448,11 @@ public class Room : IRoom
     public void AddEffect(IEffect effect)
     {
         effectQueue.Add(effect);
+    }
+
+    public void AddEnemy(IEnemy enemy)
+    {
+        enemySet.Add(enemy);
     }
 
     private void TransferQueuedEffects()

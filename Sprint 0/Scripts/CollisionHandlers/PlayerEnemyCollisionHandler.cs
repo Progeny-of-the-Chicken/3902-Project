@@ -46,6 +46,11 @@ namespace Sprint_0.Scripts.CollisionHandlers
                         cast.ColliderLeft.OnPlayerCollision(link);
                     }
                 }
+                Rope rope = enemy as Rope;
+                if (rope != null && link.collider.CollisionRectangle.Intersects(rope.ChaseCollider.Hitbox))
+                {
+                    rope.ChaseCollider.OnPlayerCollision(link);
+                }
             }
         }
     }

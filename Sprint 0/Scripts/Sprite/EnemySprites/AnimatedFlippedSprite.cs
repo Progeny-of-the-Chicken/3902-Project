@@ -3,14 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint_0.Scripts.Sprite.EnemySprites
 {
-    class GenericEnemySprite : ISprite
+    class AnimatedFlippedSprite : ISprite
     {
         Rectangle[] frames;
         Texture2D sprite;
 
         float timeSinceFrame = ObjectConstants.counterInitialVal_float;
         int currentFrame = ObjectConstants.firstFrame;
-        public GenericEnemySprite(Rectangle[] frames, Texture2D spriteSheet)
+        public AnimatedFlippedSprite(Rectangle[] frames, Texture2D spriteSheet)
         {
             this.frames = frames;
             sprite = spriteSheet;
@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (frames[currentFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
-            spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White);
+            spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White, ObjectConstants.zeroRotation, ObjectConstants.zeroVector, SpriteEffects.FlipHorizontally, ObjectConstants.zero);
         }
     }
 }

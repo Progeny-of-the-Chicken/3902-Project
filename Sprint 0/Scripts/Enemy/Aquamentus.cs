@@ -34,8 +34,8 @@ namespace Sprint_0.Scripts.Enemy
             this.location = location;
             startLocation = location;
 
-            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite(SpriteRectangles.aquamentusMoveFrames);
-            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite(SpriteRectangles.aquamentusShootFrames);
+            moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
+            shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
             sprite = moveSprite;
             projectiles = new List<IProjectile>();
 
