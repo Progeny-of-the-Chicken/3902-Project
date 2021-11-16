@@ -22,8 +22,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.BasicBoomerang,
                 WeaponType.MagicalBoomerang,
                 WeaponType.Bomb,
-                WeaponType.Potion,
-                WeaponType.Bow
+                WeaponType.Potion
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             BlueRing = true;

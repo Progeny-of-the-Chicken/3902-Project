@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -30,7 +31,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public FireSpell(Vector2 spawnLoc, FacingDirection direction)
         {
-            startPos = currentPos = spawnLoc;
+            startPos = currentPos = SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.fireSpellWidthHeight));
             switch (direction)
             {
                 case FacingDirection.Right:
