@@ -236,12 +236,24 @@ namespace Sprint_0
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
-        public const string BowItemStr = "BowItem";
-        public const string CompassStr = "Compass";
+        public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
+        public const string FairyStr = "Fairy";
+        public const string ClockStr = "Clock";
+        public const string BlueRubyStr = "BlueRuby";
+        public const string YellowRubyStr = "YellowRuby";
+        public const string BasicMapItemStr = "BasicMapItem";
+        public const string BoomerangItemStr = "BoomerangItem";
+        public const string BombItemStr = "BombItem";
+        public const string BowItemStr = "BowItem";
+        public const string BasicKeyStr = "BasicKey";
+        public const string MagicKeyStr = "MagicKey";
+        public const string CompassStr = "Compass";
+        public const string TriforcePieceStr = "TriforcePiece";
+        public const string BasicArrowItemStr = "BasicArrowItem";
+        public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
-        public const string TriforcePieceStr = "TriforcePiece";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
         public const string NorthClosedSpriteStr = "NorthClosedSprite";
@@ -299,7 +311,7 @@ namespace Sprint_0
 
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
-        
+
         public const int yPosForNorthDoor = 0;
         public const int yPosForEastWestDoor = 72;
         public const int yPosForSouthDoor = 144;
