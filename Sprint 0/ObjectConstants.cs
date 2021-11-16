@@ -335,8 +335,8 @@ namespace Sprint_0
         public static Vector2 swordBeamExplosionDownOffset = new Vector2(-4, 6) * scale;
 
         //----- Room swapping animation constants -----//
-        public const int roomswapAnimationVerticalScrollDist = 800;
-        public const int roomswapAnimationHorizontalScrollDist = 1200;
+        public const int roomswapAnimationVerticalScrollDist = 176 * scale;
+        public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
         public const int roomswapAnimationDurationInFrames = 80;
 
 
