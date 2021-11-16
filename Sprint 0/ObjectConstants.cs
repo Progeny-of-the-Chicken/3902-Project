@@ -76,6 +76,10 @@ namespace Sprint_0
         //----- Projectile constant values -----//
         public static Rectangle standardProjectileSize = new Rectangle(0, 0, 8, 8);
         public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
+        public const int linkSwordFromRightCenter = 3 * scale;
+        public const int linkSwordFromUpCenter = -4 * scale;
+        public const int linkSwordFromLeftCenter = -3 * scale;
+        public const int linkSwordFromDownCenter = 3 * scale;
 
         // Arrow
         public const double arrowSpeedPerSecond = 100.0 * scale;
@@ -87,6 +91,7 @@ namespace Sprint_0
         public static Vector2 leftArrowPopOffset = new Vector2(-20, -8);
         public static Vector2 downArrowPopOffset = new Vector2(-8, 4);
         public static Vector2 arrowRotationOffset = new Vector2(8, 2.5f);
+        public static Vector2 arrowWidthHeight = new Vector2(16, 5) * scale;
 
         // BlastZone
         public const int blastZonePositionOffset = -8;
@@ -118,9 +123,10 @@ namespace Sprint_0
 
         // SwordAttackHitbox
         public const int swordHitboxCounter = 17;
-        public const int swordHitboxLength = 11;
+        public const int swordHitboxLength = 16;
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
+        public static Vector2 swordHitboxWidthHeight = new Vector2(16, 3) * scale;
 
         // Magic projectile
         public const float magicProjectileSpread = 0.3f;
@@ -134,6 +140,7 @@ namespace Sprint_0
         public const int swordBeamMaxDistance = 150 * scale;
         public const int swordBeamDamage = 2;
         public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
+        public static Vector2 swordBeamWidthHeight = new Vector2(16, 7) * scale;
 
         //----- Enemy constant values -----//
 

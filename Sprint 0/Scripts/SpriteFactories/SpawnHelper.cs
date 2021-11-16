@@ -23,6 +23,11 @@ namespace Sprint_0.Scripts.SpriteFactories
             return spawnerLocation + GetOffsetFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions);
         }
 
+        public Vector2 CenterLocationOnLinkSword(Vector2 spawnerLocation, FacingDirection direction, Vector2 spawnerDimensions, Vector2 spawneeDimensions)
+        {
+            return spawnerLocation + GetSwordFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions, direction);
+        }
+
         //----- Helper methods for finding centers -----//
 
         private Vector2 GetCenterOfDimensions(Vector2 dimensions)
@@ -33,6 +38,23 @@ namespace Sprint_0.Scripts.SpriteFactories
         private Vector2 GetOffsetFromCenter(Vector2 center, Vector2 dimensions)
         {
             return center - (dimensions / ObjectConstants.oneInTwo);
+        }
+
+        private Vector2 GetSwordFromCenter(Vector2 center, Vector2 spawneeDimensions, FacingDirection direction)
+        {
+            return (direction) switch
+            {
+                FacingDirection.Right => center + (new Vector2(ObjectConstants.linkSwordFromRightCenter + (spawneeDimensions.X / ObjectConstants.oneInTwo), 0)
+                    * (ObjectConstants.RightUnitVector + ObjectConstants.UpUnitVector)),
+                FacingDirection.Up => center + (new Vector2(0, ObjectConstants.linkSwordFromUpCenter + (spawneeDimensions.X / ObjectConstants.oneInTwo))
+                    * (ObjectConstants.UpUnitVector + ObjectConstants.LeftUnitVector)),
+                FacingDirection.Left => center + (new Vector2(ObjectConstants.linkSwordFromLeftCenter + (spawneeDimensions.X / ObjectConstants.oneInTwo), 0)
+                    * (ObjectConstants.LeftUnitVector + ObjectConstants.DownUnitVector)),
+                FacingDirection.Down => center + (new Vector2(0, ObjectConstants.linkSwordFromDownCenter + (spawneeDimensions.X / ObjectConstants.oneInTwo))
+                    * (ObjectConstants.DownUnitVector + ObjectConstants.RightUnitVector)),
+                // Should never happen
+                _ => center
+            };
         }
     }
 }

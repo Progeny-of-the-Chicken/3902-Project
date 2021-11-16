@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.GameState
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             BlueRing = true;
-            BasicArrows = false;
+            BasicArrows = true;
             SilverArrows = false;
             Map = false;
             Compass = false;
