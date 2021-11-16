@@ -22,7 +22,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
         private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-        private double tBounceOffset = ObjectConstants.counterInitialVal_double;
         private Link linkOwner;
         private IEnemy enemyOwner;
 
