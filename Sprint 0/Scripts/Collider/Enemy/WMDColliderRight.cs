@@ -32,7 +32,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         public void OnPlayerCollision(Link player)
         {
 
-            _owner.ChangeDir(4);
+            _owner.ChangeDir(3);
 
         }
 
