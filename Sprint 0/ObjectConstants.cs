@@ -98,6 +98,7 @@ namespace Sprint_0
         // Bomb
         public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
+        public const int bombWidthHeight = 16 * scale;
 
         // Boomerang
         public const double boomerangSpeedPerSecond = 10.0;
@@ -106,12 +107,14 @@ namespace Sprint_0
         public const double boomerangTOffset = 1;
         public const int boomerangDamage = 1;
         public static Vector2 boomerangRotationOffset = new Vector2(4, 4);
+        public const int boomerangWidthHeight = 8 * scale;
 
         // FireSpell
         public const double fireSpellSpeedPerSecond = 150.0;
         public const int fireSpellMaxDistance = 200;
         public const double fireSpellLingerDuration = 2.0;
         public const int fireSpellDamage = 1;
+        public const int fireSpellWidthHeight = 16 * scale;
 
         // SwordAttackHitbox
         public const int swordHitboxCounter = 17;
@@ -124,6 +127,7 @@ namespace Sprint_0
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
+        public static Vector2 magicProjectileWidthHeight = new Vector2(8, 10) * scale;
 
         // Sword beam
         public const double swordBeamSpeedPerSecond = 100 * scale;

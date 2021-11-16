@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 
         public Vector2 CenterLocationOnSpawner(Vector2 spawnerLocation, Vector2 spawnerDimensions, Vector2 spawneeDimensions)
         {
-            return spawnerLocation + GetPositionFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions);
+            return spawnerLocation + GetOffsetFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions);
         }
 
         //----- Helper methods for finding centers -----//
@@ -30,9 +30,9 @@ namespace Sprint_0.Scripts.SpriteFactories
             return dimensions / ObjectConstants.oneInTwo;
         }
 
-        private Vector2 GetPositionFromCenter(Vector2 center, Vector2 dimensions)
+        private Vector2 GetOffsetFromCenter(Vector2 center, Vector2 dimensions)
         {
-            return center + dimensions / ObjectConstants.oneInTwo;
+            return center - (dimensions / ObjectConstants.oneInTwo);
         }
     }
 }

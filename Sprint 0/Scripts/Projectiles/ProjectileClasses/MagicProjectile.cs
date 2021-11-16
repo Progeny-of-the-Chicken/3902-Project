@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Collider.Projectile;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -28,7 +29,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public MagicProjectile(Vector2 spawnLoc, FacingDirection mainDirection, FacingDirection secondaryDirection)
         {
-            currentPos = spawnLoc;
+            currentPos = SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2(), ObjectConstants.magicProjectileWidthHeight);
             // Aquamentus facing direction
             if (mainDirection == FacingDirection.Left)
             {
