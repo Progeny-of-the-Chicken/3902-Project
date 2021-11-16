@@ -31,6 +31,7 @@ namespace Sprint_0
         public const int pauseDisplayStartingPointX = 232;
         public const int pauseDisplayStartingPointY = 400;
         public const int letterSpacing = 8;
+        public const int bombsFromDrop = 4;
 
 
         //----- Vector constant values -----//
@@ -65,6 +66,8 @@ namespace Sprint_0
         public const float linkTurningCounterDebounce = 0.05f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
+        public const int linkItemSpawnPositionXOffset = 48;
+        public const int linkItemSpawnPositionYOffset = 24;
         public static Vector2 linkStartingPosition = new Vector2(358, 408); //generic starting position
 
 
@@ -397,6 +400,9 @@ namespace Sprint_0
         public const int maxMaxHealth = 32;
         public const int maxDungeonWidthHeight = 8;
         public const int HUDYOffsetInInventory = 176 * scale;
+        public const int HealthDrawLocationX = 176;
+        public const int HealthDrawLocationY = 32;
+        public const int maxHeartsPerLine = 8;
         public static Vector2 roomMapSize = new Vector2(8 * scale, 4 * scale);
         public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
         public static Vector2 TreasureRoomLocation = new Vector2(5, 1);

@@ -215,18 +215,18 @@ namespace Sprint_0.Scripts
                 {
                     //TODO: need to come up with design for the item spawning, magic numbers will be refactored then
                     case FacingDirection.Left:
-                        yDisp += 24;
+                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
                         break;
                     case FacingDirection.Right:
-                        xDisp += 48;
-                        yDisp += 24;
+                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
+                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
                         break;
                     case FacingDirection.Up:
-                        xDisp += 24;
+                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
                         break;
                     case FacingDirection.Down:
-                        xDisp += 24;
-                        yDisp += 48;
+                        xDisp += ObjectConstants.linkItemSpawnPositionXOffset;
+                        yDisp += ObjectConstants.linkItemSpawnPositionYOffset;
                         break;
                 }
                 return new Vector2(linksPosition.X + xDisp, linksPosition.Y + yDisp);
