@@ -126,6 +126,14 @@ namespace Sprint_0.Scripts.Items
                     Collider = ItemColliderFactory.Instance.CreateTriforcePieceCollider(this);
                     sprite = ItemSpriteFactory.Instance.CreateTriforcePieceSprite();
                     break;
+                case ItemType.BasicArrowItem:
+                    Collider = ItemColliderFactory.Instance.CreateBasicArrowItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBasicArrowSprite();
+                    break;
+                case ItemType.SilverArrowItem:
+                    Collider = ItemColliderFactory.Instance.CreateSilverArrowItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateSilverArrowSprite();
+                    break;
                 default:
                     // Should never fire
                     Collider = ItemColliderFactory.Instance.CreateSmallHeartItemCollider(this);

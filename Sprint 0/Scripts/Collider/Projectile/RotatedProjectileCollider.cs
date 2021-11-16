@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
     public class RotatedProjectileCollider : IProjectileCollider
     {
         private Rectangle _hitbox;
-        private Vector2 positionOffset;
+        private Vector2 centerOffset;
 
         public IProjectile Owner { get; }
 
@@ -17,23 +17,14 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public RotatedProjectileCollider(IProjectile owner, FacingDirection direction)
         {
             Owner = owner;
-            if (owner is Arrow)
-            {
-                // No size variation between basic and silver arrows
-                _hitbox = SpriteRectangles.basicArrowFrame;
-            }
-            else if (owner is SwordAttackHitbox)
-            {
-                _hitbox = ObjectConstants.swordAttackHitBoxSize;
-            }
-            _hitbox.Size *= new Point(ObjectConstants.scale);
 
+            _hitbox = GetHitboxForOwner();
             AdjustHitbox(direction);
         }
 
         public void Update(Vector2 location)
         {
-            _hitbox.Location = location.ToPoint() + positionOffset.ToPoint();
+            _hitbox.Location = location.ToPoint() - centerOffset.ToPoint();
         }
 
         public void OnPlayerCollision(Link player)
@@ -49,28 +40,38 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         //----- Helper method for initializing the hitbox -----//
 
+        private Rectangle GetHitboxForOwner()
+        {
+            Rectangle frame;
+            if (Owner is Arrow)
+            {
+                frame = SpriteRectangles.basicArrowFrame;
+            }
+            else if (Owner is SwordAttackHitbox)
+            {
+                frame = ObjectConstants.swordAttackHitBoxSize;
+            }
+            else
+            {
+                // Sword beam
+                frame = SpriteRectangles.swordBeamFrames[ObjectConstants.firstFrame];
+            }
+            return frame;
+        }
+
         private void AdjustHitbox(FacingDirection direction)
         {
-            // Rotate hitbox pi/2 if needed, keep location at top-left corner
-            switch (direction)
+            if (direction == FacingDirection.Up || direction == FacingDirection.Down)
             {
-                case FacingDirection.Right:
-                    // No change
-                    break;
-                case FacingDirection.Up:
-                    _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = ObjectConstants.degreeRotationCW90_v * _hitbox.Height;
-                    break;
-                case FacingDirection.Left:
-                    positionOffset = ObjectConstants.degreesRotationCW180_v * _hitbox.Height;
-                    break;
-                case FacingDirection.Down:
-                    _hitbox = SwapDimensions(_hitbox);
-                    positionOffset = ObjectConstants.degreesRotationCW270_v * _hitbox.Height;
-                    break;
-                default:
-                    break;
+                SwapDimensions(_hitbox);
             }
+            _hitbox.Size *= new Point(ObjectConstants.scale);
+            centerOffset = _hitbox.Size.ToVector2() / ObjectConstants.oneInTwo;
+        }
+
+        private Vector2 GetCenterOfDimensions(Vector2 dimensions)
+        {
+            return dimensions / ObjectConstants.oneInTwo;
         }
 
         private Rectangle SwapDimensions(Rectangle rectangle)

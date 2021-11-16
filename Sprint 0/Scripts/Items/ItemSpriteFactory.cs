@@ -97,5 +97,15 @@ namespace Sprint_0.Scripts.Items
         {
             return new AnimatedItemSprite(spritesheet, SpriteRectangles.triforcePieceFrames);
         }
+
+        public ISprite CreateBasicArrowSprite()
+        {
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.basicArrowItemFrame);
+        }
+
+        public ISprite CreateSilverArrowSprite()
+        {
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.silverArrowItemFrame);
+        }
     }
 }

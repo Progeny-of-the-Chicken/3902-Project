@@ -13,6 +13,7 @@ namespace Sprint_0.GameStateHandlers
         private const int horizontalScrollDist = ObjectConstants.roomswapAnimationHorizontalScrollDist;
         private Vector2 toRoomOriginDrawPoint;
         private Vector2 fromRoomOriginDrawPoint;
+        private HUD headsUpDisplay;
 
         private string fromRoomID;
         private string toRoomID;
@@ -32,6 +33,7 @@ namespace Sprint_0.GameStateHandlers
             toRoomID = tID;
             scrollingDirection = dir;
             link = l;
+            headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
 
             fromRoom = RoomManager.Instance.LoadRoom(fromRoomID);
             toRoom = RoomManager.Instance.LoadRoom(toRoomID);
@@ -48,7 +50,6 @@ namespace Sprint_0.GameStateHandlers
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
-            HUD.Instance.Draw(sb);
 
             if (currFrame <= frames)
             {
@@ -74,7 +75,8 @@ namespace Sprint_0.GameStateHandlers
                 GameStateManager.Instance.StartGameplay();
                 link.UnSuspend();
             }
-
+            
+            headsUpDisplay.Draw(sb);
             
         }
 

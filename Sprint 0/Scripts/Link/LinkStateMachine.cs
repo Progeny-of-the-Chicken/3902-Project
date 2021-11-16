@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts
 {
@@ -15,7 +16,8 @@ namespace Sprint_0.Scripts
         private double pickUpItemCounter;
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
-        private int linkHealth;
+        public double linkHealth;
+        public int linkMaxHealth;
         private bool isSuspended;
 
         public LinkStateMachine()
@@ -25,6 +27,7 @@ namespace Sprint_0.Scripts
             ResetCountersCausedByExternal();
             linksPosition = ObjectConstants.linkStartingPosition;
             linkHealth = ObjectConstants.linkStartingHealth;
+            linkMaxHealth = ObjectConstants.linkStartingHealth;
             isSuspended = false;
         }
 
@@ -128,13 +131,25 @@ namespace Sprint_0.Scripts
             {
                 ResetCountersCausedByPlayer();
                 damageCounter = ObjectConstants.linkTakeDamageTime;
-                linkHealth -= damage;
+                if (!Inventory.Instance.BlueRing)
+                {
+                    linkHealth -= damage;
+                }
+                else
+                {
+                    linkHealth -= (double)damage / ObjectConstants.oneInTwo;
+                }
                 SFXManager.Instance.PlayLinkHit();  //putting this here so it doesn't play continuously while link stands in a fire
                 if (linkHealth <= ObjectConstants.zero)
                 {
                     damageCounter += ObjectConstants.linkDeathCounter;
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
-                    SFXManager.Instance.PlayLinkDeath(); 
+                    SFXManager.Instance.PlayLinkDeath();
+                }
+
+                if(linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
+                {
+                    SFXManager.Instance.PlayLowHealth();
                 }
             }
         }
@@ -196,31 +211,12 @@ namespace Sprint_0.Scripts
             return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
         }
 
-        public Vector2 ItemSpawnPosition
+        public void HealBy(int health)
         {
-            get
-            {
-                float xDisp = ObjectConstants.zero_float, yDisp = ObjectConstants.zero_float;
-                switch (linksDirection)
-                {
-                    //TODO: need to come up with design for the item spawning, magic numbers will be refactored then
-                    case FacingDirection.Left:
-                        yDisp += 24;
-                        break;
-                    case FacingDirection.Right:
-                        xDisp += 48;
-                        yDisp += 24;
-                        break;
-                    case FacingDirection.Up:
-                        xDisp += 24;
-                        break;
-                    case FacingDirection.Down:
-                        xDisp += 24;
-                        yDisp += 48;
-                        break;
-                }
-                return new Vector2(linksPosition.X + xDisp, linksPosition.Y + yDisp);
-            }
+            if (linkHealth + health >= linkMaxHealth)
+                linkHealth = linkMaxHealth;
+            else
+                linkHealth += health;
         }
 
         public Vector2 Position { get => linksPosition; }

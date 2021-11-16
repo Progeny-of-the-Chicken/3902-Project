@@ -43,6 +43,7 @@ namespace Sprint_0.Scripts.Enemy
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         public int Damage { get => _damage; }
+        public Vector2 Position { get => location; }
         int _damage;
         int health = 3;
         const int knockbackDistance = 50;
@@ -62,11 +63,13 @@ namespace Sprint_0.Scripts.Enemy
         public Wallmaster(Vector2 location)
         {
             this.location = location;
-            moveSpeed = 25 * ObjectConstants.scale;
-            direction = Vector2.Zero;
-            random = new byte[2];
-            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(openFrame);
-            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(openFrame);
+
+            moveSpeed = ObjectConstants.WallMasterMoveSpeed;
+            direction = ObjectConstants.LeftUnitVector;
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
+            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite();
+            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite();
+
             sprite = openSprite;
             upFrame = new Rectangle((int)location.X, (int)location.Y - (2 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
             downFrame = new Rectangle((int)location.X, (int)location.Y + (3 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
@@ -257,7 +260,14 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            delete = (health <= 0);
+
+            if (health <= ObjectConstants.zero)
+            {
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
+                delete = true;
+                SFXManager.Instance.PlayEnemyDeath();
+            }
+            SFXManager.Instance.PlayEnemyHit();
         }
         public void KnockBack(Vector2 knockback)
         {

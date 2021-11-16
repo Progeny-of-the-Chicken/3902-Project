@@ -14,6 +14,8 @@ namespace Sprint_0.Scripts.GameState
     //TODO: Update health to when moved to Link/Inventory
     public class HUD : IHUD
     {
+        Vector2 yOffset;
+
         ISprite backgroundSprite;
         ISprite[] rupeeCounter;
         ISprite[] keyCounter;
@@ -31,32 +33,22 @@ namespace Sprint_0.Scripts.GameState
         int health;
         int maxHealth;
 
-        private static HUD instance = new HUD();
-
-        public static HUD Instance
+        public HUD(int yOffset)
         {
-            get
-            {
-                return instance;
-            }
-        }
-
-        public HUD()
-        {
+            this.yOffset = new Vector2(ObjectConstants.counterInitialVal_int, yOffset);
             backgroundSprite = InventorySpriteFactory.Instance.CreateHUDBackdropSprite();
             rupeeCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
             keyCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
             bombCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
 
-            //Replace numbers with link's inventory when added
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
 
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
-            health = 7;
-            maxHealth = 12;
+            health = Link.Instance.Health;
+            maxHealth = ObjectConstants.linkStartingHealth;
             makeHeartArray();
 
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
@@ -72,12 +64,11 @@ namespace Sprint_0.Scripts.GameState
 
         public void Update()
         {
-            //Replace numbers with link's inventory when added
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
-            //Reminder to update link's health (Although we could pull directly from the instance in draw)
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
+            health = Link.Instance.Health;
             makeHeartArray();
             currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
@@ -85,11 +76,11 @@ namespace Sprint_0.Scripts.GameState
         public void Draw(SpriteBatch spriteBatch)
         {
             //Background
-            backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
+            backgroundSprite.Draw(spriteBatch, new Vector2(0, 0) + yOffset);
             drawNumbers(spriteBatch);
             drawHealth(spriteBatch);
-            secondaryWeaponSprite.Draw(spriteBatch, ObjectConstants.secondaryWeaponLocation);
-            primaryWeaponSprite.Draw(spriteBatch, ObjectConstants.primaryWeaponLocation);
+            secondaryWeaponSprite.Draw(spriteBatch, ObjectConstants.secondaryWeaponLocation + yOffset);
+            primaryWeaponSprite.Draw(spriteBatch, ObjectConstants.primaryWeaponLocation + yOffset);
             drawMap(spriteBatch);
         }
 
@@ -97,8 +88,8 @@ namespace Sprint_0.Scripts.GameState
         private void drawMap(SpriteBatch spriteBatch)
         {
             //Display above map
-            levelDisplay.Draw(spriteBatch, ObjectConstants.DungeonLevelDisplayLocation);
-            levelNumber.Draw(spriteBatch, ObjectConstants.DungeonLevelNumberDisplayLocation);
+            levelDisplay.Draw(spriteBatch, ObjectConstants.DungeonLevelDisplayLocation + yOffset);
+            levelNumber.Draw(spriteBatch, ObjectConstants.DungeonLevelNumberDisplayLocation + yOffset);
 
             string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
             TextFieldParser csvReader = new TextFieldParser(filePath);
@@ -117,14 +108,14 @@ namespace Sprint_0.Scripts.GameState
                     {
                         roomSprite = InventorySpriteFactory.Instance.CreateEmptyMapSprite();
                     }
-                    Vector2 drawLocation = ObjectConstants.mapDrawLocation + Vector2.Multiply(new Vector2(j, i), ObjectConstants.roomMapSize);
+                    Vector2 drawLocation = ObjectConstants.mapDrawLocation + Vector2.Multiply(new Vector2(j, i), ObjectConstants.roomMapSize) + yOffset;
                     roomSprite.Draw(spriteBatch, drawLocation);
                 }
             }
-            currentRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(currentRoom, ObjectConstants.roomMapSize));
+            currentRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(currentRoom, ObjectConstants.roomMapSize) + yOffset);
             if (Inventory.Instance.Compass)
             {
-                treasureRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(ObjectConstants.TreasureRoomLocation, ObjectConstants.roomMapSize));
+                treasureRoomMapMarker.Draw(spriteBatch, ObjectConstants.mapDrawLocation + ObjectConstants.roomMapSize + ObjectConstants.markerXOffset + Vector2.Multiply(ObjectConstants.TreasureRoomLocation, ObjectConstants.roomMapSize) + yOffset);
             }
         }
 
@@ -141,6 +132,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.SilverArrow => SpriteRectangles.weaponSilverArrowFrame,
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
+                WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };
@@ -152,7 +144,7 @@ namespace Sprint_0.Scripts.GameState
             //Do stuff with getting health from link here
             for (int i = 0; i < ObjectConstants.maxMaxHealth / 2; i++)
             {
-                Vector2 drawLocation = new Vector2((176 + 8 * (i % 8)) * ObjectConstants.scale, (32 + 8 * (i / 8)) * ObjectConstants.scale);
+                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + ObjectConstants.letterSpacing * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
                 heartArray[i].Draw(spriteBatch, drawLocation);
             }
         }
@@ -162,18 +154,22 @@ namespace Sprint_0.Scripts.GameState
             for (int i = 0; i < ObjectConstants.maxMaxHealth; i += 2)
             {
                 ISprite heart = InventorySpriteFactory.Instance.CreateFullHeartSprite();
-                if (i > maxHealth)
+                if (i >= maxHealth)
                 {
                     //black square
                     heart = InventorySpriteFactory.Instance.CreateBlackHUDCoverSprite();
-                } else if (i >= health) {
+                }
+                else if (i >= health)
+                {
                     //empty heart
                     heart = InventorySpriteFactory.Instance.CreateEmptyHeartSprite();
-                } else if (i == health - 1)
+                }
+                else if (i == health - 1)
                 {
                     //half heart
                     heart = InventorySpriteFactory.Instance.CreateHalfHeartSprite();
-                } else
+                }
+                else
                 {
                     //full heart
                 }
@@ -187,9 +183,9 @@ namespace Sprint_0.Scripts.GameState
             for (int i = 0; i < ObjectConstants.maxDisplayableNumbers; i++)
             {
                 int xOffset = ObjectConstants.standardWidthHeight / 2 * i * ObjectConstants.scale;
-                rupeeCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.rupeeCounterLocation.X + xOffset, ObjectConstants.rupeeCounterLocation.Y));
-                keyCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.keyCounterLocation.X + xOffset, ObjectConstants.keyCounterLocation.Y));
-                bombCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.bombCounterLocation.X + xOffset, ObjectConstants.bombCounterLocation.Y));
+                rupeeCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.rupeeCounterLocation.X + xOffset, ObjectConstants.rupeeCounterLocation.Y) + yOffset);
+                keyCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.keyCounterLocation.X + xOffset, ObjectConstants.keyCounterLocation.Y) + yOffset);
+                bombCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.bombCounterLocation.X + xOffset, ObjectConstants.bombCounterLocation.Y) + yOffset);
             }
         }
 

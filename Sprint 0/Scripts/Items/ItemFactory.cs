@@ -87,5 +87,15 @@ namespace Sprint_0.Scripts.Items
         {
             return new Item(location, ItemType.TriforcePiece);
         }
+
+        public IItem CreateBasicArrowItem(Vector2 location)
+        {
+            return new Item(location, ItemType.BasicArrowItem);
+        }
+
+        public IItem CreateSilverArrowItem(Vector2 location)
+        {
+            return new Item(location, ItemType.SilverArrowItem);
+        }
     }
 }

@@ -38,7 +38,7 @@ public class SouthClosedSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.SouthDoorSpriteStr);
         command.Execute();
-        SFXManager.Instance.PlaySecretFound();
+        SFXManager.Instance.PlayDoorUnlocking();
     }
 
 }

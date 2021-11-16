@@ -1,4 +1,4 @@
 ﻿1 1,4 1,7 1,10 1,1 3,4 3,7 3,10 3,1 5,4 5,7 5,10 5
 ,,,,,,,,,,,
-,,,,,,,,,,,
+0 0, SmallHeartItem,3 0, HeartContainer,0 2, Fairy,3 2, Clock,0 4, BlueRuby,3 4, YellowRuby,1 0, BasicMapItem,1 2, BoomerangItem,1 4, BombItem,4 0, BowItem,2 0, BasicKey,4 2, MagicKey,2 2, Compass,4 4, TriforcePiece,2 4, BasicArrowItem,2 5, SilverArrowItem
 EastDoorSprite,Room35,NorthLockedSprite,Room24,WestDoorSprite,Room15,SouthWallSprite,Exit,,,,

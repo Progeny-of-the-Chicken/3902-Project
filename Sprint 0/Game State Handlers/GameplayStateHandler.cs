@@ -26,7 +26,7 @@ namespace Sprint_0.GameStateHandlers
 
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
-            headsUpDisplay = HUD.Instance;
+            headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
             initializeLetterSprites();
         }
 
@@ -58,10 +58,12 @@ namespace Sprint_0.GameStateHandlers
             {
                 link.Suspend();
                 game.kc = new PausedKeyboardController(game, Keyboard.GetState());
+                SFXManager.Instance.PauseMusic();
             } else
             {
                 link.UnSuspend();
                 game.kc = new KeyboardController(game, Keyboard.GetState());
+                SFXManager.Instance.PlayMusic();
             }
         }
 

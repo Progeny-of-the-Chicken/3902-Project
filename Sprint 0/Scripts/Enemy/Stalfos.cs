@@ -19,6 +19,7 @@ namespace Sprint_0.Scripts.Enemy
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
         float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
         public int Damage { get => ObjectConstants.StalfosDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.StalfosStartingHealth;
         bool delete = false;
         bool inKnockBack = false;
@@ -31,11 +32,11 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite(SpriteRectangles.stalfosFrame);
+            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             SetRandomDirection();
 
-            ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
@@ -92,7 +93,7 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
+                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
             }

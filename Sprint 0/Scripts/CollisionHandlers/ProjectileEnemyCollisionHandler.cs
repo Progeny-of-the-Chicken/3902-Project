@@ -27,6 +27,11 @@ namespace Sprint_0.Scripts.CollisionHandlers
                         projectile.Collider.OnEnemyCollision(enemy);
                         enemy.Collider.OnProjectileCollision(projectile);
                     }
+                    Dodongo dodongo = enemy as Dodongo;
+                    if(dodongo != null && projectile.Collider.Hitbox.Intersects(dodongo.DetectionCollider.Hitbox))
+                    {
+                        dodongo.DetectionCollider.OnProjectileCollision(projectile);
+                    }
                 }
             }
         }
