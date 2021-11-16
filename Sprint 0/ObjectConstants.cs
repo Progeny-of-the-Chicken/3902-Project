@@ -240,10 +240,13 @@ namespace Sprint_0
         public const string spaceStr = " ";
         public const string AquamentusStr = "Aquamentus";
         public const string BladeTrapStr = "BladeTrap";
+        public const string DodongoStr = "Dodongo";
         public const string GelStr = "Gel";
         public const string GoriyaStr = "Goriya";
         public const string KeeseStr = "Keese";
         public const string OldManStr = "OldMan";
+        public const string MerchantStr = "Merchant";
+        public const string RopeStr = "Rope";
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
