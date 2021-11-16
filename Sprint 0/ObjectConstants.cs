@@ -55,7 +55,7 @@ namespace Sprint_0
 
 
         //----- Link constant values -----//
-        public const int linkStdMoveDist = scaledStdWidthHeight / 2;
+        public const int linkStdMoveDist = scaledStdWidthHeight;
         public const float linkStdMoveTime = 0.25f;
         public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
         public const float linkDeathAnimationTime = 1.5f;

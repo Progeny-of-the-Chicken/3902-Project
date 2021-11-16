@@ -10,16 +10,19 @@ namespace Sprint_0.Scripts.GameState
     {
         ISprite background;
         ISprite[] gameOverLetters = new ISprite[gameOverMessage.Length];
-        ISprite[] playAgainLetters;
-        ISprite[] quitLetters;
-        private static string gameOverMessage = "Gameover";
-        private static string playAgainMessage = "Press Enter to play again";
-        private static string quitMessage = "Press Q to quit";
+        ISprite[] playAgainLetters = new ISprite[playAgainMessage.Length];
+        ISprite[] quitLetters = new ISprite[quitMessage.Length];
+
+        private static string gameOverMessage = "gameover";
+        private static string playAgainMessage = "press enter to play again";
+        private static string quitMessage = "press q to quit";
 
         public GameOverScreen()
         {
             background = GameStateSpriteFactory.Instance.CreateBlackBackground();
-            //initializeGameOverLetterSprites();
+            initializeGameOverLetterSprites();
+            initializePlayAgainLettersLetterSprites();
+            initializeQuitLettersLetterSprites();
         }
 
         public void Update()
@@ -30,22 +33,35 @@ namespace Sprint_0.Scripts.GameState
         public void Draw(SpriteBatch sb)
         {
             background.Draw(sb, new Vector2(0, 0));
-            //drawLetters(sb);
+            drawLetters(sb);
         }
 
         // ----- Helper Methods ----- //
 
         private void drawLetters(SpriteBatch sb)
         {
-            int xRef = ObjectConstants.pauseDisplayStartingPointX;
-            int yRef = ObjectConstants.pauseDisplayStartingPointY;
-            int letterSpacing = 8;
+            int xRef = 10;
+            int yRef = 50;
+            int lineSpace = 24;
+            int letterSpacing = 2;
             int xStep = ObjectConstants.standardWidthHeight * ObjectConstants.scale + letterSpacing;
 
-            for (int i = 0; i < ObjectConstants.pausedLetters.Length; i++)
+            for (int i = 0; i < gameOverMessage.Length; i++)
             {
                 Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef);
                 gameOverLetters[i].Draw(sb, drawLocation);
+            }
+
+            for (int i = 0; i < playAgainMessage.Length; i++)
+            {
+                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + lineSpace);
+                //playAgainLetters[i].Draw(sb, drawLocation);
+            }
+
+            for (int i = 0; i < quitMessage.Length; i++)
+            {
+                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + 2 * lineSpace);
+                quitLetters[i].Draw(sb, drawLocation);
             }
         }
 
@@ -53,7 +69,7 @@ namespace Sprint_0.Scripts.GameState
         {
             for (int i = 0; i < gameOverMessage.Length; i++)
             {
-                gameOverLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(ObjectConstants.pausedLetters[i]);
+                gameOverLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(gameOverMessage[i]);
             }
         }
 
@@ -61,7 +77,15 @@ namespace Sprint_0.Scripts.GameState
         {
             for (int i = 0; i < gameOverMessage.Length; i++)
             {
-                gameOverLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(ObjectConstants.pausedLetters[i]);
+                playAgainLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(playAgainMessage[i]);
+            }
+        }
+
+        private void initializeQuitLettersLetterSprites()
+        {
+            for (int i = 0; i < quitMessage.Length; i++)
+            {
+                quitLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(quitMessage[i]);
             }
         }
     }
