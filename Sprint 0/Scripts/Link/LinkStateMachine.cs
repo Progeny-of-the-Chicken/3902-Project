@@ -146,6 +146,11 @@ namespace Sprint_0.Scripts
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
                     SFXManager.Instance.PlayLinkDeath();
                 }
+
+                if(linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
+                {
+                    SFXManager.Instance.PlayLowHealth();
+                }
             }
         }
 

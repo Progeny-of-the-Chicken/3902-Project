@@ -38,6 +38,6 @@ public class NorthClosedSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.NorthDoorSpriteStr);
         command.Execute();
-        SFXManager.Instance.PlaySecretFound();
+        SFXManager.Instance.PlayDoorUnlocking();
     }
 }

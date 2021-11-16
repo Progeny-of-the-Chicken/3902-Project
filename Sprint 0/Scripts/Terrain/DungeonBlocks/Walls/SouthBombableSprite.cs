@@ -38,6 +38,5 @@ public class SouthBombableSprite : IWall
     {
         CommandSwapDoor command = new CommandSwapDoor(room, this, ObjectConstants.SouthBombedSpriteStr);
         command.Execute();
-        SFXManager.Instance.PlaySecretFound();
     }
 }
