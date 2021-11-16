@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0
 {
@@ -31,6 +33,7 @@ namespace Sprint_0
         public const int pauseDisplayStartingPointX = 232;
         public const int pauseDisplayStartingPointY = 400;
         public const int letterSpacing = 8;
+        public const int bombsFromDrop = 4;
 
 
         //----- Vector constant values -----//
@@ -250,12 +253,24 @@ namespace Sprint_0
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
-        public const string BowItemStr = "BowItem";
-        public const string CompassStr = "Compass";
+        public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
+        public const string FairyStr = "Fairy";
+        public const string ClockStr = "Clock";
+        public const string BlueRubyStr = "BlueRuby";
+        public const string YellowRubyStr = "YellowRuby";
+        public const string BasicMapItemStr = "BasicMapItem";
+        public const string BoomerangItemStr = "BoomerangItem";
+        public const string BombItemStr = "BombItem";
+        public const string BowItemStr = "BowItem";
+        public const string BasicKeyStr = "BasicKey";
+        public const string MagicKeyStr = "MagicKey";
+        public const string CompassStr = "Compass";
+        public const string TriforcePieceStr = "TriforcePiece";
+        public const string BasicArrowItemStr = "BasicArrowItem";
+        public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
-        public const string TriforcePieceStr = "TriforcePiece";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
         public const string NorthClosedSpriteStr = "NorthClosedSprite";
@@ -313,7 +328,7 @@ namespace Sprint_0
 
         public const int xPosForParse = 0;
         public const int xPosForDoorOrigin = 0;
-        
+
         public const int yPosForNorthDoor = 0;
         public const int yPosForEastWestDoor = 72;
         public const int yPosForSouthDoor = 144;
@@ -347,8 +362,8 @@ namespace Sprint_0
         public static Vector2 swordBeamExplosionDownOffset = new Vector2(-4, 6) * scale;
 
         //----- Room swapping animation constants -----//
-        public const int roomswapAnimationVerticalScrollDist = 800;
-        public const int roomswapAnimationHorizontalScrollDist = 1200;
+        public const int roomswapAnimationVerticalScrollDist = 176 * scale;
+        public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
         public const int roomswapAnimationDurationInFrames = 80;
 
 
@@ -410,6 +425,10 @@ namespace Sprint_0
         public static Vector2 DungeonLevelNumberDisplayLocation = new Vector2(64 * scale, 8 * scale);
         public const int maxMaxHealth = 32;
         public const int maxDungeonWidthHeight = 8;
+        public const int HUDYOffsetInInventory = 176 * scale;
+        public const int HealthDrawLocationX = 176;
+        public const int HealthDrawLocationY = 32;
+        public const int maxHeartsPerLine = 8;
         public static Vector2 roomMapSize = new Vector2(8 * scale, 4 * scale);
         public static Vector2 markerXOffset = new Vector2(2 * scale, 0);
         public static Vector2 TreasureRoomLocation = new Vector2(5, 1);
@@ -427,6 +446,65 @@ namespace Sprint_0
         //----- RoomTracker constant values -----//
         public const int roomStringXIndex = 4;
         public const int roomStringYIndex = 5;
+
+
+        //----- DropTable constant values -----//
+        public const double groupADropRate = 0.31;
+        public const double groupBDropRate = 0.41;
+        public const double groupCDropRate = 0.59;
+        public const double groupDDropRate = 0.41;
+        public const double groupXDropRate = 0;
+        public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static ItemType[] groupAItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupBItems = {
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.BombItem,
+            ItemType.YellowRuby,
+            ItemType.BombItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem };
+        public static ItemType[] groupCItems = {
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Clock,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.YellowRuby,
+            ItemType.BlueRuby };
+        public static ItemType[] groupDItems = {
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem,
+            ItemType.Fairy,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.YellowRuby,
+            ItemType.SmallHeartItem, };
+
+        //Group X doesn't drop anything
 
 
         //----- Inventory constant values -----//

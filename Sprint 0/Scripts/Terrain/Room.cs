@@ -19,25 +19,25 @@ public class Room : IRoom
     private string roomId;
     private string filePath;
     private int scale;
-	private int WALLOFFSET;
+    private int WALLOFFSET;
     private int YOFFSET;
-	private Vector2 _roomDrawPoint;
-	public Vector2 roomDrawPoint { get => _roomDrawPoint; }
+    private Vector2 _roomDrawPoint;
+    public Vector2 roomDrawPoint { get => _roomDrawPoint; }
+    public ItemEntities ItemSet { get => itemSet; }
+    private ILink link;
+    private EnemySet enemySet;
+    private ItemEntities itemSet;
+    private ProjectileEntities projectileSet;
+    private EffectSet effectSet;
+    private List<ITerrain> blocks;
+    private List<IWall> walls;
+    private CollisionHandlerSet collisionHandlerSet;
+    private List<IProjectile> projectileQueue;
+    private List<IEffect> effectQueue;
 
-	private ILink link;
-	private EnemySet enemySet;
-	private ItemEntities itemSet;
-	private ProjectileEntities projectileSet;
-	private EffectSet effectSet;
-	private List<ITerrain> blocks;
-	private List<IWall> walls;
-	private CollisionHandlerSet collisionHandlerSet;
-	private List<IProjectile> projectileQueue;
-	private List<IEffect> effectQueue;
-
-	private bool enemiesFlag;
-	private List<String> RoomClear;
-	private bool inTransition = false;
+    private bool enemiesFlag;
+    private List<String> RoomClear;
+    private bool inTransition = false;
 
     public Room(string roomId, ILink link)
     {
@@ -98,32 +98,32 @@ public class Room : IRoom
     {
 		//This needs to be updated once we have more than dungeon 1
 		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, 256 * scale, 176 * scale), spritesheetLocation, Color.White);
+		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
 
-		// If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
-		if (!inTransition)
+        // If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
+        if (!inTransition)
         {
-			foreach (ITerrain block in blocks)
-			{
-				block.Draw(spriteBatch);
-			}
+            foreach (ITerrain block in blocks)
+            {
+                block.Draw(spriteBatch);
+            }
 
-			TransferQueuedProjectiles();
-			foreach (IWall door in walls)
+            TransferQueuedProjectiles();
+            foreach (IWall door in walls)
 
-			{
-				door.Draw(spriteBatch);
-			}
+            {
+                door.Draw(spriteBatch);
+            }
 
-			itemSet.Draw(spriteBatch);
-			projectileSet.Draw(spriteBatch);
-			link.Draw(spriteBatch);
-			enemySet.Draw(spriteBatch);
-			effectSet.Draw(spriteBatch);
-		}
-	}
+            itemSet.Draw(spriteBatch);
+            projectileSet.Draw(spriteBatch);
+            link.Draw(spriteBatch);
+            enemySet.Draw(spriteBatch);
+            effectSet.Draw(spriteBatch);
+        }
+    }
 
-    
+
 
     public string RoomId()
     {
@@ -241,23 +241,59 @@ public class Room : IRoom
 
                 switch (itemString[i + ObjectConstants.nextCharInString])
                 {
+                    case ObjectConstants.SmallHeartItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation));
+                        break;
+                    case ObjectConstants.HeartContainerStr:
+                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                        break;
+                    case ObjectConstants.FairyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation));
+                        break;
+                    case ObjectConstants.ClockStr:
+                        itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation));
+                        break;
+                    case ObjectConstants.BlueRubyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation));
+                        break;
+                    case ObjectConstants.YellowRubyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation));
+                        break;
+                    case ObjectConstants.BasicMapItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
+                        break;
+                    case ObjectConstants.BoomerangItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation));
+                        break;
+                    case ObjectConstants.BombItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation));
+                        break;
                     case ObjectConstants.BowItemStr:
                         itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+                        break;
+                    case ObjectConstants.BasicKeyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
+                        break;
+                    case ObjectConstants.MagicKeyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation));
                         break;
                     case ObjectConstants.CompassStr:
                         itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
                         break;
-                    case ObjectConstants.HeartContainerStr:
-                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                    case ObjectConstants.TriforcePieceStr:
+                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
+                        break;
+                    case ObjectConstants.BasicArrowItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation));
+                        break;
+                    case ObjectConstants.SilverArrowItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation));
                         break;
                     case ObjectConstants.KeyStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
                         break;
                     case ObjectConstants.MapStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
-                        break;
-                    case ObjectConstants.TriforcePieceStr:
-                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
                         break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
@@ -473,13 +509,13 @@ public class Room : IRoom
                     i++;
                     switch (strArray[i])
                     {
-						case ObjectConstants.KeyStr:
-							itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
-							SFXManager.Instance.PlayKeySpawn();
-							break;
-						case ObjectConstants.HeartContainerStr:
-							itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
-							break;
+                        case ObjectConstants.KeyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
+                            SFXManager.Instance.PlayKeySpawn();
+                            break;
+                        case ObjectConstants.HeartContainerStr:
+                            itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
+                            break;
                     }
                     break;
             }
@@ -488,17 +524,17 @@ public class Room : IRoom
 
     public void PrepareForTransition()
     {
-		inTransition = true;
+        inTransition = true;
     }
 
     public void TransitionEnded()
     {
-		inTransition = false;
-		this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
-	}
+        inTransition = false;
+        this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
+    }
 
-	public void UpdateDrawPoint(Vector2 dp)
+    public void UpdateDrawPoint(Vector2 dp)
     {
-		this._roomDrawPoint = dp;
-	}
+        this._roomDrawPoint = dp;
+    }
 }

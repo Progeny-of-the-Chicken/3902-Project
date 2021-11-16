@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Effect;
+using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Enemy;
 
 public interface IRoom
@@ -17,4 +18,5 @@ public interface IRoom
 	void TransitionEnded();
 	void UpdateDrawPoint(Vector2 dp);
 	Vector2 roomDrawPoint { get; }
+	ItemEntities ItemSet { get; }
 }
