@@ -69,6 +69,7 @@ namespace Sprint_0
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
         public static Vector2 linkStartingPosition = new Vector2(358, 408); //generic starting position
+        public const int linkWidthHeight = 16 * scale;
 
 
         //----- Item constant values -----//
@@ -78,6 +79,10 @@ namespace Sprint_0
         //----- Projectile constant values -----//
         public static Rectangle standardProjectileSize = new Rectangle(0, 0, 8, 8);
         public static Rectangle swordAttackHitBoxSize = new Rectangle(0, 0, swordHitboxLength, swordHitboxWidth);
+        public const int linkSwordFromRightCenter = 3 * scale;
+        public const int linkSwordFromUpCenter = -4 * scale;
+        public const int linkSwordFromLeftCenter = -3 * scale;
+        public const int linkSwordFromDownCenter = 3 * scale;
 
         // Arrow
         public const double arrowSpeedPerSecond = 100.0 * scale;
@@ -89,6 +94,7 @@ namespace Sprint_0
         public static Vector2 leftArrowPopOffset = new Vector2(-20, -8);
         public static Vector2 downArrowPopOffset = new Vector2(-8, 4);
         public static Vector2 arrowRotationOffset = new Vector2(8, 2.5f);
+        public static Vector2 arrowWidthHeight = new Vector2(16, 5) * scale;
 
         // BlastZone
         public const int blastZonePositionOffset = -8;
@@ -100,6 +106,7 @@ namespace Sprint_0
         // Bomb
         public const int bombDisplacement = 16 * scale;
         public const double bombFuseDurationSeconds = 2.0;
+        public const int bombWidthHeight = 16 * scale;
 
         // Boomerang
         public const double boomerangSpeedPerSecond = 10.0;
@@ -108,30 +115,35 @@ namespace Sprint_0
         public const double boomerangTOffset = 1;
         public const int boomerangDamage = 1;
         public static Vector2 boomerangRotationOffset = new Vector2(4, 4);
+        public const int boomerangWidthHeight = 8 * scale;
 
         // FireSpell
         public const double fireSpellSpeedPerSecond = 150.0;
         public const int fireSpellMaxDistance = 200;
         public const double fireSpellLingerDuration = 2.0;
         public const int fireSpellDamage = 1;
+        public const int fireSpellWidthHeight = 16 * scale;
 
         // SwordAttackHitbox
         public const int swordHitboxCounter = 17;
-        public const int swordHitboxLength = 11;
+        public const int swordHitboxLength = 16;
         public const int swordHitboxWidth = 3;
         public const int basicSwordDamage = 1;
+        public static Vector2 swordHitboxWidthHeight = new Vector2(16, 3) * scale;
 
         // Magic projectile
         public const float magicProjectileSpread = 0.3f;
         public const double magicProjectileSpeed = 150;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
+        public static Vector2 magicProjectileWidthHeight = new Vector2(8, 10) * scale;
 
         // Sword beam
         public const double swordBeamSpeedPerSecond = 100 * scale;
         public const int swordBeamMaxDistance = 150 * scale;
         public const int swordBeamDamage = 2;
         public static Vector2 swordBeamRotationOffset = new Vector2(8, 3.5f);
+        public static Vector2 swordBeamWidthHeight = new Vector2(16, 7) * scale;
 
         //----- Enemy constant values -----//
 

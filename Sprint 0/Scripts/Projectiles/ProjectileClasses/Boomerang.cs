@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Projectile;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 {
@@ -22,7 +23,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
         private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
-        private double tBounceOffset = ObjectConstants.counterInitialVal_double;
         private Link linkOwner;
         private IEnemy enemyOwner;
 
@@ -96,7 +96,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
-            startPos = currentPos = spawnLoc;
+            startPos = currentPos = (ObjectConstants.boomerangRotationOffset * ObjectConstants.scale) + SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight));
             if (magical)
             {
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
