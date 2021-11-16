@@ -13,6 +13,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private Vector2 location;
+        public Vector2 Position { get => location; }
 
         public int Damage { get => damage; }
         public IEnemyCollider Collider { get => collider; }

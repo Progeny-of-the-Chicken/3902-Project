@@ -8,8 +8,6 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
         Rectangle frame;
         Texture2D sprite;
 
-        float timeSinceFrame = ObjectConstants.counterInitialVal_float;
-        int currentFrame = ObjectConstants.firstFrame;
         public UnanimatedFlippedSprite(Rectangle frame, Texture2D spriteSheet)
         {
             this.frame = frame;

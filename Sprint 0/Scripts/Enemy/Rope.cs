@@ -33,6 +33,7 @@ namespace Sprint_0.Scripts.Enemy
         bool inKnockBack = false;
         bool chasing = false;
         Vector2 location;
+        public Vector2 Position { get => location; }
 
         FacingDirection direction;
         Vector2 knockbackDirection;

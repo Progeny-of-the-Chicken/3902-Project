@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
     public class Dodongo : IEnemy
     {
         ISprite sprite;
-
+        public Vector2 Position { get => location; }
         public IEnemyCollider Collider { get => dependency.collider; }
         public IEnemyCollider DetectionCollider { get => detectionCollider; }
         IEnemyCollider detectionCollider;
