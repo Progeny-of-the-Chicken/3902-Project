@@ -32,6 +32,11 @@ namespace Sprint_0.Scripts
             _collider = new LinkCollider(this, spawnHitbox);
         }
 
+        public void reset()
+        {
+            instance = new Link();
+        }
+
 
         public void Draw(SpriteBatch sb)
         {

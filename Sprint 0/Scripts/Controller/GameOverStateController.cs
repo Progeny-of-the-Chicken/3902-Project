@@ -5,13 +5,15 @@ using Sprint_0.Scripts.Commands;
 
 namespace Sprint_0.Scripts.Controller
 {
-	public class PausedKeyboardController : IController
+	public class GameOverStateController: IController
 	{
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private KeyboardState previousKeys;
+		Game1 game;
 
-		public PausedKeyboardController(Game1 game, KeyboardState prevState)
+		public GameOverStateController(Game1 game, KeyboardState prevState)
 		{
+			this.game = game;
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			setCommands();
 			previousKeys = prevState;
@@ -44,8 +46,8 @@ namespace Sprint_0.Scripts.Controller
 
 		private void setCommands()
 		{
-			this.RegisterCommand(Keys.M, new ToggleMute());
-			this.RegisterCommand(Keys.P, new PauseCommand());
+			this.RegisterCommand(Keys.Enter, new RestartGameCommand());
+			this.RegisterCommand(Keys.Q, new CommandQuit(game));
 		}
 	}
 }

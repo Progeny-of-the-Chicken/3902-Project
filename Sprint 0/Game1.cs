@@ -41,11 +41,9 @@ namespace Sprint_0
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public IController kc;
-        public Link link;
-        public IRoomManager roomManager;
 
         MouseController mc;
-        int roomNum = ObjectConstants.counterInitialVal_int;
+        public int roomNum = ObjectConstants.counterInitialVal_int;
 
         public Game1()
         {
@@ -53,14 +51,13 @@ namespace Sprint_0
             Content.RootDirectory = ObjectConstants.contentLocation;
             IsMouseVisible = true;
 
-            link = Link.Instance;
             kc = new KeyboardController(this, Keyboard.GetState());
 
             //Just for Sprint 3
             mc = new MouseController(this);
 
-            roomManager = RoomManager.Instance;
-            roomManager.Init(link);
+            
+            RoomManager.Instance.Init(Link.Instance);
         }
 
         protected override void Initialize()
@@ -83,18 +80,18 @@ namespace Sprint_0
             InventorySpriteFactory.Instance.LoadAllTextures(this.Content);
             FontSpriteFactory.Instance.LoadAllTextures(this.Content);
             SFXManager.Instance.LoadAllSounds(this.Content);
+            GameStateSpriteFactory.Instance.LoadAllTextures(this.Content);
 
             base.LoadContent();
-            roomManager = RoomManager.Instance;
-            roomManager.Init(link);
-            GameStateManager.Instance.Init(link, this);
+            RoomManager.Instance.Init(Link.Instance);
+            GameStateManager.Instance.Init(Link.Instance, this);
         }
 
         protected override void Update(GameTime gameTime)
         {
             kc.Update();
-            if (!link.IsAlive)
-                this.Quit();
+            if (!Link.Instance.IsAlive)
+                GameStateManager.Instance.GameOver();
 
             //Just for Sprint 3
             mc.Update();

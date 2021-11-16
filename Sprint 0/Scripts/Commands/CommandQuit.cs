@@ -5,7 +5,7 @@ public class CommandQuit : ICommand
 {
 	private Game1 game;
 
-	public CommandQuit(Game1 game) 
+    public CommandQuit(Game1 game) 
 	{
 		this.game = game;
 	}

@@ -36,6 +36,11 @@ namespace Sprint_0.Scripts.GameState
             Bomb = ObjectConstants.inventoryStartingBombs;
         }
 
+        public void reset()
+        {
+            instance = new Inventory();
+        }
+
         public List<WeaponType> Weapons { get; set; }
 
         public void RemoveWeapon(WeaponType weapon)

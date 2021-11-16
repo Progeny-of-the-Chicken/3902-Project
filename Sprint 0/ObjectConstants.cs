@@ -64,7 +64,7 @@ namespace Sprint_0
         public const float linkPickUpItemTime = 1f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
-        public const int linkStartingHealth = 12;
+        public const int linkStartingHealth = 1;
         public const float linkTurningCounterDebounce = 0.05f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
@@ -283,6 +283,7 @@ namespace Sprint_0
 
 
         //----- wall/block constant values -----//
+        public const int fullScreen = 1200;
         public const int wallOffset = scale * standardWidthHeight * 2;
         public const int yOffsetForRoom = scale * standardWidthHeight * 7 / 2;
         public const int rowParsePosition = 5;

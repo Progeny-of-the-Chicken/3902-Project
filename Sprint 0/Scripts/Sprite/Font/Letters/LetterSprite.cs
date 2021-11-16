@@ -109,6 +109,9 @@ namespace Sprint_0.Scripts.Sprite.Font.Letters
                 case 'z':
                     frame = SpriteRectangles.fontZFrame;
                     break;
+                case ' ':
+                    frame = SpriteRectangles.fontSpaceFrame;
+                    break;
             }
         }
     }
