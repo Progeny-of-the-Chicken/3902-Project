@@ -24,6 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         bool inKnockBack = false;
 
         public int Damage { get => ObjectConstants.GelDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.GelStartingHealth;
 
         Vector2 location;
@@ -34,7 +35,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             this.location = location;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateGelSprite(SpriteRectangles.gelFrames);
+            sprite = EnemySpriteFactory.Instance.CreateGelSprite();
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
@@ -66,7 +67,7 @@ namespace Sprint_0.Scripts.Enemy
                 SetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            if(timeSinceMove >= ObjectConstants.GelPauseTime)
+            if (timeSinceMove >= ObjectConstants.GelPauseTime)
             {
                 location += direction * ObjectConstants.GelMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
             }

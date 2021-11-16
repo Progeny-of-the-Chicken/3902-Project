@@ -144,7 +144,7 @@ namespace Sprint_0.Scripts
                 {
                     damageCounter += ObjectConstants.linkDeathCounter;
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
-                    SFXManager.Instance.PlayLinkDeath(); 
+                    SFXManager.Instance.PlayLinkDeath();
                 }
 
                 if(linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
@@ -211,31 +211,12 @@ namespace Sprint_0.Scripts
             return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
         }
 
-        public Vector2 ItemSpawnPosition
+        public void HealBy(int health)
         {
-            get
-            {
-                float xDisp = ObjectConstants.zero_float, yDisp = ObjectConstants.zero_float;
-                switch (linksDirection)
-                {
-                    //TODO: need to come up with design for the item spawning, magic numbers will be refactored then
-                    case FacingDirection.Left:
-                        yDisp += 24;
-                        break;
-                    case FacingDirection.Right:
-                        xDisp += 48;
-                        yDisp += 24;
-                        break;
-                    case FacingDirection.Up:
-                        xDisp += 24;
-                        break;
-                    case FacingDirection.Down:
-                        xDisp += 24;
-                        yDisp += 48;
-                        break;
-                }
-                return new Vector2(linksPosition.X + xDisp, linksPosition.Y + yDisp);
-            }
+            if (linkHealth + health >= linkMaxHealth)
+                linkHealth = linkMaxHealth;
+            else
+                linkHealth += health;
         }
 
         public Vector2 Position { get => linksPosition; }

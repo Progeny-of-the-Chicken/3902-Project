@@ -26,7 +26,7 @@ namespace Sprint_0.GameStateHandlers
 
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
-            headsUpDisplay = HUD.Instance;
+            headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
             initializeLetterSprites();
         }
 

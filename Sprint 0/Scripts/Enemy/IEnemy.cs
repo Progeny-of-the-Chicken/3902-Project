@@ -9,6 +9,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         public int Damage { get; }
         public IEnemyCollider Collider { get; }
+        public Vector2 Position { get; }
         public void Update(GameTime t);
 
         void Draw(SpriteBatch sb);

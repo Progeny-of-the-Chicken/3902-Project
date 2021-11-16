@@ -25,6 +25,7 @@ namespace Sprint_0.Scripts.Enemy
         bool delete = false;
 
         public int Damage { get => ObjectConstants.ZolDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.ZolStartingHealth;
 
         Vector2 location;
@@ -36,7 +37,7 @@ namespace Sprint_0.Scripts.Enemy
             this.location = location;
             direction = ObjectConstants.LeftUnitVector;
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            sprite = EnemySpriteFactory.Instance.CreateZolSprite(SpriteRectangles.zolFrames);
+            sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
@@ -97,6 +98,7 @@ namespace Sprint_0.Scripts.Enemy
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
                 delete = true;
                 SFXManager.Instance.PlayEnemyDeath();
+                ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(location);
             }
             SFXManager.Instance.PlayEnemyHit();
         }
@@ -106,9 +108,13 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
-            knockback.Normalize();
-            knockbackDirection = knockback;
+            //Don't move if you're going to be deleted so the Gels spawn properly
+            if (!delete)
+            {
+                inKnockBack = true;
+                knockback.Normalize();
+                knockbackDirection = knockback;
+            }
         }
         public bool CheckDelete()
         {

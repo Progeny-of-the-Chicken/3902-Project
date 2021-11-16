@@ -14,7 +14,7 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider DetectionColliderLeft;
         IEnemyCollider DetectionColliderUp;
         IEnemyCollider DetectionColliderDown;
-        public IEnemyCollider Collider {get => DamageCollider;}
+        public IEnemyCollider Collider { get => DamageCollider; }
         public IEnemyCollider ColliderRight { get => DetectionColliderRight; }
 
         public IEnemyCollider ColliderLeft { get => DetectionColliderLeft; }
@@ -39,6 +39,7 @@ namespace Sprint_0.Scripts.Enemy
         //TODO: additional refactoring needed with magic numbers
         public Vector2 Location { get => location; }
         public int Damage { get => damage; }
+        public Vector2 Position { get => location; }
         bool delete = false;
 
         Vector2 location;
@@ -63,10 +64,9 @@ namespace Sprint_0.Scripts.Enemy
             //YDetectionCollider = new DetectionCollider(this, RectangleY);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
             DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
-            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite(SpriteRectangles.spikeTrapFrame);
             count = 0;
             back = false;
-            //
+            sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite();
         }
 
         public void Update(GameTime gt)
