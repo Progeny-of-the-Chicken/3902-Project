@@ -50,7 +50,6 @@ namespace Sprint_0.GameStateHandlers
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
-            headsUpDisplay.Draw(sb);
 
             if (currFrame <= frames)
             {
@@ -76,7 +75,8 @@ namespace Sprint_0.GameStateHandlers
                 GameStateManager.Instance.StartGameplay();
                 link.UnSuspend();
             }
-
+            
+            headsUpDisplay.Draw(sb);
             
         }
 
