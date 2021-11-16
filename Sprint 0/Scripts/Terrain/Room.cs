@@ -24,7 +24,6 @@ public class Room : IRoom
     private Vector2 _roomDrawPoint;
     public Vector2 roomDrawPoint { get => _roomDrawPoint; }
     public ItemEntities ItemSet { get => itemSet; }
-
     private ILink link;
     private EnemySet enemySet;
     private ItemEntities itemSet;
@@ -233,23 +232,59 @@ public class Room : IRoom
 
                 switch (itemString[i + ObjectConstants.nextCharInString])
                 {
+                    case ObjectConstants.SmallHeartItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation));
+                        break;
+                    case ObjectConstants.HeartContainerStr:
+                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                        break;
+                    case ObjectConstants.FairyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation));
+                        break;
+                    case ObjectConstants.ClockStr:
+                        itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation));
+                        break;
+                    case ObjectConstants.BlueRubyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation));
+                        break;
+                    case ObjectConstants.YellowRubyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation));
+                        break;
+                    case ObjectConstants.BasicMapItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
+                        break;
+                    case ObjectConstants.BoomerangItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation));
+                        break;
+                    case ObjectConstants.BombItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation));
+                        break;
                     case ObjectConstants.BowItemStr:
                         itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+                        break;
+                    case ObjectConstants.BasicKeyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
+                        break;
+                    case ObjectConstants.MagicKeyStr:
+                        itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation));
                         break;
                     case ObjectConstants.CompassStr:
                         itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
                         break;
-                    case ObjectConstants.HeartContainerStr:
-                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                    case ObjectConstants.TriforcePieceStr:
+                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
+                        break;
+                    case ObjectConstants.BasicArrowItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation));
+                        break;
+                    case ObjectConstants.SilverArrowItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation));
                         break;
                     case ObjectConstants.KeyStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
                         break;
                     case ObjectConstants.MapStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
-                        break;
-                    case ObjectConstants.TriforcePieceStr:
-                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
                         break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
