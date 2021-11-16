@@ -101,25 +101,6 @@ namespace Sprint_0.Scripts
             linksPosition = newPosition;
         }
 
-        private void MoveInDirection(float dt, FacingDirection direction)
-        {
-            switch (direction)
-            {
-                case FacingDirection.Left:
-                    linksPosition.X -= ObjectConstants.linkSpeed * dt;
-                    break;
-                case FacingDirection.Right:
-                    linksPosition.X += ObjectConstants.linkSpeed * dt;
-                    break;
-                case FacingDirection.Up:
-                    linksPosition.Y -= ObjectConstants.linkSpeed * dt;
-                    break;
-                case FacingDirection.Down:
-                    linksPosition.Y += ObjectConstants.linkSpeed * dt;
-                    break;
-            }
-        }
-
         private void SwitchToFaceNewDirection(FacingDirection direction)
         {
             linksDirection = direction;
