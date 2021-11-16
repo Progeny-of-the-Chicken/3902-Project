@@ -1,7 +1,12 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
 
@@ -13,38 +18,66 @@ namespace Sprint_0.Scripts.Enemy
         ISprite sprite;
         ISprite openSprite;
         ISprite closeSprite;
-        IEnemyCollider collider;
-        public IEnemyCollider Collider { get => collider; }
+
+        IEnemyCollider DamageCollider;
+        IEnemyCollider WallMDColliderRight;
+        IEnemyCollider WallMDColliderLeft;
+        IEnemyCollider WallMDColliderUp;
+        IEnemyCollider WallMDColliderDown;
+        public IEnemyCollider Collider { get => DamageCollider; }
+        public IEnemyCollider WMDColliderRight { get => WallMDColliderRight; }
+
+        public IEnemyCollider WMDColliderLeft { get => WallMDColliderLeft; }
+
+        public IEnemyCollider WMDColliderUp { get => WallMDColliderUp; }
+
+        public IEnemyCollider WMDColliderDown { get => WallMDColliderDown; }
+
+        Rectangle openFrame = new Rectangle(392, 10, 18, 16);
+        Rectangle closeFrame = new Rectangle(410, 11, 14, 16);
+        Rectangle upFrame;
+        Rectangle downFrame;
+        Rectangle leftFrame;
+        Rectangle rightFrame;
 
         static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         byte[] random;
         public int Damage { get => _damage; }
         int _damage;
-        int health = ObjectConstants.WallMasterHealth;
-        const int knockbackDistance = 50; //TODO: this magic number appears more than once and needs to be standardized
+        int health = 3;
+        const int knockbackDistance = 50;
         bool delete = false;
         bool grab = false;
-        bool inKnockBack = false;
+        int count;
 
+        const float moveTime = 1;
         float moveSpeed;
-        float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
+        float timeSinceMove = 0;
+        int loc = 0;
 
         Vector2 location;
         Vector2 direction;
-        Vector2 knockbackDirection;
 
         Link grabbedLink;
         public Wallmaster(Vector2 location)
         {
             this.location = location;
-            moveSpeed = ObjectConstants.WallMasterMoveSpeed;
-            direction = ObjectConstants.LeftUnitVector;
-            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(SpriteRectangles.wallMasterOpenFrame);
-            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(SpriteRectangles.wallMasterCloseFrame);
+            moveSpeed = 25 * ObjectConstants.scale;
+            direction = Vector2.Zero;
+            random = new byte[2];
+            openSprite = (WallmasterOpenSprite)EnemySpriteFactory.Instance.CreateWallmasterOpenSprite(ObjectConstants.scale, openFrame);
+            closeSprite = (WallmasterCloseSprite)EnemySpriteFactory.Instance.CreateWallmasterCloseSprite(ObjectConstants.scale, openFrame);
             sprite = openSprite;
-            collider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.wallMasterOpenFrame.Width * ObjectConstants.scale), (SpriteRectangles.wallMasterOpenFrame.Height * ObjectConstants.scale)));
+            upFrame = new Rectangle((int)location.X, (int)location.Y - (2 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
+            downFrame = new Rectangle((int)location.X, (int)location.Y + (3 * ObjectConstants.standardWidthHeight), ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
+            leftFrame = new Rectangle((int)location.X - (2 * ObjectConstants.standardWidthHeight), (int)location.Y, ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
+            rightFrame = new Rectangle((int)location.X + (3 * ObjectConstants.standardWidthHeight), (int)location.Y, ObjectConstants.standardWidthHeight, ObjectConstants.standardWidthHeight);
+            DamageCollider = new WallmasterEnemyCollider(this, new Rectangle(0, 0, (int)(openFrame.Width * ObjectConstants.scale), (int)(openFrame.Height * ObjectConstants.scale)));
+            WallMDColliderDown = new WMDColliderDown(this, downFrame);
+            WallMDColliderUp = new WMDColliderUp(this, upFrame);
+            WallMDColliderRight = new WMDColliderRight(this, rightFrame);
+            WallMDColliderLeft = new WMDColliderLeft(this, leftFrame);
+            count = 0;
         }
 
         public void Update(GameTime gt)
@@ -53,7 +86,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 SearchMove(gt);
                 sprite.Update(gt);
-                collider.Update(location);
+                DamageCollider.Update(location);
             }
             else
             {
@@ -64,41 +97,151 @@ namespace Sprint_0.Scripts.Enemy
 
         void SearchMove(GameTime gt)
         {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.WallMasterTimeToMoveAgain)
+            if (loc == 1)
             {
-                SetRandomDirection();
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
+                MoveUpWM(gt);
             }
-            location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+            else if (loc == 2)
+            {
+                MoveDownWM(gt);
+            }
+            else if (loc == 3)
+            {
+                MoveLeftWM(gt);
+            }
+            else if (loc == 4)
+            {
+                MoveRightWM(gt);
+            }
+
         }
 
-        //TODO: more appropriate name, this one is funny tho
+        void MoveRightWM(GameTime gt)
+        {
+            if (count < 40)
+            {
+                direction = -Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 40 && count < 115)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 115 && count < 140)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 140)
+            {
+                direction = Vector2.Zero;
+            }
+
+        }
+
+        void MoveLeftWM(GameTime gt)
+        {
+            if (count < 40)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 40 && count < 115)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 115 && count < 140)
+            {
+                direction = -Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 140)
+            {
+                direction = Vector2.Zero;
+            }
+
+        }
+
+        void MoveUpWM(GameTime gt)
+        {
+            if (count < 40)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 40 && count < 115)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 115 && count < 140)
+            {
+                direction = -Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 140)
+            {
+                direction = Vector2.Zero;
+            }
+
+        }
+
+        void MoveDownWM(GameTime gt)
+        {
+            if (count < 40)
+            {
+                direction = -Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 40 && count < 115)
+            {
+                direction = Vector2.UnitX;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 115 && count < 140)
+            {
+                direction = Vector2.UnitY;
+                location += direction * moveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
+                count++;
+            }
+            else if (count >= 140)
+            {
+                direction = Vector2.Zero;
+            }
+
+        }
+
         void yeetLink()
         {
-            if (location.X > ObjectConstants.xOnScreenBorder)
+            if (location.X != 0)
             {
                 --location.X;
                 grabbedLink.ResetPosition(location);
             }
             else
             {
-                //TODO:reset link to his starting position
-                RoomManager.Instance.SwitchToRoom(ObjectConstants.wallMasterToRoom);
+
+                RoomManager.Instance.SwitchToRoom("Room25");
                 grabbedLink.UnSuspend();
             }
         }
 
-        void SetRandomDirection()
+        public void ChangeDir(int dir)
         {
-            //First byte is vertical/horizontal, second is +/-
-            randomDir.GetBytes(random);
-            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction = Vector2.UnitX;
-            else
-                direction = Vector2.UnitY;
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction *= ObjectConstants.vectorFlip;
+            loc = dir;
         }
 
         public void GrabLink(Link player)
@@ -114,21 +257,11 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             health -= damage;
-            if (health <= ObjectConstants.zero)
-            {
-                ObjectsFromObjectsFactory.Instance.CreateEffect(location, Effect.EffectType.Pop);
-                delete = true;
-                SFXManager.Instance.PlayEnemyDeath();
-            }
-            SFXManager.Instance.PlayEnemyHit();
+            delete = (health <= 0);
         }
-        public void SuddenKnockBack(Vector2 knockback)
+        public void KnockBack(Vector2 knockback)
         {
             location += knockback * knockbackDistance;
-        }
-        public void GradualKnockBack(Vector2 knockback)
-        {
-            //TODO: add gradual knockback to wallmaster
         }
         public bool CheckDelete()
         {
@@ -140,5 +273,14 @@ namespace Sprint_0.Scripts.Enemy
             sprite.Draw(sb, location);
         }
 
+        public void SuddenKnockBack(Vector2 knockback)
+        {
+           //none
+        }
+
+        public void GradualKnockBack(Vector2 knockback)
+        {
+            //none
+        }
     }
 }
