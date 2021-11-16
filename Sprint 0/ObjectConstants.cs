@@ -68,8 +68,6 @@ namespace Sprint_0
         public const float linkTurningCounterDebounce = 0.05f;
         public const float linkDeathCounter = 3;
         public const int defaultCounterLength = 30;
-        public const int linkItemSpawnPositionXOffset = 48;
-        public const int linkItemSpawnPositionYOffset = 24;
         public static Vector2 linkStartingPosition = new Vector2(358, 408); //generic starting position
 
 
