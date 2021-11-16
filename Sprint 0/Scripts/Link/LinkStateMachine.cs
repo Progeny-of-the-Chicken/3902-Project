@@ -144,7 +144,7 @@ namespace Sprint_0.Scripts
                 {
                     damageCounter += ObjectConstants.linkDeathCounter;
                     SFXManager.Instance.StopMusic();    //not sure where else to put this
-                    SFXManager.Instance.PlayLinkDeath(); 
+                    SFXManager.Instance.PlayLinkDeath();
                 }
             }
         }

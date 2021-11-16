@@ -23,6 +23,7 @@ namespace Sprint_0.Scripts.Enemy
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
         float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
         public int Damage { get => ObjectConstants.KeeseDamage; }
+        public Vector2 Position { get => location; }
         int health = ObjectConstants.KeeseStartingHealth;
         bool delete = false;
         bool inKnockBack = false;

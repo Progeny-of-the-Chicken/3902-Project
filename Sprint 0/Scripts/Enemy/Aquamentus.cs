@@ -17,6 +17,7 @@ namespace Sprint_0.Scripts.Enemy
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
+        public Vector2 Position { get => location; }
         private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
