@@ -6,6 +6,7 @@ using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -115,7 +116,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
+            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(
+                SpawnHelper.Instance.CenterLocationOnSpawner(location, SpriteRectangles.goriyaFrontFrame.Size.ToVector2(), new Vector2(ObjectConstants.boomerangWidthHeight)), direction, this);
         }
 
         public void TakeDamage(int damage)
