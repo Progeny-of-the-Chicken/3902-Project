@@ -70,7 +70,6 @@ namespace Sprint_0.Scripts.Enemy
             }
             else
             {
-                boomerang.Update(t);
                 if (boomerang.CheckDelete())
                 {
                     boomerang = null;
@@ -118,6 +117,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
         }
+
         public void TakeDamage(int damage)
         {
             health -= damage;
