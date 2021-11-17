@@ -150,10 +150,6 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             dependency.sprite.Draw(sb, location);
-            if (boomerang != null)
-            {
-                boomerang.Draw(sb);
-            }
         }
     }
 }
