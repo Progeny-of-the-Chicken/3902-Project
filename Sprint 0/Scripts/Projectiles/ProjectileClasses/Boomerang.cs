@@ -68,7 +68,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             // Delete on boomerang return
             if (directionVector.X * (currentPos.X - startPos.X) < ObjectConstants.zero_float || directionVector.Y * (currentPos.Y - startPos.Y) < ObjectConstants.zero_float)
             {
-                delete = true;
+                Despawn();
             }
         }
 
@@ -84,6 +84,10 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            if (Friendly)
+            {
+                Link.Instance.BoomerangReady = true;
+            }
             delete = true;
         }
 

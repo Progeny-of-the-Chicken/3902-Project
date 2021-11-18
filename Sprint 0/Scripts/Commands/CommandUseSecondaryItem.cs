@@ -33,10 +33,18 @@ namespace Sprint_0.Scripts.Commands
                     }
                     break;
                 case WeaponType.BasicBoomerang:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
+                    if (Link.Instance.BoomerangReady)
+                    {
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
+                        Link.Instance.BoomerangReady = false;
+                    }
                     break;
                 case WeaponType.MagicalBoomerang:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.Position, link.FacingDirection, link));
+                    if (Link.Instance.BoomerangReady)
+                    {
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.Position, link.FacingDirection, link));
+                        Link.Instance.BoomerangReady = false;
+                    }
                     break;
                 case WeaponType.Bomb:
                     if (Inventory.Instance.Bomb > 0)
