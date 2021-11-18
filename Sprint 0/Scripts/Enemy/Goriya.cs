@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        IProjectile boomerang;
+        public IProjectile boomerang;
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 

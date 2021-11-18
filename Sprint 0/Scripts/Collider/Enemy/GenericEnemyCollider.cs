@@ -44,7 +44,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
             {
                 projectile.Despawn();
             }
-            else if (projectile is Boomerang && Owner is Goriya && ((Boomerang)projectile).ReturnState)
+            else if (projectile is Boomerang && Owner is Goriya && ((Boomerang)projectile).ReturnState && (((Goriya)Owner).boomerang == projectile))
             {
                 projectile.Despawn();
             }
