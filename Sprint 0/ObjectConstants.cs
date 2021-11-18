@@ -113,6 +113,7 @@ namespace Sprint_0
         public const double boomerangSpeedPerSecond = 10.0;
         public const double boomerangDecelPerSecond = -5.0;
         public const double magicalBoomerangSpeedCoef = 1.2;
+        public const double boomerangReturnSpeedPerSecond = 6.0;
         public const double boomerangTOffset = 1;
         public const int boomerangDamage = 1;
         public static Vector2 boomerangRotationOffset = new Vector2(4, 4);

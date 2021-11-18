@@ -14,13 +14,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
-        private Vector2 startPos;
         private bool delete = false;
         private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
+        private double returnSpeedPerSecond = ObjectConstants.boomerangReturnSpeedPerSecond;
         private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
         private Link linkOwner;
@@ -65,11 +65,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 ReturnUpdate(gt);
             }
             collider.Update(currentPos);
-            // Delete on boomerang return
-            if (directionVector.X * (currentPos.X - startPos.X) < ObjectConstants.zero_float || directionVector.Y * (currentPos.Y - startPos.Y) < ObjectConstants.zero_float)
-            {
-                Despawn();
-            }
         }
 
         public void Draw(SpriteBatch sb)
@@ -100,7 +95,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
-            startPos = currentPos = (ObjectConstants.boomerangRotationOffset * ObjectConstants.scale) + SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight));
+            currentPos = (ObjectConstants.boomerangRotationOffset * ObjectConstants.scale) + SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight));
             if (magical)
             {
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
@@ -153,7 +148,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             }
             Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
             Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
-            currentPos += new Vector2((float)speedPerSecond) * xyScale;
+            currentPos += new Vector2((float)returnSpeedPerSecond) * xyScale;
         }
     }
 }
