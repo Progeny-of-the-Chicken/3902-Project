@@ -141,16 +141,15 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             Vector2 distanceVector;
             if (friendly)
             {
-                distanceVector = linkOwner.Position - currentPos;
+                distanceVector = SpawnHelper.Instance.CenterLocationOnSpawner(linkOwner.Position, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight)) - currentPos;
             }
             else
             {
-                distanceVector = enemyOwner.Collider.Hitbox.Location.ToVector2() - currentPos;
+                distanceVector = SpawnHelper.Instance.CenterLocationOnSpawner(enemyOwner.Position, enemyOwner.Collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.boomerangWidthHeight))  - currentPos;
             }
             Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
             Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
             currentPos += new Vector2((float)speedPerSecond) * xyScale;
-            // currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
         }
     }
 }
