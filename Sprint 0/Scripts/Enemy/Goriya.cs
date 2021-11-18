@@ -116,8 +116,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(
-                SpawnHelper.Instance.CenterLocationOnSpawner(location, SpriteRectangles.goriyaFrontFrame.Size.ToVector2(), new Vector2(ObjectConstants.boomerangWidthHeight)), direction, this);
+            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
         }
 
         public void TakeDamage(int damage)
