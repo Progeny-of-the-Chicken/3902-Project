@@ -29,11 +29,9 @@ namespace Sprint_0.Scripts.Terrain
             this.room = room;
         }
 
-        public IProjectile CreateBoomerangFromEnemy(Vector2 location, FacingDirection direction, IEnemy enemy)
+        public void CreateBoomerangFromEnemy(Vector2 location, FacingDirection direction, IEnemy enemy)
         {
-            IProjectile projectile = ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy);
-            room.AddProjectile(projectile);
-            return projectile;
+            room.AddProjectile(ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy));
         }
 
         public List<IProjectile> CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)

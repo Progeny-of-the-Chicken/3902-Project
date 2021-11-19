@@ -34,6 +34,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
+        public IEnemy EnemyOwner { get => enemyOwner; }
+
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, Link link)
         {
             linkOwner = link;

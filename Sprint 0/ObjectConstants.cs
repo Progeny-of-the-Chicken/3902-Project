@@ -57,6 +57,7 @@ namespace Sprint_0
         //----- Link constant values -----//
         public const int linkStdMoveDist = scaledStdWidthHeight / 2;
         public const float linkStdMoveTime = 0.25f;
+        // TODO: Remove doubled move speed, helpful for testing
         public const float linkSpeed = linkStdMoveDist / linkStdMoveTime * 2;
         public const float linkDeathAnimationTime = 1.5f;
         public const float linkTakeDamageTime = 1;
@@ -181,6 +182,7 @@ namespace Sprint_0
         public const double GoriyaMoveTime = 1.5;
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int GoriyaStartingHealth = 1;
+        public const float EnemyBoomerangTimeoutSeconds = 3.0f;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
