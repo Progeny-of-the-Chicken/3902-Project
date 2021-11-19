@@ -34,14 +34,13 @@ namespace Sprint_0.Scripts.Terrain
             room.AddProjectile(ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy));
         }
 
-        public List<IProjectile> CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)
+        public void CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)
         {
             List<IProjectile> projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, direction);
             foreach (IProjectile projectile in projectiles)
             {
                 room.AddProjectile(projectile);
             }
-            return projectiles;
         }
 
         public IProjectile CreateBlastZoneFromBomb(Vector2 location)
