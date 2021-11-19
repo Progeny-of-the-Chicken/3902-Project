@@ -134,6 +134,10 @@ namespace Sprint_0.Scripts.Items
                     Collider = ItemColliderFactory.Instance.CreateSilverArrowItemCollider(this);
                     sprite = ItemSpriteFactory.Instance.CreateSilverArrowSprite();
                     break;
+                case ItemType.BlueRing:
+                    Collider = ItemColliderFactory.Instance.CreateBlueRingCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateBlueRingSprite();
+                    break;
                 default:
                     // Should never fire
                     Collider = ItemColliderFactory.Instance.CreateSmallHeartItemCollider(this);

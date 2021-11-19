@@ -96,6 +96,9 @@ namespace Sprint_0.Scripts
                 case ItemType.SilverArrowItem:
                     Inventory.Instance.SilverArrows = true;
                     break;
+                case ItemType.BlueRing:
+                    Inventory.Instance.BlueRing = true;
+                    break;
             }
             item.Despawn();
         }

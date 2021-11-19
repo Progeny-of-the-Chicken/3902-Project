@@ -97,5 +97,10 @@ namespace Sprint_0.Scripts.Items
         {
             return new Item(location, ItemType.SilverArrowItem);
         }
+
+        public IItem CreateBlueRingItem(Vector2 location)
+        {
+            return new Item(location, ItemType.BlueRing);
+        }
     }
 }

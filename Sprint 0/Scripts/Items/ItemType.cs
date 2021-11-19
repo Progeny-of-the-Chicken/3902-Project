@@ -17,6 +17,7 @@
         Compass,
         TriforcePiece,
         BasicArrowItem,
-        SilverArrowItem
+        SilverArrowItem,
+        BlueRing
     }
 }

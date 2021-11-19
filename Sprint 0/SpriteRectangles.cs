@@ -69,6 +69,7 @@ namespace Sprint_0
         };
         public static Rectangle basicArrowItemFrame = new Rectangle(154, 0, 5, 16);
         public static Rectangle silverArrowItemFrame = new Rectangle(154, 16, 5, 16);
+        public static Rectangle blueRingItemFrame = new Rectangle(169, 16, 8, 16);
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
