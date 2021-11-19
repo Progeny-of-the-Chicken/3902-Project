@@ -440,15 +440,6 @@ public class Room : IRoom
         projectileQueue.Add(item);
     }
 
-    private void TransferQueuedProjectiles()
-    {
-        foreach (IProjectile projectile in projectileQueue)
-        {
-            projectileSet.Add(projectile);
-        }
-        projectileQueue.Clear();
-    }
-
     public void AddEffect(IEffect effect)
     {
         effectQueue.Add(effect);
@@ -457,6 +448,20 @@ public class Room : IRoom
     public void AddEnemy(IEnemy enemy)
     {
         enemySet.Add(enemy);
+    }
+
+    public void AddItem(IItem item)
+    {
+        itemSet.Add(item);
+    }
+
+    private void TransferQueuedProjectiles()
+    {
+        foreach (IProjectile projectile in projectileQueue)
+        {
+            projectileSet.Add(projectile);
+        }
+        projectileQueue.Clear();
     }
 
     private void TransferQueuedEffects()
