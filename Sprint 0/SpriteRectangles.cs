@@ -172,6 +172,7 @@ namespace Sprint_0
         public static Rectangle inventoryBasicArrowFrame = new Rectangle(617, 137, 5, 16);
         public static Rectangle inventorySilverArrowFrame = new Rectangle(626, 137, 5, 16);
         public static Rectangle inventoryBlueRingFrame = new Rectangle(549, 156, 8, 16);
+        public static Rectangle inventoryMagicKeyFrame = new Rectangle(579, 156, 8, 16);
         public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
         public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
         public static List<Rectangle> backdropCoverFrames = new List<Rectangle>

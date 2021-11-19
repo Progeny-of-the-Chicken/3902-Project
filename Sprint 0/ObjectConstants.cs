@@ -403,6 +403,7 @@ namespace Sprint_0
         public static Vector2 basicArrowFromBackdropLocation = new Vector2(130, 24) * scale;
         public static Vector2 silverArrowFromBackdropLocation = new Vector2(137, 24) * scale;
         public static Vector2 blueRingFromBackdropLocation = new Vector2(164, 24) * scale;
+        public static Vector2 magicKeyFromBackdropLocation = new Vector2(196, 24) * scale;
         public static Vector2 mapFromBackdropLocation = new Vector2(48, 112) * scale;
         public static Vector2 compassFromBackdropLocation = new Vector2(44, 152) * scale;
         public static List<Vector2> inventoryWeaponLocations = new List<Vector2>

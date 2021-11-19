@@ -85,7 +85,7 @@ namespace Sprint_0.Scripts
                     // Unimplemented
                     break;
                 case ItemType.MagicKey:
-                    // Unimplemented
+                    Inventory.Instance.MagicKey = true;
                     break;
                 case ItemType.TriforcePiece:
                     // TODO: End game

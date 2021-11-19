@@ -105,6 +105,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
             {
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateBlueRingSprite(), backdropLocation + ObjectConstants.blueRingFromBackdropLocation);
             }
+            if (Inventory.Instance.MagicKey)
+            {
+                itemSprites.Add(InventorySpriteFactory.Instance.CreateMagicKeySprite(), backdropLocation + ObjectConstants.magicKeyFromBackdropLocation);
+            }
             if (Inventory.Instance.BasicArrows)
             {
                 itemSprites.Add(InventorySpriteFactory.Instance.CreateBasicArrowSprite(), backdropLocation + ObjectConstants.basicArrowFromBackdropLocation);

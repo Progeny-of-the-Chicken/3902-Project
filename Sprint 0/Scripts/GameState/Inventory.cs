@@ -26,6 +26,7 @@ namespace Sprint_0.Scripts.GameState
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
             BlueRing = true;
+            MagicKey = false;
             BasicArrows = false;
             SilverArrows = false;
             Map = false;
@@ -54,6 +55,8 @@ namespace Sprint_0.Scripts.GameState
         public int SelectedWeaponIndex { get; set; }
 
         public bool BlueRing { get; set; }
+
+        public bool MagicKey { get; set; }
 
         public bool BasicArrows { get; set; }
 
