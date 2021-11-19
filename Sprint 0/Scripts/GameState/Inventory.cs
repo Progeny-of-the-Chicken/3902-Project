@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.Potion
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
-            BlueRing = true;
+            BlueRing = false;
             MagicKey = false;
             BasicArrows = false;
             SilverArrows = false;

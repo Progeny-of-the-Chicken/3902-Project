@@ -295,6 +295,9 @@ public class Room : IRoom
                     case ObjectConstants.MapStr:
                         itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
                         break;
+                    case ObjectConstants.BlueRingStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
