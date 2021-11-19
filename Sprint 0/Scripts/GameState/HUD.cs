@@ -48,7 +48,7 @@ namespace Sprint_0.Scripts.GameState
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
             health = Link.Instance.Health;
-            maxHealth = ObjectConstants.linkStartingHealth;
+            maxHealth = Link.Instance.MaxHealth;
             makeHeartArray();
 
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
@@ -69,6 +69,7 @@ namespace Sprint_0.Scripts.GameState
             bombCounter = numToSprites(Inventory.Instance.Bomb);
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             health = Link.Instance.Health;
+            maxHealth = Link.Instance.MaxHealth;
             makeHeartArray();
             currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }

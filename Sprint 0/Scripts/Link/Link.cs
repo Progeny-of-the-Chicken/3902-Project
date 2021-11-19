@@ -126,7 +126,7 @@ namespace Sprint_0.Scripts
 
         public int Health { get => (int)Math.Ceiling(linkState.linkHealth); }
 
-        public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkHealth = value; } }
+        public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkMaxHealth = value; } }
 
         public bool IsAlive { get => linkState.IsAlive; }
 
