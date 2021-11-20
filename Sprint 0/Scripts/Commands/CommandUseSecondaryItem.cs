@@ -17,6 +17,15 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
+            if (link.CanDoNewAction)
+            {
+                useSecondaryItem();
+                link.UseItem();
+            }
+        }
+
+        private void useSecondaryItem()
+        {
             WeaponType type = Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex];
             switch (type)
             {
@@ -53,7 +62,6 @@ namespace Sprint_0.Scripts.Commands
                     Inventory.Instance.RemoveWeapon(WeaponType.Potion);
                     break;
             }
-            link.UseItem();
         }
     }
 }
