@@ -2,9 +2,9 @@
 
 namespace Sprint_0.Scripts.Movement.MovementStrategy
 {
-    public class TrackLinkStrategy : IMovementStrategy
+    public class MoveRandomAndIdleStrategy : IMovementStrategy
     {
-        public TrackLinkStrategy()
+        public MoveRandomAndIdleStrategy()
         {
             // TODO: Add movement constants
         }

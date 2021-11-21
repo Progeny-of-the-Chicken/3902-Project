@@ -16,11 +16,6 @@ namespace Sprint_0.Scripts.Movement
             return selectedStrategy.Move(gameTime, location);
         }
 
-        public bool CheckFinish()
-        {
-            return selectedStrategy.CheckFinish();
-        }
-
         public void SetStrategy(IMovementStrategy strategy)
         {
             selectedStrategy = strategy;

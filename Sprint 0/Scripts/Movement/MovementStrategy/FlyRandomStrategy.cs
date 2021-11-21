@@ -4,8 +4,6 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 {
     public class FlyRandomStrategy : IMovementStrategy
     {
-        private bool finishedMovement = false;
-
         public FlyRandomStrategy()
         {
             // TODO: Add movement constants
@@ -15,11 +13,6 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         {
             // TODO: Add movement implementation
             return location;
-        }
-
-        public bool CheckFinish()
-        {
-            return finishedMovement;
         }
     }
 }
