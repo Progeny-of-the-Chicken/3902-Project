@@ -11,6 +11,7 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 
         private float speed;
         private float moveTime;
+        private float pauseTime;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
         private Vector2 directionVector;
         private List<Vector2> possibleVectors = new List<Vector2>
@@ -18,24 +19,30 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
             ObjectConstants.RightUnitVector, ObjectConstants.UpUnitVector, ObjectConstants.LeftUnitVector, ObjectConstants.DownUnitVector
         };
 
-        public MoveRandomStrategy(float speed, float moveTime)
+        public MoveRandomStrategy(float speed, float moveTime, float pauseTime)
         {
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             directionVector = GetRandomDirection();
 
             this.speed = speed;
             this.moveTime = moveTime;
+            this.pauseTime = pauseTime;
         }
 
         public Vector2 Move(GameTime gameTime, Vector2 location)
         {
+            Vector2 returnLocation = location;
             timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= moveTime)
+            if (timeSinceMove >= moveTime + pauseTime)
             {
                 directionVector = GetRandomDirection();
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
-            return location += directionVector * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (timeSinceMove >= pauseTime)
+            {
+                returnLocation += directionVector * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            return returnLocation;
         }
 
         //----- Random helper -----//
@@ -43,7 +50,7 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         private Vector2 GetRandomDirection()
         {
             randomDir.GetBytes(random);
-            return possibleVectors[random[ObjectConstants.firstInArray] % ObjectConstants.oneInFour];
+            return possibleVectors[random[ObjectConstants.firstInArray] % possibleVectors.Count];
         }
     }
 }

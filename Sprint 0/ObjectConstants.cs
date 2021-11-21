@@ -41,6 +41,10 @@ namespace Sprint_0
         public static Vector2 DownUnitVector = new Vector2(0, 1);
         public static Vector2 LeftUnitVector = new Vector2(-1, 0);
         public static Vector2 RightUnitVector = new Vector2(1, 0);
+        public static Vector2 UpLeftUnitVector = new Vector2(-1, -1);
+        public static Vector2 UpRightUnitVector = new Vector2(1, -1);
+        public static Vector2 DownLeftUnitVector = new Vector2(-1, 1);
+        public static Vector2 DownRightUnitVector = new Vector2(1, 1);
         public static Vector2 zeroVector = new Vector2(0, 0);
 
 
