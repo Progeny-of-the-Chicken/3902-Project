@@ -32,6 +32,8 @@
     <None Remove="Scripts\Sprite\BlueLinkSprites\" />
     <None Remove="Scripts\Sprite\Font\Letters\" />
     <None Remove="Scripts\Sprite\Font\Numbers\" />
+    <None Remove="Scripts\Movement\" />
+    <None Remove="Scripts\Movement\MovementStrategy\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -63,5 +65,7 @@
     <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
     <Folder Include="Scripts\Sprite\Font\Letters\" />
     <Folder Include="Scripts\Sprite\Font\Numbers\" />
+    <Folder Include="Scripts\Movement\" />
+    <Folder Include="Scripts\Movement\MovementStrategy\" />
   </ItemGroup>
 </Project>
