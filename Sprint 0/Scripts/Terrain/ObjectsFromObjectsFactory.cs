@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.Terrain
 {
@@ -57,6 +58,8 @@ namespace Sprint_0.Scripts.Terrain
             return projectile;
         }
 
+        // Effects
+
         public void CreateStaticEffect(Vector2 location, EffectType type)
         {
             room.AddEffect(new Effect.StaticEffect(location, type));
@@ -69,10 +72,44 @@ namespace Sprint_0.Scripts.Terrain
                 room.AddEffect(effect);
             }
         }
+
+        // Enemies
+
         public void CreateGelsFromZol(Vector2 location)
         {
             room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
             room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
+        }
+
+        // Items
+
+        public void CreateItemDrop(Vector2 location, Vector2 spawnerDimensions, ItemType itemType)
+        {
+            switch (itemType)
+            {
+                case ItemType.SmallHeartItem:
+                    room.AddItem(ItemFactory.Instance.CreateSmallHeartItem(location, spawnerDimensions));
+                    break;
+                case ItemType.YellowRuby:
+                    room.AddItem(ItemFactory.Instance.CreateYellowRuby(location, spawnerDimensions));
+                    break;
+                case ItemType.BlueRuby:
+                    room.AddItem(ItemFactory.Instance.CreateBlueRuby(location, spawnerDimensions));
+                    break;
+                case ItemType.Fairy:
+                    room.AddItem(ItemFactory.Instance.CreateFairy(location, spawnerDimensions));
+                    break;
+                case ItemType.BombItem:
+                    room.AddItem(ItemFactory.Instance.CreateBombItem(location, spawnerDimensions));
+                    break;
+                case ItemType.Clock:
+                    room.AddItem(ItemFactory.Instance.CreateClock(location, spawnerDimensions));
+                    break;
+                default:
+                    // Should never happen
+                    room.AddItem(ItemFactory.Instance.CreateSmallHeartItem(location, spawnerDimensions));
+                    break;
+            }
         }
     }
 }

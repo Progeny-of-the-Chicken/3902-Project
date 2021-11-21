@@ -85,7 +85,7 @@ namespace Sprint_0.Scripts
                     // Unimplemented
                     break;
                 case ItemType.MagicKey:
-                    // Unimplemented
+                    Inventory.Instance.MagicKey = true;
                     break;
                 case ItemType.TriforcePiece:
                     // TODO: End game
@@ -95,6 +95,9 @@ namespace Sprint_0.Scripts
                     break;
                 case ItemType.SilverArrowItem:
                     Inventory.Instance.SilverArrows = true;
+                    break;
+                case ItemType.BlueRing:
+                    Inventory.Instance.BlueRing = true;
                     break;
             }
             item.Despawn();

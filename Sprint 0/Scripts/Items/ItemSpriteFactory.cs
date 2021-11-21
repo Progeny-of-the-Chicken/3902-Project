@@ -107,5 +107,10 @@ namespace Sprint_0.Scripts.Items
         {
             return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.silverArrowItemFrame);
         }
+
+        public ISprite CreateBlueRingSprite()
+        {
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.blueRingItemFrame);
+        }
     }
 }

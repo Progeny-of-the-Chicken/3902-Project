@@ -33,7 +33,11 @@ namespace Sprint_0.Scripts.Collider.Terrain
         {
             link.StopMoving();
             link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
-            if (Inventory.Instance.Key > 0)
+            if (Inventory.Instance.MagicKey)
+            {
+                owner.SwapDoor();
+            }
+            else if (Inventory.Instance.Key > 0)
             {
                 owner.SwapDoor();
                 Inventory.Instance.Key--;
