@@ -2,14 +2,14 @@
 
 namespace Sprint_0.Scripts.Movement.MovementStrategy
 {
-    public class MoveHorizontalRandom : IMovementStrategy
+    public class MoveBetweenDistanceStrategy : IMovementStrategy
     {
         private float speed;
         private int moveDistance;
         private Vector2 startLocation;
         private Vector2 directionVector;
 
-        public MoveHorizontalRandom(Vector2 directionVector, float speed, int moveDistance)
+        public MoveBetweenDistanceStrategy(Vector2 directionVector, float speed, int moveDistance)
         {
             this.directionVector = directionVector;
             this.speed = speed;
