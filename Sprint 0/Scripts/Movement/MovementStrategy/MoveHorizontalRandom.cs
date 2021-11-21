@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 
         public Vector2 Move(GameTime gameTime, Vector2 location)
         {
-            if (location.X < startLocation.X - moveDistance || location.X >= startLocation.X)
+            if (location.X < startLocation.X - moveDistance || location.X > startLocation.X)
             {
                 directionVector *= ObjectConstants.vectorFlip;
             }

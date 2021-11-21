@@ -14,16 +14,14 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         private float pauseTime;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
         private Vector2 directionVector;
-        private List<Vector2> possibleVectors = new List<Vector2>
-        {
-            ObjectConstants.RightUnitVector, ObjectConstants.UpUnitVector, ObjectConstants.LeftUnitVector, ObjectConstants.DownUnitVector
-        };
+        private List<Vector2> possibleVectors;
 
-        public MoveRandomStrategy(float speed, float moveTime, float pauseTime)
+        public MoveRandomStrategy(List<Vector2> possibleVectors, float speed, float moveTime, float pauseTime)
         {
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             directionVector = GetRandomDirection();
 
+            this.possibleVectors = possibleVectors;
             this.speed = speed;
             this.moveTime = moveTime;
             this.pauseTime = pauseTime;
