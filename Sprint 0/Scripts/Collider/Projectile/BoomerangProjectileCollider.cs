@@ -44,6 +44,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
                 enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
                 ((Boomerang)Owner).BounceOffWall();
             }
+            else if (!Owner.Friendly && ((Boomerang)Owner).EnemyOwner is Goriya)
+            {
+                ((Goriya)((Boomerang)Owner).EnemyOwner).boomerangActive = false;
+            }
         }
     }
 }

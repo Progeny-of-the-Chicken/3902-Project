@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        IProjectile boomerang;
+        public bool boomerangActive { get; set; }
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
@@ -26,6 +26,7 @@ namespace Sprint_0.Scripts.Enemy
 
         float timeSinceMove = ObjectConstants.counterInitialVal_float;
         float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
+        float timeSinceBoomerangThrow = ObjectConstants.counterInitialVal_float;
         FacingDirection direction;
         Vector2 location;
         Vector2 knockbackDirection;
@@ -49,14 +50,14 @@ namespace Sprint_0.Scripts.Enemy
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
-            boomerang = null;
+            boomerangActive = false;
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
         {
-            if (boomerang == null)
+            if (boomerangActive == false)
             {
                 if (!inKnockBack)
                 {
@@ -70,11 +71,7 @@ namespace Sprint_0.Scripts.Enemy
             }
             else
             {
-                boomerang.Update(t);
-                if (boomerang.CheckDelete())
-                {
-                    boomerang = null;
-                }
+                boomerangActive = !TimeoutBoomerang(t);
             }
             collider.Update(location);
         }
@@ -116,8 +113,11 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ShootProjectile()
         {
-            boomerang = ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
+            ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
+            boomerangActive = true;
+            timeSinceBoomerangThrow = ObjectConstants.counterInitialVal_float;
         }
+
         public void TakeDamage(int damage)
         {
             health -= damage;
@@ -148,10 +148,17 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             dependency.sprite.Draw(sb, location);
-            if (boomerang != null)
+        }
+
+        private bool TimeoutBoomerang(GameTime t)
+        {
+            bool timeout = false;
+            timeSinceBoomerangThrow += (float)t.ElapsedGameTime.TotalSeconds;
+            if (timeSinceBoomerangThrow >= ObjectConstants.EnemyBoomerangTimeoutSeconds)
             {
-                boomerang.Draw(sb);
+                timeout = true;
             }
+            return timeout;
         }
     }
 }
