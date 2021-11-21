@@ -43,6 +43,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             InitializeObject(spawnLoc, direction, magical);
             SFXManager.Instance.PlayFireArrowBoomerang();
         }
+
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
         {
             enemyOwner = enemy;
@@ -76,7 +77,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public bool CheckDelete()
         {
-            return delete;
+            return delete || !OwnerIsAlive();
         }
 
         public void Despawn()
@@ -151,6 +152,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
             Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
             currentPos += new Vector2((float)returnSpeedPerSecond) * xyScale;
+        }
+
+        private bool OwnerIsAlive()
+        {
+            return (linkOwner is null || linkOwner.IsAlive) && (enemyOwner is null || !enemyOwner.CheckDelete());
         }
     }
 }
