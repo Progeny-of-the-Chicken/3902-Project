@@ -30,6 +30,7 @@ namespace Sprint_0.Scripts
 
             Rectangle spawnHitbox = new Rectangle(linkState.Position.ToPoint(), new Point(ObjectConstants.scaledStdWidthHeight));
             _collider = new LinkCollider(this, spawnHitbox);
+            BoomerangReady = true;
         }
 
         public void reset()
@@ -135,6 +136,8 @@ namespace Sprint_0.Scripts
         public bool IsSuspended { get => linkState.IsSuspended; }
 
         public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
+
+        public bool BoomerangReady { get; set; }
     }
 
 }
