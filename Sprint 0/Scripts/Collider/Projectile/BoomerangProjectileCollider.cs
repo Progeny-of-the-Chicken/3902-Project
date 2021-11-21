@@ -46,7 +46,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
             }
             else if (!Owner.Friendly && ((Boomerang)Owner).EnemyOwner is Goriya)
             {
-                ((Goriya)((Boomerang)Owner).EnemyOwner).boomerang = false;
+                ((Goriya)((Boomerang)Owner).EnemyOwner).boomerangActive = false;
             }
         }
     }

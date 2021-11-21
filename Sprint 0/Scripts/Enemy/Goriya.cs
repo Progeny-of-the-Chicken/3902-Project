@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        public bool boomerang { get; set; }
+        public bool boomerangActive { get; set; }
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
 
@@ -50,14 +50,14 @@ namespace Sprint_0.Scripts.Enemy
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
-            boomerang = false;
+            boomerangActive = false;
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
         {
-            if (boomerang == false)
+            if (boomerangActive == false)
             {
                 if (!inKnockBack)
                 {
@@ -71,7 +71,7 @@ namespace Sprint_0.Scripts.Enemy
             }
             else
             {
-                boomerang = !TimeoutBoomerang(t);
+                boomerangActive = !TimeoutBoomerang(t);
             }
             collider.Update(location);
         }
@@ -114,7 +114,7 @@ namespace Sprint_0.Scripts.Enemy
         public void ShootProjectile()
         {
             ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
-            boomerang = true;
+            boomerangActive = true;
             timeSinceBoomerangThrow = ObjectConstants.counterInitialVal_float;
         }
 
