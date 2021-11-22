@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Movement.MovementStrategy;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Movement
 {
@@ -19,9 +20,18 @@ namespace Sprint_0.Scripts.Movement
         {
         }
 
-        public IMovementStrategy CreateKnockbackStrategy(Vector2 directionVector)
+        public IMovementStrategy CreateMovementStrategyForEnemy(Vector2 directionVector, EnemyType type)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DefaultEnemyKnockbackSpeed, ObjectConstants.zeroPauseTime);
+            return type switch
+            {
+                EnemyType.Stalfos => CreateStalfosMovementStrategy(directionVector),
+                _ => CreateFreezeStrategy()
+            };
+        }
+
+        public IMovementStrategy CreateKnockbackStrategy(Vector2 directionVector, float knockbackSpeed)
+        {
+            return new MoveInDirectionStrategy(directionVector, knockbackSpeed, ObjectConstants.zeroPauseTime);
         }
 
         public IMovementStrategy CreateFreezeStrategy()

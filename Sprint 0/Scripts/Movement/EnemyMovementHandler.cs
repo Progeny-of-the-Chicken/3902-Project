@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Movement
 {
@@ -18,7 +19,8 @@ namespace Sprint_0.Scripts.Movement
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
         private float timeSinceDisruption = ObjectConstants.counterInitialVal_float;
         private float moveTime;
-        private float disruptionTime = ObjectConstants.counterInitialVal_float;
+        private EnemyType enemyType;
+        private float disruptionTime;
         private bool disruptionOccurring = false;
 
         public Vector2 Location { get => location; }
@@ -27,14 +29,16 @@ namespace Sprint_0.Scripts.Movement
 
         public bool DisruptionOccurring { get => disruptionOccurring; }
 
-        public EnemyMovementHandler(IMovementStrategy movementStrategy, float moveTime, List<Vector2> possibleVectors)
+        public EnemyMovementHandler(float moveTime, Vector2 location, List<Vector2> possibleVectors, EnemyType type)
         {
-            defaultStrategy = selectedStrategy = movementStrategy;
             this.moveTime = moveTime;
+            this.location = location;
             this.possibleVectors = possibleVectors;
+            enemyType = type;
 
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             directionVector = GetRandomDirection();
+            defaultStrategy = selectedStrategy = MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType);
         }
 
         public void Move(GameTime gameTime)
@@ -50,29 +54,16 @@ namespace Sprint_0.Scripts.Movement
             }
         }
 
-        public void SetStrategy(IMovementStrategy strategy)
+        public void SetDisruptionStrategy(IMovementStrategy strategy, float duration)
         {
             selectedStrategy = strategy;
+            disruptionTime = duration;
+            disruptionOccurring = true;
         }
 
         public void Displace(Vector2 direction)
         {
             location += direction;
-        }
-
-        public void Knockback(Vector2 direction, float knockbackTime)
-        {
-            selectedStrategy = MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction);
-            disruptionTime = (float)knockbackTime;
-        }
-
-        public void Freeze(float freezeTime)
-        {
-            selectedStrategy = MovementStrategyFactory.Instance.CreateFreezeStrategy();
-            if (freezeTime > disruptionTime)
-            {
-                disruptionTime = freezeTime;
-            }
         }
 
         //----- Helper methods for movement transition -----//
@@ -84,6 +75,7 @@ namespace Sprint_0.Scripts.Movement
             if (timeSinceMove >= moveTime)
             {
                 directionVector = GetRandomDirection();
+                selectedStrategy = MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType);
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
         }

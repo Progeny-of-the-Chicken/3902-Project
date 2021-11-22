@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Movement
 {
@@ -52,24 +53,17 @@ namespace Sprint_0.Scripts.Movement
             };
         }
 
-        public EnemyMovementHandler CreateStalfosEnemyHandler(IMovementStrategy movementStrategy)
+        public EnemyMovementHandler CreateMovementHandlerForEnemy(Vector2 location, EnemyType type)
         {
-            return new EnemyMovementHandler(movementStrategy, (float)ObjectConstants.StalfosMoveTime, CardinalVectors);
-        }
-
-        public EnemyMovementHandler CreateGelMovementHandler(IMovementStrategy movementStrategy)
-        {
-            return new EnemyMovementHandler(movementStrategy, (float)ObjectConstants.GelMoveTime, CardinalVectors);
-        }
-
-        public EnemyMovementHandler CreateZolMovementHandler(IMovementStrategy movementStrategy)
-        {
-            return new EnemyMovementHandler(movementStrategy, (float)ObjectConstants.ZolMoveTime, CardinalVectors);
-        }
-
-        public EnemyMovementHandler CreateAquamentusMovementHandler(IMovementStrategy movementStrategy)
-        {
-            return new EnemyMovementHandler(movementStrategy, ObjectConstants.counterInitialVal_float, HorizontalVectors);
+            return type switch
+            {
+                EnemyType.Stalfos => new EnemyMovementHandler((float)ObjectConstants.StalfosMoveTime, location, CardinalVectors, type),
+                EnemyType.Gel => new EnemyMovementHandler((float)ObjectConstants.GelMoveTime, location, CardinalVectors, type),
+                EnemyType.Zol => new EnemyMovementHandler((float)ObjectConstants.ZolMoveTime, location, CardinalVectors, type),
+                EnemyType.Aquamentus => new EnemyMovementHandler((float)ObjectConstants.DefaultEnemyMoveTime, location, HorizontalVectors, type),
+                // Default only happens upon missing enemy movement handler implementation
+                _ => null
+            };
         }
     }
 }

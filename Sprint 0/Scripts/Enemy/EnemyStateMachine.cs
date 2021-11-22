@@ -7,8 +7,8 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyStateMachine
     {
-        private enum State { Base, Knockback, Frozen, Dead};
-        private Dictionary<State, float> stateDurations = new Dictionary<State, float>();
+        // TODO: Damaged state
+        public enum State { Base, Knockback, Frozen};
 
         private EnemyMovementHandler movement;
         private State currentState = State.Base;
@@ -21,25 +21,26 @@ namespace Sprint_0.Scripts.Enemy
 
         public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(movement.DirectionVector); }
 
+        public State GetState { get => currentState; }
+
         public int Health { get => health; }
 
-        public bool CheckDelete { get => currentState == State.Dead; }
+        public bool CheckDelete { get => (health <= ObjectConstants.zero); }
 
         //----- Public methods -----//
 
-        public EnemyStateMachine(EnemyMovementHandler movementHandler, float moveTime)
+        public EnemyStateMachine(Vector2 startLocation, EnemyType type, int health)
         {
-            stateDurations.Add(State.Base, moveTime);
-            stateDurations.Add(State.Frozen, (float)ObjectConstants.clockFreezeSeconds);
-            stateDurations.Add(State.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
-            stateDurations.Add(State.Dead, ObjectConstants.counterInitialVal_float);
-
-            // TODO: Decide whether to pass an enum for enemy and declare movement handler here
-            movement = movementHandler;
+            movement = EnemyMovementHandlerFactory.Instance.CreateMovementHandlerForEnemy(startLocation, type);
+            this.health = health;
         }
 
         public void Update(GameTime gameTime)
         {
+            if (!movement.DisruptionOccurring)
+            {
+                currentState = State.Base;
+            }
             movement.Move(gameTime);
         }
 
@@ -49,7 +50,6 @@ namespace Sprint_0.Scripts.Enemy
             if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(Location, Effect.EffectType.Pop);
-                currentState = State.Dead;
                 SFXManager.Instance.PlayEnemyDeath();
             }
             SFXManager.Instance.PlayEnemyHit();
@@ -60,15 +60,15 @@ namespace Sprint_0.Scripts.Enemy
             movement.Displace(direction);
         }
 
-        public void Knockback(Vector2 direction)
+        public void Knockback(Vector2 direction, float knockbackTime)
         {
-            movement.Knockback(direction, stateDurations[State.Knockback]);
+            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction, ObjectConstants.DefaultEnemyKnockbackSpeed), knockbackTime);
             currentState = State.Knockback;
         }
 
         public void Freeze(float freezeTime)
         {
-            movement.Freeze(freezeTime);
+            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateFreezeStrategy(), freezeTime);
             currentState = State.Frozen;
         }
 
