@@ -19,14 +19,24 @@ namespace Sprint_0.Scripts.Movement
         {
         }
 
-        public IMovementStrategy CreateIdleStrategy()
+        public IMovementStrategy CreateKnockbackStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DefaultEnemyKnockbackSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        public IMovementStrategy CreateFreezeStrategy()
         {
             return new IdleStrategy();
         }
 
-        public IMovementStrategy CreateKnockbackStrategy(Vector2 directionVector)
+        public IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DefaultEnemyKnockbackSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ZolMoveSpeed, (float)ObjectConstants.ZolPauseTime);
+        }
+
+        public IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GelMoveSpeed, (float)ObjectConstants.GelPauseTime);
         }
     }
 }

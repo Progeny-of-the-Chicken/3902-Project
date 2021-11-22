@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Movement;
 using Sprint_0.Scripts.Terrain;
@@ -8,17 +9,16 @@ namespace Sprint_0.Scripts.Enemy
     public class EnemyStateMachine
     {
         private enum State { Base, Knockback, Frozen, Dead};
-        private Dictionary<State, float> stateDurations = new Dictionary<State, float>
-        {
-            { State.Frozen, (float)ObjectConstants.clockFreezeSeconds },
-            { State.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime }
-        };
+        private Dictionary<State, float> stateDurations = new Dictionary<State, float>();
 
         private EnemyMovementHandler movement;
+        private Vector2 directionVector;
         private State currentState = State.Base;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         private int health;
+
+        //----- Public properties -----//
 
         public Vector2 Location { get => movement.Location; }
 
@@ -26,17 +26,19 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CheckDelete { get => currentState == State.Dead; }
 
-        public EnemyStateMachine()
+        //----- Public methods -----//
+
+        public EnemyStateMachine(float moveTime)
         {
+            stateDurations.Add(State.Base, moveTime);
+            stateDurations.Add(State.Frozen, (float)ObjectConstants.clockFreezeSeconds);
+            stateDurations.Add(State.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
+            stateDurations.Add(State.Dead, ObjectConstants.counterInitialVal_float);
         }
 
         public void Update(GameTime gameTime)
         {
             movement.Move(gameTime);
-            if (currentState == State.Knockback || currentState == State.Frozen)
-            {
-                CountDownState(gameTime);
-            }
         }
 
         public void TakeDamage(int damage)
@@ -69,17 +71,15 @@ namespace Sprint_0.Scripts.Enemy
             currentState = State.Frozen;
         }
 
-        //----- Helper methods for state transitions -----//
-
-        private void CountDownState(GameTime gameTime)
+        private void ResetState()
         {
-            timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (timeSinceMove >= stateDurations[currentState])
+            if (currentState == State.Base)
             {
-                currentState = State.Base;
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
+                
             }
+            currentState = State.Base;
         }
+
+        //----- Helper methods for sprites -----//
     }
 }
