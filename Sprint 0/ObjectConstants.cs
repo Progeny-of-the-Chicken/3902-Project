@@ -534,5 +534,42 @@ namespace Sprint_0
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
+
+        //Sound effects
+        public const string soundDirectoryStr = "Sounds/";
+        public const string bombExplosionStr = soundDirectoryStr + "LOZ_Bomb_Blow";
+        public const string bombPlacementStr = soundDirectoryStr + "LOZ_Bomb_Drop";
+        public const string bossHitStr = soundDirectoryStr + "LOZ_Boss_Hit";
+        public const string bossScream1Str = soundDirectoryStr + "LOZ_Boss_Scream1";
+        public const string bossScream2Str = soundDirectoryStr +"LOZ_Boss_Scream2";
+        public const string bossScream3Str = soundDirectoryStr + "LOZ_Boss_Scream3";
+        public const string doorUnlockingStr = soundDirectoryStr + "LOZ_Door_Unlock";
+        public const string enemyDeathStr = soundDirectoryStr + "LOZ_Enemy_Die";
+        public const string enemyHitStr = soundDirectoryStr + "LOZ_Enemy_Hit";
+        public const string fanfareStr = soundDirectoryStr + "LOZ_Fanfare";
+        public const string fireArrowBoomerangStr = soundDirectoryStr + "LOZ_Arrow_Boomerang";
+        public const string fireCandleStr = soundDirectoryStr + "LOZ_Candle";
+        public const string fireMagicRodStr = soundDirectoryStr + "LOZ_MagicalRod";
+        public const string gameOverStr = soundDirectoryStr + "GameOver";
+        public const string keySpawnStr = soundDirectoryStr + "LOZ_Key_Appear";
+        public const string linkDeathStr = soundDirectoryStr + "LOZ_Link_Die";
+        public const string linkHitStr = soundDirectoryStr + "LOZ_Link_Hurt";
+        public const string lowHealthStr = soundDirectoryStr + "LOZ_LowHealth";
+        public const string musicStr = soundDirectoryStr + "Dungeon Theme";
+        public const string pickUpHeartStr = soundDirectoryStr + "LOZ_Get_Heart";
+        public const string pickUpItemStr = soundDirectoryStr + "LOZ_Get_Item";
+        public const string pickupRupeeStr = soundDirectoryStr + "LOZ_Get_Rupee";
+        public const string recorderStr = soundDirectoryStr + "LOZ_Recorder";
+        public const string refillLoopStr = soundDirectoryStr + "LOZ_Refill_Loop";
+        public const string secretFoundStr = soundDirectoryStr + "LOZ_Secret";
+        public const string shieldDeflectStr = soundDirectoryStr + "LOZ_Shield";
+        public const string shoreStr = soundDirectoryStr + "LOZ_Shore";
+        public const string stairsStr = soundDirectoryStr + "LOZ_Stairs";
+        public const string swordCombinedStr = soundDirectoryStr + "LOZ_Sword_Combined";
+        public const string swordShootStr = soundDirectoryStr + "LOZ_Sword_Shoot";
+        public const string swordSlashStr = soundDirectoryStr + "LOZ_Sword_Slash";
+        public const string textScrollStr = soundDirectoryStr + "LOZ_Text";
+        public const string textScrollSlowStr = soundDirectoryStr + "LOZ_Text_Slow";
+        public const string triforcePieceSoundStr = soundDirectoryStr + "Triforce Piece";
     }
 }
