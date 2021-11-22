@@ -242,6 +242,9 @@ namespace Sprint_0
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
+        // Movement
+        public const float zeroPauseTime = 0f;
+
 
         //----- Collision constant values -----//
         public static Vector2 degreeRotationCW90_v = new Vector2(0, -1);

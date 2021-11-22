@@ -1,12 +1,13 @@
-﻿using Sprint_0.Scripts.Movement.MovementStrategy;
+﻿using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Movement.MovementStrategy;
 
 namespace Sprint_0.Scripts.Movement
 {
     public class MovementStrategyFactory
     {
-        private MovementStrategyFactory instance = new MovementStrategyFactory();
+        private static MovementStrategyFactory instance = new MovementStrategyFactory();
 
-        public MovementStrategyFactory Instance
+        public static MovementStrategyFactory Instance
         {
             get
             {
@@ -16,6 +17,16 @@ namespace Sprint_0.Scripts.Movement
 
         private MovementStrategyFactory()
         {
+        }
+
+        public IMovementStrategy CreateIdleStrategy()
+        {
+            return new IdleStrategy();
+        }
+
+        public IMovementStrategy CreateKnockbackStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DefaultEnemyKnockbackSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }
