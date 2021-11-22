@@ -29,14 +29,19 @@ namespace Sprint_0.Scripts.Movement
             return new IdleStrategy();
         }
 
-        public IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
+        public IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ZolMoveSpeed, (float)ObjectConstants.ZolPauseTime);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.StalfosMoveSpeed, ObjectConstants.zeroPauseTime);
         }
 
         public IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.GelMoveSpeed, (float)ObjectConstants.GelPauseTime);
+        }
+
+        public IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ZolMoveSpeed, (float)ObjectConstants.ZolPauseTime);
         }
     }
 }

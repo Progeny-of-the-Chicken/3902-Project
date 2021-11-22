@@ -25,9 +25,11 @@ namespace Sprint_0.Scripts.Movement
 
         public Vector2 DirectionVector { get => directionVector; }
 
-        public EnemyMovementHandler(IMovementStrategy startingStrategy, float moveTime, List<Vector2> possibleVectors)
+        public bool DisruptionOccurring { get => disruptionOccurring; }
+
+        public EnemyMovementHandler(IMovementStrategy movementStrategy, float moveTime, List<Vector2> possibleVectors)
         {
-            defaultStrategy = selectedStrategy = startingStrategy;
+            defaultStrategy = selectedStrategy = movementStrategy;
             this.moveTime = moveTime;
             this.possibleVectors = possibleVectors;
 
@@ -51,11 +53,6 @@ namespace Sprint_0.Scripts.Movement
         public void SetStrategy(IMovementStrategy strategy)
         {
             selectedStrategy = strategy;
-        }
-
-        public void SetStrategyToDefault()
-        {
-            selectedStrategy = defaultStrategy;
         }
 
         public void Displace(Vector2 direction)
@@ -94,6 +91,7 @@ namespace Sprint_0.Scripts.Movement
 
             if (timeSinceDisruption >= disruptionTime)
             {
+                selectedStrategy = defaultStrategy;
                 disruptionOccurring = false;
                 timeSinceDisruption = ObjectConstants.counterInitialVal_float;
             }

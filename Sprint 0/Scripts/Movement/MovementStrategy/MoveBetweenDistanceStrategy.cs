@@ -9,9 +9,10 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         private Vector2 startLocation;
         private Vector2 directionVector;
 
-        public MoveBetweenDistanceStrategy(Vector2 directionVector, float speed, int moveDistance)
+        public MoveBetweenDistanceStrategy(Vector2 startVector, Vector2 startLocation, float speed, int moveDistance)
         {
-            this.directionVector = directionVector;
+            directionVector = startVector;
+            this.startLocation = startLocation;
             this.speed = speed;
             this.moveDistance = moveDistance;
         }
