@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Movement;
 using Sprint_0.Scripts.Terrain;
@@ -12,9 +11,7 @@ namespace Sprint_0.Scripts.Enemy
         private Dictionary<State, float> stateDurations = new Dictionary<State, float>();
 
         private EnemyMovementHandler movement;
-        private Vector2 directionVector;
         private State currentState = State.Base;
-        private float timeSinceMove = ObjectConstants.counterInitialVal_float;
 
         private int health;
 
@@ -22,18 +19,23 @@ namespace Sprint_0.Scripts.Enemy
 
         public Vector2 Location { get => movement.Location; }
 
+        public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(movement.DirectionVector); }
+
         public int Health { get => health; }
 
         public bool CheckDelete { get => currentState == State.Dead; }
 
         //----- Public methods -----//
 
-        public EnemyStateMachine(float moveTime)
+        public EnemyStateMachine(EnemyMovementHandler movementHandler, float moveTime)
         {
             stateDurations.Add(State.Base, moveTime);
             stateDurations.Add(State.Frozen, (float)ObjectConstants.clockFreezeSeconds);
             stateDurations.Add(State.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
             stateDurations.Add(State.Dead, ObjectConstants.counterInitialVal_float);
+
+            // TODO: Decide whether to pass an enum for enemy and declare movement handler here
+            movement = movementHandler;
         }
 
         public void Update(GameTime gameTime)
@@ -46,7 +48,6 @@ namespace Sprint_0.Scripts.Enemy
             health -= damage;
             if (health <= ObjectConstants.zero)
             {
-                // TODO: Maybe move these back to enemy class
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(Location, Effect.EffectType.Pop);
                 currentState = State.Dead;
                 SFXManager.Instance.PlayEnemyDeath();
@@ -61,25 +62,29 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Knockback(Vector2 direction)
         {
-            movement.Knockback(direction);
+            movement.Knockback(direction, stateDurations[State.Knockback]);
             currentState = State.Knockback;
         }
 
-        public void Freeze()
+        public void Freeze(float freezeTime)
         {
-            movement.Freeze();
+            movement.Freeze(freezeTime);
             currentState = State.Frozen;
         }
 
-        private void ResetState()
-        {
-            if (currentState == State.Base)
-            {
-                
-            }
-            currentState = State.Base;
-        }
+        //----- Helper method for sprites -----//
 
-        //----- Helper methods for sprites -----//
+        private FacingDirection DirectionVectorToFacingDirection(Vector2 directionVector)
+        {
+            return directionVector switch
+            {
+                Vector2(1, 0) => FacingDirection.Right,
+                Vector2(0, -1) => FacingDirection.Up,
+                Vector2(-1, 0) => FacingDirection.Left,
+                Vector2(0, 1) => FacingDirection.Down,
+                // Default case are flying enemies
+                _ => FacingDirection.Right
+            };
+        }
     }
 }

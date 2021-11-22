@@ -66,5 +66,10 @@ namespace Sprint_0.Scripts.Movement
         {
             return new EnemyMovementHandler(movementStrategy, (float)ObjectConstants.ZolMoveTime, CardinalVectors);
         }
+
+        public EnemyMovementHandler CreateAquamentusMovementHandler(IMovementStrategy movementStrategy)
+        {
+            return new EnemyMovementHandler(movementStrategy, ObjectConstants.counterInitialVal_float, HorizontalVectors);
+        }
     }
 }

@@ -60,16 +60,19 @@ namespace Sprint_0.Scripts.Movement
             location += direction;
         }
 
-        public void Knockback(Vector2 direction)
+        public void Knockback(Vector2 direction, float knockbackTime)
         {
             selectedStrategy = MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction);
-            disruptionTime = (float)ObjectConstants.DefaultEnemyKnockbackTime;
+            disruptionTime = (float)knockbackTime;
         }
 
-        public void Freeze()
+        public void Freeze(float freezeTime)
         {
             selectedStrategy = MovementStrategyFactory.Instance.CreateFreezeStrategy();
-            disruptionTime = (float)ObjectConstants.clockFreezeSeconds;
+            if (freezeTime > disruptionTime)
+            {
+                disruptionTime = freezeTime;
+            }
         }
 
         //----- Helper methods for movement transition -----//
@@ -93,6 +96,7 @@ namespace Sprint_0.Scripts.Movement
             {
                 selectedStrategy = defaultStrategy;
                 disruptionOccurring = false;
+                disruptionTime = ObjectConstants.counterInitialVal_float;
                 timeSinceDisruption = ObjectConstants.counterInitialVal_float;
             }
         }
