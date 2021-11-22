@@ -21,8 +21,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public Stalfos(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.Stalfos, ObjectConstants.StalfosStartingHealth);
             sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            stateMachine = EnemyStateMachineFactory.Instance.CreateStateMachineForEnemy(location, EnemyType.Stalfos, (float)ObjectConstants.StalfosMoveTime, ObjectConstants.StalfosStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
-            if (stateMachine.GetState != EnemyStateMachine.State.Knockback)
+            if (stateMachine.GetState != EnemyStateMachine.EnemyState.Knockback)
             {
                 sprite.Update(gt);
             }
@@ -56,7 +56,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CheckDelete()
         {
-            return stateMachine.CheckDelete;
+            return stateMachine.IsDead;
         }
 
         public void Draw(SpriteBatch sb)

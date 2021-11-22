@@ -4,16 +4,16 @@ using Sprint_0.Scripts.Enemy;
 
 namespace Sprint_0.Scripts.Movement
 {
-    public class EnemyMovementHandlerFactory
+    public class EnemyStateMachineFactory
     {
         private List<Vector2> FlyVectors;
         private List<Vector2> CardinalVectors;
         private List<Vector2> HorizontalVectors;
         private List<Vector2> IdleVectors;
         
-        private static EnemyMovementHandlerFactory instance = new EnemyMovementHandlerFactory();
+        private static EnemyStateMachineFactory instance = new EnemyStateMachineFactory();
 
-        public static EnemyMovementHandlerFactory Instance
+        public static EnemyStateMachineFactory Instance
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Sprint_0.Scripts.Movement
             }
         }
 
-        private EnemyMovementHandlerFactory()
+        private EnemyStateMachineFactory()
         {
             FlyVectors = new List<Vector2>
             {
@@ -53,14 +53,14 @@ namespace Sprint_0.Scripts.Movement
             };
         }
 
-        public EnemyMovementHandler CreateMovementHandlerForEnemy(Vector2 location, EnemyType type)
+        public EnemyStateMachine CreateStateMachineForEnemy(Vector2 location, EnemyType type, float moveTime, int health)
         {
             return type switch
             {
-                EnemyType.Stalfos => new EnemyMovementHandler((float)ObjectConstants.StalfosMoveTime, location, CardinalVectors, type),
-                EnemyType.Gel => new EnemyMovementHandler((float)ObjectConstants.GelMoveTime, location, CardinalVectors, type),
-                EnemyType.Zol => new EnemyMovementHandler((float)ObjectConstants.ZolMoveTime, location, CardinalVectors, type),
-                EnemyType.Aquamentus => new EnemyMovementHandler((float)ObjectConstants.DefaultEnemyMoveTime, location, HorizontalVectors, type),
+                EnemyType.Stalfos => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
+                EnemyType.Gel => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
+                EnemyType.Zol => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
+                EnemyType.Aquamentus => new EnemyStateMachine(location, type, moveTime, health, HorizontalVectors),
                 // Default only happens upon missing enemy movement handler implementation
                 _ => null
             };

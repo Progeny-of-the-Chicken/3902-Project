@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Movement;
 using Sprint_0.Scripts.Terrain;
@@ -7,39 +8,60 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyStateMachine
     {
-        // TODO: Damaged state
-        public enum State { Base, Knockback, Frozen};
-
+        // TODO: Implement amaged state
+        public enum EnemyState { Movement, Knockback, Frozen};
+        private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
+        private byte[] random;
+        private List<Vector2> possibleVectors;
+        private Vector2 directionVector;
         private EnemyMovementHandler movement;
-        private State currentState = State.Base;
+        private EnemyState currentState = EnemyState.Movement;
 
+        private float timeSinceMove = ObjectConstants.counterInitialVal_float;
+        private float timeSinceDisruption = ObjectConstants.counterInitialVal_float;
+        private float moveTime;
+        private float disruptionTime;
+
+        private EnemyType enemyType;
         private int health;
+        private float knockbackSpeed = ObjectConstants.DefaultEnemyKnockbackSpeed;
 
         //----- Public properties -----//
 
         public Vector2 Location { get => movement.Location; }
 
-        public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(movement.DirectionVector); }
+        public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(directionVector); }
 
-        public State GetState { get => currentState; }
+        public EnemyState GetState { get => currentState; }
 
         public int Health { get => health; }
 
-        public bool CheckDelete { get => (health <= ObjectConstants.zero); }
+        public bool IsDead { get => (health <= ObjectConstants.zero); }
 
         //----- Public methods -----//
 
-        public EnemyStateMachine(Vector2 startLocation, EnemyType type, int health)
+        public EnemyStateMachine(Vector2 startLocation, EnemyType type, float moveTime, int health, List<Vector2> possibleVectors)
         {
-            movement = EnemyMovementHandlerFactory.Instance.CreateMovementHandlerForEnemy(startLocation, type);
+            enemyType = type;
             this.health = health;
+            this.moveTime = moveTime;
+            this.possibleVectors = possibleVectors;
+
+            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
+            randomDir = new RNGCryptoServiceProvider();
+            directionVector = GetRandomDirection();
+            movement = new EnemyMovementHandler(MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, type), startLocation);
         }
 
         public void Update(GameTime gameTime)
         {
-            if (!movement.DisruptionOccurring)
+            if (currentState == EnemyState.Movement)
             {
-                currentState = State.Base;
+                CountDownMove(gameTime);
+            }
+            else
+            {
+                CountDownDisruption(gameTime);
             }
             movement.Move(gameTime);
         }
@@ -62,14 +84,51 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Knockback(Vector2 direction, float knockbackTime)
         {
-            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction, ObjectConstants.DefaultEnemyKnockbackSpeed), knockbackTime);
-            currentState = State.Knockback;
+            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction, knockbackSpeed));
+            disruptionTime = knockbackTime;
+            currentState = EnemyState.Knockback;
         }
 
         public void Freeze(float freezeTime)
         {
-            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateFreezeStrategy(), freezeTime);
-            currentState = State.Frozen;
+            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateFreezeStrategy());
+            disruptionTime = freezeTime;
+            currentState = EnemyState.Frozen;
+        }
+
+        //----- Helper methods for movement transition -----//
+
+        private void CountDownMove(GameTime gameTime)
+        {
+            timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timeSinceMove >= moveTime)
+            {
+                directionVector = GetRandomDirection();
+                movement.SetMovementStrategy(MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType));
+                timeSinceMove = ObjectConstants.counterInitialVal_float;
+            }
+        }
+
+        private void CountDownDisruption(GameTime gameTime)
+        {
+            timeSinceDisruption += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timeSinceDisruption >= disruptionTime)
+            {
+                movement.ResumeMovementStrategy();
+                currentState = EnemyState.Movement;
+                disruptionTime = ObjectConstants.counterInitialVal_float;
+                timeSinceDisruption = ObjectConstants.counterInitialVal_float;
+            }
+        }
+
+        //----- Random helper -----//
+
+        private Vector2 GetRandomDirection()
+        {
+            randomDir.GetBytes(random);
+            return possibleVectors[random[ObjectConstants.firstInArray] % possibleVectors.Count];
         }
 
         //----- Helper method for sprites -----//

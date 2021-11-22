@@ -39,6 +39,8 @@ namespace Sprint_0.Scripts.Movement
             return new IdleStrategy();
         }
 
+        // TODO: Decide whether to make these private
+
         public IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.StalfosMoveSpeed, ObjectConstants.zeroPauseTime);
