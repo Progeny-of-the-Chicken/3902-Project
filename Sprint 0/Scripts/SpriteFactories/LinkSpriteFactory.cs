@@ -10,6 +10,8 @@ namespace Sprint_0.Scripts.SpriteFactories
     {
         private Texture2D baseSpriteSheet;
         private Texture2D blueLinkSpriteSheet;
+        private Texture2D shotgunSpriteSheet;
+        private Texture2D blueLinkShotgunSpriteSheet;
 
         private static LinkSpriteFactory instance = new LinkSpriteFactory();
 
@@ -29,6 +31,8 @@ namespace Sprint_0.Scripts.SpriteFactories
         {
             baseSpriteSheet = content.Load<Texture2D>(ObjectConstants.linkFile);
             blueLinkSpriteSheet = content.Load<Texture2D>(ObjectConstants.blueLinkFile);
+            shotgunSpriteSheet = content.Load<Texture2D>(ObjectConstants.shotgunFile);
+            blueLinkShotgunSpriteSheet = content.Load<Texture2D>(ObjectConstants.blueLinkShotgunFile);
         }
 
         public Texture2D GetBaseSpriteSheet()
@@ -39,6 +43,15 @@ namespace Sprint_0.Scripts.SpriteFactories
         public Texture2D GetBlueSpriteSheet()
         {
             return blueLinkSpriteSheet;
+        }
+        public Texture2D GetShotgunSpriteSheet()
+        {
+            return shotgunSpriteSheet;
+        }
+
+        public Texture2D GetBlueShotgunSpriteSheet()
+        {
+            return blueLinkShotgunSpriteSheet;
         }
 
         public ISprite GetSpriteForState(LinkStateMachine linkState)
@@ -65,6 +78,8 @@ namespace Sprint_0.Scripts.SpriteFactories
                 return new LinkUsingItemSprite(linkState);
             if (linkState.IsPickingUpItem)
                 return new LinkPickUpSprite(linkState);
+            if (linkState.ShotgunIsBeingUsed)
+                return new LinkShotgunSprite(linkState);
             else
                 return new LinkStandingSprite(linkState);
         }
@@ -83,6 +98,8 @@ namespace Sprint_0.Scripts.SpriteFactories
                 return new BlueLinkUsingItemSprite(linkState);
             if (linkState.IsPickingUpItem)
                 return new BlueLinkPickUpSprite(linkState);
+            if (linkState.ShotgunIsBeingUsed)
+                return new BlueLinkShotgunSprite(linkState);
             else
                 return new BlueLinkStandingSprite(linkState);
         }

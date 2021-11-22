@@ -52,6 +52,11 @@ namespace Sprint_0.Scripts.Commands
                     Link.Instance.HealBy((int)(Link.Instance.MaxHealth));
                     Inventory.Instance.RemoveWeapon(WeaponType.Potion);
                     break;
+                case WeaponType.Shotgun:
+                    //We don't have to worry about the link use item method at the end because the shotgun counter will block it from doing anything
+                    Link.Instance.UseShotgun();
+                    //TODO: use the rest of the shotgun
+                    break;
             }
             link.UseItem();
         }

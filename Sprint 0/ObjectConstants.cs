@@ -254,6 +254,8 @@ namespace Sprint_0
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
         public const string blueLinkFile = "BlueLinkSpriteSheet";
+        public const string shotgunFile = "LinkShotGunSpriteSheet";
+        public const string blueLinkShotgunFile = "BlueLinkShotGunSpriteSheet";
         public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
@@ -290,6 +292,8 @@ namespace Sprint_0
         public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
+        public const string ShotgunItemStr = "ShotgunItem";
+        public const string ShotgunShellItemStr = "ShotgunShellItem";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
         public const string NorthClosedSpriteStr = "NorthClosedSprite";
@@ -535,5 +539,7 @@ namespace Sprint_0
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
+        public const int inventoryStartingShotgunShells = 0;
+        public const int shotgunShellsPerPickUp = 5;
     }
 }

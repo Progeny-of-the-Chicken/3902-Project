@@ -29,6 +29,25 @@ namespace Sprint_0
             new Rectangle(35, 47, 16, 29),
             new Rectangle(53, 47, 16, 18) };
 
+        public static Rectangle[] linkShotgunFramesRight = {
+            new Rectangle(1, 38, 16, 15),
+            new Rectangle(18, 38, 21, 15),
+            new Rectangle(46, 38, 22, 15),
+            new Rectangle(70, 37, 15, 16)
+         };
+        public static Rectangle[] linkShotgunFramesDown = {
+            new Rectangle(1, 7, 16, 16),
+            new Rectangle(18, 7, 16, 23),
+            new Rectangle(35, 7, 16, 23),
+            new Rectangle(53, 7, 13, 15)
+        };
+        public static Rectangle[] linkShotgunFramesUp = {
+            new Rectangle(1, 65, 16, 20),
+            new Rectangle(18, 58, 16, 27),
+            new Rectangle(37, 57, 12, 28),
+            new Rectangle(54, 65, 12, 20)
+        };
+
         public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 12, 16),
             new Rectangle(231, 11, 16, 16),
             new Rectangle(214, 11, 12, 16),
@@ -42,6 +61,10 @@ namespace Sprint_0
             new Rectangle(0, 0, 7, 8),
             new Rectangle(0, 8, 7, 8)
         };
+
+        public static Rectangle shotGunItemFrame = new Rectangle(72, 61, 10, 8);
+        public static Rectangle shotGunShellItemFrame = new Rectangle(74, 74, 3, 7);
+
         public static Rectangle heartContainerFrame = new Rectangle(25, 1, 13, 13);
         public static List<Rectangle> fairyFrames = new List<Rectangle>
         {
@@ -72,6 +95,7 @@ namespace Sprint_0
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
+        public static Rectangle shotgunShellProjectileFrame = new Rectangle(71, 7, 16, 15);
         public static Rectangle silverArrowFrame = new Rectangle(36, 190, 16, 5);
         public static Rectangle bombFrame = new Rectangle(145, 185, 16, 16);
         public static List<Rectangle> basicBoomerangFrames = new List<Rectangle>

@@ -97,5 +97,13 @@ namespace Sprint_0.Scripts.Items
         {
             return new Item(location, ItemType.SilverArrowItem);
         }
+        public IItem CreateShotgunItem(Vector2 location)
+        {
+            return new Item(location, ItemType.ShotgunItem);
+        }
+        public IItem CreateShotgunShellItem(Vector2 location)
+        {
+            return new Item(location, ItemType.ShotgunShellItem);
+        }
     }
 }

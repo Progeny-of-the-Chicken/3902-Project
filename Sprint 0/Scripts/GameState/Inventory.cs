@@ -33,6 +33,7 @@ namespace Sprint_0.Scripts.GameState
             Rupee = ObjectConstants.inventoryStartingRupees;
             Key = ObjectConstants.inventoryStartingKeys;
             Bomb = ObjectConstants.inventoryStartingBombs;
+            ShotgunShells = ObjectConstants.inventoryStartingShotgunShells;
         }
 
         public void reset()
@@ -68,5 +69,7 @@ namespace Sprint_0.Scripts.GameState
         public int Key { get; set; }
 
         public int Bomb { get; set; }
+
+        public int ShotgunShells { get; set; }
     }
 }

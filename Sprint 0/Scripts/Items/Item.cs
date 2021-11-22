@@ -134,6 +134,14 @@ namespace Sprint_0.Scripts.Items
                     Collider = ItemColliderFactory.Instance.CreateSilverArrowItemCollider(this);
                     sprite = ItemSpriteFactory.Instance.CreateSilverArrowSprite();
                     break;
+                case ItemType.ShotgunItem:
+                    Collider = ItemColliderFactory.Instance.CreateShotgunItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateShotgunItemSprite();
+                    break;
+                case ItemType.ShotgunShellItem:
+                    Collider = ItemColliderFactory.Instance.CreateShotgunShellItemCollider(this);
+                    sprite = ItemSpriteFactory.Instance.CreateShotgunShellItemSprite();
+                    break;
                 default:
                     // Should never fire
                     Collider = ItemColliderFactory.Instance.CreateSmallHeartItemCollider(this);

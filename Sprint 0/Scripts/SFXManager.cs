@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts
 
         private SFXManager()
         {
-
+            SoundEffect.MasterVolume = 0;
         }
         SoundEffect bombExplosion;
         SoundEffect bombPlacement;

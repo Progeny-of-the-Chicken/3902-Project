@@ -9,6 +9,7 @@
         SilverArrow,
         Bow,
         BlueCandle,
-        Potion
+        Potion,
+        Shotgun
     }
 }

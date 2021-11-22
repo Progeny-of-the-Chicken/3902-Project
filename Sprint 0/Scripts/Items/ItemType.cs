@@ -17,6 +17,8 @@
         Compass,
         TriforcePiece,
         BasicArrowItem,
-        SilverArrowItem
+        SilverArrowItem,
+        ShotgunItem,
+        ShotgunShellItem
     }
 }

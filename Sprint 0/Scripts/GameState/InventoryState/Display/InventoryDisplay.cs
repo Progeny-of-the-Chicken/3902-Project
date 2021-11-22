@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.GameState.InventoryState.Display
 {
@@ -98,7 +99,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 Rectangle sourceRec = getFrameForWeapon(Inventory.Instance.Weapons[i]);
                 // Center weapon on inventory slot
                 Vector2 weaponSlot = backdropLocation + ObjectConstants.inventorySlotLocations[i] + ObjectConstants.inventoryWeaponFromSlotOffset;
-                itemSprites.Add(InventorySpriteFactory.Instance.CreateWeaponSprite(sourceRec), weaponSlot);
+                if (Inventory.Instance.Weapons[i] == WeaponType.Shotgun)
+                    itemSprites.Add(ItemSpriteFactory.Instance.CreateShotgunItemSprite(), weaponSlot);
+
+                else
+                    itemSprites.Add(InventorySpriteFactory.Instance.CreateWeaponSprite(sourceRec), weaponSlot);
             }
             // Passive buffs
             if (Inventory.Instance.BlueRing)
@@ -139,6 +144,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
                 WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
+                WeaponType.Shotgun => SpriteRectangles.shotGunItemFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };

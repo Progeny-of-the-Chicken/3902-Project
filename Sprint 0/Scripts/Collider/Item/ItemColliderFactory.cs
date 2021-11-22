@@ -97,5 +97,15 @@ namespace Sprint_0.Scripts.Collider.Item
         {
             return new GenericItemCollider(item);
         }
+
+        public IItemCollider CreateShotgunItemCollider(IItem item)
+        {
+            return new GenericItemCollider(item);
+        }
+
+        public IItemCollider CreateShotgunShellItemCollider(IItem item)
+        {
+            return new GenericItemCollider(item);
+        }
     }
 }
