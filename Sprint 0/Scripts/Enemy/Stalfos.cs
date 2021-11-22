@@ -9,9 +9,9 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class Stalfos : IEnemy
     {
-        ISprite sprite;
+        private ISprite sprite;
         private EnemyStateMachine stateMachine;
-        IEnemyCollider collider;
+        private IEnemyCollider collider;
 
         public IEnemyCollider Collider { get => collider; }
 

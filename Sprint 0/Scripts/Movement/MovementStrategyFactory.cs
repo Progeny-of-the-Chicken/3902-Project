@@ -25,6 +25,8 @@ namespace Sprint_0.Scripts.Movement
             return type switch
             {
                 EnemyType.Stalfos => CreateStalfosMovementStrategy(directionVector),
+                EnemyType.Gel => CreateGelMovementStrategy(directionVector),
+                EnemyType.Zol => CreateZolMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }

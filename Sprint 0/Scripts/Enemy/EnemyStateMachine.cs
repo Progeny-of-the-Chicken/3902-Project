@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyStateMachine
     {
-        // TODO: Implement amaged state
+        // TODO: Implement damaged state
         public enum EnemyState { Movement, Knockback, Frozen};
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private byte[] random;
