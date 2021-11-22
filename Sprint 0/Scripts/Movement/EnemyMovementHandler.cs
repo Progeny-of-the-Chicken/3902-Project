@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Movement
 {
-    public class MovementHandler
+    public class EnemyMovementHandler
     {
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private byte[] random;
@@ -12,23 +12,20 @@ namespace Sprint_0.Scripts.Movement
 
         private IMovementStrategy defaultStrategy;
         private IMovementStrategy selectedStrategy;
-        public Vector2 location;
+        private Vector2 location;
 
-        public MovementHandler(IMovementStrategy startingStrategy)
+        public Vector2 Location { get => location; }
+
+        public EnemyMovementHandler(IMovementStrategy startingStrategy)
         {
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
 
             defaultStrategy = selectedStrategy = startingStrategy;
         }
 
-        public void Update(GameTime gameTime)
+        public void Move(GameTime gameTime)
         {
-
-        }
-
-        public void Move(GameTime gameTime, Vector2 location)
-        {
-            this.location = selectedStrategy.Move(gameTime, location);
+            location = selectedStrategy.Move(gameTime, location);
         }
 
         public void SetStrategy(IMovementStrategy strategy)
@@ -49,6 +46,11 @@ namespace Sprint_0.Scripts.Movement
         public void Knockback(Vector2 direction)
         {
             selectedStrategy = MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction);
+        }
+
+        public void Freeze()
+        {
+            selectedStrategy = MovementStrategyFactory.Instance.CreateIdleStrategy();
         }
 
         //----- Random helper -----//
