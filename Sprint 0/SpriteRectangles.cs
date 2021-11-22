@@ -69,6 +69,7 @@ namespace Sprint_0
         };
         public static Rectangle basicArrowItemFrame = new Rectangle(154, 0, 5, 16);
         public static Rectangle silverArrowItemFrame = new Rectangle(154, 16, 5, 16);
+        public static Rectangle blueRingItemFrame = new Rectangle(169, 16, 8, 16);
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
@@ -172,6 +173,7 @@ namespace Sprint_0
         public static Rectangle inventoryBasicArrowFrame = new Rectangle(617, 137, 5, 16);
         public static Rectangle inventorySilverArrowFrame = new Rectangle(626, 137, 5, 16);
         public static Rectangle inventoryBlueRingFrame = new Rectangle(549, 156, 8, 16);
+        public static Rectangle inventoryMagicKeyFrame = new Rectangle(579, 156, 8, 16);
         public static Rectangle inventoryMapFrame = new Rectangle(601, 156, 8, 16);
         public static Rectangle inventoryCompassFrame = new Rectangle(612, 156, 15, 16);
         public static List<Rectangle> backdropCoverFrames = new List<Rectangle>
@@ -274,5 +276,6 @@ namespace Sprint_0
         public static Rectangle fontXFrame = new Rectangle(352, 64, 8, 8);
         public static Rectangle fontYFrame = new Rectangle(368, 64, 8, 8);
         public static Rectangle fontZFrame = new Rectangle(384, 64, 8, 8);
+        public static Rectangle fontSpaceFrame = new Rectangle(337, 69, 8, 8);
     }
 }

@@ -21,8 +21,6 @@ namespace Sprint_0.Scripts.Enemy
         private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
-        List<IProjectile> projectiles;
-
         Vector2 location;
         Vector2 direction = ObjectConstants.LeftUnitVector;
         Vector2 startLocation;
@@ -37,7 +35,6 @@ namespace Sprint_0.Scripts.Enemy
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
             sprite = moveSprite;
-            projectiles = new List<IProjectile>();
 
             Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
             collider = new GenericEnemyCollider(this, collision);
@@ -59,10 +56,6 @@ namespace Sprint_0.Scripts.Enemy
             {
                 sprite = moveSprite;
             }
-            foreach (IProjectile projectile in projectiles)
-            {
-                projectile.Update(t);
-            }
         }
 
         public void Move(GameTime t)
@@ -78,7 +71,7 @@ namespace Sprint_0.Scripts.Enemy
         void ShootProjectile()
         {
             timeSinceFire = ObjectConstants.counterInitialVal_float;
-            projectiles = ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location - ObjectConstants.LeftUnitVector * ObjectConstants.scaledStdWidthHeight, FacingDirection.Left);
+            ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location - ObjectConstants.LeftUnitVector * ObjectConstants.scaledStdWidthHeight, FacingDirection.Left);
             sprite = shootSprite;
             SFXManager.Instance.PlayBossScream1();
         }
@@ -109,10 +102,6 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, location);
-            foreach (IProjectile projectile in projectiles)
-            {
-                projectile.Draw(sb);
-            }
         }
     }
 }

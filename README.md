@@ -36,3 +36,20 @@ In the inventory you can use:
 While the game is paused you can use:
 - P to unpause
 - M to mute the game
+
+# Known Issues
+- Doors don't render while room is switching
+- Bombs do not affect adjacent rooms
+- Link knockback does not knock link back in half block increments
+- Potion does not have sound effect
+- Link can use weapons while not standing still
+- Goriya facing a wall spawns ghost boomerangs
+- Potion is an instant heal instead of heal over time
+
+# Not Implemented
+- Clock
+- Switching Between Arrows
+- Ladder
+- Magical Key (can only be picked up)
+- Merchant does not sell anything
+- Old man text

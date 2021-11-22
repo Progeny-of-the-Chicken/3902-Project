@@ -238,62 +238,66 @@ public class Room : IRoom
                 float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
                 float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
                 Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
+                Vector2 blockDimensions = new Vector2(ObjectConstants.standardWidthHeight) * scale;
 
                 switch (itemString[i + ObjectConstants.nextCharInString])
                 {
                     case ObjectConstants.SmallHeartItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.HeartContainerStr:
-                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.FairyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.ClockStr:
-                        itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BlueRubyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.YellowRubyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BasicMapItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BoomerangItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BombItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BasicKeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.MagicKeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.CompassStr:
-                        itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.TriforcePieceStr:
-                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.BasicArrowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.SilverArrowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.KeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.MapStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
+                        break;
+                    case ObjectConstants.BlueRingStr:
+                        itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
                         break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
@@ -436,15 +440,6 @@ public class Room : IRoom
         projectileQueue.Add(item);
     }
 
-    private void TransferQueuedProjectiles()
-    {
-        foreach (IProjectile projectile in projectileQueue)
-        {
-            projectileSet.Add(projectile);
-        }
-        projectileQueue.Clear();
-    }
-
     public void AddEffect(IEffect effect)
     {
         effectQueue.Add(effect);
@@ -453,6 +448,20 @@ public class Room : IRoom
     public void AddEnemy(IEnemy enemy)
     {
         enemySet.Add(enemy);
+    }
+
+    public void AddItem(IItem item)
+    {
+        itemSet.Add(item);
+    }
+
+    private void TransferQueuedProjectiles()
+    {
+        foreach (IProjectile projectile in projectileQueue)
+        {
+            projectileSet.Add(projectile);
+        }
+        projectileQueue.Clear();
     }
 
     private void TransferQueuedEffects()
@@ -510,11 +519,11 @@ public class Room : IRoom
                     switch (strArray[i])
                     {
                         case ObjectConstants.KeyStr:
-                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation));
+                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
                             SFXManager.Instance.PlayKeySpawn();
                             break;
                         case ObjectConstants.HeartContainerStr:
-                            itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation));
+                            itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
                             break;
                     }
                     break;

@@ -19,10 +19,18 @@ namespace Sprint_0.Scripts.Terrain
                 return instance;
             }
         }
+
         private RoomManager()
         {
             dormentRooms = new Dictionary<string, IRoom>();
         }
+
+        public void reset()
+        {
+            instance = new RoomManager();
+            instance.Init(Link.Instance);
+        }
+
         public void Init(ILink player)
         {
             this.link = player;

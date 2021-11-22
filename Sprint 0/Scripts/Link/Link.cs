@@ -30,6 +30,12 @@ namespace Sprint_0.Scripts
 
             Rectangle spawnHitbox = new Rectangle(linkState.Position.ToPoint(), new Point(ObjectConstants.scaledStdWidthHeight));
             _collider = new LinkCollider(this, spawnHitbox);
+            BoomerangReady = true;
+        }
+
+        public void reset()
+        {
+            instance = new Link();
         }
 
 
@@ -121,7 +127,7 @@ namespace Sprint_0.Scripts
 
         public int Health { get => (int)Math.Ceiling(linkState.linkHealth); }
 
-        public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkHealth = value; } }
+        public int MaxHealth { get => linkState.linkMaxHealth; set { linkState.linkMaxHealth = value; } }
 
         public bool IsAlive { get => linkState.IsAlive; }
 
@@ -130,6 +136,8 @@ namespace Sprint_0.Scripts
         public bool IsSuspended { get => linkState.IsSuspended; }
 
         public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
+
+        public bool BoomerangReady { get; set; }
     }
 
 }

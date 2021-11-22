@@ -6,7 +6,7 @@ namespace Sprint_0.Scripts.Sprite.Font.Letters
     public class LetterSprite: ISprite
     {
         private Texture2D spritesheet;
-        private Rectangle frame = SpriteRectangles.fontEightFrame;
+        private Rectangle frame = SpriteRectangles.fontSpaceFrame;
         private int scale = ObjectConstants.scale;
 
         public LetterSprite(Texture2D textures, char letter)
@@ -108,6 +108,12 @@ namespace Sprint_0.Scripts.Sprite.Font.Letters
                     break;
                 case 'z':
                     frame = SpriteRectangles.fontZFrame;
+                    break;
+                case ' ':
+                    frame = SpriteRectangles.fontSpaceFrame;
+                    break;
+                default:
+                    frame = SpriteRectangles.fontSpaceFrame;
                     break;
             }
         }

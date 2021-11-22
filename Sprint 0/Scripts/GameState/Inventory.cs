@@ -25,7 +25,8 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.Potion
             };
             SelectedWeaponIndex = ObjectConstants.selectedItemStartingIndex;
-            BlueRing = true;
+            BlueRing = false;
+            MagicKey = false;
             BasicArrows = false;
             SilverArrows = false;
             Map = false;
@@ -33,6 +34,11 @@ namespace Sprint_0.Scripts.GameState
             Rupee = ObjectConstants.inventoryStartingRupees;
             Key = ObjectConstants.inventoryStartingKeys;
             Bomb = ObjectConstants.inventoryStartingBombs;
+        }
+
+        public void reset()
+        {
+            instance = new Inventory();
         }
 
         public List<WeaponType> Weapons { get; set; }
@@ -49,6 +55,8 @@ namespace Sprint_0.Scripts.GameState
         public int SelectedWeaponIndex { get; set; }
 
         public bool BlueRing { get; set; }
+
+        public bool MagicKey { get; set; }
 
         public bool BasicArrows { get; set; }
 

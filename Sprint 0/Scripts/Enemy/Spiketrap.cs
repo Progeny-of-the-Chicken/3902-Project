@@ -45,11 +45,13 @@ namespace Sprint_0.Scripts.Enemy
             moveSpeed = ObjectConstants.spikeTrapSpeed;
             OriginalLocation = location;
             direction = Vector2.Zero;
+
             RectangleXLeft = new Rectangle((int)location.X - (ObjectConstants.roomWidthInBlocks * ObjectConstants.scaledStdWidthHeight), (int)location.Y, (ObjectConstants.roomWidthInBlocks + ObjectConstants.spikeTrapSpawnAdjustment * ObjectConstants.scaledStdWidthHeight), ObjectConstants.scaledStdWidthHeight * ObjectConstants.doubleTheValue);
             RectangleXRight = new Rectangle((int)location.X, (int)location.Y, (ObjectConstants.roomWidthInBlocks * ObjectConstants.scaledStdWidthHeight), ObjectConstants.scaledStdWidthHeight * ObjectConstants.doubleTheValue);
             RectangleYDown = new Rectangle((int)location.X, ((int)location.Y - (ObjectConstants.roomHeightInBlocks * ObjectConstants.standardWidthHeight * ObjectConstants.scale)), ObjectConstants.standardWidthHeight * ObjectConstants.doubleTheValue, (ObjectConstants.roomHeightInBlocks + ObjectConstants.spikeTrapSpawnAdjustment * ObjectConstants.standardWidthHeight * ObjectConstants.scale));
             RectangleYUp = new Rectangle((int)location.X, (int)location.Y, ObjectConstants.scaledStdWidthHeight * ObjectConstants.doubleTheValue, (ObjectConstants.roomHeightInBlocks * ObjectConstants.scaledStdWidthHeight));
             DamageCollider = new GenericEnemyCollider(this, new Rectangle((int)location.X, (int)location.Y, (SpriteRectangles.spikeTrapFrame.Width * ObjectConstants.scale), (SpriteRectangles.spikeTrapFrame.Height * ObjectConstants.scale)));
+
             DetectionColliderRight = new DetectionColliderRight(this, RectangleXRight);
             DetectionColliderLeft = new DetectionColliderLeft(this, RectangleXLeft);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);

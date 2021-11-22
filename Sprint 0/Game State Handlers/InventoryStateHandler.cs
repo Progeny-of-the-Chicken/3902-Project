@@ -57,7 +57,7 @@ namespace Sprint_0.GameStateHandlers
                 SFXManager.Instance.PauseMusic();
             } else
             {
-                game.kc = new InventoryStateController(game, Keyboard.GetState());
+                game.kc = new InventoryStateController(game);
                 SFXManager.Instance.PlayMusic();
             }
         }

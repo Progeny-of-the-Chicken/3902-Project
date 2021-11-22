@@ -14,13 +14,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private IProjectileCollider collider;
         private Vector2 directionVector;
         private Vector2 currentPos;
-        private Vector2 startPos;
         private bool delete = false;
         private bool friendly = false;
 
         private double speedPerSecond = ObjectConstants.boomerangSpeedPerSecond;
         private double decelPerSecond = ObjectConstants.boomerangDecelPerSecond;
         private double magicalBoomerangSpeedCoef = ObjectConstants.magicalBoomerangSpeedCoef;
+        private double returnSpeedPerSecond = ObjectConstants.boomerangReturnSpeedPerSecond;
         private double startT = ObjectConstants.counterInitialVal_double;
         private double tInitialOffset = ObjectConstants.boomerangTOffset;
         private Link linkOwner;
@@ -34,6 +34,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
+        public IEnemy EnemyOwner { get => enemyOwner; }
+
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, Link link)
         {
             linkOwner = link;
@@ -41,6 +43,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             InitializeObject(spawnLoc, direction, magical);
             SFXManager.Instance.PlayFireArrowBoomerang();
         }
+
         public Boomerang(Vector2 spawnLoc, FacingDirection direction, bool magical, IEnemy enemy)
         {
             enemyOwner = enemy;
@@ -65,11 +68,6 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 ReturnUpdate(gt);
             }
             collider.Update(currentPos);
-            // Delete on boomerang return
-            if (directionVector.X * (currentPos.X - startPos.X) < ObjectConstants.zero_float || directionVector.Y * (currentPos.Y - startPos.Y) < ObjectConstants.zero_float)
-            {
-                delete = true;
-            }
         }
 
         public void Draw(SpriteBatch sb)
@@ -79,11 +77,15 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public bool CheckDelete()
         {
-            return delete;
+            return delete || !OwnerIsAlive();
         }
 
         public void Despawn()
         {
+            if (Friendly)
+            {
+                Link.Instance.BoomerangReady = true;
+            }
             delete = true;
         }
 
@@ -96,7 +98,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void InitializeObject(Vector2 spawnLoc, FacingDirection direction, bool magical)
         {
-            startPos = currentPos = (ObjectConstants.boomerangRotationOffset * ObjectConstants.scale) + SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight));
+            currentPos = (ObjectConstants.boomerangRotationOffset * ObjectConstants.scale) + SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight));
             if (magical)
             {
                 speedPerSecond = (int)(speedPerSecond * magicalBoomerangSpeedCoef);
@@ -141,16 +143,20 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             Vector2 distanceVector;
             if (friendly)
             {
-                distanceVector = linkOwner.Position - currentPos;
+                distanceVector = SpawnHelper.Instance.CenterLocationOnSpawner(linkOwner.Position, new Vector2(ObjectConstants.linkWidthHeight), new Vector2(ObjectConstants.boomerangWidthHeight)) - currentPos;
             }
             else
             {
-                distanceVector = enemyOwner.Collider.Hitbox.Location.ToVector2() - currentPos;
+                distanceVector = SpawnHelper.Instance.CenterLocationOnSpawner(enemyOwner.Position, enemyOwner.Collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.boomerangWidthHeight))  - currentPos;
             }
             Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
             Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
-            currentPos += new Vector2((float)speedPerSecond) * xyScale;
-            // currentPos -= directionVector * (float)((gt.TotalGameTime.TotalSeconds - startT) * speedPerSecond);
+            currentPos += new Vector2((float)returnSpeedPerSecond) * xyScale;
+        }
+
+        private bool OwnerIsAlive()
+        {
+            return (linkOwner is null || linkOwner.IsAlive) && (enemyOwner is null || !enemyOwner.CheckDelete());
         }
     }
 }

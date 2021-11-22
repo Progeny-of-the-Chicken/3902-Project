@@ -48,7 +48,7 @@ namespace Sprint_0.Scripts.GameState
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
             health = Link.Instance.Health;
-            maxHealth = ObjectConstants.linkStartingHealth;
+            maxHealth = Link.Instance.MaxHealth;
             makeHeartArray();
 
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
@@ -69,6 +69,7 @@ namespace Sprint_0.Scripts.GameState
             bombCounter = numToSprites(Inventory.Instance.Bomb);
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             health = Link.Instance.Health;
+            maxHealth = Link.Instance.MaxHealth;
             makeHeartArray();
             currentRoom = RoomManager.Instance.CurrentRoom.roomLocation;
         }
@@ -144,7 +145,7 @@ namespace Sprint_0.Scripts.GameState
             //Do stuff with getting health from link here
             for (int i = 0; i < ObjectConstants.maxMaxHealth / 2; i++)
             {
-                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
+                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + ObjectConstants.letterSpacing * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
                 heartArray[i].Draw(spriteBatch, drawLocation);
             }
         }
