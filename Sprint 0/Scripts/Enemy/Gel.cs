@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
-using Sprint_0.Scripts.Movement;
-
 
 namespace Sprint_0.Scripts.Enemy
 {

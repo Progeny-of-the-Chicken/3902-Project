@@ -25,8 +25,15 @@ namespace Sprint_0.Scripts.Movement
             return type switch
             {
                 EnemyType.Stalfos => CreateStalfosMovementStrategy(directionVector),
+                EnemyType.Keese => CreateKeeseMovementStrategy(directionVector),
+                EnemyType.Goriya => CreateGoriyaMovementStrategy(directionVector),
                 EnemyType.Gel => CreateGelMovementStrategy(directionVector),
                 EnemyType.Zol => CreateZolMovementStrategy(directionVector),
+                EnemyType.Aquamentus => CreateAquamentusMovementStrategy(directionVector),
+                EnemyType.Rope => CreateRopeMovementStrategy(directionVector),
+                EnemyType.Dodongo => CreateDodongoMovementStrategy(directionVector),
+                EnemyType.OldMan => CreateFreezeStrategy(),
+                EnemyType.Merchant => CreateFreezeStrategy(),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -41,21 +48,47 @@ namespace Sprint_0.Scripts.Movement
             return new IdleStrategy();
         }
 
-        // TODO: Decide whether to make these private
+        //----- Enemy disambiguation strategies creator methods -----//
 
-        public IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.StalfosMoveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        public IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateKeeseMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.KeeseMoveSpeed, (float)ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateGoriyaMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GoriyaMoveSpeed, (float)ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.GelMoveSpeed, (float)ObjectConstants.GelPauseTime);
         }
 
-        public IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.ZolMoveSpeed, (float)ObjectConstants.ZolPauseTime);
+        }
+
+        private IMovementStrategy CreateAquamentusMovementStrategy(Vector2 directionVector)
+        {
+            // TODO: remove position from strategy, adjust move speed, make move distance an int
+            return new MoveBetweenDistanceStrategy(directionVector, new Vector2(0), ObjectConstants.AquamentusMoveSpeed, (int)ObjectConstants.AquamentusMoveDistance);
+        }
+
+        private IMovementStrategy CreateRopeMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateDodongoMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DodongoMoveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }

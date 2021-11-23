@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 
-namespace Sprint_0.Scripts.Movement
+namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyStateMachineFactory
     {
@@ -58,9 +58,13 @@ namespace Sprint_0.Scripts.Movement
             return type switch
             {
                 EnemyType.Stalfos => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
+                EnemyType.Keese => new EnemyStateMachine(location, type, moveTime, health, FlyVectors),
+                EnemyType.Goriya => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
                 EnemyType.Gel => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
                 EnemyType.Zol => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
                 EnemyType.Aquamentus => new EnemyStateMachine(location, type, moveTime, health, HorizontalVectors),
+                EnemyType.Rope => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
+                EnemyType.Dodongo => new EnemyStateMachine(location, type, moveTime, health, CardinalVectors),
                 // Default only happens upon missing enemy movement handler implementation
                 _ => null
             };

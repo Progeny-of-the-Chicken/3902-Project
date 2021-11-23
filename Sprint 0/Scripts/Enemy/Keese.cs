@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
@@ -13,109 +8,59 @@ namespace Sprint_0.Scripts.Enemy
 {
     class Keese : IEnemy
     {
-        ISprite sprite;
-        IEnemyCollider collider;
+        private ISprite sprite;
+        private EnemyStateMachine stateMachine;
+        private IEnemyCollider collider;
+
         public IEnemyCollider Collider { get => collider; }
 
-        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        byte[] random;
-
-        float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
         public int Damage { get => ObjectConstants.KeeseDamage; }
-        public Vector2 Position { get => location; }
-        int health = ObjectConstants.KeeseStartingHealth;
-        bool delete = false;
-        bool inKnockBack = false;
 
-        Vector2 location;
-        Vector2 directionVector;
-        Vector2 knockbackDirection;
+        public Vector2 Position { get => stateMachine.Location; }
 
         public Keese(Vector2 location)
         {
-            this.location = location;
-            directionVector = Vector2.Zero;
-            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-            Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
-            collider = new GenericEnemyCollider(this, collision);
+            stateMachine = EnemyStateMachineFactory.Instance.CreateStateMachineForEnemy(location, EnemyType.Keese, (float)ObjectConstants.KeeseMoveTime, ObjectConstants.KeeseStartingHealth);
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
         {
-            if (!inKnockBack)
+            stateMachine.Update(gt);
+            if (stateMachine.GetState != EnemyStateMachine.EnemyState.Knockback)
             {
-                Move(gt);
-                if (directionVector != Vector2.Zero)
-                {
-                    sprite.Update(gt);
-                }
+                sprite.Update(gt);
             }
-            else
-            {
-                GetKnockedBack(gt);
-            }
-            collider.Update(location);
+            collider.Update(Position);
         }
 
-        public void Move(GameTime gt)
-        {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.KeeseMoveTime)
-            {
-                SetRandomDirection();
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
-            }
-            location += directionVector * ObjectConstants.KeeseMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-        }
-        void GetKnockedBack(GameTime t)
-        {
-            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
-            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
-            {
-                inKnockBack = false;
-                timeSinceKnockback = 0;
-            }
-        }
-        void SetRandomDirection()
-        {
-            randomDir.GetBytes(random);
-            directionVector.X = (random[ObjectConstants.firstInArray] % ObjectConstants.oneInThree) + ObjectConstants.adjustByNegativeOne;
-            directionVector.Y = (random[ObjectConstants.secondInArray] % ObjectConstants.oneInThree) + ObjectConstants.adjustByNegativeOne;
-        }
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health <= ObjectConstants.zero)
-            {
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
-                delete = true;
-                SFXManager.Instance.PlayEnemyDeath();
-            }
-            SFXManager.Instance.PlayEnemyHit();
+            stateMachine.TakeDamage(damage);
         }
-        public void SuddenKnockBack(Vector2 knockback)
-        {
-            location += knockback;
-        }
+
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
             knockback.Normalize();
-            knockbackDirection = knockback;
+            stateMachine.Knockback(knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
         }
+
+        public void SuddenKnockBack(Vector2 knockback)
+        {
+            stateMachine.Displace(knockback);
+        }
+
         public bool CheckDelete()
         {
-            return delete;
+            return stateMachine.IsDead;
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, location);
+            sprite.Draw(sb, Position);
         }
     }
 }
