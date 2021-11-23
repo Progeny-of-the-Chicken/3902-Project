@@ -18,6 +18,7 @@ namespace Sprint_0.Scripts.Commands
         public void Execute()
         {
             WeaponType type = Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex];
+            bool usingShotgun = false;
             switch (type)
             {
                 case WeaponType.Bow:
@@ -53,12 +54,19 @@ namespace Sprint_0.Scripts.Commands
                     Inventory.Instance.RemoveWeapon(WeaponType.Potion);
                     break;
                 case WeaponType.Shotgun:
-                    //We don't have to worry about the link use item method at the end because the shotgun counter will block it from doing anything
-                    Link.Instance.UseShotgun();
+                    usingShotgun = true;
+                    if (Inventory.Instance.ShotgunShells > 0)
+                    {
+                        Inventory.Instance.ShotgunShells--;
+                        Link.Instance.UseShotgun();
+                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
+                    }
                     //TODO: use the rest of the shotgun
                     break;
             }
-            link.UseItem();
+            //We need this to prevent a link state change if link uses a shotgun but doesn't have any shells left
+            if (!usingShotgun)
+                link.UseItem();
         }
     }
 }

@@ -85,6 +85,11 @@ namespace Sprint_0
         public const int linkSwordFromLeftCenter = -3 * scale;
         public const int linkSwordFromDownCenter = 3 * scale;
 
+        // Projectile
+        public const double shotgunPelletSpeed = 300.0 * scale;
+        public const int shotgunPelletDamage = 5;
+
+
         // Arrow
         public const double arrowSpeedPerSecond = 100.0 * scale;
         public const int arrowMaxDistance = 100 * scale;
@@ -540,6 +545,6 @@ namespace Sprint_0
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
         public const int inventoryStartingShotgunShells = 0;
-        public const int shotgunShellsPerPickUp = 5;
+        public const int shotgunShellsPerPickUp = 20;
     }
 }

@@ -51,6 +51,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
             {
                 frame = ObjectConstants.swordAttackHitBoxSize;
             }
+            else if (Owner is ShotgunPelletProjectile)
+            {
+                frame = SpriteRectangles.shotgunPelletProjectileFrame;
+            }
             else
             {
                 // Sword beam

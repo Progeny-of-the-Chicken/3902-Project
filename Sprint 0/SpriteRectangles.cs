@@ -95,7 +95,7 @@ namespace Sprint_0
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
-        public static Rectangle shotgunShellProjectileFrame = new Rectangle(71, 7, 16, 15);
+        public static Rectangle shotgunPelletProjectileFrame = new Rectangle(71, 7, 16, 15);
         public static Rectangle silverArrowFrame = new Rectangle(36, 190, 16, 5);
         public static Rectangle bombFrame = new Rectangle(145, 185, 16, 16);
         public static List<Rectangle> basicBoomerangFrames = new List<Rectangle>
