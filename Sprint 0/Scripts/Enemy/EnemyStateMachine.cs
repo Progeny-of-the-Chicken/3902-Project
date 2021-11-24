@@ -19,7 +19,7 @@ namespace Sprint_0.Scripts.Enemy
         
         private float enemyLifeTime = ObjectConstants.counterInitialVal_float;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        private float moveTime;
+        public float moveTime;
 
         private EnemyType enemyType;
         private int health;

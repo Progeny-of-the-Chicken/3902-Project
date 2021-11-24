@@ -34,6 +34,7 @@
     <None Remove="Scripts\Sprite\Font\Numbers\" />
     <None Remove="Scripts\Movement\" />
     <None Remove="Scripts\Movement\MovementStrategy\" />
+    <None Remove="Scripts\Commands\EnemyAbilities\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -67,5 +68,6 @@
     <Folder Include="Scripts\Sprite\Font\Numbers\" />
     <Folder Include="Scripts\Movement\" />
     <Folder Include="Scripts\Movement\MovementStrategy\" />
+    <Folder Include="Scripts\Commands\EnemyAbilities\" />
   </ItemGroup>
 </Project>
