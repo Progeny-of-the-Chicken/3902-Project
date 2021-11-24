@@ -77,8 +77,7 @@ namespace Sprint_0.Scripts.Movement
 
         private IMovementStrategy CreateAquamentusMovementStrategy(Vector2 directionVector)
         {
-            // TODO: remove position from strategy, adjust move speed, make move distance an int
-            return new MoveBetweenDistanceStrategy(directionVector, new Vector2(0), ObjectConstants.AquamentusMoveSpeed, (int)ObjectConstants.AquamentusMoveDistance);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.AquamentusMoveSpeed, (int)ObjectConstants.AquamentusMoveDistance);
         }
 
         private IMovementStrategy CreateRopeMovementStrategy(Vector2 directionVector)

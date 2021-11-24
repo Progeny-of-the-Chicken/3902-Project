@@ -4,15 +4,15 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 {
     public class MoveBetweenDistanceStrategy : IMovementStrategy
     {
+        private Vector2 startVector;
         private float speed;
         private int moveDistance;
-        private Vector2 startLocation;
+        private Vector2 startLocation = ObjectConstants.zeroVector;
         private Vector2 directionVector;
 
-        public MoveBetweenDistanceStrategy(Vector2 startVector, Vector2 startLocation, float speed, int moveDistance)
+        public MoveBetweenDistanceStrategy(Vector2 startVector, float speed, int moveDistance)
         {
-            directionVector = startVector;
-            this.startLocation = startLocation;
+            this.startVector = startVector;
             this.speed = speed;
             this.moveDistance = moveDistance;
         }
