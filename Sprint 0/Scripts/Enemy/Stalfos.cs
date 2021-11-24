@@ -10,6 +10,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
         public IEnemyCollider Collider { get => collider; }
@@ -23,7 +24,9 @@ namespace Sprint_0.Scripts.Enemy
         public Stalfos(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Stalfos, (float)ObjectConstants.StalfosMoveTime, ObjectConstants.StalfosStartingHealth, this);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Stalfos, (float)ObjectConstants.StalfosMoveTime, ObjectConstants.StalfosStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Stalfos, stateMachine, this);
+            invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -32,6 +35,11 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                invoker.ExecuteRandomCommand();
+            }
+
             if (stateMachine.GetState != EnemyState.Knockback)
             {
                 sprite.Update(gt);

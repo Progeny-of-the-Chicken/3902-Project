@@ -10,6 +10,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
         public IEnemyCollider Collider { get => collider; }
@@ -23,7 +24,9 @@ namespace Sprint_0.Scripts.Enemy
         public Gel(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateGelSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Gel, (float)ObjectConstants.GelMoveTime + (float)ObjectConstants.GelPauseTime, ObjectConstants.GelStartingHealth, this);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Gel, (float)ObjectConstants.GelMoveTime + (float)ObjectConstants.GelPauseTime, ObjectConstants.GelStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Gel, stateMachine, this);
+            invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -32,6 +35,11 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime t)
         {
             stateMachine.Update(t);
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                invoker.ExecuteRandomCommand();
+            }
+
             if (stateMachine.GetState != EnemyState.Knockback)
             {
                 sprite.Update(t);

@@ -161,7 +161,7 @@ namespace Sprint_0
         public const float DefaultEnemyMoveSpeed = 2 * scale * standardWidthHeight;
         public const double DefaultEnemyMoveTime = 1.0;
         public const float DefaultEnemyPauseTime = 1.0f;
-        public const float DefaultEnemyDamagedTime = 1.0f;
+        public const float DefaultEnemyDamagedTime = 0.5f;
 
         //Aquamentus
         public const int AquamentusDamage = 2;

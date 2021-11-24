@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Movement;
 using Sprint_0.Scripts.Terrain;
@@ -10,7 +9,6 @@ namespace Sprint_0.Scripts.Enemy
     {
         private Stack<(EnemyState state, float stateEndTime)> stateStack;
         private (bool damaged, float damagedEndTime) damagedState = (false, 0);
-        private EnemyRandomInvoker invoker;
         private EnemyMovementHandler movement;
         private Vector2 directionVector;
         private Vector2 lastMovementVector;
@@ -39,7 +37,7 @@ namespace Sprint_0.Scripts.Enemy
 
         //----- Public methods -----//
 
-        public EnemyStateMachine(Vector2 startLocation, EnemyType type, float moveTime, int health, IEnemy enemy)
+        public EnemyStateMachine(Vector2 startLocation, EnemyType type, float moveTime, int health)
         {
             enemyType = type;
             this.health = health;
@@ -47,16 +45,14 @@ namespace Sprint_0.Scripts.Enemy
 
             stateStack = new Stack<(EnemyState state, float stateEndTime)>();
             movement = new EnemyMovementHandler(startLocation);
-
-            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(type, this, enemy);
-            invoker.ExecuteRandomCommand();
         }
 
         public void Update(GameTime gameTime)
         {
+            movement.Move(gameTime);
             enemyLifeTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (stateStack.Peek().state == EnemyState.Movement)
+            if (GetState == EnemyState.Movement)
             {
                 UpdateMove(gameTime);
             }
@@ -69,8 +65,6 @@ namespace Sprint_0.Scripts.Enemy
             {
                 UpdateDamaged();
             }
-
-            movement.Move(gameTime);
         }
 
         public void SetState(EnemyState state, float duration, Vector2 direction)
@@ -128,6 +122,7 @@ namespace Sprint_0.Scripts.Enemy
                 EnemyState.Freeze => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.Stun => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.AbilityCast => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
+                EnemyState.NoAction => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 // Should never happen
                 _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType)
             };
@@ -139,8 +134,8 @@ namespace Sprint_0.Scripts.Enemy
 
             if (timeSinceMove >= moveTime)
             {
-                invoker.ExecuteRandomCommand();
-                // movement.SetStrategy(GetStrategyForState(stateStack.Peek().state));
+                stateStack.Pop();
+                SetState(EnemyState.NoAction, enemyLifeTime);
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
         }

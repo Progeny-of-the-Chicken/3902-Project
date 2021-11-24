@@ -10,6 +10,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
         public IEnemyCollider Collider { get => collider; }
@@ -23,7 +24,9 @@ namespace Sprint_0.Scripts.Enemy
         public Keese(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Keese, (float)ObjectConstants.KeeseMoveTime, ObjectConstants.KeeseStartingHealth, this);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Keese, (float)ObjectConstants.KeeseMoveTime, ObjectConstants.KeeseStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Keese, stateMachine, this);
+            invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -32,6 +35,11 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                invoker.ExecuteRandomCommand();
+            }
+
             if (stateMachine.GetState != EnemyState.Knockback)
             {
                 sprite.Update(gt);

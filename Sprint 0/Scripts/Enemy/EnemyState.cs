@@ -2,6 +2,7 @@
 {
     public enum EnemyState
     {
+        NoAction,
         Movement,
         Knockback,
         Freeze,
