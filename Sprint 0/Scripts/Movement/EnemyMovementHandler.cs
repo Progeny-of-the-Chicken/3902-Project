@@ -9,9 +9,8 @@ namespace Sprint_0.Scripts.Movement
 
         public Vector2 Location { get => location; }
 
-        public EnemyMovementHandler(IMovementStrategy strategy, Vector2 location)
+        public EnemyMovementHandler(Vector2 location)
         {
-            this.strategy = strategy;
             this.location = location;
         }
 

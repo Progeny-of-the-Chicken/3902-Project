@@ -23,7 +23,7 @@ namespace Sprint_0.Scripts.Enemy
         public Gel(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateGelSprite();
-            stateMachine = EnemyStateMachineFactory.Instance.CreateStateMachineForEnemy(location, EnemyType.Gel, (float)ObjectConstants.GelMoveTime + (float)ObjectConstants.GelPauseTime, ObjectConstants.GelStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Gel, (float)ObjectConstants.GelMoveTime + (float)ObjectConstants.GelPauseTime, ObjectConstants.GelStartingHealth, this);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);

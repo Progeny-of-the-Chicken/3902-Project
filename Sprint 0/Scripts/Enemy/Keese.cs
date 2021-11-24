@@ -23,7 +23,7 @@ namespace Sprint_0.Scripts.Enemy
         public Keese(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-            stateMachine = EnemyStateMachineFactory.Instance.CreateStateMachineForEnemy(location, EnemyType.Keese, (float)ObjectConstants.KeeseMoveTime, ObjectConstants.KeeseStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Keese, (float)ObjectConstants.KeeseMoveTime, ObjectConstants.KeeseStartingHealth, this);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);

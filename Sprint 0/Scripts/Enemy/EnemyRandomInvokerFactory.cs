@@ -6,56 +6,27 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyRandomInvokerFactory
     {
-        private List<Vector2> FlyVectors;
-        private List<Vector2> CardinalVectors;
-        private List<Vector2> HorizontalVectors;
-
         private static EnemyRandomInvokerFactory instance = new EnemyRandomInvokerFactory();
 
         public static EnemyRandomInvokerFactory Instance
         {
-            get
-            {
+            get {
                 return instance;
             }
         }
 
         private EnemyRandomInvokerFactory()
         {
-            FlyVectors = new List<Vector2>
-            {
-                ObjectConstants.RightUnitVector,
-                ObjectConstants.UpRightUnitVector,
-                ObjectConstants.UpUnitVector,
-                ObjectConstants.UpLeftUnitVector,
-                ObjectConstants.LeftUnitVector,
-                ObjectConstants.DownLeftUnitVector,
-                ObjectConstants.DownUnitVector,
-                ObjectConstants.DownRightUnitVector,
-                ObjectConstants.zeroVector
-            };
-            CardinalVectors = new List<Vector2>
-            {
-                ObjectConstants.RightUnitVector,
-                ObjectConstants.UpUnitVector,
-                ObjectConstants.LeftUnitVector,
-                ObjectConstants.DownUnitVector,
-            };
-            HorizontalVectors = new List<Vector2>
-            {
-                ObjectConstants.RightUnitVector,
-                ObjectConstants.LeftUnitVector
-            };
         }
 
-        public EnemyRandomInvoker CreateRandomInvokerForEnemy(EnemyStateMachine stateMachine, EnemyType type)
+        public EnemyRandomInvoker CreateInvokerForEnemy(EnemyType type, EnemyStateMachine stateMachine, IEnemy enemy)
         {
             EnemyRandomInvoker invoker = new EnemyRandomInvoker();
             // Movement
             switch (type)
             {
                 case EnemyType.Aquamentus:
-                    InitializeMoveCommands(invoker, stateMachine, HorizontalVectors);
+                    InitializeMoveCommands(invoker, stateMachine, GetHorizontalVectors());
                     break;
                 case EnemyType.Stalfos:
                 case EnemyType.Gel:
@@ -63,17 +34,17 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Goriya:
                 case EnemyType.Rope:
                 case EnemyType.Dodongo:
-                    InitializeMoveCommands(invoker, stateMachine, CardinalVectors);
+                    InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:
-                    InitializeMoveCommands(invoker, stateMachine, FlyVectors);
+                    InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
             }
             // Abilities
             switch (type)
             {
                 case EnemyType.Goriya:
-                    invoker.AddCommand(new CommandEnemyThrowBoomerang(stateMachine));
+                    invoker.AddCommand(new CommandEnemyThrowBoomerang(enemy, stateMachine));
                     break;
                 case EnemyType.Aquamentus:
                     invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
@@ -90,6 +61,44 @@ namespace Sprint_0.Scripts.Enemy
             {
                 invoker.AddCommand(new CommandMove(stateMachine, vector));
             }
+        }
+
+        //----- Vector assignment -----//
+
+        private List<Vector2> GetFlyVectors()
+        {
+            return new List<Vector2>
+            {
+                ObjectConstants.RightUnitVector,
+                ObjectConstants.UpRightUnitVector,
+                ObjectConstants.UpUnitVector,
+                ObjectConstants.UpLeftUnitVector,
+                ObjectConstants.LeftUnitVector,
+                ObjectConstants.DownLeftUnitVector,
+                ObjectConstants.DownUnitVector,
+                ObjectConstants.DownRightUnitVector,
+                ObjectConstants.zeroVector
+            };
+        }
+
+        private List<Vector2> GetCardinalVectors()
+        {
+            return new List<Vector2>
+            {
+                ObjectConstants.RightUnitVector,
+                ObjectConstants.UpUnitVector,
+                ObjectConstants.LeftUnitVector,
+                ObjectConstants.DownUnitVector,
+            };
+        }
+
+        private List<Vector2> GetHorizontalVectors()
+        {
+            return new List<Vector2>
+            {
+                ObjectConstants.RightUnitVector,
+                ObjectConstants.LeftUnitVector
+            };
         }
     }
 }

@@ -16,8 +16,7 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
 
         public void Execute()
         {
-            // TODO: Add direction
-            stateMachine.SetState(EnemyState.Movement, stateMachine.moveTime);
+            stateMachine.SetState(EnemyState.Movement, stateMachine.moveTime, direction);
         }
     }
 }

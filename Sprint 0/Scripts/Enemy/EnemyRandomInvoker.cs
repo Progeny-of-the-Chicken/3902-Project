@@ -8,7 +8,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private byte[] random;
-        List<ICommand> commands;
+        List<ICommand> commands = new List<ICommand>();
 
         public EnemyRandomInvoker()
         {
