@@ -12,6 +12,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         ISprite sprite;
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         public IEnemyCollider Collider { get => dependency.collider; }
         public IEnemyCollider DetectionCollider { get => detectionCollider; }
         IEnemyCollider detectionCollider;

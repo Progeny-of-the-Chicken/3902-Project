@@ -26,6 +26,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => ObjectConstants.ZolDamage; }
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         int health = ObjectConstants.ZolStartingHealth;
 
         Vector2 location;

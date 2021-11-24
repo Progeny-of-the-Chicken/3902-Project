@@ -20,6 +20,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => ObjectConstants.GoriyaDamage; }
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         int health = ObjectConstants.GoriyaStartingHealth;
         bool delete = false;
         bool inKnockBack = false;

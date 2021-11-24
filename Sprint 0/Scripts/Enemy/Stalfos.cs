@@ -18,6 +18,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public Vector2 Position { get => stateMachine.Location; }
 
+        public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
+
         public Stalfos(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
@@ -30,7 +32,7 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
-            if (stateMachine.GetState != EnemyStateMachine.EnemyState.Knockback)
+            if (stateMachine.GetState != EnemyState.Knockback)
             {
                 sprite.Update(gt);
             }
@@ -45,7 +47,7 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            stateMachine.Knockback(knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
+            stateMachine.Knockback(knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)

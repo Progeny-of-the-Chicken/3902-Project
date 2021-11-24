@@ -34,6 +34,7 @@ namespace Sprint_0.Scripts.Enemy
         bool chasing = false;
         Vector2 location;
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
 
         FacingDirection direction;
         Vector2 knockbackDirection;

@@ -16,6 +16,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => damage; }
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         public IEnemyCollider Collider { get => collider; }
         IEnemyCollider collider;
         const int damage = ObjectConstants.OldManDamage;

@@ -44,6 +44,7 @@ namespace Sprint_0.Scripts.Enemy
         byte[] random;
         public int Damage { get => _damage; }
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         int _damage;
         int health = 3;
         const int knockbackDistance = 50;

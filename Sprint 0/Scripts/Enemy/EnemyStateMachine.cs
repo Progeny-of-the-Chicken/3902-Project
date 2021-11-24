@@ -8,19 +8,18 @@ namespace Sprint_0.Scripts.Enemy
 {
     public class EnemyStateMachine
     {
-        // TODO: Implement damaged state
-        public enum EnemyState { Movement, Knockback, Frozen};
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private byte[] random;
         private List<Vector2> possibleVectors;
         private Vector2 directionVector;
+        private Vector2 lastKnockbackVector;
         private EnemyMovementHandler movement;
-        private EnemyState currentState = EnemyState.Movement;
-
+        private Stack<(EnemyState state, float stateEndTime)> stateStack;
+        private (bool damaged, float damagedEndTime) damagedState = (false, 0);
+        
+        private float enemyLifeTime = ObjectConstants.counterInitialVal_float;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        private float timeSinceDisruption = ObjectConstants.counterInitialVal_float;
         private float moveTime;
-        private float disruptionTime;
 
         private EnemyType enemyType;
         private int health;
@@ -32,9 +31,11 @@ namespace Sprint_0.Scripts.Enemy
 
         public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(directionVector); }
 
-        public EnemyState GetState { get => currentState; }
+        public EnemyState GetState { get => stateStack.Peek().state; }
 
         public int Health { get => health; }
+
+        public bool IsDamaged { get => damagedState.damaged; }
 
         public bool IsDead { get => (health <= ObjectConstants.zero); }
 
@@ -47,6 +48,9 @@ namespace Sprint_0.Scripts.Enemy
             this.moveTime = moveTime;
             this.possibleVectors = possibleVectors;
 
+            stateStack = new Stack<(EnemyState state, float stateEndTime)>();
+            stateStack.Push((EnemyState.Movement, moveTime));
+
             random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             randomDir = new RNGCryptoServiceProvider();
             directionVector = GetRandomDirection();
@@ -55,20 +59,32 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Update(GameTime gameTime)
         {
-            if (currentState == EnemyState.Movement)
+            enemyLifeTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (stateStack.Peek().state == EnemyState.Movement)
             {
-                CountDownMove(gameTime);
+                UpdateMove(gameTime);
             }
             else
             {
-                CountDownDisruption(gameTime);
+                UpdateState();
+            }
+            if (damagedState.damaged)
+            {
+                UpdateDamaged();
             }
             movement.Move(gameTime);
+        }
+
+        public void SetState(EnemyState state, float duration)
+        {
+            stateStack.Push((state, enemyLifeTime + duration));
+            movement.SetStrategy(GetStrategyForState(state));
         }
 
         public void TakeDamage(int damage)
         {
             health -= damage;
+            damagedState = (true, enemyLifeTime + ObjectConstants.DefaultEnemyDamagedTime);
             if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(Location, Effect.EffectType.Pop);
@@ -77,49 +93,59 @@ namespace Sprint_0.Scripts.Enemy
             SFXManager.Instance.PlayEnemyHit();
         }
 
+        public void Knockback(Vector2 knockback)
+        {
+            lastKnockbackVector = knockback;
+            SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
+        }
+
         public void Displace(Vector2 direction)
         {
             movement.Displace(direction);
         }
 
-        public void Knockback(Vector2 direction, float knockbackTime)
-        {
-            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateKnockbackStrategy(direction, knockbackSpeed));
-            disruptionTime = knockbackTime;
-            currentState = EnemyState.Knockback;
-        }
-
-        public void Freeze(float freezeTime)
-        {
-            movement.SetDisruptionStrategy(MovementStrategyFactory.Instance.CreateFreezeStrategy());
-            disruptionTime = freezeTime;
-            currentState = EnemyState.Frozen;
-        }
-
         //----- Helper methods for movement transition -----//
 
-        private void CountDownMove(GameTime gameTime)
+        private IMovementStrategy GetStrategyForState(EnemyState state)
+        {
+            return state switch
+            {
+                EnemyState.Movement => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType),
+                EnemyState.Knockback => MovementStrategyFactory.Instance.CreateKnockbackStrategy(lastKnockbackVector, knockbackSpeed),
+                EnemyState.Freeze => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
+                EnemyState.Stun => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
+                EnemyState.AbilityCast => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
+                // Should never happen
+                _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType)
+            };
+        }
+
+        private void UpdateMove(GameTime gameTime)
         {
             timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (timeSinceMove >= moveTime)
             {
                 directionVector = GetRandomDirection();
-                movement.SetMovementStrategy(MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType));
+                movement.SetStrategy(GetStrategyForState(stateStack.Peek().state));
                 timeSinceMove = ObjectConstants.counterInitialVal_float;
             }
         }
 
-        private void CountDownDisruption(GameTime gameTime)
+        private void UpdateState()
         {
-            timeSinceDisruption += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (timeSinceDisruption >= disruptionTime)
+            if (enemyLifeTime >= stateStack.Peek().stateEndTime)
             {
-                movement.ResumeMovementStrategy();
-                currentState = EnemyState.Movement;
-                disruptionTime = ObjectConstants.counterInitialVal_float;
-                timeSinceDisruption = ObjectConstants.counterInitialVal_float;
+                stateStack.Pop();
+                movement.SetStrategy(GetStrategyForState(stateStack.Peek().state));
+            }
+        }
+
+        private void UpdateDamaged()
+        {
+            if (enemyLifeTime >= damagedState.damagedEndTime)
+            {
+                damagedState.damaged = false;
             }
         }
 

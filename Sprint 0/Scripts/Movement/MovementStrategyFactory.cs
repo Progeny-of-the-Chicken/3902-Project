@@ -57,12 +57,12 @@ namespace Sprint_0.Scripts.Movement
 
         private IMovementStrategy CreateKeeseMovementStrategy(Vector2 directionVector)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.KeeseMoveSpeed, (float)ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.KeeseMoveSpeed, ObjectConstants.zeroPauseTime);
         }
 
         private IMovementStrategy CreateGoriyaMovementStrategy(Vector2 directionVector)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GoriyaMoveSpeed, (float)ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GoriyaMoveSpeed, ObjectConstants.zeroPauseTime);
         }
 
         private IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
