@@ -61,7 +61,6 @@ namespace Sprint_0.Scripts.Commands
                         Link.Instance.UseShotgun();
                         RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
                     }
-                    //TODO: use the rest of the shotgun
                     break;
             }
             //We need this to prevent a link state change if link uses a shotgun but doesn't have any shells left
