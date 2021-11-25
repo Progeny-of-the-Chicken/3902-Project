@@ -138,7 +138,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
                 WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
-                WeaponType.Shotgun => SpriteRectangles.shotGunItemFrame,
+                WeaponType.Shotgun => SpriteRectangles.shotGunItemHudFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };
@@ -192,6 +192,8 @@ namespace Sprint_0.Scripts.GameState
                 rupeeCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.rupeeCounterLocation.X + xOffset, ObjectConstants.rupeeCounterLocation.Y) + yOffset);
                 keyCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.keyCounterLocation.X + xOffset, ObjectConstants.keyCounterLocation.Y) + yOffset);
                 bombCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.bombCounterLocation.X + xOffset, ObjectConstants.bombCounterLocation.Y) + yOffset);
+                shotgunShellCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.shotgunShellCounterLocation.X + xOffset, ObjectConstants.shotgunShellCounterLocation.Y) + yOffset);
+
             }
         }
 

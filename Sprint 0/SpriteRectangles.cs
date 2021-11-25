@@ -62,7 +62,8 @@ namespace Sprint_0
             new Rectangle(0, 8, 7, 8)
         };
 
-        public static Rectangle shotGunItemFrame = new Rectangle(72, 61, 10, 8);
+        public static Rectangle shotGunItemFrame = new Rectangle(70, 60, 15, 12);
+        public static Rectangle shotGunItemHudFrame = new Rectangle(725, 136, 8, 18);
         public static Rectangle shotGunShellItemFrame = new Rectangle(74, 74, 3, 7);
 
         public static Rectangle heartContainerFrame = new Rectangle(25, 1, 13, 13);

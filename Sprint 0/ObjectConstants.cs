@@ -448,6 +448,7 @@ namespace Sprint_0
         public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
         public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
         public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 shotgunShellCounterLocation = new Vector2(96 * scale, 24 * scale);
         public static Vector2 primaryWeaponLocation = new Vector2(152 * scale, 24 * scale);
         public static Vector2 secondaryWeaponLocation = new Vector2(128 * scale, 24 * scale);
         public static Vector2 DungeonLevelDisplayLocation = new Vector2(16 * scale, 8 * scale);
