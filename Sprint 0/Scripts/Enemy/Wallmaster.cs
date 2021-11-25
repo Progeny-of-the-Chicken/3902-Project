@@ -274,6 +274,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             location += knockback * knockbackDistance;
         }
+        public void Freeze(float duration)
+        {
+            // TODO: Implement
+        }
         public bool CheckDelete()
         {
             return delete;

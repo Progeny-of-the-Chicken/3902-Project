@@ -53,6 +53,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             //The old man does not budge under the force of your sword
         }
+        public void Freeze(float duration)
+        {
+            //Old man does not get frozen
+        }
         public bool CheckDelete()
         {
             return delete;

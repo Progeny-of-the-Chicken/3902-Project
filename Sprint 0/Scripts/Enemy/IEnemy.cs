@@ -21,6 +21,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public void GradualKnockBack(Vector2 knockback);
 
+        public void Freeze(float duration);
+
         public bool CheckDelete();
     }
 }

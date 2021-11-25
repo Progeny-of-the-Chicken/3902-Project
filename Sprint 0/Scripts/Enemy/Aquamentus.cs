@@ -96,6 +96,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             //Aquamentus doesn't get knocked back when hit
         }
+        public void Freeze(float duration)
+        {
+            // TODO: Implement
+        }
         public bool CheckDelete()
         {
             return delete;

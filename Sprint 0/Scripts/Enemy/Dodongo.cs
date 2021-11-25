@@ -126,6 +126,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             location += knockback;
         }
+        public void Freeze(float duration)
+        {
+            // TODO: Implement
+        }
         public void Stun()
         {
             stunned = true;

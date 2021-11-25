@@ -79,7 +79,7 @@ namespace Sprint_0
 
 
         //----- Item constant values -----//
-        public const double clockFreezeSeconds = 10.0;
+        public const float clockFreezeSeconds = 10.0f;
 
 
         //----- Projectile constant values -----//

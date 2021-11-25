@@ -149,6 +149,10 @@ namespace Sprint_0.Scripts.Enemy
             //Though your blade crashes against the spike trap's steel, it does not yield 
             //(not implemented)
         }
+        public void Freeze(float duration)
+        {
+            // Spiketrap does not get frozen
+        }
         public bool CheckDelete()
         {
             return delete;

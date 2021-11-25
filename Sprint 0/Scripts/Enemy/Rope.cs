@@ -131,6 +131,11 @@ namespace Sprint_0.Scripts.Enemy
             knockbackDirection = knockback;
         }
 
+        public void Freeze(float duration)
+        {
+            // TODO: Implement
+        }
+
         public void ChaseLink()
         {
             chasing = true;

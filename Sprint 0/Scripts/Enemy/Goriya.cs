@@ -83,6 +83,11 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Displace(knockback);
         }
 
+        public void Freeze(float duration)
+        {
+            stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
         public bool CheckDelete()
         {
             return stateMachine.IsDead;
