@@ -1,6 +1,7 @@
 using System;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts
 {
@@ -23,24 +24,25 @@ namespace Sprint_0.Scripts
             random = new Random();
         }
 
-        public void DropItem(IEnemy enemy, ItemEntities items)
+        public void DropItem(IEnemy enemy)
         {
             double dropFreq = getDropFrequencyForType(enemy.GetType());
             double randomNum = random.NextDouble();
 
 
             if (randomNum < dropFreq)
-                items.Add(dropNextItem(enemy));
+                dropNextItem(enemy);
 
             killCounter++;
         }
 
-        private IItem dropNextItem(IEnemy enemy)
+        private void dropNextItem(IEnemy enemy)
         {
             int index = killCounter % 10;
 
             ItemType[] itemList = getItemListForType(enemy.GetType());
-            return new Item(enemy.Position, itemList[index]);
+
+            ObjectsFromObjectsFactory.Instance.CreateItemDrop(enemy.Position, enemy.Collider.Hitbox.Size.ToVector2(), itemList[index]);
         }
 
         private ItemType[] getItemListForType(Type enemy)

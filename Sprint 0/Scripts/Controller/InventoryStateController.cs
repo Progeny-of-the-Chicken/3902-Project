@@ -11,12 +11,12 @@ namespace Sprint_0.Scripts.Controller
 		private Dictionary<Keys, ICommand> controllerMappings;
 		private KeyboardState previousKeys;
 
-		public InventoryStateController(Game1 game, KeyboardState prevState)
+		public InventoryStateController(Game1 game)
 		{
 			this.game = game;
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			setCommands();
-			previousKeys = prevState;
+			previousKeys = new KeyboardState();
 		}
 
 		public void Update()
