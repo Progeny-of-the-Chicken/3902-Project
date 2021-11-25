@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Commands
         {
             GameStateManager.Instance.OpenInventory();
             // TODO: Make the controller change from the game state machine
-            game.kc = new InventoryStateController(game, Keyboard.GetState());
+            game.kc = new InventoryStateController(game);
         }
     }
 }

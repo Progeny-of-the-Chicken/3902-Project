@@ -22,50 +22,100 @@ namespace Sprint_0.Scripts.Commands
             switch (type)
             {
                 case WeaponType.Bow:
-                    if (Inventory.Instance.Rupee > 0 && Inventory.Instance.SilverArrows)
-                    {
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
-                        Inventory.Instance.Rupee--;
-                    }
-                    else if (Inventory.Instance.Rupee > 0 && Inventory.Instance.BasicArrows)
-                    {
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, false));
-                        Inventory.Instance.Rupee--;
-                    }
+                    UseBow();
                     break;
                 case WeaponType.BasicBoomerang:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
+                    UseBasicBoomerang();
                     break;
                 case WeaponType.MagicalBoomerang:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.Position, link.FacingDirection, link));
+                    UseMagicalBoomerang();
                     break;
                 case WeaponType.Bomb:
-                    if (Inventory.Instance.Bomb > 0)
-                    {
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateBomb(link.Position, link.FacingDirection));
-                        Inventory.Instance.Bomb--;
-                    }
+                    UseBomb();
                     break;
                 case WeaponType.BlueCandle:
-                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateFireSpell(link.Position, link.FacingDirection));
+                    UseBlueCandle();
                     break;
                 case WeaponType.Potion:
-                    Link.Instance.HealBy((int)(Link.Instance.MaxHealth));
-                    Inventory.Instance.RemoveWeapon(WeaponType.Potion);
+                    UsePotion();
                     break;
                 case WeaponType.Shotgun:
                     usingShotgun = true;
-                    if (Inventory.Instance.ShotgunShells > 0)
-                    {
-                        Inventory.Instance.ShotgunShells--;
-                        Link.Instance.UseShotgun();
-                        RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
-                    }
+                    UseShotgun();
                     break;
             }
             //We need this to prevent a link state change if link uses a shotgun but doesn't have any shells left
             if (!usingShotgun)
                 link.UseItem();
+        }
+
+        private void UseBow()
+        {
+            if (Inventory.Instance.Rupee > 0 && Inventory.Instance.SilverArrows)
+            {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, true));
+                Inventory.Instance.Rupee--;
+                link.UseItem();
+            }
+            else if (Inventory.Instance.Rupee > 0 && Inventory.Instance.BasicArrows)
+            {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateArrow(link.Position, link.FacingDirection, false));
+                Inventory.Instance.Rupee--;
+                link.UseItem();
+            }
+        }
+
+        private void UseBasicBoomerang()
+        {
+            if (Link.Instance.BoomerangReady)
+            {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkBasicBoomerang(link.Position, link.FacingDirection, link));
+                Link.Instance.BoomerangReady = false;
+                link.UseItem();
+            }
+        }
+
+        private void UseMagicalBoomerang()
+        {
+            if (Link.Instance.BoomerangReady)
+            {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateLinkMagicalBoomerang(link.Position, link.FacingDirection, link));
+                Link.Instance.BoomerangReady = false;
+                link.UseItem();
+            }
+        }
+
+        private void UseBomb()
+        {
+            if (Inventory.Instance.Bomb > 0)
+            {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateBomb(link.Position, link.FacingDirection));
+                Inventory.Instance.Bomb--;
+                link.UseItem();
+            }
+        }
+
+        private void UseBlueCandle()
+        {
+            RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateFireSpell(link.Position, link.FacingDirection));
+            link.UseItem();
+        }
+
+        private void UsePotion()
+        {
+            Link.Instance.HealBy((int)(Link.Instance.MaxHealth));
+            Inventory.Instance.RemoveWeapon(WeaponType.Potion);
+            link.UseItem();
+        }
+
+        private void UseShotgun()
+        {
+            if (Inventory.Instance.ShotgunShells > 0)
+            {
+                Inventory.Instance.ShotgunShells--;
+                Link.Instance.UseShotgun();
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
+            }
         }
     }
 }

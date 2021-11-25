@@ -19,6 +19,7 @@
         BasicArrowItem,
         SilverArrowItem,
         ShotgunItem,
-        ShotgunShellItem
+        ShotgunShellItem,
+        BlueRing
     }
 }

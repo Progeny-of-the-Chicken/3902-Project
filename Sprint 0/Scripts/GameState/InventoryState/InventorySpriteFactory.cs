@@ -141,6 +141,11 @@ namespace Sprint_0.Scripts.GameState.InventoryState
             return new BlueRingSprite(texture);
         }
 
+        public ISprite CreateMagicKeySprite()
+        {
+            return new MagicKeySprite(texture);
+        }
+
         public ISprite CreateBasicArrowSprite()
         {
             return new BasicArrowSprite(texture);

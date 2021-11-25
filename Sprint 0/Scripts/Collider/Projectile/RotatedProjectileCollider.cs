@@ -9,6 +9,7 @@ namespace Sprint_0.Scripts.Collider.Projectile
     {
         private Rectangle _hitbox;
         private Vector2 centerOffset;
+        private Vector2 swordHitboxLocationOffset = ObjectConstants.zeroVector;
 
         public IProjectile Owner { get; }
 
@@ -20,11 +21,15 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
             _hitbox = GetHitboxForOwner();
             AdjustHitbox(direction);
+            if (Owner is SwordAttackHitbox)
+            {
+                SetSwordHitboxLocationOffset(direction);
+            }
         }
 
         public void Update(Vector2 location)
         {
-            _hitbox.Location = location.ToPoint() - centerOffset.ToPoint();
+            _hitbox.Location = location.ToPoint() - centerOffset.ToPoint() + swordHitboxLocationOffset.ToPoint();
         }
 
         public void OnPlayerCollision(Link player)
@@ -73,11 +78,6 @@ namespace Sprint_0.Scripts.Collider.Projectile
             centerOffset = _hitbox.Size.ToVector2() / ObjectConstants.oneInTwo;
         }
 
-        private Vector2 GetCenterOfDimensions(Vector2 dimensions)
-        {
-            return dimensions / ObjectConstants.oneInTwo;
-        }
-
         private Rectangle SwapDimensions(Rectangle rectangle)
         {
             Rectangle returnRectangle = rectangle;
@@ -85,6 +85,18 @@ namespace Sprint_0.Scripts.Collider.Projectile
             returnRectangle.Height = returnRectangle.Width;
             returnRectangle.Width = temp;
             return returnRectangle;
+        }
+
+        private void SetSwordHitboxLocationOffset(FacingDirection direction)
+        {
+            if (direction == FacingDirection.Up)
+            {
+                swordHitboxLocationOffset = ObjectConstants.UpUnitVector * ObjectConstants.swordHitboxLength * ObjectConstants.scale;
+            }
+            else if (direction == FacingDirection.Left)
+            {
+                swordHitboxLocationOffset = ObjectConstants.LeftUnitVector * ObjectConstants.swordHitboxLength * ObjectConstants.scale;
+            }
         }
     }
 }

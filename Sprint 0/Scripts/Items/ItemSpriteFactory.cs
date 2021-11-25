@@ -118,5 +118,9 @@ namespace Sprint_0.Scripts.Items
         {
             return new NonAnimatedItemSprite(LinkSpriteFactory.Instance.GetShotgunSpriteSheet(), SpriteRectangles.shotGunShellItemFrame);
         }
+        public ISprite CreateBlueRingSprite()
+        {
+            return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.blueRingItemFrame);
+        }
     }
 }
