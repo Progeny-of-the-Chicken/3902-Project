@@ -1,129 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
-using System.Security.Cryptography;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
     public class Zol : IEnemy
     {
-        ISprite sprite;
-        IEnemyCollider collider;
+        private ISprite sprite;
+        private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
+        private IEnemyCollider collider;
+
         public IEnemyCollider Collider { get => collider; }
 
-        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        byte[] random;
+        public int Damage { get => ObjectConstants.StalfosDamage; }
 
-        float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
-        bool inKnockBack = false;
-        bool delete = false;
+        public Vector2 Position { get => stateMachine.Location; }
 
-        public int Damage { get => ObjectConstants.ZolDamage; }
-        public Vector2 Position { get => location; }
-        public bool CanBeAffectedByPlayer { get => true; }
-        int health = ObjectConstants.ZolStartingHealth;
-
-        Vector2 location;
-        Vector2 direction;
-        Vector2 knockbackDirection;
+        public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
         public Zol(Vector2 location)
         {
-            this.location = location;
-            direction = ObjectConstants.LeftUnitVector;
-            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
             sprite = EnemySpriteFactory.Instance.CreateZolSprite();
+            stateMachine = new EnemyStateMachine(location, EnemyType.Zol, (float)ObjectConstants.ZolMoveTime + (float)ObjectConstants.ZolPauseTime, ObjectConstants.ZolStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Zol, stateMachine, this);
+            invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
+
         public void Update(GameTime t)
         {
-            if (!inKnockBack)
+            stateMachine.Update(t);
+            if (stateMachine.GetState == EnemyState.NoAction)
             {
-                Move(t);
+                invoker.ExecuteRandomCommand();
             }
-            else
+
+            if (stateMachine.GetState != EnemyState.Knockback)
             {
-                GetKnockedBack(t);
+                sprite.Update(t);
             }
-            collider.Update(location);
-            sprite.Update(t);
+            collider.Update(Position);
         }
 
-        public void Move(GameTime t)
-        {
-            timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.ZolMoveTime + ObjectConstants.ZolPauseTime)
-            {
-                SetRandomDirection();
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
-            }
-            if (timeSinceMove >= ObjectConstants.ZolPauseTime)
-            {
-                location += direction * ObjectConstants.ZolMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            }
-        }
-        void GetKnockedBack(GameTime t)
-        {
-            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
-            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
-            {
-                inKnockBack = false;
-                timeSinceKnockback = 0;
-            }
-        }
-
-        void SetRandomDirection()
-        {
-            //First byte is vertical/horizontal, second is +/-
-            randomDir.GetBytes(random);
-            if (random[ObjectConstants.firstInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction = Vector2.UnitX;
-            else
-                direction = Vector2.UnitY;
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInTwo == ObjectConstants.zero_int)
-                direction *= ObjectConstants.vectorFlip;
-        }
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health <= ObjectConstants.zero)
+            stateMachine.TakeDamage(damage);
+            if (stateMachine.IsDead)
             {
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
-                delete = true;
-                SFXManager.Instance.PlayEnemyDeath();
-                ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(location);
+                ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.GelWidthHeight)));
             }
-            SFXManager.Instance.PlayEnemyHit();
         }
-        public void SuddenKnockBack(Vector2 knockback)
-        {
-            location += knockback;
-        }
+
         public void GradualKnockBack(Vector2 knockback)
         {
             //Don't move if you're going to be deleted so the Gels spawn properly
-            if (!delete)
+            if (!stateMachine.IsDead)
             {
-                inKnockBack = true;
                 knockback.Normalize();
-                knockbackDirection = knockback;
+                stateMachine.Knockback(knockback);
             }
         }
+
+        public void SuddenKnockBack(Vector2 knockback)
+        {
+            stateMachine.Displace(knockback);
+        }
+
         public bool CheckDelete()
         {
-            return delete;
+            return stateMachine.IsDead;
         }
-        public void Draw(SpriteBatch spriteBatch)
+
+        public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(spriteBatch, location);
+            sprite.Draw(sb, Position);
         }
     }
 }

@@ -182,6 +182,7 @@ namespace Sprint_0
         public const float GelMoveSpeed = DefaultEnemyMoveSpeed;
         public const double GelPauseTime = DefaultEnemyPauseTime;
         public const int GelStartingHealth = 1;
+        public const int GelWidthHeight = 8 * scale;
         //Goriya
         public const int GoriyaDamage = 1;
         public const double GoriyaMoveTime = 1.5;
