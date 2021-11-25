@@ -63,7 +63,7 @@ namespace Sprint_0.Scripts.Enemy
             if (!stateMachine.IsDead)
             {
                 knockback.Normalize();
-                stateMachine.Knockback(knockback);
+                stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
             }
         }
 

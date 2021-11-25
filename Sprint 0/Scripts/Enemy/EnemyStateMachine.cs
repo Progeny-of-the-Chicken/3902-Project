@@ -105,12 +105,6 @@ namespace Sprint_0.Scripts.Enemy
             SFXManager.Instance.PlayEnemyHit();
         }
 
-        public void Knockback(Vector2 knockback)
-        {
-            lastMovementVector = knockback;
-            SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime);
-        }
-
         public void Displace(Vector2 direction)
         {
             movement.Displace(direction);

@@ -75,7 +75,7 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            stateMachine.Knockback(knockback);
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)
