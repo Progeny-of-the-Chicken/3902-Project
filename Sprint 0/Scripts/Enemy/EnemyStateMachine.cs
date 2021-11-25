@@ -12,8 +12,9 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyMovementHandler movement;
         private Vector2 directionVector;
         private Vector2 lastMovementVector;
+        private EnemyState lastState = EnemyState.NoAction;
 
-        private float enemyLifeTime = ObjectConstants.counterInitialVal_float;
+        public float enemyLifeTime = ObjectConstants.counterInitialVal_float;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
         public float moveTime;
 
@@ -28,6 +29,8 @@ namespace Sprint_0.Scripts.Enemy
         public FacingDirection GetDirection { get => DirectionVectorToFacingDirection(directionVector); }
 
         public EnemyState GetState { get => stateStack.Peek().state; }
+
+        public bool StateChange { get; set; }
 
         public int Health { get => health; }
 
@@ -45,6 +48,7 @@ namespace Sprint_0.Scripts.Enemy
 
             stateStack = new Stack<(EnemyState state, float stateEndTime)>();
             movement = new EnemyMovementHandler(startLocation);
+            // SetState(EnemyState.NoAction, ObjectConstants.zeroPauseTime);
         }
 
         public void Update(GameTime gameTime)
@@ -65,6 +69,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 UpdateDamaged();
             }
+            UpdateStateChangeFlag();
         }
 
         public void SetState(EnemyState state, float duration, Vector2 direction)
@@ -109,6 +114,15 @@ namespace Sprint_0.Scripts.Enemy
         public void Displace(Vector2 direction)
         {
             movement.Displace(direction);
+        }
+
+        public void EndState()
+        {
+            stateStack.Pop();
+            if (stateStack.Count == 0)
+            {
+                SetState(EnemyState.NoAction, enemyLifeTime);
+            }
         }
 
         //----- Helper methods for movement transition -----//
@@ -170,6 +184,12 @@ namespace Sprint_0.Scripts.Enemy
                 // Default case are flying enemies
                 _ => FacingDirection.Right
             };
+        }
+
+        private void UpdateStateChangeFlag()
+        {
+            StateChange = lastState == GetState;
+            lastState = GetState;
         }
     }
 }
