@@ -48,7 +48,6 @@ namespace Sprint_0.Scripts.Enemy
 
             stateStack = new Stack<(EnemyState state, float stateEndTime)>();
             movement = new EnemyMovementHandler(startLocation);
-            // SetState(EnemyState.NoAction, ObjectConstants.zeroPauseTime);
         }
 
         public void Update(GameTime gameTime)
@@ -93,30 +92,16 @@ namespace Sprint_0.Scripts.Enemy
             movement.SetStrategy(GetStrategyForState(state));
         }
 
-        public void TakeDamage(int damage, bool IsBoss)
+        public void TakeDamage(int damage, bool isBoss)
         {
             health -= damage;
             damagedState = (true, enemyLifeTime + ObjectConstants.DefaultEnemyDamagedTime);
             if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(Location, Effect.EffectType.Pop);
-                if (IsBoss)
-                {
-                    SFXManager.Instance.PlayBossScream1();
-                }
-                else
-                {
-                    SFXManager.Instance.PlayEnemyDeath();
-                }
+                PlayDeathSound(isBoss);
             }
-            if (IsBoss)
-            {
-                SFXManager.Instance.PlayBossHit();
-            }
-            else
-            {
-                SFXManager.Instance.PlayEnemyHit();
-            }
+            PlayHitSound(isBoss);
         }
 
         public void Displace(Vector2 direction)
@@ -201,11 +186,30 @@ namespace Sprint_0.Scripts.Enemy
             lastState = GetState;
         }
 
-        //----- Helper methods for sound control -----//
+        //----- Helper method for sound control -----//
 
-        private void PlayHitSoundForEnemy()
+        private void PlayDeathSound(bool isBoss)
         {
+            if (isBoss)
+            {
+                SFXManager.Instance.PlayBossScream1();
+            }
+            else
+            {
+                SFXManager.Instance.PlayEnemyDeath();
+            }
+        }
 
+        private void PlayHitSound(bool isBoss)
+        {
+            if (isBoss)
+            {
+                SFXManager.Instance.PlayBossHit();
+            }
+            else
+            {
+                SFXManager.Instance.PlayEnemyHit();
+            }
         }
     }
 }
