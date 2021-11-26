@@ -51,7 +51,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
             }
-            if (BoomerangCaught == true && stateMachine.GetState == EnemyState.AbilityCast)
+            if (BoomerangCaught && stateMachine.GetState == EnemyState.AbilityCast)
             {
                 stateMachine.EndState();
                 BoomerangCaught = false;

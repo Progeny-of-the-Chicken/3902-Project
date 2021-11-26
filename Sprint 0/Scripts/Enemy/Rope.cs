@@ -1,17 +1,19 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
-using System.Collections.Generic;
 
 namespace Sprint_0.Scripts.Enemy
 {
     public class Rope : IEnemy
     {
+        private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
         ISprite leftSprite;
         ISprite rightSprite;
+        private bool isChasing = false;
 
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
@@ -20,33 +22,22 @@ namespace Sprint_0.Scripts.Enemy
         IEnemyCollider leftCollider;
         IEnemyCollider rightCollider;
 
-        static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
-        byte[] random;
-
-        float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
-
         public int Damage { get => ObjectConstants.RopeDamage; }
-        int health = ObjectConstants.RopeStartingHealth;
 
-        bool delete = false;
-        bool inKnockBack = false;
-        bool chasing = false;
-        Vector2 location;
-        public Vector2 Position { get => location; }
+        public Vector2 Position { get => stateMachine.Location; }
+
         public bool CanBeAffectedByPlayer { get => true; }
-
-        FacingDirection direction;
-        Vector2 knockbackDirection;
 
         (Vector2 directionVector, ISprite sprite, IEnemyCollider chaseCollider) dependency;
 
         Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)> directionDependencies;
+
         public Rope(Vector2 location)
         {
-            this.location = location;
-            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            
+            stateMachine = new EnemyStateMachine(location, EnemyType.Rope, (float)ObjectConstants.RopeMoveTime, ObjectConstants.RopeStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Rope, stateMachine, this);
+            invoker.ExecuteRandomCommand();
+
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.ropeFrames[ObjectConstants.zero].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             leftCollider = new RopeDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
             rightCollider = new RopeDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
@@ -59,101 +50,78 @@ namespace Sprint_0.Scripts.Enemy
             directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, rightSprite, rightCollider));
             directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, rightSprite, rightCollider));
             directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, rightSprite, rightCollider));
-            SetRandomDirection();
+            directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
         {
-            if (!inKnockBack)
+            stateMachine.Update(gt);
+            if (stateMachine.StateChange)
             {
-                Move(gt);
+                directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
+            }
+            if (!isChasing && stateMachine.GetState == EnemyState.Chase)
+            {
+                stateMachine.EndState();
+                isChasing = false;
+            }
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                invoker.ExecuteRandomCommand();
+            }
+            if (stateMachine.GetState != EnemyState.Knockback)
+            {
                 dependency.sprite.Update(gt);
             }
-            else
-            {
-                GetKnockedBack(gt);
-            }
-            collider.Update(location);
-            dependency.chaseCollider.Update(location);
-        }
-
-        public void Move(GameTime gt)
-        {
-            timeSinceMove += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.RopeMoveTime)
-            {
-                SetRandomDirection();
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
-            }
-            if (chasing)    location += dependency.directionVector * ObjectConstants.RopeChaseSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            else            location += dependency.directionVector * ObjectConstants.RopeMoveSpeed * (float)gt.ElapsedGameTime.TotalSeconds;
-            
-            chasing = false;
-        }
-        void GetKnockedBack(GameTime t)
-        {
-            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
-            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
-            {
-                inKnockBack = false;
-                timeSinceKnockback = 0;
-            }
-        }
-
-        void SetRandomDirection()
-        {
-            randomDir.GetBytes(random);
-            direction = (FacingDirection)(random[ObjectConstants.firstInArray] % ObjectConstants.oneInFour);
-            directionDependencies.TryGetValue(direction, out dependency);
+            collider.Update(Position);
+            dependency.chaseCollider.Update(Position);
         }
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            SFXManager.Instance.PlayEnemyHit();
-            if (health <= ObjectConstants.zero)
-            {
-                SFXManager.Instance.PlayEnemyDeath();
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
-                delete = true;
-            }
+            stateMachine.TakeDamage(damage, false);
         }
         public void SuddenKnockBack(Vector2 knockback)
         {
-            location += knockback;
+            stateMachine.Displace(knockback);
         }
+
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
             knockback.Normalize();
-            knockbackDirection = knockback;
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
         }
 
         public void Freeze(float duration)
         {
-            // TODO: Implement
+            stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
         public void ChaseLink()
         {
-            chasing = true;
-            if (direction != FacingDirection.Left)
+            if (stateMachine.GetState == EnemyState.Movement)
             {
-                direction = FacingDirection.Right;
-                directionDependencies.TryGetValue(direction, out dependency);
+                if (stateMachine.GetDirection == FacingDirection.Left)
+                {
+                    stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.RopeChaseTimeoutTime, ObjectConstants.LeftUnitVector);
+                }
+                else
+                {
+                    stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.RopeChaseTimeoutTime, ObjectConstants.RightUnitVector);
+                }
+                isChasing = true;
             }
         }
 
         public bool CheckDelete()
         {
-            return delete;
+            return stateMachine.IsDead;
         }
 
         public void Draw(SpriteBatch sb)
         {
-            dependency.sprite.Draw(sb, location);
+            dependency.sprite.Draw(sb, stateMachine.Location);
         }
     }
 }

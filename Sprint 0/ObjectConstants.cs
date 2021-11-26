@@ -203,6 +203,7 @@ namespace Sprint_0
         public const float RopeMoveSpeed = DefaultEnemyMoveSpeed;
         public const float RopeChaseSpeed = RopeMoveSpeed * 2;
         public const int RopeStartingHealth = 1;
+        public const double RopeChaseTimeoutTime = RopeMoveTime / 2;
         //Stalfos
         public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;

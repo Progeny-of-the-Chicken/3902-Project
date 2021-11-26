@@ -48,6 +48,12 @@ namespace Sprint_0.Scripts.Movement
             return new IdleStrategy();
         }
 
+        public IMovementStrategy CreateChaseStrategy(Vector2 directionVector)
+        {
+            // If multiple enemies could chase, this can be turned into a switch case with an EnemyType enum parameter
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
+        }
+
         //----- Enemy disambiguation strategies creator methods -----//
 
         private IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)

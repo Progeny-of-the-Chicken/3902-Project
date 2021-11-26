@@ -93,10 +93,12 @@ namespace Sprint_0.Scripts.Enemy
         {
             stateMachine.Displace(knockback);
         }
+
         public void Freeze(float duration)
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
+
         public void Stun()
         {
             stateMachine.SetState(EnemyState.Stun, (float)ObjectConstants.DodongoStunTime);

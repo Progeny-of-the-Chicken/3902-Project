@@ -7,6 +7,7 @@
         Knockback,
         Freeze,
         Stun,
-        AbilityCast
+        AbilityCast,
+        Chase
     }
 }

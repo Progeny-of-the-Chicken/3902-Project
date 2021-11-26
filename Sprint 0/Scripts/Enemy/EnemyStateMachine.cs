@@ -144,6 +144,7 @@ namespace Sprint_0.Scripts.Enemy
                 EnemyState.Freeze => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.Stun => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.AbilityCast => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
+                EnemyState.Chase => MovementStrategyFactory.Instance.CreateChaseStrategy(lastMovementVector),
                 EnemyState.NoAction => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 // Should never happen
                 _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType)
