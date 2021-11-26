@@ -69,7 +69,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void TakeDamage(int damage)
         {
-            stateMachine.TakeDamage(damage);
+            stateMachine.TakeDamage(damage, false);
         }
 
         public void GradualKnockBack(Vector2 knockback)

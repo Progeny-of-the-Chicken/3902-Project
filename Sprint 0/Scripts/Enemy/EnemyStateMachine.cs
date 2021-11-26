@@ -93,16 +93,30 @@ namespace Sprint_0.Scripts.Enemy
             movement.SetStrategy(GetStrategyForState(state));
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, bool IsBoss)
         {
             health -= damage;
             damagedState = (true, enemyLifeTime + ObjectConstants.DefaultEnemyDamagedTime);
             if (health <= ObjectConstants.zero)
             {
                 ObjectsFromObjectsFactory.Instance.CreateStaticEffect(Location, Effect.EffectType.Pop);
-                SFXManager.Instance.PlayEnemyDeath();
+                if (IsBoss)
+                {
+                    SFXManager.Instance.PlayBossScream1();
+                }
+                else
+                {
+                    SFXManager.Instance.PlayEnemyDeath();
+                }
             }
-            SFXManager.Instance.PlayEnemyHit();
+            if (IsBoss)
+            {
+                SFXManager.Instance.PlayBossHit();
+            }
+            else
+            {
+                SFXManager.Instance.PlayEnemyHit();
+            }
         }
 
         public void Displace(Vector2 direction)
@@ -184,6 +198,13 @@ namespace Sprint_0.Scripts.Enemy
         {
             StateChange = lastState == GetState;
             lastState = GetState;
+        }
+
+        //----- Helper methods for sound control -----//
+
+        private void PlayHitSoundForEnemy()
+        {
+
         }
     }
 }

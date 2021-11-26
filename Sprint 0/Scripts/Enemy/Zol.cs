@@ -50,7 +50,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void TakeDamage(int damage)
         {
-            stateMachine.TakeDamage(damage);
+            stateMachine.TakeDamage(damage, false);
             if (stateMachine.IsDead)
             {
                 ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.GelWidthHeight)));
