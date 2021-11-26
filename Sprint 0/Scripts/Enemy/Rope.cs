@@ -13,7 +13,6 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyRandomInvoker invoker;
         ISprite leftSprite;
         ISprite rightSprite;
-        private bool isChasing = false;
 
         IEnemyCollider collider;
         public IEnemyCollider Collider { get => collider; }
@@ -62,11 +61,6 @@ namespace Sprint_0.Scripts.Enemy
             {
                 directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
             }
-            if (!isChasing && stateMachine.GetState == EnemyState.Chase)
-            {
-                stateMachine.EndState();
-                isChasing = false;
-            }
             if (stateMachine.GetState == EnemyState.NoAction)
             {
                 invoker.ExecuteRandomCommand();
@@ -110,7 +104,6 @@ namespace Sprint_0.Scripts.Enemy
                 {
                     stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.RopeChaseTimeoutTime, ObjectConstants.RightUnitVector);
                 }
-                isChasing = true;
             }
         }
 
