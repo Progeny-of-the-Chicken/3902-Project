@@ -14,7 +14,6 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
 
         public void Execute()
         {
-            // TODO: Generalize ObjectsFromObjects method, create all three here with Aquamentus parameter
             ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(stateMachine.Location, stateMachine.GetDirection);
         }
     }

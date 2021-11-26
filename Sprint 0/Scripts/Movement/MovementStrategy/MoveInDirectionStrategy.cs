@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using System.Security.Cryptography;
+﻿using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Movement.MovementStrategy
 {
