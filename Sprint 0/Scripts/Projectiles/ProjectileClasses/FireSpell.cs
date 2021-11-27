@@ -46,6 +46,9 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
                 case FacingDirection.Down:
                     directionVector = ObjectConstants.DownUnitVector;
                     break;
+                case FacingDirection.None:
+                    directionVector = ObjectConstants.zeroVector;
+                    break;
                 default:
                     break;
             }

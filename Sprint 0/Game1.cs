@@ -34,7 +34,7 @@ namespace Sprint_0
             }
         }
     }
-    public enum FacingDirection { Right, Left, Up, Down };
+    public enum FacingDirection { Right, Left, Up, Down, None };
 
     public class Game1 : Game
     {

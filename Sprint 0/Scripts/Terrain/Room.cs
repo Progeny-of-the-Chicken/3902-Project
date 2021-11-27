@@ -299,6 +299,9 @@ public class Room : IRoom
                     case ObjectConstants.BlueRingStr:
                         itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
                         break;
+                    case ObjectConstants.FireSpellStr:
+                        projectileSet.Add(ProjectileFactory.Instance.CreateFireSpell(itemLocation, FacingDirection.None));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
