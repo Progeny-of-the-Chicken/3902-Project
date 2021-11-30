@@ -13,7 +13,7 @@ namespace Sprint_0.Scripts.GameState
         private string currLine = "";
         private int letterBuffer = 6;
         private int frameBuffer = 2;
-        private bool nextPressed = false;
+        private int frameCounter = 0;
         private int currIndex = 0;
         private bool active = false;
 
@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.GameState
         private ISprite[] letterSprites = new ISprite[maxLetters];
 
         private int initX = 40;
-        private int initY = 240;
+        private int initY = ObjectConstants.yOffsetForRoom + 2*ObjectConstants.standardWidthHeight;
 
         public DialogueBox()
         {
@@ -36,6 +36,7 @@ namespace Sprint_0.Scripts.GameState
             if (queueEmpty)
             {
                 active = false;
+                currLine = "";
             } else
             {
                 active = true;
@@ -51,31 +52,22 @@ namespace Sprint_0.Scripts.GameState
         {
             if (active)
             {
-                for (int i = 0; i <= currIndex; i++)
+                drawLetters(sb);
+
+                frameCounter++;
+
+                // If the frame counter is equal to the frame buffer, increase
+                // currIndex to print the next letter. Also reset the frame counter
+                if (frameCounter == frameBuffer)
                 {
-                    bool on2ndLine = i > midpoint;
-
-                    if (!on2ndLine)
-                    {
-                        letterSprites[i].Draw(sb, new Vector2(initX + (16 + letterBuffer) * i, initY));
-                    }
-                    else
-                    {
-                        letterSprites[i].Draw(sb, new Vector2(initX + (16 + letterBuffer) * (i - 1 - midpoint), initY + 24));
-                    }
-                }
-                
-
-                frameBuffer--;
-
-                if (frameBuffer == 0)
-                {
-                    frameBuffer = 2;
-
+                    // Only move onto the next char if there's another character
+                    // to print.
                     if (currIndex < currLine.Length - 1)
                     {
                         currIndex++;
                     }
+
+                    frameCounter = 0;
                 }
             }
         }
@@ -94,16 +86,16 @@ namespace Sprint_0.Scripts.GameState
             {
                 string nextLine;
 
-                nextPressed = true;
                 lineQueue.Dequeue();
                 currIndex = 0;
-                frameBuffer = 2;
+                frameCounter = 0;
 
                 bool isEmpty = !lineQueue.TryPeek(out nextLine);
 
                 if (isEmpty)
                 {
                     active = false;
+                    currLine = "";
                 } else
                 {
                     currLine = nextLine;
@@ -149,6 +141,30 @@ namespace Sprint_0.Scripts.GameState
             }
 
             return maxLetters / 2;
+        }
+
+        private void drawLetters(SpriteBatch sb)
+        {
+            int xOffset = 0;
+            int yOffset = 0;
+
+            for (int i = 0; i <= currIndex; i++)
+            {
+                bool on1stLine = i <= midpoint;
+
+                if (on1stLine)
+                {
+                    xOffset = (ObjectConstants.standardWidthHeight + letterBuffer) * i;
+                    yOffset = 0;
+                }
+                else
+                {
+                    xOffset = (ObjectConstants.standardWidthHeight + letterBuffer) * (i - 1 - midpoint);
+                    yOffset = 24;
+                }
+
+                letterSprites[i].Draw(sb, new Vector2(initX + xOffset, initY + yOffset));
+            }
         }
     }
 }

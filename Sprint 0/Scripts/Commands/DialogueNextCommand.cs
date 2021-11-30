@@ -2,9 +2,9 @@
 
 namespace Sprint_0.Scripts.Commands
 {
-    public class DialogueNext
+    public class DialogueNextCommand: ICommand
     {
-        public DialogueNext()
+        public DialogueNextCommand()
         {
         }
 
