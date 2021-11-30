@@ -232,7 +232,7 @@ namespace Sprint_0
         public static Rectangle NorthBombedSpriteFrame = new Rectangle(947, 11, 32, 32);
         public static Rectangle NorthBombableSpriteFrame = new Rectangle(815, 11, 32, 32);
         public static Rectangle InvisibleVerticleWallFrame = new Rectangle(814, 143, 32, 72);
-        public static Rectangle InvisibleWallFrame = new Rectangle(814, 143, 16, 16);
+        public static Rectangle InvisibleWallFrame = new Rectangle(814, 143, 32, 32);
         public static Rectangle InvisibleHorizontalWallFrame = new Rectangle(814, 143, 112, 32);
         public static Rectangle EastWallSpriteFrame = new Rectangle(815, 77, 32, 32);
         public static Rectangle EastLockedSpriteFrame = new Rectangle(881, 77, 32, 32);

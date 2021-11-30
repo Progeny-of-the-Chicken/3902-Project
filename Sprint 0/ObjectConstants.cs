@@ -249,6 +249,7 @@ namespace Sprint_0
 
         //----- string constant values -----//
         public const string secretRoom = "Room00";
+        public const string stairRoom = "Room10";
         public const string wallMasterToRoom = "Room25";
         public const string enemiesFile = "enemies";
         public const string npcFile = "npc";
@@ -301,6 +302,7 @@ namespace Sprint_0
         public const string SouthClosedSpriteStr = "SouthClosedSprite";
         public const string MoveableBlockSpriteStr = "MoveableBlockSprite";
         public const string StairSpriteStr = "StairSprite";
+        public const string InvisibleExitStr = "InvisibleExit";
         public const string EastDoorSpriteStr = "EastDoorSprite";
         public const string NorthDoorSpriteStr = "NorthDoorSprite";
         public const string WestDoorSpriteStr = "WestDoorSprite";
@@ -372,7 +374,8 @@ namespace Sprint_0
         public const int SouthDoorSpritePos = 11;
         public const int wallHitBoxHalfSize = standardWidthHeight / 2;
         public const int wallHitBoxSize = standardWidthHeight;
-        public static Vector2 sideOnRoomSpawnPosition = new Vector2(ObjectConstants.scale * ObjectConstants.wallHitBoxSize * 3, ObjectConstants.yOffsetForRoom + ObjectConstants.scale * ObjectConstants.wallHitBoxSize * 2);
+        public static Vector2 sideOnRoomSpawnPosition = new Vector2(scale * wallHitBoxSize * 3, yOffsetForRoom + scale * wallHitBoxSize * 3);
+        public static Vector2 leftOfStairSpawnPosition = new Vector2(scale * wallHitBoxSize * 7, yOffsetForRoom + scale * wallHitBoxSize * 6);
 
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
