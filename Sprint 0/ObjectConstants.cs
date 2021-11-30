@@ -329,6 +329,7 @@ namespace Sprint_0
         public const string SouthBombedSpriteStr = "SouthBombedSprite";
         public const string SouthLockedSpriteStr = "SouthLockedSprite";
         public const string SouthWallSpriteStr = "SouthWallSprite";
+        public const string InvisibleWallStr = "InvisibleWall";
 
 
         //----- wall/block constant values -----//
