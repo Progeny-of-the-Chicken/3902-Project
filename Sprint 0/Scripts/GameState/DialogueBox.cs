@@ -22,7 +22,7 @@ namespace Sprint_0.Scripts.GameState
         private ISprite[] letterSprites = new ISprite[maxLetters];
 
         private int initX = 40;
-        private int initY = ObjectConstants.yOffsetForRoom + 2*ObjectConstants.standardWidthHeight;
+        private int initY = ObjectConstants.yOffsetForRoom + 2 * ObjectConstants.standardWidthHeight;
 
         public DialogueBox()
         {
@@ -45,6 +45,14 @@ namespace Sprint_0.Scripts.GameState
                     currLine = lineQueue.Peek();
                     initLetterSpritesForLine();
                 }
+            }
+
+            if (isPrinting())
+            {
+                SFXManager.Instance.PlayTextScroll();
+            } else
+            {
+                SFXManager.Instance.StopTextScroll();
             }
         }
 
@@ -164,6 +172,18 @@ namespace Sprint_0.Scripts.GameState
                 }
 
                 letterSprites[i].Draw(sb, new Vector2(initX + xOffset, initY + yOffset));
+            }
+        }
+
+        private bool isPrinting()
+        {
+            if (currIndex < currLine.Length - 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
