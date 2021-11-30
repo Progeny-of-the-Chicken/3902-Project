@@ -371,7 +371,7 @@ namespace Sprint_0
         public const int SouthDoorSpritePos = 11;
         public const int wallHitBoxHalfSize = standardWidthHeight / 2;
         public const int wallHitBoxSize = standardWidthHeight;
-
+        public static Vector2 sideOnRoomSpawnPosition = new Vector2(ObjectConstants.scale * ObjectConstants.wallHitBoxSize * 3, ObjectConstants.yOffsetForRoom + ObjectConstants.scale * ObjectConstants.wallHitBoxSize * 2);
 
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
