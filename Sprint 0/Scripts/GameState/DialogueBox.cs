@@ -11,16 +11,20 @@ namespace Sprint_0.Scripts.GameState
     {
         private Queue<string> lineQueue = new Queue<string>();
         private string currLine = "";
-        private int letterBuffer = 6;
-        private int frameBuffer = 2;
+        private int letterSpacing = 6;
+        private int framesBetweenLetters = 2;
         private int frameCounter = 0;
         private int currIndex = 0;
         private bool active = false;
 
-        static int maxLetters = 70;
+        static int maxLetters = 400;
+        static int lettersPerLine = 35;
+        static int maxLines = 7;
         private int midpoint;
+        private int[] linebreaks;
         private ISprite[] letterSprites = new ISprite[maxLetters];
 
+        // Origin point for printed dialogue
         private int initX = 40;
         private int initY = ObjectConstants.yOffsetForRoom + 2 * ObjectConstants.standardWidthHeight;
 
@@ -66,7 +70,7 @@ namespace Sprint_0.Scripts.GameState
 
                 // If the frame counter is equal to the frame buffer, increase
                 // currIndex to print the next letter. Also reset the frame counter
-                if (frameCounter == frameBuffer)
+                if (frameCounter == framesBetweenLetters)
                 {
                     // Only move onto the next char if there's another character
                     // to print.
@@ -80,6 +84,8 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
+        // ALL DIALOGUE LINES CAN MAX BE 70 CHARACTERS, LESS IF WORDS DON'T ALIGN
+        // WITH LINE BREAKS!
         public void AddDialogue(string[] dia)
         {
             foreach (string line in dia)
@@ -125,6 +131,7 @@ namespace Sprint_0.Scripts.GameState
             }
 
             midpoint = calculateMidpoint();
+            linebreaks = calculateLineBreaks();
         }
 
         private int calculateMidpoint()
@@ -151,25 +158,57 @@ namespace Sprint_0.Scripts.GameState
             return maxLetters / 2;
         }
 
-        private void drawLetters(SpriteBatch sb)
+        private int[] calculateLineBreaks()
         {
-            int xOffset = 0;
-            int yOffset = 0;
+            int[] bps = new int[maxLines];
+            int i = 0;
+            int len = 0;
+            int total = 0;
+            string[] tokens = currLine.Split(' ');
 
-            for (int i = 0; i <= currIndex; i++)
+            for (int j = 0; j < maxLines; j++)
             {
-                bool on1stLine = i <= midpoint;
+                bps[j] = lettersPerLine * maxLines + 1;
+            }
 
-                if (on1stLine)
+            foreach (string token in tokens)
+            {
+                len += token.Length;
+
+                if (len >= lettersPerLine)
                 {
-                    xOffset = (ObjectConstants.standardWidthHeight + letterBuffer) * i;
-                    yOffset = 0;
+                    len -= token.Length;
+                    total += len;
+                    bps[i] = total;
+                    len = token.Length + 1;
+                    i++;
                 }
                 else
                 {
-                    xOffset = (ObjectConstants.standardWidthHeight + letterBuffer) * (i - 1 - midpoint);
-                    yOffset = 24;
+                    len++;
                 }
+            }
+
+            return bps;
+        }
+
+        private void drawLetters(SpriteBatch sb)
+        {
+            int xOffset;
+            int yOffset;
+            int lineNum = 0;
+
+            for (int i = 0; i <= currIndex; i++)
+            {
+                if (i == linebreaks[lineNum])
+                {
+                    lineNum++;
+                }
+
+                
+                xOffset = (ObjectConstants.standardWidthHeight + letterSpacing) * getCurrCharLinePos(i);
+                //System.Diagnostics.Debug.WriteLine(getCurrCharLinePos(i));
+                yOffset = 24 * lineNum;
 
                 letterSprites[i].Draw(sb, new Vector2(initX + xOffset, initY + yOffset));
             }
@@ -185,6 +224,21 @@ namespace Sprint_0.Scripts.GameState
             {
                 return false;
             }
+        }
+
+        private int getCurrCharLinePos(int j)
+        {
+            int pos = j;
+
+            for (int i = maxLines - 1; i >= 0; i--)
+            {
+                if (pos >= linebreaks[i])
+                {
+                    return pos - linebreaks[i];
+                }
+            }
+
+            return pos;
         }
     }
 }

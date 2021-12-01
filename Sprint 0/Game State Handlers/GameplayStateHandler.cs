@@ -29,6 +29,9 @@ namespace Sprint_0.GameStateHandlers
             roomManager.Init(link);
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
             initializeLetterSprites();
+
+            string[] dia = { "Randomly typed string, oh boy I hope this works sheesh this is gonna be a long one just to test the multi line functionality", "Second dialogue", "this one should take up more" };
+            db.AddDialogue(dia);
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
