@@ -63,5 +63,6 @@
     <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
     <Folder Include="Scripts\Sprite\Font\Letters\" />
     <Folder Include="Scripts\Sprite\Font\Numbers\" />
+    <Folder Include="Scripts\Terrain\LevelData\Dungeon2\" />
   </ItemGroup>
 </Project>
