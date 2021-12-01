@@ -6,6 +6,7 @@ using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts
 {
@@ -82,7 +83,7 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.Key += ObjectConstants.inventoryBasicKeyValue;
                     break;
                 case ItemType.Clock:
-                    // Unimplemented
+                    RoomManager.Instance.CurrentRoom.FreezeEnemies();
                     break;
                 case ItemType.MagicKey:
                     Inventory.Instance.MagicKey = true;

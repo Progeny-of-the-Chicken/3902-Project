@@ -473,6 +473,14 @@ public class Room : IRoom
         effectQueue.Clear();
     }
 
+    public void FreezeEnemies()
+    {
+        foreach (IEnemy enemy in enemySet.Enemies)
+        {
+            enemy.Freeze(ObjectConstants.clockFreezeSeconds);
+        }
+    }
+
     public void ChangeDoor(IWall doorToRemove, String doorToAdd)
     {
         Vector2 doorLocation = new Vector2(doorToRemove.Collider.Hitbox.X, doorToRemove.Collider.Hitbox.Y);

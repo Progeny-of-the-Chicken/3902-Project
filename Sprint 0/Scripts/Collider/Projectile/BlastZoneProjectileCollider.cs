@@ -33,8 +33,11 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            enemy.TakeDamage(Owner.Damage);
-            enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            if (enemy.CanBeAffectedByPlayer)
+            {
+                enemy.TakeDamage(Owner.Damage);
+                enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            }
         }
     }
 }

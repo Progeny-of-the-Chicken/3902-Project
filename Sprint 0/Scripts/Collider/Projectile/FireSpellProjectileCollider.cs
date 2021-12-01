@@ -36,7 +36,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
         public void OnEnemyCollision(IEnemy enemy)
         {
             // No knockback
-            enemy.TakeDamage(Owner.Damage);
+            if (enemy.CanBeAffectedByPlayer)
+            {
+                enemy.TakeDamage(Owner.Damage);
+            }
         }
     }
 }

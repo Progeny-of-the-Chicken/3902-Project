@@ -1,164 +1,101 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
-using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
     class Goriya : IEnemy
     {
-        public bool boomerangActive { get; set; }
-        IEnemyCollider collider;
+        private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
+        private IEnemyCollider collider;
+        private ISprite dependency;
+        private Dictionary<FacingDirection, ISprite> directionDependencies;
+
         public IEnemyCollider Collider { get => collider; }
 
-        static RNGCryptoServiceProvider randomDir;
-        byte[] random;
+        public int Damage { get => ObjectConstants.StalfosDamage; }
 
-        public int Damage { get => ObjectConstants.GoriyaDamage; }
-        public Vector2 Position { get => location; }
-        int health = ObjectConstants.GoriyaStartingHealth;
-        bool delete = false;
-        bool inKnockBack = false;
+        public Vector2 Position { get => stateMachine.Location; }
 
-        float timeSinceMove = ObjectConstants.counterInitialVal_float;
-        float timeSinceKnockback = ObjectConstants.counterInitialVal_float;
-        float timeSinceBoomerangThrow = ObjectConstants.counterInitialVal_float;
-        FacingDirection direction;
-        Vector2 location;
-        Vector2 knockbackDirection;
-        (Vector2 directionVector, ISprite sprite) dependency;
+        public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
-        Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)> directionDependencies;
+        public bool BoomerangCaught { get; set; }
+
         public Goriya(Vector2 location)
         {
+            stateMachine = new EnemyStateMachine(location, EnemyType.Goriya, (float)ObjectConstants.GoriyaMoveTime, ObjectConstants.GoriyaStartingHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Goriya, stateMachine, this);
+            invoker.ExecuteRandomCommand();
 
-            this.location = location;
-
-            random = new byte[ObjectConstants.numberOfBytesForRandomDirection];
-            randomDir = new RNGCryptoServiceProvider();
-            directionDependencies = new Dictionary<FacingDirection, (Vector2 vector, ISprite sprite)>();
-            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, EnemySpriteFactory.Instance.CreateRightGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, EnemySpriteFactory.Instance.CreateBackGoriyaSprite()));
-            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite()));
-            direction = FacingDirection.Down;
-            directionDependencies.TryGetValue(direction, out dependency);
+            directionDependencies = new Dictionary<FacingDirection, ISprite>();
+            directionDependencies.Add(FacingDirection.Right, EnemySpriteFactory.Instance.CreateRightGoriyaSprite());
+            directionDependencies.Add(FacingDirection.Left, EnemySpriteFactory.Instance.CreateLeftGoriyaSprite());
+            directionDependencies.Add(FacingDirection.Up, EnemySpriteFactory.Instance.CreateBackGoriyaSprite());
+            directionDependencies.Add(FacingDirection.Down, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite());
+            directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-
-            boomerangActive = false;
+            BoomerangCaught = false;
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime t)
         {
-            if (boomerangActive == false)
+            stateMachine.Update(t);
+            if (stateMachine.StateChange)
             {
-                if (!inKnockBack)
-                {
-                    Move(t);
-                    dependency.sprite.Update(t);
-                }
-                else
-                {
-                    GetKnockedBack(t);
-                }
+                directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
             }
-            else
+            if (BoomerangCaught && stateMachine.GetState == EnemyState.AbilityCast)
             {
-                boomerangActive = !TimeoutBoomerang(t);
+                stateMachine.EndState();
+                BoomerangCaught = false;
             }
-            collider.Update(location);
-        }
-        public void Move(GameTime t)
-        {
-            timeSinceMove += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceMove >= ObjectConstants.GoriyaMoveTime)
+            if (stateMachine.GetState == EnemyState.NoAction)
             {
-                SetRandomDirection();
-                timeSinceMove = ObjectConstants.counterInitialVal_float;
+                invoker.ExecuteRandomCommand();
             }
-            location += dependency.directionVector * ObjectConstants.GoriyaMoveSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-        }
-        void GetKnockedBack(GameTime t)
-        {
-            timeSinceKnockback += (float)t.ElapsedGameTime.TotalSeconds;
-            location += knockbackDirection * ObjectConstants.DefaultEnemyKnockbackSpeed * (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceKnockback >= ObjectConstants.DefaultEnemyKnockbackTime)
+            if (stateMachine.GetState != EnemyState.Knockback)
             {
-                inKnockBack = false;
-                timeSinceKnockback = 0;
+                dependency.Update(t);
             }
-        }
-
-        void SetRandomDirection()
-        {
-            //First byte is direction, second is whether it will shoot instead
-            randomDir.GetBytes(random);
-            if (random[ObjectConstants.secondInArray] % ObjectConstants.oneInFive == ObjectConstants.zero_int)
-            {
-                ShootProjectile();
-            }
-            else
-            {
-                direction = (FacingDirection)(random[ObjectConstants.firstInArray] % ObjectConstants.oneInFour);
-                directionDependencies.TryGetValue(direction, out dependency);
-            }
-        }
-
-        public void ShootProjectile()
-        {
-            ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(location, direction, this);
-            boomerangActive = true;
-            timeSinceBoomerangThrow = ObjectConstants.counterInitialVal_float;
+            collider.Update(Position);
         }
 
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health <= ObjectConstants.zero)
-            {
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
-                delete = true;
-                SFXManager.Instance.PlayEnemyDeath();
-            }
-            SFXManager.Instance.PlayEnemyHit();
+            stateMachine.TakeDamage(damage, false);
         }
-        public void SuddenKnockBack(Vector2 knockback)
-        {
-            location += knockback;
-        }
+
         public void GradualKnockBack(Vector2 knockback)
         {
-            inKnockBack = true;
             knockback.Normalize();
-            knockbackDirection = knockback;
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
+        }
+
+        public void SuddenKnockBack(Vector2 knockback)
+        {
+            stateMachine.Displace(knockback);
+        }
+
+        public void Freeze(float duration)
+        {
+            stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
         public bool CheckDelete()
         {
-            return delete;
+            return stateMachine.IsDead;
         }
 
         public void Draw(SpriteBatch sb)
         {
-            dependency.sprite.Draw(sb, location);
-        }
-
-        private bool TimeoutBoomerang(GameTime t)
-        {
-            bool timeout = false;
-            timeSinceBoomerangThrow += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceBoomerangThrow >= ObjectConstants.EnemyBoomerangTimeoutSeconds)
-            {
-                timeout = true;
-            }
-            return timeout;
+            dependency.Draw(sb, Position);
         }
     }
 }
