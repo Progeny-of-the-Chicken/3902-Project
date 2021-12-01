@@ -15,7 +15,8 @@ namespace Sprint_0.GameStateHandlers
         Gameplay,
         Inventory,
         RoomSwap,
-        GameOver
+        GameOver,
+        SuperHot
     }
 
     public class GameStateManager
@@ -41,11 +42,12 @@ namespace Sprint_0.GameStateHandlers
         InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
         GameOverStateHandler gameOver;
+        SuperHotStateHandler superHot;
 
         public GameStateManager()
         {
             // Set initial game state
-            this._state = GameState.Gameplay;
+            this._state = GameState.SuperHot;
         }
 
         public void Init(Link link, Game1 game)
@@ -54,6 +56,7 @@ namespace Sprint_0.GameStateHandlers
             this.game = game;
 
             gameplay = new GameplayStateHandler(link, game);
+            superHot = new SuperHotStateHandler(link, game);
         }
 
         public void RestartGame()
@@ -110,6 +113,9 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.RoomSwap:
                     break;
+                case GameState.SuperHot:
+                    inventory.TogglePause();
+                    break;
                 default:
                     break;
             }
@@ -141,6 +147,9 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.GameOver:
                     gameOver.Draw(sb, gameTime);
                     break;
+                case GameState.SuperHot:
+                    superHot.Draw(sb, gameTime);
+                    break;
                 default:
                     break;
             }
@@ -163,6 +172,9 @@ namespace Sprint_0.GameStateHandlers
                     break;
                 case GameState.GameOver:
                     gameOver.Update(gameTime);
+                    break;
+                case GameState.SuperHot:
+                    superHot.Update(gameTime);
                     break;
                 default:
                     break;
