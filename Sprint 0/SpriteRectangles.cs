@@ -49,7 +49,7 @@ namespace Sprint_0
             new Rectangle(48, 0, 8, 16)
         };
         public static Rectangle clockFrame = new Rectangle(58, 0, 11, 16);
-        public static Rectangle blueRubyFrame = new Rectangle(72, 0, 8, 16);
+        public static Rectangle blueRubyFrame = new Rectangle(72, 16, 8, 16);
         public static List<Rectangle> yellowRubyFrames = new List<Rectangle>
         {
             new Rectangle(72, 0, 8, 16),
