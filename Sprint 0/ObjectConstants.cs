@@ -225,6 +225,15 @@ namespace Sprint_0
         public const int SpikeTrapWidthMovementTicks = 100;
         public const int SpikeTrapHeightMovementTicks = 55;
 
+        //Patra
+        public const int PatraDamage = 2;
+        public const double PatraMoveTime = DefaultEnemyMoveTime;
+        public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
+        public const int PatraStartingHealth = 6;
+        //PatraMinion
+        public const int PatraMinionDamage = 1;
+        public const int PatraMinionStartingHealth = 2;
+
         //WallMaster
         public const int WallMasterHealth = 3;
         public const float WallMasterTimeToMoveAgain = 1;
@@ -232,6 +241,7 @@ namespace Sprint_0
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+        public const float QuickEnemyFramesPerSecond = 16;
         public const int firstFrame = 0;
         public const int firstInArray = 0;
         public const int secondDoorInArray = 2;
