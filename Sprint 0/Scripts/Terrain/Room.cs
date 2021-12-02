@@ -222,6 +222,9 @@ public class Room : IRoom
                     case ObjectConstants.BubbleStr:
                         enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
                         break;
+                    case ObjectConstants.DarknutStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
