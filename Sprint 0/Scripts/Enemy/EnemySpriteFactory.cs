@@ -140,5 +140,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new SpikeTrapSprite(SpriteRectangles.spikeTrapFrame, enemySprites);
         }
+
+        public ISprite CreatePatraSprite()
+        {
+            return new QuickFlippingSprite(SpriteRectangles.patraFrame, bossSprites);
+        }
     }
 }

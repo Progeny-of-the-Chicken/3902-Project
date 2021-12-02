@@ -37,6 +37,7 @@ namespace Sprint_0.Scripts.Enemy
                     InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:
+                case EnemyType.Patra:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
             }

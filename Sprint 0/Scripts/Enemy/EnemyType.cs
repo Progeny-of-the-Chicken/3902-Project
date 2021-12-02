@@ -13,6 +13,7 @@
         Rope,
         Dodongo,
         OldMan,
-        Merchant
+        Merchant,
+        Patra
     }
 }
