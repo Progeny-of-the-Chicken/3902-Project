@@ -67,6 +67,7 @@ namespace Sprint_0
         public const float linkTakeDamageTime = 1;
         public const float linkUseItemTime = 0.5f;
         public const float linkPickUpItemTime = 1f;
+        public const float linkSwordSheathTime = 5f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
         public const int linkStartingHealth = 12;

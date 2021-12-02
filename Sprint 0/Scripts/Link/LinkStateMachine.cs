@@ -14,6 +14,7 @@ namespace Sprint_0.Scripts
         private double turningCounter;
         private double knockbackCounter;
         private double pickUpItemCounter;
+        private double swordSheathCounter;
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
         public double linkHealth;
@@ -59,6 +60,8 @@ namespace Sprint_0.Scripts
                 turningCounter -= dt;
             if (IsPickingUpItem)
                 pickUpItemCounter -= dt;
+            if (SwordIsSheathed)
+                swordSheathCounter -= dt;
         }
 
         private void ResetCountersCausedByPlayer()
@@ -74,6 +77,7 @@ namespace Sprint_0.Scripts
         {
             damageCounter = ObjectConstants.counterInitialVal_double;
             knockbackCounter = ObjectConstants.counterInitialVal_double;
+            swordSheathCounter = ObjectConstants.counterInitialVal_double;
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -191,6 +195,11 @@ namespace Sprint_0.Scripts
             pickUpItemCounter = ObjectConstants.linkPickUpItemTime;
         }
 
+        public void SheathSword()
+        {
+            swordSheathCounter = ObjectConstants.linkSwordSheathTime;
+        }
+
         public void Suspend()
         {
             isSuspended = true;
@@ -234,6 +243,8 @@ namespace Sprint_0.Scripts
         public bool IsPickingUpItem { get => pickUpItemCounter > ObjectConstants.zero_double; }
 
         public bool IsTurning { get => turningCounter > ObjectConstants.zero_double; }
+
+        public bool SwordIsSheathed { get => swordSheathCounter > ObjectConstants.zero_double; }
 
         public bool IsAlive { get => linkHealth > ObjectConstants.zero_int || damageCounter > ObjectConstants.zero_int; }
 
