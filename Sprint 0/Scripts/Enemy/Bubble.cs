@@ -39,11 +39,7 @@ namespace Sprint_0.Scripts.Enemy
             {
                 invoker.ExecuteRandomCommand();
             }
-
-            if (stateMachine.GetState != EnemyState.Knockback)
-            {
-                sprite.Update(gt);
-            }
+            sprite.Update(gt);
             collider.Update(Position);
         }
 

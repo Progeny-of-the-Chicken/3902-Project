@@ -219,6 +219,9 @@ public class Room : IRoom
                     case ObjectConstants.ZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
                         break;
+                    case ObjectConstants.BubbleStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
