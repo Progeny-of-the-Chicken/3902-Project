@@ -233,7 +233,7 @@ namespace Sprint_0
         //Bubble
         public const int BubbleDamage = 1;
         public const double BubbleMoveTime = DefaultEnemyMoveTime;
-        public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 1.5f;
+        public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 2.0f;
         public const int BubblePlaceholderHealth = 5;
 
         //Sprites

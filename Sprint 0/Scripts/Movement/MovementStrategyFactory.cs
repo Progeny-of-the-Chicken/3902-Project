@@ -34,6 +34,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.Dodongo => CreateDodongoMovementStrategy(directionVector),
                 EnemyType.OldMan => CreateFreezeStrategy(),
                 EnemyType.Merchant => CreateFreezeStrategy(),
+                EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -94,6 +95,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateDodongoMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.DodongoMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateBubbleMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.BubbleMoveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }

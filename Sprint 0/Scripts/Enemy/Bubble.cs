@@ -19,7 +19,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public Vector2 Position { get => stateMachine.Location; }
 
-        public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
+        public bool CanBeAffectedByPlayer { get => false; }
 
         public Bubble(Vector2 location)
         {
