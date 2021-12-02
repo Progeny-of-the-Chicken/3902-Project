@@ -230,6 +230,12 @@ namespace Sprint_0
         public const float WallMasterTimeToMoveAgain = 1;
         public const float WallMasterMoveSpeed = DefaultEnemyMoveSpeed;
 
+        //Bubble
+        public const int BubbleDamage = 1;
+        public const double BubbleMoveTime = DefaultEnemyMoveTime;
+        public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 1.5f;
+        public const int BubblePlaceholderHealth = 5;
+
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
         public const int firstFrame = 0;

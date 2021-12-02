@@ -140,5 +140,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new SpikeTrapSprite(SpriteRectangles.spikeTrapFrame, enemySprites);
         }
+
+        public ISprite CreateBubbleSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.bubbleFrame, enemySprites);
+        }
     }
 }
