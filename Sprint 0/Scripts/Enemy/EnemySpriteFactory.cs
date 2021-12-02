@@ -143,7 +143,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateBubbleSprite()
         {
-            return new FlippingSprite(SpriteRectangles.bubbleFrame, enemySprites);
+            return new BubbleSprite(SpriteRectangles.bubbleFrame, enemySprites);
         }
     }
 }

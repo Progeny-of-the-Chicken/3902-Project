@@ -235,6 +235,8 @@ namespace Sprint_0
         public const double BubbleMoveTime = DefaultEnemyMoveTime;
         public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 2.0f;
         public const int BubblePlaceholderHealth = 5;
+        public const float BubbleFramesPerSecond = 16;
+        public static Color BubbleAnimationColor = Color.DarkOrange;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
