@@ -35,6 +35,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.OldMan => CreateFreezeStrategy(),
                 EnemyType.Merchant => CreateFreezeStrategy(),
                 EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
+                EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -100,6 +101,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateBubbleMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.BubbleMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateDarknutMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DarknutMoveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }

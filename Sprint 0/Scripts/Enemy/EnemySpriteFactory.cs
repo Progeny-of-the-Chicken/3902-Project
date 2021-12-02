@@ -145,5 +145,25 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new BubbleSprite(SpriteRectangles.bubbleFrame, enemySprites);
         }
+
+        public ISprite CreateFrontDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites);
+        }
+
+        public ISprite CreateBackDarknutSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites);
+        }
+
+        public ISprite CreateRightDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites);
+        }
+
+        public ISprite CreateLeftDarknutSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites);
+        }
     }
 }

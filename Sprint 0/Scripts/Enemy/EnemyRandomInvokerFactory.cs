@@ -35,6 +35,7 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Rope:
                 case EnemyType.Dodongo:
                 case EnemyType.Bubble:
+                case EnemyType.Darknut:
                     InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:

@@ -241,7 +241,7 @@ namespace Sprint_0
         public const int DarknutDamage = 2;
         public const double DarknutMoveTime = DefaultEnemyMoveTime;
         public const float DarknutMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int DarknutHealth = 2;
+        public const int DarknutStartingHealth = 2;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -504,7 +504,7 @@ namespace Sprint_0
         public const double groupDDropRate = 0.41;
         public const double groupXDropRate = 0;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
-        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
         public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
         public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
