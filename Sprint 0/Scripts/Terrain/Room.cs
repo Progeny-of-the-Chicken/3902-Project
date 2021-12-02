@@ -38,6 +38,7 @@ public class Room : IRoom
     private bool enemiesFlag;
     private List<String> RoomClear;
     private bool inTransition = false;
+    private DoorRandomizer doorRandomizer;
 
     public Room(string roomId, ILink link)
     {
@@ -69,6 +70,7 @@ public class Room : IRoom
 
         LoadRoom();
         collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
+        doorRandomizer = new DoorRandomizer();
     }
 
     public void Update(GameTime gt)
