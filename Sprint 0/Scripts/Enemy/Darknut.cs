@@ -58,7 +58,20 @@ namespace Sprint_0.Scripts.Enemy
 
         public void TakeDamage(int damage)
         {
-            stateMachine.TakeDamage(damage, false);
+            // Unused for darknut
+        }
+
+        public void TryTakeDamage(int damage, Vector2 damageVector)
+        {
+            damageVector.Normalize();
+            if (DoDeflection(damageVector))
+            {
+                stateMachine.TakeDamage(damage, false);
+            }
+            else
+            {
+                SFXManager.Instance.PlayShieldDeflect();
+            }
         }
 
         public void GradualKnockBack(Vector2 knockback)
@@ -84,6 +97,21 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             dependency.Draw(sb, Position);
+        }
+
+        //----- Helper method for damage deflection -----//
+
+        public bool DoDeflection(Vector2 damageVector)
+        {
+            return damageVector switch
+            {
+                Vector2(1, 0) => stateMachine.GetDirection != FacingDirection.Left,
+                Vector2(0, -1) => stateMachine.GetDirection != FacingDirection.Down,
+                Vector2(-1, 0) => stateMachine.GetDirection != FacingDirection.Right,
+                Vector2(0, 1) => stateMachine.GetDirection != FacingDirection.Up,
+                // Should never happen
+                _ => false
+            };
         }
     }
 }
