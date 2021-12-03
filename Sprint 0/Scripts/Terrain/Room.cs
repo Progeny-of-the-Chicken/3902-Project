@@ -219,6 +219,9 @@ public class Room : IRoom
                     case ObjectConstants.ZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
                         break;
+                    case ObjectConstants.PatraStr:
+                        enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;

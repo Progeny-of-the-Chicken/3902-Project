@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
@@ -13,6 +14,10 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
+        public HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
+        private float timeUntilNextSpawn = ObjectConstants.PatraSpawningDelay;
+        private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.PatraDamage; }
@@ -26,8 +31,9 @@ namespace Sprint_0.Scripts.Enemy
             sprite = EnemySpriteFactory.Instance.CreatePatraSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Patra, stateMachine, this);
-            invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            // Minion spawning
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime + ObjectConstants.PatraSpawningDelay, ObjectConstants.zeroVector);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
@@ -35,6 +41,10 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
+            if (remainingPatraMinionsToSpawn > ObjectConstants.zero)
+            {
+                UpdatePatraSpawning(gt);
+            }
             if (stateMachine.GetState == EnemyState.NoAction)
             {
                 invoker.ExecuteRandomCommand();
@@ -71,6 +81,19 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, Position);
+        }
+
+        //----- Patra minion spawning helper -----//
+
+        private void UpdatePatraSpawning(GameTime gt)
+        {
+            timeUntilNextSpawn -= (float)gt.ElapsedGameTime.TotalSeconds;
+            if (timeUntilNextSpawn <= ObjectConstants.zero_float)
+            {
+                patraMinions.Add(ObjectsFromObjectsFactory.Instance.CreatePatraMinion(new Vector2(ObjectConstants.PatraMinionBaseOrbitRadius, 0) + Position));
+                remainingPatraMinionsToSpawn--;
+                timeUntilNextSpawn = (float)ObjectConstants.PatraMoveTime / ObjectConstants.PatraStartingMinionCount;
+            }
         }
     }
 }

@@ -140,7 +140,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (timeSinceMove >= moveTime)
+            if (timeSinceMove >= stateStack.Peek().stateEndTime)
             {
                 stateStack.Pop();
                 SetState(EnemyState.NoAction, enemyLifeTime);

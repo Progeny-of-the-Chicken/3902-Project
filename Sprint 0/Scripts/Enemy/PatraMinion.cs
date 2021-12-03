@@ -22,11 +22,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public PatraMinion(Vector2 location)
         {
-            sprite = EnemySpriteFactory.Instance.CreatePatraSprite();
+            sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-
-            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)

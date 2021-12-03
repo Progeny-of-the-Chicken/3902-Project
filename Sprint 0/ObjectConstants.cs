@@ -230,9 +230,12 @@ namespace Sprint_0
         public const double PatraMoveTime = DefaultEnemyMoveTime;
         public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
         public const int PatraStartingHealth = 6;
+        public const int PatraStartingMinionCount = 8;
+        public const float PatraSpawningDelay = 5.0f;
         //PatraMinion
         public const int PatraMinionDamage = 1;
         public const int PatraMinionStartingHealth = 2;
+        public static int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
 
         //WallMaster
         public const int WallMasterHealth = 3;
@@ -295,6 +298,7 @@ namespace Sprint_0
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
+        public const string PatraStr = "Patra";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -502,8 +506,8 @@ namespace Sprint_0
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
-        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,
             ItemType.SmallHeartItem,
