@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+using Microsoft.Xna.Framework;
 
 namespace Sprint_0.Scripts.Terrain
 {
     
     class DoorRandomizer
     {
-        const int numConnections = 120;
+        const int numConnections = 50;
         int numKeys = 0;
         string[, ,] doorStrings = new String[8, 8, 8];
         bool[,,] doorAvailability = new bool[8, 8, 4];
-        
+        private static DoorRandomizer instance = new DoorRandomizer();
 
-        public DoorRandomizer()
+        public static DoorRandomizer Instance
         {
-            for (int i = 0; i < 8; i++)
+            get
             {
-                for (int j = 0; i < 8; i++)
-                {
-                    for (int k = 0; i < 4; i++)
-                    {
-                        doorAvailability[i, j, k] = true;
-                    }
-                }
+                return instance;
             }
+        }
+
+        private DoorRandomizer()
+        {
+            randomizeDoors();
         }
 
         private void randomizeDoors()
@@ -47,26 +46,52 @@ namespace Sprint_0.Scripts.Terrain
             //To keep track of what rooms need to be added
             List<Vector2> inDungeon = new List<Vector2>();
             List<Vector2> notInDungeon = new List<Vector2>();
+            inDungeon.Add(new Vector2(4, 7));
 
-            //Initialize our lists
+            //Initialize notInDungeon
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if (j != 7 || i != 4)
+                    notInDungeon.Add(new Vector2(i, j));
+
+                }
+            }
+
+            //Remove special rooms
+            notInDungeon.Remove(new Vector2(0, 0));
+            notInDungeon.Remove(new Vector2(1, 7));
+            notInDungeon.Remove(new Vector2(3, 7));
+            notInDungeon.Remove(new Vector2(4, 7));
+
+            //Initialize DoorAvailability
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 4; k++)
                     {
-                        inDungeon.Add(new Vector2(i, j));
-                    } else
+                        doorAvailability[i, j, k] = true;
+                    }
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
                     {
-                        notInDungeon.Add(new Vector2(i, j));
+                        doorStrings[i, j, k] = "";
                     }
                 }
             }
 
             var rand = new Random();
 
-            for (int i = 0; i < numConnections; i++)
+            for (int j = 0; j < numConnections; j++)
             {
+                System.Diagnostics.Debug.WriteLine(j);
                 //Find room to add door to
                 int randInt = rand.Next(inDungeon.Count);
                 Vector2 roomToAddToPos = inDungeon[randInt];
@@ -80,18 +105,85 @@ namespace Sprint_0.Scripts.Terrain
                 if (!roomIsAvailable)
                 {
                     //All doors in this room have been taken, reduce counter and skip to next attempt
-                    i--;
+                    j--;
                     continue;
                 }
 
                 //Pick next room
-                randInt = rand.Next(inDungeon.Count);
-            }
+                randInt = rand.Next(notInDungeon.Count);
+                if (randInt < inDungeon.Count)
+                {
+                    //Connecting to room that already has a door
 
+                } else
+                {
+                    //Connecting to new room
+                    randInt -= inDungeon.Count;
+                    Vector2 roomConnectingPos = notInDungeon[randInt];
+                    notInDungeon.RemoveAt(randInt);
+
+                    //Pick doors to add to
+                    randInt = rand.Next(4);
+                    while (!doorAvailability[(int)roomToAddToPos.X, (int)roomToAddToPos.Y, randInt])
+                    {
+                        randInt = (randInt + 1) % 4;
+                    }
+                    int randInt2 = (randInt + 2) % 4;
+                    addConnectingDoors(roomToAddToPos, randInt, roomConnectingPos, randInt2);
+                    inDungeon.Add(roomConnectingPos);
+                }
+
+            }
 
         }
 
-
+        //This assumes adding this door to this room is valid
+        public void addConnectingDoors(Vector2 roomLocation1, int doorLocation1, Vector2 roomLocation2, int doorLocation2)
+        {
+            doorAvailability[(int)roomLocation1.X, (int)roomLocation1.Y, doorLocation1] = false;
+            doorAvailability[(int)roomLocation2.X, (int)roomLocation2.Y, doorLocation2] = false;
+            switch (doorLocation1) {
+                case 0:
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 0] = "EastDoorSprite";
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 1] = "Room" + roomLocation2.X + roomLocation2.Y;
+                    break;
+                case 1:
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 2] = "NorthDoorSprite";
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 3] = "Room" + roomLocation2.X + roomLocation2.Y;
+                    break;
+                case 2:
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 4] = "WestDoorSprite";
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 5] = "Room" + roomLocation2.X + roomLocation2.Y;
+                    break;
+                case 3:
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 6] = "SouthDoorSprite";
+                    doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 7] = "Room" + roomLocation2.X + roomLocation2.Y;
+                    break;
+            }
+            switch (doorLocation2)
+            {
+                case 0:
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 0] = "EastDoorSprite";
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 1] = "Room" + roomLocation1.X + roomLocation1.Y;
+                    break;
+                case 1:
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 2] = "NorthDoorSprite";
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 3] = "Room" + roomLocation1.X + roomLocation1.Y;
+                    break;
+                case 2:
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 4] = "WestDoorSprite";
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 5] = "Room" + roomLocation1.X + roomLocation1.Y;
+                    break;
+                case 3:
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 6] = "SouthDoorSprite";
+                    doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 7] = "Room" + roomLocation1.X + roomLocation1.Y;
+                    break;
+            }
+            System.Diagnostics.Debug.WriteLine(roomLocation1);
+            System.Diagnostics.Debug.WriteLine(doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 2 * doorLocation1]);
+            System.Diagnostics.Debug.WriteLine(roomLocation2);
+            System.Diagnostics.Debug.WriteLine(doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 2 * doorLocation2]);
+        }
 
         public string[] getDoorsForRoom(Vector2 roomLocation)
         {

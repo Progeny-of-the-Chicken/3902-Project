@@ -257,7 +257,8 @@ namespace Sprint_0
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
         public const string blueLinkFile = "BlueLinkSpriteSheet";
-        public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
+        public const string pathForDungeon1CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
+        public const string pathForDungeon2CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon2/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
         public const string lineIsEmpty = "None";
@@ -306,13 +307,14 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string startRoom = "Room25";
+        public const string startRoom = "Room47";                                           // --------------- THIS HAS BEEN CHANGED
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
         public const string contentLocation = "Content";
         public const string OverworldTilesetStr = "OverworldTileset";
         public const string dungeonTilesetStr = "dungeonTileset";
         public const string Dungeon1EagleStr = "Dungeon1Eagle";
+        public const string Dungeon2RandomizerStr = "RandomizerDungeon";
         public const string EastBombableSpriteStr = "EastBombableSprite";
         public const string EastBombedSpriteStr = "EastBombedSprite";
         public const string EastLockedSpriteStr = "EastLockedSprite";
