@@ -35,7 +35,6 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.OldMan => CreateFreezeStrategy(),
                 EnemyType.Merchant => CreateFreezeStrategy(),
                 EnemyType.Patra => CreatePatraMovementStrategy(directionVector),
-                EnemyType.PatraMinion => CreateFreezeStrategy(),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -54,6 +53,12 @@ namespace Sprint_0.Scripts.Movement
         {
             // If multiple enemies could chase, this can be turned into a switch case with an EnemyType enum parameter
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy)
+        {
+            // Orbit currently locked at counter-clockwise
+            return new OrbitEnemyStrategy((float)ObjectConstants.PatraMinionOrbitTimeRadians, ObjectConstants.PatraMinionBaseOrbitRadius, centerEnemy);
         }
 
         //----- Enemy disambiguation strategies creator methods -----//

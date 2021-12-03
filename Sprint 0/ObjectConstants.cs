@@ -231,11 +231,13 @@ namespace Sprint_0
         public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
         public const int PatraStartingHealth = 6;
         public const int PatraStartingMinionCount = 8;
-        public const float PatraSpawningDelay = 5.0f;
+        public static Vector2 PatraWidthHeight = new Vector2(16, 11) * scale;
         //PatraMinion
         public const int PatraMinionDamage = 1;
         public const int PatraMinionStartingHealth = 2;
         public static int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
+        public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
+        public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
 
         //WallMaster
         public const int WallMasterHealth = 3;

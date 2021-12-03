@@ -76,9 +76,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Patra(location);
         }
-		public IEnemy CreatePatraMinion(Vector2 location)
+		public IEnemy CreatePatraMinion(Vector2 location, IEnemy patra)
         {
-			return new PatraMinion(location);
+			return new PatraMinion(location, patra);
         }
 	}
 }

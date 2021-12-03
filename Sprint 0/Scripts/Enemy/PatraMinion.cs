@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
-using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -11,6 +10,7 @@ namespace Sprint_0.Scripts.Enemy
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
         private IEnemyCollider collider;
+        private IEnemy patra;
 
         public IEnemyCollider Collider { get => collider; }
 
@@ -20,16 +20,22 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CanBeAffectedByPlayer { get => !stateMachine.IsDamaged; }
 
-        public PatraMinion(Vector2 location)
+        public PatraMinion(Vector2 location, IEnemy patra)
         {
             sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra);
+            this.patra = patra;
         }
 
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra);
+            }
             sprite.Update(gt);
             collider.Update(Position);
         }

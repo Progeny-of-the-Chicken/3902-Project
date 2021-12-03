@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -15,7 +16,7 @@ namespace Sprint_0.Scripts.Enemy
         private IEnemyCollider collider;
 
         public HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
-        private float timeUntilNextSpawn = ObjectConstants.PatraSpawningDelay;
+        private float timeUntilNextSpawn = ObjectConstants.zero_float;
         private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
 
         public IEnemyCollider Collider { get => collider; }
@@ -33,7 +34,7 @@ namespace Sprint_0.Scripts.Enemy
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Patra, stateMachine, this);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             // Minion spawning
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime + ObjectConstants.PatraSpawningDelay, ObjectConstants.zeroVector);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, ObjectConstants.zeroVector);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
@@ -90,7 +91,8 @@ namespace Sprint_0.Scripts.Enemy
             timeUntilNextSpawn -= (float)gt.ElapsedGameTime.TotalSeconds;
             if (timeUntilNextSpawn <= ObjectConstants.zero_float)
             {
-                patraMinions.Add(ObjectsFromObjectsFactory.Instance.CreatePatraMinion(new Vector2(ObjectConstants.PatraMinionBaseOrbitRadius, 0) + Position));
+                Vector2 center = SpawnHelper.Instance.CenterLocationOnSpawner(Position, ObjectConstants.PatraWidthHeight, ObjectConstants.PatraMinionWidthHeight);
+                patraMinions.Add(ObjectsFromObjectsFactory.Instance.CreatePatraMinion(center + new Vector2(ObjectConstants.PatraMinionBaseOrbitRadius, 0), this));
                 remainingPatraMinionsToSpawn--;
                 timeUntilNextSpawn = (float)ObjectConstants.PatraMoveTime / ObjectConstants.PatraStartingMinionCount;
             }

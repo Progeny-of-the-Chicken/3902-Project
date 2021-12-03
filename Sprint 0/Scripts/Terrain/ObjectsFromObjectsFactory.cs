@@ -81,9 +81,9 @@ namespace Sprint_0.Scripts.Terrain
             room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
         }
 
-        public IEnemy CreatePatraMinion(Vector2 location)
+        public IEnemy CreatePatraMinion(Vector2 location, IEnemy patra)
         {
-            IEnemy patraMinion = EnemyFactory.Instance.CreatePatraMinion(location);
+            IEnemy patraMinion = EnemyFactory.Instance.CreatePatraMinion(location, patra);
             room.AddEnemy(patraMinion);
             return patraMinion;
         }
