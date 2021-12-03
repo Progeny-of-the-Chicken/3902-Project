@@ -72,5 +72,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Wallmaster(location);
         }
+		public IEnemy CreatePatraMinion(Vector2 location)
+        {
+			return new PatraMinion(location);
+        }
 	}
 }

@@ -145,5 +145,9 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new QuickFlippingSprite(SpriteRectangles.patraFrame, bossSprites);
         }
+        public ISprite CreatePatraMinionSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.patraMinionFrames, bossSprites);
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.OldMan => CreateFreezeStrategy(),
                 EnemyType.Merchant => CreateFreezeStrategy(),
                 EnemyType.Patra => CreatePatraMovementStrategy(directionVector),
+                EnemyType.PatraMinion => CreateFreezeStrategy(),
                 _ => CreateFreezeStrategy()
             };
         }

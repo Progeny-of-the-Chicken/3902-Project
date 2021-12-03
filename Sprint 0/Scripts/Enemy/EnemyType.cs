@@ -14,6 +14,7 @@
         Dodongo,
         OldMan,
         Merchant,
-        Patra
+        Patra,
+        PatraMinion
     }
 }
