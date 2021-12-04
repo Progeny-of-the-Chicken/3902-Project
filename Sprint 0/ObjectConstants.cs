@@ -235,8 +235,10 @@ namespace Sprint_0
         //PatraMinion
         public const int PatraMinionDamage = 1;
         public const int PatraMinionStartingHealth = 2;
-        public static int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
+        public const int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
+        public const int PatraMinionExtendedOrbitRadius = (int)(standardWidthHeight * scale * -5.0);
         public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
+        public const double PatraRadiusChangeSpeed = (standardWidthHeight * scale * 5.0) / PatraMoveTime;
         public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
 
         //WallMaster

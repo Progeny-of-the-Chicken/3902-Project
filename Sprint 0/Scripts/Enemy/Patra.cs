@@ -15,9 +15,10 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
-        public HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
+        private HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
         private float timeUntilNextSpawn = ObjectConstants.zero_float;
         private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
+        private bool orbitIsExtended = false;
 
         public IEnemyCollider Collider { get => collider; }
 
@@ -27,13 +28,14 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CanBeAffectedByPlayer { get => !stateMachine.IsDamaged; }
 
+        public bool OrbitIsExtended { get => orbitIsExtended; }
+
         public Patra(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreatePatraSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Patra, stateMachine, this);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            // Minion spawning
             stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, ObjectConstants.zeroVector);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -42,6 +44,7 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime gt)
         {
             stateMachine.Update(gt);
+            // Minion spawning
             if (remainingPatraMinionsToSpawn > ObjectConstants.zero)
             {
                 UpdatePatraSpawning(gt);
@@ -72,6 +75,29 @@ namespace Sprint_0.Scripts.Enemy
         public void Freeze(float duration)
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
+        public void ToggleOrbit()
+        {
+            double radiusChange = ObjectConstants.PatraRadiusChangeSpeed;
+            if (!orbitIsExtended)
+            {
+                // Radius is negative, contraction is actually positive change
+                radiusChange *= ObjectConstants.adjustByNegativeOne;
+            }
+            foreach (IEnemy patraMinion in patraMinions)
+            {
+                ((PatraMinion)patraMinion).ToggleOrbit(radiusChange);
+            }
+
+            if (orbitIsExtended)
+            {
+                orbitIsExtended = false;
+            }
+            else
+            {
+                orbitIsExtended = true;
+            }
         }
 
         public bool CheckDelete()

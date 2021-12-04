@@ -50,6 +50,12 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Aquamentus:
                     invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
                     break;
+                case EnemyType.Patra:
+                    // Doubled commands for higher chance of execution out of 9 fly vectors
+                    invoker.AddCommand(new CommandTogglePatraOrbit(enemy, stateMachine));
+                    invoker.AddCommand(new CommandTogglePatraOrbit(enemy, stateMachine));
+                    // TODO: Add doubled formation change commands
+                    break;
             }
             return invoker;
         }

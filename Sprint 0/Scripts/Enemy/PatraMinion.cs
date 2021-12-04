@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Enemy
             sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double);
             this.patra = patra;
         }
 
@@ -34,7 +34,8 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
-                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra);
+
+                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double);
             }
             sprite.Update(gt);
             collider.Update(Position);
@@ -58,6 +59,11 @@ namespace Sprint_0.Scripts.Enemy
         public void Freeze(float duration)
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
+        public void ToggleOrbit(double radiusChange)
+        {
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radiusChange);
         }
 
         public bool CheckDelete()
