@@ -28,12 +28,8 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         {
             radiusTime += gt.ElapsedGameTime.TotalSeconds;
             int adjustedRadius = radius + (int)(radiusTime * radiusChange);
-            // radius += (int)(gt.ElapsedGameTime.TotalSeconds * radiusChange);
-
             double radiansToMove = (GetCurrentRadians(location) + (gt.ElapsedGameTime.TotalSeconds * orbitSpeedRadians)) % ObjectConstants.degreeRotationCW360_s;
-            Vector2 center = GetEnemyCenter(satelliteDimensions);
-            Vector2 offset = new Vector2((int)(adjustedRadius * Math.Cos(radiansToMove)), (int)(adjustedRadius * Math.Sin(radiansToMove)));
-            return center + offset;
+            return GetEnemyCenter(satelliteDimensions) + new Vector2((int)(adjustedRadius * Math.Cos(radiansToMove)), (int)(adjustedRadius * Math.Sin(radiansToMove)));
         }
 
         //----- Math helpers -----//

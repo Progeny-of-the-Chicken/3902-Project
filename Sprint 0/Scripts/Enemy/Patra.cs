@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Enemy
         private IEnemyCollider collider;
 
         private HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
-        private float timeUntilNextSpawn = ObjectConstants.zero_float;
+        private float minionSpawningCounter = ObjectConstants.zero_float;
         private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
         private bool orbitIsExtended = false;
 
@@ -125,13 +125,12 @@ namespace Sprint_0.Scripts.Enemy
 
         private void UpdatePatraSpawning(GameTime gt)
         {
-            timeUntilNextSpawn -= (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeUntilNextSpawn <= ObjectConstants.zero_float)
+            minionSpawningCounter += (float)gt.ElapsedGameTime.TotalSeconds;
+            if (minionSpawningCounter >= (float)(ObjectConstants.PatraStartingMinionCount - remainingPatraMinionsToSpawn) / ObjectConstants.PatraStartingMinionCount)
             {
                 Vector2 center = SpawnHelper.Instance.CenterLocationOnSpawner(Position, ObjectConstants.PatraWidthHeight, ObjectConstants.PatraMinionWidthHeight);
                 patraMinions.Add(ObjectsFromObjectsFactory.Instance.CreatePatraMinion(center + new Vector2(ObjectConstants.PatraMinionBaseOrbitRadius, 0), this));
                 remainingPatraMinionsToSpawn--;
-                timeUntilNextSpawn = (float)ObjectConstants.PatraMoveTime / ObjectConstants.PatraStartingMinionCount;
             }
         }
     }
