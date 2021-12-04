@@ -86,10 +86,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ToggleOrbit()
         {
-            double radiusChange = ObjectConstants.PatraRadiusChangeSpeed;
+            double radiusChange = ObjectConstants.PatraRadiusExtensionSpeed;
             if (!orbitIsExtended)
             {
-                // Radius is negative, contraction is actually positive change
                 radiusChange *= ObjectConstants.adjustByNegativeOne;
             }
             foreach (IEnemy patraMinion in patraMinions)

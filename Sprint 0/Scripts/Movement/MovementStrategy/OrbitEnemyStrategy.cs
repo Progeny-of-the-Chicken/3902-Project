@@ -13,6 +13,8 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         private double radiusChange;
         private Vector2 satelliteDimensions;
 
+        private double radiusTime = ObjectConstants.zero_float;
+
         public OrbitEnemyStrategy(IEnemy enemy, double orbitSpeedRadians, int radius, double radiusChange, Vector2 satelliteDimensions)
         {
             this.enemy = enemy;
@@ -24,10 +26,13 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 
         public Vector2 Move(GameTime gt, Vector2 location)
         {
-            radius += (int)(gt.ElapsedGameTime.TotalSeconds * radiusChange);
-            double radiansToMove = GetCurrentRadians(location) + (gt.ElapsedGameTime.TotalSeconds * orbitSpeedRadians);
+            radiusTime += gt.ElapsedGameTime.TotalSeconds;
+            int adjustedRadius = radius + (int)(radiusTime * radiusChange);
+            // radius += (int)(gt.ElapsedGameTime.TotalSeconds * radiusChange);
+
+            double radiansToMove = (GetCurrentRadians(location) + (gt.ElapsedGameTime.TotalSeconds * orbitSpeedRadians)) % ObjectConstants.degreeRotationCW360_s;
             Vector2 center = GetEnemyCenter(satelliteDimensions);
-            Vector2 offset = new Vector2((int)(radius * Math.Cos(radiansToMove)), (int)(radius * Math.Sin(radiansToMove)));
+            Vector2 offset = new Vector2((int)(adjustedRadius * Math.Cos(radiansToMove)), (int)(adjustedRadius * Math.Sin(radiansToMove)));
             return center + offset;
         }
 

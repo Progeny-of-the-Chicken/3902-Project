@@ -95,6 +95,7 @@ namespace Sprint_0.Scripts.Enemy
         public void SetState(EnemyState state, float duration, IEnemy enemy, double radiusChange)
         {
             // Hard coded to patra minion for now
+            timeSinceMove = ObjectConstants.zero_float;
             stateStack.Push((state, duration));
             movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radiusChange, ObjectConstants.PatraMinionWidthHeight));
         }

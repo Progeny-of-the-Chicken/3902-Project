@@ -238,7 +238,7 @@ namespace Sprint_0
         public const int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
         public const int PatraMinionExtendedOrbitRadius = (int)(standardWidthHeight * scale * -5.0);
         public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
-        public const double PatraRadiusChangeSpeed = (standardWidthHeight * scale * 5.0) / PatraMoveTime;
+        public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
         public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
 
         //WallMaster
@@ -259,6 +259,7 @@ namespace Sprint_0
         public const double degreeRotationCW90_s = Math.PI / 2;
         public const double degreeRotationCW180_s = Math.PI;
         public const double degreeRotationCW270_s = (3 * Math.PI) / 2;
+        public const double degreeRotationCW360_s = 2 * Math.PI;
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
