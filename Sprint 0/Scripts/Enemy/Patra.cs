@@ -59,7 +59,14 @@ namespace Sprint_0.Scripts.Enemy
 
         public void TakeDamage(int damage)
         {
-            stateMachine.TakeDamage(damage, true);
+            if (patraMinions.Count <= 0)
+            {
+                stateMachine.TakeDamage(damage, true);
+            }
+            else
+            {
+                SFXManager.Instance.PlayShieldDeflect();
+            }
         }
 
         public void GradualKnockBack(Vector2 knockback)
@@ -98,6 +105,11 @@ namespace Sprint_0.Scripts.Enemy
             {
                 orbitIsExtended = true;
             }
+        }
+
+        public void RemovePatraMinion(IEnemy patraMinion)
+        {
+            patraMinions.Remove(patraMinion);
         }
 
         public bool CheckDelete()

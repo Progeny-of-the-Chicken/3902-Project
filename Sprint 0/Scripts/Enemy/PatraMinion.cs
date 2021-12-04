@@ -39,6 +39,11 @@ namespace Sprint_0.Scripts.Enemy
             }
             sprite.Update(gt);
             collider.Update(Position);
+
+            if (stateMachine.IsDead)
+            {
+                ((Patra)patra).RemovePatraMinion(this);
+            }
         }
 
         public void TakeDamage(int damage)
