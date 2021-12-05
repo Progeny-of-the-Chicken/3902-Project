@@ -55,7 +55,6 @@
     <Folder Include="Scripts\Projectiles\" />
     <Folder Include="Scripts\Projectiles\ProjectileClasses\" />
     <Folder Include="Scripts\Sprite\ProjectileSprites\" />
-    <Folder Include="Scripts\Collider\Terrain\" />
     <Folder Include="Scripts\Collider\Item\" />
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
