@@ -11,22 +11,16 @@ namespace Sprint_0.Scripts.GameState
     {
         private Queue<string> lineQueue = new Queue<string>();
         private string currLine = "";
-        private int letterSpacing = 6;
-        private int framesBetweenLetters = 2;
         private int frameCounter = 0;
         private int currIndex = 0;
         private bool active = false;
 
-        static int maxLetters = 400;
-        static int lettersPerLine = 35;
-        static int maxLines = 7;
-        private int midpoint;
         private int[] linebreaks;
-        private ISprite[] letterSprites = new ISprite[maxLetters];
+        private ISprite[] letterSprites = new ISprite[ObjectConstants.maxLetters];
 
         // Origin point for printed dialogue
-        private int initX = 40;
-        private int initY = ObjectConstants.yOffsetForRoom + 2 * ObjectConstants.standardWidthHeight;
+        private int initX = ObjectConstants.dialogueStartX;
+        private int initY = ObjectConstants.dialogueStartY;
 
         public DialogueBox()
         {
@@ -41,7 +35,8 @@ namespace Sprint_0.Scripts.GameState
             {
                 active = false;
                 currLine = "";
-            } else
+            }
+            else
             {
                 active = true;
                 if (currLine == "")
@@ -51,13 +46,7 @@ namespace Sprint_0.Scripts.GameState
                 }
             }
 
-            if (isPrinting())
-            {
-                SFXManager.Instance.PlayTextScroll();
-            } else
-            {
-                SFXManager.Instance.StopTextScroll();
-            }
+            StartStopTextScrollSFX();
         }
 
         public void Draw(SpriteBatch sb)
@@ -65,15 +54,10 @@ namespace Sprint_0.Scripts.GameState
             if (active)
             {
                 drawLetters(sb);
-
                 frameCounter++;
 
-                // If the frame counter is equal to the frame buffer, increase
-                // currIndex to print the next letter. Also reset the frame counter
-                if (frameCounter == framesBetweenLetters)
+                if (frameCounter == ObjectConstants.framesBetweenLetters)
                 {
-                    // Only move onto the next char if there's another character
-                    // to print.
                     if (currIndex < currLine.Length - 1)
                     {
                         currIndex++;
@@ -84,8 +68,6 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
-        // ALL DIALOGUE LINES CAN MAX BE 70 CHARACTERS, LESS IF WORDS DON'T ALIGN
-        // WITH LINE BREAKS!
         public void AddDialogue(string[] dia)
         {
             foreach (string line in dia)
@@ -110,7 +92,8 @@ namespace Sprint_0.Scripts.GameState
                 {
                     active = false;
                     currLine = "";
-                } else
+                }
+                else
                 {
                     currLine = nextLine;
                     initLetterSpritesForLine();
@@ -118,64 +101,44 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
+
         // ----- Helper Methods ----- //
 
         // Creates the letter sprites for the line being shown on screen
         private void initLetterSpritesForLine()
         {
-            Array.Clear(letterSprites, 0, maxLetters);
+            Array.Clear(letterSprites, 0, ObjectConstants.maxLetters);
 
             for (int i = 0; i < currLine.Length; i++)
             {
                 letterSprites[i] = FontSpriteFactory.Instance.CreateLetterSprite(currLine[i]);
             }
 
-            midpoint = calculateMidpoint();
             linebreaks = calculateLineBreaks();
         }
 
-        private int calculateMidpoint()
-        {
-            int len = 0;
-            string[] tokens = currLine.Split(" ");
-
-            foreach (string token in tokens)
-            {
-                len += token.Length;
-
-                if (len > (maxLetters / 2))
-                {
-                    System.Diagnostics.Debug.WriteLine(len);
-                    len -= token.Length;
-                    System.Diagnostics.Debug.WriteLine(len);
-                    return len - 1;
-                } else
-                {
-                    len++;
-                }
-            }
-
-            return maxLetters / 2;
-        }
-
+        // Determines what indexes a string should begin printing on a new line based
+        // on the attribute lettersPerLine
         private int[] calculateLineBreaks()
         {
-            int[] bps = new int[maxLines];
+            int[] bps = new int[ObjectConstants.maxLines];
             int i = 0;
             int len = 0;
             int total = 0;
             string[] tokens = currLine.Split(' ');
 
-            for (int j = 0; j < maxLines; j++)
+            for (int j = 0; j < ObjectConstants.maxLines; j++)
             {
-                bps[j] = lettersPerLine * maxLines + 1;
+                bps[j] = int.MaxValue;
             }
 
+            // Loops through each word and determines at what indexes the string should
+            // begin printing on a new line.
             foreach (string token in tokens)
             {
                 len += token.Length;
 
-                if (len >= lettersPerLine)
+                if (len >= ObjectConstants.lettersPerLine)
                 {
                     len -= token.Length;
                     total += len;
@@ -192,6 +155,7 @@ namespace Sprint_0.Scripts.GameState
             return bps;
         }
 
+        // Draws the letters in currLine to the screen
         private void drawLetters(SpriteBatch sb)
         {
             int xOffset;
@@ -205,32 +169,33 @@ namespace Sprint_0.Scripts.GameState
                     lineNum++;
                 }
 
-                
-                xOffset = (ObjectConstants.standardWidthHeight + letterSpacing) * getCurrCharLinePos(i);
-                //System.Diagnostics.Debug.WriteLine(getCurrCharLinePos(i));
+                xOffset = (ObjectConstants.standardWidthHeight + ObjectConstants.letterSpacing) * getCurrCharLinePos(i);
                 yOffset = 24 * lineNum;
 
                 letterSprites[i].Draw(sb, new Vector2(initX + xOffset, initY + yOffset));
             }
         }
 
-        private bool isPrinting()
+        // Plays the text scrolling sound effect while new letters are being printed.
+        // Stops the sound effect when new letters stop being printed.
+        private void StartStopTextScrollSFX()
         {
             if (currIndex < currLine.Length - 1)
             {
-                return true;
+                SFXManager.Instance.PlayTextScroll();
             }
             else
             {
-                return false;
+                SFXManager.Instance.StopTextScroll();
             }
         }
 
+        // Returns what position the letter is in the line it will be printed on
         private int getCurrCharLinePos(int j)
         {
             int pos = j;
 
-            for (int i = maxLines - 1; i >= 0; i--)
+            for (int i = ObjectConstants.maxLines - 1; i >= 0; i--)
             {
                 if (pos >= linebreaks[i])
                 {
