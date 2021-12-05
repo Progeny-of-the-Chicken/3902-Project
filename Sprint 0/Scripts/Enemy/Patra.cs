@@ -106,6 +106,14 @@ namespace Sprint_0.Scripts.Enemy
             }
         }
 
+        public void ToggleEllipse()
+        {
+            foreach (IEnemy patraMinion in patraMinions)
+            {
+                ((PatraMinion)patraMinion).ToggleEllipse();
+            }
+        }
+
         public void RemovePatraMinion(IEnemy patraMinion)
         {
             patraMinions.Remove(patraMinion);

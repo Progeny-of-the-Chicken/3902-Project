@@ -57,8 +57,12 @@ namespace Sprint_0.Scripts.Movement
 
         public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, double radiusChange, Vector2 satelliteDimensions)
         {
-            // Orbit currently locked at counter-clockwise
             return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, GetRadiusForOrbit(centerEnemy), radiusChange, satelliteDimensions);
+        }
+
+        public IMovementStrategy CreateEllipseEnemyStrategy(IEnemy centerEnemy, double radiusChange, Vector2 satelliteDimensions)
+        {
+            return new EllipseEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, GetRadiusForOrbit(centerEnemy), radiusChange, satelliteDimensions);
         }
 
         //----- Enemy disambiguation strategies creator methods -----//

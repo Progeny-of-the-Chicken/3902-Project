@@ -2,12 +2,12 @@
 
 namespace Sprint_0.Scripts.Commands.EnemyAbilities
 {
-    public class CommandTogglePatraOrbit : ICommand
+    public class CommandTogglePatraEllipse : ICommand
     {
         private IEnemy patra;
         private EnemyStateMachine stateMachine;
 
-        public CommandTogglePatraOrbit(IEnemy patra, EnemyStateMachine stateMachine)
+        public CommandTogglePatraEllipse(IEnemy patra, EnemyStateMachine stateMachine)
         {
             this.patra = patra;
             this.stateMachine = stateMachine;
@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
 
         public void Execute()
         {
-            ((Patra)patra).ToggleOrbit();
+            ((Patra)patra).ToggleEllipse();
             stateMachine.SetState(EnemyState.AbilityCast, stateMachine.moveTime);
         }
     }

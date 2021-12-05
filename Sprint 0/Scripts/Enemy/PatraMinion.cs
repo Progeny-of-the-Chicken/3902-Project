@@ -12,6 +12,8 @@ namespace Sprint_0.Scripts.Enemy
         private IEnemyCollider collider;
         private IEnemy patra;
 
+        private bool doEllipse = false;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.PatraMinionDamage; }
@@ -23,9 +25,9 @@ namespace Sprint_0.Scripts.Enemy
         public PatraMinion(Vector2 location, IEnemy patra)
         {
             sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.PatraMinion, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double, doEllipse);
             this.patra = patra;
         }
 
@@ -34,8 +36,7 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
-
-                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double);
+                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double, doEllipse);
             }
             sprite.Update(gt);
             collider.Update(Position);
@@ -68,7 +69,20 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ToggleOrbit(double radiusChange)
         {
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radiusChange);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radiusChange, doEllipse);
+        }
+
+        public void ToggleEllipse()
+        {
+            if (doEllipse)
+            {
+                doEllipse = false;
+            }
+            else
+            {
+                doEllipse = true;
+            }
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, 0, doEllipse);
         }
 
         public bool CheckDelete()

@@ -16,7 +16,9 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
         private Vector2 ellipseCenter;
         private bool beginEllipse = true;
         private double ellipseYOffset;
-        private double radiusTime = ObjectConstants.zero_float;
+        private double radiusTime = ObjectConstants.zero_double;
+        private double xOffset = ObjectConstants.zero_double;
+        private double yOffset = ObjectConstants.zero_double;
 
         public EllipseEnemyStrategy(IEnemy enemy, double orbitSpeedRadians, int radius, double radiusChange, Vector2 satelliteDimensions)
         {
@@ -32,20 +34,21 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
             radiusTime += gt.ElapsedGameTime.TotalSeconds;
             int adjustedRadius = radius + (int)(radiusTime * radiusChange);
             UpdateEllipseCenter(location, adjustedRadius);
-            double radiansToMove = (GetEllipseRadians(location) + (gt.ElapsedGameTime.TotalSeconds * orbitSpeedRadians)) % ObjectConstants.degreeRotationCW360_s;
-            return GetEnemyCenter(satelliteDimensions) + new Vector2((int)(adjustedRadius * Math.Cos(radiansToMove)), (int)((adjustedRadius / ObjectConstants.oneInTwo) * Math.Sin(radiansToMove)));
+            double radiansToMove = (GetScaledEllipseRadians(location) + (gt.ElapsedGameTime.TotalSeconds * orbitSpeedRadians)) % ObjectConstants.degreeRotationCW360_s;
+            UpdateLocationOffsets(adjustedRadius, radiansToMove);
+            return ellipseCenter + new Vector2((int)xOffset, (int)yOffset);
         }
 
         //----- Math helpers -----//
 
-        private double GetEllipseRadians(Vector2 satelliteLocation)
+        private double GetScaledEllipseRadians(Vector2 satelliteLocation)
         {
-            return Math.PI + Math.Atan2((satelliteLocation.Y - ellipseCenter.Y), (satelliteLocation.X - ellipseCenter.X));
+            return Math.PI + Math.Atan2((satelliteLocation.Y - ellipseCenter.Y) / ObjectConstants.PatraMinionEllipseRadiusRatio, (satelliteLocation.X - ellipseCenter.X));
         }
 
-        private double GetCurrentRadians(Vector2 satelliteLocation)
+        private double GetScaledRadians(Vector2 satelliteLocation)
         {
-            return Math.PI + Math.Atan2((satelliteLocation.Y - GetEnemyCenter(satelliteDimensions).Y), (satelliteLocation.X - GetEnemyCenter(satelliteDimensions).X));
+            return Math.PI + Math.Atan2(((satelliteLocation.Y - GetEnemyCenter(satelliteDimensions).Y) / ObjectConstants.PatraMinionEllipseRadiusRatio), (satelliteLocation.X - GetEnemyCenter(satelliteDimensions).X));
         }
 
         private Vector2 GetEnemyCenter(Vector2 satelliteWidthHeight)
@@ -55,31 +58,37 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
 
         //----- Ellipse helpers -----//
 
-        private void UpdateEllipseCenter(Vector2 location, int radius)
+        private void UpdateEllipseCenter(Vector2 satelliteLocation, int adjustedRadius)
         {
             if (beginEllipse)
             {
-                InitYOffsetForRadians(GetCurrentRadians(location));
+                InitYOffsetForRadians(GetScaledRadians(satelliteLocation), adjustedRadius);
                 beginEllipse = false;
             }
-            ellipseYOffset += ((ellipseCenter.Y - GetEnemyCenter(satelliteDimensions).Y) / radius) * (int)(radiusTime * radiusChange);
-            ellipseCenter = GetEnemyCenter(satelliteDimensions) + new Vector2(ObjectConstants.zero, (int)ellipseYOffset);
+            double adjustedYOffset = ellipseYOffset + ((ellipseYOffset / adjustedRadius) * (radiusTime * radiusChange));
+            ellipseCenter = GetEnemyCenter(satelliteDimensions) + new Vector2(ObjectConstants.zero, (int)adjustedYOffset);
         }
 
-        private void InitYOffsetForRadians(double currentRadians)
+        private void InitYOffsetForRadians(double currentRadians, int adjustedRadius)
         {
             if (currentRadians < ObjectConstants.degreeRotationCW90_s)
             {
-                ellipseYOffset = (radius / Math.PI) * currentRadians;
+                ellipseYOffset = (adjustedRadius / Math.PI) * currentRadians;
             }
             else if (currentRadians < ObjectConstants.degreeRotationCW270_s)
             {
-                ellipseYOffset = radius - ((radius / Math.PI) * currentRadians);
+                ellipseYOffset = adjustedRadius - ((adjustedRadius / Math.PI) * currentRadians);
             }
             else
             {
-                ellipseYOffset = (radius / Math.PI) * ObjectConstants.degreeRotationCW360_s * currentRadians;
+                ellipseYOffset = (adjustedRadius / Math.PI) * currentRadians - (2 * adjustedRadius);
             }
+        }
+
+        private void UpdateLocationOffsets(int adjustedRadius, double radiansToMove)
+        {
+            xOffset = adjustedRadius * Math.Cos(radiansToMove);
+            yOffset = adjustedRadius * Math.Sin(radiansToMove) * ObjectConstants.PatraMinionEllipseRadiusRatio;
         }
     }
 }

@@ -240,6 +240,7 @@ namespace Sprint_0
         public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
         public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
         public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
+        public const double PatraMinionEllipseRadiusRatio = 0.5;
 
         //WallMaster
         public const int WallMasterHealth = 3;
