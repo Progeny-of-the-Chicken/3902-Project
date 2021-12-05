@@ -374,6 +374,13 @@ namespace Sprint_0
         public const int wallHitBoxHalfSize = standardWidthHeight / 2;
         public const int wallHitBoxSize = standardWidthHeight;
 
+        //----- Randomizer Dungeon Constant Values -----//
+        public const int numDoorsInRoom = 4;
+        public const int randoDungeonHeightWidth = 8;
+        public const int maxKeysBeforeForcedDoor = 10;
+        public static Vector2[] roomsWithKeys = new Vector2[] { new Vector2(4, 0), new Vector2(5, 0), new Vector2(4, 1), new Vector2(5, 1), new Vector2(4, 2), new Vector2(5, 3),
+            new Vector2(4, 5), new Vector2(5, 5), new Vector2(6, 5), new Vector2(7, 5), new Vector2(0, 6), new Vector2(1, 6), new Vector2(2, 6), new Vector2(3, 6),
+        };
 
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
@@ -390,7 +397,7 @@ namespace Sprint_0
         //----- Room swapping animation constants -----//
         public const int roomswapAnimationVerticalScrollDist = 176 * scale;
         public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
-        public const int roomswapAnimationDurationInFrames = 80;
+        public const int roomswapAnimationDurationInFrames = 30;
 
 
         //----- Inventory GUI constant values -----//
