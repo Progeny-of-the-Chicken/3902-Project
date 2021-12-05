@@ -82,7 +82,7 @@ namespace Sprint_0.Scripts.SpriteFactories
 
         public ISprite CreateLetterSprite(char letter)
         {
-            return new LetterSprite(clearTexture, letter);
+            return new LetterSprite(clearTexture, char.ToLower(letter));
         }
     }
 }

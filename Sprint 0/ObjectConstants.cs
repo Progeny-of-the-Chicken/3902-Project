@@ -28,11 +28,11 @@ namespace Sprint_0
         public const int PreferredBackBufferHeight = 232;
 
 
+
         //----- Game state constants -----//
         public static char[] pausedLetters = { 'p', 'a', 'u', 's', 'e', 'd' };
         public const int pauseDisplayStartingPointX = 232;
         public const int pauseDisplayStartingPointY = 400;
-        public const int letterSpacing = 8;
         public const int bombsFromDrop = 4;
 
 
@@ -554,5 +554,18 @@ namespace Sprint_0
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
+
+
+        //----- Dialogue Box Constants -----//
+        public const int framesBetweenLetters = 2;
+
+        public const int maxLetters = 400;
+        public const int lettersPerLine = 35;
+        public const int maxLines = 7;
+        public const int letterSpacing = 6;
+
+        // Origin point for printed dialogue
+        public const int dialogueStartX = 56;
+        public const int dialogueStartY = ObjectConstants.yOffsetForRoom + 2 * ObjectConstants.standardWidthHeight;
     }
 }
