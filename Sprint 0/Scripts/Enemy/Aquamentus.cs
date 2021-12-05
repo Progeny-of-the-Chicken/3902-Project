@@ -18,6 +18,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
         private int health = ObjectConstants.AquamentusStartingHealth;
         bool delete = false;
 
@@ -94,6 +95,10 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             //Aquamentus doesn't get knocked back when hit
+        }
+        public void Freeze(float duration)
+        {
+            // TODO: Implement
         }
         public bool CheckDelete()
         {

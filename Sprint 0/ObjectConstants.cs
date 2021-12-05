@@ -41,6 +41,10 @@ namespace Sprint_0
         public static Vector2 DownUnitVector = new Vector2(0, 1);
         public static Vector2 LeftUnitVector = new Vector2(-1, 0);
         public static Vector2 RightUnitVector = new Vector2(1, 0);
+        public static Vector2 UpLeftUnitVector = new Vector2(-1, -1);
+        public static Vector2 UpRightUnitVector = new Vector2(1, -1);
+        public static Vector2 DownLeftUnitVector = new Vector2(-1, 1);
+        public static Vector2 DownRightUnitVector = new Vector2(1, 1);
         public static Vector2 zeroVector = new Vector2(0, 0);
 
 
@@ -75,7 +79,7 @@ namespace Sprint_0
 
 
         //----- Item constant values -----//
-        public const double clockFreezeSeconds = 10.0;
+        public const float clockFreezeSeconds = 10.0f;
 
 
         //----- Projectile constant values -----//
@@ -156,7 +160,8 @@ namespace Sprint_0
         public const float DefaultEnemyKnockbackToLink = 2 * scale * standardWidthHeight;
         public const float DefaultEnemyMoveSpeed = 2 * scale * standardWidthHeight;
         public const double DefaultEnemyMoveTime = 1.0;
-        public const double DefaultEnemyPauseTime = 1.0;
+        public const float DefaultEnemyPauseTime = 1.0f;
+        public const float DefaultEnemyDamagedTime = 0.5f;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -177,11 +182,12 @@ namespace Sprint_0
         public const float GelMoveSpeed = DefaultEnemyMoveSpeed;
         public const double GelPauseTime = DefaultEnemyPauseTime;
         public const int GelStartingHealth = 1;
+        public const int GelWidthHeight = 8 * scale;
         //Goriya
         public const int GoriyaDamage = 1;
         public const double GoriyaMoveTime = 1.5;
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int GoriyaStartingHealth = 1;
+        public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
         //Keese
         public const int KeeseDamage = 1;
@@ -197,6 +203,7 @@ namespace Sprint_0
         public const float RopeMoveSpeed = DefaultEnemyMoveSpeed;
         public const float RopeChaseSpeed = RopeMoveSpeed * 2;
         public const int RopeStartingHealth = 1;
+        public const double RopeChaseTimeoutTime = RopeMoveTime / 2;
         //Stalfos
         public const int StalfosDamage = 1;
         public const double StalfosMoveTime = DefaultEnemyMoveTime;
@@ -238,6 +245,9 @@ namespace Sprint_0
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
+        // Movement
+        public const float zeroPauseTime = 0f;
+
 
         //----- Collision constant values -----//
         public static Vector2 degreeRotationCW90_v = new Vector2(0, -1);
@@ -249,6 +259,7 @@ namespace Sprint_0
 
         //----- string constant values -----//
         public const string secretRoom = "Room00";
+        public const string stairRoom = "Room10";
         public const string wallMasterToRoom = "Room25";
         public const string enemiesFile = "enemies";
         public const string npcFile = "npc";
@@ -302,6 +313,7 @@ namespace Sprint_0
         public const string SouthClosedSpriteStr = "SouthClosedSprite";
         public const string MoveableBlockSpriteStr = "MoveableBlockSprite";
         public const string StairSpriteStr = "StairSprite";
+        public const string InvisibleExitStr = "InvisibleExit";
         public const string EastDoorSpriteStr = "EastDoorSprite";
         public const string NorthDoorSpriteStr = "NorthDoorSprite";
         public const string WestDoorSpriteStr = "WestDoorSprite";
@@ -331,6 +343,7 @@ namespace Sprint_0
         public const string SouthBombedSpriteStr = "SouthBombedSprite";
         public const string SouthLockedSpriteStr = "SouthLockedSprite";
         public const string SouthWallSpriteStr = "SouthWallSprite";
+        public const string InvisibleWallStr = "InvisibleWall";
 
 
         //----- wall/block constant values -----//
@@ -373,6 +386,8 @@ namespace Sprint_0
         public const int SouthDoorSpritePos = 11;
         public const int wallHitBoxHalfSize = standardWidthHeight / 2;
         public const int wallHitBoxSize = standardWidthHeight;
+        public static Vector2 sideOnRoomSpawnPosition = new Vector2(scale * wallHitBoxSize * 3, yOffsetForRoom + scale * wallHitBoxSize * 3);
+        public static Vector2 leftOfStairSpawnPosition = new Vector2(scale * wallHitBoxSize * 7, yOffsetForRoom + scale * wallHitBoxSize * 6);
 
         //----- Randomizer Dungeon Constant Values -----//
         public const int numDoorsInRoom = 4;
