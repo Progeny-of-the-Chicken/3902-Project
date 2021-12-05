@@ -5,12 +5,12 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
-    public class StairCollider : IBlockCollider
+    public class InvisibleExitCollider : IBlockCollider
     {
         private ITerrain owner;
         private Rectangle hitbox;
 
-        public StairCollider(ITerrain owner, Rectangle hitbox)
+        public InvisibleExitCollider(ITerrain owner, Rectangle hitbox)
         {
             this.owner = owner;
             this.hitbox = hitbox;
@@ -33,8 +33,8 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
-            link.ResetPosition(ObjectConstants.sideOnRoomSpawnPosition);
-            RoomManager.Instance.SwitchToRoom(ObjectConstants.secretRoom);
+            link.ResetPosition(ObjectConstants.leftOfStairSpawnPosition);
+            RoomManager.Instance.SwitchToRoom(ObjectConstants.stairRoom);
             SFXManager.Instance.PlayStairs();
         }
 

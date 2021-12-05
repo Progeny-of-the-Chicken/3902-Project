@@ -422,6 +422,9 @@ public class Room : IRoom
                 case ObjectConstants.StairSpriteStr:
                     blocks.Add(new StairSprite(specialLocation));
                     break;
+                case ObjectConstants.InvisibleExitStr:
+                    blocks.Add(new InvisibleExit(specialLocation));
+                    break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
                     enemiesFlag = true;
@@ -471,6 +474,14 @@ public class Room : IRoom
             effectSet.Add(effect);
         }
         effectQueue.Clear();
+    }
+
+    public void FreezeEnemies()
+    {
+        foreach (IEnemy enemy in enemySet.Enemies)
+        {
+            enemy.Freeze(ObjectConstants.clockFreezeSeconds);
+        }
     }
 
     public void ChangeDoor(IWall doorToRemove, String doorToAdd)

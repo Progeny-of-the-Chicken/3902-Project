@@ -49,7 +49,7 @@ namespace Sprint_0
             new Rectangle(48, 0, 8, 16)
         };
         public static Rectangle clockFrame = new Rectangle(58, 0, 11, 16);
-        public static Rectangle blueRubyFrame = new Rectangle(72, 0, 8, 16);
+        public static Rectangle blueRubyFrame = new Rectangle(72, 16, 8, 16);
         public static List<Rectangle> yellowRubyFrames = new List<Rectangle>
         {
             new Rectangle(72, 0, 8, 16),
@@ -232,6 +232,7 @@ namespace Sprint_0
         public static Rectangle NorthBombedSpriteFrame = new Rectangle(947, 11, 32, 32);
         public static Rectangle NorthBombableSpriteFrame = new Rectangle(815, 11, 32, 32);
         public static Rectangle InvisibleVerticleWallFrame = new Rectangle(814, 143, 32, 72);
+        public static Rectangle InvisibleWallFrame = new Rectangle(814, 143, 32, 32);
         public static Rectangle InvisibleHorizontalWallFrame = new Rectangle(814, 143, 112, 32);
         public static Rectangle EastWallSpriteFrame = new Rectangle(815, 77, 32, 32);
         public static Rectangle EastLockedSpriteFrame = new Rectangle(881, 77, 32, 32);
@@ -272,10 +273,10 @@ namespace Sprint_0
         public static Rectangle fontTFrame = new Rectangle(544, 40, 8, 8);
         public static Rectangle fontUFrame = new Rectangle(560, 40, 8, 8);
         public static Rectangle fontVFrame = new Rectangle(576, 40, 8, 8);
-        public static Rectangle fontWFrame = new Rectangle(336, 64, 8, 8);
-        public static Rectangle fontXFrame = new Rectangle(352, 64, 8, 8);
-        public static Rectangle fontYFrame = new Rectangle(368, 64, 8, 8);
-        public static Rectangle fontZFrame = new Rectangle(384, 64, 8, 8);
+        public static Rectangle fontWFrame = new Rectangle(336, 56, 8, 8);
+        public static Rectangle fontXFrame = new Rectangle(352, 56, 8, 8);
+        public static Rectangle fontYFrame = new Rectangle(368, 56, 8, 8);
+        public static Rectangle fontZFrame = new Rectangle(384, 56, 8, 8);
         public static Rectangle fontSpaceFrame = new Rectangle(337, 69, 8, 8);
     }
 }
