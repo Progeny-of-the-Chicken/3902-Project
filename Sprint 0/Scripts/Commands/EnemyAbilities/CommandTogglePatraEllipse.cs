@@ -15,7 +15,9 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
 
         public void Execute()
         {
+            /*
             ((Patra)patra).ToggleEllipse();
+            */
             stateMachine.SetState(EnemyState.AbilityCast, stateMachine.moveTime);
         }
     }

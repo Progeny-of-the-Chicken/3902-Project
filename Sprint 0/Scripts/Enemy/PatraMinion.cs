@@ -12,7 +12,7 @@ namespace Sprint_0.Scripts.Enemy
         private IEnemyCollider collider;
         private IEnemy patra;
 
-        private bool doEllipse = false;
+        private int radius = ObjectConstants.PatraMinionBaseOrbitRadius;
 
         public IEnemyCollider Collider { get => collider; }
 
@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.Enemy
             sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
             stateMachine = new EnemyStateMachine(location, EnemyType.PatraMinion, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double, doEllipse);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radius, ObjectConstants.zero_double);
             this.patra = patra;
         }
 
@@ -36,7 +36,7 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
-                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, ObjectConstants.zero_double, doEllipse);
+                stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radius, ObjectConstants.zero_double);
             }
             sprite.Update(gt);
             collider.Update(Position);
@@ -69,9 +69,19 @@ namespace Sprint_0.Scripts.Enemy
 
         public void ToggleOrbit(double radiusChange)
         {
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radiusChange, doEllipse);
+            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radius, radiusChange);
+            // Set new radius for after change
+            if (((Patra)patra).orbitState.extended)
+            {
+                radius = ObjectConstants.PatraMinionExtendedOrbitRadius;
+            }
+            else
+            {
+                radius = ObjectConstants.PatraMinionBaseOrbitRadius;
+            }
         }
 
+        /*
         public void ToggleEllipse()
         {
             if (doEllipse)
@@ -84,6 +94,7 @@ namespace Sprint_0.Scripts.Enemy
             }
             stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, 0, doEllipse);
         }
+        */
 
         public bool CheckDelete()
         {

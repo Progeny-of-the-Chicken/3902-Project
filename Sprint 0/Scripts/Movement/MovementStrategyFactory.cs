@@ -55,15 +55,17 @@ namespace Sprint_0.Scripts.Movement
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, double radiusChange, Vector2 satelliteDimensions)
+        public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, int radius, double radiusChange, Vector2 satelliteDimensions)
         {
-            return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, GetRadiusForOrbit(centerEnemy), radiusChange, satelliteDimensions);
+            return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, radius, radiusChange, satelliteDimensions);
         }
 
+        /*
         public IMovementStrategy CreateEllipseEnemyStrategy(IEnemy centerEnemy, double radiusChange, Vector2 satelliteDimensions)
         {
             return new EllipseEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, GetRadiusForOrbit(centerEnemy), radiusChange, satelliteDimensions);
         }
+        */
 
         //----- Enemy disambiguation strategies creator methods -----//
 
@@ -110,17 +112,6 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreatePatraMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.PatraMoveSpeed, ObjectConstants.zeroPauseTime);
-        }
-
-        //----- Orbit/formation helpers -----//
-
-        private int GetRadiusForOrbit(IEnemy enemy)
-        {
-            return ((Patra)enemy).OrbitIsExtended switch
-            {
-                true => ObjectConstants.PatraMinionExtendedOrbitRadius,
-                false => ObjectConstants.PatraMinionBaseOrbitRadius
-            };
         }
     }
 }

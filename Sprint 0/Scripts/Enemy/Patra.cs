@@ -20,6 +20,8 @@ namespace Sprint_0.Scripts.Enemy
         private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
         private bool orbitIsExtended = false;
 
+        public (bool extended, bool ellipse) orbitState;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.PatraDamage; }
@@ -84,6 +86,15 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
+        public void ToggleOrbit(double radiusChange)
+        {
+            foreach (IEnemy patraMinion in patraMinions)
+            {
+                ((PatraMinion)patraMinion).ToggleOrbit(radiusChange);
+            }
+        }
+
+        /*
         public void ToggleOrbit()
         {
             double radiusChange = ObjectConstants.PatraRadiusExtensionSpeed;
@@ -105,7 +116,9 @@ namespace Sprint_0.Scripts.Enemy
                 orbitIsExtended = true;
             }
         }
+        */
 
+        /*
         public void ToggleEllipse()
         {
             foreach (IEnemy patraMinion in patraMinions)
@@ -113,6 +126,7 @@ namespace Sprint_0.Scripts.Enemy
                 ((PatraMinion)patraMinion).ToggleEllipse();
             }
         }
+        */
 
         public void RemovePatraMinion(IEnemy patraMinion)
         {

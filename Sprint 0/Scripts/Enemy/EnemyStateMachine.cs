@@ -92,20 +92,12 @@ namespace Sprint_0.Scripts.Enemy
             movement.SetStrategy(GetStrategyForState(state));
         }
 
-        public void SetState(EnemyState state, float duration, IEnemy enemy, double radiusChange, bool doEllipse)
+        public void SetState(EnemyState state, float duration, IEnemy enemy, int radius, double radiusChange)
         {
             // Hard coded to patra minion for now
             timeSinceMove = ObjectConstants.zero_float;
             stateStack.Push((state, duration));
-            if (doEllipse)
-            {
-                movement.SetStrategy(MovementStrategyFactory.Instance.CreateEllipseEnemyStrategy(enemy, radiusChange, ObjectConstants.PatraMinionWidthHeight));
-            }
-            else
-            {
-                movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radiusChange, ObjectConstants.PatraMinionWidthHeight));
-            }
-
+            movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radius, radiusChange, ObjectConstants.PatraMinionWidthHeight));
         }
 
         public void TakeDamage(int damage, bool isBoss)

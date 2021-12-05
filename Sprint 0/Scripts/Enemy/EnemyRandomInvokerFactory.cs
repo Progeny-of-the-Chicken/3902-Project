@@ -45,17 +45,13 @@ namespace Sprint_0.Scripts.Enemy
             switch (type)
             {
                 case EnemyType.Goriya:
-                    invoker.AddCommand(new CommandEnemyThrowBoomerang(enemy, stateMachine));
+                    invoker.AddCommandWithWeight(new CommandEnemyThrowBoomerang(enemy, stateMachine), ObjectConstants.GoriyaThrowBoomerangChanceWeight);
                     break;
                 case EnemyType.Aquamentus:
                     invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
                     break;
                 case EnemyType.Patra:
-                    // Doubled commands for higher chance of execution out of 9 fly vectors
-                    invoker.AddCommand(new CommandTogglePatraOrbit(enemy, stateMachine));
-                    invoker.AddCommand(new CommandTogglePatraOrbit(enemy, stateMachine));
-                    invoker.AddCommand(new CommandTogglePatraEllipse(enemy, stateMachine));
-                    invoker.AddCommand(new CommandTogglePatraEllipse(enemy, stateMachine));
+                    invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
             }
             return invoker;

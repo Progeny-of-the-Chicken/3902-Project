@@ -162,6 +162,7 @@ namespace Sprint_0
         public const double DefaultEnemyMoveTime = 1.0;
         public const float DefaultEnemyPauseTime = 1.0f;
         public const float DefaultEnemyDamagedTime = 0.5f;
+        public const int DefaultEnemyAbilityChangeWeight = 1;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -189,6 +190,7 @@ namespace Sprint_0
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
+        public const int GoriyaThrowBoomerangChanceWeight = 2;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
@@ -231,6 +233,7 @@ namespace Sprint_0
         public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
         public const int PatraStartingHealth = 6;
         public const int PatraStartingMinionCount = 8;
+        public const int PatraToggleOrbitChanceWeight = 6;
         public static Vector2 PatraWidthHeight = new Vector2(16, 11) * scale;
         //PatraMinion
         public const int PatraMinionDamage = 1;
@@ -239,8 +242,8 @@ namespace Sprint_0
         public const int PatraMinionExtendedOrbitRadius = (int)(standardWidthHeight * scale * -5.0);
         public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
         public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
-        public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
         public const double PatraMinionEllipseRadiusRatio = 0.5;
+        public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
 
         //WallMaster
         public const int WallMasterHealth = 3;
