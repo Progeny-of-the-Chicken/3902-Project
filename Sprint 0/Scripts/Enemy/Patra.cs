@@ -18,7 +18,6 @@ namespace Sprint_0.Scripts.Enemy
         private HashSet<IEnemy> patraMinions = new HashSet<IEnemy>();
         private float minionSpawningCounter = ObjectConstants.zero_float;
         private int remainingPatraMinionsToSpawn = ObjectConstants.PatraStartingMinionCount;
-        private bool orbitIsExtended = false;
 
         public (bool extended, bool ellipse) orbitState;
 
@@ -29,8 +28,6 @@ namespace Sprint_0.Scripts.Enemy
         public Vector2 Position { get => stateMachine.Location; }
 
         public bool CanBeAffectedByPlayer { get => !stateMachine.IsDamaged; }
-
-        public bool OrbitIsExtended { get => orbitIsExtended; }
 
         public Patra(Vector2 location)
         {
@@ -93,40 +90,6 @@ namespace Sprint_0.Scripts.Enemy
                 ((PatraMinion)patraMinion).ToggleOrbit(radiusChange);
             }
         }
-
-        /*
-        public void ToggleOrbit()
-        {
-            double radiusChange = ObjectConstants.PatraRadiusExtensionSpeed;
-            if (!orbitIsExtended)
-            {
-                radiusChange *= ObjectConstants.adjustByNegativeOne;
-            }
-            foreach (IEnemy patraMinion in patraMinions)
-            {
-                ((PatraMinion)patraMinion).ToggleOrbit(radiusChange);
-            }
-
-            if (orbitIsExtended)
-            {
-                orbitIsExtended = false;
-            }
-            else
-            {
-                orbitIsExtended = true;
-            }
-        }
-        */
-
-        /*
-        public void ToggleEllipse()
-        {
-            foreach (IEnemy patraMinion in patraMinions)
-            {
-                ((PatraMinion)patraMinion).ToggleEllipse();
-            }
-        }
-        */
 
         public void RemovePatraMinion(IEnemy patraMinion)
         {

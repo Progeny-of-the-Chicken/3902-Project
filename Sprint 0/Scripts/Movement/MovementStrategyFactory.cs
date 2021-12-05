@@ -57,15 +57,9 @@ namespace Sprint_0.Scripts.Movement
 
         public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, int radius, double radiusChange, Vector2 satelliteDimensions)
         {
+            // Can be changed to take enemy enum to make constants dynamic if needed
             return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, radius, radiusChange, satelliteDimensions);
         }
-
-        /*
-        public IMovementStrategy CreateEllipseEnemyStrategy(IEnemy centerEnemy, double radiusChange, Vector2 satelliteDimensions)
-        {
-            return new EllipseEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, GetRadiusForOrbit(centerEnemy), radiusChange, satelliteDimensions);
-        }
-        */
 
         //----- Enemy disambiguation strategies creator methods -----//
 

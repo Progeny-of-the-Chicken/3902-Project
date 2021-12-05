@@ -81,21 +81,6 @@ namespace Sprint_0.Scripts.Enemy
             }
         }
 
-        /*
-        public void ToggleEllipse()
-        {
-            if (doEllipse)
-            {
-                doEllipse = false;
-            }
-            else
-            {
-                doEllipse = true;
-            }
-            stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, 0, doEllipse);
-        }
-        */
-
         public bool CheckDelete()
         {
             return stateMachine.IsDead;
