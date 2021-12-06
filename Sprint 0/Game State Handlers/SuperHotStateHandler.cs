@@ -44,7 +44,7 @@ namespace Sprint_0.GameStateHandlers
         public void Update(GameTime gameTime)
         {
             link.Update(gameTime);
-            if (!paused && link.IsMoving)
+            if (!paused && link.AdvanceTime)
             {
                 roomManager.Update(gameTime);
                 headsUpDisplay.Update();
