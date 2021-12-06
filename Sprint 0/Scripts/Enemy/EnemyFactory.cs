@@ -84,5 +84,13 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new MegaStalfos(location);
         }
+		public IEnemy CreateMegaGel(Vector2 location)
+        {
+			return new MegaGel(location);
+        }
+		public IEnemy CreateMegaZol(Vector2 location)
+        {
+			return new MegaZol(location);
+        }
 	}
 }

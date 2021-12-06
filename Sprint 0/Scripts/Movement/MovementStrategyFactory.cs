@@ -37,7 +37,8 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
                 EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector),
                 EnemyType.MegaStalfos => CreateMegaStalfosMovementStrategy(directionVector),
-                EnemyType.MegaGel => 
+                EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector),
+                EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -118,6 +119,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateMegaGelMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaGelMoveSpeed, (float)ObjectConstants.MegaGelPauseTime);
+        }
+
+        private IMovementStrategy CreateMegaZolMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaZolMoveSpeed, (float)ObjectConstants.MegaZolPauseTime);
         }
     }
 }
