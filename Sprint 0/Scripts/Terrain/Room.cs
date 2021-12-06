@@ -11,6 +11,7 @@ using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
+using Sprint_0.Scripts.Terrain.LevelData;
 
 public class Room : IRoom
 {
@@ -38,6 +39,7 @@ public class Room : IRoom
     private bool enemiesFlag;
     private List<String> RoomClear;
     private bool inTransition = false;
+    private bool cutscenePlayed = false;
 
     public Room(string roomId, ILink link)
     {
@@ -68,6 +70,7 @@ public class Room : IRoom
         effectQueue = new List<IEffect>();
 
         LoadRoom();
+        LoadCutsceneData();
         collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
     }
 
@@ -466,6 +469,16 @@ public class Room : IRoom
                     break;
             }
         }
+    }
+
+    void LoadCutsceneData()
+    {
+        if (!cutscenePlayed)
+        {
+            CutSceneConstructor.Instance.LoadDialogueForRoom(roomId);
+        }
+        
+        cutscenePlayed = true;
     }
 
     public void AddProjectile(IProjectile item)

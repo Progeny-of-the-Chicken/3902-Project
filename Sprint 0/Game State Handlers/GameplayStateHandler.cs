@@ -7,6 +7,7 @@ using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Terrain.LevelData;
 
 namespace Sprint_0.GameStateHandlers
 {
@@ -27,7 +28,9 @@ namespace Sprint_0.GameStateHandlers
 
             roomManager = RoomManager.Instance;
             roomManager.Init(link);
+            CutSceneConstructor.Instance.Init(this);
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
+
             initializeLetterSprites();
         }
 
@@ -73,6 +76,11 @@ namespace Sprint_0.GameStateHandlers
         public void DialogueNext()
         {
             db.Next();
+        }
+
+        public void AddDialogue(string[] dia)
+        {
+            db.AddDialogue(dia);
         }
 
 
