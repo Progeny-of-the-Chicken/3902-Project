@@ -81,9 +81,15 @@ class WallSpriteFactory
                 return CreateSouthLockedSprite(location, room, nextRoom);
             case ObjectConstants.SouthWallSpriteStr:
                 return CreateSouthWallSprite(location, room);
+            case ObjectConstants.InvisibleWallStr:
+                return CreateInvisibleWallSprite(location, room);
             default:
                 return new EastBombedSprite(location, room, nextRoom);
         }
+    }
+    public IWall CreateInvisibleWallSprite(Vector2 location, Room room)
+    {
+        return new InvisibleWall(location, room);
     }
 
     public IWall CreateEastBombableSprite(Vector2 location, Room room, String nextRoom)

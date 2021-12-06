@@ -14,6 +14,7 @@ namespace Sprint_0.Scripts.Enemy
         private ISprite sprite;
         private Vector2 location;
         public Vector2 Position { get => location; }
+        public bool CanBeAffectedByPlayer { get => true; }
 
         public int Damage { get => damage; }
         public IEnemyCollider Collider { get => collider; }
@@ -51,6 +52,10 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             //The old man does not budge under the force of your sword
+        }
+        public void Freeze(float duration)
+        {
+            //Old man does not get frozen
         }
         public bool CheckDelete()
         {

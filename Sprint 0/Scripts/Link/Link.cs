@@ -102,6 +102,11 @@ namespace Sprint_0.Scripts
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
+        public void SheathSword()
+        {
+            linkState.SheathSword();
+        }
+
         public void HealBy(int health)
         {
             linkState.HealBy(health);
@@ -137,7 +142,10 @@ namespace Sprint_0.Scripts
 
         public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
 
+        public bool CanDoNewAction { get => linkState.CanDoNewThing(); }
         public bool BoomerangReady { get; set; }
+
+        public bool SwordIsSheathed { get => linkState.SwordIsSheathed; }
 
         public bool AdvanceTime { get => linkState.DoingSomething() || linkState.IsSuspended; }
     }

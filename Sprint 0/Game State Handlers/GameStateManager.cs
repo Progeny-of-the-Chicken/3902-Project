@@ -115,6 +115,10 @@ namespace Sprint_0.GameStateHandlers
             state.TogglePause();
         }
 
+        public void DialogueNext()
+        {
+            state.DialogueNext    
+        }
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             state.Draw(sb, gameTime);

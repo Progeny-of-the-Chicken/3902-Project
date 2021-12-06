@@ -35,7 +35,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateStalfosSprite()
         {
-            return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
 
         public ISprite CreateRightRopeSprite()
@@ -56,11 +56,11 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateDodongoDownSprite()
         {
-            return new FlippingSprite(SpriteRectangles.dodongoDownFrame, bossSprites);
+            return new FlippingSprite(SpriteRectangles.dodongoDownFrame, bossSprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
         public ISprite CreateDodongoUpSprite()
         {
-            return new FlippingSprite(SpriteRectangles.dodongoUpFrame, bossSprites);
+            return new FlippingSprite(SpriteRectangles.dodongoUpFrame, bossSprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
         public ISprite CreateDodongoExplodeRightSprite()
         {
@@ -76,7 +76,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateDodongoExplodeUpSprite()
         {
-            return new FlippingSprite(SpriteRectangles.dodongoExplodeUpFrame, bossSprites);
+            return new FlippingSprite(SpriteRectangles.dodongoExplodeUpFrame, bossSprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
         public ISprite CreateMerchantSprite()
         {
@@ -113,11 +113,11 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateFrontGoriyaSprite()
         {
-            return new FlippingSprite(SpriteRectangles.goriyaFrontFrame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.goriyaFrontFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
         public ISprite CreateBackGoriyaSprite()
         {
-            return new FlippingSprite(SpriteRectangles.goriyaBackFrame, enemySprites);
+            return new FlippingSprite(SpriteRectangles.goriyaBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
         public ISprite CreateRightGoriyaSprite()
         {
@@ -139,6 +139,31 @@ namespace Sprint_0.Scripts.Enemy
         public ISprite CreateSpikeTrapSprite()
         {
             return new SpikeTrapSprite(SpriteRectangles.spikeTrapFrame, enemySprites);
+        }
+
+        public ISprite CreateBubbleSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.bubbleFrame, enemySprites, ObjectConstants.BubbleFramesPerSecond);
+        }
+
+        public ISprite CreateFrontDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites);
+        }
+
+        public ISprite CreateBackDarknutSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond);
+        }
+
+        public ISprite CreateRightDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites);
+        }
+
+        public ISprite CreateLeftDarknutSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites);
         }
     }
 }

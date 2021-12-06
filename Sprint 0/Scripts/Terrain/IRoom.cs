@@ -15,6 +15,7 @@ public interface IRoom
 	void AddEffect(IEffect effect);
 	void AddEnemy(IEnemy enemy);
 	void AddItem(IItem item);
+	void FreezeEnemies();
 	void PrepareForTransition();
 	void TransitionEnded();
 	void UpdateDrawPoint(Vector2 dp);
