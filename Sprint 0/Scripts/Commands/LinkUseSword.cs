@@ -17,7 +17,7 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            if (!link.SwordIsSheathed) {
+            if (link.CanDoNewAction && !link.SwordIsSheathed) {
                 RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateSwordAttackHitbox(link.Position, link.FacingDirection));
                 if (link.Health == link.MaxHealth)
                 {

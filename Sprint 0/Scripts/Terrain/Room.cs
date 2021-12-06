@@ -428,6 +428,9 @@ public class Room : IRoom
                 case ObjectConstants.StairSpriteStr:
                     blocks.Add(new StairSprite(specialLocation));
                     break;
+                case ObjectConstants.InvisibleExitStr:
+                    blocks.Add(new InvisibleExit(specialLocation));
+                    break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
                     enemiesFlag = true;
