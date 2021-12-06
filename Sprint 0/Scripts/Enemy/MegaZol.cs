@@ -13,6 +13,8 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
+        private Vector2 lastKnockbackVector = ObjectConstants.LeftUnitVector;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.MegaZolDamage; }
@@ -51,6 +53,10 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             stateMachine.TakeDamage(damage, false);
+            if (stateMachine.IsDead)
+            {
+                SpawnMegaGels();
+            }
         }
 
         public void GradualKnockBack(Vector2 knockback)
@@ -77,6 +83,24 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, Position);
+        }
+
+        //----- Helper method for spawning MegaGels -----//
+
+        private void SpawnMegaGels()
+        {
+            IEnemy firstMegaGel = ObjectsFromObjectsFactory.Instance.CreateMegaGelFromMegaZol(Position);
+            IEnemy secondMegaGel = ObjectsFromObjectsFactory.Instance.CreateMegaGelFromMegaZol(Position);
+            if (stateMachine.GetDirection == FacingDirection.Right || stateMachine.GetDirection == FacingDirection.Left)
+            {
+                firstMegaGel.GradualKnockBack(ObjectConstants.UpLeftUnitVector);
+                secondMegaGel.GradualKnockBack(ObjectConstants.DownUnitVector);
+            }
+            else
+            {
+                firstMegaGel.GradualKnockBack(ObjectConstants.RightUnitVector);
+                secondMegaGel.GradualKnockBack(ObjectConstants.LeftUnitVector);
+            }
         }
     }
 }

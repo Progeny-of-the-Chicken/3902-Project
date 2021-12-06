@@ -228,6 +228,12 @@ public class Room : IRoom
                     case ObjectConstants.MegaStalfosStr:
                         enemySet.Add(EnemyFactory.Instance.CreateMegaStalfos(enemyLocation));
                         break;
+                    case ObjectConstants.MegaGelStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaGel(enemyLocation));
+                        break;
+                    case ObjectConstants.MegaZolStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaZol(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;

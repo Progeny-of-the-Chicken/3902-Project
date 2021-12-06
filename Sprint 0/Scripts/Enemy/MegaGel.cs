@@ -13,6 +13,8 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
+        private Vector2 lastKnockbackVector = ObjectConstants.LeftUnitVector;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.MegaGelDamage; }
@@ -51,6 +53,10 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             stateMachine.TakeDamage(damage, false);
+            if (stateMachine.IsDead)
+            {
+                SpawnZols();
+            }
         }
 
         public void GradualKnockBack(Vector2 knockback)
@@ -77,6 +83,24 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, Position);
+        }
+
+        //----- Helper method for spawning Zols -----//
+
+        private void SpawnZols()
+        {
+            IEnemy firstZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(Position);
+            IEnemy secondZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(Position);
+            if (stateMachine.GetDirection == FacingDirection.Right || stateMachine.GetDirection == FacingDirection.Left)
+            {
+                firstZol.GradualKnockBack(ObjectConstants.UpLeftUnitVector);
+                secondZol.GradualKnockBack(ObjectConstants.DownUnitVector);
+            }
+            else
+            {
+                firstZol.GradualKnockBack(ObjectConstants.RightUnitVector);
+                secondZol.GradualKnockBack(ObjectConstants.LeftUnitVector);
+            }
         }
     }
 }

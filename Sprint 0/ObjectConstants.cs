@@ -335,6 +335,8 @@ namespace Sprint_0
         public const string BubbleStr = "Bubble";
         public const string DarknutStr = "Darknut";
         public const string MegaStalfosStr = "MegaStalfos";
+        public const string MegaGelStr = "MegaGel";
+        public const string MegaZolStr = "MegaZol";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";

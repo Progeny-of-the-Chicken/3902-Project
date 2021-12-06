@@ -88,6 +88,20 @@ namespace Sprint_0.Scripts.Terrain
             return enemy;
         }
 
+        public IEnemy CreateZolFromMegaGel(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateZol(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
+        public IEnemy CreateMegaGelFromMegaZol(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateMegaGel(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
         // Items
 
         public void CreateItemDrop(Vector2 location, Vector2 spawnerDimensions, ItemType itemType)
