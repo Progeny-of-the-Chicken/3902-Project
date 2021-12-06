@@ -48,9 +48,10 @@ namespace Sprint_0.Scripts.GameState
         {
             if (Weapons.IndexOf(weapon) == SelectedWeaponIndex)
             {
-                SelectedWeaponIndex--;
+                SelectedWeaponIndex = ObjectConstants.firstInArray;
             }
             Weapons.Remove(weapon);
+
         }
 
         public int SelectedWeaponIndex { get; set; }
