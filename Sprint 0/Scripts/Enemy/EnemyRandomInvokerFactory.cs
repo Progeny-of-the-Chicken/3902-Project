@@ -44,6 +44,7 @@ namespace Sprint_0.Scripts.Enemy
                     break;
                 case EnemyType.Keese:
                 case EnemyType.Patra:
+                case EnemyType.Manhandla:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
                 case EnemyType.MegaKeese:
@@ -62,6 +63,7 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Patra:
                     invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
+                // TODO: Manhandla projectiles
             }
             return invoker;
         }

@@ -22,6 +22,7 @@
         MegaGel,
         MegaZol,
         MegaKeese,
-        MegaDarknut
+        MegaDarknut,
+        Manhandla
     }
 }

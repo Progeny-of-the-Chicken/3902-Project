@@ -312,6 +312,7 @@ namespace Sprint_0
         public const double ManhandlaMoveTime = DefaultEnemyMoveTime;
         public const float ManhandlaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int ManhandlaHeadHealth = 3;
+        public const int ManhandlaPlaceholderHealth = 1;
         public const float ManhandlaSpeedMultiplier = 1.2f;
         public const int ManhandlaComponentWidthHeight = 16 * scale;
 
@@ -383,6 +384,7 @@ namespace Sprint_0
         public const string MegaZolStr = "MegaZol";
         public const string MegaKeeseStr = "MegaKeese";
         public const string MegaDarknutStr = "MegaDarknut";
+        public const string ManhandlaStr = "Manhandla";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";

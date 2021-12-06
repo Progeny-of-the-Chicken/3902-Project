@@ -42,6 +42,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
                 EnemyType.MegaKeese => CreateTrackLinkStrategy(),
                 EnemyType.MegaDarknut => CreateMegaDarknutMovementStrategy(directionVector),
+                EnemyType.Manhandla => CreateManhandlaMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -152,7 +153,12 @@ namespace Sprint_0.Scripts.Movement
 
         private IMovementStrategy CreateMegaDarknutMovementStrategy(Vector2 directionVector)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaDarknutMoveSpeed, (float)ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaDarknutMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreateManhandlaMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ManhandlaMoveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }
