@@ -8,5 +8,6 @@ namespace Sprint_0
         void Update(GameTime gameTime);
         void Draw(SpriteBatch sb, GameTime gameTime);
         void TogglePause();
+        void DialogueNext();
     }
 }

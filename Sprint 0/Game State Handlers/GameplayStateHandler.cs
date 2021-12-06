@@ -45,6 +45,7 @@ namespace Sprint_0.GameStateHandlers
 
         public void Update(GameTime gameTime)
         {
+            link.Update(gameTime);
             if (!paused)
             {
                 roomManager.Update(gameTime);

@@ -43,7 +43,7 @@ namespace Sprint_0.GameStateHandlers
         GameOverStateHandler gameOver;
         SuperHotStateHandler superHot;
 
-        private bool inSuperHot = true;
+        private bool inSuperHot = false;
 
         public GameStateManager()
         {
@@ -117,7 +117,7 @@ namespace Sprint_0.GameStateHandlers
 
         public void DialogueNext()
         {
-            state.DialogueNext    
+            state.DialogueNext();
         }
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {

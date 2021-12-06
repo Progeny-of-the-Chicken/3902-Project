@@ -10,7 +10,7 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
-    public class SuperHotStateHandler: IGameStateHandler
+    public class SuperHotStateHandler : IGameStateHandler
     {
         private IRoomManager roomManager;
         private HUD headsUpDisplay;
@@ -18,6 +18,7 @@ namespace Sprint_0.GameStateHandlers
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Link link;
         private Game1 game;
+        private DialogueBox db = new DialogueBox();
 
         public SuperHotStateHandler(Link link, Game1 game)
         {
@@ -34,6 +35,7 @@ namespace Sprint_0.GameStateHandlers
         {
             roomManager.Draw(sb);
             headsUpDisplay.Draw(sb);
+            db.Draw(sb);
 
             if (paused)
             {
@@ -44,10 +46,14 @@ namespace Sprint_0.GameStateHandlers
         public void Update(GameTime gameTime)
         {
             link.Update(gameTime);
-            if (!paused && link.AdvanceTime)
+            if (!paused)
             {
-                roomManager.Update(gameTime);
-                headsUpDisplay.Update();
+                if (link.AdvanceTime)
+                {
+                    roomManager.Update(gameTime);
+                    headsUpDisplay.Update();
+                }
+                db.Update();
             }
         }
 
@@ -60,7 +66,8 @@ namespace Sprint_0.GameStateHandlers
                 link.Suspend();
                 game.kc = new PausedKeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PauseMusic();
-            } else
+            }
+            else
             {
                 link.UnSuspend();
                 game.kc = new KeyboardController(game, Keyboard.GetState());
@@ -68,6 +75,10 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
+        public void DialogueNext()
+        {
+            db.Next();
+        }
 
         //----- Helper Methods -----//
 
