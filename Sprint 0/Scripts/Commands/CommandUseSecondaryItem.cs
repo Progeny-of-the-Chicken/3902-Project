@@ -20,7 +20,6 @@ namespace Sprint_0.Scripts.Commands
             if (link.CanDoNewAction)
             {
                 useSecondaryItem();
-                link.UseItem();
             }
         }
 

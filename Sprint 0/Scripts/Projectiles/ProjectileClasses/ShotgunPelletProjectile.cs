@@ -33,16 +33,14 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
             collider = ProjectileColliderFactory.Instance.CreateShotgunPelletCollider(this, direction);
             friendly = true;
-            //TODO:Shotgun sound effect?
             SFXManager.Instance.PlayShotgunBang();
         }
 
         public void Update(GameTime gt)
         {
+            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
             sprite.Update(gt);
             collider.Update(currentPos);
-
-            currentPos += directionVector * (float)(gt.ElapsedGameTime.TotalSeconds * speedPerSecond);
         }
 
         public void Draw(SpriteBatch sb)
@@ -64,7 +62,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         {
 
             Random rand = new Random();
-            float randPrimaryAdjustment = (float)(rand.NextDouble() - ObjectConstants.halfAdjustment);
+            float randPrimaryAdjustment = (float)((rand.NextDouble() - ObjectConstants.halfAdjustment) * ObjectConstants.spray);
             float randSecondaryAdjustment = (float)(rand.NextDouble());
 
             switch (direction)
