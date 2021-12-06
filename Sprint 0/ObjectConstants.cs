@@ -91,6 +91,11 @@ namespace Sprint_0
         public const int linkSwordFromLeftCenter = -3 * scale;
         public const int linkSwordFromDownCenter = 3 * scale;
 
+        // Projectile
+        public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
+        public const int shotgunPelletDamage = 5;
+
+
         // Arrow
         public const double arrowSpeedPerSecond = 100.0 * scale;
         public const int arrowMaxDistance = 100 * scale;
@@ -281,6 +286,8 @@ namespace Sprint_0
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
         public const string blueLinkFile = "BlueLinkSpriteSheet";
+        public const string shotgunFile = "LinkShotGunSpriteSheet";
+        public const string blueLinkShotgunFile = "BlueLinkShotGunSpriteSheet";
         public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
@@ -319,6 +326,8 @@ namespace Sprint_0
         public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
+        public const string ShotgunItemStr = "ShotgunItem";
+        public const string ShotgunShellItemStr = "ShotgunShellItem";
         public const string BlueRingStr = "BlueRing";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
@@ -473,6 +482,7 @@ namespace Sprint_0
         public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
         public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
         public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 shotgunShellCounterLocation = new Vector2(96 * scale, 24 * scale);
         public static Vector2 primaryWeaponLocation = new Vector2(152 * scale, 24 * scale);
         public static Vector2 secondaryWeaponLocation = new Vector2(128 * scale, 24 * scale);
         public static Vector2 DungeonLevelDisplayLocation = new Vector2(16 * scale, 8 * scale);
@@ -569,6 +579,8 @@ namespace Sprint_0
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
+        public const int inventoryStartingShotgunShells = 0;
+        public const int shotgunShellsPerPickUp = 20;
 
         //Sound effects
         public const string soundDirectoryStr = "Sounds/";
@@ -576,13 +588,14 @@ namespace Sprint_0
         public const string bombPlacementStr = soundDirectoryStr + "LOZ_Bomb_Drop";
         public const string bossHitStr = soundDirectoryStr + "LOZ_Boss_Hit";
         public const string bossScream1Str = soundDirectoryStr + "LOZ_Boss_Scream1";
-        public const string bossScream2Str = soundDirectoryStr +"LOZ_Boss_Scream2";
+        public const string bossScream2Str = soundDirectoryStr + "LOZ_Boss_Scream2";
         public const string bossScream3Str = soundDirectoryStr + "LOZ_Boss_Scream3";
         public const string doorUnlockingStr = soundDirectoryStr + "LOZ_Door_Unlock";
         public const string enemyDeathStr = soundDirectoryStr + "LOZ_Enemy_Die";
         public const string enemyHitStr = soundDirectoryStr + "LOZ_Enemy_Hit";
         public const string fanfareStr = soundDirectoryStr + "LOZ_Fanfare";
         public const string fireArrowBoomerangStr = soundDirectoryStr + "LOZ_Arrow_Boomerang";
+        public const string shotgunBangStr = soundDirectoryStr + "Shotgun_Bang";
         public const string fireCandleStr = soundDirectoryStr + "LOZ_Candle";
         public const string fireMagicRodStr = soundDirectoryStr + "LOZ_MagicalRod";
         public const string gameOverStr = soundDirectoryStr + "GameOver";

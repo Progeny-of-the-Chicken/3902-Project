@@ -96,6 +96,12 @@ namespace Sprint_0.Scripts
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
+        public void UseShotgun()
+        {
+            linkState.UseShotgun();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
         public void PickUpItem()
         {
             linkState.PickUpItem();

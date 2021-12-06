@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.ItemSprites;
+using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -108,6 +110,14 @@ namespace Sprint_0.Scripts.Items
             return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.silverArrowItemFrame);
         }
 
+        public ISprite CreateShotgunItemSprite()
+        {
+            return new NonAnimatedItemSprite(LinkSpriteFactory.Instance.GetShotgunSpriteSheet(), SpriteRectangles.shotGunItemFrame);
+        }
+        public ISprite CreateShotgunShellItemSprite()
+        {
+            return new NonAnimatedItemSprite(LinkSpriteFactory.Instance.GetShotgunSpriteSheet(), SpriteRectangles.shotGunShellItemFrame);
+        }
         public ISprite CreateBlueRingSprite()
         {
             return new NonAnimatedItemSprite(spritesheet, SpriteRectangles.blueRingItemFrame);

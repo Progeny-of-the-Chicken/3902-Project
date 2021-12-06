@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.GameState.InventoryState.Display
 {
@@ -143,6 +144,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState.Display
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
                 WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
+                WeaponType.Shotgun => SpriteRectangles.shotGunItemHudFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };

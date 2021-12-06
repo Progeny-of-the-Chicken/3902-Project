@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin BlueLinkShotGunSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BlueLinkShotGunSpriteSheet.png
+
 #begin BlueLinkSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,6 +121,18 @@
 /processorParam:TextureFormat=Color
 /build:InventorySpritesheet.png
 
+#begin LinkShotGunSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LinkShotGunSpriteSheet.png
+
 #begin LinkSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -168,6 +192,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:OverworldTileset.png
+
+#begin Sounds/Shotgun_Bang.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Bang.wav
 
 #begin Sounds/Dungeon Theme.wav
 /importer:WavImporter

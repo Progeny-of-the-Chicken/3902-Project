@@ -103,5 +103,13 @@ namespace Sprint_0.Scripts.Items
         {
             return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.blueRingItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.BlueRing);
         }
+        public IItem CreateShotgunItem(Vector2 location, Vector2 spawnerDimensions)
+        {
+            return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.shotGunItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.ShotgunItem);
+        }
+        public IItem CreateShotgunShellItem(Vector2 location, Vector2 spawnerDimensions)
+        {
+            return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.shotGunShellItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.ShotgunShellItem);
+        }
     }
 }

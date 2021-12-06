@@ -27,6 +27,7 @@ namespace Sprint_0.Scripts.Commands
         private void useSecondaryItem()
         {
             WeaponType type = Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex];
+            bool usingShotgun = false;
             switch (type)
             {
                 case WeaponType.Bow:
@@ -47,7 +48,14 @@ namespace Sprint_0.Scripts.Commands
                 case WeaponType.Potion:
                     UsePotion();
                     break;
+                case WeaponType.Shotgun:
+                    usingShotgun = true;
+                    UseShotgun();
+                    break;
             }
+            //We need this to prevent a link state change if link uses a shotgun but doesn't have any shells left
+            if (!usingShotgun)
+                link.UseItem();
         }
 
         private void UseBow()
@@ -107,6 +115,16 @@ namespace Sprint_0.Scripts.Commands
             Link.Instance.HealBy((int)(Link.Instance.MaxHealth));
             Inventory.Instance.RemoveWeapon(WeaponType.Potion);
             link.UseItem();
+        }
+
+        private void UseShotgun()
+        {
+            if (Inventory.Instance.ShotgunShells > 0)
+            {
+                Inventory.Instance.ShotgunShells--;
+                Link.Instance.UseShotgun();
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
+            }
         }
     }
 }
