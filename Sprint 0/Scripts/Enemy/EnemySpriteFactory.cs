@@ -40,7 +40,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateRightRopeSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.ropeFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.ropeFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateLeftRopeSprite()
         {
@@ -48,7 +48,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateDodongoRightSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.dodongoRightFrames, bossSprites);
+            return new AnimatedEnemySprite(SpriteRectangles.dodongoRightFrames, bossSprites, ObjectConstants.scale);
         }
         public ISprite CreateDodongoLeftSprite()
         {
@@ -88,19 +88,19 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateGelSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.gelFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.gelFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateZolSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateAquamentusMoveSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.aquamentusMoveFrames, bossSprites);
+            return new AnimatedEnemySprite(SpriteRectangles.aquamentusMoveFrames, bossSprites, ObjectConstants.scale);
         }
         public ISprite CreateAquamentusShootSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.aquamentusShootFrames, bossSprites);
+            return new AnimatedEnemySprite(SpriteRectangles.aquamentusShootFrames, bossSprites, ObjectConstants.scale);
         }
         public ISprite CreateKeeseSprite()
         {
@@ -121,7 +121,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateRightGoriyaSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.goriyaRightFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.goriyaRightFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateLeftGoriyaSprite()
         {
@@ -148,7 +148,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateFrontDarknutSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites, ObjectConstants.scale);
         }
 
         public ISprite CreateBackDarknutSprite()
@@ -158,7 +158,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateRightDarknutSprite()
         {
-            return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites);
+            return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.scale);
         }
 
         public ISprite CreateLeftDarknutSprite()
@@ -169,6 +169,16 @@ namespace Sprint_0.Scripts.Enemy
         public ISprite CreateMegaStalfosSprite()
         {
             return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaStalfosScale);
+        }
+
+        public ISprite CreateMegaGelSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.gelFrames, enemySprites, ObjectConstants.MegaGelScale);
+        }
+
+        public ISprite CreateMegaZolSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites, ObjectConstants.MegaZolScale);
         }
     }
 }
