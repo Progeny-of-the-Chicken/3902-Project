@@ -86,9 +86,9 @@ namespace Sprint_0.Scripts.Terrain
             }
             else
             {
-                IRoom newRoom = new Room(roomID, link);
+                IRoom newRoom = new Room(roomID, link, isRandomized);
                 dormentRooms.Add(roomID, newRoom);
-                return new Room(roomID, link);
+                return new Room(roomID, link, isRandomized);
             }
         }
         public IRoom CurrentRoom

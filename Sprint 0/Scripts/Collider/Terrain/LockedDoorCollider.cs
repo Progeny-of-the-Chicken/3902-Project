@@ -56,6 +56,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
                 {
                     if (adjacentRoom.walls[i].GetType() == typeof(WestLockedSprite))
                     {
+                        System.Diagnostics.Debug.WriteLine("Owner is " + owner);
                         System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
                         adjacentRoom.walls[i].SwapDoor();
                     }
@@ -66,6 +67,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
                 {
                     if (adjacentRoom.walls[i].GetType() == typeof(SouthLockedSprite))
                     {
+                        System.Diagnostics.Debug.WriteLine("Owner is " + owner);
                         System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
                         adjacentRoom.walls[i].SwapDoor();
                     }
@@ -76,6 +78,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
                 {
                     if (adjacentRoom.walls[i].GetType() == typeof(EastLockedSprite))
                     {
+                        System.Diagnostics.Debug.WriteLine("Owner is " + owner);
                         System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
                         adjacentRoom.walls[i].SwapDoor();
                     }
@@ -86,6 +89,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
                 {
                     if (adjacentRoom.walls[i].GetType() == typeof(NorthLockedSprite))
                     {
+                        System.Diagnostics.Debug.WriteLine("Owner is " + owner);
                         System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
                         adjacentRoom.walls[i].SwapDoor();
                     }
