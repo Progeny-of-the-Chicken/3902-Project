@@ -300,10 +300,10 @@ public class Room : IRoom
                         itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.ShotgunItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateShotgunItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateShotgunItem(itemLocation, blockDimensions));
                         break;
                     case ObjectConstants.ShotgunShellItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateShotgunShellItem(itemLocation));
+                        itemSet.Add(ItemFactory.Instance.CreateShotgunShellItem(itemLocation, blockDimensions));
                         break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);

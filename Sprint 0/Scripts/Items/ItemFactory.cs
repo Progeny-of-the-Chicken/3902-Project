@@ -103,14 +103,13 @@ namespace Sprint_0.Scripts.Items
         {
             return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.blueRingItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.BlueRing);
         }
-        //TODO: center on spawn
-        public IItem CreateShotgunItem(Vector2 location)
+        public IItem CreateShotgunItem(Vector2 location, Vector2 spawnerDimensions)
         {
-            return new Item(location, ItemType.ShotgunItem);
+            return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.shotGunItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.ShotgunItem);
         }
-        public IItem CreateShotgunShellItem(Vector2 location)
+        public IItem CreateShotgunShellItem(Vector2 location, Vector2 spawnerDimensions)
         {
-            return new Item(location, ItemType.ShotgunShellItem);
+            return new Item(SpawnHelper.Instance.CenterLocationOnSpawner(location, spawnerDimensions, SpriteRectangles.shotGunShellItemFrame.Size.ToVector2() * ObjectConstants.scale), ItemType.ShotgunShellItem);
         }
     }
 }
