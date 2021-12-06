@@ -7,8 +7,10 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
 {
     public class MainMenuDisplay : IDisplay
     {
-        private Dictionary<ISprite, Vector2> itemSprites = new Dictionary<ISprite, Vector2>();
         private ISprite backgroundSprite;
+        private ISprite selectedSettingsSprite;
+        private Vector2 selectedSettingsLocation1;
+        private Vector2 selectedSettingsLocation2;
         private ISprite selectionSprite;
         private Vector2 selectionLocation;
         private int selectionIndex;
@@ -20,6 +22,7 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
         {
             InitializeSelection();
             backgroundSprite = MainMenuSpriteFactory.Instance.CreateBackgroundSprite();
+            selectedSettingsSprite = MainMenuSpriteFactory.Instance.CreateCurrentSettingsSprite();
         }
 
         public void Update(GameTime gt)
@@ -30,24 +33,15 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
 
         public void Draw(SpriteBatch spriteBatch, GameTime gt)
         {
-            backgroundSprite.Draw(spriteBatch, new Vector2(0, 0));
+            backgroundSprite.Draw(spriteBatch, ObjectConstants.zeroVector);
+            selectedSettingsSprite.Draw(spriteBatch, selectedSettingsLocation1);
+            selectedSettingsSprite.Draw(spriteBatch, selectedSettingsLocation2);
             selectionSprite.Draw(spriteBatch, selectionLocation);
-        }
-
-        public void Scroll(Vector2 displacement)
-        {
-            foreach (KeyValuePair<ISprite, Vector2> item in itemSprites)
-            {
-                itemSprites[item.Key] += displacement;
-            }
-            selectionLocation += displacement;
         }
 
         public void MoveSelection(FacingDirection direction)
         {
-            System.Diagnostics.Debug.WriteLine("Selection Index:" + selectionIndex);
             int index = ComputeIndexFromDirection(direction);
-            System.Diagnostics.Debug.WriteLine("Computed Index:" + index);
 
             selectionIndex = index;
             selectionLocation = ObjectConstants.mainMenuSlotLocations[selectionIndex];
@@ -58,14 +52,18 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
             switch (selectionIndex) { 
                 case 0:
                     superhot = true;
+                    selectedSettingsLocation1 = ObjectConstants.mainMenuSettingsLocations[selectionIndex];
                     break;
                 case 1:
+                    selectedSettingsLocation1 = ObjectConstants.mainMenuSettingsLocations[selectionIndex];
                     superhot = false;
                     break;
                 case 2:
+                    selectedSettingsLocation2 = ObjectConstants.mainMenuSettingsLocations[selectionIndex];
                     randomize = true;
                     break;
                 case 3:
+                    selectedSettingsLocation2 = ObjectConstants.mainMenuSettingsLocations[selectionIndex];
                     randomize = false;
                     break;
                 }
@@ -75,6 +73,8 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
         {
             selectionSprite = MainMenuSpriteFactory.Instance.CreateSelectionSprite();
             selectionLocation = backdropLocation + ObjectConstants.mainMenuSlotLocations[0];
+            selectedSettingsLocation1 = ObjectConstants.mainMenuSettingsLocations[1];
+            selectedSettingsLocation2 = ObjectConstants.mainMenuSettingsLocations[3];
         }
 
         //----- Helper method for selection movement -----//

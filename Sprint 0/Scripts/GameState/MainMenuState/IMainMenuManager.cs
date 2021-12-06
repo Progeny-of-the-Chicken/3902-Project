@@ -10,7 +10,5 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
         void Update(GameTime gt);
 
         void Draw(SpriteBatch spriteBatch, GameTime gt);
-
-        void Scroll(Vector2 displacement);
     }
 }

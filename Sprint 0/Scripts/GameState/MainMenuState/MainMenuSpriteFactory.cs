@@ -8,6 +8,7 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
     public class MainMenuSpriteFactory
     {
         private Texture2D texture;
+        private Texture2D texture2;
 
         private static MainMenuSpriteFactory instance = new MainMenuSpriteFactory();
 
@@ -26,6 +27,7 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
         public void LoadAllTextures(ContentManager content)
         {
             texture = content.Load<Texture2D>(ObjectConstants.mainMenuSpritesheetFileName);
+            texture2 = content.Load<Texture2D>(ObjectConstants.inventorySpritesheetFileName);
         }
 
         public ISprite CreateBackgroundSprite()
@@ -34,7 +36,12 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
         }
         public ISprite CreateSelectionSprite()
         {
-            return new SelectionSprite(texture);
+            return new CurrentSelectionSprite(texture2);
+        }
+
+        public ISprite CreateCurrentSettingsSprite()
+        {
+            return new CurrentSettingsSprite(texture2);
         }
     }
 }

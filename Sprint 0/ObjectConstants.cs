@@ -419,12 +419,20 @@ namespace Sprint_0
         public const string mainMenuSpritesheetFileName = "MainMenu";
         public const int halfMainMenuOptionsCount = 2;
         public const int mainMenuOptionsCount = 4;
-        public static List<Vector2> mainMenuSlotLocations = new List<Vector2>
+        public const int settingsStretchAmount = 7;
+        public static List<Vector2> mainMenuSettingsLocations = new List<Vector2>
         {
-            new Vector2(163, 65) * scale,
-            new Vector2(192, 65) * scale,
             new Vector2(163, 79) * scale,
             new Vector2(192, 79) * scale,
+            new Vector2(163, 93) * scale,
+            new Vector2(192, 93) * scale,
+        };
+        public static List<Vector2> mainMenuSlotLocations = new List<Vector2>
+        {
+            new Vector2(163, 72) * scale,
+            new Vector2(188, 72) * scale,
+            new Vector2(163, 86) * scale,
+            new Vector2(188, 86) * scale,
         };
 
         //----- Inventory GUI constant values -----//

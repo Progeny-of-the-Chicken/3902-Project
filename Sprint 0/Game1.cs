@@ -57,8 +57,6 @@ namespace Sprint_0
             //Just for Sprint 3
             mc = new MouseController(this);
 
-            
-            RoomManager.Instance.Init(Link.Instance);
         }
 
         protected override void Initialize()

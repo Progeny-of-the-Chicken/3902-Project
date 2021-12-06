@@ -11,6 +11,7 @@ namespace Sprint_0.Scripts.Commands.MainMenuState
         public void Execute()
         {
             MainMenuManager.Instance.SelectOption();
+            SFXManager.Instance.PlayPickUpRupee();
         }
     }
 }

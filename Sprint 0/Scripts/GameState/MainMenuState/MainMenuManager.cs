@@ -38,12 +38,6 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
             display.Draw(spriteBatch, gt);
         }
 
-        public void Scroll(Vector2 displacement)
-        {
-
-            display.Scroll(displacement);
-        }
-
         public void MoveSelection(FacingDirection direction)
         {
             ((MainMenuDisplay)display).MoveSelection(direction);
@@ -53,5 +47,16 @@ namespace Sprint_0.Scripts.GameState.MainMenuState
         {
             ((MainMenuDisplay)display).SelectOption();
         }
+
+        public bool GetIfSuperhot()
+        {
+            return ((MainMenuDisplay)display).superhot;
+        }
+    
+        public bool GetIfRandomized()
+        {
+            return ((MainMenuDisplay)display).randomize;
+        }
     }
+
 }

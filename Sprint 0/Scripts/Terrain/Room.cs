@@ -38,9 +38,10 @@ public class Room : IRoom
     private bool enemiesFlag;
     private List<String> RoomClear;
     private bool inTransition = false;
+    private bool isRandomized;
     private static DoorRandomizer doorRandomizer;
 
-    public Room(string roomId, ILink link)
+    public Room(string roomId, ILink link, bool isRandomized)
     {
         // Point of reference that is used for the Draw() method. Used to easily translate the room during transitions.
         this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
@@ -68,6 +69,7 @@ public class Room : IRoom
         projectileQueue = new List<IProjectile>();
         effectQueue = new List<IEffect>();
         doorRandomizer = DoorRandomizer.Instance;
+        this.isRandomized = isRandomized;
 
         LoadRoom();
         collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
@@ -79,7 +81,7 @@ public class Room : IRoom
         enemySet.Update(gt);
         itemSet.Update(gt);
         projectileSet.Update(gt);
-
+        
         foreach (ITerrain block in blocks)
         {
             block.Update();
@@ -98,9 +100,11 @@ public class Room : IRoom
 
     public void Draw(SpriteBatch spriteBatch)
     {
-		//This needs to be updated once we have more than dungeon 1
-		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon2RoomSpritesheet();                 // ------------ THIS HAS BEEN CHANGED
-		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
+        //This needs to be updated once we have more than dungeon 1
+        Texture2D texture;
+        if (isRandomized) texture = TerrainSpriteFactory.Instance.GetDungeon2RoomSpritesheet();
+        else texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+        spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
 
         // If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
         if (!inTransition)
@@ -137,7 +141,8 @@ public class Room : IRoom
     {
         spritesheetLocation = new Rectangle(ObjectConstants.roomWidthForScanIn * (int)roomLocation.X + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomHeightForScanIn * (int)roomLocation.Y + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomWidth, ObjectConstants.roomHeight);
 
-        filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon2CsvFiles + roomId + ObjectConstants.cvsExtension;
+        if (isRandomized) filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon2CsvFiles + roomId + ObjectConstants.cvsExtension;
+        else filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon1CsvFiles + roomId + ObjectConstants.cvsExtension;
         TextFieldParser csvReader = new TextFieldParser(filePath);
         csvReader.Delimiters = new string[] { ObjectConstants.separator };
 

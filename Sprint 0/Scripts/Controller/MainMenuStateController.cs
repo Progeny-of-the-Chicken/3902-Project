@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Commands;
 using Sprint_0.Scripts.Commands.MainMenuState;
+using Sprint_0.Scripts.GameState.MainMenuState;
 
 namespace Sprint_0.Scripts.Controller
 {
@@ -52,7 +53,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(Keys.S, new CommandMoveSelectionDown());
 			this.RegisterCommand(Keys.D, new CommandMoveSelectionRight());
 			this.RegisterCommand(Keys.Enter, new CommandSelectOption());
-			this.RegisterCommand(Keys.E, new CommandReturnToGameState(game));
+			this.RegisterCommand(Keys.E, new CommandStartGame(game));
 			this.RegisterCommand(Keys.M, new ToggleMute());
 			this.RegisterCommand(Keys.P, new PauseCommand());
 		}

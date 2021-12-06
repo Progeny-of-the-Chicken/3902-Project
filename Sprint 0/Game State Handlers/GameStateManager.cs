@@ -77,9 +77,14 @@ namespace Sprint_0.GameStateHandlers
             game.kc = new GameOverStateController(game, Keyboard.GetState());
         }
 
+        public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
+        {
+            RoomManager.Instance.Init(Link.Instance, isRandomized);
+            StartGameplay();
+        }
+
         public void StartGameplay()
         {
-            RoomManager.Instance.Init(Link.Instance);
             gameplay = new GameplayStateHandler(link, game);
             this._state = GameState.Gameplay;
             System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
