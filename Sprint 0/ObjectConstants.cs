@@ -247,6 +247,12 @@ namespace Sprint_0
         public const double DarknutMoveTime = DefaultEnemyMoveTime;
         public const float DarknutMoveSpeed = DefaultEnemyMoveSpeed;
         public const int DarknutStartingHealth = 2;
+        //MegaStalfos
+        public const int MegaStalfosDamage = 2;
+        public const double MegaStalfosMoveTime = StalfosMoveTime;
+        public const float MegaStalfosMoveSpeed = StalfosMoveSpeed;
+        public const int MegaStalfosHealth = 6;
+        public const double MegaStalfosScale = 1.5;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
