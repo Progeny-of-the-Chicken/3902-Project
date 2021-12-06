@@ -45,11 +45,19 @@ namespace Sprint_0.Scripts
             {
                 MoveInDirection(dt, linksDirection);
                 movingCounter -= dt;
+                if (!IsMoving)
+                {
+                    RoundPosition();
+                }
             }
             if (IsGettingKnockedBack)
             {
                 MoveInKnockBackDirection(dt);
                 knockbackCounter -= dt;
+                if (!IsGettingKnockedBack)
+                {
+                    RoundPosition();
+                }
             }
             if (IsTakingDamage)
                 damageCounter -= dt;
@@ -65,6 +73,21 @@ namespace Sprint_0.Scripts
                 pickUpItemCounter -= dt;
             if (SwordIsSheathed)
                 swordSheathCounter -= dt;
+        }
+
+        private void RoundPosition()
+        {
+            //Transform position in pixels to position in half-blocks
+            float numHalfBlocksX = (linksPosition.X - ObjectConstants.xOffsetForRoom) * 2 / ObjectConstants.scaledStdWidthHeight;
+            float numHalfBlocksY = (linksPosition.Y - ObjectConstants.yOffsetForRoom) * 2 / ObjectConstants.scaledStdWidthHeight;
+
+            //Round the number of half-blocks
+            numHalfBlocksX = (int) System.Math.Round(numHalfBlocksX);
+            numHalfBlocksY = (int) System.Math.Round(numHalfBlocksY);
+
+            //Tansform position back to pixels
+            linksPosition.X = numHalfBlocksX * ObjectConstants.scaledStdWidthHeight / 2 + ObjectConstants.xOffsetForRoom;
+            linksPosition.Y = numHalfBlocksY * ObjectConstants.scaledStdWidthHeight / 2 + ObjectConstants.yOffsetForRoom;
         }
 
         private void ResetCountersCausedByPlayer()
