@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Sprite.ProjectileSprites;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Projectiles
 {
@@ -31,6 +32,11 @@ namespace Sprint_0.Scripts.Projectiles
         public ISprite CreateArrowSprite(FacingDirection direction, bool silver)
         {
             return new ArrowSprite(spritesheet, direction, silver);
+        }
+
+        public ISprite CreateShotgunPelletSprite(FacingDirection direction)
+        {
+            return new ShotgunPelletSprite(LinkSpriteFactory.Instance.GetShotgunSpriteSheet(), direction);
         }
 
         public ISprite CreateBoomerangSprite(bool magical)

@@ -33,6 +33,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnLinkCollision(Link link)
         {
             link.StopMoving();
+            link.ResetPosition(ObjectConstants.sideOnRoomSpawnPosition);
             RoomManager.Instance.SwitchToRoom(ObjectConstants.secretRoom);
             SFXManager.Instance.PlayStairs();
         }

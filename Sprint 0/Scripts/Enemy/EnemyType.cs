@@ -14,6 +14,8 @@
         Dodongo,
         OldMan,
         Merchant,
+        Bubble,
+        Darknut,
         Patra,
         PatraMinion
     }

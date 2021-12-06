@@ -23,6 +23,11 @@ namespace Sprint_0.Scripts.Collider.Projectile
             return new RotatedProjectileCollider(projectile, direction);
         }
 
+        public IProjectileCollider CreateShotgunPelletCollider(IProjectile projectile, FacingDirection direction)
+        {
+            return new RotatedProjectileCollider(projectile, direction);
+        }
+
         public IProjectileCollider CreateBoomerangCollider(IProjectile projectile)
         {
             return new BoomerangProjectileCollider(projectile);

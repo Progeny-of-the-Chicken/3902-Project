@@ -17,12 +17,14 @@ namespace Sprint_0.Scripts.Commands
 
         public void Execute()
         {
-            RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateSwordAttackHitbox(link.Position, link.FacingDirection));
-            if (link.Health == link.MaxHealth)
-            {
-                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateSwordBeam(link.Position, link.FacingDirection));
+            if (link.CanDoNewAction && !link.SwordIsSheathed) {
+                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateSwordAttackHitbox(link.Position, link.FacingDirection));
+                if (link.Health == link.MaxHealth)
+                {
+                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateSwordBeam(link.Position, link.FacingDirection));
+                }
+                link.UseSword();
             }
-            link.UseSword();
         }
     }
 }

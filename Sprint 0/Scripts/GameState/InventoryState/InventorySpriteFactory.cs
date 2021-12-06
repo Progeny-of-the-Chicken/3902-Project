@@ -119,7 +119,7 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         public ISprite CreateTreasureRoomMapMarkerSprite()
         {
             return new TreasureRoomMapMarkerSprite(texture);
-		}
+        }
 
         public ISprite CreateDiscoveredRoomSprite(Rectangle sourceRec)
         {

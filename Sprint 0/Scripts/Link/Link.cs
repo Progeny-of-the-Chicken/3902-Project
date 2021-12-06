@@ -96,10 +96,21 @@ namespace Sprint_0.Scripts
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
         }
 
+        public void UseShotgun()
+        {
+            linkState.UseShotgun();
+            LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
         public void PickUpItem()
         {
             linkState.PickUpItem();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
+        }
+
+        public void SheathSword()
+        {
+            linkState.SheathSword();
         }
 
         public void HealBy(int health)
@@ -137,7 +148,10 @@ namespace Sprint_0.Scripts
 
         public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
 
+        public bool CanDoNewAction { get => linkState.CanDoNewThing(); }
         public bool BoomerangReady { get; set; }
+
+        public bool SwordIsSheathed { get => linkState.SwordIsSheathed; }
     }
 
 }

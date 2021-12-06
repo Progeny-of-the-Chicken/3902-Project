@@ -96,9 +96,9 @@ public class Room : IRoom
 
     public void Draw(SpriteBatch spriteBatch)
     {
-		//This needs to be updated once we have more than dungeon 1
-		Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
-		spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
+        //This needs to be updated once we have more than dungeon 1
+        Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+        spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
 
         // If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
         if (!inTransition)
@@ -219,6 +219,12 @@ public class Room : IRoom
                     case ObjectConstants.ZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
                         break;
+                    case ObjectConstants.BubbleStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
+                        break;
+                    case ObjectConstants.DarknutStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
+                        break;
                     case ObjectConstants.PatraStr:
                         enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
                         break;
@@ -301,6 +307,12 @@ public class Room : IRoom
                         break;
                     case ObjectConstants.BlueRingStr:
                         itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
+                        break;
+                    case ObjectConstants.ShotgunItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateShotgunItem(itemLocation, blockDimensions));
+                        break;
+                    case ObjectConstants.ShotgunShellItemStr:
+                        itemSet.Add(ItemFactory.Instance.CreateShotgunShellItem(itemLocation, blockDimensions));
                         break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
@@ -424,6 +436,9 @@ public class Room : IRoom
                     break;
                 case ObjectConstants.StairSpriteStr:
                     blocks.Add(new StairSprite(specialLocation));
+                    break;
+                case ObjectConstants.InvisibleExitStr:
+                    blocks.Add(new InvisibleExit(specialLocation));
                     break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:

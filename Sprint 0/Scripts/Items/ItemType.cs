@@ -18,6 +18,8 @@
         TriforcePiece,
         BasicArrowItem,
         SilverArrowItem,
+        ShotgunItem,
+        ShotgunShellItem,
         BlueRing
     }
 }

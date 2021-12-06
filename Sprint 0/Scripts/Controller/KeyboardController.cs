@@ -41,6 +41,8 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(controllerMappings, Keys.Q, new CommandQuit(game));
 			this.RegisterCommand(controllerMappings, Keys.E, new CommandEnterInventory(game));
 			this.RegisterCommand(controllerMappings, Keys.P, new PauseCommand());
+			this.RegisterCommand(controllerMappings, Keys.M, new ToggleMute());
+			this.RegisterCommand(controllerMappings, Keys.Enter, new DialogueNextCommand());
 
 			this.RegisterCommand(linkControllerMappings, Keys.W, new LinkChangeDirectionUp(Link.Instance));
 			this.RegisterCommand(linkControllerMappings, Keys.A, new LinkChangeDirectionLeft(Link.Instance));
@@ -48,7 +50,6 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(linkControllerMappings, Keys.D, new LinkChangeDirectionRight(Link.Instance));
 			this.RegisterCommand(linkControllerMappings, Keys.N, new LinkUseSword(Link.Instance, game));
 			this.RegisterCommand(linkControllerMappings, Keys.B, new CommandUseSecondaryItem(game));
-			this.RegisterCommand(controllerMappings, Keys.M, new ToggleMute());
 		}
 
 		//Update checks for keys pressed and calls the respective command

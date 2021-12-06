@@ -39,7 +39,11 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            if (enemy.CanBeAffectedByPlayer)
+            if (enemy is Darknut && enemy.CanBeAffectedByPlayer)
+            {
+                ((Darknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            }
+            else if (enemy.CanBeAffectedByPlayer)
             {
                 enemy.TakeDamage(Owner.Damage);
                 enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
@@ -58,6 +62,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
             else if (Owner is SwordAttackHitbox)
             {
                 frame = ObjectConstants.swordAttackHitBoxSize;
+            }
+            else if (Owner is ShotgunPelletProjectile)
+            {
+                frame = SpriteRectangles.shotgunPelletProjectileFrame;
             }
             else
             {
