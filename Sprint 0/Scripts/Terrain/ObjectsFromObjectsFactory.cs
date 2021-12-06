@@ -81,6 +81,13 @@ namespace Sprint_0.Scripts.Terrain
             room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
         }
 
+        public IEnemy CreateStalfosFromMegaStalfos(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateStalfos(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
         // Items
 
         public void CreateItemDrop(Vector2 location, Vector2 spawnerDimensions, ItemType itemType)

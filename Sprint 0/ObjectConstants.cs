@@ -252,7 +252,8 @@ namespace Sprint_0
         public const double MegaStalfosMoveTime = StalfosMoveTime;
         public const float MegaStalfosMoveSpeed = StalfosMoveSpeed;
         public const int MegaStalfosHealth = 6;
-        public const double MegaStalfosScale = 1.5;
+        public const double MegaStalfosScale = scale * 1.5;
+        public const double MegaStalfosKnockbackTime = DefaultEnemyKnockbackTime / 2;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -314,6 +315,7 @@ namespace Sprint_0
         public const string ZolStr = "Zol";
         public const string BubbleStr = "Bubble";
         public const string DarknutStr = "Darknut";
+        public const string MegaStalfosStr = "MegaStalfos";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";

@@ -168,7 +168,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateMegaStalfosSprite()
         {
-            return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaStalfosScale)
+            return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaStalfosScale);
         }
     }
 }

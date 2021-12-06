@@ -28,17 +28,17 @@ namespace Sprint_0.Scripts.Sets
 
         public void Update(GameTime gameTime)
         {
-            foreach(IEnemy enemy in toBeAdded)
-            {
-                enemies.Add(enemy);
-            }
-            foreach(IEnemy enemy in enemies)
+            foreach (IEnemy enemy in enemies)
             {
                 enemy.Update(gameTime);
                 if (enemy.CheckDelete())
                 {
                     toBeRemoved.Add(enemy);
                 }
+            }
+            foreach (IEnemy enemy in toBeAdded)
+            {
+                enemies.Add(enemy);
             }
             foreach (IEnemy enemy in toBeRemoved)
             {

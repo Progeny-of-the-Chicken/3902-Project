@@ -15,6 +15,7 @@
         OldMan,
         Merchant,
         Bubble,
-        Darknut
+        Darknut,
+        MegaStalfos
     }
 }

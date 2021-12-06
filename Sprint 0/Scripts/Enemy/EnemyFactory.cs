@@ -80,5 +80,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Darknut(location);
         }
+		public IEnemy CreateMegaStalfos(Vector2 location)
+        {
+			return new MegaStalfos(location);
+        }
 	}
 }
