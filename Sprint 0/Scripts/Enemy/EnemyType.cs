@@ -13,6 +13,8 @@
         Rope,
         Dodongo,
         OldMan,
-        Merchant
+        Merchant,
+        Bubble,
+        Darknut
     }
 }

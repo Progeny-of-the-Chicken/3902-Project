@@ -8,18 +8,20 @@ namespace Sprint_0.Scripts.Sprites.EnemySprites
     {
         private Texture2D sprite;
         private Rectangle sourceRectangle;
+        private float framesPerSecond;
         SpriteEffects effect = SpriteEffects.None;
 
         private float timeSinceFrame = ObjectConstants.counterInitialVal_float;
-        public FlippingSprite(Rectangle rectangle, Texture2D spriteSheet)
+        public FlippingSprite(Rectangle rectangle, Texture2D spriteSheet, float framesPerSecond)
         {
             sourceRectangle = rectangle;
             sprite = spriteSheet;
+            this.framesPerSecond = framesPerSecond;
         }
         public void Update(GameTime gt)
         {
             timeSinceFrame += (float)gt.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFrame >= ObjectConstants.oneSecond_double / ObjectConstants.DefaultEnemyFramesPerSecond)
+            if (timeSinceFrame >= ObjectConstants.oneSecond_double / framesPerSecond)
             {
                 //Will alternate between normal and flipped sprite
                 if (effect == SpriteEffects.None)

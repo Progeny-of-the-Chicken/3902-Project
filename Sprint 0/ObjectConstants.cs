@@ -67,6 +67,7 @@ namespace Sprint_0
         public const float linkTakeDamageTime = 1;
         public const float linkUseItemTime = 0.5f;
         public const float linkPickUpItemTime = 1f;
+        public const float linkSwordSheathTime = 5f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
         public const int linkStartingHealth = 12;
@@ -230,6 +231,18 @@ namespace Sprint_0
         public const float WallMasterTimeToMoveAgain = 1;
         public const float WallMasterMoveSpeed = DefaultEnemyMoveSpeed;
 
+        //Bubble
+        public const int BubbleDamage = 1;
+        public const double BubbleMoveTime = DefaultEnemyMoveTime / 2.0f;
+        public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 2.0f;
+        public const int BubblePlaceholderHealth = 5;
+        public const float BubbleFramesPerSecond = 16;
+        //Darknut
+        public const int DarknutDamage = 2;
+        public const double DarknutMoveTime = DefaultEnemyMoveTime;
+        public const float DarknutMoveSpeed = DefaultEnemyMoveSpeed;
+        public const int DarknutStartingHealth = 2;
+
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
         public const int firstFrame = 0;
@@ -286,6 +299,8 @@ namespace Sprint_0
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
+        public const string BubbleStr = "Bubble";
+        public const string DarknutStr = "Darknut";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -494,7 +509,7 @@ namespace Sprint_0
         public const double groupDDropRate = 0.41;
         public const double groupXDropRate = 0;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
-        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
         public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
         public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };

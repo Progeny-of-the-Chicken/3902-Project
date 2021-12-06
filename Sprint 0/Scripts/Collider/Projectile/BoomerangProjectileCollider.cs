@@ -40,7 +40,11 @@ namespace Sprint_0.Scripts.Collider.Projectile
         {
             if (Owner.Friendly)
             {
-                if (enemy.CanBeAffectedByPlayer)
+                if (enemy is Darknut && enemy.CanBeAffectedByPlayer)
+                {
+                    ((Darknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                }
+                else if (enemy.CanBeAffectedByPlayer)
                 {
                     enemy.TakeDamage(Owner.Damage);
                     enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
