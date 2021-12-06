@@ -44,6 +44,9 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Keese:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
+                case EnemyType.MegaKeese:
+                    invoker.AddCommand(new CommandTrackLink(stateMachine));
+                    break;
             }
             // Abilities
             switch (type)

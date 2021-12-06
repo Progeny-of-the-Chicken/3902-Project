@@ -276,7 +276,7 @@ namespace Sprint_0
         //MegaKeese
         public const int MegaKeeseDamage = 2;
         public const double MegaKeeseMoveTime = KeeseMoveTime;
-        public const float MegaKeeseMoveSpeed = KeeseMoveSpeed;
+        public const float MegaKeeseMoveSpeed = KeeseMoveSpeed * 1.5f;
         public const int MegaKeeseHealth = 4;
         public const double MegaKeeseScale = MegaEnemiesScale;
         public const double MegaKeeseKnockbackTime = MegaEnemiesKnockbackTime;

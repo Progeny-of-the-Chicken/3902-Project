@@ -234,6 +234,9 @@ public class Room : IRoom
                     case ObjectConstants.MegaZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateMegaZol(enemyLocation));
                         break;
+                    case ObjectConstants.MegaKeeseStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaKeese(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;

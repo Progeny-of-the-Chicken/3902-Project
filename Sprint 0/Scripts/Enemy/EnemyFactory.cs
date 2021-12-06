@@ -92,5 +92,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new MegaZol(location);
         }
+		public IEnemy CreateMegaKeese(Vector2 location)
+        {
+			return new MegaKeese(location);
+        }
 	}
 }

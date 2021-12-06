@@ -39,6 +39,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.MegaStalfos => CreateMegaStalfosMovementStrategy(directionVector),
                 EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector),
                 EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
+                EnemyType.MegaKeese => CreateTrackLinkStrategy(),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -57,6 +58,12 @@ namespace Sprint_0.Scripts.Movement
         {
             // If multiple enemies could chase, this can be turned into a switch case with an EnemyType enum parameter
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        public IMovementStrategy CreateTrackLinkStrategy()
+        {
+            // Can be flexible with enums if more enemies use track link strategy
+            return new TrackLinkStrategy(ObjectConstants.MegaKeeseMoveSpeed, new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)));
         }
 
         //----- Enemy disambiguation strategies creator methods -----//
