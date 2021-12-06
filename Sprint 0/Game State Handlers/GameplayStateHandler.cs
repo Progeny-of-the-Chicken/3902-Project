@@ -18,6 +18,7 @@ namespace Sprint_0.GameStateHandlers
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Link link;
         private Game1 game;
+        private DialogueBox db = new DialogueBox();
 
         public GameplayStateHandler(Link link, Game1 game)
         {
@@ -33,6 +34,7 @@ namespace Sprint_0.GameStateHandlers
         {
             roomManager.Draw(sb);
             headsUpDisplay.Draw(sb);
+            db.Draw(sb);
 
             if (paused)
             {
@@ -46,6 +48,7 @@ namespace Sprint_0.GameStateHandlers
             {
                 roomManager.Update(gameTime);
                 headsUpDisplay.Update();
+                db.Update();
             }
         }
 
@@ -64,6 +67,11 @@ namespace Sprint_0.GameStateHandlers
                 game.kc = new KeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PlayMusic();
             }
+        }
+
+        public void DialogueNext()
+        {
+            db.Next();
         }
 
 

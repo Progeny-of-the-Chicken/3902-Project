@@ -13,6 +13,15 @@
         Rope,
         Dodongo,
         OldMan,
-        Merchant
+        Merchant,
+        Bubble,
+        Darknut,
+        Patra,
+        PatraMinion,
+        MegaStalfos,
+        MegaGel,
+        MegaZol,
+        MegaKeese,
+        MegaDarknut
     }
 }

@@ -10,10 +10,12 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
 
         float timeSinceFrame = ObjectConstants.counterInitialVal_float;
         int currentFrame = ObjectConstants.firstFrame;
-        public AnimatedEnemySprite(Rectangle[] frames, Texture2D spriteSheet)
+        private double scale;
+        public AnimatedEnemySprite(Rectangle[] frames, Texture2D spriteSheet, double scale)
         {
             this.frames = frames;
             sprite = spriteSheet;
+            this.scale = scale;
         }
         public void Update(GameTime gt)
         {
@@ -26,7 +28,7 @@ namespace Sprint_0.Scripts.Sprite.EnemySprites
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (frames[currentFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
+            Rectangle destinationRectangle = new Rectangle(location.ToPoint(), (new Vector2((int)(frames[ObjectConstants.firstFrame].Size.ToVector2().X * scale), (int)(frames[ObjectConstants.firstFrame].Size.ToVector2().Y * scale))).ToPoint());
             spriteBatch.Draw(sprite, destinationRectangle, frames[currentFrame], Color.White);
         }
     }

@@ -10,11 +10,13 @@ namespace Sprint_0.Scripts.GameState
     {
         ISprite background;
         ISprite[] gameOverLetters = new ISprite[gameOverMessage.Length];
-        ISprite[] playAgainLetters = new ISprite[playAgainMessage.Length];
+        ISprite[] playAgainLetters1 = new ISprite[playAgainMessage1.Length];
+        ISprite[] playAgainLetters2 = new ISprite[playAgainMessage2.Length];
         ISprite[] quitLetters = new ISprite[quitMessage.Length];
 
         private static string gameOverMessage = "gameover";
-        private static string playAgainMessage = "press enter to play again";
+        private static string playAgainMessage1 = "press enter to";
+        private static string playAgainMessage2 = "play again";
         private static string quitMessage = "press q to quit";
 
         public GameOverScreen()
@@ -43,8 +45,7 @@ namespace Sprint_0.Scripts.GameState
             int xRef = 10;
             int yRef = 50;
             int lineSpace = 24;
-            int letterSpacing = 2;
-            int xStep = ObjectConstants.standardWidthHeight * ObjectConstants.scale + letterSpacing;
+            int xStep = ObjectConstants.standardWidthHeight * 2;
 
             for (int i = 0; i < gameOverMessage.Length; i++)
             {
@@ -52,15 +53,21 @@ namespace Sprint_0.Scripts.GameState
                 gameOverLetters[i].Draw(sb, drawLocation);
             }
 
-            for (int i = 0; i < playAgainMessage.Length; i++)
+            for (int i = 0; i < playAgainMessage1.Length; i++)
             {
-                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + lineSpace);
-                //playAgainLetters[i].Draw(sb, drawLocation);
+                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + 2 * lineSpace);
+                playAgainLetters1[i].Draw(sb, drawLocation);
+            }
+
+            for (int i = 0; i < playAgainMessage2.Length; i++)
+            {
+                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + 3 * lineSpace);
+                playAgainLetters2[i].Draw(sb, drawLocation);
             }
 
             for (int i = 0; i < quitMessage.Length; i++)
             {
-                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + 2 * lineSpace);
+                Vector2 drawLocation = new Vector2(xRef + xStep * i, yRef + 5 * lineSpace);
                 quitLetters[i].Draw(sb, drawLocation);
             }
         }
@@ -75,9 +82,14 @@ namespace Sprint_0.Scripts.GameState
 
         private void initializePlayAgainLettersLetterSprites()
         {
-            for (int i = 0; i < gameOverMessage.Length; i++)
+            for (int i = 0; i < playAgainMessage1.Length; i++)
             {
-                playAgainLetters[i] = FontSpriteFactory.Instance.CreateLetterSprite(playAgainMessage[i]);
+                playAgainLetters1[i] = FontSpriteFactory.Instance.CreateLetterSprite(playAgainMessage1[i]);
+            }
+
+            for (int i = 0; i < playAgainMessage2.Length; i++)
+            {
+                playAgainLetters2[i] = FontSpriteFactory.Instance.CreateLetterSprite(playAgainMessage2[i]);
             }
         }
 

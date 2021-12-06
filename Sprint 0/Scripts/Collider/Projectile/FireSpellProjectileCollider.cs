@@ -35,9 +35,17 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            // No knockback
-            if (enemy.CanBeAffectedByPlayer)
+            if (enemy is Darknut && enemy.CanBeAffectedByPlayer)
             {
+                ((Darknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            }
+            else if (enemy is MegaDarknut && enemy.CanBeAffectedByPlayer)
+            {
+                ((MegaDarknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            }
+            else if (enemy.CanBeAffectedByPlayer)
+            {
+                // No knockback
                 enemy.TakeDamage(Owner.Damage);
             }
         }

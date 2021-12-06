@@ -29,6 +29,25 @@ namespace Sprint_0
             new Rectangle(35, 47, 16, 29),
             new Rectangle(53, 47, 16, 18) };
 
+        public static Rectangle[] linkShotgunFramesRight = {
+            new Rectangle(1, 38, 16, 15),
+            new Rectangle(18, 38, 21, 15),
+            new Rectangle(46, 38, 22, 15),
+            new Rectangle(70, 37, 15, 16)
+         };
+        public static Rectangle[] linkShotgunFramesDown = {
+            new Rectangle(1, 7, 16, 16),
+            new Rectangle(18, 7, 16, 23),
+            new Rectangle(35, 7, 16, 23),
+            new Rectangle(53, 7, 13, 15)
+        };
+        public static Rectangle[] linkShotgunFramesUp = {
+            new Rectangle(1, 65, 16, 20),
+            new Rectangle(18, 58, 16, 27),
+            new Rectangle(37, 57, 12, 28),
+            new Rectangle(54, 65, 12, 20)
+        };
+
         public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 12, 16),
             new Rectangle(231, 11, 16, 16),
             new Rectangle(214, 11, 12, 16),
@@ -42,6 +61,11 @@ namespace Sprint_0
             new Rectangle(0, 0, 7, 8),
             new Rectangle(0, 8, 7, 8)
         };
+
+        public static Rectangle shotGunItemFrame = new Rectangle(70, 60, 15, 12);
+        public static Rectangle shotGunItemHudFrame = new Rectangle(725, 136, 8, 18);
+        public static Rectangle shotGunShellItemFrame = new Rectangle(74, 74, 3, 7);
+
         public static Rectangle heartContainerFrame = new Rectangle(25, 1, 13, 13);
         public static List<Rectangle> fairyFrames = new List<Rectangle>
         {
@@ -73,6 +97,7 @@ namespace Sprint_0
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
+        public static Rectangle shotgunPelletProjectileFrame = new Rectangle(71, 7, 16, 15);
         public static Rectangle silverArrowFrame = new Rectangle(36, 190, 16, 5);
         public static Rectangle bombFrame = new Rectangle(145, 185, 16, 16);
         public static List<Rectangle> basicBoomerangFrames = new List<Rectangle>
@@ -135,6 +160,16 @@ namespace Sprint_0
         public static Rectangle wallMasterCloseFrame = new Rectangle(410, 11, 14, 16);
         //Zol
         public static Rectangle[] zolFrames = { new Rectangle(78, 11, 14, 16), new Rectangle(95, 11, 14, 16) };
+        //Bubble
+        public static Rectangle bubbleFrame = new Rectangle(355, 11, 16, 16);
+        //Darknut
+        public static Rectangle[] darknutFrontFrames = { new Rectangle(1, 90, 16, 16), new Rectangle(18, 90, 16, 16) };
+        public static Rectangle darknutBackFrame = new Rectangle(35, 90, 16, 16);
+        public static Rectangle[] darknutRightFrames = { new Rectangle(52, 90, 16, 16), new Rectangle(69, 90, 16, 16) };
+        //Patra
+        public static Rectangle patraFrame = new Rectangle(1, 157, 16, 11);
+        //PatraMinion
+        public static Rectangle[] patraMinionFrames = { new Rectangle(18, 158, 8, 8), new Rectangle(27, 158, 8, 8) };
 
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);
@@ -276,10 +311,10 @@ namespace Sprint_0
         public static Rectangle fontTFrame = new Rectangle(544, 40, 8, 8);
         public static Rectangle fontUFrame = new Rectangle(560, 40, 8, 8);
         public static Rectangle fontVFrame = new Rectangle(576, 40, 8, 8);
-        public static Rectangle fontWFrame = new Rectangle(336, 64, 8, 8);
-        public static Rectangle fontXFrame = new Rectangle(352, 64, 8, 8);
-        public static Rectangle fontYFrame = new Rectangle(368, 64, 8, 8);
-        public static Rectangle fontZFrame = new Rectangle(384, 64, 8, 8);
+        public static Rectangle fontWFrame = new Rectangle(336, 56, 8, 8);
+        public static Rectangle fontXFrame = new Rectangle(352, 56, 8, 8);
+        public static Rectangle fontYFrame = new Rectangle(368, 56, 8, 8);
+        public static Rectangle fontZFrame = new Rectangle(384, 56, 8, 8);
         public static Rectangle fontSpaceFrame = new Rectangle(337, 69, 8, 8);
     }
 }

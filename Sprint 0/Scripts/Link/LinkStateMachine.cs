@@ -11,9 +11,11 @@ namespace Sprint_0.Scripts
         private double usingItemCounter;
         private double movingCounter;
         private double swordCounter;
+        private double shotgunCounter;
         private double turningCounter;
         private double knockbackCounter;
         private double pickUpItemCounter;
+        private double swordSheathCounter;
         private Vector2 knockbackVector;
         private Vector2 linksPosition;
         public double linkHealth;
@@ -55,10 +57,14 @@ namespace Sprint_0.Scripts
                 usingItemCounter -= dt;
             if (SwordIsBeingUsed)
                 swordCounter -= dt;
+            if (ShotgunIsBeingUsed)
+                shotgunCounter -= dt;
             if (IsTurning)
                 turningCounter -= dt;
             if (IsPickingUpItem)
                 pickUpItemCounter -= dt;
+            if (SwordIsSheathed)
+                swordSheathCounter -= dt;
         }
 
         private void ResetCountersCausedByPlayer()
@@ -67,6 +73,7 @@ namespace Sprint_0.Scripts
             movingCounter = ObjectConstants.counterInitialVal_double;
             turningCounter = ObjectConstants.counterInitialVal_double;
             swordCounter = ObjectConstants.counterInitialVal_double;
+            shotgunCounter = ObjectConstants.counterInitialVal_double;
             pickUpItemCounter = ObjectConstants.counterInitialVal_double;
         }
 
@@ -74,6 +81,7 @@ namespace Sprint_0.Scripts
         {
             damageCounter = ObjectConstants.counterInitialVal_double;
             knockbackCounter = ObjectConstants.counterInitialVal_double;
+            swordSheathCounter = ObjectConstants.counterInitialVal_double;
         }
 
         public void GoInDirection(FacingDirection direction)
@@ -147,7 +155,7 @@ namespace Sprint_0.Scripts
                     SFXManager.Instance.PlayLinkDeath();
                 }
 
-                if(linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
+                if (linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
                 {
                     SFXManager.Instance.PlayLowHealth();
                 }
@@ -185,10 +193,21 @@ namespace Sprint_0.Scripts
                 usingItemCounter = ObjectConstants.linkUseItemTime;
         }
 
+        public void UseShotgun()
+        {
+            if (CanDoNewThing())
+                shotgunCounter = ObjectConstants.linkUseItemTime;
+        }
+
         public void PickUpItem()
         {
             ResetCountersCausedByPlayer();
             pickUpItemCounter = ObjectConstants.linkPickUpItemTime;
+        }
+
+        public void SheathSword()
+        {
+            swordSheathCounter = ObjectConstants.linkSwordSheathTime;
         }
 
         public void Suspend()
@@ -203,12 +222,12 @@ namespace Sprint_0.Scripts
 
         public bool DoingSomething()
         {
-            return IsUsingItem || IsTakingDamage || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || IsPickingUpItem;
+            return IsUsingItem || IsTakingDamage || IsMoving || SwordIsBeingUsed || ShotgunIsBeingUsed || IsGettingKnockedBack || IsTurning || IsPickingUpItem;
         }
 
         public bool CanDoNewThing()
         {
-            return !(IsUsingItem || IsMoving || SwordIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
+            return !(IsUsingItem || IsMoving || SwordIsBeingUsed || ShotgunIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
         }
 
         public void HealBy(int health)
@@ -229,11 +248,14 @@ namespace Sprint_0.Scripts
         public bool IsTakingDamage { get => damageCounter > ObjectConstants.zero_double; }
 
         public bool SwordIsBeingUsed { get => swordCounter > ObjectConstants.zero_double; }
+        public bool ShotgunIsBeingUsed { get => shotgunCounter > ObjectConstants.zero_double; }
 
         public bool IsUsingItem { get => usingItemCounter > ObjectConstants.zero_double; }
         public bool IsPickingUpItem { get => pickUpItemCounter > ObjectConstants.zero_double; }
 
         public bool IsTurning { get => turningCounter > ObjectConstants.zero_double; }
+
+        public bool SwordIsSheathed { get => swordSheathCounter > ObjectConstants.zero_double; }
 
         public bool IsAlive { get => linkHealth > ObjectConstants.zero_int || damageCounter > ObjectConstants.zero_int; }
 

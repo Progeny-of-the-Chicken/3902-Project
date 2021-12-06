@@ -127,6 +127,24 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
+        public void DialogueNext()
+        {
+            switch (_state)
+            {
+                case GameState.Gameplay:
+                    gameplay.DialogueNext();
+                    break;
+                case GameState.Menu:
+                    break;
+                case GameState.Inventory:
+                    break;
+                case GameState.RoomSwap:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void OpenMenu()
         {
             this._state = GameState.Menu;

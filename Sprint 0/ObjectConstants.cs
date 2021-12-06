@@ -26,13 +26,13 @@ namespace Sprint_0
         public const double zero_double = 0;
         public const int PreferredBackBufferWidth = 256;
         public const int PreferredBackBufferHeight = 232;
+        public static Rectangle nullRectangle = new Rectangle(0, 0, 0, 0);
 
 
         //----- Game state constants -----//
         public static char[] pausedLetters = { 'p', 'a', 'u', 's', 'e', 'd' };
         public const int pauseDisplayStartingPointX = 232;
         public const int pauseDisplayStartingPointY = 400;
-        public const int letterSpacing = 8;
         public const int bombsFromDrop = 4;
 
 
@@ -67,6 +67,7 @@ namespace Sprint_0
         public const float linkTakeDamageTime = 1;
         public const float linkUseItemTime = 0.5f;
         public const float linkPickUpItemTime = 1f;
+        public const float linkSwordSheathTime = 5f;
         public const float linkFrameChangeFreq = 0.05f;
         public const float linkItemPickUpFrameChangeFreq = 0.2f;
         public const int linkStartingHealth = 12;
@@ -89,6 +90,11 @@ namespace Sprint_0
         public const int linkSwordFromUpCenter = -4 * scale;
         public const int linkSwordFromLeftCenter = -3 * scale;
         public const int linkSwordFromDownCenter = 3 * scale;
+
+        // Projectile
+        public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
+        public const int shotgunPelletDamage = 5;
+
 
         // Arrow
         public const double arrowSpeedPerSecond = 100.0 * scale;
@@ -162,6 +168,9 @@ namespace Sprint_0
         public const double DefaultEnemyMoveTime = 1.0;
         public const float DefaultEnemyPauseTime = 1.0f;
         public const float DefaultEnemyDamagedTime = 0.5f;
+        public const int DefaultEnemyAbilityChanceWeight = 1;
+        public const double MegaEnemiesScale = scale * 1.5;
+        public const double MegaEnemiesKnockbackTime = DefaultEnemyKnockbackTime / 2;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -189,6 +198,7 @@ namespace Sprint_0
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
+        public const int GoriyaThrowBoomerangChanceWeight = 2;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
@@ -230,8 +240,77 @@ namespace Sprint_0
         public const float WallMasterTimeToMoveAgain = 1;
         public const float WallMasterMoveSpeed = DefaultEnemyMoveSpeed;
 
+        //Bubble
+        public const int BubbleDamage = 1;
+        public const double BubbleMoveTime = DefaultEnemyMoveTime / 2.0f;
+        public const float BubbleMoveSpeed = DefaultEnemyMoveSpeed * 2.0f;
+        public const int BubblePlaceholderHealth = 5;
+        public const float BubbleFramesPerSecond = 16;
+        //Darknut
+        public const int DarknutDamage = 2;
+        public const double DarknutMoveTime = DefaultEnemyMoveTime;
+        public const float DarknutMoveSpeed = DefaultEnemyMoveSpeed;
+        public const int DarknutStartingHealth = 2;
+        //Patra
+        public const int PatraDamage = 2;
+        public const double PatraMoveTime = DefaultEnemyMoveTime;
+        public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
+        public const int PatraStartingHealth = 6;
+        public const int PatraStartingMinionCount = 8;
+        public const int PatraToggleOrbitChanceWeight = 6;
+        public static Vector2 PatraWidthHeight = new Vector2(16, 11) * scale;
+        //PatraMinion
+        public const int PatraMinionDamage = 1;
+        public const int PatraMinionStartingHealth = 2;
+        public const int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
+        public const int PatraMinionExtendedOrbitRadius = (int)(standardWidthHeight * scale * -5.0);
+        public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
+        public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
+        public const double PatraMinionEllipseRadiusRatio = 0.5;
+        public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
+        //MegaStalfos
+        public const int MegaStalfosDamage = 2;
+        public const double MegaStalfosMoveTime = StalfosMoveTime;
+        public const float MegaStalfosMoveSpeed = StalfosMoveSpeed;
+        public const int MegaStalfosHealth = 6;
+        public const double MegaStalfosScale = MegaEnemiesScale;
+        public const double MegaStalfosKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaGel
+        public const int MegaGelDamage = 2;
+        public const double MegaGelMoveTime = GelMoveTime;
+        public const float MegaGelMoveSpeed = GelMoveSpeed;
+        public const double MegaGelPauseTime = GelPauseTime;
+        public const int MegaGelHealth = 3;
+        public const double MegaGelScale = MegaEnemiesScale;
+        public const double MegaGelKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaZol
+        public const int MegaZolDamage = 3;
+        public const double MegaZolMoveTime = ZolMoveTime;
+        public const float MegaZolMoveSpeed = ZolMoveSpeed;
+        public const double MegaZolPauseTime = ZolPauseTime;
+        public const int MegaZolHealth = 4;
+        public const double MegaZolScale = MegaEnemiesScale;
+        public const double MegaZolKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaKeese
+        public const int MegaKeeseDamage = 2;
+        public const double MegaKeeseMoveTime = KeeseMoveTime;
+        public const float MegaKeeseMoveSpeed = KeeseMoveSpeed * 1.5f;
+        public const int MegaKeeseHealth = 4;
+        public const double MegaKeeseScale = MegaEnemiesScale;
+        public const double MegaKeeseKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaDarknut
+        public const int MegaDarknutDamage = 2;
+        public const double MegaDarknutMoveTime = DarknutMoveTime;
+        public const float MegaDarknutMoveSpeed = DarknutMoveSpeed;
+        public const int MegaDarknutHealth = 4;
+        public const double MegaDarknutScale = MegaEnemiesScale;
+        public const double MegaDarknutKnockbackTime = MegaEnemiesKnockbackTime;
+        public const float MegaDarknutChaseSpeed = DarknutMoveSpeed * 2;
+        public const double MegaDarknutChaseTimeoutTime = DarknutMoveTime / 2;
+
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+        public const float QuickEnemyFramesPerSecond = 16;
         public const int firstFrame = 0;
         public const int firstInArray = 0;
         public const int secondDoorInArray = 2;
@@ -242,6 +321,7 @@ namespace Sprint_0
         public const double degreeRotationCW90_s = Math.PI / 2;
         public const double degreeRotationCW180_s = Math.PI;
         public const double degreeRotationCW270_s = (3 * Math.PI) / 2;
+        public const double degreeRotationCW360_s = 2 * Math.PI;
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
@@ -268,6 +348,8 @@ namespace Sprint_0
         public const string projectileFile = "LoZSprites";
         public const string linkFile = "LinkSpriteSheet";
         public const string blueLinkFile = "BlueLinkSpriteSheet";
+        public const string shotgunFile = "LinkShotGunSpriteSheet";
+        public const string blueLinkShotgunFile = "BlueLinkShotGunSpriteSheet";
         public const string pathForDungeon1CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
         public const string pathForDungeon2CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon2/";
         public const string cvsExtension = ".csv";
@@ -287,6 +369,14 @@ namespace Sprint_0
         public const string StalfosStr = "Stalfos";
         public const string WallMasterStr = "WallMaster";
         public const string ZolStr = "Zol";
+        public const string BubbleStr = "Bubble";
+        public const string DarknutStr = "Darknut";
+        public const string PatraStr = "Patra";
+        public const string MegaStalfosStr = "MegaStalfos";
+        public const string MegaGelStr = "MegaGel";
+        public const string MegaZolStr = "MegaZol";
+        public const string MegaKeeseStr = "MegaKeese";
+        public const string MegaDarknutStr = "MegaDarknut";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -305,6 +395,8 @@ namespace Sprint_0
         public const string SilverArrowItemStr = "SilverArrowItem";
         public const string KeyStr = "Key";
         public const string MapStr = "Map";
+        public const string ShotgunItemStr = "ShotgunItem";
+        public const string ShotgunShellItemStr = "ShotgunShellItem";
         public const string BlueRingStr = "BlueRing";
         public const string typoInRoomMessage = "Typo in Room ";
         public const string EastClosedSpriteStr = "EastClosedSprite";
@@ -491,6 +583,7 @@ namespace Sprint_0
         public static Vector2 keyCounterLocation = new Vector2(96 * scale, 32 * scale);
         public static Vector2 bombCounterLocation = new Vector2(96 * scale, 40 * scale);
         public static Vector2 rupeeCounterLocation = new Vector2(96 * scale, 16 * scale);
+        public static Vector2 shotgunShellCounterLocation = new Vector2(96 * scale, 24 * scale);
         public static Vector2 primaryWeaponLocation = new Vector2(152 * scale, 24 * scale);
         public static Vector2 secondaryWeaponLocation = new Vector2(128 * scale, 24 * scale);
         public static Vector2 DungeonLevelDisplayLocation = new Vector2(16 * scale, 8 * scale);
@@ -527,10 +620,10 @@ namespace Sprint_0
         public const double groupDDropRate = 0.41;
         public const double groupXDropRate = 0;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
-        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya) };
+        public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
-        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,
             ItemType.SmallHeartItem,
@@ -587,5 +680,57 @@ namespace Sprint_0
         public const int inventoryYellowRupeeValue = 1;
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
+        public const int inventoryStartingShotgunShells = 0;
+        public const int shotgunShellsPerPickUp = 20;
+
+        //Sound effects
+        public const string soundDirectoryStr = "Sounds/";
+        public const string bombExplosionStr = soundDirectoryStr + "LOZ_Bomb_Blow";
+        public const string bombPlacementStr = soundDirectoryStr + "LOZ_Bomb_Drop";
+        public const string bossHitStr = soundDirectoryStr + "LOZ_Boss_Hit";
+        public const string bossScream1Str = soundDirectoryStr + "LOZ_Boss_Scream1";
+        public const string bossScream2Str = soundDirectoryStr + "LOZ_Boss_Scream2";
+        public const string bossScream3Str = soundDirectoryStr + "LOZ_Boss_Scream3";
+        public const string doorUnlockingStr = soundDirectoryStr + "LOZ_Door_Unlock";
+        public const string enemyDeathStr = soundDirectoryStr + "LOZ_Enemy_Die";
+        public const string enemyHitStr = soundDirectoryStr + "LOZ_Enemy_Hit";
+        public const string fanfareStr = soundDirectoryStr + "LOZ_Fanfare";
+        public const string fireArrowBoomerangStr = soundDirectoryStr + "LOZ_Arrow_Boomerang";
+        public const string shotgunBangStr = soundDirectoryStr + "Shotgun_Bang";
+        public const string fireCandleStr = soundDirectoryStr + "LOZ_Candle";
+        public const string fireMagicRodStr = soundDirectoryStr + "LOZ_MagicalRod";
+        public const string gameOverStr = soundDirectoryStr + "GameOver";
+        public const string keySpawnStr = soundDirectoryStr + "LOZ_Key_Appear";
+        public const string linkDeathStr = soundDirectoryStr + "LOZ_Link_Die";
+        public const string linkHitStr = soundDirectoryStr + "LOZ_Link_Hurt";
+        public const string lowHealthStr = soundDirectoryStr + "LOZ_LowHealth";
+        public const string musicStr = soundDirectoryStr + "Dungeon Theme";
+        public const string pickUpHeartStr = soundDirectoryStr + "LOZ_Get_Heart";
+        public const string pickUpItemStr = soundDirectoryStr + "LOZ_Get_Item";
+        public const string pickupRupeeStr = soundDirectoryStr + "LOZ_Get_Rupee";
+        public const string recorderStr = soundDirectoryStr + "LOZ_Recorder";
+        public const string refillLoopStr = soundDirectoryStr + "LOZ_Refill_Loop";
+        public const string secretFoundStr = soundDirectoryStr + "LOZ_Secret";
+        public const string shieldDeflectStr = soundDirectoryStr + "LOZ_Shield";
+        public const string shoreStr = soundDirectoryStr + "LOZ_Shore";
+        public const string stairsStr = soundDirectoryStr + "LOZ_Stairs";
+        public const string swordCombinedStr = soundDirectoryStr + "LOZ_Sword_Combined";
+        public const string swordShootStr = soundDirectoryStr + "LOZ_Sword_Shoot";
+        public const string swordSlashStr = soundDirectoryStr + "LOZ_Sword_Slash";
+        public const string textScrollStr = soundDirectoryStr + "LOZ_Text";
+        public const string textScrollSlowStr = soundDirectoryStr + "LOZ_Text_Slow";
+        public const string triforcePieceSoundStr = soundDirectoryStr + "Triforce Piece";
+
+        //----- Dialogue Box Constants -----//
+        public const int framesBetweenLetters = 2;
+
+        public const int maxLetters = 400;
+        public const int lettersPerLine = 35;
+        public const int maxLines = 7;
+        public const int letterSpacing = 6;
+
+        // Origin point for printed dialogue
+        public const int dialogueStartX = 56;
+        public const int dialogueStartY = ObjectConstants.yOffsetForRoom + 2 * ObjectConstants.standardWidthHeight;
     }
 }

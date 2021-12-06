@@ -36,6 +36,10 @@ namespace Sprint_0.Scripts.Collider.Enemy
                 player.PushBackGentlyBy(pushBack);
                 player.TakeDamage(Owner.Damage);
             }
+            if (Owner is Bubble)
+            {
+                player.SheathSword();
+            }
         }
 
         public void OnProjectileCollision(IProjectile projectile)

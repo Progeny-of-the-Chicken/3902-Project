@@ -97,6 +97,15 @@ namespace Sprint_0.Scripts
                 case ItemType.SilverArrowItem:
                     Inventory.Instance.SilverArrows = true;
                     break;
+                case ItemType.ShotgunItem:
+                    if (!Inventory.Instance.Weapons.Contains(WeaponType.Shotgun))
+                    {
+                        Inventory.Instance.Weapons.Add(WeaponType.Shotgun);
+                    }
+                    break;
+                case ItemType.ShotgunShellItem:
+                    Inventory.Instance.ShotgunShells += ObjectConstants.shotgunShellsPerPickUp;
+                    break;
                 case ItemType.BlueRing:
                     Inventory.Instance.BlueRing = true;
                     break;

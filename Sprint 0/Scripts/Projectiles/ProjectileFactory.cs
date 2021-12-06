@@ -74,5 +74,10 @@ namespace Sprint_0.Scripts.Projectiles
         {
             return new SwordBeam(location, direction);
         }
+
+        public IProjectile CreateShotgunPellet(Vector2 spawnLoc, FacingDirection direction)
+        {
+            return new ShotgunPelletProjectile(spawnLoc, direction);
+        }
     }
 }
