@@ -18,7 +18,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         private bool delete = false;
         private bool friendly = false;
 
-        private double speedPerSecond = ObjectConstants.arrowSpeedPerSecond;
+        private double speedPerSecond = ObjectConstants.shotgunPelletSpeed;
 
         public bool Friendly { get => friendly; }
 
