@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
             collider = ProjectileColliderFactory.Instance.CreateShotgunPelletCollider(this, direction);
             friendly = true;
             //TODO:Shotgun sound effect?
-            SFXManager.Instance.PlayFireArrowBoomerang();
+            SFXManager.Instance.PlayShotgunBang();
         }
 
         public void Update(GameTime gt)

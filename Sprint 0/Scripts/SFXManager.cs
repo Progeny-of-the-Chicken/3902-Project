@@ -29,6 +29,7 @@ namespace Sprint_0.Scripts
         SoundEffect enemyHit;
         SoundEffect fanfare;
         SoundEffect fireArrowBoomerang;
+        SoundEffect shotgunBang;
         SoundEffect fireCandle;
         SoundEffect fireMagicRod;
         SoundEffect gameOver;               //definitely needs to be loopable
@@ -74,6 +75,7 @@ namespace Sprint_0.Scripts
             enemyHit = content.Load<SoundEffect>("Sounds/LOZ_Enemy_Hit");
             fanfare = content.Load<SoundEffect>("Sounds/LOZ_Fanfare");
             fireArrowBoomerang = content.Load<SoundEffect>("Sounds/LOZ_Arrow_Boomerang");
+            shotgunBang = content.Load<SoundEffect>("Sounds/Shotgun_Bang");
             fireCandle = content.Load<SoundEffect>("Sounds/LOZ_Candle");
             fireMagicRod = content.Load<SoundEffect>("Sounds/LOZ_MagicalRod");
             gameOver = content.Load<SoundEffect>("Sounds/GameOver");
@@ -173,6 +175,10 @@ namespace Sprint_0.Scripts
         public void PlayFireArrowBoomerang()
         {
             fireArrowBoomerang.Play();
+        }
+        public void PlayShotgunBang()
+        {
+            shotgunBang.Play();
         }
         public void PlayFireCandle()
         {
