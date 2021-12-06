@@ -225,6 +225,9 @@ public class Room : IRoom
                     case ObjectConstants.DarknutStr:
                         enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
                         break;
+                    case ObjectConstants.PatraStr:
+                        enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;

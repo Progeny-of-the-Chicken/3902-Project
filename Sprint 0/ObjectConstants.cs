@@ -168,6 +168,7 @@ namespace Sprint_0
         public const double DefaultEnemyMoveTime = 1.0;
         public const float DefaultEnemyPauseTime = 1.0f;
         public const float DefaultEnemyDamagedTime = 0.5f;
+        public const int DefaultEnemyAbilityChangeWeight = 1;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -195,6 +196,7 @@ namespace Sprint_0
         public const float GoriyaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
+        public const int GoriyaThrowBoomerangChanceWeight = 2;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
@@ -247,9 +249,27 @@ namespace Sprint_0
         public const double DarknutMoveTime = DefaultEnemyMoveTime;
         public const float DarknutMoveSpeed = DefaultEnemyMoveSpeed;
         public const int DarknutStartingHealth = 2;
+        //Patra
+        public const int PatraDamage = 2;
+        public const double PatraMoveTime = DefaultEnemyMoveTime;
+        public const float PatraMoveSpeed = DefaultEnemyMoveSpeed / 2;
+        public const int PatraStartingHealth = 6;
+        public const int PatraStartingMinionCount = 8;
+        public const int PatraToggleOrbitChanceWeight = 6;
+        public static Vector2 PatraWidthHeight = new Vector2(16, 11) * scale;
+        //PatraMinion
+        public const int PatraMinionDamage = 1;
+        public const int PatraMinionStartingHealth = 2;
+        public const int PatraMinionBaseOrbitRadius = (int)(standardWidthHeight * scale * -1.5);
+        public const int PatraMinionExtendedOrbitRadius = (int)(standardWidthHeight * scale * -5.0);
+        public const double PatraMinionOrbitTimeRadians = (2 * Math.PI) / PatraMoveTime;
+        public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
+        public const double PatraMinionEllipseRadiusRatio = 0.5;
+        public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
+        public const float QuickEnemyFramesPerSecond = 16;
         public const int firstFrame = 0;
         public const int firstInArray = 0;
         public const int secondDoorInArray = 2;
@@ -260,6 +280,7 @@ namespace Sprint_0
         public const double degreeRotationCW90_s = Math.PI / 2;
         public const double degreeRotationCW180_s = Math.PI;
         public const double degreeRotationCW270_s = (3 * Math.PI) / 2;
+        public const double degreeRotationCW360_s = 2 * Math.PI;
         public const float noLayerDepth = 0;
         public const int nextInArray = 1;
 
@@ -308,6 +329,7 @@ namespace Sprint_0
         public const string ZolStr = "Zol";
         public const string BubbleStr = "Bubble";
         public const string DarknutStr = "Darknut";
+        public const string PatraStr = "Patra";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -521,8 +543,8 @@ namespace Sprint_0
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus) };
-        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,
             ItemType.SmallHeartItem,

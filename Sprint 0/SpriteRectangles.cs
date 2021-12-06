@@ -166,6 +166,10 @@ namespace Sprint_0
         public static Rectangle[] darknutFrontFrames = { new Rectangle(1, 90, 16, 16), new Rectangle(18, 90, 16, 16) };
         public static Rectangle darknutBackFrame = new Rectangle(35, 90, 16, 16);
         public static Rectangle[] darknutRightFrames = { new Rectangle(52, 90, 16, 16), new Rectangle(69, 90, 16, 16) };
+        //Patra
+        public static Rectangle patraFrame = new Rectangle(1, 157, 16, 11);
+        //PatraMinion
+        public static Rectangle[] patraMinionFrames = { new Rectangle(18, 158, 8, 8), new Rectangle(27, 158, 8, 8) };
 
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);

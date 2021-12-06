@@ -8,7 +8,8 @@ namespace Sprint_0.Scripts.Enemy
     {
         private static RNGCryptoServiceProvider randomDir = new RNGCryptoServiceProvider();
         private byte[] random;
-        List<ICommand> commands = new List<ICommand>();
+        List<(ICommand command, int weight)> commands = new List<(ICommand command, int weight)>();
+        private int totalWeight = ObjectConstants.zero;
 
         public EnemyRandomInvoker()
         {
@@ -18,13 +19,27 @@ namespace Sprint_0.Scripts.Enemy
 
         public void AddCommand(ICommand command)
         {
-            commands.Add(command);
+            commands.Add((command, ObjectConstants.DefaultEnemyAbilityChangeWeight));
+            totalWeight++;
+        }
+
+        public void AddCommandWithWeight(ICommand command, int weight)
+        {
+            commands.Add((command, weight));
+            totalWeight += weight;
         }
 
         public void ExecuteRandomCommand()
         {
             randomDir.GetBytes(random);
-            commands[random[ObjectConstants.firstInArray] % commands.Count].Execute();
+            int randomIndex = random[ObjectConstants.firstInArray] % totalWeight;
+            int commandIndex = 0;
+            while (randomIndex >= commands[commandIndex].weight)
+            {
+                randomIndex -= commands[commandIndex].weight;
+                commandIndex++;
+            }
+            commands[commandIndex].command.Execute();
         }
     }
 }

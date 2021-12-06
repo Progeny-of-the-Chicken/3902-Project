@@ -145,25 +145,29 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new FlippingSprite(SpriteRectangles.bubbleFrame, enemySprites, ObjectConstants.BubbleFramesPerSecond);
         }
-
         public ISprite CreateFrontDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites);
         }
-
         public ISprite CreateBackDarknutSprite()
         {
             return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond);
         }
-
         public ISprite CreateRightDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites);
         }
-
         public ISprite CreateLeftDarknutSprite()
         {
             return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites);
+        }
+        public ISprite CreatePatraSprite()
+        {
+            return new QuickFlippingSprite(SpriteRectangles.patraFrame, bossSprites);
+        }
+        public ISprite CreatePatraMinionSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.patraMinionFrames, bossSprites);
         }
     }
 }

@@ -15,6 +15,8 @@
         OldMan,
         Merchant,
         Bubble,
-        Darknut
+        Darknut,
+        Patra,
+        PatraMinion
     }
 }

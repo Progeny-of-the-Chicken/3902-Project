@@ -36,6 +36,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.Merchant => CreateFreezeStrategy(),
                 EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
                 EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector),
+                EnemyType.Patra => CreatePatraMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -54,6 +55,12 @@ namespace Sprint_0.Scripts.Movement
         {
             // If multiple enemies could chase, this can be turned into a switch case with an EnemyType enum parameter
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, int radius, double radiusChange, Vector2 satelliteDimensions)
+        {
+            // Can be changed to take enemy enum to make constants dynamic if needed
+            return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, radius, radiusChange, satelliteDimensions);
         }
 
         //----- Enemy disambiguation strategies creator methods -----//
@@ -106,6 +113,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateDarknutMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.DarknutMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreatePatraMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.PatraMoveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }
