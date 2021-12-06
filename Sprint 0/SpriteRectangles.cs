@@ -153,6 +153,9 @@ namespace Sprint_0
             new Rectangle(132, 157, 8, 10)
         };
 
+        //----- Main Menu source rectangles -----//
+        public static Rectangle mainMenuFrame = new Rectangle(0, 0, 256, 240);
+
         //----- Inventory GUI source rectangles -----//
         public static Rectangle weaponBackdropFrame = new Rectangle(1, 11, 256, 88);
         public static Rectangle mapBackdropFrame = new Rectangle(258, 112, 256, 88);

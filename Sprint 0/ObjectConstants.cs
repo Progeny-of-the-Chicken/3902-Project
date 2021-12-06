@@ -319,7 +319,8 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string startRoom = "Room47";                                           // --------------- THIS HAS BEEN CHANGED
+        public const string dungeon1StartRoom = "Room25";
+        public const string dungeon2StartRoom = "Room47";                                           // --------------- THIS HAS BEEN CHANGED
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
         public const string contentLocation = "Content";
@@ -414,6 +415,17 @@ namespace Sprint_0
         public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
         public const int roomswapAnimationDurationInFrames = 30;
 
+        //----- Main Menu constant values -----//
+        public const string mainMenuSpritesheetFileName = "MainMenu";
+        public const int halfMainMenuOptionsCount = 2;
+        public const int mainMenuOptionsCount = 4;
+        public static List<Vector2> mainMenuSlotLocations = new List<Vector2>
+        {
+            new Vector2(163, 65) * scale,
+            new Vector2(192, 65) * scale,
+            new Vector2(163, 79) * scale,
+            new Vector2(192, 79) * scale,
+        };
 
         //----- Inventory GUI constant values -----//
         public const string inventorySpritesheetFileName = "InventorySpritesheet";

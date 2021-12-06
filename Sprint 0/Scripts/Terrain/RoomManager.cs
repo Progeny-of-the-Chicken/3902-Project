@@ -34,7 +34,7 @@ namespace Sprint_0.Scripts.Terrain
         public void Init(ILink player)
         {
             this.link = player;
-            activeRoom = new Room(ObjectConstants.startRoom, this.link);
+            activeRoom = new Room(ObjectConstants.dungeon2StartRoom, this.link);
             RoomTracker.Instance.Init(activeRoom.RoomId());
         }
 

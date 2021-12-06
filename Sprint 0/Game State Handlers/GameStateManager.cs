@@ -12,6 +12,7 @@ namespace Sprint_0.GameStateHandlers
     public enum GameState
     {
         Menu,
+        MainMenu,
         Gameplay,
         Inventory,
         RoomSwap,
@@ -37,6 +38,7 @@ namespace Sprint_0.GameStateHandlers
         public GameState state { get => _state; }
 
         // Game State Handlers
+        MainMenuStateHandler mainmenu;
         GameplayStateHandler gameplay;
         InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
@@ -45,7 +47,7 @@ namespace Sprint_0.GameStateHandlers
         public GameStateManager()
         {
             // Set initial game state
-            this._state = GameState.Gameplay;
+            this._state = GameState.MainMenu;
         }
 
         public void Init(Link link, Game1 game)
@@ -53,7 +55,7 @@ namespace Sprint_0.GameStateHandlers
             this.link = link;
             this.game = game;
 
-            gameplay = new GameplayStateHandler(link, game);
+            mainmenu = new MainMenuStateHandler(game);
         }
 
         public void RestartGame()
@@ -77,6 +79,8 @@ namespace Sprint_0.GameStateHandlers
 
         public void StartGameplay()
         {
+            RoomManager.Instance.Init(Link.Instance);
+            gameplay = new GameplayStateHandler(link, game);
             this._state = GameState.Gameplay;
             System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
         }
@@ -102,6 +106,9 @@ namespace Sprint_0.GameStateHandlers
             {
                 case GameState.Gameplay:
                     gameplay.TogglePause();
+                    break;
+                case GameState.MainMenu:
+                    mainmenu.TogglePause();
                     break;
                 case GameState.Menu:
                     break;
@@ -130,6 +137,9 @@ namespace Sprint_0.GameStateHandlers
                 case GameState.Gameplay:
                     gameplay.Draw(sb, gameTime);
                     break;
+                case GameState.MainMenu:
+                    mainmenu.Draw(sb, gameTime);
+                    break;
                 case GameState.Menu:
                     break;
                 case GameState.Inventory:
@@ -152,6 +162,9 @@ namespace Sprint_0.GameStateHandlers
             {
                 case GameState.Gameplay:
                     gameplay.Update(gameTime);
+                    break;
+                case GameState.MainMenu:
+                    mainmenu.Update(gameTime);
                     break;
                 case GameState.Menu:
                     break;
