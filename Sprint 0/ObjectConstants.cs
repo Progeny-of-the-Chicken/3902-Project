@@ -420,6 +420,8 @@ namespace Sprint_0
         public const int halfMainMenuOptionsCount = 2;
         public const int mainMenuOptionsCount = 4;
         public const int settingsStretchAmount = 7;
+        public const int superhotFalse = 1;
+        public const int randomizeFalse = 3;
         public static List<Vector2> mainMenuSettingsLocations = new List<Vector2>
         {
             new Vector2(163, 79) * scale,

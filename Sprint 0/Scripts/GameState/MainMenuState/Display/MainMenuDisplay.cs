@@ -73,8 +73,8 @@ namespace Sprint_0.Scripts.GameState.MainMenuState.Display
         {
             selectionSprite = MainMenuSpriteFactory.Instance.CreateSelectionSprite();
             selectionLocation = backdropLocation + ObjectConstants.mainMenuSlotLocations[0];
-            selectedSettingsLocation1 = ObjectConstants.mainMenuSettingsLocations[1];
-            selectedSettingsLocation2 = ObjectConstants.mainMenuSettingsLocations[3];
+            selectedSettingsLocation1 = ObjectConstants.mainMenuSettingsLocations[ObjectConstants.superhotFalse];
+            selectedSettingsLocation2 = ObjectConstants.mainMenuSettingsLocations[ObjectConstants.randomizeFalse];
         }
 
         //----- Helper method for selection movement -----//
