@@ -16,6 +16,8 @@
         Merchant,
         Bubble,
         Darknut,
+        Patra,
+        PatraMinion,
         MegaStalfos,
         MegaGel,
         MegaZol,

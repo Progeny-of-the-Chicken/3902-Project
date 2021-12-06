@@ -43,6 +43,7 @@ namespace Sprint_0.Scripts.Enemy
                     InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:
+                case EnemyType.Patra:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
                 case EnemyType.MegaKeese:
@@ -53,10 +54,13 @@ namespace Sprint_0.Scripts.Enemy
             switch (type)
             {
                 case EnemyType.Goriya:
-                    invoker.AddCommand(new CommandEnemyThrowBoomerang(enemy, stateMachine));
+                    invoker.AddCommandWithWeight(new CommandEnemyThrowBoomerang(enemy, stateMachine), ObjectConstants.GoriyaThrowBoomerangChanceWeight);
                     break;
                 case EnemyType.Aquamentus:
                     invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
+                    break;
+                case EnemyType.Patra:
+                    invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
             }
             return invoker;

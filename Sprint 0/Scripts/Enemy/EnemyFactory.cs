@@ -79,7 +79,15 @@ namespace Sprint_0.Scripts.Enemy
 		public IEnemy CreateDarknut(Vector2 location)
         {
 			return new Darknut(location);
-        }
+		}
+		public IEnemy CreatePatra(Vector2 location)
+		{
+			return new Patra(location);
+		}
+		public IEnemy CreatePatraMinion(Vector2 location, IEnemy patra)
+		{
+			return new PatraMinion(location, patra);
+		}
 		public IEnemy CreateMegaStalfos(Vector2 location)
         {
 			return new MegaStalfos(location);

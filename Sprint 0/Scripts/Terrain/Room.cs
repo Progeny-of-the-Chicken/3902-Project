@@ -225,6 +225,9 @@ public class Room : IRoom
                     case ObjectConstants.DarknutStr:
                         enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
                         break;
+                    case ObjectConstants.PatraStr:
+                        enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
+                        break;
                     case ObjectConstants.MegaStalfosStr:
                         enemySet.Add(EnemyFactory.Instance.CreateMegaStalfos(enemyLocation));
                         break;

@@ -36,6 +36,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.Merchant => CreateFreezeStrategy(),
                 EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
                 EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector),
+                EnemyType.Patra => CreatePatraMovementStrategy(directionVector),
                 EnemyType.MegaStalfos => CreateMegaStalfosMovementStrategy(directionVector),
                 EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector),
                 EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
@@ -69,6 +70,12 @@ namespace Sprint_0.Scripts.Movement
         {
             // Can be flexible with enums if more enemies use track link strategy
             return new TrackLinkStrategy(ObjectConstants.MegaKeeseMoveSpeed, new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)));
+        }
+
+        public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, int radius, double radiusChange, Vector2 satelliteDimensions)
+        {
+            // Can be changed to take enemy enum to make constants dynamic if needed
+            return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, radius, radiusChange, satelliteDimensions);
         }
 
         //----- Enemy disambiguation strategies creator methods -----//
@@ -121,6 +128,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateDarknutMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.DarknutMoveSpeed, ObjectConstants.zeroPauseTime);
+        }
+
+        private IMovementStrategy CreatePatraMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.PatraMoveSpeed, ObjectConstants.zeroPauseTime);
         }
 
         private IMovementStrategy CreateMegaStalfosMovementStrategy(Vector2 directionVector)

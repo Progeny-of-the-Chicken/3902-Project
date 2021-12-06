@@ -145,65 +145,61 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new FlippingSprite(SpriteRectangles.bubbleFrame, enemySprites, ObjectConstants.BubbleFramesPerSecond, ObjectConstants.scale);
         }
-
         public ISprite CreateFrontDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites, ObjectConstants.scale);
         }
-
         public ISprite CreateBackDarknutSprite()
         {
             return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.scale);
         }
-
         public ISprite CreateRightDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.scale);
         }
-
         public ISprite CreateLeftDarknutSprite()
         {
             return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.scale);
         }
-
         public ISprite CreateMegaStalfosSprite()
         {
             return new FlippingSprite(SpriteRectangles.stalfosFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaStalfosScale);
         }
-
         public ISprite CreateMegaGelSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.gelFrames, enemySprites, ObjectConstants.MegaGelScale);
         }
-
         public ISprite CreateMegaZolSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites, ObjectConstants.MegaZolScale);
         }
-
         public ISprite CreateMegaKeeseSprite()
         {
             return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites, ObjectConstants.MegaKeeseScale);
         }
-
         public ISprite CreateFrontMegaDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites, ObjectConstants.MegaDarknutScale);
         }
-
         public ISprite CreateBackMegaDarknutSprite()
         {
             return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaDarknutScale);
         }
-
         public ISprite CreateRightMegaDarknutSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.MegaDarknutScale);
         }
-
         public ISprite CreateLeftMegaDarknutSprite()
         {
             return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.MegaDarknutScale);
+        }
+        public ISprite CreatePatraSprite()
+        {
+            return new QuickFlippingSprite(SpriteRectangles.patraFrame, bossSprites);
+        }
+        public ISprite CreatePatraMinionSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.patraMinionFrames, bossSprites, ObjectConstants.scale);
         }
     }
 }
