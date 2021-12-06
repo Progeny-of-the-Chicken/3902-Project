@@ -185,5 +185,25 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites, ObjectConstants.MegaKeeseScale);
         }
+
+        public ISprite CreateFrontMegaDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutFrontFrames, enemySprites, ObjectConstants.MegaDarknutScale);
+        }
+
+        public ISprite CreateBackMegaDarknutSprite()
+        {
+            return new FlippingSprite(SpriteRectangles.darknutBackFrame, enemySprites, ObjectConstants.DefaultEnemyFramesPerSecond, ObjectConstants.MegaDarknutScale);
+        }
+
+        public ISprite CreateRightMegaDarknutSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.MegaDarknutScale);
+        }
+
+        public ISprite CreateLeftMegaDarknutSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.MegaDarknutScale);
+        }
     }
 }

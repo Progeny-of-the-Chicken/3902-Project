@@ -280,6 +280,13 @@ namespace Sprint_0
         public const int MegaKeeseHealth = 4;
         public const double MegaKeeseScale = MegaEnemiesScale;
         public const double MegaKeeseKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaDarknut
+        public const int MegaDarknutDamage = 2;
+        public const double MegaDarknutMoveTime = DarknutMoveTime;
+        public const float MegaDarknutMoveSpeed = DarknutMoveSpeed;
+        public const int MegaDarknutHealth = 4;
+        public const double MegaDarknutScale = MegaEnemiesScale;
+        public const double MegaDarknutKnockbackTime = MegaEnemiesKnockbackTime;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
