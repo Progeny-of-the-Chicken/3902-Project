@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Sprint_0.Scripts.GameState.InventoryState;
+using System.Collections.Generic;
 
 namespace Sprint_0.Scripts.GameState
 {
-    public class Inventory : IInventory
+    public class Inventory
     {
         private static Inventory instance = new Inventory();
 
@@ -51,7 +52,18 @@ namespace Sprint_0.Scripts.GameState
                 SelectedWeaponIndex = ObjectConstants.firstInArray;
             }
             Weapons.Remove(weapon);
+            InventoryManager.Instance.UpdateDisplay();
+        }
 
+        public void AddWeapon(WeaponType weapon)
+        {
+            Weapons.Add(weapon);
+            InventoryManager.Instance.UpdateDisplay();
+        }
+
+        public bool HasWeapon(WeaponType weapon)
+        {
+            return Weapons.Contains(weapon);
         }
 
         public int SelectedWeaponIndex { get; set; }
