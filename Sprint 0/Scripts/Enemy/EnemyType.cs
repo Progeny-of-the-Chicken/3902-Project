@@ -19,6 +19,7 @@
         MegaStalfos,
         MegaGel,
         MegaZol,
-        MegaKeese
+        MegaKeese,
+        MegaDarknut
     }
 }

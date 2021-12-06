@@ -26,7 +26,7 @@ namespace Sprint_0
         public const double zero_double = 0;
         public const int PreferredBackBufferWidth = 256;
         public const int PreferredBackBufferHeight = 232;
-
+        public static Rectangle nullRectangle = new Rectangle(0, 0, 0, 0);
 
 
         //----- Game state constants -----//
@@ -287,6 +287,8 @@ namespace Sprint_0
         public const int MegaDarknutHealth = 4;
         public const double MegaDarknutScale = MegaEnemiesScale;
         public const double MegaDarknutKnockbackTime = MegaEnemiesKnockbackTime;
+        public const float MegaDarknutChaseSpeed = DarknutMoveSpeed * 2;
+        public const double MegaDarknutChaseTimeoutTime = DarknutMoveTime / 2;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -352,6 +354,7 @@ namespace Sprint_0
         public const string MegaGelStr = "MegaGel";
         public const string MegaZolStr = "MegaZol";
         public const string MegaKeeseStr = "MegaKeese";
+        public const string MegaDarknutStr = "MegaDarknut";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";

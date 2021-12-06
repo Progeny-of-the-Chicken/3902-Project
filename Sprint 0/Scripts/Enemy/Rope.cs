@@ -38,8 +38,8 @@ namespace Sprint_0.Scripts.Enemy
             invoker.ExecuteRandomCommand();
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.ropeFrames[ObjectConstants.zero].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            leftCollider = new RopeDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
-            rightCollider = new RopeDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
+            leftCollider = new ChaseDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
+            rightCollider = new ChaseDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
             
             leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite();
             rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite();

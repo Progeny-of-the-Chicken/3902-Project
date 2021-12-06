@@ -40,6 +40,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector),
                 EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
                 EnemyType.MegaKeese => CreateTrackLinkStrategy(),
+                EnemyType.MegaDarknut => CreateMegaDarknutMovementStrategy(directionVector),
                 _ => CreateFreezeStrategy()
             };
         }
@@ -54,10 +55,14 @@ namespace Sprint_0.Scripts.Movement
             return new IdleStrategy();
         }
 
-        public IMovementStrategy CreateChaseStrategy(Vector2 directionVector)
+        public IMovementStrategy CreateChaseStrategyForEnemy(Vector2 directionVector, EnemyType type)
         {
-            // If multiple enemies could chase, this can be turned into a switch case with an EnemyType enum parameter
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime);
+            return type switch
+            {
+                EnemyType.Rope => new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeChaseSpeed, ObjectConstants.zeroPauseTime),
+                EnemyType.MegaDarknut => new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaDarknutChaseSpeed, ObjectConstants.zeroPauseTime),
+                _ => CreateFreezeStrategy()
+            };
         }
 
         public IMovementStrategy CreateTrackLinkStrategy()
@@ -131,6 +136,11 @@ namespace Sprint_0.Scripts.Movement
         private IMovementStrategy CreateMegaZolMovementStrategy(Vector2 directionVector)
         {
             return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaZolMoveSpeed, (float)ObjectConstants.MegaZolPauseTime);
+        }
+
+        private IMovementStrategy CreateMegaDarknutMovementStrategy(Vector2 directionVector)
+        {
+            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaDarknutMoveSpeed, (float)ObjectConstants.zeroPauseTime);
         }
     }
 }

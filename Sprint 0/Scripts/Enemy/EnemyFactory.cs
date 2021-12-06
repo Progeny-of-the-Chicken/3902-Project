@@ -96,5 +96,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new MegaKeese(location);
         }
+		public IEnemy CreateMegaDarknut(Vector2 location)
+        {
+			return new MegaDarknut(location);
+        }
 	}
 }

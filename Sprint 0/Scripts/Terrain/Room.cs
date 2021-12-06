@@ -237,6 +237,9 @@ public class Room : IRoom
                     case ObjectConstants.MegaKeeseStr:
                         enemySet.Add(EnemyFactory.Instance.CreateMegaKeese(enemyLocation));
                         break;
+                    case ObjectConstants.MegaDarknutStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaDarknut(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
