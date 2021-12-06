@@ -18,6 +18,7 @@
         Darknut,
         MegaStalfos,
         MegaGel,
-        MegaZol
+        MegaZol,
+        MegaKeese
     }
 }

@@ -44,7 +44,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateLeftRopeSprite()
         {
-            return new AnimatedFlippedSprite(SpriteRectangles.ropeFrames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.ropeFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateDodongoRightSprite()
         {
@@ -52,7 +52,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateDodongoLeftSprite()
         {
-            return new AnimatedFlippedSprite(SpriteRectangles.dodongoRightFrames, bossSprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.dodongoRightFrames, bossSprites, ObjectConstants.scale);
         }
         public ISprite CreateDodongoDownSprite()
         {
@@ -104,7 +104,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateKeeseSprite()
         {
-            return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites, ObjectConstants.scale);
         }
         //TODO: fix the magic projectile sprite to not take rectangles
         public ISprite CreateMagicProjectileSprite()
@@ -125,7 +125,7 @@ namespace Sprint_0.Scripts.Enemy
         }
         public ISprite CreateLeftGoriyaSprite()
         {
-            return new AnimatedFlippedSprite(SpriteRectangles.goriyaRightFrames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.goriyaRightFrames, enemySprites, ObjectConstants.scale);
         }
         public ISprite CreateWallmasterOpenSprite()
         {
@@ -163,7 +163,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public ISprite CreateLeftDarknutSprite()
         {
-            return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites);
+            return new AnimatedFlippedSprite(SpriteRectangles.darknutRightFrames, enemySprites, ObjectConstants.scale);
         }
 
         public ISprite CreateMegaStalfosSprite()
@@ -179,6 +179,11 @@ namespace Sprint_0.Scripts.Enemy
         public ISprite CreateMegaZolSprite()
         {
             return new AnimatedEnemySprite(SpriteRectangles.zolFrames, enemySprites, ObjectConstants.MegaZolScale);
+        }
+
+        public ISprite CreateMegaKeeseSprite()
+        {
+            return new AnimatedFlippedSprite(SpriteRectangles.keeseFrames, enemySprites, ObjectConstants.MegaKeeseScale);
         }
     }
 }

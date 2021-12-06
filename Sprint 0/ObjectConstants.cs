@@ -273,6 +273,13 @@ namespace Sprint_0
         public const int MegaZolHealth = 4;
         public const double MegaZolScale = MegaEnemiesScale;
         public const double MegaZolKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaKeese
+        public const int MegaKeeseDamage = 2;
+        public const double MegaKeeseMoveTime = KeeseMoveTime;
+        public const float MegaKeeseMoveSpeed = KeeseMoveSpeed;
+        public const int MegaKeeseHealth = 4;
+        public const double MegaKeeseScale = MegaEnemiesScale;
+        public const double MegaKeeseKnockbackTime = MegaEnemiesKnockbackTime;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -337,6 +344,7 @@ namespace Sprint_0
         public const string MegaStalfosStr = "MegaStalfos";
         public const string MegaGelStr = "MegaGel";
         public const string MegaZolStr = "MegaZol";
+        public const string MegaKeeseStr = "MegaKeese";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
