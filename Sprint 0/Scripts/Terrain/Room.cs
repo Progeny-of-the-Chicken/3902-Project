@@ -30,7 +30,7 @@ public class Room : IRoom
     private ProjectileEntities projectileSet;
     private EffectSet effectSet;
     private List<ITerrain> blocks;
-    private List<IWall> walls;
+    public List<IWall> walls;
     private CollisionHandlerSet collisionHandlerSet;
     private List<IProjectile> projectileQueue;
     private List<IEffect> effectQueue;

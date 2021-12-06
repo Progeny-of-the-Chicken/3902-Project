@@ -109,13 +109,7 @@ namespace Sprint_0.Scripts.Terrain
 
         private void checkIfNewRoomHasKey(Vector2 roomConnectingPos)
         {
-            foreach (Vector2 room in ObjectConstants.roomsWithKeys)
-            {
-                if (room.Equals(roomConnectingPos))
-                {
-                    numKeys++;
-                }
-            }
+            if (ObjectConstants.roomsWithKeys.Contains(roomConnectingPos)) numKeys++;
         }
 
         private bool isDoorAvailableInRoom(Vector2 roomToAddTo, int doorNum)

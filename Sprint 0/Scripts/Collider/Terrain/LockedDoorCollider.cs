@@ -4,6 +4,7 @@ using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -35,12 +36,60 @@ namespace Sprint_0.Scripts.Collider.Terrain
             link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle));
             if (Inventory.Instance.MagicKey)
             {
+                UnlockNeighborDoor();
                 owner.SwapDoor();
             }
             else if (Inventory.Instance.Key > 0)
             {
+                UnlockNeighborDoor();
                 owner.SwapDoor();
                 Inventory.Instance.Key--;
+            }
+        }
+
+        private void UnlockNeighborDoor()
+        {
+            Room adjacentRoom = (Room) RoomManager.Instance.LoadRoomToSwapDoor(owner.NextRoom);
+            if (owner.GetType() == typeof(EastLockedSprite))
+            {
+                for (int i = 0; i < adjacentRoom.walls.Count; i++)
+                {
+                    if (adjacentRoom.walls[i].GetType() == typeof(WestLockedSprite))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
+                        adjacentRoom.walls[i].SwapDoor();
+                    }
+                }
+            } else if (owner.GetType() == typeof(NorthLockedSprite))
+            {
+                for (int i = 0; i < adjacentRoom.walls.Count; i++)
+                {
+                    if (adjacentRoom.walls[i].GetType() == typeof(SouthLockedSprite))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
+                        adjacentRoom.walls[i].SwapDoor();
+                    }
+                }
+            } else if (owner.GetType() == typeof(WestLockedSprite))
+            {
+                for (int i = 0; i < adjacentRoom.walls.Count; i++)
+                {
+                    if (adjacentRoom.walls[i].GetType() == typeof(EastLockedSprite))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
+                        adjacentRoom.walls[i].SwapDoor();
+                    }
+                }
+            } else
+            {
+                for (int i = 0; i < adjacentRoom.walls.Count; i++)
+                {
+                    if (adjacentRoom.walls[i].GetType() == typeof(NorthLockedSprite))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Swapping" + adjacentRoom.walls[i] + " from " + owner.NextRoom);
+                        adjacentRoom.walls[i].SwapDoor();
+                    }
+                }
             }
         }
 

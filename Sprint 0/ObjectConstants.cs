@@ -393,7 +393,8 @@ namespace Sprint_0
         public const int numDoorsInRoom = 4;
         public const int randoDungeonHeightWidth = 8;
         public const int maxKeysBeforeForcedDoor = 10;
-        public static Vector2[] roomsWithKeys = new Vector2[] { new Vector2(4, 0), new Vector2(5, 0), new Vector2(4, 1), new Vector2(5, 1), new Vector2(4, 2), new Vector2(5, 3),
+        public static List<Vector2> roomsWithKeys = new List<Vector2>
+        {   new Vector2(4, 0), new Vector2(5, 0), new Vector2(4, 1), new Vector2(5, 1), new Vector2(4, 2), new Vector2(5, 3),
             new Vector2(4, 5), new Vector2(5, 5), new Vector2(6, 5), new Vector2(7, 5), new Vector2(0, 6), new Vector2(1, 6), new Vector2(2, 6), new Vector2(3, 6),
         };
 
