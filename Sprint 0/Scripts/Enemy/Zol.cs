@@ -53,7 +53,11 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.TakeDamage(damage, false);
             if (stateMachine.IsDead)
             {
-                ObjectsFromObjectsFactory.Instance.CreateGelsFromZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.GelWidthHeight)));
+                IEnemy gel = ObjectsFromObjectsFactory.Instance.CreateGelFromZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.GelWidthHeight)));
+                // Give gels short immunity
+                gel.TakeDamage(ObjectConstants.zero);
+                gel = ObjectsFromObjectsFactory.Instance.CreateGelFromZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), new Vector2(ObjectConstants.GelWidthHeight)));
+                gel.TakeDamage(ObjectConstants.zero);
             }
         }
 

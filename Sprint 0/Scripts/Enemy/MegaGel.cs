@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -62,7 +63,8 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
+            lastKnockbackVector = knockback;
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.MegaGelKnockbackTime, knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)
@@ -89,9 +91,9 @@ namespace Sprint_0.Scripts.Enemy
 
         private void SpawnZols()
         {
-            IEnemy firstZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(Position);
-            IEnemy secondZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(Position);
-            if (stateMachine.GetDirection == FacingDirection.Right || stateMachine.GetDirection == FacingDirection.Left)
+            IEnemy firstZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale));
+            IEnemy secondZol = ObjectsFromObjectsFactory.Instance.CreateZolFromMegaGel(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale));
+            if (lastKnockbackVector == ObjectConstants.RightUnitVector || lastKnockbackVector == ObjectConstants.LeftUnitVector)
             {
                 firstZol.GradualKnockBack(ObjectConstants.UpLeftUnitVector);
                 secondZol.GradualKnockBack(ObjectConstants.DownUnitVector);

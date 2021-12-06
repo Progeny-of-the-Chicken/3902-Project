@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -89,7 +90,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             while (damage > 0)
             {
-                IEnemy stalfos = ObjectsFromObjectsFactory.Instance.CreateStalfosFromMegaStalfos(Position);
+                IEnemy stalfos = ObjectsFromObjectsFactory.Instance.CreateStalfosFromMegaStalfos(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale));
                 stalfos.GradualKnockBack(lastKnockbackVector);
                 damage--;
             }

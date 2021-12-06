@@ -170,7 +170,7 @@ namespace Sprint_0
         public const float DefaultEnemyDamagedTime = 0.5f;
         //Mega enemies defaults
         public const double MegaEnemiesScale = scale * 1.5;
-        public const double MegaEnemiesKnockbackSpeed = DefaultEnemyKnockbackSpeed / 2;
+        public const double MegaEnemiesKnockbackTime = DefaultEnemyKnockbackTime / 2;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -256,7 +256,7 @@ namespace Sprint_0
         public const float MegaStalfosMoveSpeed = StalfosMoveSpeed;
         public const int MegaStalfosHealth = 6;
         public const double MegaStalfosScale = MegaEnemiesScale;
-        public const double MegaStalfosKnockbackTime = MegaEnemiesKnockbackSpeed;
+        public const double MegaStalfosKnockbackTime = MegaEnemiesKnockbackTime;
         //MegaGel
         public const int MegaGelDamage = 2;
         public const double MegaGelMoveTime = GelMoveTime;
@@ -264,7 +264,7 @@ namespace Sprint_0
         public const double MegaGelPauseTime = GelPauseTime;
         public const int MegaGelHealth = 3;
         public const double MegaGelScale = MegaEnemiesScale;
-        public const double MegaGelKnockbackTime = MegaEnemiesKnockbackSpeed;
+        public const double MegaGelKnockbackTime = MegaEnemiesKnockbackTime;
         //MegaZol
         public const int MegaZolDamage = 3;
         public const double MegaZolMoveTime = ZolMoveTime;
@@ -272,7 +272,7 @@ namespace Sprint_0
         public const double MegaZolPauseTime = ZolPauseTime;
         public const int MegaZolHealth = 4;
         public const double MegaZolScale = MegaEnemiesScale;
-        public const double MegaZolKnockbackTime = MegaEnemiesKnockbackSpeed;
+        public const double MegaZolKnockbackTime = MegaEnemiesKnockbackTime;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;

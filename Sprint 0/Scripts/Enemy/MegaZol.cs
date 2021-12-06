@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -62,7 +63,8 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
+            lastKnockbackVector = knockback;
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.MegaZolKnockbackTime, knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)
@@ -89,9 +91,10 @@ namespace Sprint_0.Scripts.Enemy
 
         private void SpawnMegaGels()
         {
-            IEnemy firstMegaGel = ObjectsFromObjectsFactory.Instance.CreateMegaGelFromMegaZol(Position);
+            Vector2 megaGelDimensions = new Vector2((int)(SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaGelScale), (int)(SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaGelScale));
+            IEnemy firstMegaGel = ObjectsFromObjectsFactory.Instance.CreateMegaGelFromMegaZol(SpawnHelper.Instance.CenterLocationOnSpawner(Position, collider.Hitbox.Size.ToVector2(), megaGelDimensions));
             IEnemy secondMegaGel = ObjectsFromObjectsFactory.Instance.CreateMegaGelFromMegaZol(Position);
-            if (stateMachine.GetDirection == FacingDirection.Right || stateMachine.GetDirection == FacingDirection.Left)
+            if (lastKnockbackVector == ObjectConstants.RightUnitVector || lastKnockbackVector == ObjectConstants.LeftUnitVector)
             {
                 firstMegaGel.GradualKnockBack(ObjectConstants.UpLeftUnitVector);
                 secondMegaGel.GradualKnockBack(ObjectConstants.DownUnitVector);
