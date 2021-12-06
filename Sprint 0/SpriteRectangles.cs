@@ -170,6 +170,12 @@ namespace Sprint_0
         public static Rectangle patraFrame = new Rectangle(1, 157, 16, 11);
         //PatraMinion
         public static Rectangle[] patraMinionFrames = { new Rectangle(18, 158, 8, 8), new Rectangle(27, 158, 8, 8) };
+        //Manhandla
+        public static Rectangle manhandlaBody = new Rectangle(105, 106, 16, 16);
+        public static Rectangle[] manhandlaRightHeadFrames = { new Rectangle(122, 106, 16, 16), new Rectangle(175, 106, 16, 16) };
+        public static Rectangle[] manhandlaUpHeadFrames = { new Rectangle(158, 89, 16, 16), new Rectangle(105, 89, 16, 16) };
+        public static Rectangle[] manhandlaLeftHeadFrames = { new Rectangle(88, 106, 16, 16), new Rectangle(141, 106, 16, 16) };
+        public static Rectangle[] manhandlaDownHeadFrames = { new Rectangle(158, 123, 16, 16), new Rectangle(105, 123, 16, 16) };
 
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);

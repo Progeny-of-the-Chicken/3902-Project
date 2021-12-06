@@ -201,5 +201,25 @@ namespace Sprint_0.Scripts.Enemy
         {
             return new AnimatedEnemySprite(SpriteRectangles.patraMinionFrames, bossSprites, ObjectConstants.scale);
         }
+        public ISprite CreateManhandlaBodySprite()
+        {
+            return new UnanimatedEnemySprite(SpriteRectangles.manhandlaBody, bossSprites);
+        }
+        public ISprite CreateManhandlaRightHeadSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.manhandlaRightHeadFrames, bossSprites, ObjectConstants.scale);
+        }
+        public ISprite CreateManhandlaUpHeadSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.manhandlaUpHeadFrames, bossSprites, ObjectConstants.scale);
+        }
+        public ISprite CreateManhandlaLeftHeadSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.manhandlaLeftHeadFrames, bossSprites, ObjectConstants.scale);
+        }
+        public ISprite CreateManhandlaDownHeadSprite()
+        {
+            return new AnimatedEnemySprite(SpriteRectangles.manhandlaDownHeadFrames, bossSprites, ObjectConstants.scale);
+        }
     }
 }
