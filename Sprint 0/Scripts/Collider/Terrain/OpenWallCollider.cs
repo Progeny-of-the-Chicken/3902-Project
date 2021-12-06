@@ -33,12 +33,15 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnLinkCollision(Link link)
         {
-            link.StopMoving();
-            
-            link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle) * ObjectConstants.scale);
-            GameStateManager.Instance.SwapRooms(roomManager.CurrentRoom.RoomId(), owner.NextRoom, link.FacingDirection.Opposite());
 
-            System.Diagnostics.Debug.WriteLine("Next room:" + owner.NextRoom);
+            link.StopMoving();
+            link.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(this.hitbox, link.collider.CollisionRectangle) * ObjectConstants.scale * 2);
+
+            if (!link.gettingKnockedBack) {
+                GameStateManager.Instance.SwapRooms(roomManager.CurrentRoom.RoomId(), owner.NextRoom, link.FacingDirection.Opposite());
+
+                System.Diagnostics.Debug.WriteLine("Next room:" + owner.NextRoom);
+            }
         }
 
         public void OnProjectileCollision(IProjectile projectile)

@@ -149,6 +149,8 @@ namespace Sprint_0.Scripts
         public bool CanBeAffectedByEnemy { get => !(linkState.IsTakingDamage || linkState.IsGettingKnockedBack || linkState.IsSuspended); }
 
         public bool CanDoNewAction { get => linkState.CanDoNewThing(); }
+
+        public bool gettingKnockedBack { get => linkState.IsGettingKnockedBack ; }
         public bool BoomerangReady { get; set; }
 
         public bool SwordIsSheathed { get => linkState.SwordIsSheathed; }

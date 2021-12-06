@@ -48,9 +48,9 @@ namespace Sprint_0
             new Rectangle(54, 65, 12, 20)
         };
 
-        public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 12, 16),
+        public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 16, 16),
             new Rectangle(231, 11, 16, 16),
-            new Rectangle(214, 11, 12, 16),
+            new Rectangle(214, 11, 16, 16),
             new Rectangle(231, 11, 16, 16)};
 
         public static Rectangle linkUsingItemDownFrame = new Rectangle(107, 11, 16, 16);
