@@ -36,11 +36,18 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Dodongo:
                 case EnemyType.Bubble:
                 case EnemyType.Darknut:
+                case EnemyType.MegaStalfos:
+                case EnemyType.MegaGel:
+                case EnemyType.MegaZol:
+                case EnemyType.MegaDarknut:
                     InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:
                 case EnemyType.Patra:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
+                    break;
+                case EnemyType.MegaKeese:
+                    invoker.AddCommand(new CommandTrackLink(stateMachine));
                     break;
             }
             // Abilities

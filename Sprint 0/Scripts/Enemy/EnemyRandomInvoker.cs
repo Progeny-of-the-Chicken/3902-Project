@@ -19,7 +19,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void AddCommand(ICommand command)
         {
-            commands.Add((command, ObjectConstants.DefaultEnemyAbilityChangeWeight));
+            commands.Add((command, ObjectConstants.DefaultEnemyAbilityChanceWeight));
             totalWeight++;
         }
 

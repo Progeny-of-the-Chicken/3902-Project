@@ -26,7 +26,7 @@ namespace Sprint_0
         public const double zero_double = 0;
         public const int PreferredBackBufferWidth = 256;
         public const int PreferredBackBufferHeight = 232;
-
+        public static Rectangle nullRectangle = new Rectangle(0, 0, 0, 0);
 
 
         //----- Game state constants -----//
@@ -168,7 +168,9 @@ namespace Sprint_0
         public const double DefaultEnemyMoveTime = 1.0;
         public const float DefaultEnemyPauseTime = 1.0f;
         public const float DefaultEnemyDamagedTime = 0.5f;
-        public const int DefaultEnemyAbilityChangeWeight = 1;
+        public const int DefaultEnemyAbilityChanceWeight = 1;
+        public const double MegaEnemiesScale = scale * 1.5;
+        public const double MegaEnemiesKnockbackTime = DefaultEnemyKnockbackTime / 2;
 
         //Aquamentus
         public const int AquamentusDamage = 2;
@@ -266,6 +268,45 @@ namespace Sprint_0
         public const double PatraRadiusExtensionSpeed = (standardWidthHeight * scale * 3.5) / PatraMoveTime;
         public const double PatraMinionEllipseRadiusRatio = 0.5;
         public static Vector2 PatraMinionWidthHeight = new Vector2(8, 8) * scale;
+        //MegaStalfos
+        public const int MegaStalfosDamage = 2;
+        public const double MegaStalfosMoveTime = StalfosMoveTime;
+        public const float MegaStalfosMoveSpeed = StalfosMoveSpeed;
+        public const int MegaStalfosHealth = 6;
+        public const double MegaStalfosScale = MegaEnemiesScale;
+        public const double MegaStalfosKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaGel
+        public const int MegaGelDamage = 2;
+        public const double MegaGelMoveTime = GelMoveTime;
+        public const float MegaGelMoveSpeed = GelMoveSpeed;
+        public const double MegaGelPauseTime = GelPauseTime;
+        public const int MegaGelHealth = 3;
+        public const double MegaGelScale = MegaEnemiesScale;
+        public const double MegaGelKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaZol
+        public const int MegaZolDamage = 3;
+        public const double MegaZolMoveTime = ZolMoveTime;
+        public const float MegaZolMoveSpeed = ZolMoveSpeed;
+        public const double MegaZolPauseTime = ZolPauseTime;
+        public const int MegaZolHealth = 4;
+        public const double MegaZolScale = MegaEnemiesScale;
+        public const double MegaZolKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaKeese
+        public const int MegaKeeseDamage = 2;
+        public const double MegaKeeseMoveTime = KeeseMoveTime;
+        public const float MegaKeeseMoveSpeed = KeeseMoveSpeed * 1.5f;
+        public const int MegaKeeseHealth = 4;
+        public const double MegaKeeseScale = MegaEnemiesScale;
+        public const double MegaKeeseKnockbackTime = MegaEnemiesKnockbackTime;
+        //MegaDarknut
+        public const int MegaDarknutDamage = 2;
+        public const double MegaDarknutMoveTime = DarknutMoveTime;
+        public const float MegaDarknutMoveSpeed = DarknutMoveSpeed;
+        public const int MegaDarknutHealth = 4;
+        public const double MegaDarknutScale = MegaEnemiesScale;
+        public const double MegaDarknutKnockbackTime = MegaEnemiesKnockbackTime;
+        public const float MegaDarknutChaseSpeed = DarknutMoveSpeed * 2;
+        public const double MegaDarknutChaseTimeoutTime = DarknutMoveTime / 2;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -330,6 +371,11 @@ namespace Sprint_0
         public const string BubbleStr = "Bubble";
         public const string DarknutStr = "Darknut";
         public const string PatraStr = "Patra";
+        public const string MegaStalfosStr = "MegaStalfos";
+        public const string MegaGelStr = "MegaGel";
+        public const string MegaZolStr = "MegaZol";
+        public const string MegaKeeseStr = "MegaKeese";
+        public const string MegaDarknutStr = "MegaDarknut";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -543,7 +589,7 @@ namespace Sprint_0
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut) };
         public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,

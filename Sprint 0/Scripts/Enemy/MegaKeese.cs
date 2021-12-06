@@ -6,7 +6,7 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
-    class Gel : IEnemy
+    public class MegaKeese : IEnemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
@@ -15,26 +15,27 @@ namespace Sprint_0.Scripts.Enemy
 
         public IEnemyCollider Collider { get => collider; }
 
-        public int Damage { get => ObjectConstants.GelDamage; }
+        public int Damage { get => ObjectConstants.MegaKeeseDamage; }
 
         public Vector2 Position { get => stateMachine.Location; }
 
         public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
-        public Gel(Vector2 location)
+        public MegaKeese(Vector2 location)
         {
-            sprite = EnemySpriteFactory.Instance.CreateGelSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Gel, (float)ObjectConstants.GelMoveTime + (float)ObjectConstants.GelPauseTime, ObjectConstants.GelStartingHealth);
-            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Gel, stateMachine, this);
+            sprite = EnemySpriteFactory.Instance.CreateMegaKeeseSprite();
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaKeese, (float)ObjectConstants.MegaKeeseMoveTime, ObjectConstants.MegaKeeseHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.MegaKeese, stateMachine, this);
             invoker.ExecuteRandomCommand();
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            Point colliderHitbox = new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)).ToPoint();
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), colliderHitbox));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
-        public void Update(GameTime t)
+        public void Update(GameTime gt)
         {
-            stateMachine.Update(t);
+            stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
                 invoker.ExecuteRandomCommand();
@@ -42,7 +43,7 @@ namespace Sprint_0.Scripts.Enemy
 
             if (stateMachine.GetState != EnemyState.Knockback)
             {
-                sprite.Update(t);
+                sprite.Update(gt);
             }
             collider.Update(Position);
         }
@@ -55,7 +56,7 @@ namespace Sprint_0.Scripts.Enemy
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.MegaKeeseKnockbackTime, knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)

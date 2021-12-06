@@ -75,10 +75,32 @@ namespace Sprint_0.Scripts.Terrain
 
         // Enemies
 
-        public void CreateGelsFromZol(Vector2 location)
+        public IEnemy CreateGelFromZol(Vector2 location)
         {
-            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
-            room.AddEnemy(EnemyFactory.Instance.CreateGel(location));
+            IEnemy enemy = EnemyFactory.Instance.CreateGel(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
+        public IEnemy CreateStalfosFromMegaStalfos(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateStalfos(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
+        public IEnemy CreateZolFromMegaGel(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateZol(location);
+            room.AddEnemy(enemy);
+            return enemy;
+        }
+
+        public IEnemy CreateMegaGelFromMegaZol(Vector2 location)
+        {
+            IEnemy enemy = EnemyFactory.Instance.CreateMegaGel(location);
+            room.AddEnemy(enemy);
+            return enemy;
         }
 
         public IEnemy CreatePatraMinion(Vector2 location, IEnemy patra)

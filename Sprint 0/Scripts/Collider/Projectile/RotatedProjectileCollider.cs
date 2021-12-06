@@ -43,10 +43,14 @@ namespace Sprint_0.Scripts.Collider.Projectile
             {
                 ((Darknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
             }
+            else if (enemy is MegaDarknut && enemy.CanBeAffectedByPlayer)
+            {
+                ((MegaDarknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+            }
             else if (enemy.CanBeAffectedByPlayer)
             {
-                enemy.TakeDamage(Owner.Damage);
                 enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                enemy.TakeDamage(Owner.Damage);
             }
         }
 

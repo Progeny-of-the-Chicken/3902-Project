@@ -228,6 +228,21 @@ public class Room : IRoom
                     case ObjectConstants.PatraStr:
                         enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
                         break;
+                    case ObjectConstants.MegaStalfosStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaStalfos(enemyLocation));
+                        break;
+                    case ObjectConstants.MegaGelStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaGel(enemyLocation));
+                        break;
+                    case ObjectConstants.MegaZolStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaZol(enemyLocation));
+                        break;
+                    case ObjectConstants.MegaKeeseStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaKeese(enemyLocation));
+                        break;
+                    case ObjectConstants.MegaDarknutStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateMegaDarknut(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;

@@ -88,5 +88,25 @@ namespace Sprint_0.Scripts.Enemy
 		{
 			return new PatraMinion(location, patra);
 		}
+		public IEnemy CreateMegaStalfos(Vector2 location)
+        {
+			return new MegaStalfos(location);
+        }
+		public IEnemy CreateMegaGel(Vector2 location)
+        {
+			return new MegaGel(location);
+        }
+		public IEnemy CreateMegaZol(Vector2 location)
+        {
+			return new MegaZol(location);
+        }
+		public IEnemy CreateMegaKeese(Vector2 location)
+        {
+			return new MegaKeese(location);
+        }
+		public IEnemy CreateMegaDarknut(Vector2 location)
+        {
+			return new MegaDarknut(location);
+        }
 	}
 }

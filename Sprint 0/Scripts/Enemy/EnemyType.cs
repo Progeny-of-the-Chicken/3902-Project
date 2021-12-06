@@ -17,6 +17,11 @@
         Bubble,
         Darknut,
         Patra,
-        PatraMinion
+        PatraMinion,
+        MegaStalfos,
+        MegaGel,
+        MegaZol,
+        MegaKeese,
+        MegaDarknut
     }
 }
