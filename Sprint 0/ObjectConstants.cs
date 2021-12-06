@@ -94,6 +94,8 @@ namespace Sprint_0
         // Projectile
         public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
         public const int shotgunPelletDamage = 5;
+        public const double halfAdjustment = 0.5;
+        public const int pelletsPerBlast = 20;
 
 
         // Arrow

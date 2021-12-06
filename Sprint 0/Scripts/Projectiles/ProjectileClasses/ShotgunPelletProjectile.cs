@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public ShotgunPelletProjectile(Vector2 spawnLoc, FacingDirection direction)
         {
-            currentPos = SpawnHelper.Instance.CenterLocationOnLinkSword(spawnLoc, direction, new Vector2(ObjectConstants.linkWidthHeight), ObjectConstants.arrowWidthHeight);
+            currentPos = SpawnHelper.Instance.CenterLocationForShotgunBlast(spawnLoc, direction);
             SetSpriteVectors(direction);
 
             collider = ProjectileColliderFactory.Instance.CreateShotgunPelletCollider(this, direction);
@@ -62,19 +62,32 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         private void SetSpriteVectors(FacingDirection direction)
         {
+
+            Random rand = new Random();
+            float randPrimaryAdjustment = (float)(rand.NextDouble() - ObjectConstants.halfAdjustment);
+            float randSecondaryAdjustment = (float)(rand.NextDouble());
+
             switch (direction)
             {
                 case FacingDirection.Right:
                     directionVector = ObjectConstants.RightUnitVector;
+                    directionVector.X += randSecondaryAdjustment;
+                    directionVector.Y += randPrimaryAdjustment;
                     break;
                 case FacingDirection.Up:
                     directionVector = ObjectConstants.UpUnitVector;
+                    directionVector.Y -= randSecondaryAdjustment;
+                    directionVector.X += randPrimaryAdjustment;
                     break;
                 case FacingDirection.Left:
                     directionVector = ObjectConstants.LeftUnitVector;
+                    directionVector.X -= randSecondaryAdjustment;
+                    directionVector.Y += randPrimaryAdjustment;
                     break;
                 case FacingDirection.Down:
                     directionVector = ObjectConstants.DownUnitVector;
+                    directionVector.Y += randSecondaryAdjustment;
+                    directionVector.X += randPrimaryAdjustment;
                     break;
                 default:
                     break;

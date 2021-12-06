@@ -28,6 +28,11 @@ namespace Sprint_0.Scripts.SpriteFactories
             return spawnerLocation + GetSwordFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions, direction);
         }
 
+        public Vector2 CenterLocationForShotgunBlast(Vector2 spawnerLocation, FacingDirection linksDirection)
+        {
+            return spawnerLocation + GetLinkFacingCenterForPellets(new Vector2(ObjectConstants.linkWidthHeight, ObjectConstants.linkWidthHeight), linksDirection);
+        }
+
         //----- Helper methods for finding centers -----//
 
         private Vector2 GetCenterOfDimensions(Vector2 dimensions)
@@ -54,6 +59,19 @@ namespace Sprint_0.Scripts.SpriteFactories
                     * (ObjectConstants.DownUnitVector + ObjectConstants.RightUnitVector)),
                 // Should never happen
                 _ => center
+            };
+        }
+
+        private Vector2 GetLinkFacingCenterForPellets(Vector2 spawneeDimensions, FacingDirection direction)
+        {
+            return (direction) switch
+            {
+                FacingDirection.Right => (new Vector2(spawneeDimensions.X, spawneeDimensions.Y * (float)ObjectConstants.halfAdjustment)),
+                FacingDirection.Up => (new Vector2(spawneeDimensions.X * (float)ObjectConstants.halfAdjustment, 0)),
+                FacingDirection.Left => (new Vector2(0, spawneeDimensions.Y * (float)ObjectConstants.halfAdjustment)),
+                FacingDirection.Down => (new Vector2(spawneeDimensions.X * (float)ObjectConstants.halfAdjustment, spawneeDimensions.Y)),
+                // Should never happen
+                _ => new Vector2(0, 0)
             };
         }
     }
