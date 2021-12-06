@@ -33,7 +33,7 @@ namespace Sprint_0.Scripts.Terrain
             //To keep track of what rooms need to be added
             List<Vector2> inDungeon = new List<Vector2>();
             List<Vector2> notInDungeon = new List<Vector2>();
-            initalizeRandomizerVariables(inDungeon, notInDungeon);
+            InitalizeRandomizerVariables(inDungeon, notInDungeon);
 
             var rand = new Random();
 
@@ -48,7 +48,7 @@ namespace Sprint_0.Scripts.Terrain
                 bool roomIsAvailable = false;
                 for (int i = 0; i < ObjectConstants.numDoorsInRoom; i++)
                 {
-                    roomIsAvailable |= isDoorAvailableInRoom(roomToAddToPos, i);
+                    roomIsAvailable |= IsDoorAvailableInRoom(roomToAddToPos, i);
                 }
                 if (!roomIsAvailable)
                 {
@@ -68,12 +68,12 @@ namespace Sprint_0.Scripts.Terrain
                     //Pick door from originating room
                     randInt = rand.Next(ObjectConstants.numDoorsInRoom);
                     //Connecting to room that already has a door
-                    while (!isDoorAvailableInRoom(roomToAddToPos, randInt))
+                    while (!IsDoorAvailableInRoom(roomToAddToPos, randInt))
                     {
                         randInt = (randInt + 1) % ObjectConstants.numDoorsInRoom;
                     }
                     int randInt2 = (randInt + (ObjectConstants.numDoorsInRoom / 2)) % ObjectConstants.numDoorsInRoom; 
-                    if (!isDoorAvailableInRoom(roomConnectingPos, randInt2))
+                    if (!IsDoorAvailableInRoom(roomConnectingPos, randInt2))
                     {
                         //The opposite door to the available one was taken, reduce counter and skip to next attempt
                         System.Diagnostics.Debug.WriteLine("oops, the connecting room already was in the dungeon and had a door at that spot");
@@ -81,7 +81,7 @@ namespace Sprint_0.Scripts.Terrain
                         continue;
                     } else
                     {
-                        addConnectingDoors(roomToAddToPos, randInt, roomConnectingPos, randInt2);
+                        AddConnectingDoors(roomToAddToPos, randInt, roomConnectingPos, randInt2);
                     }
 
                 } else
@@ -93,13 +93,13 @@ namespace Sprint_0.Scripts.Terrain
 
                     //Pick doors to add to
                     randInt = rand.Next(ObjectConstants.numDoorsInRoom);
-                    while (!isDoorAvailableInRoom(roomToAddToPos, randInt))
+                    while (!IsDoorAvailableInRoom(roomToAddToPos, randInt))
                     {
                         randInt = (randInt + 1) % ObjectConstants.numDoorsInRoom;
                     }
                     int randInt2 = (randInt + (ObjectConstants.numDoorsInRoom / 2)) % ObjectConstants.numDoorsInRoom;
-                    addConnectingDoors(roomToAddToPos, randInt, roomConnectingPos, randInt2);
-                    checkIfNewRoomHasKey(roomConnectingPos);
+                    AddConnectingDoors(roomToAddToPos, randInt, roomConnectingPos, randInt2);
+                    CheckIfNewRoomHasKey(roomConnectingPos);
                     inDungeon.Add(roomConnectingPos);
                 }
 
@@ -107,17 +107,17 @@ namespace Sprint_0.Scripts.Terrain
 
         }
 
-        private void checkIfNewRoomHasKey(Vector2 roomConnectingPos)
+        private void CheckIfNewRoomHasKey(Vector2 roomConnectingPos)
         {
             if (ObjectConstants.roomsWithKeys.Contains(roomConnectingPos)) numKeys++;
         }
 
-        private bool isDoorAvailableInRoom(Vector2 roomToAddTo, int doorNum)
+        private bool IsDoorAvailableInRoom(Vector2 roomToAddTo, int doorNum)
         {
             return doorAvailability[(int)roomToAddTo.X, (int)roomToAddTo.Y, doorNum];
         }
 
-        private void initalizeRandomizerVariables(List<Vector2> inDungeon, List<Vector2> notInDungeon)
+        private void InitalizeRandomizerVariables(List<Vector2> inDungeon, List<Vector2> notInDungeon)
         {
             inDungeon.Add(new Vector2(4, 7));
 
@@ -173,10 +173,14 @@ namespace Sprint_0.Scripts.Terrain
             doorStrings[3, 7, 4] = ObjectConstants.WestDoorSpriteStr;
             doorStrings[3, 7, 5] = "Room27";
             doorAvailability[3, 7, 2] = false;
+            doorStrings[0, 0, 0] = ObjectConstants.InvisibleWallStr;
+            doorStrings[0, 0, 2] = ObjectConstants.InvisibleWallStr;
+            doorStrings[0, 0, 4] = ObjectConstants.InvisibleWallStr;
+            doorStrings[0, 0, 6] = ObjectConstants.InvisibleWallStr;
         }
 
         //This assumes adding this door to this room is valid
-        private void addConnectingDoors(Vector2 roomLocation1, int doorLocation1, Vector2 roomLocation2, int doorLocation2)
+        private void AddConnectingDoors(Vector2 roomLocation1, int doorLocation1, Vector2 roomLocation2, int doorLocation2)
         {
             doorAvailability[(int)roomLocation1.X, (int)roomLocation1.Y, doorLocation1] = false;
             doorAvailability[(int)roomLocation2.X, (int)roomLocation2.Y, doorLocation2] = false;

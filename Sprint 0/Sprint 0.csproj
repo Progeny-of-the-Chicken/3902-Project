@@ -59,7 +59,6 @@
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
-    <Folder Include="Scripts\GameState\InventoryState\" />
     <Folder Include="Scripts\GameState\InventoryState\Display\" />
     <Folder Include="Scripts\Commands\InventoryState\" />
     <Folder Include="Scripts\Sprite\BlueLinkSprites\" />

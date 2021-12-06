@@ -4,35 +4,30 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.GameState.MainMenuState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
-using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
-    public class GameplayStateHandler: IGameStateHandler
+    public class MainMenuStateHandler: IGameStateHandler
     {
-        private IRoomManager roomManager;
-        private HUD headsUpDisplay;
+        private IMainMenuManager mainMenuManager;
         private bool paused = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
-        private Link link;
         private Game1 game;
 
-        public GameplayStateHandler(Link link, Game1 game)
+        public MainMenuStateHandler(Game1 game)
         {
-            this.link = link;
             this.game = game;
-
-            roomManager = RoomManager.Instance;
-            headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
+            mainMenuManager = MainMenuManager.Instance;
+            mainMenuManager.Init();
             initializeLetterSprites();
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
-            roomManager.Draw(sb);
-            headsUpDisplay.Draw(sb);
+            mainMenuManager.Draw(sb, gameTime);
 
             if (paused)
             {
@@ -44,8 +39,7 @@ namespace Sprint_0.GameStateHandlers
         {
             if (!paused)
             {
-                roomManager.Update(gameTime);
-                headsUpDisplay.Update();
+                mainMenuManager.Update(gameTime);
             }
         }
 
@@ -55,13 +49,11 @@ namespace Sprint_0.GameStateHandlers
 
             if (paused)
             {
-                link.Suspend();
                 game.kc = new PausedKeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PauseMusic();
             } else
             {
-                link.UnSuspend();
-                game.kc = new KeyboardController(game, Keyboard.GetState());
+                game.kc = new MainMenuStateController(game);
                 SFXManager.Instance.PlayMusic();
             }
         }
