@@ -64,41 +64,41 @@ namespace Sprint_0.Scripts
 
         public void LoadAllSounds(ContentManager content)
         {
-            bombExplosion = content.Load<SoundEffect>("Sounds/LOZ_Bomb_Blow");
-            bombPlacement = content.Load<SoundEffect>("Sounds/LOZ_Bomb_Drop");
-            bossHit = content.Load<SoundEffect>("Sounds/LOZ_Boss_Hit");
-            bossScream1 = content.Load<SoundEffect>("Sounds/LOZ_Boss_Scream1");
-            bossScream2 = content.Load<SoundEffect>("Sounds/LOZ_Boss_Scream2");
-            bossScream3 = content.Load<SoundEffect>("Sounds/LOZ_Boss_Scream3");
-            doorUnlocking = content.Load<SoundEffect>("Sounds/LOZ_Door_Unlock");
-            enemyDeath = content.Load<SoundEffect>("Sounds/LOZ_Enemy_Die");
-            enemyHit = content.Load<SoundEffect>("Sounds/LOZ_Enemy_Hit");
-            fanfare = content.Load<SoundEffect>("Sounds/LOZ_Fanfare");
-            fireArrowBoomerang = content.Load<SoundEffect>("Sounds/LOZ_Arrow_Boomerang");
-            shotgunBang = content.Load<SoundEffect>("Sounds/Shotgun_Bang");
-            fireCandle = content.Load<SoundEffect>("Sounds/LOZ_Candle");
-            fireMagicRod = content.Load<SoundEffect>("Sounds/LOZ_MagicalRod");
-            gameOver = content.Load<SoundEffect>("Sounds/GameOver");
-            keySpawn = content.Load<SoundEffect>("Sounds/LOZ_Key_Appear");
-            linkDeath = content.Load<SoundEffect>("Sounds/LOZ_Link_Die");
-            linkHit = content.Load<SoundEffect>("Sounds/LOZ_Link_Hurt");
-            lowHealth = content.Load<SoundEffect>("Sounds/LOZ_LowHealth");
-            music = content.Load<SoundEffect>("Sounds/Dungeon Theme");
-            pickUpHeart = content.Load<SoundEffect>("Sounds/LOZ_Get_Heart");
-            pickUpItem = content.Load<SoundEffect>("Sounds/LOZ_Get_Item");
-            pickupRupee = content.Load<SoundEffect>("Sounds/LOZ_Get_Rupee");
-            recorder = content.Load<SoundEffect>("Sounds/LOZ_Recorder");
-            refillLoop = content.Load<SoundEffect>("Sounds/LOZ_Refill_Loop");
-            secretFound = content.Load<SoundEffect>("Sounds/LOZ_Secret");
-            shieldDeflect = content.Load<SoundEffect>("Sounds/LOZ_Shield");
-            shore = content.Load<SoundEffect>("Sounds/LOZ_Shore");
-            stairs = content.Load<SoundEffect>("Sounds/LOZ_Stairs");
-            swordCombined = content.Load<SoundEffect>("Sounds/LOZ_Sword_Combined");
-            swordShoot = content.Load<SoundEffect>("Sounds/LOZ_Sword_Shoot");
-            swordSlash = content.Load<SoundEffect>("Sounds/LOZ_Sword_Slash");
-            textScroll = content.Load<SoundEffect>("Sounds/LOZ_Text");
-            textScrollSlow = content.Load<SoundEffect>("Sounds/LOZ_Text_Slow");
-            triforcePiece = content.Load<SoundEffect>("Sounds/Triforce Piece");
+            bombExplosion = content.Load<SoundEffect>(ObjectConstants.bombExplosionStr);
+            bombPlacement = content.Load<SoundEffect>(ObjectConstants.bombPlacementStr);
+            bossHit = content.Load<SoundEffect>(ObjectConstants.bossHitStr);
+            bossScream1 = content.Load<SoundEffect>(ObjectConstants.bossScream1Str);
+            bossScream2 = content.Load<SoundEffect>(ObjectConstants.bossScream2Str);
+            bossScream3 = content.Load<SoundEffect>(ObjectConstants.bossScream3Str);
+            doorUnlocking = content.Load<SoundEffect>(ObjectConstants.doorUnlockingStr);
+            enemyDeath = content.Load<SoundEffect>(ObjectConstants.enemyDeathStr);
+            enemyHit = content.Load<SoundEffect>(ObjectConstants.enemyHitStr);
+            fanfare = content.Load<SoundEffect>(ObjectConstants.fanfareStr);
+            fireArrowBoomerang = content.Load<SoundEffect>(ObjectConstants.fireArrowBoomerangStr);
+            shotgunBang = content.Load<SoundEffect>(ObjectConstants.shotgunBangStr);
+            fireCandle = content.Load<SoundEffect>(ObjectConstants.fireCandleStr);
+            fireMagicRod = content.Load<SoundEffect>(ObjectConstants.fireMagicRodStr);
+            gameOver = content.Load<SoundEffect>(ObjectConstants.gameOverStr);
+            keySpawn = content.Load<SoundEffect>(ObjectConstants.keySpawnStr);
+            linkDeath = content.Load<SoundEffect>(ObjectConstants.linkDeathStr);
+            linkHit = content.Load<SoundEffect>(ObjectConstants.linkHitStr);
+            lowHealth = content.Load<SoundEffect>(ObjectConstants.lowHealthStr);
+            music = content.Load<SoundEffect>(ObjectConstants.musicStr);
+            pickUpHeart = content.Load<SoundEffect>(ObjectConstants.pickUpHeartStr);
+            pickUpItem = content.Load<SoundEffect>(ObjectConstants.pickUpItemStr);
+            pickupRupee = content.Load<SoundEffect>(ObjectConstants.pickupRupeeStr);
+            recorder = content.Load<SoundEffect>(ObjectConstants.recorderStr);
+            refillLoop = content.Load<SoundEffect>(ObjectConstants.refillLoopStr);
+            secretFound = content.Load<SoundEffect>(ObjectConstants.secretFoundStr);
+            shieldDeflect = content.Load<SoundEffect>(ObjectConstants.shieldDeflectStr);
+            shore = content.Load<SoundEffect>(ObjectConstants.shoreStr);
+            stairs = content.Load<SoundEffect>(ObjectConstants.stairsStr);
+            swordCombined = content.Load<SoundEffect>(ObjectConstants.swordCombinedStr);
+            swordShoot = content.Load<SoundEffect>(ObjectConstants.swordShootStr);
+            swordSlash = content.Load<SoundEffect>(ObjectConstants.swordSlashStr);
+            textScroll = content.Load<SoundEffect>(ObjectConstants.textScrollStr);
+            textScrollSlow = content.Load<SoundEffect>(ObjectConstants.textScrollSlowStr);
+            triforcePiece = content.Load<SoundEffect>(ObjectConstants.triforcePieceSoundStr);
 
             gameOverInstance = gameOver.CreateInstance();
             lowHealthInstance = lowHealth.CreateInstance();
@@ -124,7 +124,7 @@ namespace Sprint_0.Scripts
             if (musicStopped)
             {
                 stopTimer -= gt.ElapsedGameTime.TotalSeconds;
-                if(stopTimer <= 0)
+                if (stopTimer <= 0)
                 {
                     musicStopped = false;
                     PlayMusic();
@@ -232,9 +232,9 @@ namespace Sprint_0.Scripts
         {
             swordCombined.Play();
         }
-        public void PlaySwordShoot() 
-        { 
-            swordShoot.Play(); 
+        public void PlaySwordShoot()
+        {
+            swordShoot.Play();
         }
         public void PlaySwordSlash()
         {

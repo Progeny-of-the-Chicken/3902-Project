@@ -219,6 +219,12 @@ public class Room : IRoom
                     case ObjectConstants.ZolStr:
                         enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
                         break;
+                    case ObjectConstants.BubbleStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
+                        break;
+                    case ObjectConstants.DarknutStr:
+                        enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
+                        break;
                     default:
                         Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                         break;
@@ -428,6 +434,9 @@ public class Room : IRoom
                 case ObjectConstants.StairSpriteStr:
                     blocks.Add(new StairSprite(specialLocation));
                     break;
+                case ObjectConstants.InvisibleExitStr:
+                    blocks.Add(new InvisibleExit(specialLocation));
+                    break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
                     enemiesFlag = true;
@@ -477,6 +486,14 @@ public class Room : IRoom
             effectSet.Add(effect);
         }
         effectQueue.Clear();
+    }
+
+    public void FreezeEnemies()
+    {
+        foreach (IEnemy enemy in enemySet.Enemies)
+        {
+            enemy.Freeze(ObjectConstants.clockFreezeSeconds);
+        }
     }
 
     public void ChangeDoor(IWall doorToRemove, String doorToAdd)

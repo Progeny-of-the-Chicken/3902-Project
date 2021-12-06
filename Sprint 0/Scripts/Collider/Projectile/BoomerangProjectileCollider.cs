@@ -40,13 +40,20 @@ namespace Sprint_0.Scripts.Collider.Projectile
         {
             if (Owner.Friendly)
             {
-                enemy.TakeDamage(Owner.Damage);
-                enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                if (enemy is Darknut && enemy.CanBeAffectedByPlayer)
+                {
+                    ((Darknut)enemy).TryTakeDamage(Owner.Damage, Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                }
+                else if (enemy.CanBeAffectedByPlayer)
+                {
+                    enemy.TakeDamage(Owner.Damage);
+                    enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
+                }
                 ((Boomerang)Owner).BounceOffWall();
             }
-            else if (!Owner.Friendly && ((Boomerang)Owner).EnemyOwner is Goriya)
+            else if (!Owner.Friendly && ((Boomerang)Owner).ReturnState && ((Boomerang)Owner).EnemyOwner is Goriya)
             {
-                ((Goriya)((Boomerang)Owner).EnemyOwner).boomerangActive = false;
+                ((Goriya)((Boomerang)Owner).EnemyOwner).BoomerangCaught = true;
             }
         }
     }

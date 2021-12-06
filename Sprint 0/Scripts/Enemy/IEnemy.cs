@@ -10,6 +10,7 @@ namespace Sprint_0.Scripts.Enemy
         public int Damage { get; }
         public IEnemyCollider Collider { get; }
         public Vector2 Position { get; }
+        public bool CanBeAffectedByPlayer { get; }
         public void Update(GameTime t);
 
         void Draw(SpriteBatch sb);
@@ -19,6 +20,8 @@ namespace Sprint_0.Scripts.Enemy
         public void SuddenKnockBack(Vector2 knockback);
 
         public void GradualKnockBack(Vector2 knockback);
+
+        public void Freeze(float duration);
 
         public bool CheckDelete();
     }
