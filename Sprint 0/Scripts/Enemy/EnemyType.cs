@@ -16,6 +16,8 @@
         Merchant,
         Bubble,
         Darknut,
-        MegaStalfos
+        MegaStalfos,
+        MegaGel,
+        MegaZol
     }
 }

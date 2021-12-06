@@ -37,6 +37,7 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Bubble:
                 case EnemyType.Darknut:
                 case EnemyType.MegaStalfos:
+                case EnemyType.MegaGel:
                     InitializeMoveCommands(invoker, stateMachine, GetCardinalVectors());
                     break;
                 case EnemyType.Keese:

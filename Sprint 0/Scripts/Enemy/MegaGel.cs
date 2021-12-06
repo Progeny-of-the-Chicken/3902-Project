@@ -6,38 +6,36 @@ using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Enemy
 {
-    public class MegaStalfos : IEnemy
+    class MegaGel : IEnemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
 
-        private Vector2 lastKnockbackVector = ObjectConstants.LeftUnitVector;
-
         public IEnemyCollider Collider { get => collider; }
 
-        public int Damage { get => ObjectConstants.MegaStalfosDamage; }
+        public int Damage { get => ObjectConstants.MegaGelDamage; }
 
         public Vector2 Position { get => stateMachine.Location; }
 
         public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
-        public MegaStalfos(Vector2 location)
+        public MegaGel(Vector2 location)
         {
-            sprite = EnemySpriteFactory.Instance.CreateMegaStalfosSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.MegaStalfos, (float)ObjectConstants.MegaStalfosMoveTime, ObjectConstants.MegaStalfosHealth);
-            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Stalfos, stateMachine, this);
+            sprite = EnemySpriteFactory.Instance.CreateMegaGelSprite();
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaGel, (float)ObjectConstants.MegaGelMoveTime + (float)ObjectConstants.MegaGelPauseTime, ObjectConstants.MegaGelHealth);
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.MegaGel, stateMachine, this);
             invoker.ExecuteRandomCommand();
-            Point colliderHitbox = new Vector2((int)(SpriteRectangles.stalfosFrame.Size.ToVector2().X * ObjectConstants.MegaStalfosScale), (int)(SpriteRectangles.stalfosFrame.Size.ToVector2().Y * ObjectConstants.MegaStalfosScale)).ToPoint();
+            Point colliderHitbox = new Vector2((int)(SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaGelScale), (int)(SpriteRectangles.gelFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaGelScale)).ToPoint();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), colliderHitbox));
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
-        public void Update(GameTime gt)
+        public void Update(GameTime t)
         {
-            stateMachine.Update(gt);
+            stateMachine.Update(t);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
                 invoker.ExecuteRandomCommand();
@@ -45,7 +43,7 @@ namespace Sprint_0.Scripts.Enemy
 
             if (stateMachine.GetState != EnemyState.Knockback)
             {
-                sprite.Update(gt);
+                sprite.Update(t);
             }
             collider.Update(Position);
         }
@@ -53,14 +51,12 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             stateMachine.TakeDamage(damage, false);
-            SpawnStalfosForDamage(damage);
         }
 
         public void GradualKnockBack(Vector2 knockback)
         {
             knockback.Normalize();
-            lastKnockbackVector = knockback;
-            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.MegaStalfosKnockbackTime, knockback);
+            stateMachine.SetState(EnemyState.Knockback, (float)ObjectConstants.DefaultEnemyKnockbackTime, knockback);
         }
 
         public void SuddenKnockBack(Vector2 knockback)
@@ -81,18 +77,6 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, Position);
-        }
-
-        //----- Helper method for regular stalfos spawning -----//
-
-        private void SpawnStalfosForDamage(int damage)
-        {
-            while (damage > 0)
-            {
-                IEnemy stalfos = ObjectsFromObjectsFactory.Instance.CreateStalfosFromMegaStalfos(Position);
-                stalfos.GradualKnockBack(lastKnockbackVector);
-                damage--;
-            }
         }
     }
 }

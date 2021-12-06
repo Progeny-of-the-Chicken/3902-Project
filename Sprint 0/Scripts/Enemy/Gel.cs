@@ -15,7 +15,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public IEnemyCollider Collider { get => collider; }
 
-        public int Damage { get => ObjectConstants.StalfosDamage; }
+        public int Damage { get => ObjectConstants.GelDamage; }
 
         public Vector2 Position { get => stateMachine.Location; }
 
