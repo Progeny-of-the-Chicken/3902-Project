@@ -84,6 +84,7 @@ namespace Sprint_0.GameStateHandlers
             inSuperHot = isSuperhot;
             RoomManager.Instance.Init(Link.Instance, isRandomized);
             gameplay = new GameplayStateHandler(link, game);
+            inventory = new InventoryStateHandler(game);
             gameOver = new GameOverStateHandler();
             superHot = new SuperHotStateHandler(link, game);
             StartGameplay();
