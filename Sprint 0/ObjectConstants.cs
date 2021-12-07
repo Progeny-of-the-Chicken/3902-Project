@@ -692,7 +692,7 @@ namespace Sprint_0
         public const int framesBetweenLetters = 2;
 
         public const int maxLetters = 400;
-        public const int lettersPerLine = 35;
+        public const int lettersPerLine = 30;
         public const int maxLines = 7;
         public const int letterSpacing = 6;
 

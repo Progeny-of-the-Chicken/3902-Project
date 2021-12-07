@@ -13,22 +13,24 @@ namespace Sprint_0.GameStateHandlers
 {
     public class GameplayStateHandler: IGameStateHandler
     {
-        private IRoomManager roomManager;
+        private IRoomManager roomManager = RoomManager.Instance;
         private HUD headsUpDisplay;
         private bool paused = false;
+        private bool suspended = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Link link;
         private Game1 game;
-        private DialogueBox db = new DialogueBox();
+        private DialogueBox db;
 
         public GameplayStateHandler(Link link, Game1 game)
         {
             this.link = link;
             this.game = game;
+            db = new DialogueBox(this);
 
-            roomManager = RoomManager.Instance;
-            roomManager.Init(link);
             CutSceneConstructor.Instance.Init(this);
+            RoomManager.Instance.Init(Link.Instance);
+
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
 
             initializeLetterSprites();
@@ -50,8 +52,11 @@ namespace Sprint_0.GameStateHandlers
         {
             if (!paused)
             {
-                roomManager.Update(gameTime);
-                headsUpDisplay.Update();
+                if (!suspended) {
+                    roomManager.Update(gameTime);
+                    headsUpDisplay.Update();
+                }
+
                 db.Update();
             }
         }
@@ -71,6 +76,11 @@ namespace Sprint_0.GameStateHandlers
                 game.kc = new KeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PlayMusic();
             }
+        }
+
+        public void SetSuspended(bool sus)
+        {
+            suspended = sus;
         }
 
         public void DialogueNext()

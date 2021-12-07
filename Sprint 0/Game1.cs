@@ -81,10 +81,11 @@ namespace Sprint_0
             FontSpriteFactory.Instance.LoadAllTextures(this.Content);
             SFXManager.Instance.LoadAllSounds(this.Content);
             GameStateSpriteFactory.Instance.LoadAllTextures(this.Content);
+            GameStateManager.Instance.Init(Link.Instance, this);
+            RoomManager.Instance.Init(Link.Instance);
+         
 
             base.LoadContent();
-            RoomManager.Instance.Init(Link.Instance);
-            GameStateManager.Instance.Init(Link.Instance, this);
         }
 
         protected override void Update(GameTime gameTime)
