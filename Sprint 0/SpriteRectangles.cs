@@ -48,9 +48,9 @@ namespace Sprint_0
             new Rectangle(54, 65, 12, 20)
         };
 
-        public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 12, 16),
+        public static Rectangle[] linkPickUpItemFrames = { new Rectangle(214, 11, 16, 16),
             new Rectangle(231, 11, 16, 16),
-            new Rectangle(214, 11, 12, 16),
+            new Rectangle(214, 11, 16, 16),
             new Rectangle(231, 11, 16, 16)};
 
         public static Rectangle linkUsingItemDownFrame = new Rectangle(107, 11, 16, 16);
@@ -97,7 +97,7 @@ namespace Sprint_0
 
         //----- Projectile source rectangles -----//
         public static Rectangle basicArrowFrame = new Rectangle(10, 190, 16, 5);
-        public static Rectangle shotgunPelletProjectileFrame = new Rectangle(71, 7, 16, 15);
+        public static Rectangle shotgunPelletProjectileFrame = new Rectangle(71, 13, 1, 4);
         public static Rectangle silverArrowFrame = new Rectangle(36, 190, 16, 5);
         public static Rectangle bombFrame = new Rectangle(145, 185, 16, 16);
         public static List<Rectangle> basicBoomerangFrames = new List<Rectangle>

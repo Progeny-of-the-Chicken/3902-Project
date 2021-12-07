@@ -60,9 +60,9 @@ namespace Sprint_0
 
         //----- Link constant values -----//
         public const int linkStdMoveDist = scaledStdWidthHeight / 2;
-        public const float linkStdMoveTime = 0.25f;
+        public const float linkStdMoveTime = 1/8f;
         // TODO: Remove doubled move speed, helpful for testing
-        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime * 2;
+        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
         public const float linkDeathAnimationTime = 1.5f;
         public const float linkTakeDamageTime = 1;
         public const float linkUseItemTime = 0.5f;
@@ -92,8 +92,11 @@ namespace Sprint_0
         public const int linkSwordFromDownCenter = 3 * scale;
 
         // Projectile
-        public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
-        public const int shotgunPelletDamage = 5;
+        public const float shotgunPelletSpeed = scaledStdWidthHeight * 12.5f;
+        public const int shotgunPelletDamage = 1;
+        public const double halfAdjustment = 0.5;
+        public const double spray = 0.75;
+        public const int pelletsPerBlast = 20;
 
 
         // Arrow

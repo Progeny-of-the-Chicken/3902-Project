@@ -20,7 +20,6 @@ namespace Sprint_0.Scripts.Commands
             if (link.CanDoNewAction)
             {
                 useSecondaryItem();
-                link.UseItem();
             }
         }
 
@@ -123,7 +122,8 @@ namespace Sprint_0.Scripts.Commands
             {
                 Inventory.Instance.ShotgunShells--;
                 Link.Instance.UseShotgun();
-                RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
+                for (int i = 0; i < ObjectConstants.pelletsPerBlast; i++)
+                    RoomManager.Instance.CurrentRoom.AddProjectile(ProjectileFactory.Instance.CreateShotgunPellet(link.Position, link.FacingDirection));
             }
         }
     }
