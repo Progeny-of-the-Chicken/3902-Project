@@ -65,12 +65,14 @@ namespace Sprint_0.GameStateHandlers
         public void RestartGame()
         {
             System.Diagnostics.Debug.WriteLine("Restarting Game");
-            StartGameplay();
             game.roomNum = ObjectConstants.counterInitialVal_int;
-            game.kc = new KeyboardController(game, Keyboard.GetState());
+            game.kc = new MainMenuStateController(game);
             Link.Instance.reset();
             Inventory.Instance.reset();
-            RoomManager.Instance.reset();   
+            RoomManager.Instance.reset();
+
+            mainmenu = new MainMenuStateHandler(game);
+            state = mainmenu;
         }
 
         public void GameOver()
