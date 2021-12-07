@@ -638,7 +638,7 @@ namespace Sprint_0
         public const double groupBDropRate = 0.41;
         public const double groupCDropRate = 0.59;
         public const double groupDDropRate = 0.41;
-        public const double groupXDropRate = 0;
+        public const double groupXDropRate = 0.61;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
@@ -688,6 +688,17 @@ namespace Sprint_0
             ItemType.SmallHeartItem,
             ItemType.YellowRuby,
             ItemType.SmallHeartItem, };
+        public static ItemType[] groupXItems = {
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem,
+            ItemType.ShotgunShellItem,
+            ItemType.Fairy,
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.ShotgunShellItem,
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem };
 
         //Group X doesn't drop anything
 

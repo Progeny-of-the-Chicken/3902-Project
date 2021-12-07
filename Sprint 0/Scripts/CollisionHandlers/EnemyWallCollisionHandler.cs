@@ -1,29 +1,30 @@
 ﻿using System.Collections.Generic;
 using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.Projectiles;
 
 namespace Sprint_0.Scripts.CollisionHandlers
 {
-    public class EnemyBlockCollisionHandler : ICollisionHandler
+    public class EnemyWallCollisionHandler : ICollisionHandler
     {
         private HashSet<IEnemy> enemies;
-        private HashSet<ITerrain> blocks;
+        private HashSet<IWall> walls;
 
-        public EnemyBlockCollisionHandler(HashSet<IEnemy> enemies, HashSet<ITerrain> blocks)
+        public EnemyWallCollisionHandler(HashSet<IEnemy> enemies, HashSet<IWall> walls)
         {
             this.enemies = enemies;
-            this.blocks = blocks;
+            this.walls = walls;
         }
 
         public void Update()
         {
             foreach (IEnemy enemy in enemies)
             {
-                foreach (ITerrain block in blocks)
+                foreach (IWall wall in walls)
                 {
                     Wallmaster cast = enemy as Wallmaster;
-                    if (block.Collider.Hitbox.Intersects(enemy.Collider.Hitbox) && cast == null)
+                    if (wall.Collider.Hitbox.Intersects(enemy.Collider.Hitbox) && cast == null)
                     {
-                        block.Collider.OnEnemyCollision(enemy);
+                        wall.Collider.OnEnemyCollision(enemy);
                     }
                 }
             }
