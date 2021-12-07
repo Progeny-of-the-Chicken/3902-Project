@@ -11,7 +11,7 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
-        private EnemyRandomInvoker invoker;
+        private EnemyMoveAndShootInvoker invoker;
         private IEnemyCollider collider;
         private IEnemy manhandla;
 
@@ -28,8 +28,8 @@ namespace Sprint_0.Scripts.Enemy
             this.manhandla = manhandla;
             sprite = GetSpriteForSide(side);
             stateMachine = new EnemyStateMachine(location, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaHeadHealth);
-            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.ManhandlaHead, stateMachine, this);
-            invoker.ExecuteRandomCommand();
+            invoker = EnemyRandomInvokerFactory.Instance.CreateMoveAndShootInvokerForEnemy(EnemyType.ManhandlaHead, stateMachine, this);
+            invoker.ExecuteRandomMoveCommand();
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -40,7 +40,8 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
-                invoker.ExecuteRandomCommand();
+                invoker.ExecuteRandomMoveCommand();
+                invoker.ExecuteAbility();
             }
             if (!stateMachine.IsDamaged)
             {

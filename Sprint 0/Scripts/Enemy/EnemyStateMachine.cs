@@ -94,10 +94,17 @@ namespace Sprint_0.Scripts.Enemy
 
         public void SetState(EnemyState state, float duration, IEnemy enemy, int radius, double radiusChange)
         {
-            // Hard coded to patra minion for now
+            // Hard coded to patra minion for now, can be dynamic by making radius and radiuschange public members of passed enemy
             timeSinceMove = ObjectConstants.zero_float;
             stateStack.Push((state, duration));
             movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radius, radiusChange, ObjectConstants.PatraMinionWidthHeight));
+        }
+
+        public void SetState(EnemyState state, float duration, IEnemy enemy, Vector2 offset)
+        {
+            timeSinceMove = ObjectConstants.zero_float;
+            stateStack.Push((state, duration));
+            movement.SetStrategy(MovementStrategyFactory.Instance.CreateOffsetFromEnemyStrategy(enemy, offset));
         }
 
         public void TakeDamage(int damage, bool isBoss)

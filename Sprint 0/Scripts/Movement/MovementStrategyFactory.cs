@@ -80,6 +80,11 @@ namespace Sprint_0.Scripts.Movement
             return new OrbitEnemyStrategy(centerEnemy, (float)ObjectConstants.PatraMinionOrbitTimeRadians, radius, radiusChange, satelliteDimensions);
         }
 
+        public IMovementStrategy CreateOffsetFromEnemyStrategy(IEnemy centerEnemy, Vector2 offset)
+        {
+            return new OffsetFromEnemyStrategy(centerEnemy, offset);
+        }
+
         //----- Enemy disambiguation strategies creator methods -----//
 
         private IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)

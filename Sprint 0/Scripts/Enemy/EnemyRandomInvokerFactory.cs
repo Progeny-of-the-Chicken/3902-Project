@@ -21,7 +21,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public EnemyRandomInvoker CreateInvokerForEnemy(EnemyType type, EnemyStateMachine stateMachine, IEnemy enemy)
         {
+            // Invoker
             EnemyRandomInvoker invoker = new EnemyRandomInvoker();
+
             // Movement
             switch (type)
             {
@@ -51,6 +53,7 @@ namespace Sprint_0.Scripts.Enemy
                     invoker.AddCommand(new CommandTrackLink(stateMachine));
                     break;
             }
+
             // Abilities
             switch (type)
             {
@@ -67,6 +70,24 @@ namespace Sprint_0.Scripts.Enemy
                     invoker.AddCommand(new CommandShootMagicProjectileTowardLink(stateMachine));
                     break;
             }
+
+            return invoker;
+        }
+
+        public EnemyMoveAndShootInvoker CreateMoveAndShootInvokerForEnemy(EnemyType type, EnemyStateMachine stateMachine, IEnemy enemy)
+        {
+            EnemyMoveAndShootInvoker invoker = new EnemyMoveAndShootInvoker();
+
+            switch (type)
+            {
+                case EnemyType.Aquamentus:
+                    // TODO: Implement for Aquamentus
+                    break;
+                case EnemyType.ManhandlaHead:
+                    invoker.AddCommand(new CommandShootMagicProjectileTowardLink(stateMachine));
+                    break;
+            }
+
             return invoker;
         }
 
