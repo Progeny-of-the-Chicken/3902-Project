@@ -46,7 +46,6 @@ While the game is paused you can use:
 # Not Implemented
 - Switching Between Arrows
 - Ladder
-- Magical Key (can only be picked up)
 - Merchant does not sell anything
 
 # Sprint 5 Bonus Round
