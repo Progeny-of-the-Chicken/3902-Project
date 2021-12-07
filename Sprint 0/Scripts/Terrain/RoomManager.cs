@@ -7,7 +7,7 @@ namespace Sprint_0.Scripts.Terrain
     public class RoomManager : IRoomManager
     {
         private IRoom activeRoom;
-        private Dictionary<string, IRoom> dormentRooms;
+        private Dictionary<string, IRoom> cachedRooms;
         private ILink link;
         private bool isRandomized;
 
@@ -23,7 +23,7 @@ namespace Sprint_0.Scripts.Terrain
 
         private RoomManager()
         {
-            dormentRooms = new Dictionary<string, IRoom>();
+            cachedRooms = new Dictionary<string, IRoom>();
         }
 
         public void reset()
@@ -35,9 +35,17 @@ namespace Sprint_0.Scripts.Terrain
         public void Init(ILink player, bool isRandomized)
         {
             this.link = player;
+
             this.isRandomized = isRandomized;
-            if (isRandomized) activeRoom = new Room(ObjectConstants.dungeon2StartRoom, this.link, isRandomized);
-            else activeRoom = new Room(ObjectConstants.dungeon1StartRoom, this.link, isRandomized);
+            if (isRandomized)
+            {
+                activeRoom = LoadRoom(ObjectConstants.dungeon2StartRoom);
+            }
+            else
+            {
+                activeRoom = LoadRoom(ObjectConstants.dungeon1StartRoom);
+            }
+
             RoomTracker.Instance.Init(activeRoom.RoomId());
         }
 
@@ -48,16 +56,7 @@ namespace Sprint_0.Scripts.Terrain
 
         public void SwitchToRoom(string roomID)
         {
-            dormentRooms.Add(activeRoom.RoomId(), activeRoom);
-            RoomTracker.Instance.RegisterRoom(activeRoom.RoomId(), roomID);
-            if (dormentRooms.ContainsKey(roomID))
-            {
-                dormentRooms.Remove(roomID, out activeRoom);
-            }
-            else
-            {
-                activeRoom = new Room(roomID, link, isRandomized);
-            }
+            activeRoom = LoadRoom(roomID);
         }
 
         public void Update(GameTime gt)
@@ -67,30 +66,14 @@ namespace Sprint_0.Scripts.Terrain
 
         public IRoom LoadRoom(string roomID)
         {
-            if (dormentRooms.ContainsKey(roomID))
+            if (!cachedRooms.ContainsKey(roomID))
             {
-                return dormentRooms[roomID];
+                cachedRooms.Add(roomID, new Room(roomID, link, isRandomized));
             }
-            else
-            {
-                //IRoom newRoom = new Room(roomID, link);
-                //dormentRooms.Add(roomID, newRoom);
-                return new Room(roomID, link, isRandomized);
-            }
+
+            return cachedRooms[roomID];
         }
-        public IRoom LoadRoomToSwapDoor(string roomID)
-        {
-            if (dormentRooms.ContainsKey(roomID))
-            {
-                return dormentRooms[roomID];
-            }
-            else
-            {
-                IRoom newRoom = new Room(roomID, link, isRandomized);
-                dormentRooms.Add(roomID, newRoom);
-                return new Room(roomID, link, isRandomized);
-            }
-        }
+
         public IRoom CurrentRoom
         {
             get

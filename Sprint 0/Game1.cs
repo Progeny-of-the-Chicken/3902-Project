@@ -81,6 +81,8 @@ namespace Sprint_0
             FontSpriteFactory.Instance.LoadAllTextures(this.Content);
             SFXManager.Instance.LoadAllSounds(this.Content);
             GameStateSpriteFactory.Instance.LoadAllTextures(this.Content);
+            GameStateManager.Instance.Init(Link.Instance, this);
+         
 
             base.LoadContent();
             GameStateManager.Instance.Init(Link.Instance, this);

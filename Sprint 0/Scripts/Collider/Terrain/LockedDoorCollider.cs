@@ -49,7 +49,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         private void UnlockNeighborDoor()
         {
-            Room adjacentRoom = (Room) RoomManager.Instance.LoadRoomToSwapDoor(owner.NextRoom);
+            Room adjacentRoom = (Room) RoomManager.Instance.LoadRoom(owner.NextRoom);
             if (owner.GetType() == typeof(EastLockedSprite))
             {
                 for (int i = 0; i < adjacentRoom.walls.Count; i++)

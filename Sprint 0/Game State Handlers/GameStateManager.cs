@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.GameState.MainMenuState;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
@@ -82,7 +83,6 @@ namespace Sprint_0.GameStateHandlers
         public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
         {
             inSuperHot = isSuperhot;
-            RoomManager.Instance.Init(Link.Instance, isRandomized);
             gameplay = new GameplayStateHandler(link, game);
             inventory = new InventoryStateHandler(game);
             gameOver = new GameOverStateHandler();

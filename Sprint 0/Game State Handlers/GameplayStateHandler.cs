@@ -4,29 +4,35 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.GameState.MainMenuState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Terrain.LevelData;
 
 namespace Sprint_0.GameStateHandlers
 {
     public class GameplayStateHandler: IGameStateHandler
     {
-        private IRoomManager roomManager;
+        private IRoomManager roomManager = RoomManager.Instance;
         private HUD headsUpDisplay;
         private bool paused = false;
+        private bool suspended = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Link link;
         private Game1 game;
-        private DialogueBox db = new DialogueBox();
+        private DialogueBox db;
 
         public GameplayStateHandler(Link link, Game1 game)
         {
             this.link = link;
             this.game = game;
+            db = new DialogueBox(this);
 
-            roomManager = RoomManager.Instance;
+            CutSceneConstructor.Instance.Init(this);
+            RoomManager.Instance.Init(Link.Instance, MainMenuManager.Instance.GetIfRandomized());
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
+
             initializeLetterSprites();
         }
 
@@ -47,8 +53,11 @@ namespace Sprint_0.GameStateHandlers
             link.Update(gameTime);
             if (!paused)
             {
-                roomManager.Update(gameTime);
-                headsUpDisplay.Update();
+                if (!suspended) {
+                    roomManager.Update(gameTime);
+                    headsUpDisplay.Update();
+                }
+
                 db.Update();
             }
         }
@@ -70,9 +79,19 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
+        public void SetSuspended(bool sus)
+        {
+            suspended = sus;
+        }
+
         public void DialogueNext()
         {
             db.Next();
+        }
+
+        public void AddDialogue(string[] dia)
+        {
+            db.AddDialogue(dia);
         }
 
 

@@ -55,6 +55,7 @@ namespace Sprint_0.Scripts
 
         public void GoInDirection(FacingDirection direction)
         {
+
             if (linkState.CanDoNewThing())
             {
                 linkState.GoInDirection(direction);

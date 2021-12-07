@@ -63,6 +63,11 @@ namespace Sprint_0.GameStateHandlers
             //Unused
         }
 
+        public void SetSuspended(bool sus)
+        {
+            //Unused
+        }
+
         //----- Helper Methods -----//
 
 

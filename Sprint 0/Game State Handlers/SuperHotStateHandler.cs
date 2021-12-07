@@ -15,15 +15,17 @@ namespace Sprint_0.GameStateHandlers
         private IRoomManager roomManager;
         private HUD headsUpDisplay;
         private bool paused = false;
+        private bool suspended = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
         private Link link;
         private Game1 game;
-        private DialogueBox db = new DialogueBox();
+        private DialogueBox db;
 
         public SuperHotStateHandler(Link link, Game1 game)
         {
             this.link = link;
             this.game = game;
+            db = new DialogueBox(this);
 
             roomManager = RoomManager.Instance;
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
@@ -49,8 +51,11 @@ namespace Sprint_0.GameStateHandlers
             {
                 if (link.AdvanceTime)
                 {
-                    roomManager.Update(gameTime);
-                    headsUpDisplay.Update();
+                    if (!suspended)
+                    {
+                        roomManager.Update(gameTime);
+                        headsUpDisplay.Update();
+                    }
                 }
                 db.Update();
             }
@@ -77,6 +82,11 @@ namespace Sprint_0.GameStateHandlers
         public void DialogueNext()
         {
             db.Next();
+        }
+
+        public void SetSuspended(bool sus)
+        {
+            suspended = sus;
         }
 
         //----- Helper Methods -----//
