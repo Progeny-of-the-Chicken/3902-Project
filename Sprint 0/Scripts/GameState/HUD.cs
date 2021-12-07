@@ -97,7 +97,7 @@ namespace Sprint_0.Scripts.GameState
             levelDisplay.Draw(spriteBatch, ObjectConstants.DungeonLevelDisplayLocation + yOffset);
             levelNumber.Draw(spriteBatch, ObjectConstants.DungeonLevelNumberDisplayLocation + yOffset);
 
-            string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
+            string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon1CsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
             TextFieldParser csvReader = new TextFieldParser(filePath);
             csvReader.Delimiters = new string[] { ObjectConstants.separator };
             for (int i = 0; i < ObjectConstants.maxDungeonWidthHeight; i++)

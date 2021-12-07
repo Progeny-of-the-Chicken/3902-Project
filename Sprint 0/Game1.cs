@@ -11,6 +11,7 @@ using Sprint_0.Scripts;
 using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.GameState.InventoryState;
 using Microsoft.Xna.Framework.Input;
+using Sprint_0.Scripts.GameState.MainMenuState;
 
 namespace Sprint_0
 {
@@ -51,13 +52,11 @@ namespace Sprint_0
             Content.RootDirectory = ObjectConstants.contentLocation;
             IsMouseVisible = true;
 
-            kc = new KeyboardController(this, Keyboard.GetState());
+            kc = new MainMenuStateController(this);
 
             //Just for Sprint 3
             mc = new MouseController(this);
 
-            
-            //RoomManager.Instance.Init(Link.Instance);
         }
 
         protected override void Initialize()
@@ -71,6 +70,7 @@ namespace Sprint_0
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            MainMenuSpriteFactory.Instance.LoadAllTextures(this.Content);
             LinkSpriteFactory.Instance.LoadAllTextures(this.Content);
             TerrainSpriteFactory.Instance.LoadAllTextures(this.Content);
             ItemSpriteFactory.Instance.LoadAllTextures(this.Content);
@@ -82,10 +82,10 @@ namespace Sprint_0
             SFXManager.Instance.LoadAllSounds(this.Content);
             GameStateSpriteFactory.Instance.LoadAllTextures(this.Content);
             GameStateManager.Instance.Init(Link.Instance, this);
-            RoomManager.Instance.Init(Link.Instance);
          
 
             base.LoadContent();
+            GameStateManager.Instance.Init(Link.Instance, this);
         }
 
         protected override void Update(GameTime gameTime)

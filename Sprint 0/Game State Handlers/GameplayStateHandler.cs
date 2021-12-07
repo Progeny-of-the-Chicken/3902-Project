@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
+using Sprint_0.Scripts.GameState.MainMenuState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
@@ -29,8 +30,7 @@ namespace Sprint_0.GameStateHandlers
             db = new DialogueBox(this);
 
             CutSceneConstructor.Instance.Init(this);
-            RoomManager.Instance.Init(Link.Instance);
-
+            RoomManager.Instance.Init(Link.Instance, MainMenuManager.Instance.GetIfRandomized());
             headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
 
             initializeLetterSprites();
