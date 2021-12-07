@@ -24,14 +24,22 @@ namespace Sprint_0.Scripts.Terrain.LevelData
             this.gsh = gsh;
         }
 
-        public void LoadDialogueForRoom(string roomID)
+        public void LoadDialogueForRoom(string roomID, bool randomized)
         {
-            System.Diagnostics.Debug.WriteLine("Room ID Cutscene: " + roomID);
-
-            if (CutSceneData.dialogueKeys.ContainsKey(roomID))
+            if (randomized)
             {
-                string[] data = CutSceneData.dialogueKeys[roomID];
-                gsh.AddDialogue(data);
+                if (CutSceneData.dialogueKeys.ContainsKey(roomID))
+                {
+                    string[] data = CutSceneDataRandomized.dialogueKeys[roomID];
+                    gsh.AddDialogue(data);
+                }
+            } else
+            {
+                if (CutSceneData.dialogueKeys.ContainsKey(roomID))
+                {
+                    string[] data = CutSceneData.dialogueKeys[roomID];
+                    gsh.AddDialogue(data);
+                }
             }
         }
     }

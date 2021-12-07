@@ -491,7 +491,7 @@ public class Room : IRoom
     {
         if (!cutscenePlayed)
         {
-            CutSceneConstructor.Instance.LoadDialogueForRoom(roomId);
+            CutSceneConstructor.Instance.LoadDialogueForRoom(roomId, isRandomized);
         }
         
         cutscenePlayed = true;
