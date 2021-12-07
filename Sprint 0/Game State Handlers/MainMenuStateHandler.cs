@@ -58,6 +58,10 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
+        public void DialogueNext()
+        {
+            //Unused
+        }
 
         //----- Helper Methods -----//
 

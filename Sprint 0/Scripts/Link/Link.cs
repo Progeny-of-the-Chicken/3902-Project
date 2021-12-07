@@ -154,6 +154,8 @@ namespace Sprint_0.Scripts
         public bool BoomerangReady { get; set; }
 
         public bool SwordIsSheathed { get => linkState.SwordIsSheathed; }
+
+        public bool AdvanceTime { get => linkState.DoingSomething() || linkState.IsSuspended; }
     }
 
 }

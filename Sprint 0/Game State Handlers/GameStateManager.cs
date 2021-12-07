@@ -16,7 +16,8 @@ namespace Sprint_0.GameStateHandlers
         Gameplay,
         Inventory,
         RoomSwap,
-        GameOver
+        GameOver,
+        SuperHot
     }
 
     public class GameStateManager
@@ -31,11 +32,10 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
-        private GameState _state;
         private Link link;
         private Game1 game;
 
-        public GameState state { get => _state; }
+        private IGameStateHandler state;
 
         // Game State Handlers
         MainMenuStateHandler mainmenu;
@@ -43,11 +43,12 @@ namespace Sprint_0.GameStateHandlers
         InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
         GameOverStateHandler gameOver;
+        SuperHotStateHandler superHot;
+
+        private bool inSuperHot;
 
         public GameStateManager()
         {
-            // Set initial game state
-            this._state = GameState.MainMenu;
         }
 
         public void Init(Link link, Game1 game)
@@ -56,6 +57,8 @@ namespace Sprint_0.GameStateHandlers
             this.game = game;
 
             mainmenu = new MainMenuStateHandler(game);
+
+            state = mainmenu;
         }
 
         public void RestartGame()
@@ -66,143 +69,71 @@ namespace Sprint_0.GameStateHandlers
             game.kc = new KeyboardController(game, Keyboard.GetState());
             Link.Instance.reset();
             Inventory.Instance.reset();
-            RoomManager.Instance.reset();
-            
+            RoomManager.Instance.reset();   
         }
 
         public void GameOver()
         {
-            this._state = GameState.GameOver;
             gameOver = new GameOverStateHandler();
             game.kc = new GameOverStateController(game, Keyboard.GetState());
+            this.state = gameOver;
         }
 
         public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
         {
+            inSuperHot = isSuperhot;
             RoomManager.Instance.Init(Link.Instance, isRandomized);
+            gameplay = new GameplayStateHandler(link, game);
+            inventory = new InventoryStateHandler(game);
+            gameOver = new GameOverStateHandler();
+            superHot = new SuperHotStateHandler(link, game);
             StartGameplay();
         }
 
         public void StartGameplay()
         {
-            gameplay = new GameplayStateHandler(link, game);
-            this._state = GameState.Gameplay;
-            System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
+            if (inSuperHot)
+            {
+                this.state = superHot;
+                System.Diagnostics.Debug.WriteLine("Swapped to state: SuperHot");
+            }
+            else
+            {
+                this.state = gameplay;
+                System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
+            }
         }
 
         public void SwapRooms(string fromRoomID, string toRoomID, FacingDirection scrollingDirection)
         {
-            this._state = GameState.RoomSwap;
             this.swapper = new RoomSwapStateHandler(fromRoomID, toRoomID, scrollingDirection, this.link);
-
+            this.state = swapper;
             System.Diagnostics.Debug.WriteLine("Swapped to state: Room Swap");
         }
 
         public void OpenInventory()
         {
-            this._state = GameState.Inventory;
-            inventory = new InventoryStateHandler(game);
+            this.state = inventory;
             // Put rest of inventory initialization logic here
         }
 
         public void TogglePause()
         {
-            switch (_state)
-            {
-                case GameState.Gameplay:
-                    gameplay.TogglePause();
-                    break;
-                case GameState.MainMenu:
-                    mainmenu.TogglePause();
-                    break;
-                case GameState.Menu:
-                    break;
-                case GameState.Inventory:
-                    inventory.TogglePause();
-                    break;
-                case GameState.RoomSwap:
-                    break;
-                default:
-                    break;
-            }
+            state.TogglePause();
         }
 
         public void DialogueNext()
         {
-            switch (_state)
-            {
-                case GameState.Gameplay:
-                    gameplay.DialogueNext();
-                    break;
-                case GameState.Menu:
-                    break;
-                case GameState.Inventory:
-                    break;
-                case GameState.RoomSwap:
-                    break;
-                default:
-                    break;
-            }
+            state.DialogueNext();
         }
-
-        public void OpenMenu()
-        {
-            this._state = GameState.Menu;
-
-            // Put rest of menu open logic here
-        }
-
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
-
-            switch (_state)
-            {
-                case GameState.Gameplay:
-                    gameplay.Draw(sb, gameTime);
-                    break;
-                case GameState.MainMenu:
-                    mainmenu.Draw(sb, gameTime);
-                    break;
-                case GameState.Menu:
-                    break;
-                case GameState.Inventory:
-                    inventory.Draw(sb, gameTime);
-                    break;
-                case GameState.RoomSwap:
-                    swapper.Draw(sb, gameTime);
-                    break;
-                case GameState.GameOver:
-                    gameOver.Draw(sb, gameTime);
-                    break;
-                default:
-                    break;
-            }
+            state.Draw(sb, gameTime);
         }
 
         public void Update(GameTime gameTime)
         {
-            switch (_state)
-            {
-                case GameState.Gameplay:
-                    gameplay.Update(gameTime);
-                    break;
-                case GameState.MainMenu:
-                    mainmenu.Update(gameTime);
-                    break;
-                case GameState.Menu:
-                    break;
-                case GameState.Inventory:
-                    inventory.Update(gameTime);
-                    break;
-                case GameState.RoomSwap:
-                    swapper.Update(gameTime);
-                    break;
-                case GameState.GameOver:
-                    gameOver.Update(gameTime);
-                    break;
-                default:
-                    break;
-            }
+            state.Update(gameTime);
         }
     }
 }
