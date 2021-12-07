@@ -45,6 +45,7 @@ namespace Sprint_0.GameStateHandlers
         public GameStateManager()
         {
             // Set initial game state
+            inventory = new InventoryStateHandler(game);
             this._state = GameState.Gameplay;
         }
 
@@ -92,7 +93,6 @@ namespace Sprint_0.GameStateHandlers
         public void OpenInventory()
         {
             this._state = GameState.Inventory;
-            inventory = new InventoryStateHandler(game);
             // Put rest of inventory initialization logic here
         }
 

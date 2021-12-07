@@ -16,7 +16,9 @@ namespace Sprint_0.Scripts.Controller
 			this.game = game;
 			controllerMappings = new Dictionary<Keys, ICommand>();
 			setCommands();
-			previousKeys = new KeyboardState();
+			//Start with E pressed so the state doesn't immediately switch back
+			Keys[] startKeys = { Keys.E };
+			previousKeys = new KeyboardState(startKeys);
 		}
 
 		public void Update()
@@ -51,8 +53,7 @@ namespace Sprint_0.Scripts.Controller
 			this.RegisterCommand(Keys.A, new CommandMoveSelectionLeft(game));
 			this.RegisterCommand(Keys.S, new CommandMoveSelectionDown(game));
 			this.RegisterCommand(Keys.D, new CommandMoveSelectionRight(game));
-			this.RegisterCommand(Keys.B, new CommandSelectWeapon(game));
-			this.RegisterCommand(Keys.R, new CommandReturnToGameState(game));
+			this.RegisterCommand(Keys.E, new CommandReturnToGameState(game));
 			this.RegisterCommand(Keys.M, new ToggleMute());
 			this.RegisterCommand(Keys.P, new PauseCommand());
 		}
