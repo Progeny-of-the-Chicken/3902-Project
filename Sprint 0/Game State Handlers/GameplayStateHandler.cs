@@ -50,10 +50,10 @@ namespace Sprint_0.GameStateHandlers
 
         public void Update(GameTime gameTime)
         {
-            link.Update(gameTime);
             if (!paused)
             {
                 if (!suspended) {
+                    link.Update(gameTime);
                     roomManager.Update(gameTime);
                     headsUpDisplay.Update();
                 }
