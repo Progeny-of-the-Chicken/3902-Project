@@ -70,6 +70,8 @@ namespace Sprint_0.Scripts.Enemy
             }
             else
             {
+                // Short term invulnerability
+                stateMachine.TakeDamage(ObjectConstants.zero, false);
                 SFXManager.Instance.PlayShieldDeflect();
             }
         }

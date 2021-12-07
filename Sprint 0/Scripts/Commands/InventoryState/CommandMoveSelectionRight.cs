@@ -15,6 +15,7 @@ namespace Sprint_0.Scripts.Commands.InventoryState
         {
             // TODO: loop this through game
             InventoryManager.Instance.MoveSelection(FacingDirection.Right);
+            InventoryManager.Instance.SelectWeapon();
             SFXManager.Instance.PlayPickUpRupee();
         }
     }

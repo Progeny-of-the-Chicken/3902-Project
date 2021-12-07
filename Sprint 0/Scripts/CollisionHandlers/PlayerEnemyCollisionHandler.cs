@@ -71,6 +71,11 @@ namespace Sprint_0.Scripts.CollisionHandlers
                 {
                     rope.ChaseCollider.OnPlayerCollision(link);
                 }
+                MegaDarknut megaDarknut = enemy as MegaDarknut;
+                if (megaDarknut != null && link.collider.CollisionRectangle.Intersects(megaDarknut.ChaseCollider.Hitbox))
+                {
+                    megaDarknut.ChaseCollider.OnPlayerCollision(link);
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Sprint_0.Scripts.Movement.MovementStrategy
             Vector2 distanceVector = SpawnHelper.Instance.CenterLocationOnSpawner(Link.Instance.Position, new Vector2(ObjectConstants.linkWidthHeight), spawnerDimensions) - location;
             Vector2 abs = new Vector2(Math.Abs(distanceVector.X), Math.Abs(distanceVector.Y));
             Vector2 xyScale = new Vector2(distanceVector.X / (abs.X + abs.Y), distanceVector.Y / (abs.X + abs.Y));
-            return location += new Vector2(speed) * xyScale;
+            return location += new Vector2((int)(speed * gameTime.ElapsedGameTime.TotalSeconds)) * xyScale;
         }
     }
 }

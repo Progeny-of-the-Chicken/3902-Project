@@ -8,7 +8,7 @@ public interface IRoomManager
     void Draw(SpriteBatch spriteBatch);
     void SwitchToRoom(string roomID);
     IRoom CurrentRoom { get; }
-    void Init(ILink player);
+    void Init(ILink player, bool isRandomized);
     IRoom LoadRoom(string roomID);
 }
 

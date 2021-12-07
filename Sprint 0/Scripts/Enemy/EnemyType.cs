@@ -15,6 +15,13 @@
         OldMan,
         Merchant,
         Bubble,
-        Darknut
+        Darknut,
+        Patra,
+        PatraMinion,
+        MegaStalfos,
+        MegaGel,
+        MegaZol,
+        MegaKeese,
+        MegaDarknut
     }
 }

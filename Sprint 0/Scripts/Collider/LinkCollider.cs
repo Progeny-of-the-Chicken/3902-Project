@@ -43,15 +43,15 @@ namespace Sprint_0.Scripts
             switch (item.Type)
             {
                 case ItemType.BoomerangItem:
-                    if (!Inventory.Instance.Weapons.Contains(WeaponType.BasicBoomerang))
+                    if (!Inventory.Instance.HasWeapon(WeaponType.BasicBoomerang))
                     {
-                        Inventory.Instance.Weapons.Add(WeaponType.BasicBoomerang);
+                        Inventory.Instance.AddWeapon(WeaponType.BasicBoomerang);
                     }
                     break;
                 case ItemType.BowItem:
-                    if (!Inventory.Instance.Weapons.Contains(WeaponType.Bow))
+                    if (!Inventory.Instance.HasWeapon(WeaponType.Bow))
                     {
-                        Inventory.Instance.Weapons.Add(WeaponType.Bow);
+                        Inventory.Instance.AddWeapon(WeaponType.Bow);
                     }
                     break;
                 case ItemType.BombItem:
@@ -96,6 +96,15 @@ namespace Sprint_0.Scripts
                     break;
                 case ItemType.SilverArrowItem:
                     Inventory.Instance.SilverArrows = true;
+                    break;
+                case ItemType.ShotgunItem:
+                    if (!Inventory.Instance.HasWeapon(WeaponType.Shotgun))
+                    {
+                        Inventory.Instance.AddWeapon(WeaponType.Shotgun);
+                    }
+                    break;
+                case ItemType.ShotgunShellItem:
+                    Inventory.Instance.ShotgunShells += ObjectConstants.shotgunShellsPerPickUp;
                     break;
                 case ItemType.BlueRing:
                     Inventory.Instance.BlueRing = true;

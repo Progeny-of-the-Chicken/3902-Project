@@ -20,6 +20,7 @@ namespace Sprint_0.Scripts.GameState
         ISprite[] rupeeCounter;
         ISprite[] keyCounter;
         ISprite[] bombCounter;
+        ISprite[] shotgunShellCounter;
         ISprite[] heartArray;
         ISprite secondaryWeaponSprite;
         ISprite primaryWeaponSprite;
@@ -40,10 +41,13 @@ namespace Sprint_0.Scripts.GameState
             rupeeCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
             keyCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
             bombCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
+            shotgunShellCounter = new ISprite[ObjectConstants.maxDisplayableNumbers];
+
 
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
+            shotgunShellCounter = numToSprites(Inventory.Instance.ShotgunShells);
 
             //Replace numbers with link's health/max health when added
             heartArray = new ISprite[ObjectConstants.maxMaxHealth / 2];
@@ -67,6 +71,7 @@ namespace Sprint_0.Scripts.GameState
             rupeeCounter = numToSprites(Inventory.Instance.Rupee);
             keyCounter = numToSprites(Inventory.Instance.Key);
             bombCounter = numToSprites(Inventory.Instance.Bomb);
+            shotgunShellCounter = numToSprites(Inventory.Instance.ShotgunShells);
             secondaryWeaponSprite = InventorySpriteFactory.Instance.CreateWeaponSprite(getFrameForWeapon(Inventory.Instance.Weapons[Inventory.Instance.SelectedWeaponIndex]));
             health = Link.Instance.Health;
             maxHealth = Link.Instance.MaxHealth;
@@ -92,7 +97,7 @@ namespace Sprint_0.Scripts.GameState
             levelDisplay.Draw(spriteBatch, ObjectConstants.DungeonLevelDisplayLocation + yOffset);
             levelNumber.Draw(spriteBatch, ObjectConstants.DungeonLevelNumberDisplayLocation + yOffset);
 
-            string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
+            string filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon1CsvFiles + "RoomLayout" + ObjectConstants.cvsExtension;
             TextFieldParser csvReader = new TextFieldParser(filePath);
             csvReader.Delimiters = new string[] { ObjectConstants.separator };
             for (int i = 0; i < ObjectConstants.maxDungeonWidthHeight; i++)
@@ -134,6 +139,7 @@ namespace Sprint_0.Scripts.GameState
                 WeaponType.Bow => SpriteRectangles.weaponBowFrame,
                 WeaponType.BlueCandle => SpriteRectangles.weaponBlueCandleFrame,
                 WeaponType.Potion => SpriteRectangles.weaponPotionFrame,
+                WeaponType.Shotgun => SpriteRectangles.shotGunItemHudFrame,
                 // Default should never happen
                 _ => SpriteRectangles.weaponBlueCandleFrame
             };
@@ -145,7 +151,7 @@ namespace Sprint_0.Scripts.GameState
             //Do stuff with getting health from link here
             for (int i = 0; i < ObjectConstants.maxMaxHealth / 2; i++)
             {
-                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + ObjectConstants.letterSpacing * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
+                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + SpriteRectangles.fullHeartFrame.Width * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + SpriteRectangles.fullHeartFrame.Height * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
                 heartArray[i].Draw(spriteBatch, drawLocation);
             }
         }
@@ -187,6 +193,8 @@ namespace Sprint_0.Scripts.GameState
                 rupeeCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.rupeeCounterLocation.X + xOffset, ObjectConstants.rupeeCounterLocation.Y) + yOffset);
                 keyCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.keyCounterLocation.X + xOffset, ObjectConstants.keyCounterLocation.Y) + yOffset);
                 bombCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.bombCounterLocation.X + xOffset, ObjectConstants.bombCounterLocation.Y) + yOffset);
+                shotgunShellCounter[i].Draw(spriteBatch, new Vector2(ObjectConstants.shotgunShellCounterLocation.X + xOffset, ObjectConstants.shotgunShellCounterLocation.Y) + yOffset);
+
             }
         }
 

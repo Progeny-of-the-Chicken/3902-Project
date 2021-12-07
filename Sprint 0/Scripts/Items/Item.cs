@@ -88,6 +88,8 @@ namespace Sprint_0.Scripts.Items
                 ItemType.BasicArrowItem => ItemSpriteFactory.Instance.CreateBasicArrowSprite(),
                 ItemType.SilverArrowItem => ItemSpriteFactory.Instance.CreateSilverArrowSprite(),
                 ItemType.BlueRing => ItemSpriteFactory.Instance.CreateBlueRingSprite(),
+                ItemType.ShotgunItem => ItemSpriteFactory.Instance.CreateShotgunItemSprite(),
+                ItemType.ShotgunShellItem => ItemSpriteFactory.Instance.CreateShotgunShellItemSprite(),
                 _ => ItemSpriteFactory.Instance.CreateSmallHeartItemSprite()
             };
         }

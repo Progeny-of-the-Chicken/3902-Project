@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts
 
         private SFXManager()
         {
-
+            SoundEffect.MasterVolume = 0;
         }
         SoundEffect bombExplosion;
         SoundEffect bombPlacement;
@@ -29,6 +29,7 @@ namespace Sprint_0.Scripts
         SoundEffect enemyHit;
         SoundEffect fanfare;
         SoundEffect fireArrowBoomerang;
+        SoundEffect shotgunBang;
         SoundEffect fireCandle;
         SoundEffect fireMagicRod;
         SoundEffect gameOver;               //definitely needs to be loopable
@@ -74,6 +75,7 @@ namespace Sprint_0.Scripts
             enemyHit = content.Load<SoundEffect>(ObjectConstants.enemyHitStr);
             fanfare = content.Load<SoundEffect>(ObjectConstants.fanfareStr);
             fireArrowBoomerang = content.Load<SoundEffect>(ObjectConstants.fireArrowBoomerangStr);
+            shotgunBang = content.Load<SoundEffect>(ObjectConstants.shotgunBangStr);
             fireCandle = content.Load<SoundEffect>(ObjectConstants.fireCandleStr);
             fireMagicRod = content.Load<SoundEffect>(ObjectConstants.fireMagicRodStr);
             gameOver = content.Load<SoundEffect>(ObjectConstants.gameOverStr);
@@ -122,7 +124,7 @@ namespace Sprint_0.Scripts
             if (musicStopped)
             {
                 stopTimer -= gt.ElapsedGameTime.TotalSeconds;
-                if(stopTimer <= 0)
+                if (stopTimer <= 0)
                 {
                     musicStopped = false;
                     PlayMusic();
@@ -173,6 +175,10 @@ namespace Sprint_0.Scripts
         public void PlayFireArrowBoomerang()
         {
             fireArrowBoomerang.Play();
+        }
+        public void PlayShotgunBang()
+        {
+            shotgunBang.Play();
         }
         public void PlayFireCandle()
         {
@@ -226,9 +232,9 @@ namespace Sprint_0.Scripts
         {
             swordCombined.Play();
         }
-        public void PlaySwordShoot() 
-        { 
-            swordShoot.Play(); 
+        public void PlaySwordShoot()
+        {
+            swordShoot.Play();
         }
         public void PlaySwordSlash()
         {

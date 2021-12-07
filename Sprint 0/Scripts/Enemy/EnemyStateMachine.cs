@@ -92,6 +92,14 @@ namespace Sprint_0.Scripts.Enemy
             movement.SetStrategy(GetStrategyForState(state));
         }
 
+        public void SetState(EnemyState state, float duration, IEnemy enemy, int radius, double radiusChange)
+        {
+            // Hard coded to patra minion for now
+            timeSinceMove = ObjectConstants.zero_float;
+            stateStack.Push((state, duration));
+            movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radius, radiusChange, ObjectConstants.PatraMinionWidthHeight));
+        }
+
         public void TakeDamage(int damage, bool isBoss)
         {
             health -= damage;
@@ -129,7 +137,7 @@ namespace Sprint_0.Scripts.Enemy
                 EnemyState.Freeze => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.Stun => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.AbilityCast => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
-                EnemyState.Chase => MovementStrategyFactory.Instance.CreateChaseStrategy(lastMovementVector),
+                EnemyState.Chase => MovementStrategyFactory.Instance.CreateChaseStrategyForEnemy(lastMovementVector, enemyType),
                 EnemyState.NoAction => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 // Should never happen
                 _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType)
@@ -140,7 +148,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (timeSinceMove >= moveTime)
+            if (timeSinceMove >= stateStack.Peek().stateEndTime)
             {
                 stateStack.Pop();
                 SetState(EnemyState.NoAction, enemyLifeTime);

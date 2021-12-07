@@ -64,6 +64,12 @@ namespace Sprint_0.Scripts.Collider.Item
                 case ItemType.SilverArrowItem:
                     _hitbox = SpriteRectangles.silverArrowItemFrame;
                     break;
+                case ItemType.ShotgunItem:
+                    _hitbox = SpriteRectangles.shotGunItemFrame;
+                    break;
+                case ItemType.ShotgunShellItem:
+                    _hitbox = SpriteRectangles.shotGunShellItemFrame;
+                    break;
                 default:
                     // Should never happen
                     _hitbox = SpriteRectangles.smallHeartFrames[ObjectConstants.firstFrame];

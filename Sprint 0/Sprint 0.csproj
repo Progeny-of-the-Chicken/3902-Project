@@ -59,7 +59,6 @@
     <Folder Include="Scripts\Collider\Projectile\" />
     <Folder Include="Scripts\Effect\" />
     <Folder Include="Scripts\Sprite\EffectSprites\" />
-    <Folder Include="Scripts\GameState\InventoryState\" />
     <Folder Include="Scripts\GameState\InventoryState\Display\" />
     <Folder Include="Scripts\Commands\InventoryState\" />
     <Folder Include="Scripts\Sprite\BlueLinkSprites\" />
@@ -68,5 +67,6 @@
     <Folder Include="Scripts\Movement\" />
     <Folder Include="Scripts\Movement\MovementStrategy\" />
     <Folder Include="Scripts\Commands\EnemyAbilities\" />
+    <Folder Include="Scripts\Terrain\LevelData\Dungeon2\" />
   </ItemGroup>
 </Project>

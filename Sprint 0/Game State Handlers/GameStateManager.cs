@@ -12,6 +12,7 @@ namespace Sprint_0.GameStateHandlers
     public enum GameState
     {
         Menu,
+        MainMenu,
         Gameplay,
         Inventory,
         RoomSwap,
@@ -37,13 +38,14 @@ namespace Sprint_0.GameStateHandlers
         private IGameStateHandler state;
 
         // Game State Handlers
+        MainMenuStateHandler mainmenu;
         GameplayStateHandler gameplay;
         InventoryStateHandler inventory;
         RoomSwapStateHandler swapper;
         GameOverStateHandler gameOver;
         SuperHotStateHandler superHot;
 
-        private bool inSuperHot = false;
+        private bool inSuperHot;
 
         public GameStateManager()
         {
@@ -54,14 +56,9 @@ namespace Sprint_0.GameStateHandlers
             this.link = link;
             this.game = game;
 
-            gameplay = new GameplayStateHandler(link, game);
-            inventory = new InventoryStateHandler(game);
-            //Maybe change swapper so we can initialize it here?
-            //swapper = new RoomSwapStateHandler();
-            gameOver = new GameOverStateHandler();
-            superHot = new SuperHotStateHandler(link, game);
+            mainmenu = new MainMenuStateHandler(game);
 
-            StartGameplay();
+            state = mainmenu;
         }
 
         public void RestartGame()
@@ -72,8 +69,7 @@ namespace Sprint_0.GameStateHandlers
             game.kc = new KeyboardController(game, Keyboard.GetState());
             Link.Instance.reset();
             Inventory.Instance.reset();
-            RoomManager.Instance.reset();
-            
+            RoomManager.Instance.reset();   
         }
 
         public void GameOver()
@@ -81,6 +77,17 @@ namespace Sprint_0.GameStateHandlers
             gameOver = new GameOverStateHandler();
             game.kc = new GameOverStateController(game, Keyboard.GetState());
             this.state = gameOver;
+        }
+
+        public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
+        {
+            inSuperHot = isSuperhot;
+            RoomManager.Instance.Init(Link.Instance, isRandomized);
+            gameplay = new GameplayStateHandler(link, game);
+            inventory = new InventoryStateHandler(game);
+            gameOver = new GameOverStateHandler();
+            superHot = new SuperHotStateHandler(link, game);
+            StartGameplay();
         }
 
         public void StartGameplay()
