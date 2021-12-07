@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
@@ -12,6 +13,7 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyStateMachine stateMachine;
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
+        private HashSet<(Vector2 offset, ISprite sprite, IEnemyCollider collider)> headSet = new HashSet<(Vector2 offset, ISprite sprite, IEnemyCollider collider)>();
 
         public IEnemyCollider Collider { get => collider; }
 
@@ -27,7 +29,9 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine = new EnemyStateMachine(location, EnemyType.Manhandla, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaPlaceholderHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Manhandla, stateMachine, this);
             invoker.ExecuteRandomCommand();
+
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
+            InitializeHeads(location);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
@@ -60,6 +64,7 @@ namespace Sprint_0.Scripts.Enemy
         public void SuddenKnockBack(Vector2 knockback)
         {
             stateMachine.Displace(knockback);
+            // TODO: Displace heads too
         }
 
         public void Freeze(float duration)
@@ -75,6 +80,21 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             bodySprite.Draw(sb, Position);
+        }
+
+        //----- Helper method for generating heads -----//
+
+        private void InitializeHeads(Vector2 location)
+        {
+            Point headSize = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight).ToPoint();
+            Vector2 headLocation = location * ObjectConstants.RightUnitVector;
+            headSet.Add((headLocation, EnemySpriteFactory.Instance.CreateManhandlaRightHeadSprite(), new GenericEnemyCollider(this, new Rectangle(headLocation.ToPoint(), headSize))));
+            headLocation = location * ObjectConstants.UpUnitVector;
+            headSet.Add((headLocation, EnemySpriteFactory.Instance.CreateManhandlaUpHeadSprite(), new GenericEnemyCollider(this, new Rectangle(headLocation.ToPoint(), headSize))));
+            headLocation = location * ObjectConstants.LeftUnitVector;
+            headSet.Add((headLocation, EnemySpriteFactory.Instance.CreateManhandlaLeftHeadSprite(), new GenericEnemyCollider(this, new Rectangle(headLocation.ToPoint(), headSize))));
+            headLocation = location * ObjectConstants.DownUnitVector;
+            headSet.Add((headLocation, EnemySpriteFactory.Instance.CreateManhandlaDownHeadSprite(), new GenericEnemyCollider(this, new Rectangle(headLocation.ToPoint(), headSize))));
         }
     }
 }
