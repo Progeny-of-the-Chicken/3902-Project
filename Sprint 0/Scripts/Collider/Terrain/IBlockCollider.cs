@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Items;
+
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -18,5 +20,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
         void OnEnemyCollision(IEnemy enemy);
 
         void OnLinkCollision(Link link);
+
+        void OnItemCollision(IItem item);
     }
 }

@@ -4,33 +4,37 @@ using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Controller;
 using Sprint_0.Scripts.GameState;
-using Sprint_0.Scripts.GameState.InventoryState;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.GameStateHandlers
 {
-    public class InventoryStateHandler: IGameStateHandler
+    public class SuperHotStateHandler : IGameStateHandler
     {
-        private IInventoryManager inventoryManager;
+        private IRoomManager roomManager;
         private HUD headsUpDisplay;
         private bool paused = false;
         private ISprite[] pausedLetterSprites = new ISprite[ObjectConstants.pausedLetters.Length];
+        private Link link;
         private Game1 game;
+        private DialogueBox db = new DialogueBox();
 
-        public InventoryStateHandler(Game1 game)
+        public SuperHotStateHandler(Link link, Game1 game)
         {
+            this.link = link;
             this.game = game;
-            headsUpDisplay = new HUD(ObjectConstants.HUDYOffsetInInventory);
-            inventoryManager = InventoryManager.Instance;
-            inventoryManager.Init();
+
+            roomManager = RoomManager.Instance;
+            headsUpDisplay = new HUD(ObjectConstants.counterInitialVal_int);
             initializeLetterSprites();
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
-            inventoryManager.Draw(sb, gameTime);
+            roomManager.Draw(sb);
             headsUpDisplay.Draw(sb);
+            db.Draw(sb);
 
             if (paused)
             {
@@ -40,10 +44,15 @@ namespace Sprint_0.GameStateHandlers
 
         public void Update(GameTime gameTime)
         {
-            headsUpDisplay.Update();
+            link.Update(gameTime);
             if (!paused)
             {
-                inventoryManager.Update(gameTime);
+                if (link.AdvanceTime)
+                {
+                    roomManager.Update(gameTime);
+                    headsUpDisplay.Update();
+                }
+                db.Update();
             }
         }
 
@@ -53,18 +62,21 @@ namespace Sprint_0.GameStateHandlers
 
             if (paused)
             {
+                link.Suspend();
                 game.kc = new PausedKeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PauseMusic();
-            } else
+            }
+            else
             {
-                game.kc = new InventoryStateController(game);
+                link.UnSuspend();
+                game.kc = new KeyboardController(game, Keyboard.GetState());
                 SFXManager.Instance.PlayMusic();
             }
         }
 
         public void DialogueNext()
         {
-            //Unused
+            db.Next();
         }
 
         //----- Helper Methods -----//

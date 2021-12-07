@@ -82,10 +82,20 @@ namespace Sprint_0.GameStateHandlers
 
         public void Update(GameTime gameTime)
         {
+            link.Update(gameTime);
             toRoom.Update(gameTime);
             fromRoom.Update(gameTime);
         }
 
+        public void TogglePause()
+        {
+            //Unused
+        }
+
+        public void DialogueNext()
+        {
+            //Unused
+        }
 
         /*--------------- Helper Methods ---------------*/
 
