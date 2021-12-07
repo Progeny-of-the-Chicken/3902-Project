@@ -8,8 +8,8 @@ namespace Sprint_0.Scripts.Terrain
     
     class DoorRandomizer
     {
-        const int numConnections = 60;
-        int roomsWithAllowableDoors = 61;
+        const int numConnections = ObjectConstants.numberOfConnections;
+        int roomsWithAllowableDoors = ObjectConstants.numberOfConnectableRooms;
         int numKeys = 0;
         string[, ,] doorStrings = new String[ObjectConstants.randoDungeonHeightWidth, ObjectConstants.randoDungeonHeightWidth, ObjectConstants.randoDungeonHeightWidth];
         bool[,,] doorAvailability = new bool[ObjectConstants.randoDungeonHeightWidth, ObjectConstants.randoDungeonHeightWidth, ObjectConstants.numDoorsInRoom];
@@ -39,7 +39,6 @@ namespace Sprint_0.Scripts.Terrain
 
             for (int j = 0; j < numConnections; j++)
             {
-                System.Diagnostics.Debug.WriteLine(j);
                 //Find room to add door to
                 int randInt = rand.Next(inDungeon.Count);
                 Vector2 roomToAddToPos = inDungeon[randInt];
@@ -53,7 +52,6 @@ namespace Sprint_0.Scripts.Terrain
                 if (!roomIsAvailable)
                 {
                     //All doors in this room have been taken, reduce counter and skip to next attempt
-                     System.Diagnostics.Debug.WriteLine("oops, the room I picked, " + roomToAddToPos + " is completely full");
                     roomsWithAllowableDoors--;
                     inDungeon.Remove(roomToAddToPos);
                     j--;
@@ -76,7 +74,6 @@ namespace Sprint_0.Scripts.Terrain
                     if (!IsDoorAvailableInRoom(roomConnectingPos, randInt2))
                     {
                         //The opposite door to the available one was taken, reduce counter and skip to next attempt
-                        System.Diagnostics.Debug.WriteLine("oops, the connecting room already was in the dungeon and had a door at that spot");
                         j--;
                         continue;
                     } else
@@ -119,7 +116,7 @@ namespace Sprint_0.Scripts.Terrain
 
         private void InitalizeRandomizerVariables(List<Vector2> inDungeon, List<Vector2> notInDungeon)
         {
-            inDungeon.Add(new Vector2(4, 7));
+            inDungeon.Add(ObjectConstants.randomizeDungeonStartRoom);
 
             //Initialize notInDungeon
             for (int i = 0; i < ObjectConstants.randoDungeonHeightWidth; i++)
@@ -132,10 +129,10 @@ namespace Sprint_0.Scripts.Terrain
             }
 
             //Remove special rooms
-            notInDungeon.Remove(new Vector2(0, 0));
-            notInDungeon.Remove(new Vector2(1, 7));
-            notInDungeon.Remove(new Vector2(3, 7));
-            notInDungeon.Remove(new Vector2(4, 7));
+            notInDungeon.Remove(ObjectConstants.randomizeDungeonSideOnRoom);
+            notInDungeon.Remove(ObjectConstants.randomizeDungeonTreasureRoom1);
+            notInDungeon.Remove(ObjectConstants.randomizeDungeonTreasureRoom2);
+            notInDungeon.Remove(ObjectConstants.randomizeDungeonStartRoom);
 
             //Initialize DoorAvailability
             for (int i = 0; i < ObjectConstants.randoDungeonHeightWidth; i++)
@@ -161,22 +158,22 @@ namespace Sprint_0.Scripts.Terrain
             }
 
             //Bosses always lead to treasure rooms
-            doorStrings[0, 7, 0] = ObjectConstants.EastClosedSpriteStr;
-            doorStrings[0, 7, 1] = "Room17";
-            doorAvailability[0, 7, 0] = false;
-            doorStrings[1, 7, 4] = ObjectConstants.WestDoorSpriteStr;
-            doorStrings[1, 7, 5] = "Room07";
-            doorAvailability[1, 7, 2] = false;
-            doorStrings[2, 7, 0] = ObjectConstants.EastClosedSpriteStr;
-            doorStrings[2, 7, 1] = "Room37";
-            doorAvailability[2, 7, 0] = false;
-            doorStrings[3, 7, 4] = ObjectConstants.WestDoorSpriteStr;
-            doorStrings[3, 7, 5] = "Room27";
-            doorAvailability[3, 7, 2] = false;
-            doorStrings[0, 0, 0] = ObjectConstants.InvisibleWallStr;
-            doorStrings[0, 0, 2] = ObjectConstants.InvisibleWallStr;
-            doorStrings[0, 0, 4] = ObjectConstants.InvisibleWallStr;
-            doorStrings[0, 0, 6] = ObjectConstants.InvisibleWallStr;
+            doorStrings[(int) ObjectConstants.randomizeDungeonBossRoom1.X, (int)ObjectConstants.randomizeDungeonBossRoom1.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastClosedSpriteStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonBossRoom1.X, (int)ObjectConstants.randomizeDungeonBossRoom1.Y, ObjectConstants.eastDoorRandomizerArrayLocation + 1] = ObjectConstants.randomizeDungeonTreasureRoom1Str;
+            doorAvailability[(int)ObjectConstants.randomizeDungeonBossRoom1.X, (int)ObjectConstants.randomizeDungeonBossRoom1.Y, ObjectConstants.eastDoorRandomizerArrayLocation / 2] = false;
+            doorStrings[(int) ObjectConstants.randomizeDungeonTreasureRoom1.X, (int) ObjectConstants.randomizeDungeonTreasureRoom1.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestDoorSpriteStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonTreasureRoom1.X, (int)ObjectConstants.randomizeDungeonTreasureRoom1.Y, ObjectConstants.westDoorRandomizerArrayLocation + 1] = ObjectConstants.randomizeDungeonBossRoom1Str;
+            doorAvailability[(int)ObjectConstants.randomizeDungeonTreasureRoom1.X, (int)ObjectConstants.randomizeDungeonTreasureRoom1.Y, ObjectConstants.westDoorRandomizerArrayLocation / 2] = false;
+            doorStrings[(int)ObjectConstants.randomizeDungeonBossRoom2.X, (int)ObjectConstants.randomizeDungeonBossRoom2.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastClosedSpriteStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonBossRoom2.X, (int)ObjectConstants.randomizeDungeonBossRoom2.Y, ObjectConstants.eastDoorRandomizerArrayLocation + 1] = ObjectConstants.randomizeDungeonTreasureRoom1Str;
+            doorAvailability[(int)ObjectConstants.randomizeDungeonBossRoom2.X, (int)ObjectConstants.randomizeDungeonBossRoom2.Y, ObjectConstants.eastDoorRandomizerArrayLocation / 2] = false;
+            doorStrings[(int)ObjectConstants.randomizeDungeonTreasureRoom2.X, (int)ObjectConstants.randomizeDungeonTreasureRoom2.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestDoorSpriteStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonTreasureRoom2.X, (int)ObjectConstants.randomizeDungeonTreasureRoom2.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.randomizeDungeonBossRoom2Str;
+            doorAvailability[(int) ObjectConstants.randomizeDungeonTreasureRoom2.X, (int)ObjectConstants.randomizeDungeonTreasureRoom2.Y, ObjectConstants.westDoorRandomizerArrayLocation / 2] = false;
+            doorStrings[(int) ObjectConstants.randomizeDungeonSideOnRoom.X, (int)ObjectConstants.randomizeDungeonSideOnRoom.Y, (int)ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.InvisibleWallStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonSideOnRoom.X, (int)ObjectConstants.randomizeDungeonSideOnRoom.Y, (int)ObjectConstants.northDoorRandomizerArrayLocation] = ObjectConstants.InvisibleWallStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonSideOnRoom.X, (int)ObjectConstants.randomizeDungeonSideOnRoom.Y, (int)ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.InvisibleWallStr;
+            doorStrings[(int)ObjectConstants.randomizeDungeonSideOnRoom.X, (int)ObjectConstants.randomizeDungeonSideOnRoom.Y, (int)ObjectConstants.southDoorRandomizerArrayLocation] = ObjectConstants.InvisibleWallStr;
         }
 
         //This assumes adding this door to this room is valid
@@ -193,39 +190,39 @@ namespace Sprint_0.Scripts.Terrain
                 switch (doorLocation1)
                 {
                     case 0:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 0] = ObjectConstants.EastDoorSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 1] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastDoorSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.eastDoorRandomizerArrayLocation+1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 1:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 2] = ObjectConstants.NorthDoorSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 3] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.northDoorRandomizerArrayLocation] = ObjectConstants.NorthDoorSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.northDoorRandomizerArrayLocation+1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 2:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 4] = ObjectConstants.WestDoorSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 5] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestDoorSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.westDoorRandomizerArrayLocation+1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 3:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 6] = ObjectConstants.SouthDoorSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 7] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.southDoorRandomizerArrayLocation] = ObjectConstants.SouthDoorSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.southDoorRandomizerArrayLocation+1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                 }
                 switch (doorLocation2)
                 {
                     case 0:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 0] = ObjectConstants.EastDoorSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 1] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastDoorSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.eastDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 1:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 2] = ObjectConstants.NorthDoorSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 3] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.northDoorRandomizerArrayLocation] = ObjectConstants.NorthDoorSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.northDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 2:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 4] = ObjectConstants.WestDoorSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 5] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestDoorSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.westDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 3:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 6] = ObjectConstants.SouthDoorSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 7] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.southDoorRandomizerArrayLocation] = ObjectConstants.SouthDoorSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.southDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                 }
             }
@@ -237,46 +234,42 @@ namespace Sprint_0.Scripts.Terrain
                 switch (doorLocation1)
                 {
                     case 0:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 0] = ObjectConstants.EastLockedSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 1] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastLockedSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.eastDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 1:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 2] = ObjectConstants.NorthLockedSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 3] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.northDoorRandomizerArrayLocation] = ObjectConstants.NorthLockedSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.northDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 2:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 4] = ObjectConstants.WestLockedSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 5] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestLockedSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.westDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                     case 3:
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 6] = ObjectConstants.SouthLockedSpriteStr;
-                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 7] = "Room" + roomLocation2.X + roomLocation2.Y;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.southDoorRandomizerArrayLocation] = ObjectConstants.SouthLockedSpriteStr;
+                        doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, ObjectConstants.southDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation2.X + roomLocation2.Y;
                         break;
                 }
                 switch (doorLocation2)
                 {
                     case 0:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 0] = ObjectConstants.EastLockedSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 1] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.eastDoorRandomizerArrayLocation] = ObjectConstants.EastLockedSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.eastDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 1:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 2] = ObjectConstants.NorthLockedSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 3] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.northDoorRandomizerArrayLocation] = ObjectConstants.NorthLockedSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.northDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 2:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 4] = ObjectConstants.WestLockedSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 5] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.westDoorRandomizerArrayLocation] = ObjectConstants.WestLockedSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.westDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                     case 3:
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 6] = ObjectConstants.SouthLockedSpriteStr;
-                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 7] = "Room" + roomLocation1.X + roomLocation1.Y;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.southDoorRandomizerArrayLocation] = ObjectConstants.SouthLockedSpriteStr;
+                        doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, ObjectConstants.southDoorRandomizerArrayLocation + 1] = ObjectConstants.roomPrefixStr + roomLocation1.X + roomLocation1.Y;
                         break;
                 }
             }
-            System.Diagnostics.Debug.WriteLine(roomLocation1);
-            System.Diagnostics.Debug.WriteLine(doorStrings[(int)roomLocation1.X, (int)roomLocation1.Y, 2 * doorLocation1]);
-            System.Diagnostics.Debug.WriteLine(roomLocation2);
-            System.Diagnostics.Debug.WriteLine(doorStrings[(int)roomLocation2.X, (int)roomLocation2.Y, 2 * doorLocation2]);
         }
 
         public string[] getDoorsForRoom(Vector2 roomLocation)

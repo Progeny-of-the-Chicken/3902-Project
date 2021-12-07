@@ -486,6 +486,23 @@ namespace Sprint_0
         public const int numDoorsInRoom = 4;
         public const int randoDungeonHeightWidth = 8;
         public const int maxKeysBeforeForcedDoor = 10;
+        public const int numberOfConnections = 60;              //----- Can be tweaked to change how connected the dungeon is -----//
+        public const int numberOfConnectableRooms = 61;          //----- 8x8 but without three special rooms -----//
+        public const int eastDoorRandomizerArrayLocation = 0;
+        public const int northDoorRandomizerArrayLocation = 2;
+        public const int westDoorRandomizerArrayLocation = 4;
+        public const int southDoorRandomizerArrayLocation = 6;
+        public static Vector2 randomizeDungeonStartRoom = new Vector2(4, 7);
+        public static Vector2 randomizeDungeonSideOnRoom = new Vector2(0, 0);
+        public static Vector2 randomizeDungeonBossRoom1 = new Vector2(0, 7);
+        public static Vector2 randomizeDungeonTreasureRoom1 = new Vector2(1, 7);
+        public static Vector2 randomizeDungeonBossRoom2 = new Vector2(2, 7);
+        public static Vector2 randomizeDungeonTreasureRoom2 = new Vector2(3, 7);
+        public const string roomPrefixStr = "Room";
+        public const string randomizeDungeonBossRoom1Str = "Room07";
+        public const string randomizeDungeonTreasureRoom1Str = "Room17";
+        public const string randomizeDungeonBossRoom2Str = "Room27";
+        public const string randomizeDungeonTreasureRoom2Str = "Room37";
         public static List<Vector2> roomsWithKeys = new List<Vector2>
         {   new Vector2(4, 0), new Vector2(5, 0), new Vector2(4, 1), new Vector2(5, 1), new Vector2(4, 2), new Vector2(5, 3),
             new Vector2(4, 5), new Vector2(5, 5), new Vector2(6, 5), new Vector2(7, 5), new Vector2(0, 6), new Vector2(1, 6), new Vector2(2, 6), new Vector2(3, 6),
