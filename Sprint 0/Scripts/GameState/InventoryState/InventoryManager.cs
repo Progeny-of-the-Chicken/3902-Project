@@ -65,5 +65,10 @@ namespace Sprint_0.Scripts.GameState.InventoryState
         {
             ((InventoryDisplay)displays[inventoryDisplayIndex]).MoveSelection(direction);
         }
+
+        public void UpdateDisplay()
+        {
+            displays[inventoryDisplayIndex] = new InventoryDisplay();
+        }
     }
 }

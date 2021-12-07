@@ -151,7 +151,7 @@ namespace Sprint_0.Scripts.GameState
             //Do stuff with getting health from link here
             for (int i = 0; i < ObjectConstants.maxMaxHealth / 2; i++)
             {
-                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + ObjectConstants.letterSpacing * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + ObjectConstants.letterSpacing * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
+                Vector2 drawLocation = new Vector2((ObjectConstants.HealthDrawLocationX + SpriteRectangles.fullHeartFrame.Width * (i % ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale, (ObjectConstants.HealthDrawLocationY + SpriteRectangles.fullHeartFrame.Height * (i / ObjectConstants.maxHeartsPerLine)) * ObjectConstants.scale) + yOffset;
                 heartArray[i].Draw(spriteBatch, drawLocation);
             }
         }
