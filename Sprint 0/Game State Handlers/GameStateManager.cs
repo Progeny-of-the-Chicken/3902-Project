@@ -113,6 +113,7 @@ namespace Sprint_0.GameStateHandlers
 
         public void OpenInventory()
         {
+            inventory = new InventoryStateHandler(game);
             this.state = inventory;
             // Put rest of inventory initialization logic here
         }
