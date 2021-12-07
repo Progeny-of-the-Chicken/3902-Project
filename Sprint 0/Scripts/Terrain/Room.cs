@@ -80,7 +80,6 @@ public class Room : IRoom
 
     public void Update(GameTime gt)
     {
-        link.Update(gt);
         enemySet.Update(gt);
         itemSet.Update(gt);
         projectileSet.Update(gt);

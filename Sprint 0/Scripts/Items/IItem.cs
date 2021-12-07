@@ -13,6 +13,7 @@ namespace Sprint_0.Scripts.Items
         void Update(GameTime gt);
 
         void Draw(SpriteBatch sb);
+        void MoveItemBlock(Vector2 adjustment);
 
         bool CheckDelete();
 

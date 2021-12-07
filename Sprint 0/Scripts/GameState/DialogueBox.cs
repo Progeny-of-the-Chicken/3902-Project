@@ -20,13 +20,13 @@ namespace Sprint_0.Scripts.GameState
 
         private int[] linebreaks;
         private ISprite[] letterSprites = new ISprite[ObjectConstants.maxLetters];
-        private GameplayStateHandler gsh;
+        private IGameStateHandler gsh;
 
         // Origin point for printed dialogue
         private int initX = ObjectConstants.dialogueStartX;
         private int initY = ObjectConstants.dialogueStartY;
 
-        public DialogueBox(GameplayStateHandler gsh)
+        public DialogueBox(IGameStateHandler gsh)
         {
             this.gsh = gsh;
         }
