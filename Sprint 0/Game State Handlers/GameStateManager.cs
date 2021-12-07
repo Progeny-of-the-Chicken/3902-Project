@@ -86,6 +86,7 @@ namespace Sprint_0.GameStateHandlers
         public void StartGameplay()
         {
             gameplay = new GameplayStateHandler(link, game);
+            inventory = new InventoryStateHandler(game);
             this._state = GameState.Gameplay;
             System.Diagnostics.Debug.WriteLine("Swapped to state: Gameplay");
         }
@@ -101,7 +102,6 @@ namespace Sprint_0.GameStateHandlers
         public void OpenInventory()
         {
             this._state = GameState.Inventory;
-            inventory = new InventoryStateHandler(game);
             // Put rest of inventory initialization logic here
         }
 
