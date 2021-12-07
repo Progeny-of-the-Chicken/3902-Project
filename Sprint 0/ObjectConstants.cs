@@ -523,7 +523,7 @@ namespace Sprint_0
         //----- Room swapping animation constants -----//
         public const int roomswapAnimationVerticalScrollDist = 176 * scale;
         public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
-        public const int roomswapAnimationDurationInFrames = 30;
+        public const int roomswapAnimationDurationInFrames = 60;
 
         //----- Main Menu constant values -----//
         public const string mainMenuSpritesheetFileName = "MainMenu";
