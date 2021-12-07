@@ -92,8 +92,11 @@ namespace Sprint_0
         public const int linkSwordFromDownCenter = 3 * scale;
 
         // Projectile
-        public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
-        public const int shotgunPelletDamage = 5;
+        public const float shotgunPelletSpeed = scaledStdWidthHeight * 12.5f;
+        public const int shotgunPelletDamage = 1;
+        public const double halfAdjustment = 0.5;
+        public const double spray = 0.75;
+        public const int pelletsPerBlast = 20;
 
 
         // Arrow
