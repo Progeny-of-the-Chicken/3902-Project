@@ -15,6 +15,14 @@ Switch Rooms by Left/Right clicking
 - Chalina Russell
 
 # Controls
+In the inventory you can use:
+- WASD to scroll selection
+- Enter to choose selection
+- E to start the game
+- P to pause
+- M to mute the game
+- Q to quit
+
 In Gameplay, you can use:
 - WASD to move
 - E to enter the inventory
