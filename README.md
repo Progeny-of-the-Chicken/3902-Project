@@ -42,6 +42,7 @@ While the game is paused you can use:
 - Potion does not have sound effect
 - Potion is an instant heal instead of heal over time
 - Clock is only 10 seconds (intentional change)
+- Link can continue to take damage after death and cut off the death animation
 
 # Not Implemented
 - Switching Between Arrows
