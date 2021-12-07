@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -39,6 +40,12 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnProjectileCollision(IProjectile projectile)
         {
             // No projectile interaction
+        }
+
+        public void OnItemCollision(IItem item)
+        {
+            //no item collision
+
         }
 
         public void Update(Vector2 location)

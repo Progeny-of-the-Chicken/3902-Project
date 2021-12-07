@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Projectiles;
+using Sprint_0.Scripts.Items;
+
 
 namespace Sprint_0.Scripts.Collider.Terrain
 {
@@ -39,6 +41,12 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnProjectileCollision(IProjectile projectile)
         {
             // No projectile interaction
+        }
+
+        public void OnItemCollision(IItem item)
+        {
+            Vector2 adjustmentForBlock = Overlap.DirectionToMoveObjectOff(this.hitbox, item.Collider.Hitbox);
+            item.MoveItemBlock(adjustmentForBlock);
         }
 
         public void Update(Vector2 location)
