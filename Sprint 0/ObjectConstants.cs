@@ -414,7 +414,7 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string dungeon1StartRoom = "Room25";
+        public const string dungeon1StartRoom = "Room10";
         public const string dungeon2StartRoom = "Room47";                                           // --------------- THIS HAS BEEN CHANGED
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
