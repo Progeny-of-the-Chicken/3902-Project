@@ -112,5 +112,9 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new Manhandla(location);
         }
+		public IEnemy CreateManhandlaHead(Vector2 location, FacingDirection side, IEnemy manhandla)
+        {
+			return new ManhandlaHead(location, side, manhandla);
+        }
 	}
 }

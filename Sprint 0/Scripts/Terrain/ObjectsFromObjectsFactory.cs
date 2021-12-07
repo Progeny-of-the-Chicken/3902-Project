@@ -110,6 +110,13 @@ namespace Sprint_0.Scripts.Terrain
             return patraMinion;
         }
 
+        public IEnemy CreateManhandlaHead(Vector2 location, FacingDirection side, IEnemy manhandla)
+        {
+            IEnemy manhandlaHead = EnemyFactory.Instance.CreateManhandlaHead(location, side, manhandla);
+            room.AddEnemy(manhandlaHead);
+            return manhandlaHead;
+        }
+
         // Items
 
         public void CreateItemDrop(Vector2 location, Vector2 spawnerDimensions, ItemType itemType)

@@ -308,13 +308,17 @@ namespace Sprint_0
         public const float MegaDarknutChaseSpeed = DarknutMoveSpeed * 2;
         public const double MegaDarknutChaseTimeoutTime = DarknutMoveTime / 2;
         //Manhandla
-        public const int ManhandlaHeadDamage = 2;
+        public const int ManhandlaDamage = 2;
         public const double ManhandlaMoveTime = DefaultEnemyMoveTime;
         public const float ManhandlaMoveSpeed = DefaultEnemyMoveSpeed;
-        public const int ManhandlaHeadHealth = 3;
         public const int ManhandlaPlaceholderHealth = 1;
-        public const float ManhandlaSpeedMultiplier = 1.2f;
+        public const float ManhandlaSpeedPerDeadHead = 0.5f;
         public const int ManhandlaComponentWidthHeight = 16 * scale;
+        //ManhandlaHead
+        public const int ManhandlaHeadDamage = 2;
+        public const double ManhandlaHeadPlaceholderMoveTime = DefaultEnemyMoveTime;
+        public const int ManhandlaHeadHealth = 3;
+        public const float ManhandlaHeadReloadTime = 2.0f;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;

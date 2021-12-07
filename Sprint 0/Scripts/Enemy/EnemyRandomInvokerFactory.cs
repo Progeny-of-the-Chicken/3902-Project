@@ -63,7 +63,9 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Patra:
                     invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
-                // TODO: Manhandla projectiles
+                case EnemyType.ManhandlaHead:
+                    invoker.AddCommand(new CommandShootMagicProjectileTowardLink(stateMachine));
+                    break;
             }
             return invoker;
         }

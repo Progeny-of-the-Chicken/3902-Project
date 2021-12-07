@@ -43,6 +43,7 @@ namespace Sprint_0.Scripts.Movement
                 EnemyType.MegaKeese => CreateTrackLinkStrategy(),
                 EnemyType.MegaDarknut => CreateMegaDarknutMovementStrategy(directionVector),
                 EnemyType.Manhandla => CreateManhandlaMovementStrategy(directionVector),
+                EnemyType.ManhandlaHead => CreateFreezeStrategy(),
                 _ => CreateFreezeStrategy()
             };
         }

@@ -23,6 +23,7 @@
         MegaZol,
         MegaKeese,
         MegaDarknut,
-        Manhandla
+        Manhandla,
+        ManhandlaHead
     }
 }
