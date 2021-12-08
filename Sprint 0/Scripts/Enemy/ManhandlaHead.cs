@@ -25,17 +25,17 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
-        public ManhandlaHead(Vector2 location, FacingDirection side, IEnemy manhandla)
+        public ManhandlaHead(Vector2 manhandlaLocation, FacingDirection side, IEnemy manhandla)
         {
             this.manhandla = manhandla;
+            offsetFromManhandla = GetOffsetForSide(side);
             sprite = GetSpriteForSide(side);
-            stateMachine = new EnemyStateMachine(location, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaHeadHealth);
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
+            stateMachine = new EnemyStateMachine(manhandlaLocation + offsetFromManhandla, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaHeadHealth);
+            collider = new GenericEnemyCollider(this, new Rectangle(manhandlaLocation.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
             shootProjectileCommand = new CommandShootMagicProjectileTowardLink(stateMachine);
 
-            offsetFromManhandla = GetOffsetForSide(side);
             stateMachine.SetState(EnemyState.Movement, ObjectConstants.ManhandlaHeadReloadTime, manhandla, offsetFromManhandla);
-            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
+            ObjectsFromObjectsFactory.Instance.CreateStaticEffect(manhandlaLocation, Effect.EffectType.Explosion);
         }
 
         public void Update(GameTime gt)
