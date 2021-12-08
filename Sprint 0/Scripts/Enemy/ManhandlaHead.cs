@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Commands.EnemyAbilities;
 
 namespace Sprint_0.Scripts.Enemy
 {
@@ -11,9 +11,11 @@ namespace Sprint_0.Scripts.Enemy
     {
         private ISprite sprite;
         private EnemyStateMachine stateMachine;
-        private EnemyMoveAndShootInvoker invoker;
         private IEnemyCollider collider;
         private IEnemy manhandla;
+        private ICommand shootProjectileCommand;
+
+        private Vector2 offsetFromManhandla;
 
         public IEnemyCollider Collider { get => collider; }
 
@@ -28,10 +30,11 @@ namespace Sprint_0.Scripts.Enemy
             this.manhandla = manhandla;
             sprite = GetSpriteForSide(side);
             stateMachine = new EnemyStateMachine(location, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaHeadHealth);
-            invoker = EnemyRandomInvokerFactory.Instance.CreateMoveAndShootInvokerForEnemy(EnemyType.ManhandlaHead, stateMachine, this);
-            invoker.ExecuteRandomMoveCommand();
-
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
+            shootProjectileCommand = new CommandShootMagicProjectileTowardLink(stateMachine);
+
+            offsetFromManhandla = GetOffsetForSide(side);
+            stateMachine.SetState(EnemyState.Movement, ObjectConstants.ManhandlaHeadReloadTime, manhandla, offsetFromManhandla);
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
 
@@ -40,8 +43,8 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.Update(gt);
             if (stateMachine.GetState == EnemyState.NoAction)
             {
-                invoker.ExecuteRandomMoveCommand();
-                invoker.ExecuteAbility();
+                shootProjectileCommand.Execute();
+                stateMachine.SetState(EnemyState.Movement, ObjectConstants.ManhandlaHeadReloadTime, manhandla, offsetFromManhandla);
             }
             if (!stateMachine.IsDamaged)
             {
@@ -85,7 +88,7 @@ namespace Sprint_0.Scripts.Enemy
             sprite.Draw(sb, Position);
         }
 
-        //----- Helper method for sprite initialization -----//
+        //----- Helper methods for initialization -----//
 
         private ISprite GetSpriteForSide(FacingDirection side)
         {
@@ -97,6 +100,20 @@ namespace Sprint_0.Scripts.Enemy
                 FacingDirection.Down => EnemySpriteFactory.Instance.CreateManhandlaDownHeadSprite(),
                 // Should never happen
                 _ => EnemySpriteFactory.Instance.CreateManhandlaRightHeadSprite()
+            };
+        }
+
+        private Vector2 GetOffsetForSide(FacingDirection side)
+        {
+            Vector2 offset = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight);
+            return side switch
+            {
+                FacingDirection.Right => offset * ObjectConstants.RightUnitVector,
+                FacingDirection.Up => offset * ObjectConstants.UpUnitVector,
+                FacingDirection.Left => offset * ObjectConstants.LeftUnitVector,
+                FacingDirection.Down => offset * ObjectConstants.DownUnitVector,
+                // Should never happen
+                _ => offset * ObjectConstants.RightUnitVector
             };
         }
     }

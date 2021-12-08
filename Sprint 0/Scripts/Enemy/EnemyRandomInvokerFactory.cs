@@ -66,26 +66,6 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Patra:
                     invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
-                case EnemyType.ManhandlaHead:
-                    invoker.AddCommand(new CommandShootMagicProjectileTowardLink(stateMachine));
-                    break;
-            }
-
-            return invoker;
-        }
-
-        public EnemyMoveAndShootInvoker CreateMoveAndShootInvokerForEnemy(EnemyType type, EnemyStateMachine stateMachine, IEnemy enemy)
-        {
-            EnemyMoveAndShootInvoker invoker = new EnemyMoveAndShootInvoker();
-
-            switch (type)
-            {
-                case EnemyType.Aquamentus:
-                    // TODO: Implement for Aquamentus
-                    break;
-                case EnemyType.ManhandlaHead:
-                    invoker.AddCommand(new CommandShootMagicProjectileTowardLink(stateMachine));
-                    break;
             }
 
             return invoker;

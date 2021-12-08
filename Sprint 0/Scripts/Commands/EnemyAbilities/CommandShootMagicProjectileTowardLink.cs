@@ -15,7 +15,6 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
         public void Execute()
         {
             // TODO: Implement projectile
-            stateMachine.SetState(EnemyState.AbilityCast, ObjectConstants.ManhandlaHeadReloadTime);
         }
     }
 }
