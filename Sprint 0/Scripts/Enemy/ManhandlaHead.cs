@@ -56,6 +56,10 @@ namespace Sprint_0.Scripts.Enemy
         public void TakeDamage(int damage)
         {
             stateMachine.TakeDamage(damage, true);
+            if (stateMachine.IsDead)
+            {
+                ((Manhandla)manhandla).RemoveHead(this);
+            }
         }
 
         public void GradualKnockBack(Vector2 knockback)

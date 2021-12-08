@@ -15,6 +15,8 @@ namespace Sprint_0.Scripts.Enemy
         private IEnemyCollider collider;
         private HashSet<IEnemy> headSet = new HashSet<IEnemy>();
 
+        private float speed = ObjectConstants.ManhandlaMoveSpeed;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.ManhandlaHeadDamage; }
@@ -70,6 +72,12 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
+        public void RemoveHead(IEnemy head)
+        {
+            headSet.Remove(head);
+            speed += ObjectConstants.ManhandlaSpeedPerDeadHead;
+        }
+
         public bool CheckDelete()
         {
             return headSet.Count == ObjectConstants.zero;
@@ -84,13 +92,9 @@ namespace Sprint_0.Scripts.Enemy
 
         private void InitializeHeads(Vector2 location)
         {
-            // Vector2 headOffset = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight) * ObjectConstants.RightUnitVector;
             headSet.Add(ObjectsFromObjectsFactory.Instance.CreateManhandlaHead(location, FacingDirection.Right, this));
-            // headOffset = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight) * ObjectConstants.UpUnitVector;
             headSet.Add(ObjectsFromObjectsFactory.Instance.CreateManhandlaHead(location, FacingDirection.Up, this));
-            // headOffset = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight) * ObjectConstants.LeftUnitVector;
             headSet.Add(ObjectsFromObjectsFactory.Instance.CreateManhandlaHead(location, FacingDirection.Left, this));
-            // headOffset = new Vector2(ObjectConstants.ManhandlaComponentWidthHeight) * ObjectConstants.DownUnitVector;
             headSet.Add(ObjectsFromObjectsFactory.Instance.CreateManhandlaHead(location, FacingDirection.Down, this));
         }
     }
