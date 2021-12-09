@@ -7,6 +7,7 @@ using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.GameStateHandlers;
 
 namespace Sprint_0.Scripts
 {
@@ -43,15 +44,15 @@ namespace Sprint_0.Scripts
             switch (item.Type)
             {
                 case ItemType.BoomerangItem:
-                    if (!Inventory.Instance.Weapons.Contains(WeaponType.BasicBoomerang))
+                    if (!Inventory.Instance.HasWeapon(WeaponType.BasicBoomerang))
                     {
-                        Inventory.Instance.Weapons.Add(WeaponType.BasicBoomerang);
+                        Inventory.Instance.AddWeapon(WeaponType.BasicBoomerang);
                     }
                     break;
                 case ItemType.BowItem:
-                    if (!Inventory.Instance.Weapons.Contains(WeaponType.Bow))
+                    if (!Inventory.Instance.HasWeapon(WeaponType.Bow))
                     {
-                        Inventory.Instance.Weapons.Add(WeaponType.Bow);
+                        Inventory.Instance.AddWeapon(WeaponType.Bow);
                     }
                     break;
                 case ItemType.BombItem:
@@ -89,7 +90,7 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.MagicKey = true;
                     break;
                 case ItemType.TriforcePiece:
-                    // TODO: End game
+                    GameStateManager.Instance.GameOver();
                     break;
                 case ItemType.BasicArrowItem:
                     Inventory.Instance.BasicArrows = true;
@@ -98,9 +99,9 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.SilverArrows = true;
                     break;
                 case ItemType.ShotgunItem:
-                    if (!Inventory.Instance.Weapons.Contains(WeaponType.Shotgun))
+                    if (!Inventory.Instance.HasWeapon(WeaponType.Shotgun))
                     {
-                        Inventory.Instance.Weapons.Add(WeaponType.Shotgun);
+                        Inventory.Instance.AddWeapon(WeaponType.Shotgun);
                     }
                     break;
                 case ItemType.ShotgunShellItem:

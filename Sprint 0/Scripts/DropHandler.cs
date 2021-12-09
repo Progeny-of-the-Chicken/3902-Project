@@ -57,6 +57,8 @@ namespace Sprint_0.Scripts
                 list = ObjectConstants.groupCItems;
             if (ObjectConstants.groupDEnemies.Contains(enemy))
                 list = ObjectConstants.groupDItems;
+            if (ObjectConstants.groupXEnemies.Contains(enemy))
+                list = ObjectConstants.groupXItems;
             return list;
         }
         private double getDropFrequencyForType(Type enemy)

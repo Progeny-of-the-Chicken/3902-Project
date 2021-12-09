@@ -23,5 +23,20 @@ namespace Sprint_0.GameStateHandlers
         {
             screen.Update();
         }
+
+        public void TogglePause()
+        {
+            //Unused
+        }
+
+        public void DialogueNext()
+        {
+            //Unused
+        }
+
+        public void SetSuspended(bool sus)
+        {
+            //Unused
+        }
     }
 }

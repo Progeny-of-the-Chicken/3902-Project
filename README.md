@@ -15,6 +15,14 @@ Switch Rooms by Left/Right clicking
 - Chalina Russell
 
 # Controls
+In the inventory you can use:
+- WASD to scroll selection
+- Enter to choose selection
+- E to start the game
+- P to pause
+- M to mute the game
+- Q to quit
+
 In Gameplay, you can use:
 - WASD to move
 - E to enter the inventory
@@ -27,8 +35,7 @@ In Gameplay, you can use:
 
 In the inventory you can use:
 - WASD to scroll selection
-- B to select the currently highlighted item
-- R to return to gameplay
+- E to return to the game
 - P to pause
 - M to mute the game
 - Q to quit
@@ -40,16 +47,18 @@ While the game is paused you can use:
 # Known Issues
 - Doors don't render while room is switching
 - Bombs do not affect adjacent rooms
-- Link knockback does not knock link back in half block increments
 - Potion does not have sound effect
-- Link can use weapons while not standing still
-- Goriya facing a wall spawns ghost boomerangs
 - Potion is an instant heal instead of heal over time
+- Clock is only 10 seconds (intentional change)
+- Link can continue to take damage after death and cut off the death animation
 
 # Not Implemented
-- Clock
 - Switching Between Arrows
 - Ladder
-- Magical Key (can only be picked up)
 - Merchant does not sell anything
-- Old man text
+
+# Sprint 5 Bonus Round
+- Shotgun Item
+- Advancable Dialogue Boxes
+- Randomized dungeon mode
+- Super Hot mode (time only moves when you do)

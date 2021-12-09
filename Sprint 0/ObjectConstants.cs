@@ -60,9 +60,9 @@ namespace Sprint_0
 
         //----- Link constant values -----//
         public const int linkStdMoveDist = scaledStdWidthHeight / 2;
-        public const float linkStdMoveTime = 0.25f;
+        public const float linkStdMoveTime = 1/8f;
         // TODO: Remove doubled move speed, helpful for testing
-        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime * 2;
+        public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
         public const float linkDeathAnimationTime = 1.5f;
         public const float linkTakeDamageTime = 1;
         public const float linkUseItemTime = 0.5f;
@@ -92,8 +92,11 @@ namespace Sprint_0
         public const int linkSwordFromDownCenter = 3 * scale;
 
         // Projectile
-        public const float shotgunPelletSpeed = scaledStdWidthHeight * 15;
-        public const int shotgunPelletDamage = 5;
+        public const float shotgunPelletSpeed = scaledStdWidthHeight * 12.5f;
+        public const int shotgunPelletDamage = 1;
+        public const double halfAdjustment = 0.5;
+        public const double spray = 0.75;
+        public const int pelletsPerBlast = 20;
 
 
         // Arrow
@@ -365,7 +368,8 @@ namespace Sprint_0
         public const string blueLinkFile = "BlueLinkSpriteSheet";
         public const string shotgunFile = "LinkShotGunSpriteSheet";
         public const string blueLinkShotgunFile = "BlueLinkShotGunSpriteSheet";
-        public const string pathForCsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
+        public const string pathForDungeon1CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon1/";
+        public const string pathForDungeon2CsvFiles = @"/../../../Scripts/Terrain/LevelData/Dungeon2/";
         public const string cvsExtension = ".csv";
         public const string separator = ",";
         public const string lineIsEmpty = "None";
@@ -426,13 +430,15 @@ namespace Sprint_0
         public const string WestDoorSpriteStr = "WestDoorSprite";
         public const string SouthDoorSpriteStr = "SouthDoorSprite";
         //TODO: start in start room
-        public const string startRoom = "Room25";
+        public const string dungeon1StartRoom = "Room25";
+        public const string dungeon2StartRoom = "Room47";                                           // --------------- THIS HAS BEEN CHANGED
         public static string[] rooms = new string[] {"Room25", "Room15", "Room35", "Room24", "Room23", "Room33", "Room13", "Room12", "Room02", "Room22", "Room21", "Room20", "Room10", "Room00", "Room32", "Room42", "Room41",
 "Room51"};
         public const string contentLocation = "Content";
         public const string OverworldTilesetStr = "OverworldTileset";
         public const string dungeonTilesetStr = "dungeonTileset";
         public const string Dungeon1EagleStr = "Dungeon1Eagle";
+        public const string Dungeon2RandomizerStr = "RandomizerDungeon";
         public const string EastBombableSpriteStr = "EastBombableSprite";
         public const string EastBombedSpriteStr = "EastBombedSprite";
         public const string EastLockedSpriteStr = "EastLockedSprite";
@@ -495,6 +501,32 @@ namespace Sprint_0
         public static Vector2 sideOnRoomSpawnPosition = new Vector2(scale * wallHitBoxSize * 3, yOffsetForRoom + scale * wallHitBoxSize * 3);
         public static Vector2 leftOfStairSpawnPosition = new Vector2(scale * wallHitBoxSize * 7, yOffsetForRoom + scale * wallHitBoxSize * 6);
 
+        //----- Randomizer Dungeon Constant Values -----//
+        public const int numDoorsInRoom = 4;
+        public const int randoDungeonHeightWidth = 8;
+        public const int maxKeysBeforeForcedDoor = 10;
+        public const int numberOfConnections = 60;              //----- Can be tweaked to change how connected the dungeon is -----//
+        public const int numberOfConnectableRooms = 61;          //----- 8x8 but without three special rooms -----//
+        public const int eastDoorRandomizerArrayLocation = 0;
+        public const int northDoorRandomizerArrayLocation = 2;
+        public const int westDoorRandomizerArrayLocation = 4;
+        public const int southDoorRandomizerArrayLocation = 6;
+        public static Vector2 randomizeDungeonStartRoom = new Vector2(4, 7);
+        public static Vector2 randomizeDungeonSideOnRoom = new Vector2(0, 0);
+        public static Vector2 randomizeDungeonBossRoom1 = new Vector2(0, 7);
+        public static Vector2 randomizeDungeonTreasureRoom1 = new Vector2(1, 7);
+        public static Vector2 randomizeDungeonBossRoom2 = new Vector2(2, 7);
+        public static Vector2 randomizeDungeonTreasureRoom2 = new Vector2(3, 7);
+        public const string roomPrefixStr = "Room";
+        public const string randomizeDungeonBossRoom1Str = "Room07";
+        public const string randomizeDungeonTreasureRoom1Str = "Room17";
+        public const string randomizeDungeonBossRoom2Str = "Room27";
+        public const string randomizeDungeonTreasureRoom2Str = "Room37";
+        public static List<Vector2> roomsWithKeys = new List<Vector2>
+        {   new Vector2(4, 0), new Vector2(5, 0), new Vector2(4, 1), new Vector2(5, 1), new Vector2(4, 2), new Vector2(5, 3),
+            new Vector2(4, 5), new Vector2(5, 5), new Vector2(6, 5), new Vector2(7, 5), new Vector2(0, 6), new Vector2(1, 6), new Vector2(2, 6), new Vector2(3, 6),
+        };
+
         //----- Effect constant values -----//
         public const double popDurationSeconds = 0.2;
         public const double explosionDurationSeconds = 0.3;
@@ -510,8 +542,29 @@ namespace Sprint_0
         //----- Room swapping animation constants -----//
         public const int roomswapAnimationVerticalScrollDist = 176 * scale;
         public const int roomswapAnimationHorizontalScrollDist = 256 * scale;
-        public const int roomswapAnimationDurationInFrames = 80;
+        public const int roomswapAnimationDurationInFrames = 60;
 
+        //----- Main Menu constant values -----//
+        public const string mainMenuSpritesheetFileName = "MainMenu";
+        public const int halfMainMenuOptionsCount = 2;
+        public const int mainMenuOptionsCount = 4;
+        public const int settingsStretchAmount = 7;
+        public const int superhotFalse = 1;
+        public const int randomizeFalse = 3;
+        public static List<Vector2> mainMenuSettingsLocations = new List<Vector2>
+        {
+            new Vector2(163, 79) * scale,
+            new Vector2(192, 79) * scale,
+            new Vector2(163, 93) * scale,
+            new Vector2(192, 93) * scale,
+        };
+        public static List<Vector2> mainMenuSlotLocations = new List<Vector2>
+        {
+            new Vector2(163, 72) * scale,
+            new Vector2(188, 72) * scale,
+            new Vector2(163, 86) * scale,
+            new Vector2(188, 86) * scale,
+        };
 
         //----- Inventory GUI constant values -----//
         public const string inventorySpritesheetFileName = "InventorySpritesheet";
@@ -601,7 +654,7 @@ namespace Sprint_0
         public const double groupBDropRate = 0.41;
         public const double groupCDropRate = 0.59;
         public const double groupDDropRate = 0.41;
-        public const double groupXDropRate = 0;
+        public const double groupXDropRate = 0.61;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
@@ -651,6 +704,17 @@ namespace Sprint_0
             ItemType.SmallHeartItem,
             ItemType.YellowRuby,
             ItemType.SmallHeartItem, };
+        public static ItemType[] groupXItems = {
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem,
+            ItemType.ShotgunShellItem,
+            ItemType.Fairy,
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem,
+            ItemType.SmallHeartItem,
+            ItemType.ShotgunShellItem,
+            ItemType.ShotgunShellItem,
+            ItemType.SmallHeartItem };
 
         //Group X doesn't drop anything
 
@@ -708,7 +772,7 @@ namespace Sprint_0
         public const int framesBetweenLetters = 2;
 
         public const int maxLetters = 400;
-        public const int lettersPerLine = 35;
+        public const int lettersPerLine = 30;
         public const int maxLines = 7;
         public const int letterSpacing = 6;
 

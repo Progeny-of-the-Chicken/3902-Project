@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Item;
+using Sprint_0.Scripts.Collider;
 
 namespace Sprint_0.Scripts.Items
 {
@@ -10,10 +11,10 @@ namespace Sprint_0.Scripts.Items
         private ISprite sprite;
         private Vector2 pos;
         private bool delete = false;
-
         public ItemType Type { get; }
 
         public IItemCollider Collider { get; set; }
+
 
         public Item(Vector2 spawnLoc, ItemType type)
         {
@@ -21,6 +22,11 @@ namespace Sprint_0.Scripts.Items
             sprite = GetSpriteForItemType(Type);
             Collider = new GenericItemCollider(this);
             pos = spawnLoc;
+        }
+
+        public void MoveItemBlock(Vector2 adjustment)
+        {
+            pos += adjustment;
         }
 
         public void Update(GameTime gt)
@@ -64,6 +70,7 @@ namespace Sprint_0.Scripts.Items
             }
             delete = true;
         }
+
 
         //----- Helper method for initializing dependencies by type -----//
 

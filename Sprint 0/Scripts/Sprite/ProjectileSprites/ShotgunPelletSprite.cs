@@ -41,7 +41,7 @@ namespace Sprint_0.Scripts.Sprite.ProjectileSprites
         public void Draw(SpriteBatch sb, Vector2 location)
         {
             Rectangle dest = new Rectangle((int)location.X, (int)location.Y, frame.Width * scale, frame.Height * scale);
-            sb.Draw(spritesheet, dest, frame, Color.White, (float)rotation, ObjectConstants.arrowRotationOffset, SpriteEffects.None, ObjectConstants.noLayerDepth);
+            sb.Draw(spritesheet, dest, frame, Color.White, (float)rotation, ObjectConstants.zeroVector, SpriteEffects.None, ObjectConstants.noLayerDepth);
         }
     }
 }

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint_0.GameStateHandlers;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.SpriteFactories;
+using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Terrain.LevelData;
 
 namespace Sprint_0.Scripts.GameState
 {
@@ -17,13 +20,15 @@ namespace Sprint_0.Scripts.GameState
 
         private int[] linebreaks;
         private ISprite[] letterSprites = new ISprite[ObjectConstants.maxLetters];
+        private IGameStateHandler gsh;
 
         // Origin point for printed dialogue
         private int initX = ObjectConstants.dialogueStartX;
         private int initY = ObjectConstants.dialogueStartY;
 
-        public DialogueBox()
+        public DialogueBox(IGameStateHandler gsh)
         {
+            this.gsh = gsh;
         }
 
         public void Update()
@@ -38,6 +43,11 @@ namespace Sprint_0.Scripts.GameState
             }
             else
             {
+                if (roomSuspendsForCutScene())
+                {
+                    gsh.SetSuspended(true);
+                }
+
                 active = true;
                 if (currLine == "")
                 {
@@ -92,6 +102,11 @@ namespace Sprint_0.Scripts.GameState
                 {
                     active = false;
                     currLine = "";
+
+                    if (roomSuspendsForCutScene())
+                    {
+                        gsh.SetSuspended(false);
+                    }
                 }
                 else
                 {
@@ -143,7 +158,13 @@ namespace Sprint_0.Scripts.GameState
                     len -= token.Length;
                     total += len;
                     bps[i] = total;
-                    len = token.Length + 1;
+                    len = token.Length;
+
+                    if (i != 0)
+                    {
+                        len++;
+                    }
+
                     i++;
                 }
                 else
@@ -161,6 +182,8 @@ namespace Sprint_0.Scripts.GameState
             int xOffset;
             int yOffset;
             int lineNum = 0;
+            int currPos = 0;
+            bool lineStartedWithSpace = false;
 
             for (int i = 0; i <= currIndex; i++)
             {
@@ -169,7 +192,28 @@ namespace Sprint_0.Scripts.GameState
                     lineNum++;
                 }
 
-                xOffset = (ObjectConstants.standardWidthHeight + ObjectConstants.letterSpacing) * getCurrCharLinePos(i);
+                currPos = getCurrCharLinePos(i);
+
+                if (currPos == 0)
+                {
+                    if (currLine[i] == ' ')
+                    {
+                        lineStartedWithSpace = true;
+                    }
+                    else
+                    {
+                        lineStartedWithSpace = false;
+                    }
+                }
+
+                if (lineStartedWithSpace)
+                {
+                    xOffset = (ObjectConstants.standardWidthHeight + ObjectConstants.letterSpacing) * (currPos - 1);
+                } else
+                {
+                    xOffset = (ObjectConstants.standardWidthHeight + ObjectConstants.letterSpacing) * currPos;
+                }
+                
                 yOffset = 24 * lineNum;
 
                 letterSprites[i].Draw(sb, new Vector2(initX + xOffset, initY + yOffset));
@@ -182,6 +226,7 @@ namespace Sprint_0.Scripts.GameState
         {
             if (currIndex < currLine.Length - 1)
             {
+                System.Console.WriteLine(currIndex);
                 SFXManager.Instance.PlayTextScroll();
             }
             else
@@ -204,6 +249,11 @@ namespace Sprint_0.Scripts.GameState
             }
 
             return pos;
+        }
+
+        private bool roomSuspendsForCutScene()
+        {
+            return CutSceneData.IsSuspendedUntilDialogueCleared(RoomManager.Instance.CurrentRoom.RoomId());
         }
     }
 }

@@ -11,6 +11,7 @@ using Sprint_0.Scripts.Sets;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
+using Sprint_0.Scripts.Terrain.LevelData;
 
 public class Room : IRoom
 {
@@ -30,7 +31,7 @@ public class Room : IRoom
     private ProjectileEntities projectileSet;
     private EffectSet effectSet;
     private List<ITerrain> blocks;
-    private List<IWall> walls;
+    public List<IWall> walls;
     private CollisionHandlerSet collisionHandlerSet;
     private List<IProjectile> projectileQueue;
     private List<IEffect> effectQueue;
@@ -38,8 +39,11 @@ public class Room : IRoom
     private bool enemiesFlag;
     private List<String> RoomClear;
     private bool inTransition = false;
+    private bool isRandomized;
+    private static DoorRandomizer doorRandomizer;
+    private bool cutscenePlayed = false;
 
-    public Room(string roomId, ILink link)
+    public Room(string roomId, ILink link, bool isRandomized)
     {
         // Point of reference that is used for the Draw() method. Used to easily translate the room during transitions.
         this._roomDrawPoint = new Vector2(ObjectConstants.xPosForWestDoor * scale, ObjectConstants.yPosForNorthDoor * scale + ObjectConstants.yOffsetForRoom);
@@ -66,18 +70,20 @@ public class Room : IRoom
 
         projectileQueue = new List<IProjectile>();
         effectQueue = new List<IEffect>();
+        doorRandomizer = DoorRandomizer.Instance;
+        this.isRandomized = isRandomized;
 
         LoadRoom();
+        LoadCutsceneData();
         collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
     }
 
     public void Update(GameTime gt)
     {
-        link.Update(gt);
         enemySet.Update(gt);
         itemSet.Update(gt);
         projectileSet.Update(gt);
-
+        
         foreach (ITerrain block in blocks)
         {
             block.Update();
@@ -97,7 +103,9 @@ public class Room : IRoom
     public void Draw(SpriteBatch spriteBatch)
     {
         //This needs to be updated once we have more than dungeon 1
-        Texture2D texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
+        Texture2D texture;
+        if (isRandomized) texture = TerrainSpriteFactory.Instance.GetDungeon2RoomSpritesheet();
+        else texture = TerrainSpriteFactory.Instance.GetDungeon1RoomSpritesheet();
         spriteBatch.Draw(texture, new Rectangle((int)_roomDrawPoint.X, (int)_roomDrawPoint.Y, ObjectConstants.roomWidth * scale, ObjectConstants.roomHeight * scale), spritesheetLocation, Color.White);
 
         // If room is in transtion state, then we don't need to draw the enemies, items, effects, etc.
@@ -135,7 +143,8 @@ public class Room : IRoom
     {
         spritesheetLocation = new Rectangle(ObjectConstants.roomWidthForScanIn * (int)roomLocation.X + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomHeightForScanIn * (int)roomLocation.Y + ObjectConstants.roomReadInAdjustment, ObjectConstants.roomWidth, ObjectConstants.roomHeight);
 
-        filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForCsvFiles + roomId + ObjectConstants.cvsExtension;
+        if (isRandomized) filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon2CsvFiles + roomId + ObjectConstants.cvsExtension;
+        else filePath = Environment.CurrentDirectory.ToString() + ObjectConstants.pathForDungeon1CsvFiles + roomId + ObjectConstants.cvsExtension;
         TextFieldParser csvReader = new TextFieldParser(filePath);
         csvReader.Delimiters = new string[] { ObjectConstants.separator };
 
@@ -171,84 +180,87 @@ public class Room : IRoom
     void LoadEnemies(TextFieldParser csvReader)
     {
         string[] enemyString = csvReader.ReadFields();
-        for (int i = ObjectConstants.counterInitialVal_int; i < enemyString.Length; i += ObjectConstants.coordinateReadInAdjustment)
+        if (enemyString[ObjectConstants.firstInArray] != ObjectConstants.lineIsEmpty) 
         {
-            if (!enemyString[i].Equals(ObjectConstants.emptyStr))
+            for (int i = ObjectConstants.counterInitialVal_int; i < enemyString.Length; i += ObjectConstants.coordinateReadInAdjustment)
             {
-                //first string in each pair notates location
-                float enemyLocationX = float.Parse(enemyString[i].Substring(ObjectConstants.xPosForParse, enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
-                float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
-                Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
-
-                //second string in each pair notates enemy type
-                switch (enemyString[i + ObjectConstants.nextCharInString])
+                if (!enemyString[i].Equals(ObjectConstants.emptyStr))
                 {
-                    case ObjectConstants.AquamentusStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
-                        break;
-                    case ObjectConstants.BladeTrapStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
-                        break;
-                    case ObjectConstants.DodongoStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateDodongo(enemyLocation));
-                        break;
-                    case ObjectConstants.GelStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
-                        break;
-                    case ObjectConstants.GoriyaStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
-                        break;
-                    case ObjectConstants.KeeseStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
-                        break;
-                    case ObjectConstants.OldManStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
-                        break;
-                    case ObjectConstants.MerchantStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMerchant(enemyLocation));
-                        break;
-                    case ObjectConstants.RopeStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateRope(enemyLocation));
-                        break;
-                    case ObjectConstants.StalfosStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
-                        break;
-                    case ObjectConstants.WallMasterStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
-                        break;
-                    case ObjectConstants.ZolStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
-                        break;
-                    case ObjectConstants.BubbleStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
-                        break;
-                    case ObjectConstants.DarknutStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
-                        break;
-                    case ObjectConstants.PatraStr:
-                        enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
-                        break;
-                    case ObjectConstants.MegaStalfosStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMegaStalfos(enemyLocation));
-                        break;
-                    case ObjectConstants.MegaGelStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMegaGel(enemyLocation));
-                        break;
-                    case ObjectConstants.MegaZolStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMegaZol(enemyLocation));
-                        break;
-                    case ObjectConstants.MegaKeeseStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMegaKeese(enemyLocation));
-                        break;
-                    case ObjectConstants.MegaDarknutStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateMegaDarknut(enemyLocation));
-                        break;
-                    case ObjectConstants.ManhandlaStr:
-                        enemySet.Add(EnemyFactory.Instance.CreateManhandla(enemyLocation));
-                        break;
-                    default:
-                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
-                        break;
+                    //first string in each pair notates location
+                    float enemyLocationX = float.Parse(enemyString[i].Substring(ObjectConstants.xPosForParse, enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float enemyLocationY = float.Parse(enemyString[i].Substring(enemyString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                    Vector2 enemyLocation = new Vector2(enemyLocationX, enemyLocationY);
+
+                    //second string in each pair notates enemy type
+                    switch (enemyString[i + ObjectConstants.nextCharInString])
+                    {
+                        case ObjectConstants.AquamentusStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateAquamentus(enemyLocation));
+                            break;
+                        case ObjectConstants.BladeTrapStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateSpikeTrap(enemyLocation));
+                            break;
+                        case ObjectConstants.DodongoStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateDodongo(enemyLocation));
+                            break;
+                        case ObjectConstants.GelStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateGel(enemyLocation));
+                            break;
+                        case ObjectConstants.GoriyaStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateGoriya(enemyLocation));
+                            break;
+                        case ObjectConstants.KeeseStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateKeese(enemyLocation));
+                            break;
+                        case ObjectConstants.OldManStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateOldMan(enemyLocation));
+                            break;
+                        case ObjectConstants.MerchantStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMerchant(enemyLocation));
+                            break;
+                        case ObjectConstants.RopeStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateRope(enemyLocation));
+                            break;
+                        case ObjectConstants.StalfosStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateStalfos(enemyLocation));
+                            break;
+                        case ObjectConstants.WallMasterStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateWallMaster(enemyLocation));
+                            break;
+                        case ObjectConstants.ZolStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateZol(enemyLocation));
+                            break;
+                        case ObjectConstants.BubbleStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateBubble(enemyLocation));
+                            break;
+                        case ObjectConstants.DarknutStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateDarknut(enemyLocation));
+                            break;
+                        case ObjectConstants.PatraStr:
+                            enemySet.Add(EnemyFactory.Instance.CreatePatra(enemyLocation));
+                            break;
+                        case ObjectConstants.MegaStalfosStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMegaStalfos(enemyLocation));
+                            break;
+                        case ObjectConstants.MegaGelStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMegaGel(enemyLocation));
+                            break;
+                        case ObjectConstants.MegaZolStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMegaZol(enemyLocation));
+                            break;
+                        case ObjectConstants.MegaKeeseStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMegaKeese(enemyLocation));
+                            break;
+                        case ObjectConstants.MegaDarknutStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateMegaDarknut(enemyLocation));
+                            break;
+                        case ObjectConstants.ManhandlaStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateManhandla(enemyLocation));
+                            break;
+                        default:
+                            Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
+                            break;
+                    }
                 }
             }
         }
@@ -257,84 +269,87 @@ public class Room : IRoom
     void LoadItems(TextFieldParser csvReader)
     {
         string[] itemString = csvReader.ReadFields();
-        for (int i = ObjectConstants.counterInitialVal_int; i < itemString.Length; i += ObjectConstants.coordinateReadInAdjustment)
-        {
-            if (!itemString[i].Equals(ObjectConstants.emptyStr))
+        if (itemString[ObjectConstants.firstInArray] != ObjectConstants.lineIsEmpty) 
+            { 
+            for (int i = ObjectConstants.counterInitialVal_int; i < itemString.Length; i += ObjectConstants.coordinateReadInAdjustment)
             {
-                //first string in each pair notates location
-                float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
-                float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
-                Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
-                Vector2 blockDimensions = new Vector2(ObjectConstants.standardWidthHeight) * scale;
-
-                switch (itemString[i + ObjectConstants.nextCharInString])
+                if (!itemString[i].Equals(ObjectConstants.emptyStr))
                 {
-                    case ObjectConstants.SmallHeartItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.HeartContainerStr:
-                        itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.FairyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.ClockStr:
-                        itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BlueRubyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.YellowRubyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BasicMapItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BoomerangItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BombItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BasicKeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.MagicKeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.CompassStr:
-                        itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.TriforcePieceStr:
-                        itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BasicArrowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.SilverArrowItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.KeyStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.MapStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.BlueRingStr:
-                        itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.ShotgunItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateShotgunItem(itemLocation, blockDimensions));
-                        break;
-                    case ObjectConstants.ShotgunShellItemStr:
-                        itemSet.Add(ItemFactory.Instance.CreateShotgunShellItem(itemLocation, blockDimensions));
-                        break;
-                    default:
-                        Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
-                        break;
+                    //first string in each pair notates location
+                    float itemLocationX = float.Parse(itemString[i].Substring(ObjectConstants.xPosForParse, itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + WALLOFFSET;
+                    float itemLocationY = float.Parse(itemString[i].Substring(itemString[i].IndexOf(ObjectConstants.spaceStr))) * ObjectConstants.standardWidthHeight * this.scale + YOFFSET + WALLOFFSET;
+                    Vector2 itemLocation = new Vector2(itemLocationX, itemLocationY);
+                    Vector2 blockDimensions = new Vector2(ObjectConstants.standardWidthHeight) * scale;
+
+                    switch (itemString[i + ObjectConstants.nextCharInString])
+                    {
+                        case ObjectConstants.SmallHeartItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateSmallHeartItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.HeartContainerStr:
+                            itemSet.Add(ItemFactory.Instance.CreateHeartContainer(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.FairyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateFairy(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.ClockStr:
+                            itemSet.Add(ItemFactory.Instance.CreateClock(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BlueRubyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBlueRuby(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.YellowRubyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateYellowRuby(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BasicMapItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BoomerangItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBoomerangItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BombItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBombItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BowItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBowItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BasicKeyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.MagicKeyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateMagicKey(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.CompassStr:
+                            itemSet.Add(ItemFactory.Instance.CreateCompass(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.TriforcePieceStr:
+                            itemSet.Add(ItemFactory.Instance.CreateTriforcePiece(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BasicArrowItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.SilverArrowItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.KeyStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicKey(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.MapStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicMapItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.BlueRingStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.ShotgunItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateShotgunItem(itemLocation, blockDimensions));
+                            break;
+                        case ObjectConstants.ShotgunShellItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateShotgunShellItem(itemLocation, blockDimensions));
+                            break;
+                        default:
+                            Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
+                            break;
+                    }
                 }
             }
         }
@@ -368,6 +383,10 @@ public class Room : IRoom
         walls.Add(new InvisibleHorizontalWall(doorLocation, this));
 
         string[] doorString = csvReader.ReadFields();
+        if (doorString[0].Equals("Randomizer"))
+        {
+            doorString = doorRandomizer.getDoorsForRoom(this.roomLocation);
+        }
 
         //East
         doorLocation.X = ObjectConstants.xPosForEastDoor * scale;
@@ -471,6 +490,16 @@ public class Room : IRoom
         }
     }
 
+    void LoadCutsceneData()
+    {
+        if (!cutscenePlayed)
+        {
+            CutSceneConstructor.Instance.LoadDialogueForRoom(roomId, isRandomized);
+        }
+        
+        cutscenePlayed = true;
+    }
+
     public void AddProjectile(IProjectile item)
     {
         projectileQueue.Add(item);
@@ -524,7 +553,6 @@ public class Room : IRoom
         if (walls.Remove(doorToRemove))
         {
             walls.Add(WallSpriteFactory.Instance.CreateWallFromString(doorToAdd, doorLocation, this, nextRoom));
-            System.Diagnostics.Debug.WriteLine(doorToAdd);
             collisionHandlerSet = new CollisionHandlerSet(link, enemySet.Enemies, itemSet.itemSet, projectileSet.ProjectileSet, new HashSet<ITerrain>(blocks), new HashSet<IWall>(walls));
         }
     }

@@ -146,6 +146,9 @@ namespace Sprint_0.Scripts.Terrain
                 case ItemType.Clock:
                     room.AddItem(ItemFactory.Instance.CreateClock(location, spawnerDimensions));
                     break;
+                case ItemType.ShotgunShellItem:
+                    room.AddItem(ItemFactory.Instance.CreateShotgunShellItem(location, spawnerDimensions));
+                    break;
                 default:
                     // Should never happen
                     room.AddItem(ItemFactory.Instance.CreateSmallHeartItem(location, spawnerDimensions));

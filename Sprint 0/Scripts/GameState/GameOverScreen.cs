@@ -15,8 +15,8 @@ namespace Sprint_0.Scripts.GameState
         ISprite[] quitLetters = new ISprite[quitMessage.Length];
 
         private static string gameOverMessage = "gameover";
-        private static string playAgainMessage1 = "press enter to";
-        private static string playAgainMessage2 = "play again";
+        private static string playAgainMessage1 = "";
+        private static string playAgainMessage2 = "";
         private static string quitMessage = "press q to quit";
 
         public GameOverScreen()
