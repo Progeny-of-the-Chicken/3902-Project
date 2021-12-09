@@ -60,9 +60,6 @@ namespace Sprint_0.Scripts.Enemy
                 case EnemyType.Goriya:
                     invoker.AddCommandWithWeight(new CommandEnemyThrowBoomerang(enemy, stateMachine), ObjectConstants.GoriyaThrowBoomerangChanceWeight);
                     break;
-                case EnemyType.Aquamentus:
-                    invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
-                    break;
                 case EnemyType.Patra:
                     invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;

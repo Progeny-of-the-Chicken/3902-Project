@@ -175,10 +175,11 @@ namespace Sprint_0
         //Aquamentus
         public const int AquamentusDamage = 2;
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
-        public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
-        public const double AquamentusReloadTime = 2;
-        public const double AquamentusShootSpriteTime = 0.5f;
+        public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed / 2;
+        public const double AquamentusMoveTime = DefaultEnemyMoveTime * 2;
+        public const double AquamentusShootTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
+        public const double AquamentusProjectileSpreadRadians = (Math.PI / 12);
         //Dodongo
         public const int DodongoDamage = 2;
         public const float DodongoMoveSpeed = DefaultEnemyMoveSpeed;

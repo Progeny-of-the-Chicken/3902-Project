@@ -1,96 +1,74 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Sprint_0.Scripts.Sprite;
 using Sprint_0.Scripts.Collider.Enemy;
-using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.Commands.EnemyAbilities;
 
 namespace Sprint_0.Scripts.Enemy
 {
     public class Aquamentus : IEnemy
     {
-        ISprite sprite;
-        ISprite moveSprite;
-        ISprite shootSprite;
-        IEnemyCollider collider;
+        private ISprite sprite;
+        private ISprite moveSprite;
+        private ISprite shootSprite;
+        private EnemyStateMachine stateMachine;
+        private EnemyRandomInvoker invoker;
+        private ICommand shootCommand;
+        private IEnemyCollider collider;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
-        public Vector2 Position { get => location; }
-        public bool CanBeAffectedByPlayer { get => true; }
-        private int health = ObjectConstants.AquamentusStartingHealth;
-        bool delete = false;
 
-        Vector2 location;
-        Vector2 direction = ObjectConstants.LeftUnitVector;
-        Vector2 startLocation;
+        public Vector2 Position { get => stateMachine.Location; }
 
-        float timeSinceFire = ObjectConstants.counterInitialVal_float;
+        public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
         public Aquamentus(Vector2 location)
         {
-            this.location = location;
-            startLocation = location;
-
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
             sprite = moveSprite;
 
-            Rectangle collision = new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint());
-            collider = new GenericEnemyCollider(this, collision);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Aquamentus, (float)ObjectConstants.AquamentusMoveTime, ObjectConstants.AquamentusMoveSpeed, ObjectConstants.AquamentusStartingHealth);
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Aquamentus, stateMachine, this);
+            invoker.ExecuteRandomCommand();
+            shootCommand = new CommandShootThreeMagicProjectileSpread(stateMachine);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
             SFXManager.Instance.PlayBossScream1();
         }
         public void Update(GameTime t)
         {
-            Move(t);
+            stateMachine.Update(t);
+            if (stateMachine.GetState == EnemyState.NoAction)
+            {
+                invoker.ExecuteRandomCommand();
+                shootCommand.Execute();
+            }
+            if (stateMachine.StateChange)
+            {
+                if (stateMachine.GetState == EnemyState.Movement)
+                {
+                    sprite = moveSprite;
+                }
+                else
+                {
+                    sprite = shootSprite;
+                }
+            }
             sprite.Update(t);
-
-            timeSinceFire += (float)t.ElapsedGameTime.TotalSeconds;
-            if (timeSinceFire >= ObjectConstants.AquamentusReloadTime)
-            {
-                ShootProjectile();
-            }
-            if (timeSinceFire >= ObjectConstants.AquamentusShootSpriteTime)
-            {
-                sprite = moveSprite;
-            }
+            collider.Update(Position);
         }
-
-        public void Move(GameTime t)
-        {
-            if (location.X < startLocation.X - ObjectConstants.AquamentusMoveDistance || location.X > startLocation.X)
-            {
-                direction *= ObjectConstants.vectorFlip;
-            }
-            location += ObjectConstants.AquamentusMoveSpeed * direction * (float)t.ElapsedGameTime.TotalSeconds;
-            collider.Update(location);
-        }
-
-        void ShootProjectile()
-        {
-            timeSinceFire = ObjectConstants.counterInitialVal_float;
-            ObjectsFromObjectsFactory.Instance.CreateThreeMagicProjectilesFromEnemy(location - ObjectConstants.LeftUnitVector * ObjectConstants.scaledStdWidthHeight, FacingDirection.Left);
-            sprite = shootSprite;
-            SFXManager.Instance.PlayBossScream1();
-        }
-
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health <= ObjectConstants.zero)
-            {
-                ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Pop);
-                delete = true;
-                SFXManager.Instance.PlayBossScream1();
-            }
-            SFXManager.Instance.PlayBossHit();
+            stateMachine.TakeDamage(damage, true);
         }
         public void SuddenKnockBack(Vector2 knockback)
         {
-            location += knockback;
+            stateMachine.Displace(knockback);
         }
         public void GradualKnockBack(Vector2 knockback)
         {
@@ -98,15 +76,15 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void Freeze(float duration)
         {
-            // TODO: Implement
+            stateMachine.SetState(EnemyState.Freeze, duration);
         }
         public bool CheckDelete()
         {
-            return delete;
+            return stateMachine.IsDead;
         }
         public void Draw(SpriteBatch sb)
         {
-            sprite.Draw(sb, location);
+            sprite.Draw(sb, stateMachine.Location);
         }
     }
 }

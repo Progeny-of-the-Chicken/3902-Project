@@ -26,7 +26,6 @@ namespace Sprint_0.Scripts.Movement
             {
                 EnemyType.Gel => new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.GelPauseTime),
                 EnemyType.Zol => new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.ZolPauseTime),
-                EnemyType.Aquamentus => new MoveInDirectionStrategy(directionVector, moveSpeed, (int)ObjectConstants.AquamentusMoveDistance),
                 EnemyType.MegaGel => new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.MegaGelPauseTime),
                 EnemyType.MegaZol => new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.MegaZolPauseTime),
                 EnemyType.MegaKeese => CreateTrackLinkStrategy(moveSpeed),

@@ -61,7 +61,7 @@ namespace Sprint_0.Scripts.Enemy
                 ((Manhandla)manhandla).RemoveHead(this);
                 SFXManager.Instance.PlayBossHit();
             }
-            SFXManager.Instance.PlayBossScream1();
+            // SFXManager.Instance.PlayBossScream1();
         }
 
         public void GradualKnockBack(Vector2 knockback)
