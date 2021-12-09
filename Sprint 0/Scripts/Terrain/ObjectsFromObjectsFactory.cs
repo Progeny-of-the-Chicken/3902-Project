@@ -35,6 +35,11 @@ namespace Sprint_0.Scripts.Terrain
             room.AddProjectile(ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy));
         }
 
+        public void CreateMagicProjectileFromEnemy(Vector2 location, Vector2 directionVector)
+        {
+            room.AddProjectile(ProjectileFactory.Instance.CreateMagicProjectile(location, directionVector));
+        }
+
         public void CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)
         {
             List<IProjectile> projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, direction);

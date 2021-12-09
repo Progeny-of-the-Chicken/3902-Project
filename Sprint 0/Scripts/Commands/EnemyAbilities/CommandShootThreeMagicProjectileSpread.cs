@@ -1,4 +1,7 @@
-﻿using Sprint_0.Scripts.Enemy;
+﻿using System;
+using Microsoft.Xna.Framework;
+using Sprint_0.Scripts.Enemy;
+using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.Scripts.Terrain;
 
 namespace Sprint_0.Scripts.Commands.EnemyAbilities

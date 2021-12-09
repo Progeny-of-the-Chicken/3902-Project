@@ -146,7 +146,7 @@ namespace Sprint_0
 
         // Magic projectile
         public const float magicProjectileSpread = 0.3f;
-        public const double magicProjectileSpeed = 150;
+        public const double magicProjectileSpeed = standardWidthHeight * scale * 6;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
         public static Vector2 magicProjectileWidthHeight = new Vector2(8, 10) * scale;
@@ -312,7 +312,8 @@ namespace Sprint_0
         public const double ManhandlaMoveTime = DefaultEnemyMoveTime;
         public const float ManhandlaMoveSpeed = DefaultEnemyMoveSpeed;
         public const int ManhandlaPlaceholderHealth = 1;
-        public const float ManhandlaSpeedPerDeadHead = 0.5f;
+        public const float ManhandlaSpeedPerDeadHead = ManhandlaMoveSpeed * 0.5f;
+        public const float ManhandlaMoveTimePerMoveSpeed = 2f;
         public const int ManhandlaComponentWidthHeight = 16 * scale;
         //ManhandlaHead
         public const int ManhandlaHeadDamage = 2;

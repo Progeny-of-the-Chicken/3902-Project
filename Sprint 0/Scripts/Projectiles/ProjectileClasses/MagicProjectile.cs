@@ -11,9 +11,8 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
     {
         private ISprite sprite;
         private IProjectileCollider collider;
-        private Vector2 directionVector = ObjectConstants.DownUnitVector + ObjectConstants.RightUnitVector;
+        private Vector2 directionVector;
         private Vector2 currentPos;
-        private float spreadFactor = ObjectConstants.magicProjectileSpread;
         private bool delete = false;
         private bool friendly;
 
@@ -27,29 +26,11 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public IProjectileCollider Collider { get => collider; }
 
-        public MagicProjectile(Vector2 spawnLoc, FacingDirection mainDirection, FacingDirection secondaryDirection)
+        public MagicProjectile(Vector2 spawnLoc, Vector2 directionVector)
         {
             currentPos = SpawnHelper.Instance.CenterLocationOnSpawner(spawnLoc, SpriteRectangles.aquamentusMoveFrames[ObjectConstants.firstFrame].Size.ToVector2(), ObjectConstants.magicProjectileWidthHeight);
-            // Aquamentus facing direction
-            if (mainDirection == FacingDirection.Left)
-            {
-                directionVector.X *= ObjectConstants.vectorFlip;
-            }
-            // Upward, Downward, or straight projectile
-            switch (secondaryDirection)
-            {
-                case FacingDirection.Up:
-                    directionVector.Y *= ObjectConstants.vectorFlip * spreadFactor;
-                    break;
-                case FacingDirection.Down:
-                    directionVector.Y *= spreadFactor;
-                    break;
-                default:
-                    directionVector.Y = ObjectConstants.zero;
-                    break;
-            }
+            this.directionVector = directionVector;
             sprite = EnemySpriteFactory.Instance.CreateMagicProjectileSprite();
-
             collider = ProjectileColliderFactory.Instance.CreateMagicProjectileCollider(this);
             friendly = false;
         }

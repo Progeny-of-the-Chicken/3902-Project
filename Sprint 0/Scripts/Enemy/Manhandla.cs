@@ -73,7 +73,8 @@ namespace Sprint_0.Scripts.Enemy
         public void RemoveHead(IEnemy head)
         {
             headSet.Remove(head);
-            stateMachine.moveSpeed += ObjectConstants.ManhandlaMoveSpeed * ObjectConstants.ManhandlaSpeedPerDeadHead;
+            stateMachine.moveSpeed += ObjectConstants.ManhandlaSpeedPerDeadHead;
+            stateMachine.moveTime = ObjectConstants.ManhandlaMoveSpeed / stateMachine.moveSpeed;
         }
 
         public bool CheckDelete()
