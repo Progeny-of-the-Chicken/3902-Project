@@ -18,7 +18,6 @@ namespace Sprint_0.Scripts.Collider.Projectile
             Owner = owner;
             if (Owner is MagicProjectile)
             {
-                // TODO: get dimensions from enemy sprite
                 _hitbox = ObjectConstants.standardProjectileSize;
             }
             _hitbox.Size *= new Point(ObjectConstants.scale);
@@ -31,8 +30,18 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void OnPlayerCollision(Link player)
         {
-            player.TakeDamage(Owner.Damage);
-            player.PushBackInstantlyBy(Overlap.DirectionToMoveObjectOff(player.collider.CollisionRectangle, _hitbox));
+            if (player.CanBeAffectedByEnemy)
+            {
+                Vector2 pushBack = Overlap.DirectionToMoveObjectOff(_hitbox, player.collider.CollisionRectangle);
+                //playing it safe to avoid dividebyzero
+                if (!pushBack.Equals(Vector2.Zero))
+                {
+                    pushBack.Normalize();
+                    pushBack *= ObjectConstants.DefaultEnemyKnockbackToLink;
+                }
+                player.PushBackGentlyBy(pushBack);
+                player.TakeDamage(Owner.Damage);
+            }
         }
 
         public void OnEnemyCollision(IEnemy enemy)
