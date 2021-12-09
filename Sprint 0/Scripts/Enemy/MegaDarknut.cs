@@ -26,7 +26,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public MegaDarknut(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.MegaDarknut, (float)ObjectConstants.MegaDarknutMoveTime, ObjectConstants.MegaDarknutHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaDarknut, (float)ObjectConstants.MegaDarknutMoveTime, ObjectConstants.MegaDarknutMoveSpeed, ObjectConstants.MegaDarknutHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.MegaDarknut, stateMachine, this);
             invoker.ExecuteRandomCommand();
 

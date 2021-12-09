@@ -32,7 +32,7 @@ namespace Sprint_0.Scripts.Enemy
         public Patra(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreatePatraSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Patra, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMoveSpeed, ObjectConstants.PatraStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Patra, stateMachine, this);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, ObjectConstants.zeroVector);

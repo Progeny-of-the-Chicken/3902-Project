@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public Darknut(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.Darknut, (float)ObjectConstants.DarknutMoveTime, ObjectConstants.DarknutStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Darknut, (float)ObjectConstants.DarknutMoveTime, ObjectConstants.DarknutMoveSpeed, ObjectConstants.DarknutStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Darknut, stateMachine, this);
             invoker.ExecuteRandomCommand();
 

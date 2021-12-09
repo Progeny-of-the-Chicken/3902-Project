@@ -29,7 +29,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             InitializeHeads(location);
             sprite = EnemySpriteFactory.Instance.CreateManhandlaBodySprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Manhandla, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaPlaceholderHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Manhandla, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaMoveSpeed, ObjectConstants.ManhandlaPlaceholderHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Manhandla, stateMachine, this);
             invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));

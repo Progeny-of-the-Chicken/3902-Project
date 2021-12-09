@@ -17,6 +17,7 @@ namespace Sprint_0.Scripts.Enemy
         public float enemyLifeTime = ObjectConstants.counterInitialVal_float;
         private float timeSinceMove = ObjectConstants.counterInitialVal_float;
         public float moveTime;
+        public float moveSpeed;
 
         private EnemyType enemyType;
         private int health;
@@ -40,11 +41,12 @@ namespace Sprint_0.Scripts.Enemy
 
         //----- Public methods -----//
 
-        public EnemyStateMachine(Vector2 startLocation, EnemyType type, float moveTime, int health)
+        public EnemyStateMachine(Vector2 startLocation, EnemyType type, float moveTime, float moveSpeed, int health)
         {
             enemyType = type;
-            this.health = health;
             this.moveTime = moveTime;
+            this.moveSpeed = moveSpeed;
+            this.health = health;
 
             stateStack = new Stack<(EnemyState state, float stateEndTime)>();
             movement = new EnemyMovementHandler(startLocation);
@@ -94,7 +96,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public void SetState(EnemyState state, float duration, IEnemy enemy, int radius, double radiusChange)
         {
-            // Hard coded to patra minion for now, can be dynamic by making radius and radiuschange public members of passed enemy
+            // Hard coded to patra minion for now, can be dynamic by making radius and radius change public members of passed enemy
             timeSinceMove = ObjectConstants.zero_float;
             stateStack.Push((state, duration));
             movement.SetStrategy(MovementStrategyFactory.Instance.CreateOrbitEnemyStrategy(enemy, radius, radiusChange, ObjectConstants.PatraMinionWidthHeight));
@@ -139,7 +141,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             return state switch
             {
-                EnemyState.Movement => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType),
+                EnemyState.Movement => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, moveSpeed, enemyType),
                 EnemyState.Knockback => MovementStrategyFactory.Instance.CreateKnockbackStrategy(lastMovementVector, knockbackSpeed),
                 EnemyState.Freeze => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 EnemyState.Stun => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
@@ -147,7 +149,7 @@ namespace Sprint_0.Scripts.Enemy
                 EnemyState.Chase => MovementStrategyFactory.Instance.CreateChaseStrategyForEnemy(lastMovementVector, enemyType),
                 EnemyState.NoAction => MovementStrategyFactory.Instance.CreateFreezeStrategy(),
                 // Should never happen
-                _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, enemyType)
+                _ => MovementStrategyFactory.Instance.CreateMovementStrategyForEnemy(directionVector, moveSpeed, enemyType)
             };
         }
 

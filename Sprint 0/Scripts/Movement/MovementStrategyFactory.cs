@@ -20,29 +20,29 @@ namespace Sprint_0.Scripts.Movement
         {
         }
 
-        public IMovementStrategy CreateMovementStrategyForEnemy(Vector2 directionVector, EnemyType type)
+        public IMovementStrategy CreateMovementStrategyForEnemy(Vector2 directionVector, float moveSpeed, EnemyType type)
         {
             return type switch
             {
-                EnemyType.Stalfos => CreateStalfosMovementStrategy(directionVector),
-                EnemyType.Keese => CreateKeeseMovementStrategy(directionVector),
-                EnemyType.Goriya => CreateGoriyaMovementStrategy(directionVector),
-                EnemyType.Gel => CreateGelMovementStrategy(directionVector),
-                EnemyType.Zol => CreateZolMovementStrategy(directionVector),
-                EnemyType.Aquamentus => CreateAquamentusMovementStrategy(directionVector),
-                EnemyType.Rope => CreateRopeMovementStrategy(directionVector),
-                EnemyType.Dodongo => CreateDodongoMovementStrategy(directionVector),
+                EnemyType.Stalfos => CreateStalfosMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Keese => CreateKeeseMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Goriya => CreateGoriyaMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Gel => CreateGelMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Zol => CreateZolMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Aquamentus => CreateAquamentusMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Rope => CreateRopeMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Dodongo => CreateDodongoMovementStrategy(directionVector, moveSpeed),
                 EnemyType.OldMan => CreateFreezeStrategy(),
                 EnemyType.Merchant => CreateFreezeStrategy(),
-                EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector),
-                EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector),
-                EnemyType.Patra => CreatePatraMovementStrategy(directionVector),
-                EnemyType.MegaStalfos => CreateMegaStalfosMovementStrategy(directionVector),
-                EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector),
-                EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector),
-                EnemyType.MegaKeese => CreateTrackLinkStrategy(),
-                EnemyType.MegaDarknut => CreateMegaDarknutMovementStrategy(directionVector),
-                EnemyType.Manhandla => CreateManhandlaMovementStrategy(directionVector),
+                EnemyType.Bubble => CreateBubbleMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Darknut => CreateDarknutMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Patra => CreatePatraMovementStrategy(directionVector, moveSpeed),
+                EnemyType.MegaStalfos => CreateMegaStalfosMovementStrategy(directionVector, moveSpeed),
+                EnemyType.MegaGel => CreateMegaGelMovementStrategy(directionVector, moveSpeed),
+                EnemyType.MegaZol => CreateMegaZolMovementStrategy(directionVector, moveSpeed),
+                EnemyType.MegaKeese => CreateTrackLinkStrategy(moveSpeed),
+                EnemyType.MegaDarknut => CreateMegaDarknutMovementStrategy(directionVector, moveSpeed),
+                EnemyType.Manhandla => CreateManhandlaMovementStrategy(directionVector, moveSpeed),
                 EnemyType.ManhandlaHead => CreateFreezeStrategy(),
                 _ => CreateFreezeStrategy()
             };
@@ -68,10 +68,10 @@ namespace Sprint_0.Scripts.Movement
             };
         }
 
-        public IMovementStrategy CreateTrackLinkStrategy()
+        public IMovementStrategy CreateTrackLinkStrategy(float moveSpeed)
         {
             // Can be flexible with enums if more enemies use track link strategy
-            return new TrackLinkStrategy(ObjectConstants.MegaKeeseMoveSpeed, new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)));
+            return new TrackLinkStrategy(moveSpeed, new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)));
         }
 
         public IMovementStrategy CreateOrbitEnemyStrategy(IEnemy centerEnemy, int radius, double radiusChange, Vector2 satelliteDimensions)
@@ -87,84 +87,84 @@ namespace Sprint_0.Scripts.Movement
 
         //----- Enemy disambiguation strategies creator methods -----//
 
-        private IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateStalfosMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.StalfosMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateKeeseMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateKeeseMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.KeeseMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateGoriyaMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateGoriyaMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GoriyaMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateGelMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.GelMoveSpeed, (float)ObjectConstants.GelPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.GelPauseTime);
         }
 
-        private IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateZolMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ZolMoveSpeed, (float)ObjectConstants.ZolPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.ZolPauseTime);
         }
 
-        private IMovementStrategy CreateAquamentusMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateAquamentusMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.AquamentusMoveSpeed, (int)ObjectConstants.AquamentusMoveDistance);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, (int)ObjectConstants.AquamentusMoveDistance);
         }
 
-        private IMovementStrategy CreateRopeMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateRopeMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.RopeMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateDodongoMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateDodongoMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DodongoMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateBubbleMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateBubbleMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.BubbleMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateDarknutMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateDarknutMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.DarknutMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreatePatraMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreatePatraMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.PatraMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateMegaStalfosMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateMegaStalfosMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaStalfosMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateMegaGelMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateMegaGelMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaGelMoveSpeed, (float)ObjectConstants.MegaGelPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.MegaGelPauseTime);
         }
 
-        private IMovementStrategy CreateMegaZolMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateMegaZolMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaZolMoveSpeed, (float)ObjectConstants.MegaZolPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, (float)ObjectConstants.MegaZolPauseTime);
         }
 
-        private IMovementStrategy CreateMegaDarknutMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateMegaDarknutMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.MegaDarknutMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
 
-        private IMovementStrategy CreateManhandlaMovementStrategy(Vector2 directionVector)
+        private IMovementStrategy CreateManhandlaMovementStrategy(Vector2 directionVector, float moveSpeed)
         {
-            return new MoveInDirectionStrategy(directionVector, ObjectConstants.ManhandlaMoveSpeed, ObjectConstants.zeroPauseTime);
+            return new MoveInDirectionStrategy(directionVector, moveSpeed, ObjectConstants.zeroPauseTime);
         }
     }
 }

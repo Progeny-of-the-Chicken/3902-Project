@@ -30,7 +30,7 @@ namespace Sprint_0.Scripts.Enemy
             this.manhandla = manhandla;
             offsetFromManhandla = GetOffsetForSide(side);
             sprite = GetSpriteForSide(side);
-            stateMachine = new EnemyStateMachine(manhandlaLocation + offsetFromManhandla, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, ObjectConstants.ManhandlaHeadHealth);
+            stateMachine = new EnemyStateMachine(manhandlaLocation + offsetFromManhandla, EnemyType.ManhandlaHead, (float)ObjectConstants.ManhandlaMoveTime, 0f, ObjectConstants.ManhandlaHeadHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(manhandlaLocation.ToPoint(), new Point(ObjectConstants.ManhandlaComponentWidthHeight)));
             shootProjectileCommand = new CommandShootMagicProjectileTowardLink(stateMachine);
 
