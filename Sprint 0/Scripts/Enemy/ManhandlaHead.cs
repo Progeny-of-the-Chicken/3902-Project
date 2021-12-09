@@ -59,7 +59,9 @@ namespace Sprint_0.Scripts.Enemy
             if (stateMachine.IsDead)
             {
                 ((Manhandla)manhandla).RemoveHead(this);
+                SFXManager.Instance.PlayBossHit();
             }
+            SFXManager.Instance.PlayBossScream1();
         }
 
         public void GradualKnockBack(Vector2 knockback)
