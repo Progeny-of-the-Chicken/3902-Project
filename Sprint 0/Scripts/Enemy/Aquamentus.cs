@@ -17,6 +17,8 @@ namespace Sprint_0.Scripts.Enemy
         private ICommand shootCommand;
         private IEnemyCollider collider;
 
+        private (int left, int right) movementBarrier;
+
         public IEnemyCollider Collider { get => collider; }
 
         public int Damage { get => ObjectConstants.AquamentusDamage; }
@@ -27,6 +29,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public Aquamentus(Vector2 location)
         {
+            movementBarrier = ((int)location.X - ObjectConstants.AquamentusBarrierLength, (int)location.X + ObjectConstants.AquamentusBarrierLength);
+
             moveSprite = EnemySpriteFactory.Instance.CreateAquamentusMoveSprite();
             shootSprite = EnemySpriteFactory.Instance.CreateAquamentusShootSprite();
             sprite = moveSprite;
@@ -43,6 +47,7 @@ namespace Sprint_0.Scripts.Enemy
         public void Update(GameTime t)
         {
             stateMachine.Update(t);
+            FitToBarrier();
             if (stateMachine.GetState == EnemyState.NoAction)
             {
                 invoker.ExecuteRandomCommand();
@@ -85,6 +90,20 @@ namespace Sprint_0.Scripts.Enemy
         public void Draw(SpriteBatch sb)
         {
             sprite.Draw(sb, stateMachine.Location);
+        }
+
+        //----- Helper for restricting movement -----//
+
+        private void FitToBarrier()
+        {
+            if (Position.X < movementBarrier.left)
+            {
+                stateMachine.Displace(new Vector2(movementBarrier.left - Position.X, 0));
+            }
+            else if (Position.X > movementBarrier.right)
+            {
+                stateMachine.Displace(new Vector2(Position.X - movementBarrier.right, 0));
+            }
         }
     }
 }
