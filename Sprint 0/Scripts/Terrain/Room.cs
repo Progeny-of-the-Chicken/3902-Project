@@ -479,6 +479,7 @@ public class Room : IRoom
                     break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
+                case ObjectConstants.BlueRingStr:
                     enemiesFlag = true;
                     RoomClear.Add(specialString[i]);
                     RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
