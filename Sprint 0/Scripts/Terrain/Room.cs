@@ -80,24 +80,27 @@ public class Room : IRoom
 
     public void Update(GameTime gt)
     {
-        enemySet.Update(gt);
-        itemSet.Update(gt);
-        projectileSet.Update(gt);
-        
-        foreach (ITerrain block in blocks)
+        if (!inTransition)
         {
-            block.Update();
+            enemySet.Update(gt);
+            itemSet.Update(gt);
+            projectileSet.Update(gt);
+
+            foreach (ITerrain block in blocks)
+            {
+                block.Update();
+            }
+
+            effectSet.Update(gt);
+            collisionHandlerSet.Update();
+
+            if (enemiesFlag && isAllEnemiesDead())
+            {
+                RoomCleared();
+            }
+
+            TransferQueuedEffects();
         }
-
-        effectSet.Update(gt);
-        collisionHandlerSet.Update();
-
-        if (enemiesFlag && isAllEnemiesDead())
-        {
-            RoomCleared();
-        }
-
-        TransferQueuedEffects();
     }
 
     public void Draw(SpriteBatch spriteBatch)
