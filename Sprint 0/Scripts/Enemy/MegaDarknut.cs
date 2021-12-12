@@ -12,8 +12,8 @@ namespace Sprint_0.Scripts.Enemy
         private EnemyStateMachine stateMachine;
         private EnemyRandomInvoker invoker;
         private IEnemyCollider collider;
-        private (ISprite sprite, IEnemyCollider detectionCollider) dependency;
-        private Dictionary<FacingDirection, (ISprite sprite, IEnemyCollider detectionCollider)> directionDependencies;
+        private (ISprite sprite, IEnemyCollider detectionCollider, Vector2 colliderOffset) dependency;
+        private Dictionary<FacingDirection, (ISprite sprite, IEnemyCollider detectionCollider, Vector2 colliderOffset)> directionDependencies;
 
         public IEnemyCollider Collider { get => collider; }
         public IEnemyCollider ChaseCollider { get => dependency.detectionCollider; }
@@ -33,11 +33,11 @@ namespace Sprint_0.Scripts.Enemy
             Vector2 darknutDimensions = new Vector2((int)(SpriteRectangles.darknutBackFrame.Size.ToVector2().X * ObjectConstants.MegaDarknutScale), (int)(SpriteRectangles.darknutBackFrame.Size.ToVector2().Y * ObjectConstants.MegaDarknutScale));
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), darknutDimensions.ToPoint()));
 
-            directionDependencies = new Dictionary<FacingDirection, (ISprite sprite, IEnemyCollider detectionCollider)>();
-            directionDependencies.Add(FacingDirection.Right, (EnemySpriteFactory.Instance.CreateRightMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * darknutDimensions.X).ToPoint(), new Point(ObjectConstants.roomWidth, (int)darknutDimensions.Y)))));
-            directionDependencies.Add(FacingDirection.Left, (EnemySpriteFactory.Instance.CreateLeftMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, (int)darknutDimensions.Y))));
-            directionDependencies.Add(FacingDirection.Up, (EnemySpriteFactory.Instance.CreateBackMegaDarknutSprite(), new ChaseDetectionCollider(this, ObjectConstants.nullRectangle)));
-            directionDependencies.Add(FacingDirection.Down, (EnemySpriteFactory.Instance.CreateFrontMegaDarknutSprite(), new ChaseDetectionCollider(this, ObjectConstants.nullRectangle)));
+            directionDependencies = new Dictionary<FacingDirection, (ISprite sprite, IEnemyCollider detectionCollider, Vector2 colliderOffset)>();
+            directionDependencies.Add(FacingDirection.Right, (EnemySpriteFactory.Instance.CreateRightMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle(0, 0, ObjectConstants.roomWidth, (int)darknutDimensions.Y)), ObjectConstants.RightUnitVector * darknutDimensions));
+            directionDependencies.Add(FacingDirection.Left, (EnemySpriteFactory.Instance.CreateLeftMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle(0, 0, ObjectConstants.roomWidth, (int)darknutDimensions.Y)), ObjectConstants.LeftUnitVector * ObjectConstants.roomWidth));
+            directionDependencies.Add(FacingDirection.Up, (EnemySpriteFactory.Instance.CreateBackMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle(0, 0, (int)darknutDimensions.X, ObjectConstants.roomHeight)), ObjectConstants.UpUnitVector * ObjectConstants.roomHeight));
+            directionDependencies.Add(FacingDirection.Down, (EnemySpriteFactory.Instance.CreateFrontMegaDarknutSprite(), new ChaseDetectionCollider(this, new Rectangle(0, 0, (int)darknutDimensions.X, ObjectConstants.roomHeight)), ObjectConstants.DownUnitVector * darknutDimensions));
             directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -56,7 +56,7 @@ namespace Sprint_0.Scripts.Enemy
             }
             dependency.sprite.Update(t);
             collider.Update(Position);
-            dependency.detectionCollider.Update(Position);
+            dependency.detectionCollider.Update(Position + dependency.colliderOffset);
         }
 
         public void TakeDamage(int damage)
@@ -83,14 +83,7 @@ namespace Sprint_0.Scripts.Enemy
         {
             if (stateMachine.GetState == EnemyState.Movement)
             {
-                if (stateMachine.GetDirection == FacingDirection.Left)
-                {
-                    stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.MegaDarknutChaseTimeoutTime, ObjectConstants.LeftUnitVector);
-                }
-                else if (stateMachine.GetDirection == FacingDirection.Right)
-                {
-                    stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.MegaDarknutChaseTimeoutTime, ObjectConstants.RightUnitVector);
-                }
+                stateMachine.SetState(EnemyState.Chase, (float)ObjectConstants.MegaDarknutChaseTimeoutTime, GetVectorForDirection(stateMachine.GetDirection));
             }
         }
 
@@ -121,7 +114,7 @@ namespace Sprint_0.Scripts.Enemy
 
         //----- Helper method for damage deflection -----//
 
-        public bool DoDeflection(Vector2 damageVector)
+        private bool DoDeflection(Vector2 damageVector)
         {
             return damageVector switch
             {
@@ -131,6 +124,19 @@ namespace Sprint_0.Scripts.Enemy
                 Vector2(0, 1) => stateMachine.GetDirection != FacingDirection.Up,
                 // Should never happen
                 _ => false
+            };
+        }
+
+        private Vector2 GetVectorForDirection(FacingDirection direction)
+        {
+            return direction switch
+            {
+                FacingDirection.Right => ObjectConstants.RightUnitVector,
+                FacingDirection.Up => ObjectConstants.UpUnitVector,
+                FacingDirection.Left => ObjectConstants.LeftUnitVector,
+                FacingDirection.Down => ObjectConstants.DownUnitVector,
+                // Should never happen
+                _ => ObjectConstants.zeroVector
             };
         }
     }
