@@ -83,6 +83,15 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
+        public void ChangeDirection()
+        {
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
+        }
+
         public void ToggleOrbit(double radiusChange)
         {
             foreach (IEnemy patraMinion in patraMinions)

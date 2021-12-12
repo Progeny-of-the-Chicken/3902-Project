@@ -29,6 +29,7 @@ namespace Sprint_0.Scripts.Collider.Terrain
             {
                 Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
                 enemy.SuddenKnockBack(adjustmentForEnemy);
+                enemy.ChangeDirection();
             }
         }
 

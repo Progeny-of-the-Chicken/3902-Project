@@ -67,6 +67,11 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
+        public void ChangeDirection()
+        {
+            // Patra minion has no free movement
+        }
+
         public void ToggleOrbit(double radiusChange)
         {
             stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radius, radiusChange);

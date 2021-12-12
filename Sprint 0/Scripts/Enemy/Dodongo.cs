@@ -99,6 +99,15 @@ namespace Sprint_0.Scripts.Enemy
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
 
+        public void ChangeDirection()
+        {
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
+        }
+
         public void Stun()
         {
             stateMachine.SetState(EnemyState.Stun, (float)ObjectConstants.DodongoStunTime);
