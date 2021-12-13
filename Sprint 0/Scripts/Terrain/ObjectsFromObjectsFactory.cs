@@ -35,13 +35,9 @@ namespace Sprint_0.Scripts.Terrain
             room.AddProjectile(ProjectileFactory.Instance.CreateEnemyBoomerang(location, direction, enemy));
         }
 
-        public void CreateThreeMagicProjectilesFromEnemy(Vector2 location, FacingDirection direction)
+        public void CreateMagicProjectileFromEnemy(Vector2 location, Vector2 directionVector)
         {
-            List<IProjectile> projectiles = ProjectileFactory.Instance.CreateThreeMagicProjectiles(location, direction);
-            foreach (IProjectile projectile in projectiles)
-            {
-                room.AddProjectile(projectile);
-            }
+            room.AddProjectile(ProjectileFactory.Instance.CreateMagicProjectile(location, directionVector));
         }
 
         public IProjectile CreateBlastZoneFromBomb(Vector2 location)
@@ -108,6 +104,13 @@ namespace Sprint_0.Scripts.Terrain
             IEnemy patraMinion = EnemyFactory.Instance.CreatePatraMinion(location, patra);
             room.AddEnemy(patraMinion);
             return patraMinion;
+        }
+
+        public IEnemy CreateManhandlaHead(Vector2 manhandlaLocation, FacingDirection side, IEnemy manhandla)
+        {
+            IEnemy manhandlaHead = EnemyFactory.Instance.CreateManhandlaHead(manhandlaLocation, side, manhandla);
+            room.AddEnemy(manhandlaHead);
+            return manhandlaHead;
         }
 
         // Items

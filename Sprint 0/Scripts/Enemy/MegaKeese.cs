@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         public MegaKeese(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateMegaKeeseSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.MegaKeese, (float)ObjectConstants.MegaKeeseMoveTime, ObjectConstants.MegaKeeseHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaKeese, (float)ObjectConstants.MegaKeeseMoveTime, ObjectConstants.MegaKeeseMoveSpeed, ObjectConstants.MegaKeeseHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.MegaKeese, stateMachine, this);
             invoker.ExecuteRandomCommand();
             Point colliderHitbox = new Vector2((int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaKeeseScale), (int)(SpriteRectangles.keeseFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaKeeseScale)).ToPoint();

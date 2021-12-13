@@ -21,7 +21,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public EnemyRandomInvoker CreateInvokerForEnemy(EnemyType type, EnemyStateMachine stateMachine, IEnemy enemy)
         {
+            // Invoker
             EnemyRandomInvoker invoker = new EnemyRandomInvoker();
+
             // Movement
             switch (type)
             {
@@ -44,25 +46,25 @@ namespace Sprint_0.Scripts.Enemy
                     break;
                 case EnemyType.Keese:
                 case EnemyType.Patra:
+                case EnemyType.Manhandla:
                     InitializeMoveCommands(invoker, stateMachine, GetFlyVectors());
                     break;
                 case EnemyType.MegaKeese:
                     invoker.AddCommand(new CommandTrackLink(stateMachine));
                     break;
             }
+
             // Abilities
             switch (type)
             {
                 case EnemyType.Goriya:
                     invoker.AddCommandWithWeight(new CommandEnemyThrowBoomerang(enemy, stateMachine), ObjectConstants.GoriyaThrowBoomerangChanceWeight);
                     break;
-                case EnemyType.Aquamentus:
-                    invoker.AddCommand(new CommandShootThreeMagicProjectileSpread(stateMachine));
-                    break;
                 case EnemyType.Patra:
                     invoker.AddCommandWithWeight(new CommandTogglePatraOrbit(enemy, stateMachine), ObjectConstants.PatraToggleOrbitChanceWeight);
                     break;
             }
+
             return invoker;
         }
 

@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.Enemy
         public MegaStalfos(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateMegaStalfosSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.MegaStalfos, (float)ObjectConstants.MegaStalfosMoveTime, ObjectConstants.MegaStalfosHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaStalfos, (float)ObjectConstants.MegaStalfosMoveTime, ObjectConstants.MegaStalfosMoveSpeed, ObjectConstants.MegaStalfosHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Stalfos, stateMachine, this);
             invoker.ExecuteRandomCommand();
             Point colliderHitbox = new Vector2((int)(SpriteRectangles.stalfosFrame.Size.ToVector2().X * ObjectConstants.MegaStalfosScale), (int)(SpriteRectangles.stalfosFrame.Size.ToVector2().Y * ObjectConstants.MegaStalfosScale)).ToPoint();

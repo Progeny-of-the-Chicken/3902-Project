@@ -254,6 +254,9 @@ public class Room : IRoom
                         case ObjectConstants.MegaDarknutStr:
                             enemySet.Add(EnemyFactory.Instance.CreateMegaDarknut(enemyLocation));
                             break;
+                        case ObjectConstants.ManhandlaStr:
+                            enemySet.Add(EnemyFactory.Instance.CreateManhandla(enemyLocation));
+                            break;
                         default:
                             Console.WriteLine(ObjectConstants.typoInRoomMessage + roomId);
                             break;
@@ -476,6 +479,7 @@ public class Room : IRoom
                     break;
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
+                case ObjectConstants.BlueRingStr:
                     enemiesFlag = true;
                     RoomClear.Add(specialString[i]);
                     RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
