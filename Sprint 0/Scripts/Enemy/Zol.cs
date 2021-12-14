@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Enemy
         public Zol(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateZolSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Zol, (float)ObjectConstants.ZolMoveTime + (float)ObjectConstants.ZolPauseTime, ObjectConstants.ZolStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Zol, (float)ObjectConstants.ZolMoveTime + (float)ObjectConstants.ZolPauseTime, ObjectConstants.ZolMoveSpeed, ObjectConstants.ZolStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Zol, stateMachine, this);
             invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));

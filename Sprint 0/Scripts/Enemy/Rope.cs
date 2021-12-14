@@ -33,7 +33,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public Rope(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.Rope, (float)ObjectConstants.RopeMoveTime, ObjectConstants.RopeStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Rope, (float)ObjectConstants.RopeMoveTime, ObjectConstants.RopeMoveSpeed, ObjectConstants.RopeStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Rope, stateMachine, this);
             invoker.ExecuteRandomCommand();
 

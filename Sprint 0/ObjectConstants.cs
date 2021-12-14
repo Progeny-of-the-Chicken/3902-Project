@@ -149,7 +149,7 @@ namespace Sprint_0
 
         // Magic projectile
         public const float magicProjectileSpread = 0.3f;
-        public const double magicProjectileSpeed = 150;
+        public const double magicProjectileSpeed = standardWidthHeight * scale * 6;
         public const double magicProjectileLifetime = 3.0;
         public const int magicProjectileDamage = 1;
         public static Vector2 magicProjectileWidthHeight = new Vector2(8, 10) * scale;
@@ -178,10 +178,12 @@ namespace Sprint_0
         //Aquamentus
         public const int AquamentusDamage = 2;
         public const float AquamentusMoveDistance = 2 * scale * standardWidthHeight;
-        public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed;
-        public const double AquamentusReloadTime = 2;
-        public const double AquamentusShootSpriteTime = 0.5f;
+        public const float AquamentusMoveSpeed = DefaultEnemyMoveSpeed / 2;
+        public const double AquamentusMoveTime = DefaultEnemyMoveTime * 2;
+        public const double AquamentusShootTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
+        public const double AquamentusProjectileSpreadRadians = (Math.PI / 12);
+        public const int AquamentusBarrierLength = (int)(AquamentusMoveSpeed * 2);
         //Dodongo
         public const int DodongoDamage = 2;
         public const float DodongoMoveSpeed = DefaultEnemyMoveSpeed;
@@ -311,6 +313,19 @@ namespace Sprint_0
         public const double MegaDarknutKnockbackTime = MegaEnemiesKnockbackTime;
         public const float MegaDarknutChaseSpeed = DarknutMoveSpeed * 2;
         public const double MegaDarknutChaseTimeoutTime = DarknutMoveTime / 2;
+        //Manhandla
+        public const int ManhandlaDamage = 2;
+        public const double ManhandlaMoveTime = DefaultEnemyMoveTime;
+        public const float ManhandlaMoveSpeed = DefaultEnemyMoveSpeed;
+        public const int ManhandlaPlaceholderHealth = 1;
+        public const float ManhandlaSpeedPerDeadHead = ManhandlaMoveSpeed * 0.5f;
+        public const float ManhandlaMoveTimePerMoveSpeed = 2f;
+        public const int ManhandlaComponentWidthHeight = 16 * scale;
+        //ManhandlaHead
+        public const int ManhandlaHeadDamage = 2;
+        public const double ManhandlaHeadPlaceholderMoveTime = DefaultEnemyMoveTime;
+        public const int ManhandlaHeadHealth = 3;
+        public const float ManhandlaHeadReloadTime = 2.0f;
 
         //Sprites
         public const float DefaultEnemyFramesPerSecond = 4;
@@ -381,6 +396,7 @@ namespace Sprint_0
         public const string MegaZolStr = "MegaZol";
         public const string MegaKeeseStr = "MegaKeese";
         public const string MegaDarknutStr = "MegaDarknut";
+        public const string ManhandlaStr = "Manhandla";
         public const string SmallHeartItemStr = "SmallHeartItem";
         public const string HeartContainerStr = "HeartContainer";
         public const string FairyStr = "Fairy";
@@ -643,7 +659,7 @@ namespace Sprint_0
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
         public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(Manhandla), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut) };
         public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,

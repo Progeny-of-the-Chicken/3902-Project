@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public Dodongo(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.Dodongo, (float)ObjectConstants.DodongoMoveTime, ObjectConstants.DodongoStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Dodongo, (float)ObjectConstants.DodongoMoveTime, ObjectConstants.DodongoMoveSpeed, ObjectConstants.DodongoStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Dodongo, stateMachine, this);
             invoker.ExecuteRandomCommand();
 

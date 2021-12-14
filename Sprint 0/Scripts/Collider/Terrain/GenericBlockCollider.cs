@@ -24,8 +24,8 @@ namespace Sprint_0.Scripts.Collider.Terrain
 
         public void OnEnemyCollision(IEnemy enemy)
         {
-            //Keese can go over blocks
-            if (!(enemy is Keese) && !(enemy is MegaKeese))
+            //Flying enemies
+            if (!(enemy is Keese) && !(enemy is Aquamentus) && !(enemy is Patra) && !(enemy is MegaKeese) && !(enemy is Manhandla))
             {
                 Vector2 adjustmentForEnemy = Overlap.DirectionToMoveObjectOff(this.hitbox, enemy.Collider.Hitbox);
                 enemy.SuddenKnockBack(adjustmentForEnemy);

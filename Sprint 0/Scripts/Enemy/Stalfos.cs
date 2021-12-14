@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         public Stalfos(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Stalfos, (float)ObjectConstants.StalfosMoveTime, ObjectConstants.StalfosStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Stalfos, (float)ObjectConstants.StalfosMoveTime, ObjectConstants.StalfosMoveSpeed, ObjectConstants.StalfosStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Stalfos, stateMachine, this);
             invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.stalfosFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));

@@ -28,10 +28,17 @@ namespace Sprint_0.Scripts.Collider.Projectile
 
         public void OnPlayerCollision(Link link)
         {
-            if (!Owner.Friendly)
+            if (!Owner.Friendly && link.CanBeAffectedByEnemy)
             {
+                Vector2 pushBack = Overlap.DirectionToMoveObjectOff(_hitbox, link.collider.CollisionRectangle);
+                //playing it safe to avoid dividebyzero
+                if (!pushBack.Equals(Vector2.Zero))
+                {
+                    pushBack.Normalize();
+                    pushBack *= ObjectConstants.DefaultEnemyKnockbackToLink;
+                }
+                link.PushBackGentlyBy(pushBack);
                 link.TakeDamage(Owner.Damage);
-                link.PushBackGentlyBy(Overlap.DirectionToMoveObjectOff(link.collider.CollisionRectangle, _hitbox));
                 ((Boomerang)Owner).BounceOffWall();
             }
         }

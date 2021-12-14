@@ -108,5 +108,13 @@ namespace Sprint_0.Scripts.Enemy
         {
 			return new MegaDarknut(location);
         }
+		public IEnemy CreateManhandla(Vector2 location)
+        {
+			return new Manhandla(location);
+        }
+		public IEnemy CreateManhandlaHead(Vector2 manhandlaLocation, FacingDirection side, IEnemy manhandla)
+        {
+			return new ManhandlaHead(manhandlaLocation, side, manhandla);
+        }
 	}
 }

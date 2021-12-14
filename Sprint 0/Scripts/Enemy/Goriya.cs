@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.Enemy
 
         public Goriya(Vector2 location)
         {
-            stateMachine = new EnemyStateMachine(location, EnemyType.Goriya, (float)ObjectConstants.GoriyaMoveTime, ObjectConstants.GoriyaStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Goriya, (float)ObjectConstants.GoriyaMoveTime, ObjectConstants.GoriyaMoveSpeed, ObjectConstants.GoriyaStartingHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Goriya, stateMachine, this);
             invoker.ExecuteRandomCommand();
 

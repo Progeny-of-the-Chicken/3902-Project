@@ -25,7 +25,7 @@ namespace Sprint_0.Scripts.Enemy
         public PatraMinion(Vector2 location, IEnemy patra)
         {
             sprite = EnemySpriteFactory.Instance.CreatePatraMinionSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.PatraMinion, (float)ObjectConstants.PatraMoveTime, ObjectConstants.PatraMinionStartingHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.PatraMinion, (float)ObjectConstants.PatraMoveTime, (float)ObjectConstants.PatraRadiusExtensionSpeed, ObjectConstants.PatraMinionStartingHealth);
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.patraMinionFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
             stateMachine.SetState(EnemyState.Movement, (float)ObjectConstants.PatraMoveTime, patra, radius, ObjectConstants.zero_double);
             this.patra = patra;

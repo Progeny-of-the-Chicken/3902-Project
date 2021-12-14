@@ -56,12 +56,17 @@ namespace Sprint_0.Scripts.Projectiles
             return new FireSpell(location, direction);
         }
 
+        public IProjectile CreateMagicProjectile(Vector2 location, Vector2 directionVector)
+        {
+            return new MagicProjectile(location, directionVector);
+        }
+
         public List<IProjectile> CreateThreeMagicProjectiles(Vector2 location, FacingDirection mainDirection)
         {
             return new List<IProjectile>{
-                new MagicProjectile(location, mainDirection, FacingDirection.Up),
-                new MagicProjectile(location, mainDirection, mainDirection),
-                new MagicProjectile(location, mainDirection, FacingDirection.Down)
+                new MagicProjectile(location, new Vector2(0, 0)),
+                new MagicProjectile(location, new Vector2(0, 0)),
+                new MagicProjectile(location, new Vector2(0, 0))
             };
         }
 

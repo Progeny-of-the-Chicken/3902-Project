@@ -24,7 +24,7 @@ namespace Sprint_0.Scripts.Enemy
         public Bubble(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateBubbleSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.Bubble, (float)ObjectConstants.BubbleMoveTime, ObjectConstants.BubblePlaceholderHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.Bubble, (float)ObjectConstants.BubbleMoveTime, ObjectConstants.BubbleMoveSpeed, ObjectConstants.BubblePlaceholderHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.Bubble, stateMachine, this);
             invoker.ExecuteRandomCommand();
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.bubbleFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));

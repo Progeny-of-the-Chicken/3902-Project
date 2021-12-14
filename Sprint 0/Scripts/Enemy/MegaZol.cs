@@ -27,7 +27,7 @@ namespace Sprint_0.Scripts.Enemy
         public MegaZol(Vector2 location)
         {
             sprite = EnemySpriteFactory.Instance.CreateMegaZolSprite();
-            stateMachine = new EnemyStateMachine(location, EnemyType.MegaZol, (float)ObjectConstants.MegaZolMoveTime + (float)ObjectConstants.MegaZolPauseTime, ObjectConstants.MegaZolHealth);
+            stateMachine = new EnemyStateMachine(location, EnemyType.MegaZol, (float)ObjectConstants.MegaZolMoveTime + (float)ObjectConstants.MegaZolPauseTime, ObjectConstants.MegaZolMoveSpeed, ObjectConstants.MegaZolHealth);
             invoker = EnemyRandomInvokerFactory.Instance.CreateInvokerForEnemy(EnemyType.MegaGel, stateMachine, this);
             invoker.ExecuteRandomCommand();
             Point colliderHitbox = new Vector2((int)(SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2().X * ObjectConstants.MegaZolScale), (int)(SpriteRectangles.zolFrames[ObjectConstants.firstFrame].Size.ToVector2().Y * ObjectConstants.MegaZolScale)).ToPoint();
