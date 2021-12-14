@@ -85,7 +85,11 @@ namespace Sprint_0.Scripts.Enemy
         }
         public void ChangeDirection()
         {
-            // TODO: Implement for new aquamentus
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
         }
         public bool CheckDelete()
         {
@@ -103,10 +107,12 @@ namespace Sprint_0.Scripts.Enemy
             if (Position.X < movementBarrier.left)
             {
                 stateMachine.Displace(new Vector2(movementBarrier.left - Position.X, 0));
+                ChangeDirection();
             }
             else if (Position.X > movementBarrier.right)
             {
-                stateMachine.Displace(new Vector2(Position.X - movementBarrier.right, 0));
+                stateMachine.Displace(ObjectConstants.adjustByNegativeOne * new Vector2(Position.X - movementBarrier.right, 0));
+                ChangeDirection();
             }
         }
     }
