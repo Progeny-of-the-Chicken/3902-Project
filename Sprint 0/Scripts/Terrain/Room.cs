@@ -483,6 +483,8 @@ public class Room : IRoom
                 case ObjectConstants.HeartContainerStr:
                 case ObjectConstants.KeyStr:
                 case ObjectConstants.BlueRingStr:
+                case ObjectConstants.BasicArrowItemStr:
+                case ObjectConstants.SilverArrowItemStr:
                     enemiesFlag = true;
                     RoomClear.Add(specialString[i]);
                     RoomClear.Add(specialString[i + ObjectConstants.nextCharInString]);
@@ -600,6 +602,15 @@ public class Room : IRoom
                             break;
                         case ObjectConstants.HeartContainerStr:
                             itemSet.Add(ItemFactory.Instance.CreateHeartContainer(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
+                            break;
+                        case ObjectConstants.BlueRingStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBlueRingItem(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
+                            break;
+                        case ObjectConstants.BasicArrowItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateBasicArrowItem(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
+                            break;
+                        case ObjectConstants.SilverArrowItemStr:
+                            itemSet.Add(ItemFactory.Instance.CreateSilverArrowItem(specialLocation, new Vector2(ObjectConstants.standardWidthHeight) * scale));
                             break;
                     }
                     break;
