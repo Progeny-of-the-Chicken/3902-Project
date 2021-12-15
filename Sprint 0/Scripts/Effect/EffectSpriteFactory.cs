@@ -38,6 +38,11 @@ namespace Sprint_0.Scripts.Effect
             return new ExplosionSprite(spritesheet);
         }
 
+        public ISprite CreatePelletImpactSprite(FacingDirection direction)
+        {
+            return new PelletImpactSprite(spritesheet, direction);
+        }
+
         public ISprite CreateSwordBeamExplosionSprite(SpriteEffects flipValue)
         {
             return new SwordBeamExplosionSprite(spritesheet, flipValue);

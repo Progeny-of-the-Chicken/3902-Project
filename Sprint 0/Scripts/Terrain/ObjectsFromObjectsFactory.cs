@@ -61,6 +61,11 @@ namespace Sprint_0.Scripts.Terrain
             room.AddEffect(new Effect.StaticEffect(location, type));
         }
 
+        public void CreateShotgunPelletImpactEffect(Vector2 location, EffectType type, FacingDirection direction)
+        {
+            room.AddEffect(new Effect.StaticEffect(location, type, direction));
+        }
+
         public void CreateSwordBeamExplosion(Vector2 location)
         {
             foreach (IEffect effect in EffectFactory.Instance.CreateSwordBeamExplosion(location))

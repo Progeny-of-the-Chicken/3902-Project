@@ -24,6 +24,11 @@ namespace Sprint_0.Scripts.Effect
             return new StaticEffect(location, type);
         }
 
+        public IEffect CreateShotgunPelletImpactEffect(Vector2 location, EffectType type, FacingDirection direction)
+        {
+            return new StaticEffect(location, type, direction);
+        }
+
         public List<IEffect> CreateSwordBeamExplosion(Vector2 location)
         {
             List<IEffect> effects = new List<IEffect>

@@ -14,7 +14,13 @@ namespace Sprint_0.Scripts.Effect
         public StaticEffect(Vector2 location, EffectType type)
         {
             this.location = location;
-            InitializeByType(type);
+            InitializeByType(type, FacingDirection.Up);
+        }
+
+        public StaticEffect(Vector2 location, EffectType type, FacingDirection direction)
+        {
+            this.location = location;
+            InitializeByType(type, direction);
         }
 
         public void Update(GameTime gameTime)
@@ -39,7 +45,7 @@ namespace Sprint_0.Scripts.Effect
 
         //----- Helper to get effect duration -----//
 
-        private void InitializeByType(EffectType type)
+        private void InitializeByType(EffectType type, FacingDirection direction)
         {
             switch (type)
             {
@@ -50,6 +56,10 @@ namespace Sprint_0.Scripts.Effect
                 case EffectType.Explosion:
                     sprite = EffectSpriteFactory.Instance.CreateExplosionSprite();
                     durationSeconds = ObjectConstants.explosionDurationSeconds;
+                    break;
+                case EffectType.PelletImpact:
+                    durationSeconds = ObjectConstants.pelletImpactDurationSeconds;
+                    sprite = EffectSpriteFactory.Instance.CreatePelletImpactSprite(direction);
                     break;
                 default:
                     break;
