@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Commands;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts.Controller
 {
