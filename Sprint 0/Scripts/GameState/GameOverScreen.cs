@@ -23,7 +23,5 @@ namespace Sprint_0.Scripts.GameState
         {
             background.Draw(sb, new Vector2(0, 0));
         }
-
-        // ----- Helper Methods ----- //
     }
 }

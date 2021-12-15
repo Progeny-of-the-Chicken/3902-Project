@@ -8,6 +8,7 @@ using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.GameStateHandlers;
+using System.Threading.Tasks;
 
 namespace Sprint_0.Scripts
 {
@@ -90,7 +91,8 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.MagicKey = true;
                     break;
                 case ItemType.TriforcePiece:
-                    GameStateManager.Instance.GameOver();
+                    TimeSpan seconds = SFXManager.Instance.triforcePiece.Duration;
+                    Task.Delay(seconds).ContinueWith(o => { GameStateManager.Instance.GameOver(); });
                     break;
                 case ItemType.BasicArrowItem:
                     Inventory.Instance.BasicArrows = true;
