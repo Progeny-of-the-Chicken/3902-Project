@@ -38,10 +38,6 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            if (projectile is Arrow)
-            {
-                //not needed
-            }
         }
     }
 }

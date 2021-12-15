@@ -29,10 +29,9 @@ namespace Sprint_0.Scripts.Collider.Enemy
 
         public void OnProjectileCollision(IProjectile projectile)
         {
-            Bomb bomb = projectile as Bomb;
-            if(bomb != null)
+            if (projectile is Bomb || projectile is ShotgunPelletProjectile)
             {
-                bomb.Despawn();
+                projectile.Despawn();
                 owner.Stun();
             }
         }
