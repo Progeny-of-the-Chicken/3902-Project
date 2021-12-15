@@ -78,9 +78,12 @@ namespace Sprint_0.GameStateHandlers
 
         public void GameOver()
         {
-            gameOver = new GameOverStateHandler();
-            game.kc = new GameOverStateController(game, Keyboard.GetState());
-            this.state = gameOver;
+            if (this.state != gameOver)
+            {
+                gameOver = new GameOverStateHandler();
+                game.kc = new GameOverStateController(game, Keyboard.GetState());
+                this.state = gameOver;
+            }
         }
 
         public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
@@ -118,7 +121,6 @@ namespace Sprint_0.GameStateHandlers
         {
             inventory = new InventoryStateHandler(game);
             this.state = inventory;
-            // Put rest of inventory initialization logic here
         }
 
         public void TogglePause()
