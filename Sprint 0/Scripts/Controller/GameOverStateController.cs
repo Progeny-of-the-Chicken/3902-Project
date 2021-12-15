@@ -47,6 +47,7 @@ namespace Sprint_0.Scripts.Controller
 		private void setCommands()
 		{
 			this.RegisterCommand(Keys.Q, new CommandQuit(game));
+			this.RegisterCommand(Keys.Enter, new RestartGameCommand());
 		}
 	}
 }

@@ -65,6 +65,7 @@ namespace Sprint_0.GameStateHandlers
         public void RestartGame()
         {
             System.Diagnostics.Debug.WriteLine("Restarting Game");
+
             game.roomNum = ObjectConstants.counterInitialVal_int;
             game.kc = new MainMenuStateController(game);
             Link.Instance.reset();
@@ -129,6 +130,7 @@ namespace Sprint_0.GameStateHandlers
         {
             state.DialogueNext();
         }
+
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             state.Draw(sb, gameTime);

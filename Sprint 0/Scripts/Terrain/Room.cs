@@ -125,9 +125,9 @@ public class Room : IRoom
 
             itemSet.Draw(spriteBatch);
             projectileSet.Draw(spriteBatch);
-            link.Draw(spriteBatch);
             enemySet.Draw(spriteBatch);
             effectSet.Draw(spriteBatch);
+            link.Draw(spriteBatch);
         }
     }
 

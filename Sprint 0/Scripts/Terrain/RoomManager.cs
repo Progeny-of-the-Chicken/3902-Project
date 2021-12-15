@@ -23,13 +23,17 @@ namespace Sprint_0.Scripts.Terrain
 
         private RoomManager()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             cachedRooms = new Dictionary<string, IRoom>();
         }
 
         public void reset()
         {
-            instance = new RoomManager();
-            instance.Init(Link.Instance, isRandomized);
+            Init();
         }
 
         public void Init(ILink player, bool isRandomized)
