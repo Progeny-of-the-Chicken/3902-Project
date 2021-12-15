@@ -55,6 +55,7 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            SFXManager.Instance.PlayShotgunCollide();
             delete = true;
         }
 

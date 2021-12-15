@@ -60,7 +60,7 @@ namespace Sprint_0
 
         //----- Link constant values -----//
         public const int linkStdMoveDist = scaledStdWidthHeight / 2;
-        public const float linkStdMoveTime = 1/8f;
+        public const float linkStdMoveTime = 1 / 8f;
         // TODO: Remove doubled move speed, helpful for testing
         public const float linkSpeed = linkStdMoveDist / linkStdMoveTime;
         public const float linkDeathAnimationTime = 1.5f;
@@ -97,6 +97,7 @@ namespace Sprint_0
         public const double halfAdjustment = 0.5;
         public const double spray = 0.75;
         public const int pelletsPerBlast = 20;
+        public const float shotgunVolume = 0.3f;
 
 
         // Arrow
@@ -744,6 +745,17 @@ namespace Sprint_0
         public const string fanfareStr = soundDirectoryStr + "LOZ_Fanfare";
         public const string fireArrowBoomerangStr = soundDirectoryStr + "LOZ_Arrow_Boomerang";
         public const string shotgunBangStr = soundDirectoryStr + "Shotgun_Bang";
+        public static string[] shotgunCollideStrs = {
+            soundDirectoryStr + "Shotgun_Collide_1",
+            soundDirectoryStr + "Shotgun_Collide_2",
+            soundDirectoryStr + "Shotgun_Collide_3",
+            soundDirectoryStr + "Shotgun_Collide_4",
+            soundDirectoryStr + "Shotgun_Collide_5",
+            soundDirectoryStr + "Shotgun_Collide_6",
+            soundDirectoryStr + "Shotgun_Collide_7",
+            soundDirectoryStr + "Shotgun_Collide_8"
+         };
+
         public const string fireCandleStr = soundDirectoryStr + "LOZ_Candle";
         public const string fireMagicRodStr = soundDirectoryStr + "LOZ_MagicalRod";
         public const string gameOverStr = soundDirectoryStr + "GameOver";

@@ -223,6 +223,54 @@
 /processorParam:Quality=Best
 /build:Sounds/Shotgun_Bang.wav
 
+#begin Sounds/Shotgun_Collide_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_1.wav
+
+#begin Sounds/Shotgun_Collide_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_2.wav
+
+#begin Sounds/Shotgun_Collide_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_3.wav
+
+#begin Sounds/Shotgun_Collide_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_4.wav
+
+#begin Sounds/Shotgun_Collide_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_5.wav
+
+#begin Sounds/Shotgun_Collide_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_6.wav
+
+#begin Sounds/Shotgun_Collide_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_7.wav
+
+#begin Sounds/Shotgun_Collide_8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shotgun_Collide_8.wav
+
 #begin Sounds/Dungeon Theme.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
