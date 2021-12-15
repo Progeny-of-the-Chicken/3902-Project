@@ -92,6 +92,7 @@ namespace Sprint_0.Scripts
                     break;
                 case ItemType.TriforcePiece:
                     TimeSpan seconds = SFXManager.Instance.triforcePiece.Duration;
+                    GameStateManager.Instance.WonGame();
                     Task.Delay(seconds).ContinueWith(o => { GameStateManager.Instance.GameOver(); });
                     break;
                 case ItemType.BasicArrowItem:

@@ -35,8 +35,13 @@ namespace Sprint_0.GameStateHandlers
 
         private Link link;
         private Game1 game;
-
         private IGameStateHandler state;
+        private bool inSuperHot;
+        private bool isGameWon = false;
+        public bool GameWon {
+            get => isGameWon;
+        }
+                
 
         // Game State Handlers
         MainMenuStateHandler mainmenu;
@@ -45,8 +50,6 @@ namespace Sprint_0.GameStateHandlers
         RoomSwapStateHandler swapper;
         GameOverStateHandler gameOver;
         SuperHotStateHandler superHot;
-
-        private bool inSuperHot;
 
         public GameStateManager()
         {
@@ -74,6 +77,7 @@ namespace Sprint_0.GameStateHandlers
 
             mainmenu = new MainMenuStateHandler(game);
             state = mainmenu;
+            isGameWon = false;
         }
 
         public void GameOver()
@@ -141,6 +145,11 @@ namespace Sprint_0.GameStateHandlers
         public void Update(GameTime gameTime)
         {
             state.Update(gameTime);
+        }
+
+        public void WonGame()
+        {
+            this.isGameWon = true;
         }
     }
 }

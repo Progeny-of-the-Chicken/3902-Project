@@ -15,9 +15,30 @@ namespace Sprint_0.GameStateHandlers
             screen = new GameOverScreen();
             db = new DialogueBox(this);
 
-            string[] dia = { "Game over.                    Press Enter to Play again     Press Q to quit" };
+            string[] deathDialogue = {
+                "Game over.                    " +
+                "Press Enter to Play again     " +
+                "Press Q to quit" };
+            string[] victoryDialogue = {
+                "Congratulations! You've       " +
+                "defeated Aquamentus and       " +
+                "collected the triforce piece! " +
+                "You have brought peace once   " +
+                "again to the dungeon.         " +
+                "                              " +
+                "                              " +
+                "Press Enter to Play again     " +
+                "Press Q to quit"
+                };
 
-            db.AddDialogue(dia);
+            if (GameStateManager.Instance.GameWon)
+            {
+                db.AddDialogue(victoryDialogue);
+            } else
+            {
+                db.AddDialogue(deathDialogue);
+            }
+           
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
