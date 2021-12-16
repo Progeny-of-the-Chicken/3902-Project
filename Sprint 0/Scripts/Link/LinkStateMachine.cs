@@ -36,6 +36,7 @@ namespace Sprint_0.Scripts
         public void Update(GameTime gt)
         {
             float dt = (float)gt.ElapsedGameTime.TotalSeconds;
+
             if (isSuspended)
             {
                 ResetCountersCausedByPlayer();
@@ -250,7 +251,7 @@ namespace Sprint_0.Scripts
 
         public bool CanDoNewThing()
         {
-            return !(IsUsingItem || IsMoving || SwordIsBeingUsed || ShotgunIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem);
+            return !(IsUsingItem || IsMoving || SwordIsBeingUsed || ShotgunIsBeingUsed || IsGettingKnockedBack || IsTurning || DeathAnimation || IsPickingUpItem || IsSuspended);
         }
 
         public void HealBy(int health)

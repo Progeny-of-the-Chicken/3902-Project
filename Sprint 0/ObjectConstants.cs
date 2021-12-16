@@ -787,7 +787,7 @@ namespace Sprint_0
 
         public const int maxLetters = 400;
         public const int lettersPerLine = 30;
-        public const int maxLines = 7;
+        public const int maxLines = 10;
         public const int letterSpacing = 6;
 
         // Origin point for printed dialogue

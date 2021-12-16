@@ -7,6 +7,8 @@ using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.GameStateHandlers;
+using System.Threading.Tasks;
+using System;
 
 namespace Sprint_0.Scripts
 {
@@ -91,7 +93,9 @@ namespace Sprint_0.Scripts
                 case ItemType.TriforcePiece:
                     Vector2 location = SpawnHelper.Instance.CenterLocationOnLinkForTriforce(Link.Instance.Position, new Vector2(ObjectConstants.linkWidthHeight, ObjectConstants.linkWidthHeight), SpriteRectangles.triforcePieceFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale);
                     ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Triforce);
-                    GameStateManager.Instance.GameOver();
+                    GameStateManager.Instance.WonGame();
+                    TimeSpan seconds = SFXManager.Instance.triforcePiece.Duration;
+                    Task.Delay(seconds).ContinueWith(o => { GameStateManager.Instance.GameOver(); });
                     break;
                 case ItemType.BasicArrowItem:
                     Inventory.Instance.BasicArrows = true;

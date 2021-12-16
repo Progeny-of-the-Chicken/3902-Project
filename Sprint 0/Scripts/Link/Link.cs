@@ -25,6 +25,11 @@ namespace Sprint_0.Scripts
 
         private Link()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             linkState = new LinkStateMachine();
             LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
 
@@ -35,7 +40,7 @@ namespace Sprint_0.Scripts
 
         public void reset()
         {
-            instance = new Link();
+            Init();
         }
 
 
@@ -55,9 +60,9 @@ namespace Sprint_0.Scripts
 
         public void GoInDirection(FacingDirection direction)
         {
-
             if (linkState.CanDoNewThing())
             {
+
                 linkState.GoInDirection(direction);
                 LinkSprite = LinkSpriteFactory.Instance.GetSpriteForState(linkState);
             }
