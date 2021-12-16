@@ -26,7 +26,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         }
         public void Update(Vector2 location)
         {
-            rectangle.Location = location.ToPoint();
+            // rectangle.Location = location.ToPoint();
         }
 
         public void OnPlayerCollision(Link player)
