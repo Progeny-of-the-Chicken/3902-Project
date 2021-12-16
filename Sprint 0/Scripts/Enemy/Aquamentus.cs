@@ -83,6 +83,14 @@ namespace Sprint_0.Scripts.Enemy
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
         }
+        public void ChangeDirection()
+        {
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
+        }
         public bool CheckDelete()
         {
             return stateMachine.IsDead;
@@ -99,10 +107,12 @@ namespace Sprint_0.Scripts.Enemy
             if (Position.X < movementBarrier.left)
             {
                 stateMachine.Displace(new Vector2(movementBarrier.left - Position.X, 0));
+                ChangeDirection();
             }
             else if (Position.X > movementBarrier.right)
             {
-                stateMachine.Displace(new Vector2(Position.X - movementBarrier.right, 0));
+                stateMachine.Displace(ObjectConstants.adjustByNegativeOne * new Vector2(Position.X - movementBarrier.right, 0));
+                ChangeDirection();
             }
         }
     }

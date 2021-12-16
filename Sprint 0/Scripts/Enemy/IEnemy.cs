@@ -23,6 +23,8 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Freeze(float duration);
 
+        public void ChangeDirection();
+
         public bool CheckDelete();
     }
 }

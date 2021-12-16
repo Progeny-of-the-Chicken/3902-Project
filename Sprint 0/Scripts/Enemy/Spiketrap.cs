@@ -153,6 +153,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             // Spiketrap does not get frozen
         }
+        public void ChangeDirection()
+        {
+            // Spiketrap does not have free movement
+        }
         public bool CheckDelete()
         {
             return delete;

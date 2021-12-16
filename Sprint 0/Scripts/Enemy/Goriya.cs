@@ -38,7 +38,7 @@ namespace Sprint_0.Scripts.Enemy
             directionDependencies.Add(FacingDirection.Down, EnemySpriteFactory.Instance.CreateFrontGoriyaSprite());
             directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
-            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.goriyaFrontFrame.Size.ToVector2() * ObjectConstants.scale).ToPoint()));
+            collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.GoriyaWidthHeight * ObjectConstants.scale)));
             BoomerangCaught = false;
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -86,6 +86,15 @@ namespace Sprint_0.Scripts.Enemy
         public void Freeze(float duration)
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
+        public void ChangeDirection()
+        {
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
         }
 
         public bool CheckDelete()

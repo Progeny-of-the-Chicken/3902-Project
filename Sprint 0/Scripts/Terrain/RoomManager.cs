@@ -57,6 +57,7 @@ namespace Sprint_0.Scripts.Terrain
         public void SwitchToRoom(string roomID)
         {
             activeRoom = LoadRoom(roomID);
+            ObjectsFromObjectsFactory.Instance.LoadRoom(activeRoom);
         }
 
         public void Update(GameTime gt)

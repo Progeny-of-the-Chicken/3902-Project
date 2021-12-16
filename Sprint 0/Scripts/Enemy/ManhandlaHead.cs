@@ -81,7 +81,13 @@ namespace Sprint_0.Scripts.Enemy
 
         public void Freeze(float duration)
         {
+            // TODO: Freeze Manhandla
             stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
+        public void ChangeDirection()
+        {
+            // Unused for ManhandlaHead
         }
 
         public bool CheckDelete()

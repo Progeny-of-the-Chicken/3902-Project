@@ -28,7 +28,7 @@ namespace Sprint_0.Scripts.Terrain.LevelData
         {
             if (randomized)
             {
-                if (CutSceneData.dialogueKeys.ContainsKey(roomID))
+                if (CutSceneDataRandomized.dialogueKeys.ContainsKey(roomID))
                 {
                     string[] data = CutSceneDataRandomized.dialogueKeys[roomID];
                     gsh.AddDialogue(data);

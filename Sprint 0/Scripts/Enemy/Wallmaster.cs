@@ -278,6 +278,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             // TODO: Implement
         }
+        public void ChangeDirection()
+        {
+            // TODO: Implement
+        }
         public bool CheckDelete()
         {
             return delete;

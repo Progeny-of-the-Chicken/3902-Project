@@ -182,7 +182,7 @@ namespace Sprint_0
         public const double AquamentusMoveTime = DefaultEnemyMoveTime * 2;
         public const double AquamentusShootTime = 0.5f;
         public const int AquamentusStartingHealth = 6;
-        public const double AquamentusProjectileSpreadRadians = (Math.PI / 12);
+        public const double AquamentusProjectileSpreadRadians = Math.PI / 9;
         public const int AquamentusBarrierLength = (int)(AquamentusMoveSpeed * 2);
         //Dodongo
         public const int DodongoDamage = 2;
@@ -204,6 +204,7 @@ namespace Sprint_0
         public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
         public const int GoriyaThrowBoomerangChanceWeight = 2;
+        public const int GoriyaWidthHeight = 16;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;
