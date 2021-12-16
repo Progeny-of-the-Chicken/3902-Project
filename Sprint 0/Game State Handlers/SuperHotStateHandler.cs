@@ -84,6 +84,11 @@ namespace Sprint_0.GameStateHandlers
             db.Next();
         }
 
+        public void ClearDialogue()
+        {
+            db.ClearDialogue();
+        }
+
         public void SetSuspended(bool sus)
         {
             suspended = sus;

@@ -116,6 +116,12 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
+        public void ClearDialogue()
+        {
+            this.currLine = "";
+            this.lineQueue.Clear();
+        }
+
 
         // ----- Helper Methods ----- //
 

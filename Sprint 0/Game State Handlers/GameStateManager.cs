@@ -129,6 +129,12 @@ namespace Sprint_0.GameStateHandlers
         {
             state.DialogueNext();
         }
+
+        public void ClearDialogue()
+        {
+            state.ClearDialogue();
+        }
+
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             state.Draw(sb, gameTime);

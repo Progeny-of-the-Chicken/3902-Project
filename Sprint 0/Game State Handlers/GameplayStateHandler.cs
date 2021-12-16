@@ -89,6 +89,11 @@ namespace Sprint_0.GameStateHandlers
             db.Next();
         }
 
+        public void ClearDialogue()
+        {
+            db.ClearDialogue();
+        }
+
         public void AddDialogue(string[] dia)
         {
             db.AddDialogue(dia);

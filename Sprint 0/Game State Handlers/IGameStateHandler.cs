@@ -9,6 +9,7 @@ namespace Sprint_0
         void Draw(SpriteBatch sb, GameTime gameTime);
         void TogglePause();
         void DialogueNext();
+        void ClearDialogue();
         void SetSuspended(bool sus);
     }
 }

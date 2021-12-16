@@ -16,7 +16,7 @@ public interface IRoom
 	void AddEnemy(IEnemy enemy);
 	void AddItem(IItem item);
 	void FreezeEnemies();
-	void PrepareForTransition();
+	void PrepareForTransition(bool leaving);
 	void TransitionEnded();
 	void UpdateDrawPoint(Vector2 dp);
 	Vector2 roomDrawPoint { get; }
