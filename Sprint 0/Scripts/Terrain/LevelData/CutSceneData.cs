@@ -20,13 +20,5 @@ namespace Sprint_0.Scripts.Terrain.LevelData
             { "Room25", room25 },
             { "Room00" , room00 }
         };
-        private static ArrayList suspended = new ArrayList() { "Room25" };
-
-
-
-        public static bool IsSuspendedUntilDialogueCleared(string roomID)
-        {
-            return suspended.Contains(roomID);
-        }
     }
 }

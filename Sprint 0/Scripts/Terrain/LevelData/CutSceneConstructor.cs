@@ -31,7 +31,7 @@ namespace Sprint_0.Scripts.Terrain.LevelData
                 if (CutSceneDataRandomized.dialogueKeys.ContainsKey(roomID))
                 {
                     string[] data = CutSceneDataRandomized.dialogueKeys[roomID];
-                    gsh.AddDialogue(data);
+                    gsh.AddDialogue(data, true);
                 }
             } else
             {

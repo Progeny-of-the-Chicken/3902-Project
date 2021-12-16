@@ -142,9 +142,9 @@ namespace Sprint_0.GameStateHandlers
             state.ClearDialogue();
         }
 
-        public void AddDialogue(string[] dia)
+        public void AddDialogue(string[] dia, bool forCutscene = false)
         {
-            state.AddDialogue(dia);
+            state.AddDialogue(dia, forCutscene);
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)

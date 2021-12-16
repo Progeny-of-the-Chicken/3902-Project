@@ -21,6 +21,7 @@ namespace Sprint_0.Scripts.GameState
         private bool active = false;
         private bool showInstructions = true;
         private int instructionsFrameCounter = framesPerInstructionFlash;
+        private bool dialogueIsForCutscene = false;
 
         private int[] linebreaks;
         private ISprite[] letterSprites = new ISprite[ObjectConstants.maxLetters];
@@ -96,12 +97,16 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
-        public void AddDialogue(string[] dia)
+        public void AddDialogue(string[] dia, bool forCutScene = false)
         {
+            dialogueIsForCutscene = forCutScene;
+
             foreach (string line in dia)
             {
                 lineQueue.Enqueue(line);
             }
+
+            //initLetterSpritesForLine();
         }
 
         public void Next()
@@ -119,12 +124,14 @@ namespace Sprint_0.Scripts.GameState
 
                 if (isEmpty)
                 {
+                    // Dialogue has been exhausted
                     active = false;
                     currLine = "";
 
                     if (roomSuspendsForCutScene())
                     {
                         gsh.SetSuspended(false);
+                        dialogueIsForCutscene = false;
                     }
                 }
                 else
@@ -139,6 +146,8 @@ namespace Sprint_0.Scripts.GameState
         {
             this.currLine = "";
             this.lineQueue.Clear();
+            currIndex = 0;
+            active = false;
         }
 
 
@@ -297,7 +306,7 @@ namespace Sprint_0.Scripts.GameState
 
         private bool roomSuspendsForCutScene()
         {
-            return CutSceneData.IsSuspendedUntilDialogueCleared(RoomManager.Instance.CurrentRoom.RoomId());
+            return dialogueIsForCutscene;
         }
     }
 }

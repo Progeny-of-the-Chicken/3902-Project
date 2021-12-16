@@ -102,9 +102,9 @@ namespace Sprint_0.GameStateHandlers
             db.ClearDialogue();
         }
 
-        public void AddDialogue(string[] dia)
+        public void AddDialogue(string[] dia, bool forCutscene = false)
         {
-            db.AddDialogue(dia);
+            db.AddDialogue(dia, forCutscene);
         }
 
 
