@@ -23,6 +23,13 @@ namespace Sprint_0.Scripts.SpriteFactories
             return spawnerLocation + GetOffsetFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions);
         }
 
+        public Vector2 CenterLocationOnLinkForTriforce(Vector2 spawnerLocation, Vector2 spawnerDimensions, Vector2 spawneeDimensions)
+        {
+            Vector2 pos = GetCenterOfDimensions(spawnerDimensions);
+            pos.Y -= spawnerDimensions.Y / ObjectConstants.oneInTwo + spawneeDimensions.Y / ObjectConstants.oneInTwo;
+            return spawnerLocation + GetOffsetFromCenter(pos, spawneeDimensions);
+        }
+
         public Vector2 CenterLocationOnLinkSword(Vector2 spawnerLocation, FacingDirection direction, Vector2 spawnerDimensions, Vector2 spawneeDimensions)
         {
             return spawnerLocation + GetSwordFromCenter(GetCenterOfDimensions(spawnerDimensions), spawneeDimensions, direction);
