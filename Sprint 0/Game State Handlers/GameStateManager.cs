@@ -84,6 +84,7 @@ namespace Sprint_0.GameStateHandlers
         {
             if (this.state != gameOver)
             {
+                SFXManager.Instance.StopMusic();
                 gameOver = new GameOverStateHandler();
                 game.kc = new GameOverStateController(game, Keyboard.GetState());
                 this.state = gameOver;
@@ -102,6 +103,8 @@ namespace Sprint_0.GameStateHandlers
 
         public void StartGameplay()
         {
+            SFXManager.Instance.PlayMusic();
+
             if (inSuperHot)
             {
                 this.state = superHot;

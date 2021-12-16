@@ -122,7 +122,7 @@ namespace Sprint_0.Scripts
             textScrollInstance.IsLooped = true;
             textScrollSlowInstance.IsLooped = true;
 
-            PlayMusic();
+            //PlayMusic();
         }
 
         public void Update(GameTime gt)
