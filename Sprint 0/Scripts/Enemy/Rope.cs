@@ -27,9 +27,9 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CanBeAffectedByPlayer { get => true; }
 
-        (Vector2 directionVector, ISprite sprite, IEnemyCollider chaseCollider) dependency;
+        (Vector2 directionVector, ISprite sprite, IEnemyCollider chaseCollider, Vector2 colliderOffset) dependency;
 
-        Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)> directionDependencies;
+        Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider, Vector2)> directionDependencies;
 
         public Rope(Vector2 location)
         {
@@ -38,17 +38,16 @@ namespace Sprint_0.Scripts.Enemy
             invoker.ExecuteRandomCommand();
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), (SpriteRectangles.ropeFrames[ObjectConstants.zero].Size.ToVector2() * ObjectConstants.scale).ToPoint()));
-            leftCollider = new ChaseDetectionCollider(this, new Rectangle(0, (int)location.Y, (int)location.X, ObjectConstants.scaledStdWidthHeight));
-            rightCollider = new ChaseDetectionCollider(this, new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight)));
+            leftCollider = rightCollider = new ChaseDetectionCollider(this, new Rectangle(0, 0, ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight));
             
             leftSprite = EnemySpriteFactory.Instance.CreateLeftRopeSprite();
             rightSprite = EnemySpriteFactory.Instance.CreateRightRopeSprite();
 
-            directionDependencies = new Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider)>();
-            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, leftSprite, leftCollider));
-            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, rightSprite, rightCollider));
-            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, rightSprite, rightCollider));
-            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, rightSprite, rightCollider));
+            directionDependencies = new Dictionary<FacingDirection, (Vector2, ISprite, IEnemyCollider, Vector2)>();
+            directionDependencies.Add(FacingDirection.Left, (ObjectConstants.LeftUnitVector, leftSprite, leftCollider, ObjectConstants.LeftUnitVector * ObjectConstants.roomWidth));
+            directionDependencies.Add(FacingDirection.Right, (ObjectConstants.RightUnitVector, rightSprite, rightCollider, ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight));
+            directionDependencies.Add(FacingDirection.Up, (ObjectConstants.UpUnitVector, rightSprite, rightCollider, ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight));
+            directionDependencies.Add(FacingDirection.Down, (ObjectConstants.DownUnitVector, rightSprite, rightCollider, ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight));
             directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
@@ -70,7 +69,7 @@ namespace Sprint_0.Scripts.Enemy
                 dependency.sprite.Update(gt);
             }
             collider.Update(Position);
-            dependency.chaseCollider.Update(Position);
+            dependency.chaseCollider.Update(Position + dependency.colliderOffset);
         }
         public void TakeDamage(int damage)
         {
@@ -90,6 +89,15 @@ namespace Sprint_0.Scripts.Enemy
         public void Freeze(float duration)
         {
             stateMachine.SetState(EnemyState.Freeze, duration);
+        }
+
+        public void ChangeDirection()
+        {
+            if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
         }
 
         public void ChaseLink()

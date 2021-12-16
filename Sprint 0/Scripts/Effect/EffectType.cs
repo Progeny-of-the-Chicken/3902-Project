@@ -3,6 +3,8 @@
     public enum EffectType
     {
         Pop,
-        Explosion
+        Explosion,
+        PelletImpact,
+        Triforce
     }
 }

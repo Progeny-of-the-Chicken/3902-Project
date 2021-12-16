@@ -52,6 +52,10 @@ namespace Sprint_0.Scripts.Collider.Projectile
                 enemy.GradualKnockBack(Overlap.DirectionToMoveObjectOff(_hitbox, enemy.Collider.Hitbox));
                 enemy.TakeDamage(Owner.Damage);
             }
+            else if (Owner is ShotgunPelletProjectile)
+            {
+                enemy.TakeDamage(Owner.Damage);
+            }
         }
 
         //----- Helper method for initializing the hitbox -----//

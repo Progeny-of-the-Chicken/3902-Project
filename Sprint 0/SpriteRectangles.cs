@@ -179,6 +179,8 @@ namespace Sprint_0
 
         //----- Effect source rectangles -----//
         public static Rectangle popFrame = new Rectangle(53, 189, 8, 8);
+
+        public static Rectangle pelletImpactFrame = new Rectangle(117, 204, 10, 10);
         public static List<Rectangle> explosionFrames = new List<Rectangle>
         {
             new Rectangle(162, 185, 16, 16),

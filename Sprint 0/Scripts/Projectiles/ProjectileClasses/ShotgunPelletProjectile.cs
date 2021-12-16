@@ -25,11 +25,13 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
         public int Damage { get => ObjectConstants.shotgunPelletDamage; }
 
         public IProjectileCollider Collider { get => collider; }
+        FacingDirection direction;
 
         public ShotgunPelletProjectile(Vector2 spawnLoc, FacingDirection direction)
         {
             currentPos = SpawnHelper.Instance.CenterLocationForShotgunBlast(spawnLoc, direction);
-            SetSpriteVectors(direction);
+            this.direction = direction;
+            SetSpriteVectors();
 
             collider = ProjectileColliderFactory.Instance.CreateShotgunPelletCollider(this, direction);
             friendly = true;
@@ -55,10 +57,12 @@ namespace Sprint_0.Scripts.Projectiles.ProjectileClasses
 
         public void Despawn()
         {
+            SFXManager.Instance.PlayShotgunCollide();
+            ObjectsFromObjectsFactory.Instance.CreateShotgunPelletImpactEffect(currentPos, EffectType.PelletImpact, direction);
             delete = true;
         }
 
-        private void SetSpriteVectors(FacingDirection direction)
+        private void SetSpriteVectors()
         {
 
             Random rand = new Random();

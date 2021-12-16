@@ -19,12 +19,7 @@ namespace Sprint_0.Scripts.Collider.Enemy
         }
         public void Update(Vector2 location)
         {
-            //Left rectangle update
-            if(this.location.X > location.X)
-                rectangle = new Rectangle(0, (int)location.Y, (int)location.X, Hitbox.Height);
-            else
-                rectangle = new Rectangle((location + ObjectConstants.RightUnitVector * ObjectConstants.scaledStdWidthHeight).ToPoint(), new Point(ObjectConstants.roomWidth, ObjectConstants.scaledStdWidthHeight));
-
+            rectangle.Location = location.ToPoint();
             this.location = location;
         }
 

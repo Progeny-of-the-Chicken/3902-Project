@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using System;
 
 namespace Sprint_0.Scripts
 {
@@ -30,6 +31,8 @@ namespace Sprint_0.Scripts
         SoundEffect fanfare;
         SoundEffect fireArrowBoomerang;
         SoundEffect shotgunBang;
+        SoundEffect[] shotgunCollide;
+        int shotgunCollideCounter = 0;
         SoundEffect fireCandle;
         SoundEffect fireMagicRod;
         SoundEffect gameOver;               //definitely needs to be loopable
@@ -76,6 +79,9 @@ namespace Sprint_0.Scripts
             fanfare = content.Load<SoundEffect>(ObjectConstants.fanfareStr);
             fireArrowBoomerang = content.Load<SoundEffect>(ObjectConstants.fireArrowBoomerangStr);
             shotgunBang = content.Load<SoundEffect>(ObjectConstants.shotgunBangStr);
+            shotgunCollide = new SoundEffect[ObjectConstants.shotgunCollideStrs.Length];
+            for (int i = 0; i < shotgunCollide.Length; i++)
+                shotgunCollide[i] = content.Load<SoundEffect>(ObjectConstants.shotgunCollideStrs[i]);
             fireCandle = content.Load<SoundEffect>(ObjectConstants.fireCandleStr);
             fireMagicRod = content.Load<SoundEffect>(ObjectConstants.fireMagicRodStr);
             gameOver = content.Load<SoundEffect>(ObjectConstants.gameOverStr);
@@ -178,7 +184,13 @@ namespace Sprint_0.Scripts
         }
         public void PlayShotgunBang()
         {
-            shotgunBang.Play();
+            shotgunBang.Play(ObjectConstants.shotgunVolume, ObjectConstants.zero_float, ObjectConstants.zero_float);
+        }
+        public void PlayShotgunCollide()
+        {
+            shotgunCollideCounter++;
+            shotgunCollideCounter %= ObjectConstants.shotgunCollideStrs.Length;
+            shotgunCollide[shotgunCollideCounter].Play();
         }
         public void PlayFireCandle()
         {

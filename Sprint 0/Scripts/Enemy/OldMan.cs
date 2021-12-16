@@ -57,6 +57,10 @@ namespace Sprint_0.Scripts.Enemy
         {
             //Old man does not get frozen
         }
+        public void ChangeDirection()
+        {
+            //Old man does not have direction
+        }
         public bool CheckDelete()
         {
             return delete;

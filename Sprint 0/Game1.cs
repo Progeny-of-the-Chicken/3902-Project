@@ -42,8 +42,6 @@ namespace Sprint_0
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public IController kc;
-
-        MouseController mc;
         public int roomNum = ObjectConstants.counterInitialVal_int;
 
         public Game1()
@@ -53,10 +51,6 @@ namespace Sprint_0
             IsMouseVisible = true;
 
             kc = new MainMenuStateController(this);
-
-            //Just for Sprint 3
-            mc = new MouseController(this);
-
         }
 
         protected override void Initialize()
@@ -82,7 +76,7 @@ namespace Sprint_0
             SFXManager.Instance.LoadAllSounds(this.Content);
             GameStateSpriteFactory.Instance.LoadAllTextures(this.Content);
             GameStateManager.Instance.Init(Link.Instance, this);
-         
+
 
             base.LoadContent();
             GameStateManager.Instance.Init(Link.Instance, this);
@@ -93,9 +87,6 @@ namespace Sprint_0
             kc.Update();
             if (!Link.Instance.IsAlive)
                 GameStateManager.Instance.GameOver();
-
-            //Just for Sprint 3
-            mc.Update();
 
             SFXManager.Instance.Update(gameTime);
             GameStateManager.Instance.Update(gameTime);
@@ -108,7 +99,7 @@ namespace Sprint_0
             _spriteBatch.Begin();
 
             GameStateManager.Instance.Draw(_spriteBatch, gameTime);
-            
+
             _spriteBatch.End();
 
             //base.Draw(gameTime);
@@ -118,33 +109,6 @@ namespace Sprint_0
         {
             Exit();
         }
-
-        //Just for sprint 3
-        void ChangeRoom()
-        {
-			GameStateManager.Instance.SwapRooms(RoomManager.Instance.CurrentRoom.RoomId(), ObjectConstants.rooms[roomNum], FacingDirection.Up);
-        }
-
-        public void NextRoom()
-        {
-            roomNum++;
-            if (roomNum + ObjectConstants.nextInArray > ObjectConstants.rooms.Length)
-            {
-                roomNum = ObjectConstants.counterInitialVal_int;
-            }
-            ChangeRoom();
-        }
-
-        public void PrevRoom()
-        {
-            roomNum--;
-            if (roomNum < ObjectConstants.counterInitialVal_int)
-            {
-                roomNum = ObjectConstants.rooms.Length - 1;
-            }
-            ChangeRoom();
-        }
-
     }
 
 }

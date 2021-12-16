@@ -156,7 +156,7 @@ namespace Sprint_0.Scripts
 
         public bool CanDoNewAction { get => linkState.CanDoNewThing(); }
 
-        public bool gettingKnockedBack { get => linkState.IsGettingKnockedBack ; }
+        public bool gettingKnockedBack { get => linkState.IsGettingKnockedBack; }
         public bool BoomerangReady { get; set; }
 
         public bool SwordIsSheathed { get => linkState.SwordIsSheathed; }
