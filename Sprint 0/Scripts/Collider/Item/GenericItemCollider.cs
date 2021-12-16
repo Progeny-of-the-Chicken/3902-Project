@@ -85,7 +85,8 @@ namespace Sprint_0.Scripts.Collider.Item
 
         public void OnLinkCollision(Link link)
         {
-            link.PickUpItem();
+            if (Owner.Type == ItemType.ShotgunItem || Owner.Type == ItemType.BoomerangItem || Owner.Type == ItemType.BowItem || Owner.Type == ItemType.TriforcePiece || Owner.Type == ItemType.BlueRing || Owner.Type == ItemType.MagicKey)
+                link.PickUpItem();
         }
     }
 }

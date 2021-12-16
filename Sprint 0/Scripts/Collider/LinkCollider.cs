@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Sprint_0.Scripts.Collider;
+﻿using Microsoft.Xna.Framework;
 using Sprint_0.Scripts.Enemy;
 using Sprint_0.Scripts.Items;
 using Sprint_0.Scripts.Projectiles;
 using Sprint_0.Scripts.Projectiles.ProjectileClasses;
 using Sprint_0.Scripts.GameState;
 using Sprint_0.Scripts.Terrain;
+using Sprint_0.Scripts.SpriteFactories;
 using Sprint_0.GameStateHandlers;
 
 namespace Sprint_0.Scripts
@@ -90,6 +89,8 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.MagicKey = true;
                     break;
                 case ItemType.TriforcePiece:
+                    Vector2 location = SpawnHelper.Instance.CenterLocationOnLinkForTriforce(Link.Instance.Position, new Vector2(ObjectConstants.linkWidthHeight, ObjectConstants.linkWidthHeight), SpriteRectangles.triforcePieceFrames[ObjectConstants.firstFrame].Size.ToVector2() * ObjectConstants.scale);
+                    ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Triforce);
                     GameStateManager.Instance.GameOver();
                     break;
                 case ItemType.BasicArrowItem:

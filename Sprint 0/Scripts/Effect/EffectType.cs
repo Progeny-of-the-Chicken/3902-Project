@@ -5,5 +5,6 @@
         Pop,
         Explosion,
         PelletImpact,
+        Triforce
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint_0.Scripts.Sprite;
+using Sprint_0.Scripts.Items;
 
 namespace Sprint_0.Scripts.Effect
 {
@@ -60,6 +61,10 @@ namespace Sprint_0.Scripts.Effect
                 case EffectType.PelletImpact:
                     durationSeconds = ObjectConstants.pelletImpactDurationSeconds;
                     sprite = EffectSpriteFactory.Instance.CreatePelletImpactSprite(direction);
+                    break;
+                case EffectType.Triforce:
+                    durationSeconds = ObjectConstants.linkPickUpItemTime;
+                    sprite = ItemSpriteFactory.Instance.CreateTriforcePieceSprite();
                     break;
                 default:
                     break;
