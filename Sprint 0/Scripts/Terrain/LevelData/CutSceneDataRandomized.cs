@@ -12,14 +12,10 @@ namespace Sprint_0.Scripts.Terrain.LevelData
             "SHE DIVIDED IT INTO ONE UNIT TO HIDE IT FROM GANNON BEFORE SHE WAS CAPTURED.",
             "GO FIND THE ONE UNITS LINK TO SAVE HER"
         };
-        private static string[] room00 = {
-            "                                                                                                         Bruh thats a                     shotgun"
-        };
 
         public static Dictionary<string, string[]> dialogueKeys = new Dictionary<string, string[]>()
         {
-            { "Room47", room47 },
-            { "Room00" , room00 }
+            { "Room47", room47 }
         };
     }
 }
