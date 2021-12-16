@@ -182,6 +182,9 @@ namespace Sprint_0.Scripts
                 if (linkHealth <= linkMaxHealth / ObjectConstants.lowHealthThreshold)
                 {
                     SFXManager.Instance.PlayLowHealth();
+                } else
+                {
+                    SFXManager.Instance.StopLowHealth();
                 }
             }
         }
