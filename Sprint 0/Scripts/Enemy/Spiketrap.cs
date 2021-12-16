@@ -30,7 +30,6 @@ namespace Sprint_0.Scripts.Enemy
         Vector2 OriginalLocation;
         float moveSpeed;
         int damage;
-        int count;
         bool movingBack;
         bool moving;
         public int Damage { get => damage; }
@@ -54,7 +53,7 @@ namespace Sprint_0.Scripts.Enemy
             DetectionColliderLeft = new DetectionColliderLeft(this, RectangleXLeft);
             DetectionColliderUp = new DetectionColliderUp(this, RectangleYUp);
             DetectionColliderDown = new DetectionColliderDown(this, RectangleYDown);
-            count = ObjectConstants.counterInitialVal_int;
+
             movingBack = false;
             moving = false;
             sprite = (SpikeTrapSprite)EnemySpriteFactory.Instance.CreateSpikeTrapSprite();
@@ -98,7 +97,7 @@ namespace Sprint_0.Scripts.Enemy
 
         private void moveBackToStart(float dt)
         {
-            location -= direction * moveSpeed * dt;
+            location -= direction * moveSpeed * (float)ObjectConstants.halfAdjustment * dt ;
             //if we are moving left/right and are close enough, snap back
             if (Math.Abs(direction.Y) < ObjectConstants.verySmallVal && Math.Abs(OriginalLocation.X - location.X) < ObjectConstants.spikeTrapSnapDist)
             {
