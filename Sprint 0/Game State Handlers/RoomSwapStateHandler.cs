@@ -39,8 +39,8 @@ namespace Sprint_0.GameStateHandlers
             toRoom = RoomManager.Instance.LoadRoom(toRoomID);
 
             link.Suspend();
-            fromRoom.PrepareForTransition();
-            toRoom.PrepareForTransition();
+            fromRoom.PrepareForTransition(true);
+            toRoom.PrepareForTransition(false);
 
             fromRoomOriginDrawPoint = fromRoom.roomDrawPoint;
             toRoomOriginDrawPoint = calculateEnteringRoomOriginDrawPoint();
@@ -87,20 +87,11 @@ namespace Sprint_0.GameStateHandlers
             fromRoom.Update(gameTime);
         }
 
-        public void TogglePause()
-        {
-            //Unused
-        }
-
-        public void DialogueNext()
-        {
-            //Unused
-        }
-
-        public void SetSuspended(bool sus)
-        {
-            //Unused
-        }
+        public void TogglePause() { /*Unused*/ }
+        public void DialogueNext() { /*Unused*/ }
+        public void ClearDialogue() { /*Unused*/ }
+        public void AddDialogue(string[] dia, bool forCutscene = false) { /*Unused*/ }
+        public void SetSuspended(bool sus) { /*Unused*/ }
 
         /*--------------- Helper Methods ---------------*/
 

@@ -58,15 +58,10 @@ namespace Sprint_0.GameStateHandlers
             }
         }
 
-        public void DialogueNext()
-        {
-            //Unused
-        }
-
-        public void SetSuspended(bool sus)
-        {
-            //Unused
-        }
+        public void DialogueNext() { /*Unused*/ }
+        public void ClearDialogue() { /*Unused*/ }
+        public void AddDialogue(string[] dia, bool forCutscene = false) { /*Unused*/ }
+        public void SetSuspended(bool sus) { /*Unused*/ }
 
         //----- Helper Methods -----//
 

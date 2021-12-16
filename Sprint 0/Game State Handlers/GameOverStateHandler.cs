@@ -38,7 +38,8 @@ namespace Sprint_0.GameStateHandlers
             {
                 db.AddDialogue(deathDialogue);
             }
-           
+
+            db.FlashEnter(false);
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
@@ -53,19 +54,10 @@ namespace Sprint_0.GameStateHandlers
             db.Update();
         }
 
-        public void TogglePause()
-        {
-            //Unused
-        }
-
-        public void DialogueNext()
-        {
-            db.Next();
-        }
-
-        public void SetSuspended(bool sus)
-        {
-            //Unused
-        }
+        public void TogglePause() { /*Unused*/ }
+        public void DialogueNext() { /*Unused*/ }
+        public void ClearDialogue() { /*Unused*/ }
+        public void AddDialogue(string[] dia, bool forCutscene = false) { /*Unused*/ }
+        public void SetSuspended(bool sus) { /*Unused*/ }
     }
 }
