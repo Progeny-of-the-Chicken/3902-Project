@@ -38,7 +38,8 @@ namespace Sprint_0.GameStateHandlers
             {
                 db.AddDialogue(deathDialogue);
             }
-           
+
+            db.FlashEnter(false);
         }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)

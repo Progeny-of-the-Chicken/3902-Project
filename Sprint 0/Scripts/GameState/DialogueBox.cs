@@ -150,6 +150,11 @@ namespace Sprint_0.Scripts.GameState
             active = false;
         }
 
+        public void FlashEnter(bool b)
+        {
+            showInstructions = b;
+        }
+
 
         // ----- Helper Methods ----- //
 
