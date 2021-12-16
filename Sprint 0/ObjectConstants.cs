@@ -96,7 +96,7 @@ namespace Sprint_0
         public const int shotgunPelletDamage = 1;
         public const double halfAdjustment = 0.5;
         public const double spray = 0.75;
-        public const int pelletsPerBlast = 20;
+        public const int pelletsPerBlast = 10;
         public const float shotgunVolume = 0.3f;
 
 
@@ -730,7 +730,7 @@ namespace Sprint_0
         public const int inventoryBlueRupeeValue = 5;
         public const int inventoryBasicKeyValue = 1;
         public const int inventoryStartingShotgunShells = 0;
-        public const int shotgunShellsPerPickUp = 20;
+        public const int shotgunShellsPerPickUp = 10;
 
         //Sound effects
         public const string soundDirectoryStr = "Sounds/";
