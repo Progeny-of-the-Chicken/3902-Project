@@ -112,6 +112,18 @@ namespace Sprint_0.Scripts.Sprite.Font.Letters
                 case ' ':
                     frame = SpriteRectangles.fontSpaceFrame;
                     break;
+                case '\'':
+                    frame = SpriteRectangles.fontApostropheFrame;
+                    break;
+                case '!':
+                    frame = SpriteRectangles.fontExclaimationFrame;
+                    break;
+                case '.':
+                    frame = SpriteRectangles.fontPeriodFrame;
+                    break;
+                case ',':
+                    frame = SpriteRectangles.fontCommaFrame;
+                    break;
                 default:
                     frame = SpriteRectangles.fontSpaceFrame;
                     break;
