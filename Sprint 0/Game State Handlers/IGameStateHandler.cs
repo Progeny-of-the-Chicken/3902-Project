@@ -10,6 +10,7 @@ namespace Sprint_0
         void TogglePause();
         void DialogueNext();
         void ClearDialogue();
+        void AddDialogue(string[] dia);
         void SetSuspended(bool sus);
     }
 }

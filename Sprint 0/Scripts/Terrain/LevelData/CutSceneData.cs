@@ -9,8 +9,7 @@ namespace Sprint_0.Scripts.Terrain.LevelData
             "MANY YEARS AGO PRINCE DARKNESS GANNON STOLE ONE OF THE TRIFORCE WITH POWER",
             "PRINCESS ZELDA HAD ONE OF THE TRIFORCE WITH WISDOM",
             "SHE DIVIDED IT INTO ONE UNIT TO HIDE IT FROM GANNON BEFORE SHE WAS CAPTURED.",
-            "GO FIND THE ONE UNITS LINK TO SAVE HER",
-            "Wait bruh thats a shotgun"
+            "GO FIND THE ONE UNITS LINK TO SAVE HER"
         };
         private static string[] room00 = {
             "                                                                                                         Bruh thats a                     Bow"

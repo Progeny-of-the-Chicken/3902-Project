@@ -328,6 +328,7 @@ namespace Sprint_0
         public static Rectangle fontExclaimationFrame = new Rectangle(416, 56, 8, 8);
         public static Rectangle fontApostropheFrame = new Rectangle(432, 56, 8, 8);
         public static Rectangle fontPeriodFrame = new Rectangle(464, 56, 8, 8);
+        public static Rectangle fontQuestionFrame = new Rectangle(496, 56, 8, 8);
 
         public static Rectangle fontSpaceFrame = new Rectangle(337, 69, 8, 8);
     }

@@ -124,6 +124,9 @@ namespace Sprint_0.Scripts.Sprite.Font.Letters
                 case ',':
                     frame = SpriteRectangles.fontCommaFrame;
                     break;
+                case '?':
+                    frame = SpriteRectangles.fontQuestionFrame;
+                    break;
                 default:
                     frame = SpriteRectangles.fontSpaceFrame;
                     break;

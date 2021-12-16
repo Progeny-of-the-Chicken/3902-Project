@@ -51,6 +51,9 @@ namespace Sprint_0.Scripts
                     }
                     break;
                 case ItemType.BowItem:
+                    string[] bowDia = { "A Bow? Really? Why couldn't it have been something useful like a shotgun?" };
+                    GameStateManager.Instance.AddDialogue(bowDia);
+
                     if (!Inventory.Instance.HasWeapon(WeaponType.Bow))
                     {
                         Inventory.Instance.AddWeapon(WeaponType.Bow);
@@ -104,6 +107,9 @@ namespace Sprint_0.Scripts
                     Inventory.Instance.SilverArrows = true;
                     break;
                 case ItemType.ShotgunItem:
+                    string[] shotgunDia = { "Bruh, is that a shotgun...?" };
+                    GameStateManager.Instance.AddDialogue(shotgunDia);
+
                     if (!Inventory.Instance.HasWeapon(WeaponType.Shotgun))
                     {
                         Inventory.Instance.AddWeapon(WeaponType.Shotgun);

@@ -142,6 +142,11 @@ namespace Sprint_0.GameStateHandlers
             state.ClearDialogue();
         }
 
+        public void AddDialogue(string[] dia)
+        {
+            state.AddDialogue(dia);
+        }
+
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             state.Draw(sb, gameTime);
