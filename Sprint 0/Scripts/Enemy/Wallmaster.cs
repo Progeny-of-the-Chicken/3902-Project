@@ -238,7 +238,7 @@ namespace Sprint_0.Scripts.Enemy
             else
             {
 
-                RoomManager.Instance.SwitchToRoom("Room25");
+                RoomManager.Instance.YeetedByWallmaster();
                 grabbedLink.UnSuspend();
             }
         }

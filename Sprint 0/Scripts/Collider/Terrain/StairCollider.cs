@@ -49,7 +49,6 @@ namespace Sprint_0.Scripts.Collider.Terrain
         public void OnItemCollision(IItem item)
         {
             //no item collision
-
         }
 
         public void Update(Vector2 location)
