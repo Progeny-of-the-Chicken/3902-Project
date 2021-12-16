@@ -205,7 +205,7 @@ namespace Sprint_0
         public const int GoriyaStartingHealth = 3;
         public const float EnemyBoomerangTimeoutSeconds = 3.0f;
         public const int GoriyaThrowBoomerangChanceWeight = 2;
-        public const int GoriyaWidthHeight = 16;
+        public const int GoriyaWidthHeight = 15;
         //Keese
         public const int KeeseDamage = 1;
         public const double KeeseMoveTime = DefaultEnemyMoveTime;

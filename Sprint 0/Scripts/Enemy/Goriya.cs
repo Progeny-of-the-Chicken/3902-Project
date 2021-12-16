@@ -23,8 +23,6 @@ namespace Sprint_0.Scripts.Enemy
 
         public bool CanBeAffectedByPlayer { get => !(stateMachine.IsDamaged || stateMachine.GetState == EnemyState.Knockback); }
 
-        public bool BoomerangCaught { get; set; }
-
         public Goriya(Vector2 location)
         {
             stateMachine = new EnemyStateMachine(location, EnemyType.Goriya, (float)ObjectConstants.GoriyaMoveTime, ObjectConstants.GoriyaMoveSpeed, ObjectConstants.GoriyaStartingHealth);
@@ -39,7 +37,6 @@ namespace Sprint_0.Scripts.Enemy
             directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
 
             collider = new GenericEnemyCollider(this, new Rectangle(location.ToPoint(), new Point(ObjectConstants.GoriyaWidthHeight * ObjectConstants.scale)));
-            BoomerangCaught = false;
 
             ObjectsFromObjectsFactory.Instance.CreateStaticEffect(location, Effect.EffectType.Explosion);
         }
@@ -50,11 +47,6 @@ namespace Sprint_0.Scripts.Enemy
             if (stateMachine.StateChange)
             {
                 directionDependencies.TryGetValue(stateMachine.GetDirection, out dependency);
-            }
-            if (BoomerangCaught && stateMachine.GetState == EnemyState.AbilityCast)
-            {
-                stateMachine.EndState();
-                BoomerangCaught = false;
             }
             if (stateMachine.GetState == EnemyState.NoAction)
             {
@@ -91,6 +83,15 @@ namespace Sprint_0.Scripts.Enemy
         public void ChangeDirection()
         {
             if (stateMachine.GetState == EnemyState.Movement)
+            {
+                stateMachine.EndState();
+                invoker.ExecuteRandomCommand();
+            }
+        }
+
+        public void CatchBoomerang()
+        {
+            if (stateMachine.GetState == EnemyState.AbilityCast)
             {
                 stateMachine.EndState();
                 invoker.ExecuteRandomCommand();

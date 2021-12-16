@@ -16,7 +16,7 @@ namespace Sprint_0.Scripts.Commands.EnemyAbilities
 
         public void Execute()
         {
-            stateMachine.SetState(EnemyState.AbilityCast, stateMachine.enemyLifeTime + ObjectConstants.EnemyBoomerangTimeoutSeconds);
+            stateMachine.SetState(EnemyState.AbilityCast, ObjectConstants.EnemyBoomerangTimeoutSeconds);
             ObjectsFromObjectsFactory.Instance.CreateBoomerangFromEnemy(stateMachine.Location, stateMachine.GetDirection, enemy);
         }
     }
