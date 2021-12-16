@@ -45,7 +45,7 @@ namespace Sprint_0
         public static Vector2 UpRightUnitVector = new Vector2(1, -1);
         public static Vector2 DownLeftUnitVector = new Vector2(-1, 1);
         public static Vector2 DownRightUnitVector = new Vector2(1, 1);
-        public static Vector2 zeroVector = new Vector2(0, 0);
+        public static Vector2 zeroVector = new Vector2(0f, 0f);
 
 
         //----- Probability and random selection constant values -----//
@@ -234,13 +234,12 @@ namespace Sprint_0
         public const int ZolStartingHealth = 1;
         //SpikeTrap
         public const int vectorFlip = -1;
-        public const int spikeTrapSpeed = 25 * scale;
+        public const int spikeTrapSpeed = scaledStdWidthHeight * 3;
+        public const int spikeTrapSnapDist = 3;
         public const int roomWidthInBlocks = 12;
         public const int roomHeightInBlocks = 7;
         public const int spikeTrapSpawnAdjustment = 1;
-        public const int doubleTheValue = 2;
-        public const int SpikeTrapWidthMovementTicks = 100;
-        public const int SpikeTrapHeightMovementTicks = 55;
+        public const float verySmallVal = 0.001f;
 
         //WallMaster
         public const int WallMasterHealth = 3;
