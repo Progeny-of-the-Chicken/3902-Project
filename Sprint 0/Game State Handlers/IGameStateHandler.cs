@@ -9,6 +9,8 @@ namespace Sprint_0
         void Draw(SpriteBatch sb, GameTime gameTime);
         void TogglePause();
         void DialogueNext();
+        void ClearDialogue();
+        void AddDialogue(string[] dia, bool forCutscene = false);
         void SetSuspended(bool sus);
     }
 }

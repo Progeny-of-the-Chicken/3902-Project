@@ -35,8 +35,13 @@ namespace Sprint_0.GameStateHandlers
 
         private Link link;
         private Game1 game;
-
         private IGameStateHandler state;
+        private bool inSuperHot;
+        private bool isGameWon = false;
+        public bool GameWon {
+            get => isGameWon;
+        }
+                
 
         // Game State Handlers
         MainMenuStateHandler mainmenu;
@@ -45,8 +50,6 @@ namespace Sprint_0.GameStateHandlers
         RoomSwapStateHandler swapper;
         GameOverStateHandler gameOver;
         SuperHotStateHandler superHot;
-
-        private bool inSuperHot;
 
         public GameStateManager()
         {
@@ -65,6 +68,7 @@ namespace Sprint_0.GameStateHandlers
         public void RestartGame()
         {
             System.Diagnostics.Debug.WriteLine("Restarting Game");
+
             game.roomNum = ObjectConstants.counterInitialVal_int;
             game.kc = new MainMenuStateController(game);
             Link.Instance.reset();
@@ -73,13 +77,18 @@ namespace Sprint_0.GameStateHandlers
 
             mainmenu = new MainMenuStateHandler(game);
             state = mainmenu;
+            isGameWon = false;
         }
 
         public void GameOver()
         {
-            gameOver = new GameOverStateHandler();
-            game.kc = new GameOverStateController(game, Keyboard.GetState());
-            this.state = gameOver;
+            if (this.state != gameOver)
+            {
+                SFXManager.Instance.StopMusic();
+                gameOver = new GameOverStateHandler();
+                game.kc = new GameOverStateController(game, Keyboard.GetState());
+                this.state = gameOver;
+            }
         }
 
         public void StartGameFromMainMenu(bool isSuperhot, bool isRandomized)
@@ -94,6 +103,8 @@ namespace Sprint_0.GameStateHandlers
 
         public void StartGameplay()
         {
+            SFXManager.Instance.PlayMusic();
+
             if (inSuperHot)
             {
                 this.state = superHot;
@@ -117,7 +128,6 @@ namespace Sprint_0.GameStateHandlers
         {
             inventory = new InventoryStateHandler(game);
             this.state = inventory;
-            // Put rest of inventory initialization logic here
         }
 
         public void TogglePause()
@@ -129,6 +139,17 @@ namespace Sprint_0.GameStateHandlers
         {
             state.DialogueNext();
         }
+
+        public void ClearDialogue()
+        {
+            state.ClearDialogue();
+        }
+
+        public void AddDialogue(string[] dia, bool forCutscene = false)
+        {
+            state.AddDialogue(dia, forCutscene);
+        }
+
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {
             state.Draw(sb, gameTime);
@@ -137,6 +158,11 @@ namespace Sprint_0.GameStateHandlers
         public void Update(GameTime gameTime)
         {
             state.Update(gameTime);
+        }
+
+        public void WonGame()
+        {
+            this.isGameWon = true;
         }
     }
 }

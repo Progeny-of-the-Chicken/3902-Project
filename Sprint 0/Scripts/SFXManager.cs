@@ -55,7 +55,7 @@ namespace Sprint_0.Scripts
         SoundEffect swordSlash;
         SoundEffect textScroll;             //probably needs to be loopable
         SoundEffect textScrollSlow;         //probably needs to be loopable
-        SoundEffect triforcePiece;
+        public SoundEffect triforcePiece;
 
         SoundEffectInstance gameOverInstance;
         SoundEffectInstance lowHealthInstance;
@@ -122,7 +122,7 @@ namespace Sprint_0.Scripts
             textScrollInstance.IsLooped = true;
             textScrollSlowInstance.IsLooped = true;
 
-            PlayMusic();
+            //PlayMusic();
         }
 
         public void Update(GameTime gt)

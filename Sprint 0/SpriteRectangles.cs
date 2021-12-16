@@ -323,6 +323,13 @@ namespace Sprint_0
         public static Rectangle fontXFrame = new Rectangle(352, 56, 8, 8);
         public static Rectangle fontYFrame = new Rectangle(368, 56, 8, 8);
         public static Rectangle fontZFrame = new Rectangle(384, 56, 8, 8);
+
+        public static Rectangle fontCommaFrame = new Rectangle(400, 56, 8, 8);
+        public static Rectangle fontExclaimationFrame = new Rectangle(416, 56, 8, 8);
+        public static Rectangle fontApostropheFrame = new Rectangle(432, 56, 8, 8);
+        public static Rectangle fontPeriodFrame = new Rectangle(464, 56, 8, 8);
+        public static Rectangle fontQuestionFrame = new Rectangle(496, 56, 8, 8);
+
         public static Rectangle fontSpaceFrame = new Rectangle(337, 69, 8, 8);
     }
 }

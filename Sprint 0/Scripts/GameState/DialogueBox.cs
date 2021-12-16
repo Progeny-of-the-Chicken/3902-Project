@@ -12,14 +12,21 @@ namespace Sprint_0.Scripts.GameState
 {
     public class DialogueBox
     {
+        private const int framesPerInstructionFlash = 60;
+
         private Queue<string> lineQueue = new Queue<string>();
         private string currLine = "";
         private int frameCounter = 0;
         private int currIndex = 0;
         private bool active = false;
+        private bool showInstructions = true;
+        private int instructionsFrameCounter = framesPerInstructionFlash;
+        private bool dialogueIsForCutscene = false;
 
         private int[] linebreaks;
         private ISprite[] letterSprites = new ISprite[ObjectConstants.maxLetters];
+        private static string InstructionsMessage = "Press enter";
+        private ISprite[] instructionLetterSprites = new ISprite[InstructionsMessage.Length];
         private IGameStateHandler gsh;
 
         // Origin point for printed dialogue
@@ -29,6 +36,7 @@ namespace Sprint_0.Scripts.GameState
         public DialogueBox(IGameStateHandler gsh)
         {
             this.gsh = gsh;
+            initLetterSpritesForInstructions();
         }
 
         public void Update()
@@ -57,6 +65,12 @@ namespace Sprint_0.Scripts.GameState
             }
 
             StartStopTextScrollSFX();
+            instructionsFrameCounter--;
+
+            if (showInstructions && instructionsFrameCounter == 0)
+            {
+                instructionsFrameCounter = framesPerInstructionFlash;
+            }
         }
 
         public void Draw(SpriteBatch sb)
@@ -75,21 +89,31 @@ namespace Sprint_0.Scripts.GameState
 
                     frameCounter = 0;
                 }
+
+                if (showInstructions && instructionsFrameCounter > framesPerInstructionFlash / 2)
+                {
+                    drawInstructionsMessage(sb);
+                }
             }
         }
 
-        public void AddDialogue(string[] dia)
+        public void AddDialogue(string[] dia, bool forCutScene = false)
         {
+            dialogueIsForCutscene = forCutScene;
+
             foreach (string line in dia)
             {
                 lineQueue.Enqueue(line);
             }
+
+            //initLetterSpritesForLine();
         }
 
         public void Next()
         {
             if (active)
             {
+                showInstructions = false;
                 string nextLine;
 
                 lineQueue.Dequeue();
@@ -100,12 +124,14 @@ namespace Sprint_0.Scripts.GameState
 
                 if (isEmpty)
                 {
+                    // Dialogue has been exhausted
                     active = false;
                     currLine = "";
 
                     if (roomSuspendsForCutScene())
                     {
                         gsh.SetSuspended(false);
+                        dialogueIsForCutscene = false;
                     }
                 }
                 else
@@ -116,8 +142,40 @@ namespace Sprint_0.Scripts.GameState
             }
         }
 
+        public void ClearDialogue()
+        {
+            this.currLine = "";
+            this.lineQueue.Clear();
+            currIndex = 0;
+            active = false;
+        }
+
+        public void FlashEnter(bool b)
+        {
+            showInstructions = b;
+        }
+
 
         // ----- Helper Methods ----- //
+
+        // Creates the letter sprites for the instructions message
+        private void initLetterSpritesForInstructions()
+        {
+            for (int i = 0; i < InstructionsMessage.Length; i++)
+            {
+                instructionLetterSprites[i] = FontSpriteFactory.Instance.CreateLetterSprite(InstructionsMessage[i]);
+            }
+        }
+
+        private void drawInstructionsMessage(SpriteBatch sb)
+        {
+            for (int i = 0; i < InstructionsMessage.Length; i++)
+            {
+                int xOffset = (ObjectConstants.standardWidthHeight + ObjectConstants.letterSpacing) * i;
+
+                instructionLetterSprites[i].Draw(sb, new Vector2(500 + xOffset, 600));
+            }
+        }
 
         // Creates the letter sprites for the line being shown on screen
         private void initLetterSpritesForLine()
@@ -253,7 +311,7 @@ namespace Sprint_0.Scripts.GameState
 
         private bool roomSuspendsForCutScene()
         {
-            return CutSceneData.IsSuspendedUntilDialogueCleared(RoomManager.Instance.CurrentRoom.RoomId());
+            return dialogueIsForCutscene;
         }
     }
 }

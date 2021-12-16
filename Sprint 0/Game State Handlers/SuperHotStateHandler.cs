@@ -84,6 +84,16 @@ namespace Sprint_0.GameStateHandlers
             db.Next();
         }
 
+        public void ClearDialogue()
+        {
+            db.ClearDialogue();
+        }
+
+        public void AddDialogue(string[] dia, bool forCutscene = false)
+        {
+            db.AddDialogue(dia, forCutscene);
+        }
+
         public void SetSuspended(bool sus)
         {
             suspended = sus;

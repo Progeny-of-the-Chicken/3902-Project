@@ -102,7 +102,7 @@ namespace Sprint_0
 
             _spriteBatch.End();
 
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
 
         public void Quit()

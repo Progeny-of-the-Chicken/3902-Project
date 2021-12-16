@@ -81,6 +81,14 @@ namespace Sprint_0.GameStateHandlers
 
         public void SetSuspended(bool sus)
         {
+            if (sus)
+            {
+                Link.Instance.Suspend();
+            } else
+            {
+                Link.Instance.UnSuspend();
+            }
+            
             suspended = sus;
         }
 
@@ -89,9 +97,14 @@ namespace Sprint_0.GameStateHandlers
             db.Next();
         }
 
-        public void AddDialogue(string[] dia)
+        public void ClearDialogue()
         {
-            db.AddDialogue(dia);
+            db.ClearDialogue();
+        }
+
+        public void AddDialogue(string[] dia, bool forCutscene = false)
+        {
+            db.AddDialogue(dia, forCutscene);
         }
 
 

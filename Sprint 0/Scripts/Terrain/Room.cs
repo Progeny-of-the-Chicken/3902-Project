@@ -12,6 +12,7 @@ using Sprint_0.Scripts.Terrain;
 using Sprint_0.Scripts.Effect;
 using Sprint_0.Scripts;
 using Sprint_0.Scripts.Terrain.LevelData;
+using Sprint_0.GameStateHandlers;
 
 public class Room : IRoom
 {
@@ -128,9 +129,9 @@ public class Room : IRoom
 
             itemSet.Draw(spriteBatch);
             projectileSet.Draw(spriteBatch);
-            link.Draw(spriteBatch);
             enemySet.Draw(spriteBatch);
             effectSet.Draw(spriteBatch);
+            link.Draw(spriteBatch);
         }
     }
 
@@ -618,8 +619,13 @@ public class Room : IRoom
         }
     }
 
-    public void PrepareForTransition()
+    public void PrepareForTransition(bool leaving)
     {
+        if (leaving)
+        {
+            GameStateManager.Instance.ClearDialogue();
+        }
+
         inTransition = true;
     }
 
