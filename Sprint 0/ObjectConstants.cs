@@ -660,9 +660,9 @@ namespace Sprint_0
         public const double groupXDropRate = 0.61;
         public static HashSet<Type> groupAEnemies = new HashSet<Type>() { };
         public static HashSet<Type> groupBEnemies = new HashSet<Type> { typeof(Goriya), typeof(Darknut) };
-        public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster) };
-        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(Manhandla), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut) };
-        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(PatraMinion) };
+        public static HashSet<Type> groupCEnemies = new HashSet<Type> { typeof(Stalfos), typeof(Zol), typeof(Wallmaster), typeof(Rope) };
+        public static HashSet<Type> groupDEnemies = new HashSet<Type> { typeof(Aquamentus), typeof(Patra), typeof(Manhandla), typeof(MegaStalfos), typeof(MegaGel), typeof(MegaZol), typeof(MegaKeese), typeof(MegaDarknut), typeof(Dodongo) };
+        public static HashSet<Type> groupXEnemies = new HashSet<Type> { typeof(Keese), typeof(Gel), typeof(SpikeTrap), typeof(Bubble) };
         public static ItemType[] groupAItems = {
             ItemType.YellowRuby,
             ItemType.SmallHeartItem,
