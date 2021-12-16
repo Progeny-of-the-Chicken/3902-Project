@@ -45,6 +45,7 @@ namespace Sprint_0.Scripts.Sprite.LinkSprites
         {
             if (isFrame1)
             {
+
                 drawFrame1(sb);
             }
             else

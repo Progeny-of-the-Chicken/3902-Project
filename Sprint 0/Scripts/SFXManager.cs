@@ -55,7 +55,7 @@ namespace Sprint_0.Scripts
         SoundEffect swordSlash;
         SoundEffect textScroll;             //probably needs to be loopable
         SoundEffect textScrollSlow;         //probably needs to be loopable
-        SoundEffect triforcePiece;
+        public SoundEffect triforcePiece;
 
         SoundEffectInstance gameOverInstance;
         SoundEffectInstance lowHealthInstance;

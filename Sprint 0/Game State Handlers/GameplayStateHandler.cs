@@ -81,6 +81,14 @@ namespace Sprint_0.GameStateHandlers
 
         public void SetSuspended(bool sus)
         {
+            if (sus)
+            {
+                Link.Instance.Suspend();
+            } else
+            {
+                Link.Instance.UnSuspend();
+            }
+            
             suspended = sus;
         }
 

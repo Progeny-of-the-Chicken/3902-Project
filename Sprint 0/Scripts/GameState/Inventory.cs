@@ -17,6 +17,11 @@ namespace Sprint_0.Scripts.GameState
 
         private Inventory()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             Weapons = new List<WeaponType>
             {
                 WeaponType.BlueCandle,
@@ -40,7 +45,7 @@ namespace Sprint_0.Scripts.GameState
 
         public void reset()
         {
-            instance = new Inventory();
+            Init();
         }
 
         public List<WeaponType> Weapons { get; set; }

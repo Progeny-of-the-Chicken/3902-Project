@@ -63,6 +63,7 @@ namespace Sprint_0.Scripts.Controller
 				executeCommandsForKey(key, controllerMappings);
 				if (!Link.Instance.IsSuspended)
 				{
+
 					executeCommandsForKey(key, linkControllerMappings);
 				}
 			}

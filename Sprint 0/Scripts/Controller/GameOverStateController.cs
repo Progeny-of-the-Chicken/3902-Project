@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Sprint_0.Scripts.Commands;
+using Sprint_0.Scripts.GameState;
 
 namespace Sprint_0.Scripts.Controller
 {
@@ -47,6 +47,7 @@ namespace Sprint_0.Scripts.Controller
 		private void setCommands()
 		{
 			this.RegisterCommand(Keys.Q, new CommandQuit(game));
+			this.RegisterCommand(Keys.Enter, new RestartGameCommand());
 		}
 	}
 }
