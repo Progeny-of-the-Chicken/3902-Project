@@ -71,6 +71,12 @@ namespace Sprint_0.Scripts.Terrain
             ObjectsFromObjectsFactory.Instance.LoadRoom(activeRoom);
         }
 
+        public void YeetedByWallmaster()
+        {
+            SwitchToRoom("Room25");
+            Link.Instance.ResetPosition(ObjectConstants.linkStartingPosition);
+        }
+
         public void Update(GameTime gt)
         {
             activeRoom.Update(gt);
