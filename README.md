@@ -62,3 +62,38 @@ While the game is paused you can use:
 - Advancable Dialogue Boxes
 - Randomized dungeon mode
 - Super Hot mode (time only moves when you do)
+
+## Post Sprint 5 bug fixes and features completed before final presentation (list more detailed that previously)
+# Features:
+- Added different dialogue screens for winning vs. dying
+- Added instructions for how to interact with dialogue the first time it’s used
+- Added dialogue for picking up the bow and shotgun
+- Added dialogue for picking up a room key
+- Made in game music not play in the game over, death, and main menu screens
+- Created Manhandla and added to randomized dungeon
+- Added bow, arrows and the ring to certain rooms in the randomized dungeons as room clear rewards
+- Link pickup of triforce to animate triforce over his head
+- Each shotgun pellet impact creates animation/effect and makes impact sound
+
+# Bug Fixes/Improvements:
+- Fixed bug where playing again after death wouldn’t work
+- Fixed bug where the game would end before victory or death music finished playing
+- Fixed a bug where the low health sound effect wouldn’t turn off if you regained health
+- Fixed bug where dialogue from the dialogue box would stay on screen after leaving the room
+- Fixed a bug where the game over screen would also have the instructions flashing
+- Fixed a bug where link would spawn in the walls of the secret room
+- Fixed bug where link would disappear/not be interact-able after being dragged by the wallmaster
+- Fixed Aquamentus movement and projectiles
+- Fixed chasing for mega darknut
+- Fixed enemies trying to walk into walls
+- Fixed missing object spawning in revisited rooms
+- Fixed spawn explosions happening before link enters the room
+- Fixed room25 crash on randomized dungeon
+- Updated drop table to really include all enemies
+- Improved Goriya getting out of sync when throwing boomerangs at walls point-blank
+- Removed mouse controller to prevent bugs and enable normal gameplay
+- Balanced shotgun strength
+- Fixed volume on shotgun to be less loud
+- Spike trap functions correctly
+- Fixed shotgun pellet collision issues
+- Fixed link pickup animation for non weapon/special items
