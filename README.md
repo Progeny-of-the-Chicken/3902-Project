@@ -63,8 +63,8 @@ While the game is paused you can use:
 - Randomized dungeon mode
 - Super Hot mode (time only moves when you do)
 
-## Post Sprint 5 bug fixes and features completed before final presentation (list more detailed that previously)
-# Features:
+# Post Sprint 5 bug fixes and features completed before final presentation (list more detailed that previously)
+## Features:
 - Added different dialogue screens for winning vs. dying
 - Added instructions for how to interact with dialogue the first time it’s used
 - Added dialogue for picking up the bow and shotgun
@@ -75,7 +75,7 @@ While the game is paused you can use:
 - Link pickup of triforce to animate triforce over his head
 - Each shotgun pellet impact creates animation/effect and makes impact sound
 
-# Bug Fixes/Improvements:
+## Bug Fixes/Improvements:
 - Fixed bug where playing again after death wouldn’t work
 - Fixed bug where the game would end before victory or death music finished playing
 - Fixed a bug where the low health sound effect wouldn’t turn off if you regained health
